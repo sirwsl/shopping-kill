@@ -1,0 +1,14 @@
+# 应用服务 WEB 访问端口
+server:
+  port: 8080
+
+# 应用名称
+spring:
+  application:
+    name: shopping-kill
+  # spring 静态资源扫描路径
+  resources:
+    static-locations: classpath:/static/
+  #环境修改
+  profiles:
+    active: dev
