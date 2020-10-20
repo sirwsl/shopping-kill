@@ -10,7 +10,7 @@ spring:
       password: 18314263373
       # 配置初始化大小、最小、最大
       initial-size: 20
-      min-idle: 5
+      min-idle: 0
       max-active: 50
       #配置获取连接等待超时的时间
       maxWait: 60000
@@ -19,7 +19,7 @@ spring:
       #配置一个连接在池中最小生存的时间，单位是毫秒
       minEvictableIdleTimeMillis: 300000
       #测试连接
-      validationQuery: SELECT1FROMDUAL
+      validationQuery: SELECT1
       #申请连接的时候检测，建议配置为true，不影响性能，并且保证安全性
       testWhileIdle: true
 
@@ -57,7 +57,46 @@ spring:
           statement-close-after-log-enabled: false
           result-set-open-after-log-enabled: false
           result-set-close-after-log-enabled: false
+  jpa:
+    # 配置 DBMS 类型
+    database: MYSQL
+    # 配置是否将执行的 SQL 输出到日志
+    show-sql: true
+    properties:
+      hibernate:
+        hbm2ddl:
+          # 配置开启自动更新表结构
+          auto: update
+    open-in-view: false
 
+  redis:
+    jedis:
+      pool:
+        max-active: 128
+        max-idle: 8
+        max-wait: -1
+        min-idle: 0
+    timeout: 10000
+    cluster:
+      nodes:
+        - 121.196.187.160:6379
+        - 121.196.187.160:6380
+        - 121.196.187.160:6381
+        - 121.196.187.160:6382
+        - 121.196.187.160:6383
+        - 121.196.187.160:6384
+    password: 18314263373
 
+redis:
+  timeout: 10000 #客户端超时时间单位是毫秒 默认是2000
+  maxIdle: 300 #最大空闲数
+  maxTotal: 1000 #控制一个pool可分配多少个jedis实例,用来替换上面的redis.maxActive,如果是jedis 2.4以后用该属性
+  maxWaitMillis: 1000 #最大建立连接等待时间。如果超过此时间将接到异常。设为-1表示无限制。
+  minEvictableIdleTimeMillis: 300000 #连接的最小空闲时间 默认1800000毫秒(30分钟)
+  numTestsPerEvictionRun: 1024 #每次释放连接的最大数目,默认3
+  timeBetweenEvictionRunsMillis: 30000 #逐出扫描的时间间隔(毫秒) 如果为负数,则不运行逐出线程, 默认-1
+  testOnBorrow: true #是否在从池中取出连接前进行检验,如果检验失败,则从池中去除连接并尝试取出另一个
+  testWhileIdle: true #在空闲时检查有效性, 默认false
+  password: 18314263373 #密码
 
 

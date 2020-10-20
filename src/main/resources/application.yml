@@ -12,22 +12,3 @@ spring:
   #环境修改
   profiles:
     active: dev
-  redis:
-    jedis:
-      pool:
-        max-active: 128
-        max-idle: 8
-        max-wait: -1
-        min-idle: 0
-    timeout: 10000
-    cluster:
-      nodes:
-        - 121.196.187.160:6379
-        - 121.196.187.160:6380
-        - 121.196.187.160:6381
-        - 121.196.187.160:6382
-        - 121.196.187.160:6383
-        - 121.196.187.160:6384
-    password: 18314263373
-
-

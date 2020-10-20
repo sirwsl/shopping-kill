@@ -16,7 +16,7 @@ import javax.annotation.Resource;
 class ShoppingKillApplicationTests {
 
     @Resource
-    StringRedisTemplate redisTemplate;
+    StringRedisTemplate stringRedisTemplate;
 
     @Test
     void contextLoads() {
@@ -25,9 +25,10 @@ class ShoppingKillApplicationTests {
     @Test
     void redisTest(){
         log.info("进入");
-        redisTemplate.opsForValue().set("test","sirwsl");
-        String test = redisTemplate.opsForValue().get("test");
-        log.info(test);
+        stringRedisTemplate.opsForValue().set("test","sirwsl");
+        String test = stringRedisTemplate.opsForValue().get("test");
+        System.err.println("------------"+test);
+        System.out.println("------------"+test);
 
     }
 }
