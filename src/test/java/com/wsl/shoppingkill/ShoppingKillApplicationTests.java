@@ -31,4 +31,11 @@ class ShoppingKillApplicationTests {
         System.out.println("------------"+test);
 
     }
+    @Test
+    public void test1(){
+        stringRedisTemplate.opsForValue().set("name","sirwsl");
+        String test = stringRedisTemplate.opsForValue().get("name");
+        System.err.println("------------"+test);
+        System.out.println("------------"+test);
+    }
 }

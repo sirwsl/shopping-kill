@@ -12,3 +12,9 @@ spring:
   #环境修改
   profiles:
     active: dev
+  rabbitmq:
+    addresses: 121.196.187.160:5672,121.196.187.160:5673,121.196.187.160:5674
+    username: admin
+    password: 18314263373
+    connection-timeout: 1500
+
