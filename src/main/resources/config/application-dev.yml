@@ -101,6 +101,31 @@ redis:
   testWhileIdle: true #在空闲时检查有效性, 默认false
   password: 18314263373 #密码
 
+zookeeper-hosts: 121.196.187.160:2181,121.196.187.160:2182,121.196.187.160:2183
 
-
-zookeeper-hosts: 121.196.187.160:2181 ,121.196.187.160:2182,121.196.187.160:2183
+jetcache:
+  statIntervalMinutes: 1 #统计间隔
+  areaInCacheName: false
+  local:
+    default: #默认area
+      type: caffeine
+      keyConvertor: fastjson
+  remote:
+    default:
+      type: redis.lettuce #使用lettuce
+      keyConvertor: fastjson
+      valueEncoder: java
+      valueDecoder: java
+      poolConfig:
+        minIdle: 1
+        maxIdle: 50
+        maxTotal: 1000
+        maxWait: 1000
+      uri:
+        - redis://18314263373@121.196.187.160:6379/0  #redis://密码@IP:端口/库
+        - redis://18314263373@121.196.187.160:6380/0
+        - redis://18314263373@121.196.187.160:6381/0
+        - redis://18314263373@121.196.187.160:6382/0
+        - redis://18314263373@121.196.187.160:6383/0
+        - redis://18314263373@121.196.187.160:6383/0
+      readFrom: masterPreferred #master优先

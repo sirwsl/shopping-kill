@@ -176,39 +176,19 @@
             <artifactId>jackson-annotations</artifactId>
         </dependency>
 
-        <!--ResultFul接口-->
-        <!--<dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-rest</artifactId>
-            <exclusions>
-                <exclusion>
-                    <artifactId>spring-plugin-core</artifactId>
-                    <groupId>org.springframework.plugin</groupId>
-                </exclusion>
-            </exclusions>
+        <!--二级缓存设置-->
+        <!--本地缓存-->
+        <dependency>
+            <groupId>com.github.ben-manes.caffeine</groupId>
+            <artifactId>caffeine</artifactId>
+        </dependency>
+        <!--cache缓存-对redis与本地cache操作-->
+        <dependency>
+            <groupId>com.alicp.jetcache</groupId>
+            <artifactId>jetcache-starter-redis-lettuce</artifactId>
+            <version>2.6.0.M1</version>
         </dependency>
 
-
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-            <version>2.7.0</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>guava</artifactId>
-                    <groupId>com.google.guava</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>javassist</artifactId>
-                    <groupId>org.javassist</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-            <version>2.7.0</version>
-        </dependency>-->
         <!--其余依赖-->
         <dependency>
             <groupId>commons-io</groupId>
