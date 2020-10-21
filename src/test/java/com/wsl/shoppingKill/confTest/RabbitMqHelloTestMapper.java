@@ -1,5 +1,6 @@
-package com.wsl.shoppingkill;
+package com.wsl.shoppingKill.confTest;
 
+import com.wsl.shoppingKill.test.HelloSender;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class RabbitMqHelloTest {
+public class RabbitMqHelloTestMapper {
 
     @Autowired
     private HelloSender helloSender;

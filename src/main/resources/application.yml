@@ -1,6 +1,10 @@
 # 应用服务 WEB 访问端口
 server:
   port: 8080
+  servlet:
+    context-path: /
+    encoding:
+      charset: UTF-8
 
 # 应用名称
 spring:
@@ -12,9 +16,13 @@ spring:
   #环境修改
   profiles:
     active: dev
-  rabbitmq:
-    addresses: 121.196.187.160:5672,121.196.187.160:5673,121.196.187.160:5674
-    username: admin
-    password: 18314263373
-    connection-timeout: 1500
+
+
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT-8
+    default-property-inclusion: non_null
+
+
+
 

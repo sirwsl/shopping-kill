@@ -1,13 +1,11 @@
-package com.wsl.shoppingkill;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
+package com.wsl.shoppingKill.test;
 
 import org.springframework.amqp.core.AmqpTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * 简单队列

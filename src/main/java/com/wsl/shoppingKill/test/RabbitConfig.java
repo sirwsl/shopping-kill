@@ -1,4 +1,4 @@
-package cn.cuit.rabbit.one2one.producer;
+package com.wsl.shoppingKill.test;
 
 import org.springframework.amqp.core.Queue;
 import org.springframework.context.annotation.Bean;

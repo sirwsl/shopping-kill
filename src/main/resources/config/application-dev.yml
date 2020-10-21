@@ -8,35 +8,21 @@ spring:
       url: jdbc:mysql://121.196.187.160:3306/shoppingkill?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false
       username: root
       password: 18314263373
-      # 配置初始化大小、最小、最大
-      initial-size: 20
+      initial-size: 20 # 配置初始化大小、最小、最大
       min-idle: 0
       max-active: 50
-      #配置获取连接等待超时的时间
-      maxWait: 60000
-      #配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
-      timeBetweenEvictionRunsMillis: 60000
-      #配置一个连接在池中最小生存的时间，单位是毫秒
-      minEvictableIdleTimeMillis: 300000
-      #测试连接
-      validationQuery: SELECT1
-      #申请连接的时候检测，建议配置为true，不影响性能，并且保证安全性
-      testWhileIdle: true
-
-      #获取连接时执行检测，建议关闭，影响性能
-      testOnBorrow: false
-
-      #归还连接时执行检测，建议关闭，影响性能
-      testOnReturn: false
-      #是否开启PSCache，PSCache对支持游标的数据库性能提升巨大，oracle建议开启，mysql下建议关闭
-      pool-prepared-statements: false
-      #开启poolPreparedStatements后生效
-      max-pool-prepared-statement-per-connection-size: 20
-      #配置扩展插件，常用的插件有=>stat:监控统计  log4j:日志  wall:防御sql注入
-      filters: stat,wall,log4j
+      maxWait: 60000  #配置获取连接等待超时的时间
+      timeBetweenEvictionRunsMillis: 60000  #配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      minEvictableIdleTimeMillis: 300000  #配置一个连接在池中最小生存的时间，单位是毫秒
+      validationQuery: SELECT1    #测试连接
+      testWhileIdle: true #申请连接的时候检测，建议配置为true，不影响性能，并且保证安全性
+      testOnBorrow: false #获取连接时执行检测，建议关闭，影响性能
+      testOnReturn: false #归还连接时执行检测，建议关闭，影响性能
+      pool-prepared-statements: false #是否开启PSCache，PSCache对支持游标的数据库性能提升巨大，oracle建议开启，mysql下建议关闭
+      max-pool-prepared-statement-per-connection-size: 20 #开启poolPreparedStatements后生效
+      filters: stat,wall,log4j #配置扩展插件，常用的插件有=>stat:监控统计  log4j:日志  wall:防御sql注入
       logSlowSql: true
-      # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
-      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000  # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
       # Druid WebStatFilter配置
       web-stat-filter:
         enabled: true
@@ -58,15 +44,11 @@ spring:
           result-set-open-after-log-enabled: false
           result-set-close-after-log-enabled: false
   jpa:
-    # 配置 DBMS 类型
-    database: MYSQL
-    # 配置是否将执行的 SQL 输出到日志
-    show-sql: true
+    database: MYSQL # 配置 DBMS 类型
+    show-sql: true # 配置是否将执行的 SQL 输出到日志
     properties:
       hibernate:
-        hbm2ddl:
-          # 配置开启自动更新表结构
-          auto: update
+        ddl-auto: none # 配置开启自动更新表结构
     open-in-view: false
 
   redis:
@@ -87,6 +69,26 @@ spring:
         - 121.196.187.160:6384
     password: 18314263373
 
+  rabbitmq:
+    addresses: 121.196.187.160:5672,121.196.187.160:5673,121.196.187.160:5674
+    username: admin
+    password: 18314263373
+    #默认虚拟主机
+    virtual-host: /
+    #连接超时实践
+    connection-timeout: 10000
+    publisher-confirm-type: correlated
+    publisher-returns: true
+    template:
+      mandatory: true
+    #消费端配置
+    listener:
+      simple:
+        max-concurrency: 50
+        concurrency: 10
+        acknowledge-mode: manual #签收设置
+        prefetch: 1 #限流
+
 redis:
   timeout: 10000 #客户端超时时间单位是毫秒 默认是2000
   maxIdle: 300 #最大空闲数
@@ -100,3 +102,5 @@ redis:
   password: 18314263373 #密码
 
 
+
+zookeeper-hosts: 121.196.187.160:2181 ,121.196.187.160:2182,121.196.187.160:2183
