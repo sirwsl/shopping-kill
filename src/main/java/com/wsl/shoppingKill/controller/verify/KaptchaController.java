@@ -3,7 +3,7 @@ package com.wsl.shoppingKill.controller.verify;
 
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import com.wsl.shoppingKill.entity.TestEntity;
-import com.wsl.shoppingKill.enumerate.Constants;
+import com.wsl.shoppingKill.constant.Constants;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;

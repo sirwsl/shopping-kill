@@ -1,4 +1,4 @@
-package com.wsl.shoppingKill.util;
+package com.wsl.shoppingKill.common.util;
 import com.alibaba.fastjson.JSONObject;
 import com.zhenzi.sms.ZhenziSmsClient;
 import lombok.extern.slf4j.Slf4j;

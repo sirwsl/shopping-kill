@@ -1,4 +1,4 @@
-package com.wsl.shoppingKill.enumerate;
+package com.wsl.shoppingKill.constant;
 
 /**
  * @author wsl

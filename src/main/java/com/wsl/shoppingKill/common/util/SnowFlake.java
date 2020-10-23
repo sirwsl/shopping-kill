@@ -1,4 +1,4 @@
-package com.wsl.shoppingKill.util;
+package com.wsl.shoppingKill.common.util;
 
 /**
  * 描述: Twitter的分布式自增ID雪花算法snowflake (Java版)

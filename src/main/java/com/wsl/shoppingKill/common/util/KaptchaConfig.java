@@ -1,4 +1,4 @@
-package com.wsl.shoppingKill.util;
+package com.wsl.shoppingKill.common.util;
 
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import com.google.code.kaptcha.util.Config;
