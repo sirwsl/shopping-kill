@@ -1,4 +1,4 @@
-package com.wsl.shoppingKill.config;
+package com.wsl.shoppingKill.config.dbConfig;
 
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
