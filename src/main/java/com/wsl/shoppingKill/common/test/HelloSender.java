@@ -1,4 +1,4 @@
-package com.wsl.shoppingKill.test;
+package com.wsl.shoppingKill.common.test;
 
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.stereotype.Component;

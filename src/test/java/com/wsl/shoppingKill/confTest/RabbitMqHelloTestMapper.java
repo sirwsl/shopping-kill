@@ -1,6 +1,6 @@
 package com.wsl.shoppingKill.confTest;
 
-import com.wsl.shoppingKill.test.HelloSender;
+import com.wsl.shoppingKill.common.test.HelloSender;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
