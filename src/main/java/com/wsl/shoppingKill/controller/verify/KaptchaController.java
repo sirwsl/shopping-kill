@@ -49,7 +49,7 @@ public class KaptchaController {
             // 生产验证码字符串并保存到redis中
             String rightCode = katha.createText();
             log.info("rightCode:{}", rightCode);
-            stringRedisTemplate.opsForValue().set(Constants.REDIS_PREFIX +user.getId(), rightCode,
+            stringRedisTemplate.opsForValue().set(Constants.REDIS_PREFIX +user.getUserId(), rightCode,
                     Constants.KAPTCHA_EXPIRE_TIME, TimeUnit.SECONDS);
 
             // 使用生产的验证码字符串返回一个BufferedImage对象并转为byte写入到byte数组中
@@ -79,7 +79,7 @@ public class KaptchaController {
      * @return bool:判断结果
      */
     public Boolean imgVerifyCode(TestEntity user, long goodsId, String tryCode) {
-        String rightCode = stringRedisTemplate.opsForValue().get(Constants.REDIS_PREFIX + user.getId());
+        String rightCode = stringRedisTemplate.opsForValue().get(Constants.REDIS_PREFIX + user.getUserId());
         log.info("rightCode={}, tryCode={}", rightCode, tryCode);
         return tryCode.equals(rightCode);
     }

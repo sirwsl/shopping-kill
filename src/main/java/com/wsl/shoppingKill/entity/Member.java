@@ -1,25 +1,27 @@
 package com.wsl.shoppingKill.entity;
 
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
-import java.util.Date;
-
-/**
- * @author wsl
- */
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Admin implements Serializable {
+public class Member implements Serializable {
     /**
     * id
     */
     private Long id;
+
+    /**
+    * 昵称
+    */
+    private String name;
 
     /**
     * 用户名
@@ -27,7 +29,7 @@ public class Admin implements Serializable {
     private String username;
 
     /**
-    * 密码 md5加密存储
+    * 密码，加密存储
     */
     private String password;
 
@@ -37,9 +39,9 @@ public class Admin implements Serializable {
     private String phone;
 
     /**
-    * 微信号
+    * 注册邮箱
     */
-    private String wx;
+    private String email;
 
     /**
     * 性别
@@ -57,24 +59,34 @@ public class Admin implements Serializable {
     private String img;
 
     /**
-    * 类型: 1-管理员  2-员工
+    * 签名
     */
-    private Integer type;
+    private String description;
 
     /**
-    * 创建时间
+    * 积分
     */
-    private Date createTime;
+    private Integer points;
+
+    /**
+    * 余额
+    */
+    private BigDecimal balance;
 
     /**
     * 更新时间
     */
-    private Date updateTime;
+    private LocalDateTime updateTime;
 
     /**
-    * 是否离职 0-离职 1-在职
+    * 创建时间
     */
-    private byte[] state;
+    private LocalDateTime createTime;
+
+    /**
+    * 是否注销
+    */
+    private Integer state;
 
     private static final long serialVersionUID = 1L;
 }

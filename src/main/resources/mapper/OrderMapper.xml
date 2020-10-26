@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wsl.shoppingKill.mapper.OrderMapper">
+  <resultMap id="BaseResultMap" type="com.wsl.shoppingKill.entity.Order">
+    <!--@mbg.generated-->
+    <!--@Table t_order-->
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="member_id" jdbcType="BIGINT" property="memberId" />
+    <result column="adress_id" jdbcType="INTEGER" property="adressId" />
+    <result column="good_id" jdbcType="BIGINT" property="goodId" />
+    <result column="good_num" jdbcType="INTEGER" property="goodNum" />
+    <result column="freight_money" jdbcType="DECIMAL" property="freightMoney" />
+    <result column="pay_money" jdbcType="DECIMAL" property="payMoney" />
+    <result column="pay_type" jdbcType="INTEGER" property="payType" />
+    <result column="source_type" jdbcType="INTEGER" property="sourceType" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="order_type" jdbcType="INTEGER" property="orderType" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="pay_time" jdbcType="TIMESTAMP" property="payTime" />
+    <result column="pay_num" jdbcType="VARCHAR" property="payNum" />
+    <result column="delivery_company" jdbcType="VARCHAR" property="deliveryCompany" />
+    <result column="delivery_num" jdbcType="VARCHAR" property="deliveryNum" />
+    <result column="expand_time" jdbcType="VARBINARY" property="expandTime" />
+    <result column="integration" jdbcType="INTEGER" property="integration" />
+    <result column="bill_type" jdbcType="INTEGER" property="billType" />
+    <result column="bill_header" jdbcType="VARCHAR" property="billHeader" />
+    <result column="bill_content" jdbcType="VARCHAR" property="billContent" />
+    <result column="bill_receiver_phone" jdbcType="VARCHAR" property="billReceiverPhone" />
+    <result column="bill_receiver_email" jdbcType="VARCHAR" property="billReceiverEmail" />
+    <result column="confirm_status" jdbcType="INTEGER" property="confirmStatus" />
+    <result column="delete_status" jdbcType="VARBINARY" property="deleteStatus" />
+    <result column="delivery_time" jdbcType="TIMESTAMP" property="deliveryTime" />
+    <result column="receive_time" jdbcType="TIMESTAMP" property="receiveTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, member_id, adress_id, good_id, good_num, freight_money, pay_money, pay_type, 
+    source_type, `status`, order_type, remarks, create_time, pay_time, pay_num, delivery_company, 
+    delivery_num, expand_time, integration, bill_type, bill_header, bill_content, bill_receiver_phone, 
+    bill_receiver_email, confirm_status, delete_status, delivery_time, receive_time
+  </sql>
+
+</mapper>

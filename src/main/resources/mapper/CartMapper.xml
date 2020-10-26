@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wsl.shoppingKill.mapper.CartMapper">
+  <resultMap id="BaseResultMap" type="com.wsl.shoppingKill.entity.Cart">
+    <!--@mbg.generated-->
+    <!--@Table t_cart-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="member_id" jdbcType="BIGINT" property="memberId" />
+    <result column="goods_info" jdbcType="BIGINT" property="goodsInfo" />
+    <result column="goods_num" jdbcType="INTEGER" property="goodsNum" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="created" jdbcType="TIMESTAMP" property="created" />
+    <result column="updated" jdbcType="TIMESTAMP" property="updated" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, member_id, goods_info, goods_num, `status`, created, updated
+  </sql>
+
+</mapper>
