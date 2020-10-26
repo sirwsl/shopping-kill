@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
  * @date 2020/10/21-12:28
  **/
 @Entity
-@TableName("Test")
+@TableName("test")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -34,14 +34,14 @@ public class TestEntity implements Serializable {
     @Column(length = 64,columnDefinition = "varchar(64) NOT NULL COMMENT '管理员名称' ")
     private String name;
 
-    //@Column(name="creat_time" ,columnDefinition = "NOT NULL COMMENT '创建时间'")
+    @Column(name="creat_time" ,columnDefinition = "NOT NULL COMMENT '创建时间'")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
     @Temporal(TemporalType.TIMESTAMP)
     @TableField(fill = FieldFill.INSERT)
     private LocalDateTime creatTime;
 
-    //@Column(name = "update_time",columnDefinition = "timestamp COMMENT '修改时间'", nullable = false, updatable = false, insertable = false)
+    @Column(name = "update_time",columnDefinition = "timestamp COMMENT '修改时间'", nullable = false, updatable = false, insertable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
     @Temporal(TemporalType.TIMESTAMP)

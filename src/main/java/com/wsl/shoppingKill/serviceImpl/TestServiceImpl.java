@@ -22,7 +22,7 @@ public class TestServiceImpl extends ServiceImpl<TestMapper,TestEntity> implemen
     private TestMapper testMapper;
 
     @Override
-    @Cached(name = "TestUser.", key = "#user.id",expire = 1,timeUnit = TimeUnit.HOURS)
+    @Cached(name = "TestUser.", expire = 1,timeUnit = TimeUnit.HOURS)
     public boolean insertTest(TestEntity user) {
         return testMapper.insert(user) > 0;
     }

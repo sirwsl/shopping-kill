@@ -1,5 +1,7 @@
 package com.wsl.shoppingKill.confTest;
 
+import com.wsl.shoppingKill.entity.TestEntity;
+import com.wsl.shoppingKill.service.TestService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -17,6 +19,8 @@ class RedisTests {
     @Resource
     StringRedisTemplate stringRedisTemplate;
 
+    @Resource
+    TestService service;
     @Test
     void contextLoads() {
     }
@@ -36,5 +40,12 @@ class RedisTests {
         String test = stringRedisTemplate.opsForValue().get("name");
         System.err.println("------------"+test);
         System.out.println("------------"+test);
+    }
+
+    @Test
+    public void test2(){
+        TestEntity testEntity = new TestEntity(123,"123","ewqwefqwefqwefqwfq");
+        System.out.println(service.insertTest(testEntity));
+
     }
 }
