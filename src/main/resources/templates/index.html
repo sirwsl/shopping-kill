@@ -23,9 +23,9 @@
 							<input type="button" />
 						</form>
 						<div class="btn fl clearfix">
-							<a href="mygxin.html"><img src="img/grzx.png"/></a>
+							<a href="my.html" target="displayArea"><img src="img/grzx.png"/></a>
 							<a href="#" class="er1"><img src="img/ewm.png"/></a>
-							<a href="cart.html"><img src="img/gwc.png"/></a>
+							<a href="cart.html" target="displayArea"><img src="img/gwc.png"/></a>
 							<p><a href="#"><img src="img/smewm.png"/></a></p>
 						</div>
 					</div>
@@ -36,31 +36,31 @@
 						<a href="#">所有商品</a>
 						<div class="sList">
 							<div class="wrapper  clearfix">
-								<a href="paint.html"  target="displayArea">
+								<a href="allList.html"  target="displayArea">
 									<dl>
 										<dt><img src="img/nav1.jpg"/></dt>
 										<dd>电脑</dd>
 									</dl>
 								</a>
-								<a href="paint.html"  target="displayArea">
+								<a href="allList.html"  target="displayArea">
 									<dl>
 										<dt><img src="img/nav2.jpg"/></dt>
 										<dd>手机</dd>
 									</dl>
 								</a>
-								<a href="paint.html"  target="displayArea">
+								<a href="allList.html"  target="displayArea">
 									<dl>
 										<dt><img src="img/nav3.jpg"/></dt>
 										<dd>平板</dd>
 									</dl>
 								</a>
-								<a href="paint.html"  target="displayArea">
+								<a href="allList.html"  target="displayArea">
 									<dl>
 										<dt><img src="img/nav6.jpg"/></dt>
 										<dd>配件</dd>
 									</dl>
 								</a>
-								<a href="paint.html"  target="displayArea">
+								<a href="allList.html"  target="displayArea">
 									<dl>
 										<dt><img src="img/nav7.jpg"/></dt>
 										<dd>创意装饰</dd>
@@ -74,7 +74,7 @@
 				</ul>
 			</div>
 		</div>
-		<iframe src="home.html" onload="setIframeHeight(this)" 	 name="displayArea" width="100%" height="100%" scrolling="no" id="displayArea" frameborder="0"></iframe>
+		<iframe src="home.html"	 name="displayArea" width="100%" height="100%" scrolling="no" id="displayArea" frameborder="0"></iframe>
 		
 		<!--返回顶部-->
 		<div class="gotop">
@@ -137,17 +137,18 @@
 	<script src="js/nav.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/jquery.flexslider-min.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
-		function setIframeHeight(iframe) {
-			if(iframe) {
-				var iframeWin = iframe.contentWindow || iframe.contentDocument.parentWindow;
-				if(iframeWin.document.body) {
-					iframe.height = iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight;
-				}
-			}
-		};
 		
-		window.onload = function() {
-		setIframeHeight(document.getElementById('displayArea'));
-		};
+		function reinitIframe() {
+		var iframe = document.getElementById("displayArea");
+		try {
+		var bHeight = iframe.contentWindow.document.body.scrollHeight;
+		var dHeight = iframe.contentWindow.document.documentElement.scrollHeight;
+		var height = Math.min(bHeight, dHeight);
+		iframe.height = height;
+		
+		} catch (ex) { }
+		
+		}
+		window.setInterval("reinitIframe()", 20);
 	</script>
 </html>

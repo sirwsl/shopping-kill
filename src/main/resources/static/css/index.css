@@ -51,8 +51,10 @@ img{
 	margin:0 auto 30px; 
 }
 .news div.top a,.news div.bott a{
-	display: block;
+	display: flex;
 	position: relative;
+	align-items:center; 
+	justify-content:center;
 }
 .news div.top a p,.news div.bott a p{
 	position: absolute;

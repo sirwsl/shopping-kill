@@ -12,7 +12,7 @@ spring:
     name: shopping-kill
   # spring 静态资源扫描路径
   resources:
-    static-locations: classpath:/static/
+    static-locations: classpath:/static/,classpath:/templates/
   #环境修改
   profiles:
     active: dev
