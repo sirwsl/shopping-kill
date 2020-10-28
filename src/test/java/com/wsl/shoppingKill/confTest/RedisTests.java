@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -18,6 +19,9 @@ class RedisTests {
 
     @Resource
     StringRedisTemplate stringRedisTemplate;
+
+    @Resource
+    private RedisTemplate<String,Object> redisTemplate;
 
     @Resource
     TestService service;
@@ -46,6 +50,16 @@ class RedisTests {
     public void test2(){
         TestEntity testEntity = new TestEntity(123,"123","ewqwefqwefqwefqwfq");
         System.out.println(service.insertTest(testEntity));
+
+    }
+
+    @Test
+    public void test3(){
+        TestEntity testEntity = new TestEntity(123,"123","ewqwefqwefqwefqwfq");
+        redisTemplate.opsForValue().set("user1",testEntity);
+        System.out.println("取结果"+redisTemplate.opsForValue().get("user1"));
+        TestEntity user = (TestEntity) redisTemplate.opsForValue().get("user1");
+        System.out.println(user.getText());
 
     }
 }

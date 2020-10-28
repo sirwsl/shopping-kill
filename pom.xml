@@ -188,6 +188,12 @@
             <artifactId>jetcache-starter-redis-lettuce</artifactId>
             <version>2.6.0.M1</version>
         </dependency>
+
+        <!--jackson序列化依赖-->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
         <!--短信接口-->
         <dependency>
             <groupId>com.zhenzikj</groupId>
