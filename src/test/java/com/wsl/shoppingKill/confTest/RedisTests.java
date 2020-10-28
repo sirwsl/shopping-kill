@@ -25,6 +25,8 @@ class RedisTests {
 
     @Resource
     TestService service;
+
+
     @Test
     void contextLoads() {
     }

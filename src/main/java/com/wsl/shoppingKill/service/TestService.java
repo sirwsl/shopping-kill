@@ -1,10 +1,7 @@
 package com.wsl.shoppingKill.service;
 
-import com.alicp.jetcache.anno.Cached;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.wsl.shoppingKill.entity.TestEntity;
-
-import java.util.concurrent.TimeUnit;
 
 
 /**

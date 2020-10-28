@@ -1,3 +1,5 @@
+mysql—url: jdbc:mysql://121.196.187.160:3306/shoppingkill?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false&rewriteBatchedStatements=true #rewriteBatchedStatements=true开启批处理流程
+
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
@@ -5,7 +7,7 @@ spring:
       driverClassName: com.mysql.cj.jdbc.Driver
       driver-class-name: com.mysql.cj.jdbc.Driver
       platform: mysql
-      url: jdbc:mysql://121.196.187.160:3306/shoppingkill?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false
+      url: ${mysql-url}
       username: root
       password: 18314263373
       initial-size: 20 # 配置初始化大小、最小、最大
