@@ -1,0 +1,191 @@
+.none {
+	display: none;
+}
+
+.site_mast .categorys-tab-content {
+	display: none;
+}
+
+.site_mast:hover .categorys-tab-content {
+	display: block;
+}
+
+.hot_tj {
+	font-size: 16px;
+	color: #fff;
+	background: #f42424;
+	float: left;
+	padding: 27px 12px;
+	width: 16px;
+	font-family: "microsoft yahei"
+}
+
+.hot_tj_container {
+	margin-top: 10px;
+}
+
+.hot_tj_list {
+	float: left;
+	position: relative;
+	height: 110px;
+	overflow: hidden;
+	padding: 20px;
+	background-color: #ededed;
+}
+
+.hot_tj_list li {
+	width: 260px;
+	height: 110px;
+	border: 1px solid #fff;
+	float: left;
+	background: #fff;
+	margin-right: 20px;
+}
+
+.hot_tj_list li:hover {
+	border-color: #ec5051;
+}
+
+.hot_tj_list .item {
+	padding: 10px;
+	float: left;
+}
+
+.hot_tj_list .item .p_img {
+	width: 90px;
+	height: 90px;
+	float: left;
+	margin-right: 12px;
+}
+
+.hot_tj_list .item .p_name {
+	float: left;
+	width: 130px;
+	height: 35px;
+	overflow: hidden;
+}
+
+.hot_tj_list .item .p_price {
+	float: left;
+	color: #f42424;
+	padding-top: 6px;
+	width: 120px;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.hot_tj_list .item .p_btn {
+	height: 22px;
+	border: 0;
+	margin-top: 6px;
+}
+
+.hot_tj_list .item .p_btn a {
+	background: #f42424;
+	border-color: #f42424;
+	color: #fff;
+	float: left;
+	padding: 0 10px;
+	line-height: 23px;
+	border: 1px solid #f42424;
+	display: inline-block;
+	margin-right: 5px;
+	font-size: 12px;
+	cursor: pointer;
+}
+
+.hot_tj_list .item .p_btn a:hover {
+	background: #ec5051;
+	color: #fff;
+}
+
+.hot_tj_list li.last {
+	margin-right: 0;
+}
+
+.js {
+	width: 90%;
+	margin: 10px auto 0 auto;
+}
+
+.js p {
+	padding: 5px 0;
+	font-weight: bold;
+	overflow: hidden;
+}
+
+.js p span {
+	float: right;
+}
+
+.js p span a {
+	color: #f00;
+	text-decoration: underline;
+}
+
+.js textarea {
+	height: 100px;
+	width: 98%;
+	padding: 5px;
+	border: 1px solid #ccc;
+	border-top: 2px solid #aaa;
+	border-left: 2px solid #aaa;
+}
+
+
+/* 本例子css */
+
+.picFocus1 {
+	margin: 0 auto;
+	width: 300px;
+	border: 1px solid #ccc;
+	padding: 5px;
+	position: relative;
+	overflow: hidden;
+	zoom: 1;
+	float: left;
+}
+
+.picFocus1 .hd {
+	width: 100%;
+	padding-top: 5px;
+	overflow: hidden;
+}
+
+.picFocus1 .hd ul {
+	margin-right: -5px;
+	overflow: hidden;
+	zoom: 1;
+}
+
+.picFocus1 .hd ul li {
+	padding-top: 5px;
+	float: left;
+	text-align: center;
+}
+
+.picFocus1 .hd ul li img {
+	width: 45px;
+	height: 45px;
+	border: 2px solid #ddd;
+	cursor: pointer;
+	margin-right: 5px;
+}
+
+.picFocus1 .hd ul li.on {
+	background: url("images/icoUp.gif") no-repeat center 0;
+}
+
+.picFocus1 .hd ul li.on img {
+	border-color: #f60;
+}
+
+.picFocus1 .bd li {
+	vertical-align: middle;
+}
+
+.picFocus1 .bd img {
+	width: 300px;
+	height: 300px;
+	display: block;
+}

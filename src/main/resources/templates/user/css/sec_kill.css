@@ -1,0 +1,188 @@
+.seckill {
+	width: 100%;
+	height: 190px;
+	min-width: 1200px;
+	background: url(../images/se_kill.png) center;
+	background-size: 100% 100%;
+}
+
+.skill_warp {
+	margin-top: 20px;
+}
+
+.skill_tab {
+	width: 100%;
+	height: 50px;
+	overflow: hidden;
+	background: #eee;
+}
+
+.skill_tab_time li {
+	width: 20%;
+	float: left;
+	text-align: center;
+	cursor: pointer;
+}
+
+.skill_warp li {
+	float: left;
+	width: 210px;
+	margin: 0 10px 10px 0;
+	margin-bottom: 10px;
+	position: relative;
+	padding: 10px;
+}
+
+.curr {
+	background-color: #f42424;
+	color: #fff;
+}
+
+li.curr strong {
+	font-size: 24px;
+	color: #fff;
+}
+
+li strong {
+	display: inline-block;
+	color: #555;
+	font-size: 18px;
+	line-height: 50px;
+}
+
+.time {
+	display: inline-block;
+}
+
+li .time {
+	line-height: 50px;
+	vertical-align: middle;
+	margin: -14px 0 0 10px;
+}
+
+.skill_tab_time li i {
+	width: 78px;
+	height: 22px;
+	line-height: 22px;
+	border: 1px solid #8c8c8c;
+	border-radius: 22px;
+	display: inline-block;
+	vertical-align: middle;
+	margin: -10px 0 0 12px;
+	font-size: 12px;
+	text-align: center;
+}
+
+.hide {
+	display: none;
+}
+
+.active2 {
+	display: inline-block;
+}
+
+.mod_shodow {
+	transition: all .5s;
+}
+
+.mod_shodow:hover {
+	-webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+	-moz-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+	box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+	-webkit-transform: translate3d(0, -3px, 0);
+	-moz-transform: translate3d(0, -3px, 0);
+	transform: translate3d(0, -3px, 0);
+}
+
+.p_img {
+	margin-bottom: 10px;
+}
+
+.p_img img {
+	width: 100%;
+	height: 100%;
+}
+
+.p_name {
+	margin-bottom: 6px;
+	font-size: 12px;
+}
+
+.p_name a {
+	display: block;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	font-size: 14px;
+	color: #555;
+}
+
+.p_price {
+	float: left;
+	font-size: 18px;
+	color: #f42424;
+}
+
+.p_del {
+	float: left;
+	color: #999;
+	line-height: 27px;
+	margin-left: 10px;
+}
+
+.btn {
+	width: 190px;
+	margin: 10px 0 0 0;
+	text-align: center;
+	height: 28px;
+	line-height: 28px;
+	padding: 0 10px;
+	height: 23px;
+	line-height: 23px;
+	border: 1px solid #f42424;
+	border-top-color: rgb(244, 36, 36);
+	border-right-color: rgb(244, 36, 36);
+	border-bottom-color: rgb(244, 36, 36);
+	border-left-color: rgb(244, 36, 36);
+	display: inline-block;
+	color: #f42424;
+	background-color: #fff;
+	margin-right: 5px;
+	font-size: 12px;
+	cursor: pointer;
+}
+
+.sc_kill_btn {
+	background: #f42424;
+	border-color: #f42424;
+	color: #fff;
+}
+
+.sc_kill_btn:hover {
+	background: #ec5051;
+	color: #fff;
+}
+
+.more_goods {
+	text-align: center;
+}
+
+.seckill1 {
+	width: 100%;
+	height: 130px;
+	min-width: 1200px;
+	background: url(../images/seckill_banner.jpg) center;
+	background-size: 100% 100%;
+	text-align: center;
+}
+
+.seckill1 span {
+	font-size: 30px;
+	color: #b31919;
+	font-weight: bold;
+	display: block;
+	padding-top: 70px;
+}
+.sel{
+	display: inline-block;
+}

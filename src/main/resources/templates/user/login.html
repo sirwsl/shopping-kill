@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/base.css" />
+		<title>注册</title>
+	</head>
+
+	<body>		
+		<div class="register_con">
+			<div class="register_conr">
+				<div class="register">
+				</div>
+				<div class="clear"></div>
+				<div class="user per_register" style="padding-top: 40px;">
+					<span>用户名：</span>
+					<img src="images/user.png" class="psw" style="margin-top: 10px;" />
+					<input type="text" name="user" id="IDnum" class="input_comm" placeholder="请输入用户名" style="margin-top: 0px;">
+					<br />
+					<span>密码：</span>
+					<img src="images/password.png" class="psw" />
+					<input type="password" name="password" id="password" class="input_comm" placeholder="请输入密码" />
+					<br />
+					<span>验证码：</span>
+					<input type="text" name="yanzhengma" class="yanzhengma" placeholder="请输入验证码" />
+					<img src="/verify/jpg" class="yanzheng" />
+					<p class="change fr">
+						<a href="#">看不清楚 再换一张</a>
+					</p>
+					<div class="clear"></div>
+					<!--<input type="checkbox" name="jizhu" value="记住账号和密码" class="bark"/><span class="bark1">记住账号和密码</span>
+						<span class="forget fr"><a href="#">忘记密码</a></span>-->
+					<input type="button" name="denglu" value="登 录" class="btn_register" id="toIndex"/>
+					<span class="forget fr"><a href="./register.html">去注册</a></span>					
+				</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+	</body>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/kuCity.js"></script>
+	<script>
+		$('.business').click(function() {
+			$('.business_register').show();
+			$('.per_register').hide();
+			$(this).addClass('active1').removeClass('cancel');
+			$('.personal').addClass('cancel').removeClass('active1');
+		});
+		$('.personal').click(function() {
+			$('.business_register').hide();
+			$('.per_register').show();
+			$(".business").addClass('cancel').removeClass('active1');
+			$(this).addClass('active1').removeClass('cancel');
+		});
+		$("#toIndex").click(function(){
+			window.location.href = "index.html"
+		})
+	</script>
+	<script>
+		$('.search').kuCity();
+	</script>
+</html>
