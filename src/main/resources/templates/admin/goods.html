@@ -1,0 +1,217 @@
+ <!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>商品管理</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+	<link href="css/ionic.css" rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+		<div class="row">
+		    <div class="col-sm-12">
+		        <div class="ibox float-e-margins">
+		            <div class="ibox-title">
+		                <h5>商品管理</h5>
+		                <div class="ibox-tools">
+		                    <a data-toggle="modal" class="btn btn-info" href="#modal-form" data-toggle="modal" data-target="#myModal">添加</a>
+		                </div>
+		            </div>
+		            <div class="ibox-content">
+		
+		                <table class="table table-bordered">
+		                    <thead>
+		                        <tr>
+		                            <th>id</th>
+		                            <th>名称</th>
+		                            <th>参考图</th>
+									<th>描述</th>
+									<th>是否上架</th>
+									<th>操作</th>
+		                        </tr>
+		                    </thead>
+		                    <tbody>
+		                        <tr>
+		                            <td>12345</td>
+									<td>手机</td>
+									<td>
+										<img src="css/patterns/header-profile-skin-1.png" style="width: 38px;height: 38px;" />
+										<img src="css/patterns/header-profile-skin-1.png" style="width: 38px;height: 38px;" />
+										<img src="css/patterns/header-profile-skin-1.png" style="width: 38px;height: 38px;" />
+										<img src="css/patterns/header-profile-skin-1.png" style="width: 38px;height: 38px;" />
+										<img src="css/patterns/header-profile-skin-1.png" style="width: 38px;height: 38px;" />
+									</td>
+									<td>这是商品描述</td>
+									<td>
+										<label class="toggle toggle-positive">
+										  <input type="checkbox" checked="">
+										  <div class="track">
+										    <div class="handle"></div>
+										  </div>
+										</label>
+									</td>
+									<td>
+										<a data-toggle="modal" class="btn btn-info" href="#modal-form" data-toggle="modal" data-target="#EditModal">编辑</a>
+										<a data-toggle="modal" class="btn btn-danger" href="#" >删除</a>
+									</td>
+		                        </tr>
+		                        
+		                    </tbody>
+		                </table>
+		            </div>
+		        </div>
+		    </div>
+	    </div>
+    </div>
+
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModal" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+						&times;
+					</button>
+					<h4 class="modal-title" id="myModalLabel">
+						添加商品
+					</h4>
+				</div>
+				<div class="modal-body">
+					<form class="form-horizontal">
+						添加商品内容
+					    <div class="form-group">
+					        <label class="col-sm-3 control-label">属性：</label>
+					
+					        <div class="col-sm-8">
+					            <input type="text" placeholder="属性" class="form-control"> 
+					            
+					        </div>
+					    </div>
+					    <div class="form-group">
+					        <label class="col-sm-3 control-label">数量：</label>
+					        <div class="col-sm-8">
+					            <input type="number" placeholder="数量" class="form-control">
+					        </div>
+					    </div>
+					   
+					</form>
+					
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消
+					</button>
+					<button type="button" class="btn btn-primary">
+						确定
+					</button>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal -->
+	</div>
+
+<div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="myModal" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+						&times;
+					</button>
+					<h4 class="modal-title" id="myModalLabel">
+						编辑商品
+					</h4>
+				</div>
+				<div class="modal-body">
+					<form class="form-horizontal">
+						编辑商品内容
+					    <div class="form-group">
+					        <label class="col-sm-3 control-label">属性：</label>
+					
+					        <div class="col-sm-8">
+					            <input type="text" placeholder="属性" class="form-control"> 
+					            
+					        </div>
+					    </div>
+					    <div class="form-group">
+					        <label class="col-sm-3 control-label">数量：</label>
+					        <div class="col-sm-8">
+					            <input type="number" placeholder="数量" class="form-control">
+					        </div>
+					    </div>
+					   
+					</form>
+					
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消
+					</button>
+					<button type="button" class="btn btn-primary">
+						确定
+					</button>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal -->
+	</div>
+
+
+<!-- 全局js -->
+<script src="js/jquery.min.js?v=2.1.4"></script>
+<script src="js/bootstrap.min.js?v=3.3.6"></script>
+
+
+<!--开关JS-->
+<script src="js/ionic.bundle.min.js"></script>
+<!-- Peity -->
+<script src="js/plugins/peity/jquery.peity.min.js"></script>
+
+<!-- 自定义js -->
+<script src="js/content.js?v=1.0.0"></script>
+
+
+<!-- iCheck -->
+<script src="js/plugins/iCheck/icheck.min.js"></script>
+
+<!-- Peity -->
+<script src="js/demo/peity-demo.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green',
+        });
+    });
+</script>
+
+
+
+
+</body>
+
+</html>
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</body>
+</html>
+
+

@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title> - 选项卡 &amp; 面板</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+	<link href="css/plugins/footable/footable.core.css" rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeIn">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="tabs-container">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" href="#tab-1" aria-expanded="true">已支付</a>
+                        </li>
+                        <li class=""><a data-toggle="tab" href="#tab-2" aria-expanded="false">待支付</a>
+                        </li>
+						<li class=""><a data-toggle="tab" href="#tab-3" aria-expanded="false">待收货</a>
+						</li>
+						<li class=""><a data-toggle="tab" href="#tab-4" aria-expanded="false">已结束</a>
+						</li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="tab-1" class="tab-pane active">
+                            <div class="panel-body">
+                                <div class="ibox float-e-margins">
+                                	<div class="ibox-content">
+                                	   <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="8">
+                                		   <thead>
+                                		   <tr>
+                                			   <th data-toggle="true">id</th>
+                                			   <th>商品</th>
+                                			   <th>下单时间</th>
+                                			   <th>支付时间</th>
+											   <th>支付金额</th>
+											   <th>数量</th>
+                                			   <th data-hide="all">备注</th>
+											   <th data-hide="all">收获地址</th>
+											   <th data-hide="all">收货人</th>
+											   <th data-hide="all">联系电话</th>
+                                			   <th>操作</th>
+                                		   </tr>
+                                		   </thead>
+                                		   <tbody>
+                                		   <tr>
+                                			   <td>11286464645646846548486453</td>
+                                			   <td>华为P30</td>
+                                			   <td>2020-11-12 12:00</td>
+                                			   <td>2020-11-12 12:00</td>
+											   <td>99</td>
+                                			   <td>1</td>
+											   <td>这是一个备注备注白色：99  灰色：32 彩色：66</td>
+											   <td>收货地址：云南省五华区云南民族大学121大街</td>
+											   <td>sirwsl</td>
+											   <td>18314263373</td>
+                                			   <td>
+											   <a data-toggle="modal" class="btn btn-primary" href="#modal-form">出库</a>
+											   </td>
+                                		   </tr>
+                                		  
+                                		   </tbody>
+                                		   <tfoot>
+                                		   <tr>
+                                			   <td colspan="5">
+                                				   <ul class="pagination pull-right"></ul>
+                                			   </td>
+                                		   </tr>
+                                		   </tfoot>
+                                	   </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="tab-2" class="tab-pane">
+                            <div class="panel-body">
+                                <div class="ibox float-e-margins">
+                                	<div class="ibox-content">
+                                	   <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="8">
+                                		   <thead>
+                                		   <tr>
+                                			   <th data-toggle="true">id</th>
+                                			   <th>商品</th>
+                                			   <th>下单时间</th>
+											   <th>支付金额</th>
+                                			   <th>数量</th>
+                                			   <th data-hide="all">备注</th>
+                                			   <th data-hide="all">收获地址</th>
+                                			   <th data-hide="all">收货人</th>
+                                			   <th data-hide="all">联系电话</th>
+                                			   <th>操作</th>
+                                		   </tr>
+                                		   </thead>
+                                		   <tbody>
+                                		   <tr>
+                                			   <td>11286464645646846548486453</td>
+                                			   <td>华为P30</td>
+                                			   <td>2020-11-12 12:00</td>
+											   <td>86</td>
+                                			   <td>1</td>
+                                			   <td>这是一个备注备注白色：99  灰色：32 彩色：66</td>
+                                			   <td>收货地址：云南省五华区云南民族大学121大街</td>
+                                			   <td>sirwsl</td>
+                                			   <td>18314263373</td>
+                                			   <td>
+                                			   
+                            				   <a data-toggle="modal" class="btn btn-primary" href="#">提醒支付</a>
+                            				   <a data-toggle="modal" class="btn btn-danger" href="#modal-form" data-toggle="modal" data-target="#modal-price">修改价格</a>
+                            				   </td>
+                                		   </tr>
+                                		  
+                                		   </tbody>
+                                		   <tfoot>
+                                		   <tr>
+                                			   <td colspan="5">
+                                				   <ul class="pagination pull-right"></ul>
+                                			   </td>
+                                		   </tr>
+                                		   </tfoot>
+                                	   </table>
+                                    </div>
+                                </div>
+                            </div>
+					    </div>
+						<div id="tab-3" class="tab-pane">
+						    <div class="panel-body">
+								<div class="ibox float-e-margins">
+									<div class="ibox-content">
+									   <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="8">
+										   <thead>
+										   <tr>
+											   <th data-toggle="true">id</th>
+											   <th>商品</th>
+											   <th>下单时间</th>
+											   <th>支付金额</th>
+											   <th>数量</th>
+											   <th data-hide="all">备注</th>
+											   <th data-hide="all">收获地址</th>
+											   <th data-hide="all">收货人</th>
+											   <th data-hide="all">联系电话</th>
+											   <th>操作</th>
+										   </tr>
+										   </thead>
+										   <tbody>
+										   <tr>
+											   <td>11286464645646846548486453</td>
+											   <td>华为P30</td>
+											   <td>2020-11-12 12:00</td>
+											   <td>86</td>
+											   <td>1</td>
+											   <td>这是一个备注备注白色：99  灰色：32 彩色：66</td>
+											   <td>收货地址：云南省五华区云南民族大学121大街</td>
+											   <td>sirwsl</td>
+											   <td>18314263373</td>
+											   <td>
+											   
+											   <a data-toggle="modal" class="btn btn-primary" href="#">提醒收货</a>
+											   <a data-toggle="modal" class="btn btn-danger" href="#">提醒评价</a>
+											   </td>
+										   </tr>
+										  
+										   </tbody>
+										   <tfoot>
+										   <tr>
+											   <td colspan="5">
+												   <ul class="pagination pull-right"></ul>
+											   </td>
+										   </tr>
+										   </tfoot>
+									   </table>
+								    </div>
+								</div>
+							</div>
+						</div>
+						
+						<div id="tab-4" class="tab-pane">
+							<div class="ibox-content">
+							    <div class="row">
+							        <div class="col-sm-4">
+							            <div class="input-group">
+							                <input type="text" placeholder="请输入关键词" class="input-sm form-control"> <span class="input-group-btn">
+							                    <button type="button" class="btn btn-sm btn-primary"> 搜索</button> </span>
+							            </div>
+							        </div>
+							        
+							        <div class="col-sm-3">
+							            <div class="input-group">
+							                <input type="text" placeholder="请输入id" class="input-sm form-control"> <span class="input-group-btn">
+							                    <button type="button" class="btn btn-sm btn-primary"> 搜索</button> </span>
+							            </div>
+							        </div>
+							    </div>	
+							</div>	
+						    <div class="panel-body">
+								<div class="ibox float-e-margins">
+									<div class="ibox float-e-margins">
+										<div class="ibox-content">
+										   <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="8">
+											   <thead>
+											   <tr>
+												   <th data-toggle="true">id</th>
+												   <th>商品</th>
+												   <th>下单时间</th>
+												   <th>支付金额</th>
+												   <th>数量</th>
+												   <th data-hide="all">备注</th>
+												   <th data-hide="all">收获地址</th>
+												   <th data-hide="all">收货人</th>
+												   <th data-hide="all">联系电话</th>
+												   <th>操作</th>
+											   </tr>
+											   </thead>
+											   <tbody>
+											   <tr>
+												   <td>11286464645646846548486453</td>
+												   <td>华为P30</td>
+												   <td>2020-11-12 12:00</td>
+												   <td>86</td>
+												   <td>1</td>
+												   <td>这是一个备注备注白色：99  灰色：32 彩色：66</td>
+												   <td>收货地址：云南省五华区云南民族大学121大街</td>
+												   <td>sirwsl</td>
+												   <td>18314263373</td>
+												   <td>
+												   <a data-toggle="modal" class="btn btn-warning" href="#">售后</a>
+												   </td>
+											   </tr>
+											  
+											   </tbody>
+											   <tfoot>
+											   <tr>
+												   <td colspan="5">
+													   <ul class="pagination pull-right"></ul>
+												   </td>
+											   </tr>
+											   </tfoot>
+										   </table>
+									    </div>
+									</div>
+								</div>
+							</div>
+						</div>
+                    </div>
+                </div>
+            </div>
+		</div>	
+	</div>		
+	
+	<div id="modal-form" class="modal fade" aria-hidden="true">
+	    <div class="modal-dialog">
+	        <div class="modal-content">
+	            <div class="modal-body">
+	                <div class="row">
+	                        <h3 class="m-t-none m-b">订单出库</h3>
+	                        <form role="form">
+	                            <div class="col-sm-12">
+									<div class="form-group">
+									    <label>物流公司</label>
+									    <div class="col-xl-8">
+											<input type="number" placeholder="请输入物流公司" class="form-control">
+										</div>
+									</div>
+									<div class="form-group">
+									    <label>物流编号</label>
+									    <div class="col-xl-8">
+											<input type="number" placeholder="数量" class="form-control">
+										</div>
+									</div>
+								</div>
+								
+								<button class="btn btn-default"> 取消</button>
+								<button class="btn btn-primary" >确定出库</button>
+	                       </form>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+	
+	<div id="modal-price" class="modal fade" aria-hidden="true">
+	    <div class="modal-dialog">
+	        <div class="modal-content">
+	            <div class="modal-body">
+	                <div class="row">
+	                        <h3 class="m-t-none m-b">订单改价</h3>
+	                        <form role="form">
+	                            <div class="col-sm-12">
+									<div class="form-group">
+									    <label>商品原价</label>
+									    <div class="col-xl-8">
+											<input type="number"  class="form-control" value="88"/>
+										</div>
+									</div>
+									<div class="form-group">
+									    <label>待支付价格</label>
+									    <div class="col-xl-8">
+											<input type="number" placeholder="价格" class="form-control">
+										</div>
+									</div>
+								</div>
+								
+								<button class="btn btn-default"> 取消</button>
+								<button class="btn btn-primary" >确定出库</button>
+	                        </form>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+	
+	</body>
+	
+	<!-- 全局js -->
+	<script src="js/jquery.min.js?v=2.1.4"></script>
+	<script src="js/bootstrap.min.js?v=3.3.6"></script>
+	<script src="js/plugins/footable/footable.all.min.js"></script>
+	<!-- layerDate plugin javascript -->
+	<script src="js/plugins/layer/laydate/laydate.js"></script>
+	
+	<!-- 自定义js -->
+	<script src="js/content.js?v=1.0.0"></script>
+	<script>
+	    $(document).ready(function() {
+	        $('.footable').footable();
+	        $('.footable2').footable();
+	
+	    });
+	</script>
+	
+	<script>
+	    $(document).ready(function () {
+	        $('.i-checks').iCheck({
+	            checkboxClass: 'icheckbox_square-green',
+	            radioClass: 'iradio_square-green',
+	        });
+	    });
+	</script>
+</html>

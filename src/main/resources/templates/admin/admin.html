@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title> - 数据表格</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+
+    <!-- Data Tables -->
+    <link href="css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+		<div class="col-sm-4" style="margin-bottom: 10px;">
+		    <a data-toggle="modal" class="btn btn-success" href="#modal-form" data-toggle="modal" data-target="#myModal">添加人员</a>
+	</div>
+		
+		<div class="row">
+		    <div class="col-sm-12">
+		        <div class="ibox float-e-margins">
+		            <div class="ibox-title">
+		                <h5>员工管理</h5>
+		            </div>
+		            <div class="ibox-content">
+		
+		                <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="8">
+		                    <thead>
+		                    <tr>
+		                        <th>账号</th>
+								<th>名字</th>
+								<th>职位</th>
+		                        <th>电话</th>
+		                        <th>操作</th>
+		                    </tr>
+		                    </thead>
+		                    <tbody>
+		                    <tr>
+		                        <td>20154864834</td>
+		                        <td>袁岳</td>
+		                        <td>营业员</td>
+		                        <td>18314263373</td>
+		                        
+		                        <td>
+									<button type="button" class="btn  btn-warning">取消权限</button>
+									<button type="button" class="btn  btn-danger">删除人员</button>
+								</td>
+		                    </tr>
+		                    
+		                   
+		                    </tbody>
+		                    <tfoot>
+		                    <tr>
+		                        <td colspan="5">
+		                            <ul class="pagination pull-right"></ul>
+		                        </td>
+		                    </tr>
+		                    </tfoot>
+		                </table>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+						&times;
+					</button>
+					<h4 class="modal-title" id="myModalLabel">
+						添加人员
+					</h4>
+				</div>
+				<div class="modal-body">
+					
+					<table class="footable table table-stripped toggle-arrow-tiny" data-page-size="8">
+					    <thead>
+					    <tr>
+					        <th>账号</th>
+							<th>名字</th>
+							<th>职位</th>
+					    </tr>
+					    </thead>
+					    <tbody>
+					    <tr>
+					        <td><input/></td>
+					        <td><input/></td>
+					        <td><input/></td>
+					    </tr>
+					    </tbody>
+						<thead>
+						<tr>
+						    <th>账号</th>
+							<th>名字</th>
+							<th>职位</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr>
+						    <td><input/></td>
+						    <td><input/></td>
+						    <td><input/></td>
+						</tr>
+						</tbody>
+					    <tfoot>
+					    <tr>
+					
+					</table>
+					
+					
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消
+					</button>
+					<button type="button" class="btn btn-primary">
+						确定
+					</button>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal -->
+	</div>
+	
+	
+	    <!-- 全局js -->
+	    <script src="js/jquery.min.js?v=2.1.4"></script>
+	    <script src="js/bootstrap.min.js?v=3.3.6"></script>
+	
+	
+	
+	    <script src="js/plugins/jeditable/jquery.jeditable.js"></script>
+	
+	    <!-- Data Tables -->
+	    <script src="js/plugins/dataTables/jquery.dataTables.js"></script>
+	    <script src="js/plugins/dataTables/dataTables.bootstrap.js"></script>
+	
+	    <script src="js/plugins/footable/footable.all.min.js"></script>
+	    
+	    <!-- 自定义js -->
+	    <script src="js/content.js?v=1.0.0"></script>
+	    <script>
+	        $(document).ready(function() {
+	    
+	            $('.footable').footable();
+	            $('.footable2').footable();
+	    
+	        });
+	    
+	    </script>
+	    
+	    
+	    
+	
+	</body>
+</html>
+	

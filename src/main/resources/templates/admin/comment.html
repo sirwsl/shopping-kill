@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>评价管理</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+	<link href="css/plugins/footable/footable.core.css" rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeIn">
+        <div class="row">
+            <div class="col-sm-12">
+
+                <div class="ibox float-e-margins">
+                	<div class="ibox-content">
+                	   <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="8">
+                		   <thead>
+                		   <tr>
+                			   <th data-toggle="true">id</th>
+                			   <th>用户id</th>
+							   <th>商品名称</th>
+                			   <th>评价时间</th>
+                			   <th>评价星级</th>
+                			   <th data-hide="all">评价内容</th>
+                			   <th>操作</th>
+                		   </tr>
+                		   </thead>
+                		   <tbody>
+                		   <tr>
+                			   <td>1123</td>
+							   <td>4186413851</td>
+                			   <td>华为P30</td>
+                			   <td>2020-11-12 12:00</td>
+                			   <td>5</td>
+                			   <td>测试评价内容666这个收到后及时到首都华盛顿覅u答复</td>
+                			   <td>				  
+								   <a data-toggle="modal" class="btn btn-danger" href="#">删除</a>
+								</td>
+                		   </tr>
+                		  
+                		   </tbody>
+                		   <tfoot>
+                		   <tr>
+                			   <td colspan="5">
+                				   <ul class="pagination pull-right"></ul>
+                			   </td>
+                		   </tr>
+                		   </tfoot>
+                	   </table>
+                    </div>
+                </div>
+                
+            </div>
+		</div>	
+	</div>		
+	
+	
+	
+	</body>
+	
+	<!-- 全局js -->
+	<script src="js/jquery.min.js?v=2.1.4"></script>
+	<script src="js/bootstrap.min.js?v=3.3.6"></script>
+	<script src="js/plugins/footable/footable.all.min.js"></script>
+	<!-- layerDate plugin javascript -->
+	<script src="js/plugins/layer/laydate/laydate.js"></script>
+	
+	<!-- 自定义js -->
+	<script src="js/content.js?v=1.0.0"></script>
+	<script>
+	    $(document).ready(function() {
+	        $('.footable').footable();
+	        $('.footable2').footable();
+	
+	    });
+	</script>
+	
+	<script>
+	    $(document).ready(function () {
+	        $('.i-checks').iCheck({
+	            checkboxClass: 'icheckbox_square-green',
+	            radioClass: 'iradio_square-green',
+	        });
+	    });
+	</script>
+</html>
