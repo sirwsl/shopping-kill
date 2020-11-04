@@ -1,27 +1,35 @@
 package com.wsl.shoppingKill.domain;
 
-import java.time.LocalDateTime;
-
+import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.*;
+import lombok.experimental.Accessors;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.Id;
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * 售后记录表
  * @author wangshilei
  * @date 2020/11/4 16:39
  **/
+@TableName("t_after_sales")
 @EqualsAndHashCode(callSuper = true)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AfterSales extends Model<AfterSales> {
+@ToString
+@Accessors(chain = true)
+public class AfterSales extends Model<AfterSales> implements Serializable {
     /**
     * id
     */
-    private Integer id;
+    @Id
+    @TableId(type = IdType.AUTO)
+    private Long id;
 
     /**
     * 订单id
@@ -31,7 +39,7 @@ public class AfterSales extends Model<AfterSales> {
     /**
     * 管理员id
     */
-    private Integer adminId;
+    private Long adminId;
 
     /**
     * 处理内容
@@ -46,6 +54,8 @@ public class AfterSales extends Model<AfterSales> {
     /**
     * 处理时间
     */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime dealTime;
 
     /**
@@ -56,15 +66,22 @@ public class AfterSales extends Model<AfterSales> {
     /**
     * 创建时间
     */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
+    @TableField(fill = FieldFill.INSERT)
     private LocalDateTime creatTime;
 
     /**
     * 更新时间
     */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
 
     /**
     * 是否删除
     */
+    @TableLogic
     private Boolean delFlag;
 }

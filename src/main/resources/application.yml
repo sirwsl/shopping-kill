@@ -23,5 +23,12 @@ spring:
     time-zone: GMT-8
     default-property-inclusion: non_null
 
-
+mybatis-plus:
+  type-aliases-package: com.wsl.shoppingKill.constant
+  configuration:
+    default-enum-type-handler: org.apache.ibatis.type.EnumOrdinalTypeHandler
+  global-config:
+    db-config:
+      logic-delete-value: 1
+      logic-not-delete-value: 0
 

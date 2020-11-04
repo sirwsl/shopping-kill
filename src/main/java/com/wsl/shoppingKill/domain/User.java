@@ -1,12 +1,15 @@
 package com.wsl.shoppingKill.domain;
 
-import java.time.LocalDateTime;
-
+import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.*;
+import lombok.experimental.Accessors;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.Id;
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  *
@@ -14,15 +17,20 @@ import lombok.NoArgsConstructor;
  * @author wangshilei
  * @date 2020/11/4 16:46
  **/
+@TableName("t_user")
 @EqualsAndHashCode(callSuper = true)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class User extends Model<User> {
+@ToString
+@Accessors(chain = true)
+public class User extends Model<User> implements Serializable {
     /**
     * id
     */
-    private Integer id;
+    @Id
+    @TableId(type = IdType.AUTO)
+    private Long id;
 
     /**
     * 账号
@@ -87,15 +95,22 @@ public class User extends Model<User> {
     /**
     * 创建时间
     */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
+    @TableField(fill = FieldFill.INSERT)
     private LocalDateTime creatTime;
 
     /**
     * 跟新时间
     */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
 
     /**
     * 是否删除
     */
+    @TableLogic
     private Boolean delFlag;
 }

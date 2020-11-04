@@ -1,46 +1,60 @@
 package com.wsl.shoppingKill.domain;
 
-import java.time.LocalDateTime;
-
+import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.*;
+import lombok.experimental.Accessors;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.Id;
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * 购物车
  * @author wangshilei
  * @date 2020/11/4 16:41
  **/
+@TableName("t_cart")
 @EqualsAndHashCode(callSuper = true)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Cart extends Model<Cart> {
+@ToString
+@Accessors(chain = true)
+public class Cart extends Model<Cart> implements Serializable {
     /**
     * 购物车id
     */
-    private Integer id;
+    @Id
+    @TableId(type = IdType.AUTO)
+    private Long id;
 
     /**
     * 用户id
     */
-    private Integer userId;
+    private Long userId;
 
     /**
     * sku_id
     */
-    private Integer skuId;
+    private Long skuId;
 
     /**
     * 创建时间（加入时间）
     */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
+    @TableField(fill = FieldFill.INSERT)
     private LocalDateTime creatTime;
 
     /**
     * 更新时间
     */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
 
     /**
@@ -51,5 +65,6 @@ public class Cart extends Model<Cart> {
     /**
     * 是否删除
     */
+    @TableLogic
     private Boolean delFlag;
 }
