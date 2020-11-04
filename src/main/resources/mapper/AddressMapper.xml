@@ -1,25 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wsl.shoppingKill.mapper.AddressMapper">
-  <resultMap id="BaseResultMap" type="com.wsl.shoppingKill.entity.Address">
+  <resultMap id="BaseResultMap" type="com.wsl.shoppingKill.domain.Address">
     <!--@mbg.generated-->
     <!--@Table t_address-->
-    <id column="id" jdbcType="BIGINT" property="id" />
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
-    <result column="receiver_state" jdbcType="VARCHAR" property="receiverState" />
-    <result column="receiver_city" jdbcType="VARCHAR" property="receiverCity" />
-    <result column="receiver_district" jdbcType="VARCHAR" property="receiverDistrict" />
-    <result column="receiver_address" jdbcType="VARCHAR" property="receiverAddress" />
-    <result column="receiver_zip" jdbcType="CHAR" property="receiverZip" />
-    <result column="status" jdbcType="VARBINARY" property="status" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="address_num" jdbcType="INTEGER" property="addressNum" />
+    <result column="status" jdbcType="BOOLEAN" property="status" />
+    <result column="creat_time" jdbcType="TIMESTAMP" property="creatTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="del_flag" jdbcType="BOOLEAN" property="delFlag" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    id, `name`, phone, receiver_state, receiver_city, receiver_district, receiver_address, 
-    receiver_zip, `status`, create_time, update_time
+    id, user_id, `name`, phone, address, address_num, `status`, creat_time, update_time,
+    del_flag
   </sql>
-
 </mapper>

@@ -1,15 +1,12 @@
 package com.wsl.shoppingKill.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.wsl.shoppingKill.entity.Admin;
-import org.springframework.stereotype.Service;
+import com.wsl.shoppingKill.domain.Admin;
 
 /**
- * @author wsl
+ * @author wangShilei
  */
-@Service
-public interface AdminService extends IService<Admin> {
-
+public interface AdminService extends IService<Admin>{
 
 
 }

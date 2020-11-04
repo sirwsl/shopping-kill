@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wsl.shoppingKill.mapper.ActivityLimitMapper">
+  <resultMap id="BaseResultMap" type="com.wsl.shoppingKill.domain.ActivityLimit">
+    <!--@mbg.generated-->
+    <!--@Table t_activity_limit-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="sku_id" jdbcType="INTEGER" property="skuId" />
+    <result column="activity_id" jdbcType="INTEGER" property="activityId" />
+    <result column="limit_num" jdbcType="INTEGER" property="limitNum" />
+    <result column="creat_time" jdbcType="TIMESTAMP" property="creatTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="del_flag" jdbcType="BOOLEAN" property="delFlag" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, sku_id, activity_id, limit_num, creat_time, update_time, del_flag
+  </sql>
+</mapper>

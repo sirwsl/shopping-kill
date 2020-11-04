@@ -1,16 +1,12 @@
 package com.wsl.shoppingKill.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.wsl.shoppingKill.entity.Address;
-import org.springframework.stereotype.Service;
+import com.wsl.shoppingKill.domain.Address;
 
 /**
- * @author wsl
+ * @author wangShilei
  */
-@Service
 public interface AddressService extends IService<Address> {
 
 
-
 }
-

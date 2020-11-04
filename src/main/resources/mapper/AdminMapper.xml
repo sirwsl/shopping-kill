@@ -1,26 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wsl.shoppingKill.mapper.AdminMapper">
-  <resultMap id="BaseResultMap" type="com.wsl.shoppingKill.entity.Admin">
+  <resultMap id="BaseResultMap" type="com.wsl.shoppingKill.domain.Admin">
     <!--@mbg.generated-->
     <!--@Table t_admin-->
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="username" jdbcType="VARCHAR" property="username" />
+    <id column="id" jdbcType="INTEGER" property="id" />
     <result column="password" jdbcType="VARCHAR" property="password" />
-    <result column="phone" jdbcType="VARCHAR" property="phone" />
-    <result column="wx" jdbcType="VARCHAR" property="wx" />
-    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="id_card" jdbcType="VARCHAR" property="idCard" />
+    <result column="phone" jdbcType="CHAR" property="phone" />
     <result column="address" jdbcType="VARCHAR" property="address" />
-    <result column="img" jdbcType="VARCHAR" property="img" />
-    <result column="type" jdbcType="INTEGER" property="type" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="we_chat" jdbcType="VARCHAR" property="weChat" />
+    <result column="creat_time" jdbcType="TIMESTAMP" property="creatTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
-    <result column="state" jdbcType="VARBINARY" property="state" />
+    <result column="del_flag" jdbcType="BOOLEAN" property="delFlag" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    id, username, `password`, phone, wx, sex, address, img, `type`, create_time, update_time, 
-    `state`
+    id, `password`, id_card, phone, address, we_chat, creat_time, update_time, del_flag
   </sql>
-
 </mapper>
