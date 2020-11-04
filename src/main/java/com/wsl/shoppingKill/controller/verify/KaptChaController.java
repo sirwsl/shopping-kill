@@ -24,7 +24,7 @@ import java.util.concurrent.TimeUnit;
 @RestController
 @Slf4j
 @RequestMapping("/verify")
-public class KaptchaController {
+public class KaptChaController {
 
     /**
      * 1、验证码工具
@@ -41,7 +41,7 @@ public class KaptchaController {
      * @throws Exception:验证码生成异常
      */
     @RequestMapping("/jpg")
-    public void getKaptcha(HttpServletResponse httpServletResponse, TestEntity user)
+    public void getKaptCha(HttpServletResponse httpServletResponse, TestEntity user)
             throws Exception {
         byte[] captchaChallengeAsJpeg;
         ByteArrayOutputStream jpegOutputStream = new ByteArrayOutputStream();
@@ -50,7 +50,7 @@ public class KaptchaController {
             String rightCode = katha.createText();
             log.info("rightCode:{}", rightCode);
             stringRedisTemplate.opsForValue().set(Constants.REDIS_PREFIX +user.getUserId(), rightCode,
-                    Constants.KAPTCHA_EXPIRE_TIME, TimeUnit.SECONDS);
+                    Constants.CAPTCHA_EXPIRE_TIME, TimeUnit.SECONDS);
 
             // 使用生产的验证码字符串返回一个BufferedImage对象并转为byte写入到byte数组中
             BufferedImage challenge = katha.createImage(rightCode);

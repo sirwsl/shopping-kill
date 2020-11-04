@@ -48,7 +48,7 @@ public class SmsValidat {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            log.error("error","SMS send error");
+            log.error("SMS send error");
         }
         return json;
     }

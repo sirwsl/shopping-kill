@@ -24,7 +24,7 @@ public class TestUser {
 
     @Test
     public void test(){
-        TestEntity testUser = new TestEntity(3,"siqqqqqqqqqqqqq6","1888888888");
+        TestEntity testUser = new TestEntity(3,"sobriquet6","1888888888");
         System.err.println(testService.insertTest(testUser));
     }
 
