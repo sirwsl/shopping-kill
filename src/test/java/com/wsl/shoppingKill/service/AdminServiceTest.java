@@ -17,18 +17,22 @@ import javax.annotation.Resource;
 @SpringBootTest
 public class AdminServiceTest {
     @Resource
-    private AdminService adminvice;
+    private AdminService advice;
 
     @Test
     public void testAdmin(){
-        //123,"123",1,"532923199701161916","18314263373","地址","sirwsl"
+        //123,"123",1,"532923199701161916","18314263373","地址","sirWsl"
         Admin admin = new Admin();
-        admin.setAddress("地址").setSex(SexEnum.MAN).setIdCard("532923199701161916")
-                .setPassword("123").setPhone("18314263373").setWeChat("sirWsl");
+        admin.setAddress("地址").setSex(SexEnum.MAN).setIdCard("53292319970116191")
+                .setPassword("123").setPhone("1831426337").setWeChat("sirWsl");
         System.out.println(admin.toString());
-        adminvice.insetAdmin(admin);
+        advice.insetAdmin(admin);
+        System.err.println("存储结束");
+        System.out.println(advice.getAdmin("1831426337"));
+
     }
-    public void testgetAdmin(){
-        System.out.println(adminvice.getAdmin(2L));
+    @Test
+    public void testedAdmin(){
+        System.out.println(advice.getAdmin("1831426337"));
     }
 }

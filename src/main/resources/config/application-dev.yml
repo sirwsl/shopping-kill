@@ -54,7 +54,7 @@ spring:
     open-in-view: false
 
   redis:
-    jedis:
+    lettuce:
       pool:
         max-active: 128
         max-idle: 8
@@ -112,6 +112,8 @@ jetcache:
     default: #默认area
       type: caffeine
       keyConvertor: fastjson
+      limit: 10000              #本地缓存最大个数
+      defaultExpireInMillis: 10000   #缓存的时间全局 默认值
   remote:
     default:
       type: redis.lettuce #使用lettuce
@@ -129,5 +131,5 @@ jetcache:
         - redis://18314263373@121.196.187.160:6381/0
         - redis://18314263373@121.196.187.160:6382/0
         - redis://18314263373@121.196.187.160:6383/0
-        - redis://18314263373@121.196.187.160:6383/0
+        - redis://18314263373@121.196.187.160:6384/0
       readFrom: masterPreferred #master优先

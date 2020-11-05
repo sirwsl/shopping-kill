@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.wsl.shoppingKill.domain.Admin;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.HashMap;
+
 /**
  * @author wangShilei
  */
@@ -14,14 +16,17 @@ public interface AdminService extends IService<Admin> {
      * @author WangShilei
      * @date 2020/11/4 10:48 下午
      **/
-    int insetAdmin(@Param("admin") Admin admin);
+    boolean insetAdmin(@Param("admin") Admin admin);
 
     /**
      *
      * @author  WangShilei
      * @date 2020/11/5 1:00 上午
-     * @param id :
+     * @param phone :
      * @return null
      **/
-    Admin getAdmin(Long id);
+    Admin getAdmin(String phone);
+
+
+    boolean str(HashMap<Integer,String> map);
 }
