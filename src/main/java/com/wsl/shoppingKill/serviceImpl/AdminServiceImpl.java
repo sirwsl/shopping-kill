@@ -32,9 +32,9 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
     }
 
     @Override
-    @CachePut(value = "test")
-    public boolean str(HashMap<Integer,String> map){
-        return true;
+    @Cached(name = "TestUser.", key = "#admin.phone" ,expire = 1,timeUnit = TimeUnit.HOURS)
+    public Admin str(Admin admin){
+        return new Admin();
     }
 
     @Override

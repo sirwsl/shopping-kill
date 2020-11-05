@@ -28,5 +28,5 @@ public interface AdminService extends IService<Admin> {
     Admin getAdmin(String phone);
 
 
-    boolean str(HashMap<Integer,String> map);
+    Admin str(Admin admin);
 }
