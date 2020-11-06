@@ -9,6 +9,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
+import java.util.Objects;
 
 /**
  * @author : WangShiLei
@@ -51,7 +52,7 @@ public class AdminServiceTest {
 
     @Test
     public void testGetValueForJava(){
-        System.out.println(redisTemplate.opsForValue().get("TestUser.1888867786").toString());
+        System.out.println(Objects.requireNonNull(redisTemplate.opsForValue().get("TestUser.1888867786")).toString());
 
 
     }
@@ -60,5 +61,11 @@ public class AdminServiceTest {
     public void testGetValue(){
         Admin admin = new Admin();
         System.out.println(advice.str(admin.setPhone("18888677861")));
+    }
+
+    @Test
+    public void deleteLogicAdmin(){
+        Admin admin  = new Admin();
+        admin.deleteById(23);
     }
 }
