@@ -28,20 +28,16 @@ public class ConvertObjUtil {
             return null;
         Field[] fields = obj.getClass().getDeclaredFields();
         try {
-            Map map = new HashMap();
-            for (int i = 0; i < fields.length; i++) {
+            Map<String, Object> map = new HashMap<>();
+            for (Field field : fields) {
                 try {
-                    Field f = obj.getClass().getDeclaredField(fields[i].getName());
+                    Field f = obj.getClass().getDeclaredField(field.getName());
                     f.setAccessible(true);
                     Object o = f.get(obj);
-                    if (null == o) {
-                        map.put(fields[i].getName(), null);
-                    } else {
-                        map.put(fields[i].getName(), o);
-                    }
+                    map.put(field.getName(), o);
                 } catch (NoSuchFieldException | IllegalArgumentException | IllegalAccessException e) {
                     // TODO Auto-generated catch block
-                    log.error("异常",e);
+                    log.error("异常", e);
                 }
             }
             resultList.add(map);
@@ -66,19 +62,15 @@ public class ConvertObjUtil {
         }
         Field[] fields = obj.getClass().getDeclaredFields();
         try {
-            for (int i = 0; i < fields.length; i++) {
+            for (Field field : fields) {
                 try {
-                    Field f = obj.getClass().getDeclaredField(fields[i].getName());
+                    Field f = obj.getClass().getDeclaredField(field.getName());
                     f.setAccessible(true);
                     Object o = f.get(obj);
-                    if (null == o) {
-                        resultMap.put(fields[i].getName(), null);
-                    } else {
-                        resultMap.put(fields[i].getName(), o);
-                    }
+                    resultMap.put(field.getName(), o);
                 } catch (NoSuchFieldException | IllegalAccessException | IllegalArgumentException e) {
                     // TODO Auto-generated catch block
-                    log.error("异常",e);
+                    log.error("异常", e);
                 }
             }
         } catch (SecurityException e) {
