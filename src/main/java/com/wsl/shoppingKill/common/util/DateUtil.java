@@ -19,7 +19,29 @@ import java.util.TimeZone;
 public class DateUtil {
     public static final String DEFAULT_TZ = "Asia/Shanghai";
 
+    /**
+     *  是否比当前时间早
+     * @author  WangShilei
+     * @date 2020/11/7 6:05 下
+     **/
+    public static boolean isAfter(LocalDateTime localDateTime){
+        //获取当前时间
+        LocalDateTime nowTime= LocalDateTime.now();
+        //比较  现在的时间 比 设定的时间 之前  返回的类型是Boolean类型
+        return nowTime.isAfter(localDateTime);
+    }
 
+    /**
+     * 是否比当前时间晚
+     * @author : WangShiLei
+     * @date : 2020/11/7 6:06 下午
+     **/
+    public static boolean isBefore(LocalDateTime localDateTime){
+        //获取当前时间
+        LocalDateTime nowTime= LocalDateTime.now();
+        //比较  现在的时间 比 设定的时间 之后  返回的类型是Boolean类型
+        return nowTime.isBefore(localDateTime);
+    }
     /**
      * 获取过去第几天的日期
      *
@@ -262,8 +284,7 @@ public class DateUtil {
         cal.set(Calendar.SECOND, 0);
         cal.set(Calendar.MILLISECOND, 0);
         cal.add(Calendar.DAY_OF_MONTH, -3);
-        Date date = cal.getTime();
-        return date;
+        return cal.getTime();
     }
 
 }

@@ -43,7 +43,7 @@ public class LimitList extends Model<LimitList> implements Serializable {
     private String number;
 
     /**
-    * 状态（0-黑名单 1-白名单）
+    * 状态（0-黑名单）
     */
     private Integer status;
 
