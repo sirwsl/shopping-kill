@@ -2,7 +2,7 @@ package com.wsl.shoppingKill.service.admin;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.wsl.shoppingKill.domain.LimitList;
-import com.wsl.shoppingKill.domain.LimitListParam;
+import com.wsl.shoppingKill.obj.param.LimitListParam;
 
 /**
  * @author wangShilei

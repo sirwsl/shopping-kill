@@ -1,7 +1,7 @@
 package com.wsl.shoppingKill.convert;
 
 import com.wsl.shoppingKill.domain.LimitList;
-import com.wsl.shoppingKill.domain.LimitListParam;
+import com.wsl.shoppingKill.obj.param.LimitListParam;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
