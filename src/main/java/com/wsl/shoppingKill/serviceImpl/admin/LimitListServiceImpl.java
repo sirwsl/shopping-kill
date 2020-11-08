@@ -4,8 +4,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wsl.shoppingKill.common.util.DateUtil;
 import com.wsl.shoppingKill.convert.LimitListConverter;
 import com.wsl.shoppingKill.domain.LimitList;
-import com.wsl.shoppingKill.domain.LimitListParam;
 import com.wsl.shoppingKill.mapper.LimitListMapper;
+import com.wsl.shoppingKill.obj.param.LimitListParam;
 import com.wsl.shoppingKill.service.admin.LimitListService;
 import org.springframework.stereotype.Service;
 

@@ -1,11 +1,11 @@
 package com.wsl.shoppingKill.obj.param;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.sun.istack.NotNull;
 import lombok.*;
 import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
 /**
@@ -23,6 +23,11 @@ import java.time.LocalDateTime;
 public class LimitListParam {
 
     /**
+     * id
+     **/
+    private Long id;
+
+    /**
      * 类型(0-手机号 1-ip)
      */
     private Integer type;
@@ -30,7 +35,7 @@ public class LimitListParam {
     /**
      * 号码
      */
-    @NotNull
+    @NotBlank(message = "添加黑名单不能为空")
     private String number;
 
 
