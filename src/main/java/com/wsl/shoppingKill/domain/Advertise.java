@@ -24,6 +24,8 @@ import java.time.LocalDateTime;
 @ToString
 @Accessors(chain = true)
 public class Advertise extends Model<Advertise> implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     /**
     * 广告id
     */
@@ -76,4 +78,20 @@ public class Advertise extends Model<Advertise> implements Serializable {
     */
     @TableLogic
     private Boolean delFlag;
+
+    public static final String ID = "id";
+
+    public static final String IMG_URL = "img_url";
+
+    public static final String TARGET_URL = "target_url";
+
+    public static final String START_TIME = "start_time";
+
+    public static final String END_TIME = "end_time";
+
+    public static final String CREAT_TIME = "creat_time";
+
+    public static final String UPDATE_TIME = "update_time";
+
+    public static final String DEL_FLAG = "del_flag";
 }

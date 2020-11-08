@@ -1,5 +1,7 @@
 package com.wsl.shoppingKill.controller.admin;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.wsl.shoppingKill.common.Result;
 import com.wsl.shoppingKill.constant.LimitListEnum;
 import com.wsl.shoppingKill.domain.LimitList;
@@ -9,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author : WangShiLei
@@ -21,6 +25,58 @@ public class LimitListController {
 
     @Resource
     private LimitListService limitListService;
+
+    /**
+     * 获取黑名单手机号列表
+     * @author : WangShiLei
+     * @date : 2020/11/8 12:28 下午
+     * @return Result<Page<LimitListParam>>
+     **/
+    @GetMapping("/getBlackListForPhone/v1")
+    public Result<IPage<LimitList>> getLimitListForPhone(Integer page, Integer num){
+        return Result.success(limitListService.getBlackListForPhone(page,num));
+    }
+
+    /**
+     * 获取黑名单IP列表
+     * @author : WangShiLei
+     * @date : 2020/11/8 12:28 下午
+     * @return Result<Page<LimitListParam>>
+     **/
+    @GetMapping("/getBlackListForIp/v1")
+    public Result<IPage<LimitList>> getLimitListForIp(Integer page, Integer num){
+        return Result.success(limitListService.getBlackListForIp(page,num));
+    }
+
+    /**
+     * 更具手机号进行查询
+     * @author : WangShiLei
+     * @date : 2020/11/8 5:28 下午
+     * @param num:
+     * @return com.wsl.shoppingKill.common.Result<java.util.List<com.wsl.shoppingKill.domain.LimitList>>
+     **/
+    @GetMapping("/selectBlackListByPhone/v1")
+    public Result<List<LimitList>> getLimitListByPhone( String num){
+        if (StringUtils.isEmpty(num)){
+            return Result.error("error","手机号不能为空");
+        }
+        return Result.success(limitListService.getBlackListByNumber(num,LimitListEnum.PHONE));
+    }
+
+    /**
+     * 更具IP查询
+     * @author : WangShiLei
+     * @date : 2020/11/8 5:28 下午
+     * @param num:
+     * @return com.wsl.shoppingKill.common.Result<java.util.List<com.wsl.shoppingKill.domain.LimitList>>
+     **/
+    @GetMapping("/selectBlackListByIp/v1")
+    public Result<List<LimitList>> getLimitListByIp( String num){
+        if (StringUtils.isEmpty(num)){
+            return Result.error("error","IP不能为空");
+        }
+        return Result.success(limitListService.getBlackListByNumber(num,LimitListEnum.IP));
+    }
 
     /**
      *  添加用户黑名单
@@ -56,8 +112,13 @@ public class LimitListController {
      * @return com.wsl.shoppingKill.common.Result<java.lang.Boolean>
      **/
     @DeleteMapping("delBlackListById/v1")
-    public Result<Boolean> removeLimitList(Long id){
+    public Result<Boolean> removeLimitListById(Long id){
         return Result.success(limitListService.removeById(id));
+    }
+
+    @DeleteMapping("/delBlackListByIds/v1")
+    public Result<Boolean> removeLimitListByIds(Integer[] ids){
+        return Result.success(limitListService.removeByIds(Arrays.asList(ids)));
     }
 
     /**

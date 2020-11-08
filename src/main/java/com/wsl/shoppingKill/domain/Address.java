@@ -24,6 +24,8 @@ import java.time.LocalDateTime;
 @ToString
 @Accessors(chain = true)
 public class Address extends Model<Address> implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     /**
      * 地址id
      */
@@ -82,4 +84,25 @@ public class Address extends Model<Address> implements Serializable {
      */
     @TableLogic
     private Boolean delFlag;
+
+
+    public static final String ID = "id";
+
+    public static final String USER_ID = "user_id";
+
+    public static final String NAME = "name";
+
+    public static final String PHONE = "phone";
+
+    public static final String ADDRESS = "address";
+
+    public static final String ADDRESS_NUM = "address_num";
+
+    public static final String STATUS = "status";
+
+    public static final String CREAT_TIME = "creat_time";
+
+    public static final String UPDATE_TIME = "update_time";
+
+    public static final String DEL_FLAG = "del_flag";
 }

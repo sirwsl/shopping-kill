@@ -24,6 +24,8 @@ import java.time.LocalDateTime;
 @ToString
 @Accessors(chain = true)
 public class AfterSales extends Model<AfterSales> implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     /**
     * id
     */
@@ -84,4 +86,25 @@ public class AfterSales extends Model<AfterSales> implements Serializable {
     */
     @TableLogic
     private Boolean delFlag;
+
+
+    public static final String ID = "id";
+
+    public static final String ORDER_ID = "order_id";
+
+    public static final String ADMIN_ID = "admin_id";
+
+    public static final String DETAIL = "detail";
+
+    public static final String TYPE = "type";
+
+    public static final String DEAL_TIME = "deal_time";
+
+    public static final String RESULT = "result";
+
+    public static final String CREAT_TIME = "creat_time";
+
+    public static final String UPDATE_TIME = "update_time";
+
+    public static final String DEL_FLAG = "del_flag";
 }

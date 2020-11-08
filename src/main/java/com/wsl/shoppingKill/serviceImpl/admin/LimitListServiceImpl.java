@@ -1,7 +1,11 @@
 package com.wsl.shoppingKill.serviceImpl.admin;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wsl.shoppingKill.common.util.DateUtil;
+import com.wsl.shoppingKill.constant.LimitListEnum;
 import com.wsl.shoppingKill.convert.LimitListConverter;
 import com.wsl.shoppingKill.domain.LimitList;
 import com.wsl.shoppingKill.mapper.LimitListMapper;
@@ -11,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * @author WangShilei
@@ -34,4 +39,39 @@ public class LimitListServiceImpl extends ServiceImpl<LimitListMapper, LimitList
 
         return limitList.insert();
     }
+
+    @Override
+    public IPage<LimitList> getBlackListForPhone(Integer page, Integer num) {
+        if (page ==null){
+            page = 0;
+        }
+        if (num == null || num == 0){
+            num = 10;
+        }
+        Page<LimitList> phonePage = new Page<>(page,num);
+        return limitListMapper.selectPage(phonePage,new QueryWrapper<LimitList>()
+                .eq(LimitList.TYPE, LimitListEnum.PHONE));
+    }
+
+    @Override
+    public IPage<LimitList> getBlackListForIp(Integer page, Integer num) {
+        if (page ==null){
+            page = 0;
+        }
+        if (num == null || num == 0){
+            num = 10;
+        }
+        Page<LimitList> phonePage = new Page<>(page,num);
+        return limitListMapper.selectPage(phonePage,new QueryWrapper<LimitList>()
+                .eq(LimitList.TYPE, LimitListEnum.IP));
+    }
+
+    @Override
+    public List<LimitList> getBlackListByNumber(String num,Integer type) {
+        return limitListMapper.selectList(new QueryWrapper<LimitList>()
+                .like(LimitList.NUMBER,num)
+                .eq(LimitList.TYPE,type));
+    }
+
+
 }

@@ -26,6 +26,8 @@ import java.time.LocalDateTime;
 @ToString
 @Accessors(chain = true)
 public class Sku extends Model<Sku> implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     /**
     * SKU_ID
     */
@@ -99,4 +101,33 @@ public class Sku extends Model<Sku> implements Serializable {
     */
     @TableLogic
     private Boolean delFlag;
+
+
+
+    public static final String ID = "id";
+
+    public static final String GOODS_ID = "goods_id";
+
+    public static final String ATTRIBUTE = "attribute";
+
+    public static final String IMG_URL = "img_url";
+
+    public static final String REAL_PRICE = "real_price";
+
+    public static final String COST_PRICE = "cost_price";
+
+    public static final String SELL_PRICE = "sell_price";
+
+    public static final String NUM = "num";
+
+    public static final String WARN_NUM = "warn_num";
+
+    public static final String EXP_PRICE = "exp_price";
+
+    public static final String CREAT_TIME = "creat_time";
+
+    public static final String UPDATE_TIME = "update_time";
+
+    public static final String DEL_FLAG = "del_flag";
+
 }

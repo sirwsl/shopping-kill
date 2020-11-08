@@ -25,6 +25,8 @@ import java.time.LocalDateTime;
 @ToString
 @Accessors(chain = true)
 public class Subscription extends Model<Subscription> implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     /**
     * 订阅者号
     */
@@ -63,4 +65,19 @@ public class Subscription extends Model<Subscription> implements Serializable {
     */
     @TableLogic
     private Boolean delFlag;
+
+
+
+    public static final String NUMBER = "number";
+
+    public static final String TYPE = "type";
+
+    public static final String STATUS = "status";
+
+    public static final String CREAT_TIME = "creat_time";
+
+    public static final String UPDATE_TIME = "update_time";
+
+    public static final String DEL_FLAG = "del_flag";
+
 }

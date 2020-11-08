@@ -25,6 +25,8 @@ import java.time.LocalDateTime;
 @ToString
 @Accessors(chain = true)
 public class ActivityLimit extends Model<ActivityLimit> implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     /**
     * id
     */
@@ -68,4 +70,18 @@ public class ActivityLimit extends Model<ActivityLimit> implements Serializable 
     */
     @TableLogic
     private Boolean delFlag;
+
+    public static final String ID = "id";
+
+    public static final String SKU_ID = "sku_id";
+
+    public static final String ACTIVITY_ID = "activity_id";
+
+    public static final String LIMIT_NUM = "limit_num";
+
+    public static final String CREAT_TIME = "creat_time";
+
+    public static final String UPDATE_TIME = "update_time";
+
+    public static final String DEL_FLAG = "del_flag";
 }

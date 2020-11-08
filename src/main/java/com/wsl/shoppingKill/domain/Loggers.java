@@ -24,6 +24,8 @@ import java.time.LocalDateTime;
 @ToString
 @Accessors(chain = true)
 public class Loggers extends Model<Loggers> implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     /**
     * 日志id
     */
@@ -72,4 +74,22 @@ public class Loggers extends Model<Loggers> implements Serializable {
     */
     @TableLogic
     private Boolean delFlag;
+
+
+
+    public static final String ID = "id";
+
+    public static final String DETAIL = "detail";
+
+    public static final String MAN_ID = "man_id";
+
+    public static final String TYPE = "type";
+
+    public static final String GRADE = "grade";
+
+    public static final String CREAT_TIME = "creat_time";
+
+    public static final String UPDATE_TIME = "update_time";
+
+    public static final String DEL_FLAG = "del_flag";
 }

@@ -24,6 +24,8 @@ import java.time.LocalDateTime;
 @ToString
 @Accessors(chain = true)
 public class Appraisal extends Model<Appraisal> implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     /**
     * id
     */
@@ -72,4 +74,21 @@ public class Appraisal extends Model<Appraisal> implements Serializable {
     */
     @TableLogic
     private Boolean delFlag;
+
+
+    public static final String ID = "id";
+
+    public static final String ORDER_ID = "order_id";
+
+    public static final String DETAIL = "detail";
+
+    public static final String IMG_URL = "img_url";
+
+    public static final String GRADE = "grade";
+
+    public static final String CREAT_TIME = "creat_time";
+
+    public static final String UPDATE_TIME = "update_time";
+
+    public static final String DEL_FLAG = "del_flag";
 }

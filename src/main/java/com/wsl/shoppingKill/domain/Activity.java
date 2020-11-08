@@ -25,6 +25,8 @@ import java.time.LocalDateTime;
 @ToString
 @Accessors(chain = true)
 public class Activity extends Model<Activity> implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     /**
     * 秒杀活动
     */
@@ -73,4 +75,18 @@ public class Activity extends Model<Activity> implements Serializable {
     @TableLogic
     private Boolean delFlag;
 
+
+    public static final String ID = "id";
+
+    public static final String GOODS_ID = "goods_id";
+
+    public static final String START_TIME = "start_time";
+
+    public static final String END_TIME = "end_time";
+
+    public static final String CREAT_TIME = "creat_time";
+
+    public static final String UPDATE_TIME = "update_time";
+
+    public static final String DEL_FLAG = "del_flag";
 }

@@ -25,6 +25,8 @@ import java.time.LocalDateTime;
 @ToString
 @Accessors(chain = true)
 public class User extends Model<User> implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     /**
     * id
     */
@@ -113,4 +115,39 @@ public class User extends Model<User> implements Serializable {
     */
     @TableLogic
     private Boolean delFlag;
+
+
+
+
+    public static final String ID = "id";
+
+    public static final String NAME = "name";
+
+    public static final String PASSWORD = "password";
+
+    public static final String NICK_NAME = "nick_name";
+
+    public static final String IMG = "img";
+
+    public static final String SEX = "sex";
+
+    public static final String SIGNATURE = "signature";
+
+    public static final String PHONE = "phone";
+
+    public static final String EMAIL = "email";
+
+    public static final String ID_CARD = "id_card";
+
+    public static final String REAL_NAME = "real_name";
+
+    public static final String WE_CHAT = "we_chat";
+
+    public static final String APPLY = "apply";
+
+    public static final String CREAT_TIME = "creat_time";
+
+    public static final String UPDATE_TIME = "update_time";
+
+    public static final String DEL_FLAG = "del_flag";
 }

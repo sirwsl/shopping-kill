@@ -24,6 +24,8 @@ import java.time.LocalDateTime;
 @ToString
 @Accessors(chain = true)
 public class Cart extends Model<Cart> implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     /**
     * 购物车id
     */
@@ -67,4 +69,18 @@ public class Cart extends Model<Cart> implements Serializable {
     */
     @TableLogic
     private Boolean delFlag;
+
+    public static final String ID = "id";
+
+    public static final String USER_ID = "user_id";
+
+    public static final String SKU_ID = "sku_id";
+
+    public static final String CREAT_TIME = "creat_time";
+
+    public static final String UPDATE_TIME = "update_time";
+
+    public static final String STATUS = "status";
+
+    public static final String DEL_FLAG = "del_flag";
 }

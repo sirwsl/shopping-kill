@@ -25,6 +25,8 @@ import java.time.LocalDateTime;
 @ToString
 @Accessors(chain = true)
 public class Types extends Model<Types> implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     /**
     * 类别id
     */
@@ -58,4 +60,17 @@ public class Types extends Model<Types> implements Serializable {
     */
     @TableLogic
     private Boolean delFlag;
+
+
+
+    public static final String ID = "id";
+
+    public static final String NAME = "name";
+
+    public static final String CREAT_TIME = "creat_time";
+
+    public static final String UPDATE_TIME = "update_time";
+
+    public static final String DEL_FLAG = "del_flag";
+
 }
