@@ -1,7 +1,6 @@
 package com.wsl.shoppingKill.common.log;
 
 import com.alibaba.fastjson.JSON;
-
 import com.wsl.shoppingKill.common.util.HttpContextUtil;
 import com.wsl.shoppingKill.common.util.IpUtils;
 import com.wsl.shoppingKill.component.request.AbstractCurrentRequestComponent;
@@ -12,8 +11,6 @@ import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.springframework.context.expression.AnnotatedElementKey;
-import org.springframework.expression.EvaluationContext;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -27,13 +24,13 @@ import java.lang.reflect.Method;
  **/
 @Aspect
 @Component
-public class LoggersAspect {
+public class LoggersAspect<DataResponse> {
 
 
     @Resource
     private AbstractCurrentRequestComponent abstractCurrentRequestComponent;
 
-    private final ExpressionEvaluator<String> evaluator = new ExpressionEvaluator<>();
+    private final ExpressionEvaluator evaluator = new ExpressionEvaluator();
 
     //定义切点 @Pointcut
     //在注解的位置切入代码
@@ -62,11 +59,13 @@ public class LoggersAspect {
             Object[] args = joinPoint.getArgs();
             //将参数所在的数组转换成json
             String params = JSON.toJSONString(args);
+            System.err.println(params);
+            String num =  AspectSupportUtils.getKeyValue(joinPoint, myLog.value()).toString();
+
 
             //保存获取的操作
-            loggers.setDetail(myLog.detail()+"->[操作参数："+getAttachmentId(joinPoint)+"]"
-                    +"[className:"+className[className.length-1]+"]->["
-                    +className[className.length-3]+"."+className[className.length-2]+"]")
+            loggers.setDetail(myLog.detail()+"->[操作参数："+num+"]"
+                    +"->[Class："+className[className.length-1]+"]")
                     .setGrade(myLog.grade());
 
         }
@@ -80,21 +79,5 @@ public class LoggersAspect {
         loggers.insert();
     }
 
-
-    private MyLog getDistributeExceptionHandler(JoinPoint joinPoint){
-        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
-        Method method = signature.getMethod();
-        return method.getAnnotation(MyLog.class);
-    }
-
-    private String getAttachmentId(JoinPoint joinPoint) {
-        MyLog handler = getDistributeExceptionHandler(joinPoint);
-        if (joinPoint.getArgs() == null) {
-            return null;
-        }
-        EvaluationContext evaluationContext = evaluator.createEvaluationContext(joinPoint.getTarget(), joinPoint.getTarget().getClass(), ((MethodSignature) joinPoint.getSignature()).getMethod(), joinPoint.getArgs());
-        AnnotatedElementKey methodKey = new AnnotatedElementKey(((MethodSignature) joinPoint.getSignature()).getMethod(), joinPoint.getTarget().getClass());
-        return evaluator.condition(handler.value(), methodKey, evaluationContext, String.class);
-    }
 
 }

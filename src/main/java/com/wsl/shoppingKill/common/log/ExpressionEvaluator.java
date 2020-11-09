@@ -1,6 +1,5 @@
 package com.wsl.shoppingKill.common.log;
 
-import com.wsl.shoppingKill.common.log.ExpressionRootObject;
 import org.springframework.aop.support.AopUtils;
 import org.springframework.context.expression.AnnotatedElementKey;
 import org.springframework.context.expression.CachedExpressionEvaluator;
@@ -20,21 +19,22 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 
 
-public class ExpressionEvaluator<T> extends CachedExpressionEvaluator {
+public class ExpressionEvaluator extends CachedExpressionEvaluator {
     private final ParameterNameDiscoverer paramNameDiscoverer = new DefaultParameterNameDiscoverer();
+
     private final Map<ExpressionKey, Expression> conditionCache = new ConcurrentHashMap<>(64);
+
     private final Map<AnnotatedElementKey, Method> targetMethodCache = new ConcurrentHashMap<>(64);
 
-
-    public EvaluationContext createEvaluationContext(Object object, Class<?> targetClass, Method method, Object[] args) {
+    public EvaluationContext createEvaluationContext(Object object, Class<?> targetClass, Method method,
+                                                     Object[] args) {
         Method targetMethod = getTargetMethod(targetClass, method);
         ExpressionRootObject root = new ExpressionRootObject(object, args);
         return new MethodBasedEvaluationContext(root, targetMethod, args, this.paramNameDiscoverer);
     }
 
-
-    public T condition(String conditionExpression, AnnotatedElementKey elementKey, EvaluationContext evalContext, Class<T> clazz) {
-        return getExpression(this.conditionCache, elementKey, conditionExpression).getValue(evalContext, clazz);
+    public Object key(String conditionExpression, AnnotatedElementKey elementKey, EvaluationContext evalContext) {
+        return getExpression(this.conditionCache, elementKey, conditionExpression).getValue(evalContext);
     }
 
     private Method getTargetMethod(Class<?> targetClass, Method method) {
@@ -42,9 +42,6 @@ public class ExpressionEvaluator<T> extends CachedExpressionEvaluator {
         Method targetMethod = this.targetMethodCache.get(methodKey);
         if (targetMethod == null) {
             targetMethod = AopUtils.getMostSpecificMethod(method, targetClass);
-            if (targetMethod == null) {
-                targetMethod = method;
-            }
             this.targetMethodCache.put(methodKey, targetMethod);
         }
         return targetMethod;

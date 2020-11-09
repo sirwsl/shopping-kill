@@ -23,7 +23,7 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
 
 
     @Override
-    @MyLog(detail = "添加管理员",grade = LoggerEnum.SERIOUS,value = "admin.name")
+    @MyLog(detail = "添加管理员",grade = LoggerEnum.SERIOUS,value = "#admin.name")
     public boolean addAdmin(Admin admin) {
         return adminMapper.insert(admin)>0;
     }
