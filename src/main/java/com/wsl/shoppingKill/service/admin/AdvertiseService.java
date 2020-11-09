@@ -18,7 +18,7 @@ public interface AdvertiseService extends IService<Advertise> {
      * @author wangshilei
      * @date 2020/11/9 18:28
      **/
-    IPage<Advertise> getAdvertisePage();
+    IPage<Advertise> getAdvertisePage(Long page,Long size);
 
     /**
      * 获取图片及地址
@@ -26,7 +26,39 @@ public interface AdvertiseService extends IService<Advertise> {
      * @author wangshilei
      * @date 2020/11/9 18:29
      **/
-    List<AdvertiseVO> getAdvertiseURL();
+    List<AdvertiseVO> getAdvertiseUrl();
+
+    /**
+     * 获取正在展示的广告
+     * @author : WangShiLei
+     * @date : 2020/11/9 10:04 下午
+     * @param page:
+     * @param size：
+     * @return IPage
+     **/
+    IPage<Advertise> getAdvertiseDoing(Long page, Long size);
+
+
+    /**
+     * 获取已经结束展示的广告
+     * @author : WangShiLei
+     * @date : 2020/11/9 10:04 下午
+     * @param page:
+     * @param size :
+     * @return IPage
+     **/
+    IPage<Advertise> getAdvertiseOver(Long page, Long size);
+
+    /**
+     * 获取未开始展示的广告
+     * @author : WangShiLei
+     * @date : 2020/11/9 10:04 下午
+     * @param page:
+     * @param size :
+     * @return IPage
+     **/
+    IPage<Advertise> getAdvertiseBegin(Long page, Long size);
+
 
     /**
      * 修改活动内容

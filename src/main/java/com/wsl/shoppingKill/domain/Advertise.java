@@ -8,6 +8,7 @@ import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -36,11 +37,13 @@ public class Advertise extends Model<Advertise> implements Serializable {
     /**
     * 广告图片链接
     */
+    @NotNull(message = "图片不能为空")
     private String imgUrl;
 
     /**
     * 目标url
     */
+    @NotNull(message = "链接地址不能为空")
     private String targetUrl;
 
     /**

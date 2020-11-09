@@ -29,13 +29,13 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
     }
 
     @Override
-    @MyLog(detail = "修改管理员信息",grade = LoggerEnum.WORN)
+    @MyLog(detail = "修改管理员信息",grade = LoggerEnum.WORN,value = "#admin.name")
     public boolean updateAdmin(Admin admin) {
         return adminMapper.updateById(admin)>0;
     }
 
     @Override
-    @MyLog(detail = "删除管理员",grade = LoggerEnum.SERIOUS)
+    @MyLog(detail = "删除管理员",grade = LoggerEnum.SERIOUS,value = "#id")
     public boolean delAdmin(Long id) {
         return adminMapper.deleteById(id)>0;
     }

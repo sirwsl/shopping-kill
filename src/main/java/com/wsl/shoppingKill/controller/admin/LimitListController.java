@@ -3,7 +3,9 @@ package com.wsl.shoppingKill.controller.admin;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.wsl.shoppingKill.common.Result;
+import com.wsl.shoppingKill.common.log.MyLog;
 import com.wsl.shoppingKill.constant.LimitListEnum;
+import com.wsl.shoppingKill.constant.LoggerEnum;
 import com.wsl.shoppingKill.domain.LimitList;
 import com.wsl.shoppingKill.obj.param.LimitListParam;
 import com.wsl.shoppingKill.service.admin.LimitListService;
@@ -112,11 +114,13 @@ public class LimitListController {
      * @return com.wsl.shoppingKill.common.Result<java.lang.Boolean>
      **/
     @DeleteMapping("delBlackListById/v1")
+    @MyLog(detail = "移除黑名单",grade = LoggerEnum.SERIOUS,value = "#id")
     public Result<Boolean> removeLimitListById(Long id){
         return Result.success(limitListService.removeById(id));
     }
 
     @DeleteMapping("/delBlackListByIds/v1")
+    @MyLog(detail = "移除黑名单",grade = LoggerEnum.SERIOUS,value = "#id")
     public Result<Boolean> removeLimitListByIds(Integer[] ids){
         return Result.success(limitListService.removeByIds(Arrays.asList(ids)));
     }
@@ -129,6 +133,7 @@ public class LimitListController {
      * @return boolean
      **/
     @PutMapping("/updateBlackListById/v1")
+    @MyLog(detail = "更新黑名单",grade = LoggerEnum.SERIOUS,value = "#id")
     public Result<Boolean> updateLimitList(LimitList limitList){
         return Result.success(limitListService.updateById(limitList));
     }
