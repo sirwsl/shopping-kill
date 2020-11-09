@@ -12,6 +12,8 @@ import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.context.expression.AnnotatedElementKey;
+import org.springframework.expression.EvaluationContext;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -31,6 +33,7 @@ public class LoggersAspect {
     @Resource
     private AbstractCurrentRequestComponent abstractCurrentRequestComponent;
 
+    private final ExpressionEvaluator<String> evaluator = new ExpressionEvaluator<>();
 
     //定义切点 @Pointcut
     //在注解的位置切入代码
@@ -61,7 +64,8 @@ public class LoggersAspect {
             String params = JSON.toJSONString(args);
 
             //保存获取的操作
-            loggers.setDetail(myLog.detail()+"    [className:"+className[className.length-1]+"]->["
+            loggers.setDetail(myLog.detail()+"->[操作参数："+getAttachmentId(joinPoint)+"]"
+                    +"[className:"+className[className.length-1]+"]->["
                     +className[className.length-3]+"."+className[className.length-2]+"]")
                     .setGrade(myLog.grade());
 
@@ -74,6 +78,23 @@ public class LoggersAspect {
 
         //调用service保存SysLog实体类到数据库
         loggers.insert();
+    }
+
+
+    private MyLog getDistributeExceptionHandler(JoinPoint joinPoint){
+        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
+        Method method = signature.getMethod();
+        return method.getAnnotation(MyLog.class);
+    }
+
+    private String getAttachmentId(JoinPoint joinPoint) {
+        MyLog handler = getDistributeExceptionHandler(joinPoint);
+        if (joinPoint.getArgs() == null) {
+            return null;
+        }
+        EvaluationContext evaluationContext = evaluator.createEvaluationContext(joinPoint.getTarget(), joinPoint.getTarget().getClass(), ((MethodSignature) joinPoint.getSignature()).getMethod(), joinPoint.getArgs());
+        AnnotatedElementKey methodKey = new AnnotatedElementKey(((MethodSignature) joinPoint.getSignature()).getMethod(), joinPoint.getTarget().getClass());
+        return evaluator.condition(handler.value(), methodKey, evaluationContext, String.class);
     }
 
 }

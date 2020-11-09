@@ -4,8 +4,10 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.wsl.shoppingKill.common.log.MyLog;
 import com.wsl.shoppingKill.common.util.DateUtil;
 import com.wsl.shoppingKill.constant.LimitListEnum;
+import com.wsl.shoppingKill.constant.LoggerEnum;
 import com.wsl.shoppingKill.convert.LimitListConverter;
 import com.wsl.shoppingKill.domain.LimitList;
 import com.wsl.shoppingKill.mapper.LimitListMapper;
@@ -28,6 +30,7 @@ public class LimitListServiceImpl extends ServiceImpl<LimitListMapper, LimitList
 
 
     @Override
+    @MyLog(detail = "添加黑名单",grade = LoggerEnum.SERIOUS)
     public boolean addBlackList(LimitListParam limitListParam){
         if (limitListParam.getStartTime() == null || DateUtil.isAfter(limitListParam.getStartTime())){
             limitListParam.setStartTime(LocalDateTime.now());

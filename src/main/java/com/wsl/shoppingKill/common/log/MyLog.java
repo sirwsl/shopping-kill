@@ -14,5 +14,6 @@ import java.util.PrimitiveIterator;
 @Documented //生成文档
 public @interface MyLog {
     String detail() default "";
+    String value() default  "";
     LoggerEnum grade() default LoggerEnum.NONE;
 }
