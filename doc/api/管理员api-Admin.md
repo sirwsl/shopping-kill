@@ -4,7 +4,7 @@
 #### 获取管理员列表
 方式：GET
 
-地址：/admin/addAdmin/v1
+地址：/admin/getAdminList/v1
 
 参数：null
 
@@ -43,6 +43,44 @@
     ]
 }
 ```
+
+#### 获取当前登录管理员
+方式：GET
+
+地址：/admin/getAdmin/v1
+
+参数：null
+
+
+返回值：
+```json
+{
+    "code": 0,
+    "msg": "SUCCESS",
+    "userMsg": "操作成功",
+    "data": {
+        "id": 1,
+        "name": "ceshi123",
+        "password": "12356789",
+        "sex": "男",
+        "idCard": "138543518343884464",
+        "phone": "18314263373",
+        "address": "测试家庭住址",
+        "creatTime": "2020-11-09 11:58:46",
+        "updateTime": "2020-11-09 12:42:12",
+        "delFlag": false
+    }
+}
+```
+error
+```json
+{
+    "code": 5000,
+    "msg": "error",
+    "userMsg": "当前登录id异常"
+}
+```
+
 
 #### 添加管理员
 方式：POST

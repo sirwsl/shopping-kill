@@ -29,6 +29,7 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
     }
 
     @Override
+    @MyLog(detail = "修改管理员信息",grade = LoggerEnum.WORN)
     public boolean updateAdmin(Admin admin) {
         return adminMapper.updateById(admin)>0;
     }

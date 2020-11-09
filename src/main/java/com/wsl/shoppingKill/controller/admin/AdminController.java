@@ -8,12 +8,16 @@ import com.wsl.shoppingKill.service.AddressService;
 import com.wsl.shoppingKill.service.admin.AdminService;
 import org.springframework.beans.AbstractPropertyAccessor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 import java.util.List;
+import java.util.Objects;
+import java.util.Timer;
 
 /** 管理员api
  * @author WangShilei
@@ -80,9 +84,29 @@ public class AdminController {
      * @author wangshilei
      * @date 2020/11/9 11:35
      **/
-    @GetMapping("/getAdmin/v1")
-    public Result<List<Admin>> getAdmin(){
+    @GetMapping("/getAdminList/v1")
+    public Result<List<Admin>> getAdminList(){
         return Result.success(adminService.getAdminList());
+    }
+
+
+    /**
+     * 获取当前用户信息
+     * @return Admin
+     * @author wangshilei
+     * @date 2020/11/9 17:53
+     **/
+    @GetMapping("/getAdmin/v1")
+    public Result<Admin> getAdmin(){
+        Long id = component.getCurrentUser().getId();
+        if(id==null || id==0){
+            return Result.error("error","登录异常，请重新尝试修改");
+        }
+        Admin admin = adminService.getById(id);
+        if (Objects.isNull(admin)){
+            return Result.error("error","当前登录id异常");
+        }
+        return Result.success(admin);
     }
 
 }
