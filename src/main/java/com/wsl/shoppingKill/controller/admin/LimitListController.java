@@ -122,7 +122,7 @@ public class LimitListController {
     }
 
     /**
-     *
+     * 更新黑名单列表
      * @author : WangShiLei
      * @date : 2020/11/8 11:06 上午
      * @param limitList: 更新资源
