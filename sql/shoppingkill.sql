@@ -11,7 +11,7 @@
  Target Server Version : 50731
  File Encoding         : 65001
 
- Date: 09/11/2020 09:07:08
+ Date: 09/11/2020 11:57:41
 */
 
 SET NAMES utf8mb4;
@@ -82,8 +82,6 @@ CREATE TABLE `t_admin`  (
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '跟新时间',
   `del_flag` tinyint(1) NOT NULL DEFAULT 0 COMMENT '是否离职',
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `id_card`(`id_card`) USING BTREE,
-  UNIQUE INDEX `phone`(`phone`) USING BTREE,
   UNIQUE INDEX `name`(`name`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 30 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '管理员表' ROW_FORMAT = Dynamic;
 
@@ -192,10 +190,11 @@ CREATE TABLE `t_limit_list`  (
 DROP TABLE IF EXISTS `t_loggers`;
 CREATE TABLE `t_loggers`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '日志id',
-  `detail` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '操作内容',
+  `detail` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '操作内容',
   `man_id` bigint(20) NULL DEFAULT NULL COMMENT '操作人id',
   `type` int(1) NULL DEFAULT NULL COMMENT '操作类型(0-用户 1-管理员)',
   `grade` int(1) NULL DEFAULT NULL COMMENT '等级(0-正常 1-良好 2-严重 3-极其严重)',
+  `ip` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'ip',
   `creat_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间(操作时间)',
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   `del_flag` tinyint(1) NULL DEFAULT 0 COMMENT '是否删除',

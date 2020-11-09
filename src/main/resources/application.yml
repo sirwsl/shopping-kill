@@ -8,6 +8,8 @@ server:
 
 # 应用名称
 spring:
+  aop:
+    auto: true
   application:
     name: shopping-kill
   # spring 静态资源扫描路径

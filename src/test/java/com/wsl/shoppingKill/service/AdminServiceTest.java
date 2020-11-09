@@ -2,6 +2,7 @@ package com.wsl.shoppingKill.service;
 
 import com.wsl.shoppingKill.constant.SexEnum;
 import com.wsl.shoppingKill.domain.Admin;
+import com.wsl.shoppingKill.service.admin.AdminService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -31,9 +32,8 @@ public class AdminServiceTest {
         admin.setAddress("地址").setIdCard("53292681136").setSex(SexEnum.MAN)
                 .setPassword("123").setPhone("18888677861").setWeChat("sirWsl").setDelFlag(true);
         System.out.println(admin.toString());
-        advice.insetAdmin(admin);
+
         System.err.println("存储结束");
-        System.out.println(advice.getAdmin("18888677861"));
 
     }
     @Test
@@ -57,11 +57,6 @@ public class AdminServiceTest {
 
     }
 
-    @Test
-    public void testGetValue(){
-        Admin admin = new Admin();
-        System.out.println(advice.str(admin.setPhone("18888677861")));
-    }
 
     @Test
     public void deleteLogicAdmin(){

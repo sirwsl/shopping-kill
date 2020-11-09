@@ -1,8 +1,13 @@
 package com.wsl.shoppingKill.domain;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.wsl.shoppingKill.common.fastjson.BaseEnumSerializer;
+import com.wsl.shoppingKill.common.fastjson.IEnumDeSerializer;
+import com.wsl.shoppingKill.constant.LoggerEnum;
 import lombok.*;
 import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -49,9 +54,16 @@ public class Loggers extends Model<Loggers> implements Serializable {
     private Integer type;
 
     /**
-    * 等级(0-正常 1-良好 2-严重 3-极其严重)
+    * 等级(0-正常 1-良好 2-严重)
     */
-    private Integer grade;
+    @JSONField(serializeUsing = BaseEnumSerializer.class)
+    @JsonDeserialize(using = IEnumDeSerializer.class)
+    private LoggerEnum grade;
+
+    /**
+     * ip地址
+     **/
+    private String ip;
 
     /**
     * 创建时间(操作时间)

@@ -60,7 +60,7 @@ public class ControllerAdvice {
     @ExceptionHandler(BindException.class)
     public Result<Object> exception(BindException e) {
         log.error("参数异常：{}", Exceptions.getStackTraceAsString(e));
-        return new Result<>(Result.PARAM_ERROR, getOutMsg(e), Objects.requireNonNull(e.getFieldError()).getDefaultMessage(), null);
+        return new Result<>(Result.PARAM_ERROR, getOutMsg(e), "绑定异常", null);
     }
 
     @ExceptionHandler(MissingServletRequestParameterException.class)
@@ -72,8 +72,7 @@ public class ControllerAdvice {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Result<Object> exception(MethodArgumentNotValidException e) {
         log.error("数据验证未通过：{}", Exceptions.getStackTraceAsString(e));
-        return new Result<>(Result.PARAM_ERROR, getOutMsg(e), Objects.requireNonNull(e.getBindingResult().getFieldError())
-                .getDefaultMessage(), null);
+        return new Result<>(Result.PARAM_ERROR, getOutMsg(e), "参数校验未通过，参数非法", null);
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)

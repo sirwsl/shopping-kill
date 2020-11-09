@@ -13,6 +13,7 @@ import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -42,12 +43,14 @@ public class Admin extends Model<Admin> implements Serializable {
     /**
      * 账号
      */
+    @NotNull(message="账号不能为空")
     private String name;
 
 
     /**
     * 密码
     */
+    @NotNull(message = "密码不能为空")
     private String password;
 
 
@@ -56,20 +59,24 @@ public class Admin extends Model<Admin> implements Serializable {
      */
     @JSONField(serializeUsing = BaseEnumSerializer.class)
     @JsonDeserialize(using = IEnumDeSerializer.class)
+    @NotNull(message = "性别不能为空")
     private SexEnum sex;
     /**
     * 身份证号
     */
+    @NotNull(message = "身份证号不能为空")
     private String idCard;
 
     /**
     * 手机号
     */
+    @NotNull(message = "手机号不能为空")
     private String phone;
 
     /**
     * 家庭住址
     */
+    @NotNull(message = "家庭住址不能为空")
     private String address;
 
     /**
