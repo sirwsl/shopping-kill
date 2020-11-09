@@ -104,4 +104,9 @@ public class Loggers extends Model<Loggers> implements Serializable {
     public static final String UPDATE_TIME = "update_time";
 
     public static final String DEL_FLAG = "del_flag";
+
+    /**0-用户 1-管理员**/
+    public static final Integer ADMIN = 1;
+
+    public static final Integer CUSTOMER = 0;
 }

@@ -9,12 +9,37 @@
     <result column="man_id" jdbcType="INTEGER" property="manId" />
     <result column="type" jdbcType="INTEGER" property="type" />
     <result column="grade" jdbcType="INTEGER" property="grade" />
+    <result column="ip" jdbcType="VARCHAR" property="ip" />
     <result column="creat_time" jdbcType="TIMESTAMP" property="creatTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="del_flag" jdbcType="BOOLEAN" property="delFlag" />
   </resultMap>
+
+  <resultMap id="LoggersVOMap" type="com.wsl.shoppingKill.obj.vo.LoggersVO">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="detail" jdbcType="VARCHAR" property="detail" />
+    <result column="man_id" jdbcType="INTEGER" property="manId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="ip" jdbcType="VARCHAR" property="ip" />
+    <result column="grade" jdbcType="INTEGER" property="grade" />
+    <result column="creat_time" jdbcType="TIMESTAMP" property="creatTime" />
+  </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    id, detail, man_id, `type`, grade, creat_time, update_time, del_flag
+    id, detail, man_id, `type`, grade,ip, creat_time, update_time, del_flag
   </sql>
+
+  <select id="getAllLogByType" resultMap="LoggersVOMap">
+    select lg.id,lg.detail,lg.man_id,ad.name,lg.type,lg.ip,lg.grade,lg.creat_time
+    from t_loggers as lg
+    <if  test="type == 1">
+       left join t_admin ad on lg.man_id = ad.id
+    </if>
+    <if test="type ==0">
+       left join t_user ad on lg.man_id = ad.id
+    </if>
+    where lg.type = #{type};
+  </select>
+
 </mapper>

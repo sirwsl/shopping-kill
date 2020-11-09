@@ -61,7 +61,7 @@ public class LoggersAspect {
             String params = JSON.toJSONString(args);
 
             //保存获取的操作
-            loggers.setDetail(myLog.detail()+"\t[className:"+className[className.length-1]+"]->["
+            loggers.setDetail(myLog.detail()+"    [className:"+className[className.length-1]+"]->["
                     +className[className.length-3]+"."+className[className.length-2]+"]")
                     .setGrade(myLog.grade());
 

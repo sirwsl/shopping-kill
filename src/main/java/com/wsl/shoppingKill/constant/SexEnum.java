@@ -18,9 +18,9 @@ public enum  SexEnum implements IEnum<Integer>, BaseEnum {
     WOMAN(2,"女");
 
     @EnumValue
-    private int value;
+    private final int value;
 
-    private String desc;
+    private final String desc;
 
     SexEnum(int value,String desc) {
         this.value = value;
