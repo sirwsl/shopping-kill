@@ -6,6 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * 启动类
@@ -17,6 +18,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 @EnableMethodCache(basePackages = { "com.wsl.shoppingKill" })
 @EnableCreateCacheAnnotation
 @EntityScan(basePackages = {"com.wsl.shoppingKill.entity"})
+@EnableTransactionManagement
 public class Application {
 
     public static void main(String[] args) {

@@ -1,5 +1,6 @@
 package com.wsl.shoppingKill.common.config;
 
+import com.esotericsoftware.minlog.Log;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.framework.api.CuratorEvent;
@@ -12,6 +13,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 
 import javax.annotation.Resource;
+import java.io.IOException;
 
 
 /**
@@ -30,8 +32,17 @@ public class CuratorFrameworkConfig {
         // 创建client
         CuratorFramework curatorFramework = CuratorFrameworkFactory.newClient(env.getProperty("zookeeper-hosts"), retry);
         // 添加watched 监听器
-        curatorFramework.getCuratorListenable().addListener(new MyCuratorListener(){});
-        curatorFramework.start();
+        curatorFramework.getCuratorListenable().addListener(new MyCuratorListener() {});
+
+        try {
+
+            curatorFramework.start();
+        }catch (Exception e){
+            curatorFramework.close();
+            Log.warn("zk启动异常{}尝试重新启动",e.getLocalizedMessage());
+            curatorFramework.start();
+            Log.info("zk正常启动");
+        }
         return curatorFramework;
     }
 
