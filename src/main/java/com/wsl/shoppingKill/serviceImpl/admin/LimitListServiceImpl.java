@@ -6,9 +6,9 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wsl.shoppingKill.common.log.MyLog;
 import com.wsl.shoppingKill.common.util.DateUtil;
-import com.wsl.shoppingKill.constant.LimitListEnum;
+import com.wsl.shoppingKill.constant.BaseEnum;
 import com.wsl.shoppingKill.constant.LoggerEnum;
-import com.wsl.shoppingKill.convert.LimitListConverter;
+import com.wsl.shoppingKill.obj.convert.LimitListConverter;
 import com.wsl.shoppingKill.domain.LimitList;
 import com.wsl.shoppingKill.mapper.LimitListMapper;
 import com.wsl.shoppingKill.obj.param.LimitListParam;
@@ -53,7 +53,7 @@ public class LimitListServiceImpl extends ServiceImpl<LimitListMapper, LimitList
         }
         Page<LimitList> phonePage = new Page<>(page,num);
         return limitListMapper.selectPage(phonePage,new QueryWrapper<LimitList>()
-                .eq(LimitList.TYPE, LimitListEnum.PHONE));
+                .eq(LimitList.TYPE, BaseEnum.PHONE));
     }
 
     @Override
@@ -66,7 +66,7 @@ public class LimitListServiceImpl extends ServiceImpl<LimitListMapper, LimitList
         }
         Page<LimitList> phonePage = new Page<>(page,num);
         return limitListMapper.selectPage(phonePage,new QueryWrapper<LimitList>()
-                .eq(LimitList.TYPE, LimitListEnum.IP));
+                .eq(LimitList.TYPE, BaseEnum.IP));
     }
 
     @Override

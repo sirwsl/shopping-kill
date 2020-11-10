@@ -2,22 +2,16 @@ package com.wsl.shoppingKill.controller.admin;
 
 import com.wsl.shoppingKill.common.Result;
 import com.wsl.shoppingKill.component.request.AbstractCurrentRequestComponent;
-import com.wsl.shoppingKill.constant.RolesEnum;
+import com.wsl.shoppingKill.constant.BaseEnum;
 import com.wsl.shoppingKill.domain.Admin;
-import com.wsl.shoppingKill.service.AddressService;
 import com.wsl.shoppingKill.service.admin.AdminService;
-import org.springframework.beans.AbstractPropertyAccessor;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
-import java.util.Timer;
 
 /** 管理员api
  * @author WangShilei
@@ -41,7 +35,7 @@ public class AdminController {
      **/
     @PostMapping("/addAdmin/v1")
     public Result<Boolean> addAdmin(@Valid Admin admin){
-        if (!component.getCurrentUser().getFlag().equals(RolesEnum.ADMIN)){
+        if (!component.getCurrentUser().getFlag().equals(BaseEnum.ADMIN)){
             return Result.error("error","只有超级管理员有权限");
         }
         return Result.success(adminService.addAdmin(admin));
@@ -72,7 +66,7 @@ public class AdminController {
      **/
     @DeleteMapping("/delAdmin/v1")
     public Result<Boolean> delAdmin(@NotNull(message = "id不能为空") Long id){
-        if (!component.getCurrentUser().getFlag().equals(RolesEnum.ADMIN)){
+        if (!component.getCurrentUser().getFlag().equals(BaseEnum.ADMIN)){
             return Result.error("error","只有超级管理员有权限");
         }
         return Result.success(adminService.delAdmin(id));

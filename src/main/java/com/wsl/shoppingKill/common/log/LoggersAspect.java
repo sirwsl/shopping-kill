@@ -1,7 +1,6 @@
 package com.wsl.shoppingKill.common.log;
 
 import com.alibaba.fastjson.JSON;
-import com.wsl.shoppingKill.common.util.HttpContextUtil;
 import com.wsl.shoppingKill.common.util.IpUtils;
 import com.wsl.shoppingKill.component.request.AbstractCurrentRequestComponent;
 import com.wsl.shoppingKill.domain.Loggers;
@@ -60,7 +59,7 @@ public class LoggersAspect<DataResponse> {
             //将参数所在的数组转换成json
             String params = JSON.toJSONString(args);
             System.err.println(params);
-            String num =  AspectSupportUtils.getKeyValue(joinPoint, myLog.value()).toString();
+            String num =  AspectSupport.getKeyValue(joinPoint, myLog.value()).toString();
 
 
             //保存获取的操作

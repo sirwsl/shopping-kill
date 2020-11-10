@@ -2,7 +2,7 @@ package com.wsl.shoppingKill.controller.verify;
 
 
 import com.google.code.kaptcha.impl.DefaultKaptcha;
-import com.wsl.shoppingKill.constant.Constants;
+import com.wsl.shoppingKill.constant.BaseEnum;
 import com.wsl.shoppingKill.domain.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -49,8 +49,8 @@ public class KaptChaController {
             // 生产验证码字符串并保存到redis中
             String rightCode = katha.createText();
             log.info("rightCode:{}", rightCode);
-            stringRedisTemplate.opsForValue().set(Constants.REDIS_PREFIX +user.getId(), rightCode,
-                    Constants.CAPTCHA_EXPIRE_TIME, TimeUnit.SECONDS);
+            stringRedisTemplate.opsForValue().set(BaseEnum.REDIS_PREFIX +user.getId(), rightCode,
+                    BaseEnum.CAPTCHA_EXPIRE_TIME, TimeUnit.SECONDS);
 
             // 使用生产的验证码字符串返回一个BufferedImage对象并转为byte写入到byte数组中
             BufferedImage challenge = katha.createImage(rightCode);
@@ -79,7 +79,7 @@ public class KaptChaController {
      * @return bool:判断结果
      */
     public Boolean imgVerifyCode(User user, long goodsId, String tryCode) {
-        String rightCode = stringRedisTemplate.opsForValue().get(Constants.REDIS_PREFIX + user.getId());
+        String rightCode = stringRedisTemplate.opsForValue().get(BaseEnum.REDIS_PREFIX + user.getId());
         log.info("rightCode={}, tryCode={}", rightCode, tryCode);
         return tryCode.equals(rightCode);
     }

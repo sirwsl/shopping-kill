@@ -1,4 +1,4 @@
-package com.wsl.shoppingKill.convert;
+package com.wsl.shoppingKill.obj.convert;
 
 import com.wsl.shoppingKill.domain.LimitList;
 import com.wsl.shoppingKill.obj.param.LimitListParam;

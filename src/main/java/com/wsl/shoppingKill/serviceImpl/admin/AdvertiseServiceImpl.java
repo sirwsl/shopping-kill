@@ -8,7 +8,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wsl.shoppingKill.common.log.MyLog;
 import com.wsl.shoppingKill.constant.LoggerEnum;
-import com.wsl.shoppingKill.convert.AdvertiseConverter;
+import com.wsl.shoppingKill.obj.convert.AdvertiseConverter;
 import com.wsl.shoppingKill.domain.Advertise;
 import com.wsl.shoppingKill.mapper.AdvertiseMapper;
 import com.wsl.shoppingKill.obj.vo.AdvertiseVO;

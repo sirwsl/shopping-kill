@@ -1,4 +1,6 @@
-package com.wsl.shoppingKill.common.util;
+package com.wsl.shoppingKill.component.request.snowflake;
+
+import org.springframework.stereotype.Component;
 
 /**
  * 描述: Twitter的分布式自增ID雪花算法snowflake (Java版)
@@ -6,6 +8,7 @@ package com.wsl.shoppingKill.common.util;
  * @author yanpenglei
  * 2018-03-13 12:37
  **/
+@Component
 public class SnowFlake {
 
     /**
@@ -44,7 +47,12 @@ public class SnowFlake {
     //序列号
     private long sequence = 0L;
     //上一次时间戳
-    private long lastStmp = -1L;
+    private long lastStamp = -1L;
+
+    public SnowFlake(){
+        this.datacenterId = 2;
+        this.machineId = 3;
+    }
 
     public SnowFlake(long datacenterId, long machineId) {
         if (datacenterId > MAX_DATACENTER_NUM || datacenterId < 0) {
@@ -53,8 +61,7 @@ public class SnowFlake {
         if (machineId > MAX_MACHINE_NUM || machineId < 0) {
             throw new IllegalArgumentException("machineId can't be greater than MAX_MACHINE_NUM or less than 0");
         }
-        this.datacenterId = datacenterId;
-        this.machineId = machineId;
+
     }
 
     /**
@@ -63,12 +70,12 @@ public class SnowFlake {
      * @return
      */
     public synchronized long nextId() {
-        long currStmp = getNewstmp();
-        if (currStmp < lastStmp) {
+        long currStmp = getNewest();
+        if (currStmp < lastStamp) {
             throw new RuntimeException("Clock moved backwards.  Refusing to generate id");
         }
 
-        if (currStmp == lastStmp) {
+        if (currStmp == lastStamp) {
             //相同毫秒内，序列号自增
             sequence = (sequence + 1) & MAX_SEQUENCE;
             //同一毫秒的序列数已经达到最大
@@ -80,7 +87,7 @@ public class SnowFlake {
             sequence = 0L;
         }
 
-        lastStmp = currStmp;
+        lastStamp = currStmp;
 
         //时间戳部分
         return (currStmp - START_STMP) << TIMESTMP_LEFT
@@ -90,14 +97,14 @@ public class SnowFlake {
     }
 
     private long getNextMill() {
-        long mill = getNewstmp();
-        while (mill <= lastStmp) {
-            mill = getNewstmp();
+        long mill = getNewest();
+        while (mill <= lastStamp) {
+            mill = getNewest();
         }
         return mill;
     }
 
-    private long getNewstmp() {
+    private long getNewest() {
         return System.currentTimeMillis();
     }
 

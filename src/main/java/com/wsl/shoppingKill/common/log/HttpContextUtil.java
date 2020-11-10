@@ -1,4 +1,4 @@
-package com.wsl.shoppingKill.common.util;
+package com.wsl.shoppingKill.common.log;
 
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;

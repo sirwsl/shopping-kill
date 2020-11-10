@@ -1,0 +1,17 @@
+# 阿里云存储参数配置
+ali:
+  oss:
+    endpoint: oss-cn-shenzhen.aliyuncs.com
+    accessKeyId: LTAIoOIpViJOimve
+    accessKeySecret: XzU1crrklFHlEHRgENojhew5b09hMC
+    bucketName: shoppingkill
+    url: //oss.wslhome.top/
+    aliUrl: http://shopingkill.oss-cn-shenzhen.aliyuncs.com/
+    getFileUrl: ${aliyun.oss.url}${aliyun.oss.fileDir}
+
+
+#SMS榛子云参数配置
+zzy:
+  apiUrl: https://sms_developer.zhenzikj.com
+  appSecret: MDAxNDZiNGMtNTYwNy00ZTcwLWEyNTItMGY1OThmYmNjZGM2
+  appId: 105924

@@ -1,7 +1,10 @@
-package com.wsl.shoppingKill.common.util;
+package com.wsl.shoppingKill.component.sms;
+
 import com.alibaba.fastjson.JSONObject;
 import com.zhenzi.sms.ZhenziSmsClient;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -10,13 +13,22 @@ import java.util.Random;
 
 /**
  * 短信验证工具实现
- * @author: wangShilei
- * @create: 2020-05-26 21:54
+ * @author wangShilei
+ * 2020-05-26 21:54
  **/
 
 @Component
-@Slf4j
-public class SmsValidat {
+public class SmsValidate {
+
+    protected static final Logger log = LoggerFactory.getLogger(SmsValidate.class);
+
+    @Value("${zzy.apiUrl}")
+    String apiUrl;
+    @Value("${zzy.appSecret}")
+    String appSecret;
+    @Value("${zzy.appId}")
+    String appId;
+
 
     public JSONObject getCode(String memPhone){
         JSONObject json = new JSONObject();
@@ -25,11 +37,9 @@ public class SmsValidat {
             String code = String.valueOf(new Random().nextInt(999999));
             //将验证码通过榛子云接口发送至手机
 
-            String apiUrl = "https://sms_developer.zhenzikj.com";
-            String appSecret = "MDAxNDZiNGMtNTYwNy00ZTcwLWEyNTItMGY1OThmYmNjZGM2";
-            String appId = "105924";
+
             ZhenziSmsClient client = new ZhenziSmsClient(apiUrl, appId, appSecret);
-            Map<String, Object> params = new HashMap<>(2);
+            Map<String, Object> params = new HashMap<>(8);
             params.put("number", memPhone);
             params.put("templateId", "355");
             String[] templateParams = new String[2];

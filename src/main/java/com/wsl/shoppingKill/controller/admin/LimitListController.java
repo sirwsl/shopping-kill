@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.wsl.shoppingKill.common.Result;
 import com.wsl.shoppingKill.common.log.MyLog;
-import com.wsl.shoppingKill.constant.LimitListEnum;
+import com.wsl.shoppingKill.constant.BaseEnum;
 import com.wsl.shoppingKill.constant.LoggerEnum;
 import com.wsl.shoppingKill.domain.LimitList;
 import com.wsl.shoppingKill.obj.param.LimitListParam;
@@ -62,7 +62,7 @@ public class LimitListController {
         if (StringUtils.isEmpty(num)){
             return Result.error("error","手机号不能为空");
         }
-        return Result.success(limitListService.getBlackListByNumber(num,LimitListEnum.PHONE));
+        return Result.success(limitListService.getBlackListByNumber(num, BaseEnum.PHONE));
     }
 
     /**
@@ -77,7 +77,7 @@ public class LimitListController {
         if (StringUtils.isEmpty(num)){
             return Result.error("error","IP不能为空");
         }
-        return Result.success(limitListService.getBlackListByNumber(num,LimitListEnum.IP));
+        return Result.success(limitListService.getBlackListByNumber(num,BaseEnum.IP));
     }
 
     /**
@@ -90,7 +90,7 @@ public class LimitListController {
     @PostMapping("/addBlackListByPhone/v1")
     public Result<Boolean> addLimitListByPhone(@Valid LimitListParam limitListParam){
         return Result.success(limitListService.addBlackList(
-                limitListParam.setType(LimitListEnum.PHONE)
+                limitListParam.setType(BaseEnum.PHONE)
         ));
     }
 
@@ -98,7 +98,7 @@ public class LimitListController {
     public Result<Boolean> addLimitListByIp(@Valid LimitListParam limitListParam){
         try {
             limitListService.addBlackList(
-                    limitListParam.setType(LimitListEnum.IP)
+                    limitListParam.setType(BaseEnum.IP)
             );
         }catch (Exception e){
             return Result.error("error","数据已经存在");
