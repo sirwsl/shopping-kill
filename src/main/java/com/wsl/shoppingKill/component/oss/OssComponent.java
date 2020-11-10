@@ -38,11 +38,8 @@ public class OssComponent {
     private String accessKeySecret;
     @Value("${ali.oss.bucketName}")
     private String bucketName;
-    
-    /**
-     * 文件存储目录
-     */
-    private String fileDir;
+
+
     /**
      * URL配置
      */
@@ -59,9 +56,9 @@ public class OssComponent {
      * @param file 文件
      * @return 返回完整URL地址
      */
-    public String uploadFile(MultipartFile file) {
-        String fileUrl = uploadImg2Oss(file);
-        String str = getFileUrl(fileUrl);
+    public String uploadFile(String fileDir,MultipartFile file) {
+        String fileUrl = uploadImg2Oss(fileDir,file);
+        String str = getFileUrl(fileDir,fileUrl);
         return str.trim();
     }
     
@@ -72,11 +69,11 @@ public class OssComponent {
      * @param fileName 文件名(带后缀)
      * @return 返回完整URL地址
      */
-    public String uploadFile(MultipartFile file, String fileName) {
+    public String uploadFile(String fileDir,MultipartFile file, String fileName) {
         try {
             InputStream inputStream = file.getInputStream();
-            this.uploadFile2Oss(inputStream, fileName);
-            String url = getFileUrl(fileName);
+            this.uploadFile2Oss(fileDir,inputStream, fileName);
+            String url = getFileUrl(fileDir,fileName);
             if (url != null && url.length() > 0) {
                 return url;
             }
@@ -92,13 +89,13 @@ public class OssComponent {
      * @param fileList 文件列表
      * @return 返回完整URL，逗号分隔
      */
-    public String uploadFile(List<MultipartFile> fileList) {
+    public String uploadFile(String fileDir,List<MultipartFile> fileList) {
         String fileUrl;
         String str;
         StringBuilder photoUrl = new StringBuilder();
         for (int i = 0; i < fileList.size(); i++) {
-            fileUrl = uploadImg2Oss(fileList.get(i));
-            str = getFileUrl(fileUrl);
+            fileUrl = uploadImg2Oss(fileDir,fileList.get(i));
+            str = getFileUrl(fileDir,fileUrl);
             if (i == 0) {
                 photoUrl = new StringBuilder(str);
             } else {
@@ -108,7 +105,7 @@ public class OssComponent {
         return photoUrl.toString().trim();
     }
     
-    public boolean deleteFile(String fileName) {
+    public boolean deleteFile(String fileDir,String fileName) {
         // 创建OSSClient实例
         OSS ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
         // 删除文件
@@ -125,10 +122,10 @@ public class OssComponent {
      * @param fileUrl 文件名
      * @return 完整URL路径
      */
-    public String getFileUrl(String fileUrl) {
+    public String getFileUrl(String fileDir,String fileUrl) {
         if (fileUrl != null && fileUrl.length() > 0) {
             String[] split = fileUrl.split("/");
-            String url = this.getUrl(this.fileDir + split[split.length - 1]);
+            String url = this.getUrl(fileDir + split[split.length - 1]);
             return Objects.requireNonNull(url);
         }
         return null;
@@ -173,7 +170,7 @@ public class OssComponent {
      * @param file 文件
      * @return 文件名
      */
-    private String uploadImg2Oss(MultipartFile file) {
+    private String uploadImg2Oss(String fileDir,MultipartFile file) {
         // 1、限制最大文件为20M
         int maxFileSize = 1024 * 1024 * 20;
         if (file.getSize() > maxFileSize) {
@@ -187,7 +184,7 @@ public class OssComponent {
         String name = uuid + suffix;
         try {
             InputStream inputStream = file.getInputStream();
-            this.uploadFile2Oss(inputStream, name);
+            this.uploadFile2Oss(fileDir,inputStream, name);
             return name;
         } catch (Exception e) {
             return "上传失败";
@@ -200,7 +197,7 @@ public class OssComponent {
      * @param inputStream 输入流
      * @param fileName    文件名
      */
-    private void uploadFile2Oss(InputStream inputStream, String fileName) {
+    private void uploadFile2Oss(String fileDir,InputStream inputStream, String fileName) {
         String ret;
         try {
             //创建上传Object的Metadata

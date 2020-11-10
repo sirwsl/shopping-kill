@@ -1,11 +1,15 @@
 package com.wsl.shoppingKill.controller.admin;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.fasterxml.jackson.databind.ser.Serializers;
 import com.wsl.shoppingKill.common.Result;
+import com.wsl.shoppingKill.component.oss.OssComponent;
+import com.wsl.shoppingKill.constant.BaseEnum;
 import com.wsl.shoppingKill.domain.Advertise;
 import com.wsl.shoppingKill.obj.vo.AdvertiseVO;
 import com.wsl.shoppingKill.service.admin.AdvertiseService;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
@@ -23,6 +27,13 @@ public class AdvertiseController {
     @Resource
     private AdvertiseService advertiseService;
 
+    @Resource
+    OssComponent ossComponent;
+    @PostMapping("/upload")
+    public Result<String> addAdvertise(MultipartFile file){
+        String s = ossComponent.uploadFile(BaseEnum.OSS_OTHER, file);
+        return Result.success(s);
+    }
 
     /**
      * 添加一条广告
