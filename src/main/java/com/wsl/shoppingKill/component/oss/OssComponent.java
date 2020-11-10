@@ -12,8 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.URL;
 import java.util.*;
 
@@ -130,7 +129,45 @@ public class OssComponent {
         }
         return null;
     }
-    
+    public File getFile(String url) {
+        //对本地文件命名
+        String fileName = url.substring(url.lastIndexOf("."));
+        File file = null;
+
+        URL urlfile;
+        InputStream inStream = null;
+        OutputStream os = null;
+        try {
+            file = File.createTempFile("net_url", fileName);
+            //下载
+            urlfile = new URL(url);
+            inStream = urlfile.openStream();
+            os = new FileOutputStream(file);
+
+            int bytesRead = 0;
+            byte[] buffer = new byte[8192];
+            while ((bytesRead = inStream.read(buffer, 0, 8192)) != -1) {
+                os.write(buffer, 0, bytesRead);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (null != os) {
+                    os.close();
+                }
+                if (null != inStream) {
+                    inStream.close();
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        return file;
+    }
+
     /* -----------内部辅助功能------------------------ */
     
     /**

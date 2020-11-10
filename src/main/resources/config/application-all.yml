@@ -1,3 +1,13 @@
+#邮件通知设置
+spring:
+  mail:
+    host: smtp.163.com
+    username: shoppingkill@163.com
+    password: TSVSWNMMIHUDHUYY
+    port: 25
+    default-encoding: utf-8
+    protocol: smtp
+
 # 阿里云存储参数配置
 ali:
   oss:
@@ -15,3 +25,4 @@ zzy:
   apiUrl: https://sms_developer.zhenzikj.com
   appSecret: MDAxNDZiNGMtNTYwNy00ZTcwLWEyNTItMGY1OThmYmNjZGM2
   appId: 105924
+
