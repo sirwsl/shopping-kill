@@ -1,6 +1,10 @@
 package com.wsl.shoppingKill.component;
 
+import com.wsl.shoppingKill.Application;
 import com.wsl.shoppingKill.component.email.MailComponent;
+import freemarker.template.Configuration;
+import freemarker.template.Template;
+import freemarker.template.TemplateException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -8,6 +12,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
 import javax.mail.MessagingException;
+import java.io.IOException;
+import java.io.StringWriter;
+import java.util.HashMap;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -50,12 +57,23 @@ public class mailComponentTest {
     }
 
     @Test
-    public void testTemplateMailTest() throws MessagingException {
-//        Context context = new Context();
-//        context.setVariable("id","ispringboot");
-//
-//        String emailContent = templateEngine.process("emailTeplate", context);
-//        mailComponent.sendHtmlMail("ispringboot@163.com","这是一封HTML模板邮件",emailContent);
+    public void testTemplateMailTest() throws MessagingException, IOException, TemplateException {
+        Configuration configuration =new Configuration(Configuration.VERSION_2_3_0);
+        ClassLoader loader = Application.class.getClassLoader();
+        configuration.setClassLoaderForTemplateLoading(loader,"ftl");
+
+        // 配置模版文件
+        Template template = configuration.getTemplate("test.ftl");
+
+        // 结合 User 对象渲染模版
+        StringWriter mail = new StringWriter();
+        HashMap<String,String> map = new HashMap<>();
+        map.put("name","sirwsl");
+        map.put("sex","男");
+        template.process(map, mail);
+
+        // 将渲染结果发送出去
+        mailComponent.sendHtmlMail("sirwsl@163.com","这是一封HTML模板邮件",mail.toString());
 
     }
 }

@@ -222,6 +222,10 @@
             <artifactId>hibernate-validator</artifactId>
             <version>6.1.6.Final</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-freemarker</artifactId>
+        </dependency>
         <!--工具辅助包-->
         <dependency>
             <groupId>org.apache.commons</groupId>
