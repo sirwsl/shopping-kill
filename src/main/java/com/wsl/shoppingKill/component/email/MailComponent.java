@@ -1,8 +1,6 @@
 package com.wsl.shoppingKill.component.email;
 
 import com.wsl.shoppingKill.component.oss.OssComponent;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -22,7 +20,6 @@ import java.io.File;
 @Component
 public class MailComponent {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Value("${spring.mail.username}")
     private String from;
