@@ -29,6 +29,7 @@ public class mailComponentTest {
                 "<body>\n" +
                 "<h3>hello world</h3>\n" +
                 "<h1>html</h1>\n" +
+                "<img src = 'https://shopingkill.oss-cn-shenzhen.aliyuncs.com/other/e46d347b-d05b-490a-a0cd-6dba27b6209f.jpg'>"+
                 "<body>\n" +
                 "</html>\n";
         mailComponent.sendHtmlMail("sirwsl@163.com","这是一封HTML邮件",content);
@@ -36,7 +37,8 @@ public class mailComponentTest {
 
     @Test
     public void sendAttachmentsMail() throws MessagingException {
-        String filePath = "/ijiangtao/软件开发前景.docx";
+        String fileUrl = "https://shopingkill.oss-cn-shenzhen.aliyuncs.com/other/%E7%8E%8B%E4%B8%96%E7%A3%8A.pdf";
+        String fileName = "test.pdf";
         String content = "<html>\n" +
                 "<body>\n" +
                 "<h3>hello world</h3>\n" +
@@ -44,24 +46,7 @@ public class mailComponentTest {
                 "<h1>附件传输</h1>\n" +
                 "<body>\n" +
                 "</html>\n";
-        mailComponent.sendAttachmentsMail("sirwsl@163.com","这是一封HTML邮件",content, filePath);
-    }
-
-    @Test
-    public void sendLinkResourceMail() throws MessagingException {
-        //TODO 改为本地图片目录
-        String imgPath = "https://shopingkill.oss-cn-shenzhen.aliyuncs.com/other/e46d347b-d05b-490a-a0cd-6dba27b6209f.jpg";
-        String rscId = "测试图片链接";
-        String content = "<html>" +
-                "<body>" +
-                "<h3>hello world</h3>" +
-                "<h1>html</h1>" +
-                "<h1>图片邮件</h1>" +
-                "<img src='cid:"+rscId+"'></img>" +
-                "<body>" +
-                "</html>";
-
-        mailComponent.sendLinkResourceMail("sirwsl@163.com","这是一封图片邮件",content, imgPath, rscId);
+        mailComponent.sendAttachmentsMail("sirwsl@163.com","这是一封HTML邮件",content, fileUrl,fileName);
     }
 
     @Test
