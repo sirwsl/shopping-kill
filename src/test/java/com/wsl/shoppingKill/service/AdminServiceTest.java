@@ -2,7 +2,6 @@ package com.wsl.shoppingKill.service;
 
 import com.wsl.shoppingKill.constant.SexEnum;
 import com.wsl.shoppingKill.domain.Admin;
-import com.wsl.shoppingKill.service.admin.AdminService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;

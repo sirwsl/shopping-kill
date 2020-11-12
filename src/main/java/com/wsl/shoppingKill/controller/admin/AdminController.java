@@ -4,7 +4,7 @@ import com.wsl.shoppingKill.common.Result;
 import com.wsl.shoppingKill.component.request.AbstractCurrentRequestComponent;
 import com.wsl.shoppingKill.constant.BaseEnum;
 import com.wsl.shoppingKill.domain.Admin;
-import com.wsl.shoppingKill.service.admin.AdminService;
+import com.wsl.shoppingKill.service.AdminService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;

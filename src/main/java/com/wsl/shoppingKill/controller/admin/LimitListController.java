@@ -4,12 +4,14 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.wsl.shoppingKill.common.Result;
 import com.wsl.shoppingKill.common.log.MyLog;
+import com.wsl.shoppingKill.component.oss.OssComponent;
 import com.wsl.shoppingKill.constant.BaseEnum;
 import com.wsl.shoppingKill.constant.LoggerEnum;
 import com.wsl.shoppingKill.domain.LimitList;
 import com.wsl.shoppingKill.obj.param.LimitListParam;
-import com.wsl.shoppingKill.service.admin.LimitListService;
+import com.wsl.shoppingKill.service.LimitListService;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
@@ -27,7 +29,13 @@ public class LimitListController {
 
     @Resource
     private LimitListService limitListService;
+    @Resource
+    OssComponent ossComponent;
 
+    @PostMapping("/upload")
+    public Result<String> upload(MultipartFile file){
+        return Result.success(ossComponent.uploadFile(BaseEnum.OSS_OTHER,file));
+    }
     /**
      * 获取黑名单手机号列表
      * @author : WangShiLei

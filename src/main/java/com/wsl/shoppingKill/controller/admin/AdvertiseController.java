@@ -3,7 +3,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.wsl.shoppingKill.common.Result;
 import com.wsl.shoppingKill.domain.Advertise;
 import com.wsl.shoppingKill.obj.vo.AdvertiseVO;
-import com.wsl.shoppingKill.service.admin.AdvertiseService;
+import com.wsl.shoppingKill.service.AdvertiseService;
 import org.springframework.web.bind.annotation.*;
 
 

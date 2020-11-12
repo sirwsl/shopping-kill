@@ -1,4 +1,4 @@
-package com.wsl.shoppingKill.serviceImpl.admin;
+package com.wsl.shoppingKill.serviceImpl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -12,7 +12,7 @@ import com.wsl.shoppingKill.obj.convert.LimitListConverter;
 import com.wsl.shoppingKill.domain.LimitList;
 import com.wsl.shoppingKill.mapper.LimitListMapper;
 import com.wsl.shoppingKill.obj.param.LimitListParam;
-import com.wsl.shoppingKill.service.admin.LimitListService;
+import com.wsl.shoppingKill.service.LimitListService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

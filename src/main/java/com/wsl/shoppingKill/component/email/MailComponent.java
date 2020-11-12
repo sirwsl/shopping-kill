@@ -21,6 +21,7 @@ import java.io.File;
 public class MailComponent {
 
 
+
     @Value("${spring.mail.username}")
     private String from;
 

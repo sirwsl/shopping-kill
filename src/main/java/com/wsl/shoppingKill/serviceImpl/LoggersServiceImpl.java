@@ -1,4 +1,4 @@
-package com.wsl.shoppingKill.serviceImpl.admin;
+package com.wsl.shoppingKill.serviceImpl;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wsl.shoppingKill.domain.Loggers;
 import com.wsl.shoppingKill.mapper.LoggersMapper;
 import com.wsl.shoppingKill.obj.vo.LoggersVO;
-import com.wsl.shoppingKill.service.admin.LoggersService;
+import com.wsl.shoppingKill.service.LoggersService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

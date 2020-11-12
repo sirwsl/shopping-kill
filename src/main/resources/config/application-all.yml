@@ -14,8 +14,8 @@ ali:
     endpoint: oss-cn-shenzhen.aliyuncs.com
     accessKeyId: LTAIoOIpViJOimve
     accessKeySecret: XzU1crrklFHlEHRgENojhew5b09hMC
-    bucketName: shopingkill
-    url: //oss.wslhome.top/
+    bucketName: shoppingkill
+    url: //shopingkill.oss-cn-shenzhen.aliyuncs.com/
     aliUrl: http://shopingkill.oss-cn-shenzhen.aliyuncs.com/
     getFileUrl: ${aliyun.oss.url}${aliyun.oss.fileDir}
 

@@ -1,4 +1,4 @@
-package com.wsl.shoppingKill.serviceImpl.admin;
+package com.wsl.shoppingKill.serviceImpl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -6,7 +6,7 @@ import com.wsl.shoppingKill.common.log.MyLog;
 import com.wsl.shoppingKill.constant.LoggerEnum;
 import com.wsl.shoppingKill.domain.Admin;
 import com.wsl.shoppingKill.mapper.AdminMapper;
-import com.wsl.shoppingKill.service.admin.AdminService;
+import com.wsl.shoppingKill.service.AdminService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

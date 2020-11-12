@@ -1,4 +1,4 @@
-package com.wsl.shoppingKill.serviceImpl.admin;
+package com.wsl.shoppingKill.serviceImpl;
 
 import com.alicp.jetcache.anno.Cached;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -12,7 +12,7 @@ import com.wsl.shoppingKill.obj.convert.AdvertiseConverter;
 import com.wsl.shoppingKill.domain.Advertise;
 import com.wsl.shoppingKill.mapper.AdvertiseMapper;
 import com.wsl.shoppingKill.obj.vo.AdvertiseVO;
-import com.wsl.shoppingKill.service.admin.AdvertiseService;
+import com.wsl.shoppingKill.service.AdvertiseService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

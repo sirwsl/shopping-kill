@@ -3,7 +3,7 @@ package com.wsl.shoppingKill.controller.admin;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.wsl.shoppingKill.common.Result;
 import com.wsl.shoppingKill.obj.vo.LoggersVO;
-import com.wsl.shoppingKill.service.admin.LoggersService;
+import com.wsl.shoppingKill.service.LoggersService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;

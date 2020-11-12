@@ -1,4 +1,4 @@
-package com.wsl.shoppingKill.service.admin;
+package com.wsl.shoppingKill.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
