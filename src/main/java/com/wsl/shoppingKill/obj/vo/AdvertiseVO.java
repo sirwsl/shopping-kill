@@ -1,12 +1,8 @@
 package com.wsl.shoppingKill.obj.vo;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.*;
 import lombok.experimental.Accessors;
 
-
-import javax.persistence.Id;
 
 
 /** 活动连接展示

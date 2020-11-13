@@ -1,4 +1,4 @@
-package com.wsl.shoppingKill.component.request.snowflake;
+package com.wsl.shoppingKill.component.snowflake;
 
 import org.springframework.stereotype.Component;
 
@@ -16,14 +16,20 @@ public class SnowFlake {
      */
     private final static long START_STMP = 1480166465631L;
 
+
+     //每一部分占用的位数
     /**
-     * 每一部分占用的位数
+     *序列号占用的位数
      */
-    //序列号占用的位数
+
     private final static long SEQUENCE_BIT = 12;
-    //机器标识占用的位数
+    /**
+     *机器标识占用的位数
+     */
     private final static long MACHINE_BIT = 5;
-    //数据中心占用的位数
+    /**
+     *数据中心占用的位数
+     */
     private final static long DATACENTER_BIT = 5;
 
     /**
@@ -40,13 +46,22 @@ public class SnowFlake {
     private final static long DATACENTER_LEFT = SEQUENCE_BIT + MACHINE_BIT;
     private final static long TIMESTMP_LEFT = DATACENTER_LEFT + DATACENTER_BIT;
 
-    //数据中心
+    /**
+     *数据中心
+     */
+
     private long datacenterId;
-    //机器标识
+    /**
+     * 机器标识
+     */
     private long machineId;
-    //序列号
+    /**
+     * 序列号
+     */
     private long sequence = 0L;
-    //上一次时间戳
+    /**
+     * 上一次时间戳
+     */
     private long lastStamp = -1L;
 
     public SnowFlake(){
@@ -67,7 +82,7 @@ public class SnowFlake {
     /**
      * 产生下一个ID
      *
-     * @return
+     * @return long
      */
     public synchronized long nextId() {
         long currStmp = getNewest();

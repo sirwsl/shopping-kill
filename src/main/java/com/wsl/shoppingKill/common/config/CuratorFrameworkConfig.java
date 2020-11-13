@@ -47,7 +47,7 @@ public class CuratorFrameworkConfig {
     }
 
 
-    public class MyCuratorListener implements CuratorListener {
+    public static class MyCuratorListener implements CuratorListener {
         @Override
         public void eventReceived(CuratorFramework client, CuratorEvent event) throws Exception {
             CuratorEventType type = event.getType();

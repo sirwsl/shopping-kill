@@ -12,7 +12,6 @@ import lombok.*;
 import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Id;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 

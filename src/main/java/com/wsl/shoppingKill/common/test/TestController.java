@@ -24,11 +24,10 @@ public class TestController {
     @Resource
     private CuratorFramework curatorFramework;
 
-    private String lockPath = "/lock/test/";
 
-
-    @GetMapping(value = "/zookpTest", produces = "application/json; charset=utf-8")
+    @GetMapping(value = "/LookupTest", produces = "application/json; charset=utf-8")
     public void zookpTest() {
+        String lockPath = "/lock/test/";
         String lockName = lockPath + UUID.randomUUID().toString();
         log.info("============={} 线程访问开始=========lockName:{}",Thread.currentThread().getName(),lockName);
         //TODO 获取分布式锁

@@ -23,21 +23,23 @@ import java.lang.reflect.Method;
  **/
 @Aspect
 @Component
-public class LoggersAspect<DataResponse> {
+public class LoggersAspect {
 
 
     @Resource
     private AbstractCurrentRequestComponent abstractCurrentRequestComponent;
 
-    private final ExpressionEvaluator evaluator = new ExpressionEvaluator();
-
-    //定义切点 @Pointcut
-    //在注解的位置切入代码
+    /**
+     *定义切点 @Pointcut 在注解的位置切入代码
+     **/
     @Pointcut("@annotation( com.wsl.shoppingKill.common.log.MyLog)")
     public void logPointCut() {
     }
 
-    //切面 配置通知
+    /**
+     *切面 配置通知
+     */
+
     @AfterReturning("logPointCut()")
     public void saveSysLog(JoinPoint joinPoint) {
         //保存日志

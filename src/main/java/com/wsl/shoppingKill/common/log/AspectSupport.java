@@ -15,7 +15,7 @@ import java.lang.reflect.Method;
  * @date : 2020/11/9 8:43 下午
  **/
 public class AspectSupport {
-    private static ExpressionEvaluator evaluator = new ExpressionEvaluator();
+    private static final ExpressionEvaluator evaluator = new ExpressionEvaluator();
 
     public static Object getKeyValue(JoinPoint joinPoint, String keyExpression) {
         return getKeyValue(joinPoint.getTarget(), joinPoint.getArgs(), joinPoint.getTarget().getClass(),

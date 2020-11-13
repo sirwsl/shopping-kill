@@ -4,14 +4,12 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.wsl.shoppingKill.common.Result;
 import com.wsl.shoppingKill.common.log.MyLog;
-import com.wsl.shoppingKill.component.oss.OssComponent;
 import com.wsl.shoppingKill.constant.BaseEnum;
 import com.wsl.shoppingKill.constant.LoggerEnum;
 import com.wsl.shoppingKill.domain.LimitList;
 import com.wsl.shoppingKill.obj.param.LimitListParam;
 import com.wsl.shoppingKill.service.LimitListService;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;

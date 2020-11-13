@@ -189,7 +189,7 @@ public class OssComponent {
      * @param key 文件名
      * @return URL
      */
-    @Deprecated()
+    @Deprecated
     private String getUrl(String key) {
         // 设置URL过期时间为20年  3600l* 1000*24*365*20
         Date expiration = new Date(System.currentTimeMillis() + 3600L * 1000 * 24 * 365 * 20);

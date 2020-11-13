@@ -78,7 +78,7 @@ public class KaptChaController {
      * @param tryCode:输入的验证码
      * @return bool:判断结果
      */
-    public Boolean imgVerifyCode(User user, long goodsId, String tryCode) {
+    public Boolean imgVerifyCode(User user, String tryCode) {
         String rightCode = stringRedisTemplate.opsForValue().get(BaseEnum.REDIS_PREFIX + user.getId());
         log.info("rightCode={}, tryCode={}", rightCode, tryCode);
         return tryCode.equals(rightCode);

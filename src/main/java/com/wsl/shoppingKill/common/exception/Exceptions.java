@@ -7,6 +7,9 @@ package com.wsl.shoppingKill.common.exception;//
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
+/**
+ * @author wsl
+ */
 public final class Exceptions {
     private Exceptions() {
     }

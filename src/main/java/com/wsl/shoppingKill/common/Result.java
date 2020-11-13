@@ -6,6 +6,7 @@
 package com.wsl.shoppingKill.common;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * 前端控制器返回封装类，除了第三方调用（cloud和http等请求）外，
@@ -16,30 +17,28 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  */
 public class Result<T> {
 
-    // 成功
+    /**成功**/
     public static final int SUCCESS = 0;
 
-    // 鉴权失败,需要登录
+    /**鉴权失败,需要登录**/
     public static final int UNLOGIN = 1000;
-    // 存在危险字符
+     /**存在危险字符**/
     public static final int DANGER_CHAR = 1001;
-    // 当前用户没有权限
-    public static final int NO_PERMISSIONS = 1002;
-    // 需要账号验证
+    /**需要账号验证**/
     public static final int NEED_VERIFY = 1003;
-    // 参数校验失败
+     /**参数校验失败**/
     public static final int PARAM_VALIDATE_FAILED = 2000;
-    // 参数错误
+     /**参数错误**/
     public static final int PARAM_ERROR = 2001;
-    // 暂无数据
+     /**暂无数据**/
     public static final int NO_DATA = 2002;
-    // 内部出错
+     /**内部出错**/
     public static final int SERVER_ERROR = 5000;
-    // 调用接口返回空
+     /**调用接口返回空**/
     public static final int SERVER_RETURN_NULL = 2002;
-    // 调用webservice出错
+     /**调用webservice出错**/
     public static final int WEBSERVER_ERROR = 5001;
-    // 调用服务出错
+     /** 调用服务出错**/
     public static final int RETURN_ERROR = 2003;
 
     private int code = 0;
@@ -48,7 +47,7 @@ public class Result<T> {
 
     private String userMsg = "";
 
-    //    @JsonIgnoreProperties({ "isdel", "createTime", "updateTime", "updateUserId" })
+
     private T data = null;
 
     public Result() {
@@ -59,7 +58,7 @@ public class Result<T> {
      *
      * @param code:
      */
-    //@Deprecated
+
     public Result(int code) {
         this.code = code;
     }
@@ -69,7 +68,7 @@ public class Result<T> {
      *
      * @param data:
      */
-    //@Deprecated
+
     public Result(T data) {
         this.data = data;
     }
@@ -83,7 +82,7 @@ public class Result<T> {
      * @param userMsg:
      * @param data:
      */
-    //@Deprecated
+
     public Result(int code, String msg, String userMsg, T data) {
         this.code = code;
         this.msg = msg;
@@ -190,7 +189,7 @@ public class Result<T> {
      * 全部改用拦截器
      */
     @Deprecated
-    public static <T> Result<T> unlogin(String msg, String userMsg) {
+    public static <T> Result<T> unloving(String msg, String userMsg) {
         return new Result<>(Result.UNLOGIN, msg, userMsg, null);
     }
 
@@ -199,7 +198,7 @@ public class Result<T> {
      * 全部改用拦截器
      */
     @Deprecated
-    public static <T> Result<T> unlogin(String msg, String userMsg, T t) {
+    public static <T> Result<T> unloving(String msg, String userMsg, T t) {
         return new Result<>(Result.UNLOGIN, msg, userMsg, t);
     }
 
@@ -209,7 +208,7 @@ public class Result<T> {
      * 全部改用拦截器
      */
     @Deprecated
-    public static <T> Result<T> unlogin(T t) {
+    public static <T> Result<T> unloving(T t) {
         return new Result<>(Result.UNLOGIN, "", "", t);
     }
 
