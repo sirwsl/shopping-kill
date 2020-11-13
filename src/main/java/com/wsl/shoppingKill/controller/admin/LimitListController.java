@@ -29,13 +29,7 @@ public class LimitListController {
 
     @Resource
     private LimitListService limitListService;
-    @Resource
-    OssComponent ossComponent;
 
-    @PostMapping("/upload")
-    public Result<String> upload(MultipartFile file){
-        return Result.success(ossComponent.uploadFile(BaseEnum.OSS_OTHER,file));
-    }
     /**
      * 获取黑名单手机号列表
      * @author : WangShiLei

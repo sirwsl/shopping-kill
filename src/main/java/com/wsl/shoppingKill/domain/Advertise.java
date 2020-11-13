@@ -6,8 +6,10 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.Id;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -43,8 +45,11 @@ public class Advertise extends Model<Advertise> implements Serializable {
     /**
     * 目标url
     */
-    @NotNull(message = "链接地址不能为空")
-    private String targetUrl;
+    @Transient
+    @NotNull(message = "上传文件不能为空")
+    private MultipartFile targetUrl;
+
+
 
     /**
     * 开始时间
