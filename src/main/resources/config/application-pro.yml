@@ -73,23 +73,29 @@ spring:
 
   rabbitmq:
     addresses: 121.196.187.160:5672,121.196.187.160:5673,121.196.187.160:5674
-    username: admin
-    password: 18314263373
-    #默认虚拟主机
-    virtual-host: /
-    #连接超时实践
-    connection-timeout: 10000
-    publisher-confirm-type: correlated
-    publisher-returns: true
-    template:
-      mandatory: true
-    #消费端配置
-    listener:
-      simple:
-        max-concurrency: 50
-        concurrency: 10
-        acknowledge-mode: manual #签收设置
-        prefetch: 1 #限流
+      username: admin
+      password: 18314263373
+      publisher-confirms: true
+      publisher-returns: true
+      #默认虚拟主机
+      virtual-host: /
+      #连接超时实践
+      connection-timeout: 10000
+      publisher-confirm-type: correlated
+      template:
+        mandatory: true
+        retry:
+          max-attempts: 5 #最大重试次数
+          max-interval: 1200 #最大重试时间
+      #消费端配置
+      listener:
+        simple:
+          max-concurrency: 50
+          concurrency: 10
+          acknowledge-mode: manual #签收设置
+          retry:
+            enabled: true
+          prefetch: 1 #限流
 
 redis:
   timeout: 10000 #客户端超时时间单位是毫秒 默认是2000

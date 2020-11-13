@@ -30,9 +30,18 @@ public class  RabbitMqEnum {
 
     public static class Key{
         //短信路由键
-        public static final String KEY_SMS = "sms";
+        public static final String KEY_SMS = "#.sms";
 
-        public static final String KEY_EMAIL = "email";
+        public static final String KEY_USER_SMS = "user.sms";
+
+        public static final String KEY_ADMIN_SMS = "admin.sms";
+
+        //邮箱路由键
+        public static final String KEY_EMAIL = "#.email";
+
+        public static final String KEY_USER_EMAIL = "uer.email";
+
+        public static final String KEY_ADMIN_EMAIL = "admin.email";
     }
 
 
