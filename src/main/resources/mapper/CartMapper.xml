@@ -12,8 +12,5 @@
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="del_flag" jdbcType="BOOLEAN" property="delFlag" />
   </resultMap>
-  <sql id="Base_Column_List">
-    <!--@mbg.generated-->
-    id, user_id, sku_id, creat_time, update_time, `status`, del_flag
-  </sql>
+
 </mapper>

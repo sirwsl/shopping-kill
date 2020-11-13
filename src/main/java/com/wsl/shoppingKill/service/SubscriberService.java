@@ -1,12 +1,12 @@
 package com.wsl.shoppingKill.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.wsl.shoppingKill.domain.Subscription;
+import com.wsl.shoppingKill.domain.Subscriber;
 
 /**
  * @author wangShilei
  */
-public interface SubscriptionService extends IService<Subscription> {
+public interface SubscriberService extends IService<Subscriber> {
 
 
 }

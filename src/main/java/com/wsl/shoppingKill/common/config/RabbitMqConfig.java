@@ -2,10 +2,15 @@ package com.wsl.shoppingKill.common.config;
 
 import com.wsl.shoppingKill.constant.RabbitMqEnum;
 import org.springframework.amqp.core.*;
+import org.springframework.amqp.rabbit.annotation.RabbitListenerConfigurer;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
+import org.springframework.amqp.rabbit.listener.RabbitListenerEndpointRegistrar;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.messaging.converter.MappingJackson2MessageConverter;
+import org.springframework.messaging.handler.annotation.support.DefaultMessageHandlerMethodFactory;
+import org.springframework.messaging.handler.annotation.support.MessageHandlerMethodFactory;
 
 import javax.annotation.Resource;
 
@@ -14,7 +19,7 @@ import javax.annotation.Resource;
  * @date 2020/11/13-13:34
  **/
 @Configuration
-public class RabbitMqConfig {
+public class RabbitMqConfig implements RabbitListenerConfigurer {
 
     @Resource
     private RabbitAdmin rabbitAdmin;
@@ -96,5 +101,22 @@ public class RabbitMqConfig {
 
         rabbitAdmin.declareQueue(queueMail());
         rabbitAdmin.declareQueue(queueMail());
+    }
+
+    @Override
+    public void configureRabbitListeners(RabbitListenerEndpointRegistrar rabbitListenerEndpointRegistrar) {
+        rabbitListenerEndpointRegistrar.setMessageHandlerMethodFactory(messageHandlerMethodFactory());
+    }
+
+    @Bean
+    MessageHandlerMethodFactory messageHandlerMethodFactory(){
+        DefaultMessageHandlerMethodFactory messageHandlerMethodFactory = new DefaultMessageHandlerMethodFactory();
+        messageHandlerMethodFactory.setMessageConverter(mappingJackson2MessageConverter());
+        return messageHandlerMethodFactory;
+    }
+
+    @Bean
+    public MappingJackson2MessageConverter mappingJackson2MessageConverter(){
+        return  new MappingJackson2MessageConverter();
     }
 }

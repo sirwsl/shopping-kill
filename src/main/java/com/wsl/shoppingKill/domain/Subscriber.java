@@ -17,14 +17,14 @@ import java.time.LocalDateTime;
  * @author wangshilei
  * @date 2020/11/4 16:44
  **/
-@TableName("t_subscription")
+@TableName("t_subscriber")
 @EqualsAndHashCode(callSuper = true)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 @Accessors(chain = true)
-public class Subscription extends Model<Subscription> implements Serializable {
+public class Subscriber extends Model<Subscriber> implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**

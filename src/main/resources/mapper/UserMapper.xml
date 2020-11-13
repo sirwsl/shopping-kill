@@ -21,9 +21,5 @@
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="del_flag" jdbcType="BOOLEAN" property="delFlag" />
   </resultMap>
-  <sql id="Base_Column_List">
-    <!--@mbg.generated-->
-    id, `name`, `password`, nick_name, img, sex, signature, phone, email, id_card, real_name, 
-    we_chat, apply, creat_time, update_time, del_flag
-  </sql>
+
 </mapper>

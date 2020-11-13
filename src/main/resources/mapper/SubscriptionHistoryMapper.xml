@@ -8,13 +8,11 @@
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="detail" jdbcType="VARCHAR" property="detail" />
     <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="real" jdbcType="INTEGER" property="real" />
     <result column="admin_id" jdbcType="INTEGER" property="adminId" />
     <result column="creat_time" jdbcType="TIMESTAMP" property="creatTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="del_flag" jdbcType="BOOLEAN" property="delFlag" />
   </resultMap>
-  <sql id="Base_Column_List">
-    <!--@mbg.generated-->
-    id, title, detail, `type`, admin_id, creat_time, update_time, del_flag
-  </sql>
+
 </mapper>

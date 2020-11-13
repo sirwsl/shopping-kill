@@ -55,6 +55,11 @@ public class SubscriptionHistory extends Model<SubscriptionHistory> implements S
     private Long adminId;
 
     /**
+     * 发布是否成功
+     **/
+    private Boolean real;
+
+    /**
     * 创建时间(发布时间)
     */
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")

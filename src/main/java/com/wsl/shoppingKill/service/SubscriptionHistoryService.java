@@ -8,5 +8,12 @@ import com.wsl.shoppingKill.domain.SubscriptionHistory;
  */
 public interface SubscriptionHistoryService extends IService<SubscriptionHistory> {
 
-
+    /**
+     * 发送订阅消息
+     * @param subscriptionHistory :
+     * @return null
+     * @author wangshilei
+     * @date 2020/11/13 16:02
+     **/
+    boolean sendNewsSubscription(SubscriptionHistory subscriptionHistory);
 }
