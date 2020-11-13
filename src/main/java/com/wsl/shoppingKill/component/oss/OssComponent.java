@@ -57,7 +57,7 @@ public class OssComponent {
      * @param file 文件
      * @return 返回完整URL地址
      */
-    public String uploadFile(String fileDir,MultipartFile file) {
+    public String uploadFile(String fileDir,MultipartFile file) throws Exception{
         String fileUrl = uploadImg2Oss(fileDir,file);
         String str = getFileUrl(fileDir,fileUrl);
         return str.trim();
@@ -70,7 +70,7 @@ public class OssComponent {
      * @param fileName 文件名(带后缀)
      * @return 返回完整URL地址
      */
-    public String uploadFile(String fileDir,MultipartFile file, String fileName) {
+    public String uploadFile(String fileDir,MultipartFile file, String fileName) throws Exception{
         try {
             InputStream inputStream = file.getInputStream();
             this.uploadFile2Oss(fileDir,inputStream, fileName);
@@ -78,9 +78,9 @@ public class OssComponent {
             if (url != null && url.length() > 0) {
                 return url;
             }
-            return "URL获取失败";
+            throw new Exception("获取图片路径失败");
         } catch (IOException e) {
-            return "上传失败";
+            throw new Exception("上传失败");
         }
     }
     
@@ -90,7 +90,7 @@ public class OssComponent {
      * @param fileList 文件列表
      * @return 返回完整URL，逗号分隔
      */
-    public String uploadFile(String fileDir,List<MultipartFile> fileList) {
+    public String uploadFile(String fileDir,List<MultipartFile> fileList) throws Exception{
         String fileUrl;
         String str;
         StringBuilder photoUrl = new StringBuilder();
@@ -210,11 +210,11 @@ public class OssComponent {
      * @param file 文件
      * @return 文件名
      */
-    private String uploadImg2Oss(String fileDir,MultipartFile file) {
+    private String uploadImg2Oss(String fileDir,MultipartFile file) throws Exception{
         // 1、限制最大文件为20M
         int maxFileSize = 1024 * 1024 * 5;
         if (file.getSize() > maxFileSize) {
-            return "图片太大";
+            throw new Exception("上传图片太大");
         }
         // 2、重命名文件
         String fileName = Objects.requireNonNull(file.getOriginalFilename(), "文件名不能为空");
@@ -227,7 +227,7 @@ public class OssComponent {
             this.uploadFile2Oss(fileDir,inputStream, name);
             return name;
         } catch (Exception e) {
-            return "上传失败";
+            throw new Exception("上传失败");
         }
     }
     

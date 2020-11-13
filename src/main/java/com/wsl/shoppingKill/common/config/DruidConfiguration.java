@@ -25,21 +25,6 @@ public class DruidConfiguration {
     private static final Logger logger = LoggerFactory.getLogger(DruidConfiguration.class);
 
 
-    @Bean(name = "dataSource")
-    @ConfigurationProperties(prefix = "spring.datasource")
-    public DataSource dateSource() {
-        return new DruidDataSource();
-    }
-
-    @Bean
-    @DependsOn("dataSource")
-    public DataSourceTransactionManager transactionManager(DataSource dataSource) {
-        DataSourceTransactionManager transactionManager = new DataSourceTransactionManager();
-        transactionManager.setDataSource(dataSource);
-        return transactionManager;
-    }
-
-
     @Bean
     public ServletRegistrationBean<StatViewServlet> druidServlet() {
         logger.info("init Druid Servlet Configuration ");

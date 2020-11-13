@@ -9,7 +9,7 @@
 
 |参数|类型|是否必须|说明|
 |---|---|---|---|
-|imgUrl|img|是|广告图片|
+|file|file|是|广告图片|
 |targetUrl|String|是|图片地址|
 |startTime|Date|否|默认当前时间|
 |endTime|Date|否|默认7天结束|
@@ -34,8 +34,8 @@
 |参数|类型|是否必须|说明|
 |---|---|---|---|
 |id|Long|是|id|
-|imgUrl|img|是|广告图片|
-|targetUrl|String|是|图片地址|
+|file|file|否|广告图片|
+|targetUrl|String|否|图片目标地址|
 |startTime|Date|否|默认当前时间|
 |endTime|Date|否|默认7天结束|
 
@@ -45,7 +45,7 @@
     "code": 0,
     "msg": "SUCCESS",
     "userMsg": "操作成功",
-    "data": true
+    "data": "添加成功"
 }
 ```
 
@@ -68,7 +68,7 @@
     "code": 0,
     "msg": "SUCCESS",
     "userMsg": "操作成功",
-    "data": true
+    "data": "添加成功"
 }
 ```
 

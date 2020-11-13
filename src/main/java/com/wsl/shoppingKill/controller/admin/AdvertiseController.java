@@ -4,6 +4,7 @@ import com.wsl.shoppingKill.common.Result;
 import com.wsl.shoppingKill.domain.Advertise;
 import com.wsl.shoppingKill.obj.vo.AdvertiseVO;
 import com.wsl.shoppingKill.service.AdvertiseService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -32,7 +33,10 @@ public class AdvertiseController {
      * @return com.wsl.shoppingKill.common.Result<java.lang.Boolean>
      **/
     @PostMapping("/addAdvertise/v1")
-    public Result<Boolean> addAdvertise(@Valid Advertise advertise){
+    public Result<String> addAdvertise(@Valid Advertise advertise){
+        if (StringUtils.isBlank(advertise.getFile().getOriginalFilename())){
+            return Result.error("error","上传文件不能为空");
+        }
         return Result.success(advertiseService.addAdvertise(advertise));
     }
 
@@ -44,7 +48,10 @@ public class AdvertiseController {
      * @return com.wsl.shoppingKill.common.Result<java.lang.Boolean>
      **/
     @PutMapping("/updateAdvertise/v1")
-    public Result<Boolean> updateAdvertise(@Valid Advertise advertise){
+    public Result<String> updateAdvertise(@Valid Advertise advertise){
+        if (advertise.getId()==null ||advertise.getId() == 0){
+            return Result.error("error","id不能为空");
+        }
         return Result.success(advertiseService.updateAdvertise(advertise));
     }
 
@@ -56,7 +63,7 @@ public class AdvertiseController {
      * @return com.wsl.shoppingKill.common.Result<java.lang.Boolean>
      **/
     @DeleteMapping("/delAdvertise/v1")
-    public Result<Boolean> delAdvertise(@NotNull(message = "id不能为空") Long id){
+    public Result<Boolean> delAdvertise(@NotNull(message = "id不能为空") Long id) {
         return Result.success(advertiseService.delAdvertise(id));
     }
 

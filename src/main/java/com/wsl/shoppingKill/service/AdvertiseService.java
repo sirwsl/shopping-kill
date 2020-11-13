@@ -63,11 +63,11 @@ public interface AdvertiseService extends IService<Advertise> {
     /**
      * 修改活动内容
      * @param advertise:
-     * @return boolean
+     * @return String
      * @author wangshilei
      * @date 2020/11/9 18:33
      **/
-    boolean updateAdvertise(Advertise advertise);
+    String updateAdvertise(Advertise advertise);
 
     /**
      * 删除一个活动
@@ -81,11 +81,11 @@ public interface AdvertiseService extends IService<Advertise> {
     /**
      * 添加一个活动
      * @param advertise :
-     * @return boolean
+     * @return String
      * @author wangshilei
      * @date 2020/11/9 18:36
      **/
-    boolean addAdvertise(Advertise advertise);
+    String addAdvertise(Advertise advertise);
 
 
 }

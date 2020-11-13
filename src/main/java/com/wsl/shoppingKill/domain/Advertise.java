@@ -22,9 +22,9 @@ import java.time.LocalDateTime;
 @TableName("t_advertise")
 @EqualsAndHashCode(callSuper = true)
 @Data
-@AllArgsConstructor
+@AllArgsConstructor()
 @NoArgsConstructor
-@ToString
+@ToString(exclude = "file")
 @Accessors(chain = true)
 public class Advertise extends Model<Advertise> implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -39,15 +39,17 @@ public class Advertise extends Model<Advertise> implements Serializable {
     /**
     * 广告图片链接
     */
-    @NotNull(message = "图片不能为空")
     private String imgUrl;
 
     /**
     * 目标url
     */
-    @Transient
-    @NotNull(message = "上传文件不能为空")
-    private MultipartFile targetUrl;
+    @NotNull(message = "目标连接不能为空")
+    private String targetUrl;
+
+
+    @TableField(exist = false)
+    private transient MultipartFile file;
 
 
 
