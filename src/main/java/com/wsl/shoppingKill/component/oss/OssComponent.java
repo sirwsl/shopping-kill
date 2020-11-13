@@ -37,6 +37,8 @@ public class OssComponent {
     private String accessKeySecret;
     @Value("${ali.oss.bucketName}")
     private String bucketName;
+    @Value("${ali.oss.myHostUrl}")
+    private String myHostUrl;
 
 
     /**
@@ -124,7 +126,7 @@ public class OssComponent {
     public String getFileUrl(String fileDir,String fileUrl) {
         if (fileUrl != null && fileUrl.length() > 0) {
             String[] split = fileUrl.split("/");
-            String url = this.getUrl(fileDir + split[split.length - 1]);
+            String url = myHostUrl+ fileDir + split[split.length - 1];
             return Objects.requireNonNull(url);
         }
         return null;
@@ -144,7 +146,7 @@ public class OssComponent {
             inStream = urlfile.openStream();
             os = new FileOutputStream(file);
 
-            int bytesRead = 0;
+            int bytesRead ;
             byte[] buffer = new byte[8192];
             while ((bytesRead = inStream.read(buffer, 0, 8192)) != -1) {
                 os.write(buffer, 0, bytesRead);
@@ -182,11 +184,12 @@ public class OssComponent {
     }
     
     /**
-     * 获得url链接
-     *
+     * 获得url真实外网链接
+     * 不提供使用，因为会产生公网OOS流量下行费用
      * @param key 文件名
      * @return URL
      */
+    @Deprecated()
     private String getUrl(String key) {
         // 设置URL过期时间为20年  3600l* 1000*24*365*20
         Date expiration = new Date(System.currentTimeMillis() + 3600L * 1000 * 24 * 365 * 20);
@@ -209,7 +212,7 @@ public class OssComponent {
      */
     private String uploadImg2Oss(String fileDir,MultipartFile file) {
         // 1、限制最大文件为20M
-        int maxFileSize = 1024 * 1024 * 20;
+        int maxFileSize = 1024 * 1024 * 5;
         if (file.getSize() > maxFileSize) {
             return "图片太大";
         }
