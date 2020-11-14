@@ -4,8 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.recipes.locks.InterProcessSemaphoreMutex;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.util.UUID;
@@ -15,8 +13,8 @@ import java.util.concurrent.TimeUnit;
  * @author wangshilei
  * @date 2020/10/21 11:43
  **/
-@RestController
-@RequestMapping("/test")
+//@RestController
+//@RequestMapping("/test")
 @Slf4j
 public class TestController {
 

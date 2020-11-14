@@ -39,7 +39,7 @@ public class  RabbitMqEnum {
         //邮箱路由键
         public static final String KEY_EMAIL = "#.email";
 
-        public static final String KEY_USER_EMAIL = "uer.email";
+        public static final String KEY_USER_EMAIL = "user.email";
 
         public static final String KEY_ADMIN_EMAIL = "admin.email";
     }

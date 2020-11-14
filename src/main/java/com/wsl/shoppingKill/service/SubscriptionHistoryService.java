@@ -11,7 +11,7 @@ public interface SubscriptionHistoryService extends IService<SubscriptionHistory
     /**
      * 发送订阅消息
      * @param subscriptionHistory :
-     * @return null
+     * @return boolean
      * @author wangshilei
      * @date 2020/11/13 16:02
      **/

@@ -13,7 +13,8 @@ public enum SmsEnum {
     /**
      * 消息订阅
      */
-    SUBSCRIPTION(2227,"消息订阅"),
+    SUBSCRIPTION(2270,"消息订阅"),
+    SUBSCRIPTION2(2282,"消息订阅"),
     /**
      *取消授权
      */
