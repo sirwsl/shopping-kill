@@ -13,7 +13,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 
 import javax.annotation.Resource;
-import java.io.IOException;
 
 
 /**
@@ -54,7 +53,6 @@ public class CuratorFrameworkConfig {
             if(type == CuratorEventType.WATCHED){
                 WatchedEvent watchedEvent = event.getWatchedEvent();
                 String path = watchedEvent.getPath();
-                System.out.println(watchedEvent.getType()+" -- "+ path);
                 // 重新设置改节点监听
                 if(null != path){
                     client.checkExists().watched().forPath(path);

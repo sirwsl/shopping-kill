@@ -3,6 +3,10 @@ package com.wsl.shoppingKill.domain;
 import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import lombok.*;
 import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -57,11 +61,13 @@ public class SubscriptionHistory extends Model<SubscriptionHistory> implements S
     /**
      * 发布是否成功
      **/
-    private Boolean real;
+    private Boolean realFlag;
 
     /**
     * 创建时间(发布时间)
     */
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
     @TableField(fill = FieldFill.INSERT)
@@ -72,6 +78,8 @@ public class SubscriptionHistory extends Model<SubscriptionHistory> implements S
     */
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
 
@@ -91,6 +99,8 @@ public class SubscriptionHistory extends Model<SubscriptionHistory> implements S
     public static final String DETAIL = "detail";
 
     public static final String TYPE = "type";
+
+    public static final String REAL_FLAG = "real_flag";
 
     public static final String ADMIN_ID = "admin_id";
 

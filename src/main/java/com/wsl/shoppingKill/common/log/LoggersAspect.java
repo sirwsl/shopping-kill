@@ -60,7 +60,6 @@ public class LoggersAspect {
             Object[] args = joinPoint.getArgs();
             //将参数所在的数组转换成json
             String params = JSON.toJSONString(args);
-            System.err.println(params);
             String num =  AspectSupport.getKeyValue(joinPoint, myLog.value()).toString();
 
 

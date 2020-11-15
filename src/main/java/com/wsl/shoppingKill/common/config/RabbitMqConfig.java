@@ -1,6 +1,7 @@
 package com.wsl.shoppingKill.common.config;
 
 import com.wsl.shoppingKill.constant.RabbitMqEnum;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
@@ -19,6 +20,7 @@ import javax.annotation.Resource;
  * @date 2020/11/13-13:34
  **/
 @Configuration
+@Slf4j
 public class RabbitMqConfig {
 
     @Resource

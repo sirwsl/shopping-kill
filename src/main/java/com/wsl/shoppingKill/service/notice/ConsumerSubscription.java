@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
  **/
 @Component
 @Slf4j
-public class ConsumerSubscriptionImpl {
+public class ConsumerSubscription {
 
 
     @Resource
@@ -40,7 +40,6 @@ public class ConsumerSubscriptionImpl {
     private MailComponent mailComponent;
 
     /**
-     * TODO： 未测试
      * 监听短信发送
      *@param subscriptionHistory:
      * @author wangshilei
@@ -48,32 +47,23 @@ public class ConsumerSubscriptionImpl {
      **/
     @RabbitListener(queues = RabbitMqEnum.Queue.QUEUE_SMS)
     public void smsConsumerSubscription(SubscriptionHistory subscriptionHistory, Channel channel, Message message) throws IOException {
-        try{
-            channel.basicAck(message.getMessageProperties().getDeliveryTag(),false);
-            List<String> phoneList = subscriberService.list(new QueryWrapper<Subscriber>()
-                    .eq(Subscriber.TYPE, BaseEnum.PHONE))
-                    .stream()
-                    .map(Subscriber::getNumber)
-                    .collect(Collectors.toList());
-            String[] text = new String[2];
-            text[0] = subscriptionHistory.getTitle();
-            text[1] = subscriptionHistory.getDetail();
-            phoneList.forEach(li-> smsComponent.send(SmsEnum.SUBSCRIPTION.getCode(),text,li));
+        channel.basicAck(message.getMessageProperties().getDeliveryTag(),false);
+        List<String> phoneList = subscriberService.list(new QueryWrapper<Subscriber>()
+                .eq(Subscriber.TYPE, BaseEnum.PHONE))
+                .stream()
+                .map(Subscriber::getNumber)
+                .collect(Collectors.toList());
+        String[] text = new String[3];
+        text[1] = subscriptionHistory.getTitle();
+        text[2] = subscriptionHistory.getDetail();
+        phoneList.forEach(li-> {
+            text[0] = li;
+            smsComponent.send(SmsEnum.SUBSCRIPTION.getCode(),text,li);
+        });
 
-        } catch (IOException e) {
-            if (message.getMessageProperties().getRedelivered()) {
-                log.warn("短信订阅消息已重复处理失败,拒绝再次接收:{}", subscriptionHistory.getTitle());
-                ;
-                /* 拒绝消息，requeue=false 表示不再重新入队，如果配置了死信队列则进入死信队列 */
-                channel.basicReject(message.getMessageProperties().getDeliveryTag(), false);
-            }else {
-                channel.basicNack(message.getMessageProperties().getDeliveryTag(), false,false);
-            }
-        }
     }
 
     /**
-     * TODO： 未测试
      * 监听邮件发送
      *@param subscriptionHistory:
      * @author wangshilei
@@ -92,7 +82,6 @@ public class ConsumerSubscriptionImpl {
         } catch (IOException e) {
             if (message.getMessageProperties().getRedelivered()) {
                 log.warn("短信订阅消息已重复处理失败,拒绝再次接收:{}", subscriptionHistory.getTitle());
-                ;
                 /* 拒绝消息，requeue=false 表示不再重新入队，如果配置了死信队列则进入死信队列 */
                 channel.basicReject(message.getMessageProperties().getDeliveryTag(), false);
             }else {
