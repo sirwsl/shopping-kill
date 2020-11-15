@@ -9,6 +9,7 @@
     <result column="id_card" jdbcType="VARCHAR" property="idCard" />
     <result column="phone" jdbcType="CHAR" property="phone" />
     <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="mail" jdbcType="VARCHAR" property="mail" />
     <result column="we_chat" jdbcType="VARCHAR" property="weChat" />
     <result column="creat_time" jdbcType="TIMESTAMP" property="creatTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />

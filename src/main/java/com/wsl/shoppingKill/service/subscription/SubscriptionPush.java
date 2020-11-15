@@ -1,4 +1,4 @@
-package com.wsl.shoppingKill.service.notice;
+package com.wsl.shoppingKill.service.subscription;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
  **/
 @Component
 @Slf4j
-public class ConsumerSubscription {
+public class SubscriptionPush {
 
 
     @Resource
@@ -78,8 +78,15 @@ public class ConsumerSubscription {
                     .stream()
                     .map(Subscriber::getNumber)
                     .collect(Collectors.toList());
-            emailList.forEach(li-> mailComponent.sendSimpleMail(li,subscriptionHistory.getTitle(),subscriptionHistory.getDetail()));
-        } catch (IOException e) {
+            emailList.forEach(li-> {
+                try {
+                    mailComponent.sendSubscription(li,subscriptionHistory);
+                } catch (Exception e) {
+                    log.error("邮件推送失败用户mail：{}，内容为：{}",li,subscriptionHistory.getTitle());
+                    e.printStackTrace();
+                }
+            });
+        } catch (Exception e) {
             if (message.getMessageProperties().getRedelivered()) {
                 log.warn("短信订阅消息已重复处理失败,拒绝再次接收:{}", subscriptionHistory.getTitle());
                 /* 拒绝消息，requeue=false 表示不再重新入队，如果配置了死信队列则进入死信队列 */

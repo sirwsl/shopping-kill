@@ -46,7 +46,7 @@ public class Admin extends Model<Admin> implements Serializable {
     /**
      * 账号
      */
-    @NotNull(message="账号不能为空")
+    @NotNull(message="用户名不能为空")
     private String name;
 
 
@@ -75,6 +75,11 @@ public class Admin extends Model<Admin> implements Serializable {
     */
     @NotNull(message = "手机号不能为空")
     private String phone;
+
+    /**
+     * 邮箱
+     */
+    private String mail;
 
     /**
     * 家庭住址

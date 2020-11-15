@@ -91,12 +91,13 @@ error
 
 |  参数  |  类型  |  是否必须  |  说明  |
 |  ----  |  ----  |  ----  | ----  |
-| name | String |是|账号| 
+| name | String |是|用户名| 
 |password|String|是|密码|
 |sex|enum|是|MAN or WOMAN|
 |idCard|String|是|身份证号|
 |phone|String|是|手机号|
 |address|String|是|地址|
+|mail|String|否|邮箱|
 
 返回值：
 ```json
