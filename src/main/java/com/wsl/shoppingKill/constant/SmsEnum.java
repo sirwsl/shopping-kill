@@ -42,7 +42,9 @@ public enum SmsEnum {
     /**
      *简单短信验证
      */
-    SIMPLE(355,"简单短信验证");
+    SIMPLE(355,"简单短信验证"),
+
+    UPDATE_INFO(2317,"修改会员信息");
 
 
     private final int code;

@@ -39,6 +39,8 @@ public class  RabbitMqEnum {
 
         public static final String QUEUE_USER_SMS ="queue_user_sms";
 
+        public static final String QUEUE_UPDATE_USER_SMS ="queue_update_user_sms";
+
 
 
     }
@@ -76,6 +78,9 @@ public class  RabbitMqEnum {
         public static final String KEY_REMOVE_USER_EMAIL = "remove.user.mail";
 
         public static final String KEY_REMOVE_USER = "remove.user.#";
+
+        //修改用户信息
+        public static final String KEY_UPDATE_USER_INFO = "update_user_info";
 
 
     }
