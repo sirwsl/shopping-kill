@@ -1,5 +1,8 @@
 package com.wsl.shoppingKill.serviceImpl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wsl.shoppingKill.common.log.MyLog;
 import com.wsl.shoppingKill.component.request.AbstractCurrentRequestComponent;
@@ -46,4 +49,12 @@ public class SubscriptionHistoryServiceImpl extends ServiceImpl<SubscriptionHist
         }
         return true;
     }
+
+    @Override
+    public IPage<SubscriptionHistory> getAllSubscriptionHistory(Integer current,Integer size) {
+        Page<SubscriptionHistory> page = new Page<>(current,size);
+        return subscriptionHistoryMapper.selectPage(page,
+                new QueryWrapper<SubscriptionHistory>().orderByDesc(SubscriptionHistory.ID));
+    }
+
 }
