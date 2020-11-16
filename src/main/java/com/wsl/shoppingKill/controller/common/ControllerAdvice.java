@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindException;
@@ -19,7 +20,6 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-
 
 import javax.servlet.http.HttpServletRequest;
 import java.rmi.RemoteException;
@@ -36,7 +36,7 @@ import java.util.Objects;
 @RestControllerAdvice(annotations = RestController.class)
 @ResponseStatus(HttpStatus.ACCEPTED)
 @Slf4j
-public class ControllerAdvice {
+public class ControllerAdvice{
 
     private static String getOutMsg(final Throwable e) {
         if (e != null) {
@@ -60,7 +60,7 @@ public class ControllerAdvice {
     @ExceptionHandler(BindException.class)
     public Result<Object> exception(BindException e) {
         log.error("参数异常：{}", Exceptions.getStackTraceAsString(e));
-        return new Result<>(Result.PARAM_ERROR, getOutMsg(e), "参数异常", null);
+        return new Result<>(Result.PARAM_ERROR, getOutMsg(e), Objects.requireNonNull(e.getFieldError()).getDefaultMessage(), null);
     }
 
     @ExceptionHandler(MissingServletRequestParameterException.class)
@@ -72,7 +72,8 @@ public class ControllerAdvice {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Result<Object> exception(MethodArgumentNotValidException e) {
         log.error("数据验证未通过：{}", Exceptions.getStackTraceAsString(e));
-        return new Result<>(Result.PARAM_ERROR, getOutMsg(e), "参数校验未通过，参数非法", null);
+        return new Result<>(Result.PARAM_ERROR, getOutMsg(e), Objects.requireNonNull(e.getBindingResult().getFieldError())
+                .getDefaultMessage(), null);
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
@@ -106,7 +107,11 @@ public class ControllerAdvice {
         return new Result<>(Result.SERVER_ERROR, getOutMsg(e), "服务器开小差了", null);
     }
 
-
+    @ExceptionHandler(DuplicateKeyException.class)
+    public Result<Object> exception(DuplicateKeyException e) {
+        log.error("服务器异常", e);
+        return new Result<>(Result.SERVER_ERROR, getOutMsg(e), "数据库数据异常", null);
+    }
 
     @ExceptionHandler(Exception.class)
     public Result<Object> exception(Exception e) {
