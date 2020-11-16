@@ -16,6 +16,7 @@ public interface LoggersMapper extends BaseMapper<Loggers> {
     /**
      * 获取全部日志类型
      * @param type:类型
+     * @param page :
      * @return null
      * @author wangshilei
      * @date 2020/11/9 13:50
