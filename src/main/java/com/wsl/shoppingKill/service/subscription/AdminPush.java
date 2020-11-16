@@ -8,6 +8,9 @@ import com.wsl.shoppingKill.constant.SmsEnum;
 import com.wsl.shoppingKill.domain.Admin;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
+import org.springframework.amqp.rabbit.annotation.Exchange;
+import org.springframework.amqp.rabbit.annotation.Queue;
+import org.springframework.amqp.rabbit.annotation.QueueBinding;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;
 
@@ -36,7 +39,12 @@ public class AdminPush {
      * @param channel:
      * @param message:
      **/
-    @RabbitListener(queues = RabbitMqEnum.Queue.QUEUE_SMS)
+    @RabbitListener(bindings = @QueueBinding(
+            value = @Queue(value = RabbitMqEnum.Queue.QUEUE_ADD_ADMIN_SMS,exclusive = "false",autoDelete = "false",durable = "true"),
+            exchange = @Exchange(RabbitMqEnum.Exchange.EXCHANGE_ADMIN),
+            key = RabbitMqEnum.Key.KEY_ADD_ADMIN,
+            ignoreDeclarationExceptions = "true"
+    ))
     public void addAdminSms(Admin admin, Channel channel, Message message) throws IOException {
         try {
             channel.basicAck(message.getMessageProperties().getDeliveryTag(),false);
@@ -65,7 +73,12 @@ public class AdminPush {
      * @param channel:
      * @param message:
      **/
-    @RabbitListener(queues = RabbitMqEnum.Queue.QUEUE_EMAIL)
+    @RabbitListener(bindings = @QueueBinding(
+            value = @Queue(value = RabbitMqEnum.Queue.QUEUE_ADD_ADMIN_MAIL,exclusive = "false",autoDelete = "false",durable = "true"),
+            exchange = @Exchange(RabbitMqEnum.Exchange.EXCHANGE_ADMIN),
+            key = RabbitMqEnum.Key.KEY_ADD_ADMIN,
+            ignoreDeclarationExceptions = "true"
+    ))
     public void addAdminEmail(Admin admin, Channel channel, Message message) throws IOException {
         try {
             channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
@@ -89,11 +102,16 @@ public class AdminPush {
          * @param channel:
          * @param message:
          **/
-        @RabbitListener(queues = RabbitMqEnum.Queue.QUEUE_SMS)
+        @RabbitListener(bindings = @QueueBinding(
+                value = @Queue(value = RabbitMqEnum.Queue.QUEUE_REMOVE_ADMIN_SMS,exclusive = "false",autoDelete = "false",durable = "true"),
+                exchange = @Exchange(value = RabbitMqEnum.Exchange.EXCHANGE_ADMIN),
+                key = RabbitMqEnum.Key.KEY_REMOVE_ADMIN,
+                ignoreDeclarationExceptions = "true"
+        ))
         public void delAdminSms(Admin admin, Channel channel, Message message) throws IOException {
             try {
                 channel.basicAck(message.getMessageProperties().getDeliveryTag(),false);
-                String[] send = new String[3];
+                String[] send = new String[2];
                 send[0] = admin.getName();
                 send[1] = admin.getPhone();
                 smsComponent.send(SmsEnum.REMOVE_AUTHORIZATION.getCode(),send,admin.getPhone());
@@ -117,7 +135,12 @@ public class AdminPush {
          * @param channel:
          * @param message:
          **/
-        @RabbitListener(queues = RabbitMqEnum.Queue.QUEUE_EMAIL)
+        @RabbitListener(bindings = @QueueBinding(
+                value = @Queue(value = RabbitMqEnum.Queue.QUEUE_REMOVE_ADMIN_MAIL,exclusive = "false",autoDelete = "false",durable = "true"),
+                exchange = @Exchange(RabbitMqEnum.Exchange.EXCHANGE_ADMIN),
+                key = RabbitMqEnum.Key.KEY_REMOVE_ADMIN,
+                ignoreDeclarationExceptions = "true"
+        ))
         public void delAdminEmail(Admin admin, Channel channel, Message message) throws IOException {
             try {
                 channel.basicAck(message.getMessageProperties().getDeliveryTag(),false);

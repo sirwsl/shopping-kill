@@ -8,7 +8,6 @@ import com.wsl.shoppingKill.constant.RabbitMqEnum;
 import com.wsl.shoppingKill.domain.Admin;
 import com.wsl.shoppingKill.mapper.AdminMapper;
 import com.wsl.shoppingKill.service.AdminService;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 
@@ -32,11 +31,7 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
     @MyLog(detail = "添加管理员",grade = LoggerEnum.SERIOUS,value = "#admin.name")
     public boolean addAdmin(Admin admin) {
         if (adminMapper.insert(admin)>0){
-            if(StringUtils.isNotBlank(admin.getMail())){
-                rabbitTemplate.convertAndSend(RabbitMqEnum.Exchange.EXCHANGE_FANOUT_NOTICE,"",admin);
-            }else {
-                rabbitTemplate.convertAndSend(RabbitMqEnum.Exchange.EXCHANGE_SMS_MAIL,RabbitMqEnum.Key.KEY_ADMIN_SMS,admin);
-            }
+            rabbitTemplate.convertAndSend(RabbitMqEnum.Exchange.EXCHANGE_ADMIN,RabbitMqEnum.Key.KEY_ADD_ADMIN,admin);
             return true;
         }
         return false;
@@ -54,11 +49,7 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
     public boolean delAdmin(Long id) {
         Admin admin = adminMapper.selectById(id);
         if (adminMapper.deleteById(id)>0){
-            if (StringUtils.isNotBlank(admin.getMail())){
-                rabbitTemplate.convertAndSend(RabbitMqEnum.Exchange.EXCHANGE_FANOUT_NOTICE,"",admin);
-            }else {
-                rabbitTemplate.convertAndSend(RabbitMqEnum.Exchange.EXCHANGE_SMS_MAIL,RabbitMqEnum.Key.KEY_ADMIN_SMS,admin);
-            }
+            rabbitTemplate.convertAndSend(RabbitMqEnum.Exchange.EXCHANGE_ADMIN,RabbitMqEnum.Key.KEY_REMOVE_ADMIN,admin);
             return true;
         }
         return false;

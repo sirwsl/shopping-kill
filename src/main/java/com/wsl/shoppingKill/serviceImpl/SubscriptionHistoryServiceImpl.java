@@ -40,19 +40,10 @@ public class SubscriptionHistoryServiceImpl extends ServiceImpl<SubscriptionHist
         subscriptionHistory.setAdminId(abstractCurrentRequestComponent.getCurrentUser().getId());
         subscriptionHistoryMapper.insert(subscriptionHistory);
         if (subscriptionHistory.getType().equals(BaseEnum.PHONE)) {
-            rabbitTemplate.convertAndSend(RabbitMqEnum.Exchange.EXCHANGE_SMS_MAIL, RabbitMqEnum.Key.KEY_USER_SMS, subscriptionHistory);
+            rabbitTemplate.convertAndSend(RabbitMqEnum.Exchange.EXCHANGE_USER, RabbitMqEnum.Key.KEY_SUBSCRIPTION_SMS, subscriptionHistory);
         } else if (subscriptionHistory.getType().equals(BaseEnum.EMAIL)) {
-            rabbitTemplate.convertAndSend(RabbitMqEnum.Exchange.EXCHANGE_SMS_MAIL, RabbitMqEnum.Key.KEY_USER_EMAIL, subscriptionHistory);
+            rabbitTemplate.convertAndSend(RabbitMqEnum.Exchange.EXCHANGE_USER, RabbitMqEnum.Key.KEY_SUBSCRIPTION_EMAIL, subscriptionHistory);
         }
-
-        rabbitTemplate.setConfirmCallback((correlationData, ack, cause) -> {
-            log.debug(ack + "    " + "已经应答  cause:{} " + cause + " correlationDate:{}" + correlationData);
-            if (ack) {
-                subscriptionHistory.setRealFlag(true).updateById();
-            } else {
-                log.warn("消息应答出错，未应答标题为{}，消息id为{}", subscriptionHistory.getTitle(), subscriptionHistory.getId());
-            }
-        });
         return true;
     }
 }

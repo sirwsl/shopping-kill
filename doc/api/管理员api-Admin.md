@@ -97,7 +97,7 @@ error
 |idCard|String|是|身份证号|
 |phone|String|是|手机号|
 |address|String|是|地址|
-|mail|String|否|邮箱|
+|mail|String|是|邮箱|
 
 返回值：
 ```json

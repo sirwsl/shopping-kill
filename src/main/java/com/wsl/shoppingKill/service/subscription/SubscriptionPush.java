@@ -13,6 +13,9 @@ import com.wsl.shoppingKill.domain.SubscriptionHistory;
 import com.wsl.shoppingKill.service.SubscriberService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
+import org.springframework.amqp.rabbit.annotation.Exchange;
+import org.springframework.amqp.rabbit.annotation.Queue;
+import org.springframework.amqp.rabbit.annotation.QueueBinding;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
@@ -45,7 +48,12 @@ public class SubscriptionPush {
      * @author wangshilei
      * @date 2020/11/13 18:25
      **/
-    @RabbitListener(queues = RabbitMqEnum.Queue.QUEUE_SMS)
+    @RabbitListener(bindings = @QueueBinding(
+            value = @Queue(value = RabbitMqEnum.Queue.QUEUE_SUBSCRIPTION_SMS,exclusive = "false",autoDelete = "false",durable = "true"),
+            exchange = @Exchange(RabbitMqEnum.Exchange.EXCHANGE_USER),
+            key = RabbitMqEnum.Key.KEY_SUBSCRIPTION_SMS,
+            ignoreDeclarationExceptions = "true"
+    ))
     public void smsConsumerSubscription(SubscriptionHistory subscriptionHistory, Channel channel, Message message) throws IOException {
         channel.basicAck(message.getMessageProperties().getDeliveryTag(),false);
         List<String> phoneList = subscriberService.list(new QueryWrapper<Subscriber>()
@@ -60,7 +68,7 @@ public class SubscriptionPush {
             text[0] = li;
             smsComponent.send(SmsEnum.SUBSCRIPTION.getCode(),text,li);
         });
-
+        subscriptionHistory.setRealFlag(true).updateById();
     }
 
     /**
@@ -69,7 +77,12 @@ public class SubscriptionPush {
      * @author wangshilei
      * @date 2020/11/13 18:25
      **/
-    @RabbitListener(queues = RabbitMqEnum.Queue.QUEUE_EMAIL)
+    @RabbitListener(bindings = @QueueBinding(
+            value = @Queue(value = RabbitMqEnum.Queue.QUEUE_SUBSCRIPTION_MAIL,exclusive = "false",autoDelete = "false",durable = "true"),
+            exchange = @Exchange(RabbitMqEnum.Exchange.EXCHANGE_USER),
+            key = RabbitMqEnum.Key.KEY_SUBSCRIPTION_EMAIL,
+            ignoreDeclarationExceptions = "true"
+    ))
     public void emailConsumerSubscription(SubscriptionHistory subscriptionHistory, Channel channel, Message message) throws IOException {
         try{
             channel.basicAck(message.getMessageProperties().getDeliveryTag(),false);
@@ -86,6 +99,7 @@ public class SubscriptionPush {
                     e.printStackTrace();
                 }
             });
+            subscriptionHistory.setRealFlag(true).updateById();
         } catch (Exception e) {
             if (message.getMessageProperties().getRedelivered()) {
                 log.warn("短信订阅消息已重复处理失败,拒绝再次接收:{}", subscriptionHistory.getTitle());
