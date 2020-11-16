@@ -60,7 +60,7 @@ public class ControllerAdvice {
     @ExceptionHandler(BindException.class)
     public Result<Object> exception(BindException e) {
         log.error("参数异常：{}", Exceptions.getStackTraceAsString(e));
-        return new Result<>(Result.PARAM_ERROR, getOutMsg(e), "绑定异常", null);
+        return new Result<>(Result.PARAM_ERROR, getOutMsg(e), "参数异常", null);
     }
 
     @ExceptionHandler(MissingServletRequestParameterException.class)

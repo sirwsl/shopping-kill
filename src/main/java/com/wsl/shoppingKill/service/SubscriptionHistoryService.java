@@ -3,6 +3,7 @@ package com.wsl.shoppingKill.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.wsl.shoppingKill.domain.SubscriptionHistory;
+import com.wsl.shoppingKill.obj.param.PageTimeParam;
 
 /**
  * @author wangShilei
@@ -28,4 +29,13 @@ public interface SubscriptionHistoryService extends IService<SubscriptionHistory
      * @date 2020/11/16 14:24
      **/
     IPage<SubscriptionHistory> getAllSubscriptionHistory(Integer current,Integer size);
+
+    /**
+     * 按照时间查找订阅历史
+     * @param pageTimeParam :
+     * @return IPage<SubscriptionHistory>
+     * @author wangshilei
+     * @date 2020/11/16 14:24
+     **/
+    IPage<SubscriptionHistory> getSubscriptionHistoryByTime(PageTimeParam pageTimeParam);
 }

@@ -11,6 +11,7 @@ import com.wsl.shoppingKill.constant.LoggerEnum;
 import com.wsl.shoppingKill.constant.RabbitMqEnum;
 import com.wsl.shoppingKill.domain.SubscriptionHistory;
 import com.wsl.shoppingKill.mapper.SubscriptionHistoryMapper;
+import com.wsl.shoppingKill.obj.param.PageTimeParam;
 import com.wsl.shoppingKill.service.SubscriptionHistoryService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -55,6 +56,14 @@ public class SubscriptionHistoryServiceImpl extends ServiceImpl<SubscriptionHist
         Page<SubscriptionHistory> page = new Page<>(current,size);
         return subscriptionHistoryMapper.selectPage(page,
                 new QueryWrapper<SubscriptionHistory>().orderByDesc(SubscriptionHistory.ID));
+    }
+
+    @Override
+    public IPage<SubscriptionHistory> getSubscriptionHistoryByTime(PageTimeParam pageTimeParam) {
+        Page<SubscriptionHistory> page = new Page<>(pageTimeParam.getCurrent(), pageTimeParam.getSize());
+        return subscriptionHistoryMapper.selectPage(page,new QueryWrapper<SubscriptionHistory>()
+                .ge(SubscriptionHistory.CREAT_TIME,pageTimeParam.getBeginTime())
+                .le(SubscriptionHistory.CREAT_TIME,pageTimeParam.getEndTime()));
     }
 
 }
