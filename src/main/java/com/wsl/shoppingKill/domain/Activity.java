@@ -100,9 +100,13 @@ public class Activity extends Model<Activity> implements Serializable {
 
     public static final String ID = "id";
 
-    public static final String GOODS_ID = "goods_id";
+    public static final String GOODS_ID = "sku_id";
 
     public static final String START_TIME = "start_time";
+
+    public static final String MONEY = "money";
+
+    public static final String NUM = "num";
 
     public static final String END_TIME = "end_time";
 
