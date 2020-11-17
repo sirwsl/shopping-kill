@@ -4,6 +4,7 @@ import com.wsl.shoppingKill.Application;
 import com.wsl.shoppingKill.component.oss.OssComponent;
 import com.wsl.shoppingKill.domain.Admin;
 import com.wsl.shoppingKill.domain.SubscriptionHistory;
+import com.wsl.shoppingKill.domain.User;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -87,6 +88,39 @@ public class MailComponent {
         template.process(admin, mail);
         sendHtmlMail(admin.getMail(),"管理员账号移除通知",mail.toString());
     }
+
+    /**
+     *  删除会员账号通知
+     * @author : WangShiLei
+     * @date : 2020/11/15 11:05 下午
+     * @param user :信息
+     **/
+    public void sendDelUser(User user) throws MessagingException, IOException, TemplateException {
+        Configuration configuration =new Configuration(Configuration.VERSION_2_3_0);
+        ClassLoader loader = Application.class.getClassLoader();
+        configuration.setClassLoaderForTemplateLoading(loader,"ftl");
+        Template template = configuration.getTemplate("DelUser.ftl");
+        StringWriter mail = new StringWriter();
+        template.process(user, mail);
+        sendHtmlMail(user.getEmail(),"账号移除通知",mail.toString());
+    }
+
+    /**
+     *  删除会员账号通知
+     * @author : WangShiLei
+     * @date : 2020/11/15 11:05 下午
+     * @param user :信息
+     **/
+    public void sendUpdateUser(User user) throws MessagingException, IOException, TemplateException {
+        Configuration configuration =new Configuration(Configuration.VERSION_2_3_0);
+        ClassLoader loader = Application.class.getClassLoader();
+        configuration.setClassLoaderForTemplateLoading(loader,"ftl");
+        Template template = configuration.getTemplate("UpdateUser.ftl");
+        StringWriter mail = new StringWriter();
+        template.process(user, mail);
+        sendHtmlMail(user.getEmail(),"账号信息修改通知",mail.toString());
+    }
+
 
     /**
      *  订阅推送邮件

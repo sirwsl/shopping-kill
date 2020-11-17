@@ -26,13 +26,13 @@ public class  RabbitMqEnum {
         public static final String QUEUE_SUBSCRIPTION_SMS = "queue_subscription_sms";
 
         //管理员
-        public static final String QUEUE_ADD_ADMIN_MAIL = "add_queue_admin_mail";
+        public static final String QUEUE_ADD_ADMIN_MAIL = "queue_add_admin_mail";
 
-        public static final String QUEUE_ADD_ADMIN_SMS = "add_queue_admin_sms";
+        public static final String QUEUE_ADD_ADMIN_SMS = "queue_add_admin_sms";
 
-        public static final String QUEUE_REMOVE_ADMIN_MAIL = "remove_queue_admin_mail";
+        public static final String QUEUE_REMOVE_ADMIN_MAIL = "queue_remove_admin_mail";
 
-        public static final String QUEUE_REMOVE_ADMIN_SMS = "remove_queue_admin_sms";
+        public static final String QUEUE_REMOVE_ADMIN_SMS = "queue_remove_admin_sms";
 
         //用户注册
         public static final String QUEUE_USER_MAIL ="queue_user_mail";
@@ -41,7 +41,11 @@ public class  RabbitMqEnum {
 
         public static final String QUEUE_UPDATE_USER_SMS ="queue_update_user_sms";
 
+        public static final String QUEUE_UPDATE_USER_MAIL ="queue_update_user_mail";
 
+        public static final String QUEUE_REMOVE_USER_SMS ="queue_remove_user_sms";
+
+        public static final String QUEUE_REMOVE_USER_MAIL ="queue_remove_user_mail";
 
     }
 
@@ -80,7 +84,9 @@ public class  RabbitMqEnum {
         public static final String KEY_REMOVE_USER = "remove.user.#";
 
         //修改用户信息
-        public static final String KEY_UPDATE_USER_INFO = "update_user_info";
+        public static final String KEY_UPDATE_USER_SMS = "update_user_sms";
+
+        public static final String KEY_UPDATE_USER_MAIL = "update_user_mail";
 
 
     }

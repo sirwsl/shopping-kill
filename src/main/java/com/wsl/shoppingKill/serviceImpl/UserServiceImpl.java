@@ -38,7 +38,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @MyLog(detail = "修改会员信息",grade = LoggerEnum.INFO,value = "#user.id")
     public boolean updateUserInfo(User user) {
         if (userMapper.updateById(user)>0){
-            rabbitTemplate.convertAndSend(RabbitMqEnum.Exchange.EXCHANGE_USER,RabbitMqEnum.Key.KEY_UPDATE_USER_INFO,user);
+            rabbitTemplate.convertAndSend(RabbitMqEnum.Exchange.EXCHANGE_USER,RabbitMqEnum.Key.KEY_UPDATE_USER_SMS,user);
+            if (StringUtils.isNotBlank(user.getEmail())){
+                rabbitTemplate.convertAndSend(RabbitMqEnum.Exchange.EXCHANGE_USER,RabbitMqEnum.Key.KEY_UPDATE_USER_MAIL,user);
+            }
             return true;
         }
         return false;
@@ -49,7 +52,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     public boolean delUserInfo(Integer id) {
         User user = userMapper.selectById(id);
         if (userMapper.deleteById(id)>0){
-            rabbitTemplate.convertAndSend(RabbitMqEnum.Exchange.EXCHANGE_USER,RabbitMqEnum.Key.KEY_REMOVE_ADMIN_SMS,user);
+            rabbitTemplate.convertAndSend(RabbitMqEnum.Exchange.EXCHANGE_USER,RabbitMqEnum.Key.KEY_REMOVE_USER_SMS,user);
             if (StringUtils.isNotBlank(user.getEmail())){
                 rabbitTemplate.convertAndSend(RabbitMqEnum.Exchange.EXCHANGE_USER,RabbitMqEnum.Key.KEY_REMOVE_USER_EMAIL,user);
             }

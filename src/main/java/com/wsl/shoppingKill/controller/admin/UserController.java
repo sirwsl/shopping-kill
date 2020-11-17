@@ -7,7 +7,6 @@ import com.wsl.shoppingKill.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 /** 会员管理
@@ -28,7 +27,7 @@ public class UserController {
     }
 
     @PutMapping("/updateUserInfo/v1")
-    public Result<Boolean> updateUserInfo(@Valid User user){
+    public Result<Boolean> updateUserInfo(User user){
         return Result.success(userService.updateUserInfo(user));
     }
 

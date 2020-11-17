@@ -2,17 +2,22 @@ package com.wsl.shoppingKill.controller.admin;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.wsl.shoppingKill.common.Result;
 import com.wsl.shoppingKill.common.log.MyLog;
 import com.wsl.shoppingKill.constant.BaseEnum;
 import com.wsl.shoppingKill.constant.LoggerEnum;
 import com.wsl.shoppingKill.domain.LimitList;
+import com.wsl.shoppingKill.domain.User;
 import com.wsl.shoppingKill.obj.param.LimitListParam;
 import com.wsl.shoppingKill.service.LimitListService;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -92,6 +97,31 @@ public class LimitListController {
         return Result.success(limitListService.addBlackList(
                 limitListParam.setType(BaseEnum.PHONE)
         ));
+    }
+
+    /**
+     * 根据用户id黑名单
+     *
+     * @param id:
+     * @return : com.wsl.shoppingKill.common.Result<java.lang.Boolean>
+     * @author : WangShiLei
+     * @date : 2020/11/7 5:02 下午
+     **/
+    @PostMapping("/addBlackListById/v1")
+    public Result<Boolean> addLimitListById(@NotNull(message = "用户id不能为空") Long id,
+                                            @NotNull(message = "开始时间不能为空") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+                                            @JsonFormat(locale = "zh", timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+                                                    LocalDateTime beginTime,
+                                            @NotNull(message = "开始时间不能为空") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+                                            @JsonFormat(locale = "zh", timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+                                                    LocalDateTime endTime) {
+        User user = new User();
+        user = user.selectById(id);
+        LimitListParam limitList = new LimitListParam();
+        return Result.success(limitListService.addBlackList(limitList
+                .setId(Long.getLong(user.getPhone()))
+                .setStartTime(beginTime)
+                .setEndTime(endTime)));
     }
 
     @PostMapping("/addBlackListByIp/v1")
