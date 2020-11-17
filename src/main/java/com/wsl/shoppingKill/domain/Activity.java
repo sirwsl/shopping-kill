@@ -13,6 +13,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Id;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
@@ -39,10 +40,19 @@ public class Activity extends Model<Activity> implements Serializable {
     private Long id;
 
     /**
-    * 商品id
+    * skuId
     */
-    private Long goodsId;
+    private Long skuId;
 
+    /**
+     * 活动价格
+     */
+    private BigDecimal money;
+
+    /**
+     * 上架数量
+     */
+    private Integer num;
     /**
     * 开始时间
     */

@@ -5,7 +5,9 @@
     <!--@mbg.generated-->
     <!--@Table t_activity-->
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="goods_id" jdbcType="INTEGER" property="goodsId" />
+    <result column="sku_id" jdbcType="INTEGER" property="skuId" />
+    <result column="num" jdbcType="INTEGER" property="num" />
+    <result column="money" jdbcType="DECIMAL" property="money" />
     <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
     <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
     <result column="creat_time" jdbcType="TIMESTAMP" property="creatTime" />
