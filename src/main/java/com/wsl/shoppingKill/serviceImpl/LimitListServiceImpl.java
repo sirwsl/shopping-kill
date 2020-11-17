@@ -30,7 +30,7 @@ public class LimitListServiceImpl extends ServiceImpl<LimitListMapper, LimitList
 
 
     @Override
-    @MyLog(detail = "添加黑名单",grade = LoggerEnum.SERIOUS,value = "#limitListParam.type")
+    @MyLog(detail = "添加黑名单",grade = LoggerEnum.SERIOUS,value = "#limitListParam.id")
     public boolean addBlackList(LimitListParam limitListParam){
         if (limitListParam.getStartTime() == null || DateUtil.isAfter(limitListParam.getStartTime())){
             limitListParam.setStartTime(LocalDateTime.now());
