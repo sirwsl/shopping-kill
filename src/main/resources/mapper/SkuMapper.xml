@@ -19,33 +19,25 @@
         <result column="del_flag" jdbcType="BOOLEAN" property="delFlag"/>
     </resultMap>
 
-    <sql id="getSkuVO">
-        select t_sku.*, tg.id as googsId, tg.name as goodsName
-        from t_sku
-                     left join t_goods tg on t_sku.goods_id = tg.id
-    </sql>
     <select id="getSku" resultType="com.wsl.shoppingKill.obj.vo.SkuVO">
-        <include refid="getSkuVO">
-            <trim suffix="and del_flag = 0">
-                where t_sku.id = #{id}
-            </trim>
-        </include>
+        select t_sku.*, tg.id as googsId, tg.name as goodsName
+        from t_sku left join t_goods tg on t_sku.goods_id = tg.id
+            where t_sku.id = #{id} and t_sku.del_flag = 0
     </select>
 
     <select id="getSkuAll" resultType="com.wsl.shoppingKill.obj.vo.SkuVO">
-        <include refid="getSkuVO">
-            <where>
-                <trim suffix="and t_sku.del_flag = 0">
-                    <if test="id != null">
-                        <bind name="ids" value="'%' + id + '%'"/>
-                        t_sku.id like #{ids}
-                    </if>
-                    <if test="name != null and name != ''">
-                        <bind name="names" value="'%' + name + '%'"/>
-                        tg.name like #{names}
-                    </if>
-                </trim>
-            </where>
-        </include>
+        select t_sku.*, tg.id as googsId, tg.name as goodsName
+        from t_sku left join t_goods tg on t_sku.goods_id = tg.id
+             <where>
+                <if test="id != null">
+                    <bind name="ids" value="'%' + id + '%'"/>
+                    t_sku.id like #{ids}
+                </if>
+                <if test="name != null and name != ''">
+                    <bind name="names" value="'%' + name + '%'"/>
+                    and tg.name like #{names}
+                </if>
+                 and t_sku.del_flag = 0
+             </where>
     </select>
 </mapper>

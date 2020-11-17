@@ -3,6 +3,8 @@ package com.wsl.shoppingKill.serviceImpl;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.wsl.shoppingKill.component.oss.OssComponent;
+import com.wsl.shoppingKill.constant.BaseEnum;
 import com.wsl.shoppingKill.domain.Goods;
 import com.wsl.shoppingKill.domain.Sku;
 import com.wsl.shoppingKill.mapper.SkuMapper;
@@ -11,6 +13,7 @@ import com.wsl.shoppingKill.service.SkuService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 
 /**
@@ -21,6 +24,9 @@ public class SkuServiceImpl extends ServiceImpl<SkuMapper, Sku> implements SkuSe
 
     @Resource
     private SkuMapper skuMapper;
+
+    @Resource
+    private OssComponent ossComponent;
 
     @Override
     public SkuVO getSku(Long id) {
@@ -34,10 +40,14 @@ public class SkuServiceImpl extends ServiceImpl<SkuMapper, Sku> implements SkuSe
 
 
     @Override
-    public boolean updateSku(SkuVO skuVO) {
+    @Transactional(rollbackOn = Exception.class)
+    public boolean updateSku(SkuVO skuVO) throws Exception {
         Sku sku = new Sku();
         Goods goods = new Goods();
         goods.setId(skuVO.getId()).setName(skuVO.getGoodsName()).updateById();
+        if (!skuVO.getImg().isEmpty()){
+            skuVO.setImgUrl(ossComponent.uploadFile(BaseEnum.OSS_SKU,skuVO.getImg()));
+        }
         sku.setWarnNum(skuVO.getWarnNum())
                 .setSellPrice(skuVO.getSellPrice())
                 .setRealPrice(skuVO.getRealPrice())

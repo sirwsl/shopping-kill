@@ -17,7 +17,7 @@ spring:
     static-locations: classpath:/static/,classpath:/templates/
   #环境修改
   profiles:
-    active: dev,all
+    active: test,all
 
 
   jackson:

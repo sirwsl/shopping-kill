@@ -40,7 +40,7 @@ public interface SkuService extends IService<Sku> {
      * @author wangshilei
      * @date 2020/11/17 16:25
      **/
-    boolean updateSku(SkuVO sku);
+    boolean updateSku(SkuVO sku) throws Exception;
 
     /**
      * 根据id删除sku
