@@ -10,6 +10,7 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.expression.spel.SpelEvaluationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindException;
@@ -115,6 +116,12 @@ public class ControllerAdvice{
 
     @ExceptionHandler(Exception.class)
     public Result<Object> exception(Exception e) {
+        log.error("服务器异常", e);
+        return new Result<>(Result.SERVER_ERROR, getOutMsg(e), "服务器开小差了", null);
+    }
+
+    @ExceptionHandler(SpelEvaluationException.class)
+    public Result<Object> exception(SpelEvaluationException e) {
         log.error("服务器异常", e);
         return new Result<>(Result.SERVER_ERROR, getOutMsg(e), "服务器开小差了", null);
     }
