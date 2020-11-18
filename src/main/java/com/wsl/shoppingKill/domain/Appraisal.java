@@ -38,9 +38,14 @@ public class Appraisal extends Model<Appraisal> implements Serializable {
     private Long id;
 
     /**
-    * 订单id
+    * 物品id
     */
-    private String orderId;
+    private String goodsId;
+
+    /**
+     * 用户id
+     */
+    private Long userId;
 
     /**
     * 评价内容

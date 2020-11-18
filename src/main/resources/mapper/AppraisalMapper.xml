@@ -5,7 +5,9 @@
     <!--@mbg.generated-->
     <!--@Table t_appraisal-->
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="order_id" jdbcType="VARCHAR" property="orderId" />
+    <result column="goods_id" jdbcType="BIGINT" property="goodsId" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="goods_id" jdbcType="VARCHAR" property="goodsId" />
     <result column="detail" jdbcType="VARCHAR" property="detail" />
     <result column="img_url" jdbcType="VARCHAR" property="imgUrl" />
     <result column="grade" jdbcType="INTEGER" property="grade" />

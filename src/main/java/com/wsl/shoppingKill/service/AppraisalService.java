@@ -8,5 +8,5 @@ import com.wsl.shoppingKill.domain.Appraisal;
  */
 public interface AppraisalService extends IService<Appraisal> {
 
-
+    //IPage<Appraisal> getAppraisalAll();
 }
