@@ -35,7 +35,7 @@ public interface UserService extends IService<User> {
      * @param id:
      * @return boolean
      **/
-    boolean delUserInfo(Integer id);
+    boolean delUserInfo(Long id);
 
 
 }

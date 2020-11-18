@@ -5,6 +5,7 @@ import com.wsl.shoppingKill.common.Result;
 import com.wsl.shoppingKill.constant.BaseEnum;
 import com.wsl.shoppingKill.domain.Subscriber;
 import com.wsl.shoppingKill.service.SubscriberService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -67,6 +68,9 @@ public class SubscriberController {
      **/
     @DeleteMapping("/delSubscriber/v1")
     public Result<Boolean> delSubscriber(@Valid String number){
+        if (StringUtils.isBlank(number)){
+            return Result.error("error","删除订阅者id不能为空");
+        }
         return Result.success(subscriberService.delSubscriber(number));
     }
 }

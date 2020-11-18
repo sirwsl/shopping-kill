@@ -49,7 +49,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     @MyLog(detail = "删除会员",grade = LoggerEnum.SERIOUS,value = "#id")
-    public boolean delUserInfo(Integer id) {
+    public boolean delUserInfo(Long id) {
         User user = userMapper.selectById(id);
         if (userMapper.deleteById(id)>0){
             rabbitTemplate.convertAndSend(RabbitMqEnum.Exchange.EXCHANGE_USER,RabbitMqEnum.Key.KEY_REMOVE_USER_SMS,user);

@@ -152,6 +152,9 @@ public class LimitListController {
     @DeleteMapping("/delBlackListByIds/v1")
     @MyLog(detail = "移除黑名单",grade = LoggerEnum.SERIOUS,value = "#id")
     public Result<Boolean> removeLimitListByIds(Integer[] ids){
+        if(ids.length <=0){
+            return Result.error("error","移除id不能为空");
+        }
         return Result.success(limitListService.removeByIds(Arrays.asList(ids)));
     }
 
@@ -164,7 +167,7 @@ public class LimitListController {
      **/
     @PutMapping("/updateBlackListById/v1")
     @MyLog(detail = "更新黑名单",grade = LoggerEnum.SERIOUS,value = "#id")
-    public Result<Boolean> updateLimitList(LimitList limitList){
+    public Result<Boolean> updateLimitList(@Valid LimitList limitList){
         return Result.success(limitListService.updateById(limitList));
     }
 }

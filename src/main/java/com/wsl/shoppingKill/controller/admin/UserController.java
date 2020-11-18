@@ -7,7 +7,6 @@ import com.wsl.shoppingKill.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.validation.constraints.NotNull;
 
 /** 会员管理
  * TODO:未测试
@@ -32,7 +31,10 @@ public class UserController {
     }
 
     @DeleteMapping("/delUser/v1")
-    public Result<Boolean> delUser(@NotNull(message = "删除id不能为空") Integer id){
+    public Result<Boolean> delUser(Long id){
+        if(id == null || id == 0){
+            return Result.error("error","删除id不能为空");
+        }
         return Result.success(userService.delUserInfo(id));
     }
 }

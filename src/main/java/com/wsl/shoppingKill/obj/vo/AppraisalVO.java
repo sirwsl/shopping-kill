@@ -36,11 +36,15 @@ public class AppraisalVO implements Serializable {
      */
     private Long id;
 
-
     /**
-     * 用户名称
+     * 用户账户
      */
     private String userName;
+
+    /**
+     * 用户昵称
+     */
+    private String userNickName;
 
     /**
      * 物品名称

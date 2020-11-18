@@ -54,6 +54,9 @@ public class SkuController {
 
     @DeleteMapping("/delSkuById/v1")
     public Result<Boolean> delSkuInfo(Long id){
+        if (id == null || id == 0){
+            return Result.error("error","删除SKU的id不能为空");
+        }
         return Result.success(skuService.delSku(id));
     }
 }

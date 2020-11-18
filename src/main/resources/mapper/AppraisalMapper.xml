@@ -16,4 +16,27 @@
     <result column="del_flag" jdbcType="BOOLEAN" property="delFlag" />
   </resultMap>
 
+  <select id="getAppraisalAll" resultType="com.wsl.shoppingKill.obj.vo.AppraisalVO">
+    select ta.*, tu.name as userName,tu.nick_name as userNickName,tg.name as goodsName
+    from t_appraisal ta
+    left join t_user tu on ta.user_id = tu.id
+    left join t_goods tg on ta.goods_id = tg.id
+    <where>
+      <if test="appraisal.id != null">
+        <bind name="ta_id" value="'%' +appraisal.id+'%'" />
+        and ta.id like #{ta_id}
+      </if>
+      <if test="appraisal.goodsName != null and appraisal.goodsName != ''">
+        <bind name="tg_name" value="'%' + appraisal.goodsName + '%'"/>
+        and tg.name like #{tg_name}
+      </if>
+      <if test="appraisal.userName != null and appraisal.userName != ''">
+        <bind name="tu_name" value="'%' + appraisal.userName + '%'"/>
+        and tu.name like #{tu_name}
+      </if>
+      AND ta.del_flag = 0
+    </where>
+  </select>
+
+
 </mapper>

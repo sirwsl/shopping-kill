@@ -119,6 +119,12 @@ public class ControllerAdvice{
         return new Result<>(Result.SERVER_ERROR, getOutMsg(e), "服务器开小差了", null);
     }
 
+    @ExceptionHandler(NullPointerException.class)
+    public Result<Object> exception(NullPointerException e) {
+        log.error("服务器异常", e);
+        return new Result<>(Result.SERVER_ERROR, getOutMsg(e), "参数异常NPE", null);
+    }
+
     @ExceptionHandler(RemoteException.class)
     public Result<Object> exception(RemoteException e) {
         log.error("调用远程服务器常：{}", Exceptions.getStackTraceAsString(e));

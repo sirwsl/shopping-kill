@@ -91,7 +91,9 @@ public class Appraisal extends Model<Appraisal> implements Serializable {
 
     public static final String ID = "id";
 
-    public static final String ORDER_ID = "order_id";
+    public static final String GOODS_ID = "goods_id";
+
+    public static final String USER_ID = "user_id";
 
     public static final String DETAIL = "detail";
 

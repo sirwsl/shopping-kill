@@ -11,7 +11,7 @@
  Target Server Version : 80019
  File Encoding         : 65001
 
- Date: 18/11/2020 10:45:07
+ Date: 18/11/2020 13:46:17
 */
 
 SET NAMES utf8mb4;
@@ -112,6 +112,7 @@ CREATE TABLE `t_after_sales`  (
 DROP TABLE IF EXISTS `t_appraisal`;
 CREATE TABLE `t_appraisal`  (
   `id` bigint NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `user_id` bigint NOT NULL COMMENT '用户id',
   `goods_id` bigint NOT NULL COMMENT '商品id',
   `detail` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '评价内容',
   `img_url` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '评价图片',

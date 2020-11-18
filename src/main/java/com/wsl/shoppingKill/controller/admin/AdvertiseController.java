@@ -7,10 +7,8 @@ import com.wsl.shoppingKill.service.AdvertiseService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
-
 import javax.annotation.Resource;
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -63,7 +61,10 @@ public class AdvertiseController {
      * @return com.wsl.shoppingKill.common.Result<java.lang.Boolean>
      **/
     @DeleteMapping("/delAdvertise/v1")
-    public Result<Boolean> delAdvertise(@NotNull(message = "id不能为空") Long id) {
+    public Result<Boolean> delAdvertise(Long id) {
+        if(id == null || id == 0){
+            return Result.error("error","删除id不能为空");
+        }
         return Result.success(advertiseService.delAdvertise(id));
     }
 
