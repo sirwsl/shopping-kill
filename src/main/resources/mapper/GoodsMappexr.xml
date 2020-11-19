@@ -15,4 +15,28 @@
     <result column="del_flag" jdbcType="BOOLEAN" property="delFlag" />
   </resultMap>
 
+    <select id="getAllGoods" resultType="com.wsl.shoppingKill.obj.vo.GoodsVO">
+        select tg.id,
+               tg.name,
+               tg.detail,
+               tg.img_url,
+               tg.shelf,
+               tg.type_id,
+               tt.name as typeName
+        from t_goods as tg
+        left join t_types tt on tg.type_id = tt.id
+        <where>
+            <if test="goods.typeId != null">
+                tg.type_id = #{goods.typeId}
+            </if>
+            <if test="goods.name != null and goods.name != ''">
+                <bind name="names" value="'%' + goods.name + '%'"/>
+                tg.name = #{names}
+            </if>
+            <if test="goods.shelf != null">
+                tg.shelf = #{goods.shelf}
+            </if>
+            and tg.del_flag = 0
+        </where>
+    </select>
 </mapper>

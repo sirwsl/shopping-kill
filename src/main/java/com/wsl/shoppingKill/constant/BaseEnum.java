@@ -28,6 +28,7 @@ public class BaseEnum {
     public static final String OSS_HEAD = "head/";
     public static final String OSS_ADVERTISE = "advertise/";
     public static final String OSS_SKU = "sku/";
+    public static final String OSS_GOODS = "goods/";
     public static final String OSS_OTHER = "other/";
 
 }
