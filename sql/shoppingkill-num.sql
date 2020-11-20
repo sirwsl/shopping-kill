@@ -11,7 +11,7 @@
  Target Server Version : 80019
  File Encoding         : 65001
 
- Date: 20/11/2020 14:45:33
+ Date: 20/11/2020 14:52:47
 */
 
 SET NAMES utf8mb4;
@@ -115,8 +115,9 @@ DROP TABLE IF EXISTS `t_after_sales`;
 CREATE TABLE `t_after_sales`  (
   `id` bigint NOT NULL AUTO_INCREMENT COMMENT 'id',
   `order_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '订单id',
-  `admin_id` bigint NOT NULL COMMENT '管理员id',
-  `detail` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '处理内容',
+  `admin_id` bigint NULL DEFAULT NULL COMMENT '处理人id',
+  `detail` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '售后内容',
+  `result_detail` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '处理内容',
   `type` int NOT NULL COMMENT '处理类型 （3-退货退款 2-换货 1-仅退款）',
   `deal_time` datetime(0) NULL DEFAULT NULL COMMENT '处理时间',
   `result` tinyint(1) NOT NULL DEFAULT 0 COMMENT '是否解决（0-未解决 1-已解决  默认0）',

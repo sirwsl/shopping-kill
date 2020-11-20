@@ -48,9 +48,14 @@ public class AfterSales extends Model<AfterSales> implements Serializable {
     private Long adminId;
 
     /**
-    * 处理内容
+    * 申请内容
     */
     private String detail;
+
+    /**
+     * 处理内容
+     */
+    private String resultDetail;
 
     /**
     * 处理类型 （3-退货退款 2-换货 1-仅退款）
@@ -105,6 +110,8 @@ public class AfterSales extends Model<AfterSales> implements Serializable {
     public static final String ADMIN_ID = "admin_id";
 
     public static final String DETAIL = "detail";
+
+    public static final String RESULT_DETAIL = "result_detail";
 
     public static final String TYPE = "type";
 

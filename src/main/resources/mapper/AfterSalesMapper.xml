@@ -8,6 +8,7 @@
     <result column="order_id" jdbcType="VARCHAR" property="orderId" />
     <result column="admin_id" jdbcType="INTEGER" property="adminId" />
     <result column="detail" jdbcType="VARCHAR" property="detail" />
+    <result column="result_detail" jdbcType="VARCHAR" property="resultDetail" />
     <result column="type" jdbcType="INTEGER" property="type" />
     <result column="deal_time" jdbcType="TIMESTAMP" property="dealTime" />
     <result column="result" jdbcType="BOOLEAN" property="result" />
