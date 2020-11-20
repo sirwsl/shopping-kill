@@ -65,6 +65,9 @@ public class GoodsController {
      */
     @PutMapping("/updateGoods/v1")
     public Result<Boolean> updateGoods(@Valid Goods goods){
+        if (goods.getId()==null||goods.getId()==0){
+            return Result.error("error","更新id不能为空");
+        }
         if (StringUtils.isBlank(goods.getImgUrl())&&goods.getFile().isEmpty()){
             return Result.error("error","图片不能为空");
         }

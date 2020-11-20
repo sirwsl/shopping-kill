@@ -62,10 +62,10 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
     @Override
     @MyLog(value = "#id", detail = "商品上架处理", grade = LoggerEnum.INFO)
     public boolean merchandise(Long id,Boolean flag) {
-        if (!flag){
-            return goodsMapper.updateById(new Goods().setShelf(false))>0;
+        if (flag == null || !flag){
+            return goodsMapper.updateById(new Goods().setId(id).setShelf(false))>0;
         }
-        return goodsMapper.updateById(new Goods().setShelf(true))>0;
+        return goodsMapper.updateById(new Goods().setId(id).setShelf(true))>0;
     }
 
     @Override
@@ -73,7 +73,7 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
     @Transactional(rollbackFor = Exception.class)
     public boolean updateGoods(Goods goods) throws Exception {
         if (StringUtils.isNotBlank(goods.getFile().getOriginalFilename())){
-            ossComponent.uploadFile(BaseEnum.OSS_GOODS,goods.getFile());
+            goods.setImgUrl(ossComponent.uploadFile(BaseEnum.OSS_GOODS,goods.getFile()));
         }
         return goodsMapper.updateById(goods)>0;
     }

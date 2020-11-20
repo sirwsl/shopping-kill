@@ -21,6 +21,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import javax.servlet.http.HttpServletRequest;
 import java.rmi.RemoteException;
@@ -140,6 +141,12 @@ public class ControllerAdvice{
 
     @ExceptionHandler(IllegalStateException.class)
     public Result<Object> exception(IllegalStateException e) {
+        log.error("参数异常：{}", Exceptions.getStackTraceAsString(e));
+        return Result.paramError(getOutMsg(e), "请求参数不正确");
+    }
+
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    public Result<Object> exception(MethodArgumentTypeMismatchException e) {
         log.error("参数异常：{}", Exceptions.getStackTraceAsString(e));
         return Result.paramError(getOutMsg(e), "请求参数不正确");
     }
