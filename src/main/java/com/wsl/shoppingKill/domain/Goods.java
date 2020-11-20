@@ -37,7 +37,7 @@ public class Goods extends Model<Goods> implements Serializable {
     */
     @Id
     @TableId(type = IdType.AUTO)
-    @NotNull(message = "商品id不能为空")
+
     private Long id;
 
     /**
