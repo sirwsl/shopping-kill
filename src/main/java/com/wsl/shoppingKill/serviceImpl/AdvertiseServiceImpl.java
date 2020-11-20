@@ -1,19 +1,17 @@
 package com.wsl.shoppingKill.serviceImpl;
 
-import com.alicp.jetcache.anno.Cached;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
-import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wsl.shoppingKill.common.log.MyLog;
 import com.wsl.shoppingKill.component.oss.OssComponent;
 import com.wsl.shoppingKill.constant.BaseEnum;
 import com.wsl.shoppingKill.constant.LoggerEnum;
-import com.wsl.shoppingKill.obj.convert.AdvertiseConverter;
 import com.wsl.shoppingKill.domain.Advertise;
 import com.wsl.shoppingKill.mapper.AdvertiseMapper;
+import com.wsl.shoppingKill.obj.convert.AdvertiseConverter;
 import com.wsl.shoppingKill.obj.vo.AdvertiseVO;
 import com.wsl.shoppingKill.service.AdvertiseService;
 import org.springframework.stereotype.Service;
@@ -23,8 +21,6 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Objects;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author WangShilei
@@ -49,7 +45,6 @@ public class AdvertiseServiceImpl extends ServiceImpl<AdvertiseMapper, Advertise
     }
 
     @Override
-    @Cached(name="advertise:",expire=1,timeUnit = TimeUnit.DAYS)
     public List<AdvertiseVO> getAdvertiseUrl() {
         LocalDateTime localDateTime = LocalDateTime.now();
         List<Advertise> advertises = advertiseMapper.selectList(new QueryWrapper<Advertise>()
