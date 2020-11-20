@@ -33,19 +33,9 @@ public class AfterSalesParam implements Serializable {
     private String orderId;
 
     /**
-     * 用户账户
+     * 售后类型
      */
-    private String userName;
-
-    /**
-     * 用户手机号
-     */
-    private String userPhone;
-
-    /**
-     * 用户昵称
-     */
-    private String userNickName;
+    private String type;
 
     /**
     * 是否解决（0-未解决 1-已解决  默认0）

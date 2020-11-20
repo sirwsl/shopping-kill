@@ -17,8 +17,29 @@
     <result column="del_flag" jdbcType="BOOLEAN" property="delFlag" />
   </resultMap>
 
-  <select id="getAfterSalesAll" resultType="com.wsl.shoppingKill.obj.vo.AfterSalesVO">
-    <!--TODO:四个连表查询分开，便于操作-->
+  <select id="getAfterSalesAll" resultType="com.wsl.shoppingKill.obj.bo.AfterSalesBO">
+    select tas.id, tas.order_id, tas.admin_id, tas.detail, tas.result_detail,tas.type, tas.deal_time, tas.result,
+            tor.user_id, tor.sku_id, tor.num, tor.pay_price
+    from t_after_sales tas
+    left join t_order tor on tor.id = tas.order_id
+    <where>
+        <if test="afterSalesParam.id != null">
+          <bind name="Ids" value="'%'+param1.id+'%'"/>
+          tas.id like #{Ids}
+        </if>
+        <if test="afterSalesParam.orderId != null and afterSalesParam.orderId != ''">
+         <bind name="orderId" value="'%' + afterSalesParam.orderId + '%'" />
+           AND tas.order_id like #{orderId}
+        </if>
+        <if test="afterSalesParam.type != null and afterSalesParam.type != ''">
+          AND tas.type = #{afterSalesParam.type}
+        </if>
+      <if test="afterSalesParam.result != null">
+        AND tas.result = #{afterSalesParam.result}
+      </if>
+      AND tas.del_flag = 0
+    </where>
+
 
   </select>
 </mapper>
