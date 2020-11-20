@@ -17,4 +17,8 @@
     <result column="del_flag" jdbcType="BOOLEAN" property="delFlag" />
   </resultMap>
 
+  <select id="getAfterSalesAll" resultType="com.wsl.shoppingKill.obj.vo.AfterSalesVO">
+    <!--TODO:四个连表查询分开，便于操作-->
+
+  </select>
 </mapper>
