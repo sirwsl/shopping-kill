@@ -53,7 +53,7 @@ public class AfterSales extends Model<AfterSales> implements Serializable {
     private String detail;
 
     /**
-    * 处理类型 （0-退货退款 1-换货 3-仅退款）
+    * 处理类型 （3-退货退款 2-换货 1-仅退款）
     */
     private Integer type;
 

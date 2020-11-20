@@ -11,7 +11,7 @@
  Target Server Version : 80019
  File Encoding         : 65001
 
- Date: 18/11/2020 13:46:08
+ Date: 20/11/2020 14:45:33
 */
 
 SET NAMES utf8mb4;
@@ -117,7 +117,7 @@ CREATE TABLE `t_after_sales`  (
   `order_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '订单id',
   `admin_id` bigint NOT NULL COMMENT '管理员id',
   `detail` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '处理内容',
-  `type` int NOT NULL COMMENT '处理类型 （0-退货退款 1-换货 3-仅退款）',
+  `type` int NOT NULL COMMENT '处理类型 （3-退货退款 2-换货 1-仅退款）',
   `deal_time` datetime(0) NULL DEFAULT NULL COMMENT '处理时间',
   `result` tinyint(1) NOT NULL DEFAULT 0 COMMENT '是否解决（0-未解决 1-已解决  默认0）',
   `creat_time` datetime(0) NOT NULL COMMENT '创建时间',
@@ -145,13 +145,13 @@ CREATE TABLE `t_appraisal`  (
   `update_time` datetime(0) NOT NULL COMMENT '更新时间',
   `del_flag` tinyint(1) NOT NULL DEFAULT 0 COMMENT '是否删除',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '评价表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '评价表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of t_appraisal
 -- ----------------------------
 INSERT INTO `t_appraisal` VALUES (1, 1, 1, '测试评价1', NULL, 5, '2020-11-18 13:38:15', '2020-11-18 13:38:19', 0);
-INSERT INTO `t_appraisal` VALUES (2, 2, 2, '评价内容', NULL, 2, '2020-11-18 13:38:30', '2020-11-18 13:38:33', 1);
+INSERT INTO `t_appraisal` VALUES (2, 2, 2, '评价内容', NULL, 2, '2020-11-18 13:38:30', '2020-11-18 13:38:33', 0);
 INSERT INTO `t_appraisal` VALUES (3, 1, 1, '测试评价1', NULL, 5, '2020-11-18 13:38:15', '2020-11-18 13:38:19', 0);
 INSERT INTO `t_appraisal` VALUES (4, 2, 1, '测试评价1', NULL, 3, '2020-11-18 13:38:15', '2020-11-18 13:38:19', 0);
 INSERT INTO `t_appraisal` VALUES (5, 3, 3, '测试评价1', NULL, 4, '2020-11-18 13:38:15', '2020-11-18 13:38:19', 0);
@@ -191,15 +191,16 @@ CREATE TABLE `t_goods`  (
   `update_time` datetime(0) NOT NULL COMMENT '更新时间',
   `del_flag` tinyint(1) NOT NULL DEFAULT 0 COMMENT '逻辑删除',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of t_goods
 -- ----------------------------
-INSERT INTO `t_goods` VALUES (1, '手机', 1, '/url/img/img.jpg', 1, '这就是一个手机，一个很牛逼的手机', '2020-11-17 14:27:07', '2020-11-21 14:27:11', 0);
-INSERT INTO `t_goods` VALUES (2, '电脑', 1, 'https://www.wslhome.top/img/imgs/asdasasdf.jpg', 1, '电脑电脑电脑电脑电脑', '2020-11-17 14:28:26', '2020-11-18 14:28:28', 0);
-INSERT INTO `t_goods` VALUES (3, '充电宝', 2, 'https://wslhome.top/test/upload/test.jpg', 1, '充电宝', '2020-11-19 14:30:05', '2020-11-17 14:30:11', 0);
-INSERT INTO `t_goods` VALUES (4, '手机壳', 2, 'img/jeisjfoiaw.jpeg', 1, '这就是个测试手机壳', '2020-11-17 14:30:52', '2020-11-17 14:30:54', 0);
+INSERT INTO `t_goods` VALUES (1, '手机', 1, '/url/img/img.jpg', 0, '这就是一个手机，一个很牛逼的手机', '2020-11-17 14:27:07', '2020-11-21 14:27:11', 1);
+INSERT INTO `t_goods` VALUES (2, '电脑', 1, 'https://www.wslhome.top/img/imgs/asdasasdf.jpg', 1, '电脑电脑电脑电脑电脑', '2020-11-17 14:28:26', '2020-11-20 14:02:14', 0);
+INSERT INTO `t_goods` VALUES (3, '充电宝', 2, 'https://wslhome.top/test/upload/test.jpg', 1, '充电宝', '2020-11-19 14:30:05', '2020-11-20 14:06:02', 0);
+INSERT INTO `t_goods` VALUES (4, '手机壳', 2, 'img/jeisjfoiaw.jpeg', 0, '这就是个测试手机壳', '2020-11-17 14:30:52', '2020-11-17 14:30:54', 0);
+INSERT INTO `t_goods` VALUES (5, 'test1', 1, 'http://static.wslhome.top/goods/8bba6198-91a8-4389-9488-e43fec38358d.jpg', 0, '测试描述', '2020-11-20 11:12:34', '2020-11-20 13:42:56', 0);
 
 -- ----------------------------
 -- Table structure for t_limit_list
@@ -237,7 +238,7 @@ CREATE TABLE `t_loggers`  (
   `update_time` datetime(0) NOT NULL COMMENT '更新时间',
   `del_flag` tinyint(1) NOT NULL DEFAULT 0 COMMENT '是否删除',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 52 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 61 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of t_loggers
@@ -282,6 +283,35 @@ INSERT INTO `t_loggers` VALUES (48, '添加发布订阅内容->[操作参数：8
 INSERT INTO `t_loggers` VALUES (49, '添加发布订阅内容->[操作参数：90]->[Class：SubscriptionHistoryServiceImpl]', 1, 1, 1, '0:0:0:0:0:0:0:1', '2020-11-16 14:18:03', '2020-11-16 14:18:03', 0);
 INSERT INTO `t_loggers` VALUES (50, '修改会员信息->[操作参数：1]->[Class：UserServiceImpl]', 1, 1, 1, '0:0:0:0:0:0:0:1', '2020-11-17 10:37:23', '2020-11-17 10:37:23', 0);
 INSERT INTO `t_loggers` VALUES (51, '删除会员->[操作参数：4]->[Class：UserServiceImpl]', 1, 1, 3, '0:0:0:0:0:0:0:1', '2020-11-17 10:38:21', '2020-11-17 10:38:21', 0);
+INSERT INTO `t_loggers` VALUES (52, '删除评价信息->[操作参数：5]->[Class：AppraisalServiceImpl]', 1, 1, 3, '0:0:0:0:0:0:0:1', '2020-11-18 15:36:47', '2020-11-18 15:36:47', 0);
+INSERT INTO `t_loggers` VALUES (53, '添加商品类别->[操作参数：1]->[Class：TypesServiceImpl]', 1, 1, 1, '0:0:0:0:0:0:0:1', '2020-11-18 17:13:07', '2020-11-18 17:13:07', 0);
+INSERT INTO `t_loggers` VALUES (54, '添加商品类别->[操作参数：2]->[Class：TypesServiceImpl]', 1, 1, 1, '0:0:0:0:0:0:0:1', '2020-11-18 17:13:50', '2020-11-18 17:13:50', 0);
+INSERT INTO `t_loggers` VALUES (55, '添加商品类别->[操作参数：3]->[Class：TypesServiceImpl]', 1, 1, 1, '0:0:0:0:0:0:0:1', '2020-11-18 17:13:54', '2020-11-18 17:13:54', 0);
+INSERT INTO `t_loggers` VALUES (56, '添加商品类别->[操作参数：4]->[Class：TypesServiceImpl]', 1, 1, 1, '0:0:0:0:0:0:0:1', '2020-11-18 17:13:58', '2020-11-18 17:13:58', 0);
+INSERT INTO `t_loggers` VALUES (57, '删除商品类别->[操作参数：1]->[Class：TypesServiceImpl]', 1, 1, 1, '0:0:0:0:0:0:0:1', '2020-11-18 17:18:58', '2020-11-18 17:18:58', 0);
+INSERT INTO `t_loggers` VALUES (58, '删除商品类别->[操作参数：1]->[Class：TypesServiceImpl]', 1, 1, 1, '0:0:0:0:0:0:0:1', '2020-11-18 17:19:24', '2020-11-18 17:19:24', 0);
+INSERT INTO `t_loggers` VALUES (59, '添加商品类别->[操作参数：123]->[Class：TypesServiceImpl]', 1, 1, 1, '0:0:0:0:0:0:0:1', '2020-11-18 17:22:42', '2020-11-18 17:22:42', 0);
+INSERT INTO `t_loggers` VALUES (60, '更新商品类别->[操作参数：2]->[Class：TypesServiceImpl]', 1, 1, 0, '0:0:0:0:0:0:0:1', '2020-11-18 17:35:38', '2020-11-18 17:35:38', 0);
+INSERT INTO `t_loggers` VALUES (61, '商品更新->[操作参数：5]->[Class：GoodsServiceImpl]', 1, 1, 1, '0:0:0:0:0:0:0:1', '2020-11-20 13:40:39', '2020-11-20 13:40:39', 0);
+INSERT INTO `t_loggers` VALUES (62, '商品更新->[操作参数：5]->[Class：GoodsServiceImpl]', 1, 1, 1, '0:0:0:0:0:0:0:1', '2020-11-20 13:42:56', '2020-11-20 13:42:56', 0);
+INSERT INTO `t_loggers` VALUES (63, '商品删除->[操作参数：1]->[Class：GoodsServiceImpl]', 1, 1, 2, '0:0:0:0:0:0:0:1', '2020-11-20 13:48:46', '2020-11-20 13:48:46', 0);
+INSERT INTO `t_loggers` VALUES (64, '商品上架处理->[操作参数：1]->[Class：GoodsServiceImpl]', 1, 1, 1, '0:0:0:0:0:0:0:1', '2020-11-20 13:52:52', '2020-11-20 13:52:52', 0);
+INSERT INTO `t_loggers` VALUES (65, '商品上架处理->[操作参数：1]->[Class：GoodsServiceImpl]', 1, 1, 1, '0:0:0:0:0:0:0:1', '2020-11-20 13:58:27', '2020-11-20 13:58:27', 0);
+INSERT INTO `t_loggers` VALUES (66, '商品上架处理->[操作参数：2]->[Class：GoodsServiceImpl]', 1, 1, 1, '0:0:0:0:0:0:0:1', '2020-11-20 13:58:32', '2020-11-20 13:58:32', 0);
+INSERT INTO `t_loggers` VALUES (67, '商品上架处理->[操作参数：2]->[Class：GoodsServiceImpl]', 1, 1, 1, '0:0:0:0:0:0:0:1', '2020-11-20 13:58:37', '2020-11-20 13:58:37', 0);
+INSERT INTO `t_loggers` VALUES (68, '商品上架处理->[操作参数：2]->[Class：GoodsServiceImpl]', 1, 1, 1, '0:0:0:0:0:0:0:1', '2020-11-20 13:58:38', '2020-11-20 13:58:38', 0);
+INSERT INTO `t_loggers` VALUES (69, '商品上架处理->[操作参数：2]->[Class：GoodsServiceImpl]', 1, 1, 1, '0:0:0:0:0:0:0:1', '2020-11-20 13:58:38', '2020-11-20 13:58:38', 0);
+INSERT INTO `t_loggers` VALUES (70, '商品上架处理->[操作参数：2]->[Class：GoodsServiceImpl]', 1, 1, 1, '0:0:0:0:0:0:0:1', '2020-11-20 13:58:39', '2020-11-20 13:58:39', 0);
+INSERT INTO `t_loggers` VALUES (71, '商品上架处理->[操作参数：3]->[Class：GoodsServiceImpl]', 1, 1, 1, '0:0:0:0:0:0:0:1', '2020-11-20 13:58:54', '2020-11-20 13:58:54', 0);
+INSERT INTO `t_loggers` VALUES (72, '商品上架处理->[操作参数：3]->[Class：GoodsServiceImpl]', 1, 1, 1, '0:0:0:0:0:0:0:1', '2020-11-20 13:59:55', '2020-11-20 13:59:55', 0);
+INSERT INTO `t_loggers` VALUES (73, '商品上架处理->[操作参数：1]->[Class：GoodsServiceImpl]', 1, 1, 1, '0:0:0:0:0:0:0:1', '2020-11-20 14:00:31', '2020-11-20 14:00:31', 0);
+INSERT INTO `t_loggers` VALUES (74, '商品上架处理->[操作参数：2]->[Class：GoodsServiceImpl]', 1, 1, 1, '0:0:0:0:0:0:0:1', '2020-11-20 14:00:36', '2020-11-20 14:00:36', 0);
+INSERT INTO `t_loggers` VALUES (75, '商品上架处理->[操作参数：2]->[Class：GoodsServiceImpl]', 1, 1, 1, '0:0:0:0:0:0:0:1', '2020-11-20 14:00:57', '2020-11-20 14:00:57', 0);
+INSERT INTO `t_loggers` VALUES (76, '商品上架处理->[操作参数：2]->[Class：GoodsServiceImpl]', 1, 1, 1, '0:0:0:0:0:0:0:1', '2020-11-20 14:02:14', '2020-11-20 14:02:14', 0);
+INSERT INTO `t_loggers` VALUES (77, '商品上架处理->[操作参数：3]->[Class：GoodsServiceImpl]', 1, 1, 1, '0:0:0:0:0:0:0:1', '2020-11-20 14:02:29', '2020-11-20 14:02:29', 0);
+INSERT INTO `t_loggers` VALUES (78, '商品上架处理->[操作参数：3]->[Class：GoodsServiceImpl]', 1, 1, 1, '0:0:0:0:0:0:0:1', '2020-11-20 14:02:36', '2020-11-20 14:02:36', 0);
+INSERT INTO `t_loggers` VALUES (79, '商品上架处理->[操作参数：3]->[Class：GoodsServiceImpl]', 1, 1, 1, '0:0:0:0:0:0:0:1', '2020-11-20 14:06:02', '2020-11-20 14:06:02', 0);
+INSERT INTO `t_loggers` VALUES (80, '商品上架处理->[操作参数：1]->[Class：GoodsServiceImpl]', 1, 1, 1, '0:0:0:0:0:0:0:1', '2020-11-20 14:06:13', '2020-11-20 14:06:13', 0);
 
 -- ----------------------------
 -- Table structure for t_order
@@ -398,11 +428,16 @@ CREATE TABLE `t_types`  (
   `update_time` datetime(0) NOT NULL COMMENT '更新时间',
   `del_flag` tinyint(1) NOT NULL DEFAULT 0 COMMENT '逻辑删除',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品类别表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品类别表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of t_types
 -- ----------------------------
+INSERT INTO `t_types` VALUES (1, '测试分类手机', '2020-11-18 17:13:07', '2020-11-18 17:13:07', 1);
+INSERT INTO `t_types` VALUES (2, '456789', '2020-11-18 17:13:50', '2020-11-18 17:35:38', 0);
+INSERT INTO `t_types` VALUES (3, '测试分类电脑2', '2020-11-18 17:13:54', '2020-11-18 17:13:54', 0);
+INSERT INTO `t_types` VALUES (4, '测试分类电脑6', '2020-11-18 17:13:58', '2020-11-18 17:13:58', 0);
+INSERT INTO `t_types` VALUES (5, '123', '2020-11-18 17:22:42', '2020-11-18 17:22:42', 0);
 
 -- ----------------------------
 -- Table structure for t_user
