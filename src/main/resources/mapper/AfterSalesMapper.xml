@@ -24,7 +24,7 @@
     left join t_order tor on tor.id = tas.order_id
     <where>
         <if test="afterSalesParam.id != null">
-          <bind name="Ids" value="'%'+param1.id+'%'"/>
+          <bind name="Ids" value="'%'+afterSalesParam.id+'%'"/>
           tas.id like #{Ids}
         </if>
         <if test="afterSalesParam.orderId != null and afterSalesParam.orderId != ''">

@@ -104,6 +104,9 @@ public class AfterSalesServiceImpl extends ServiceImpl<AfterSalesMapper, AfterSa
     @Transactional(rollbackFor = Exception.class)
     @MyLog(value = "#afterSalesResultParam.id",detail = "售后处理",grade = LoggerEnum.INFO)
     public boolean refundGoodsAndMoney(AfterSalesResultParam afterSalesResultParam) throws Exception {
+        if (afterSalesMapper.selectById(afterSalesResultParam.getId()).getResult()){
+            return false;
+        }
         boolean updateById = AfterSalesConverter.INSTANCE.afterSalesParam2DoMain(
                 afterSalesResultParam.setAdminId(abstractCurrentRequestComponent.getCurrentUser().getId()))
                 .setDealTime(LocalDateTime.now())

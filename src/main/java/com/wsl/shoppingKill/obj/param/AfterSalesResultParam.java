@@ -74,6 +74,10 @@ public class AfterSalesResultParam implements Serializable {
     @NotNull(message = "处理结果不能未空")
     private Boolean result;
 
+    /**
+     * 处理类型
+     */
+    @NotNull(message = "处理类型不能为空")
     private Integer type;
 
     /**

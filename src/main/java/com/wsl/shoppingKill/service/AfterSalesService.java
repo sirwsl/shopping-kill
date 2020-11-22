@@ -31,6 +31,7 @@ public interface AfterSalesService extends IService<AfterSales> {
      * @date 2020/11/20 15:23
      * @param afterSalesResultParam :
      * @return boolean
+     * @throws Exception: 异常
      */
     boolean refundGoodsAndMoney(AfterSalesResultParam afterSalesResultParam) throws Exception;
 
