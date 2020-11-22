@@ -17,7 +17,7 @@
     <result column="del_flag" jdbcType="BOOLEAN" property="delFlag" />
   </resultMap>
 
-  <select id="getAfterSalesAll" resultType="com.wsl.shoppingKill.obj.bo.AfterSalesBO">
+  <select id="getAfterSalesAll" resultType="com.wsl.shoppingKill.obj.vo.AfterSalesVO">
     select tas.id, tas.order_id, tas.admin_id, tas.detail, tas.result_detail,tas.type, tas.deal_time, tas.result,
             tor.user_id, tor.sku_id, tor.num, tor.pay_price
     from t_after_sales tas

@@ -32,6 +32,6 @@ public interface AfterSalesService extends IService<AfterSales> {
      * @param afterSalesResultParam :
      * @return boolean
      */
-    boolean refundGoodsAndMoney(AfterSalesResultParam afterSalesResultParam);
+    boolean refundGoodsAndMoney(AfterSalesResultParam afterSalesResultParam) throws Exception;
 
 }

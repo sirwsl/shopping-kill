@@ -40,8 +40,8 @@ public class AfterSalesResultParam implements Serializable {
     /**
     * 订单id
     */
-    @NotNull(message = "订单id不能未空")
-    private String orderId;
+    @NotNull(message = "原SKUId不能未空")
+    private Long oldSkuId;
 
     /**
      * 换货SkuId
@@ -73,6 +73,13 @@ public class AfterSalesResultParam implements Serializable {
     */
     @NotNull(message = "处理结果不能未空")
     private Boolean result;
+
+    private Integer type;
+
+    /**
+     * 管理员id
+     */
+    private Long adminId;
 
 
 }

@@ -4,8 +4,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wsl.shoppingKill.domain.AfterSales;
-import com.wsl.shoppingKill.obj.bo.AfterSalesBO;
 import com.wsl.shoppingKill.obj.param.AfterSalesParam;
+import com.wsl.shoppingKill.obj.vo.AfterSalesVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -26,5 +26,5 @@ public interface AfterSalesMapper extends BaseMapper<AfterSales> {
      * @param afterSalesParam :
      * @return IPage<com.wsl.shoppingKill.obj.vo.AfterSalesBO>
      */
-    IPage<AfterSalesBO> getAfterSalesAll(Page<AfterSalesBO> page, @Param("afterSalesParam") AfterSalesParam afterSalesParam);
+    IPage<AfterSalesVO> getAfterSalesAll(Page<AfterSalesVO> page, @Param("afterSalesParam") AfterSalesParam afterSalesParam);
 }

@@ -116,6 +116,10 @@ public class AfterSalesVO implements Serializable {
     private BigDecimal payPrice;
 
     /**
+     * 物品id
+     */
+    private Long goodsId;
+    /**
      * 物品名称
      */
     private String goodsName;
