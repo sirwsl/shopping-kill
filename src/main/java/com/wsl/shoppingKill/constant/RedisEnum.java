@@ -6,7 +6,9 @@ package com.wsl.shoppingKill.constant;
  **/
 public class RedisEnum {
     /**redis存储验证码**/
-    public static final String REDIS_PREFIX = "verify:user:";
+    public static final String VERIFY_CODE = "verify:code:";
+
+    public static final String VERIFY_TOKEN="verify:token:";
     public static final int CAPTCHA_EXPIRE_TIME = 5;
 
 }

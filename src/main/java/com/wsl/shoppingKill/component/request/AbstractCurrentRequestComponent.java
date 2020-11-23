@@ -13,12 +13,6 @@ import javax.annotation.Resource;
 public abstract class AbstractCurrentRequestComponent {
 
 
-
-    static final String REQUEST_HEADER_TOKEN = "Authorization";
-
-    static final String TOKEN = "token";
-
-
     @Resource
     protected StringRedisTemplate stringRedisTemplate;
 

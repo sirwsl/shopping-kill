@@ -19,6 +19,8 @@ spring:
   profiles:
     active: dev,all
 
+  
+
 
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss

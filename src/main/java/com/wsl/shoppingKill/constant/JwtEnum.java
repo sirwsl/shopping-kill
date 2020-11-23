@@ -9,4 +9,7 @@ public class JwtEnum {
     public static final String KEY_USER_NAME = "verify:user:name";
     public static final String KEY_USER_URL = "verify:user:url";
     public static final String KEY_USER_FLAG = "verify:user:flag";
+
+    public static final String AUTH_HEADER_KEY = "Authorization";
+    public static final String TOKEN_PREFIX = "shoppingKill";
 }

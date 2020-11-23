@@ -2,6 +2,7 @@ package com.wsl.shoppingKill.controller.common;
 
 import com.wsl.shoppingKill.common.Result;
 import com.wsl.shoppingKill.common.exception.Exceptions;
+import com.wsl.shoppingKill.obj.exception.TokenRuntimeException;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.lettuce.core.RedisException;
 import lombok.AllArgsConstructor;
@@ -39,7 +40,7 @@ import java.util.Objects;
 @RestControllerAdvice(annotations = RestController.class)
 @ResponseStatus(HttpStatus.ACCEPTED)
 @Slf4j
-public class ControllerAdvice{
+public class ControllerAdvice {
 
     private static String getOutMsg(final Throwable e) {
         if (e != null) {
@@ -151,10 +152,23 @@ public class ControllerAdvice{
         log.error("参数异常：{}", Exceptions.getStackTraceAsString(e));
         return Result.paramError(getOutMsg(e), "请求参数不正确");
     }
+
     @ExceptionHandler(ExpiredJwtException.class)
     public Result<Object> exception(ExpiredJwtException e) {
         log.error("服务器异常", e);
         return new Result<>(Result.SERVER_ERROR, getOutMsg(e), "登录已经过期，Token令牌失效", null);
+    }
+
+    @ExceptionHandler(TokenRuntimeException.class)
+    public Result<Object> tokenRuntimeException(TokenRuntimeException e) {
+        e.printStackTrace();
+        return Result.error(e.getCode().toString(), e.getMsg());
+    }
+
+    @ExceptionHandler(Exception.class)
+    public Result<Object> handlerException(Exception e) {
+        e.printStackTrace();
+        return Result.error();
     }
 
 
