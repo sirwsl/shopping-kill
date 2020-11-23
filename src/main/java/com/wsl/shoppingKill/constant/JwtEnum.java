@@ -12,4 +12,7 @@ public class JwtEnum {
 
     public static final String AUTH_HEADER_KEY = "Authorization";
     public static final String TOKEN_PREFIX = "shoppingKill";
+
+    public static final String TOKEN = "token";
+
 }

@@ -26,6 +26,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -161,15 +162,16 @@ public class ControllerAdvice {
 
     @ExceptionHandler(TokenRuntimeException.class)
     public Result<Object> tokenRuntimeException(TokenRuntimeException e) {
-        e.printStackTrace();
-        return Result.error(e.getCode().toString(), e.getMsg());
+        log.error("token校验不通过",e);
+        return new Result<>(Result.UNLOGIN,getOutMsg(e), e.getMsg(),null);
     }
 
-    @ExceptionHandler(Exception.class)
-    public Result<Object> handlerException(Exception e) {
-        e.printStackTrace();
-        return Result.error();
+    @ExceptionHandler(UnsupportedEncodingException.class)
+    public Result<Object> unsupportedEncodingException(UnsupportedEncodingException e) {
+        log.error("账号名称编码异常",e);
+        return Result.paramError(getOutMsg(e), "账号异常，存在非正常编码字符");
     }
+
 
 
     /**

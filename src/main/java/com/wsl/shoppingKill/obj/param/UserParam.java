@@ -2,7 +2,6 @@ package com.wsl.shoppingKill.obj.param;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotNull;
 
@@ -16,13 +15,20 @@ import javax.validation.constraints.NotNull;
 @NotNull
 public class UserParam {
 
-    @NotNull(message = "用户名不能未空")
+    private String phone;
+
+    @NotNull(message = "账号不能为空")
     private String name;
 
     @NotNull(message = "密码不能未空")
-    @Length(min = 6,message = "密码不能少于6位")
     private String password;
 
     @NotNull(message = "验证码不能未空")
     private String code;
+
+    /**
+     * 1-管理员
+     * 2-会员
+     */
+    private Integer type;
 }

@@ -16,7 +16,7 @@ public class BaseEnum {
      * 0-用户 1-管理员
      **/
     public static final Integer ADMIN = 1;
-    public static final Integer CUSTOMER = 0;
+    public static final Integer USER = 0;
 
     /**
      * 成功失败

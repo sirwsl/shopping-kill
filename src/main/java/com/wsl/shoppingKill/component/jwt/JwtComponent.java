@@ -1,5 +1,6 @@
-package com.wsl.shoppingKill.common.util;
+package com.wsl.shoppingKill.component.jwt;
 
+import com.wsl.shoppingKill.common.util.DateUtil;
 import com.wsl.shoppingKill.constant.JwtEnum;
 import com.wsl.shoppingKill.obj.bo.UserBO;
 import io.jsonwebtoken.Claims;
@@ -7,6 +8,8 @@ import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.joda.time.DateTime;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
@@ -17,13 +20,18 @@ import java.util.Date;
  * @author WangShilei
  * @date 2020/11/23-10:41
  **/
-public class JwtTokenUtils {
+@Component
+public class JwtComponent {
 
-    private static Integer expire = 360;
+    @Value("${jwt.expire}")
+    private Integer expire;
 
-    private static Key getKeyInstance(){
+    @Value("${jwt.keys}")
+    private String keys;
+
+    private Key getKeyInstance(){
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
-        byte[] bytes = DatatypeConverter.parseBase64Binary("mall-user");
+        byte[] bytes = DatatypeConverter.parseBase64Binary(keys);
         return new SecretKeySpec(bytes,signatureAlgorithm.getJcaName());
     }
 
@@ -32,7 +40,7 @@ public class JwtTokenUtils {
      * @param userBO :
      * @return String
      */
-    public static String getToken(UserBO userBO){
+    public String getToken(UserBO userBO){
         return Jwts.builder()
                 .claim(JwtEnum.KEY_USER_ID,userBO.getId())
                 .claim(JwtEnum.KEY_USER_FLAG,userBO.getFlag())
@@ -46,7 +54,7 @@ public class JwtTokenUtils {
      * @param token:
      * @return JwtInfo:
      */
-    public static UserBO getTokenInfo(String token){
+    public UserBO getTokenInfo(String token){
         Jws<Claims> claimsJws = Jwts.parser().setSigningKey(getKeyInstance()).parseClaimsJws(token);
         Claims claims = claimsJws.getBody();
         UserBO userBO = new UserBO();
@@ -55,7 +63,7 @@ public class JwtTokenUtils {
         return userBO;
     }
 
-    public static Long getTokenTime(String token){
+    public Long getTokenTime(String token){
         Jws<Claims> claimsJws = Jwts.parser().setSigningKey(getKeyInstance()).parseClaimsJws(token);
         Claims claims = claimsJws.getBody();
         System.out.println(claims.getExpiration());

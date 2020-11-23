@@ -26,3 +26,9 @@ zzy:
   appSecret: MDAxNDZiNGMtNTYwNy00ZTcwLWEyNTItMGY1OThmYmNjZGM2
   appId: 105924
 
+jwt:
+  redisToken: 4800
+  expire: 3600
+  newToken: 600
+  keys: wslhome-shoppingKill-sirwsl
+

@@ -1,6 +1,6 @@
 package com.wsl.shoppingKill.component.request;
 
-import com.wsl.shoppingKill.common.util.JwtTokenUtils;
+import com.wsl.shoppingKill.component.jwt.JwtComponent;
 import com.wsl.shoppingKill.constant.JwtEnum;
 import com.wsl.shoppingKill.constant.RedisEnum;
 import com.wsl.shoppingKill.obj.bo.UserBO;
@@ -28,6 +28,9 @@ public class ProdAbstractCurrentRequestComponent extends AbstractCurrentRequestC
 
     @Resource
     private RedisTemplate<String,UserBO> redisTemplate;
+
+    @Resource
+    private JwtComponent jwtComponent;
     /**
      * 获取当前登陆用户信息
      * @return 当前登录用户信息
@@ -40,7 +43,7 @@ public class ProdAbstractCurrentRequestComponent extends AbstractCurrentRequestC
             return null;
         }
         try {
-            return JwtTokenUtils.getTokenInfo(token.substring(JwtEnum.TOKEN_PREFIX.length()));
+            return jwtComponent.getTokenInfo(token.substring(JwtEnum.TOKEN_PREFIX.length()));
         }catch (Exception e){
             UserBO userBO = redisTemplate.opsForValue().get(RedisEnum.VERIFY_TOKEN+token);
             if (Objects.nonNull(userBO)){

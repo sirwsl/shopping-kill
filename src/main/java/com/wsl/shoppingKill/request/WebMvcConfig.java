@@ -1,5 +1,6 @@
 package com.wsl.shoppingKill.request;
 
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -9,6 +10,9 @@ import javax.annotation.Resource;
  * @author WangShilei
  * @date 2020/11/23-18:58
  **/
+
+
+@Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
     /*
      * 注入 token 拦截器
