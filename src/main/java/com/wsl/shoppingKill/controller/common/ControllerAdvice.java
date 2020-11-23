@@ -2,6 +2,7 @@ package com.wsl.shoppingKill.controller.common;
 
 import com.wsl.shoppingKill.common.Result;
 import com.wsl.shoppingKill.common.exception.Exceptions;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.lettuce.core.RedisException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -150,8 +151,12 @@ public class ControllerAdvice{
         log.error("参数异常：{}", Exceptions.getStackTraceAsString(e));
         return Result.paramError(getOutMsg(e), "请求参数不正确");
     }
+    @ExceptionHandler(ExpiredJwtException.class)
+    public Result<Object> exception(ExpiredJwtException e) {
+        log.error("服务器异常", e);
+        return new Result<>(Result.SERVER_ERROR, getOutMsg(e), "登录已经过期，Token令牌失效", null);
+    }
 
-  
 
     /**
      * 异常信息通知内部类
