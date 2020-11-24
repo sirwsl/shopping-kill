@@ -1,23 +1,13 @@
 package com.wsl.shoppingKill.request;
 
-import com.baomidou.mybatisplus.core.toolkit.StringUtils;
-import com.esotericsoftware.minlog.Log;
 import com.wsl.shoppingKill.component.jwt.JwtComponent;
-import com.wsl.shoppingKill.constant.JwtEnum;
-import com.wsl.shoppingKill.constant.RedisEnum;
 import com.wsl.shoppingKill.obj.bo.UserBO;
-import com.wsl.shoppingKill.obj.exception.TokenRuntimeException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.annotation.Resource;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.util.Objects;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author WangShilei
@@ -39,11 +29,13 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
     private Long redisToken;
 
 
-    @Override
+    /*@Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+
         // 允许跨域
         response.setHeader("Access-Control-Allow-Origin", "*");
         //获取请求头（如果有此请求头，表示token已经签发）
+
         String header = request.getHeader(JwtEnum.AUTH_HEADER_KEY);
         if (StringUtils.isEmpty(header)) {
             for (Cookie cookie : request.getCookies()) {
@@ -82,7 +74,7 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
         }
         return true;
 
-    }
+    }*/
 
 
 }

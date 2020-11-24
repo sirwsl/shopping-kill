@@ -1,14 +1,21 @@
 package com.wsl.shoppingKill.serviceImpl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.wsl.shoppingKill.constant.BaseEnum;
 import com.wsl.shoppingKill.constant.RedisEnum;
+import com.wsl.shoppingKill.domain.Loggers;
+import com.wsl.shoppingKill.mapper.LoggersMapper;
 import com.wsl.shoppingKill.mapper.UserMapper;
 import com.wsl.shoppingKill.service.HomeService;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author WangShilei
@@ -22,6 +29,9 @@ public class HomeServiceImpl implements HomeService {
 
     @Resource
     private UserMapper userMapper;
+
+    @Resource
+    private LoggersMapper loggersMapper;
 
     @Override
     public Integer getTodayNum() {
@@ -54,6 +64,16 @@ public class HomeServiceImpl implements HomeService {
     @Override
     public Integer getNumber() {
         return userMapper.selectCount(new QueryWrapper<>());
+    }
+
+    @Override
+    public Map<String, IPage<Loggers>> getLoggersAll(Long current,Long size) {
+        Map<String, IPage<Loggers>> loggers = new HashMap<>();
+        IPage<Loggers> adminLog = loggersMapper.selectPage(new Page<>(current, size), new QueryWrapper<Loggers>().eq(Loggers.TYPE, BaseEnum.ADMIN));
+        IPage<Loggers> userLog = loggersMapper.selectPage(new Page<>(current, size), new QueryWrapper<Loggers>().eq(Loggers.TYPE, BaseEnum.USER));
+        loggers.put("admin",adminLog);
+        loggers.put("user",userLog);
+        return loggers;
     }
 
 

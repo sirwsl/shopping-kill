@@ -1,8 +1,12 @@
 package com.wsl.shoppingKill.controller.admin;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.wsl.shoppingKill.common.Result;
+import com.wsl.shoppingKill.domain.Loggers;
 import com.wsl.shoppingKill.service.HomeService;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -27,6 +31,7 @@ public class HomeController {
      * @date 2020/11/24 15:11
      * @return Result<Map<String,Integer>>
      */
+    @GetMapping("/getTotalToday/v1")
    public Result<Map<String,Integer>> getTotalSum(){
        Map<String,Integer> result = new HashMap<>(8);
        result.put("Number",homeService.getNumber());
@@ -35,4 +40,18 @@ public class HomeController {
        result.put("TodayOut",homeService.getTodayOut());
        return Result.success(result);
    }
+
+
+
+
+    /**
+     * 获取操作日志
+     * @author wangShilei
+     * @date 2020/11/24 16:46
+     * @return com.wsl.shoppingKill.common.Result<com.wsl.shoppingKill.domain.Loggers>
+     */
+    @GetMapping("/getLoggersAll/v1")
+    public Result<Map<String, IPage<Loggers>>> getLoggersAll(@RequestParam(defaultValue = "1") Long current,@RequestParam(defaultValue = "10")Long size){
+        return Result.success(homeService.getLoggersAll(current,size));
+    }
 }

@@ -1,5 +1,10 @@
 package com.wsl.shoppingKill.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.wsl.shoppingKill.domain.Loggers;
+
+import java.util.Map;
+
 /**
  * 主页service
  * @author WangShilei
@@ -43,6 +48,15 @@ public interface HomeService {
      */
     Integer getNumber();
 
-    
 
+
+    /**
+     * 获取所有登录日志
+     * @author wangShilei
+     * @date 2020/11/24 16:51
+     * @param current :
+     * @param size :
+     * @return Map<String,IPage<Loggers>>
+     */
+    Map<String, IPage<Loggers>> getLoggersAll(Long current,Long size);
 }
