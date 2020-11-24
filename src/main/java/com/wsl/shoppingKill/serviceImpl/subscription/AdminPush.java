@@ -1,4 +1,4 @@
-package com.wsl.shoppingKill.service.subscription;
+package com.wsl.shoppingKill.serviceImpl.subscription;
 
 import com.rabbitmq.client.Channel;
 import com.wsl.shoppingKill.component.email.MailComponent;
