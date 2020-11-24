@@ -41,6 +41,8 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        // 允许跨域
+        response.setHeader("Access-Control-Allow-Origin", "*");
         //获取请求头（如果有此请求头，表示token已经签发）
         String header = request.getHeader(JwtEnum.AUTH_HEADER_KEY);
         if (StringUtils.isEmpty(header)) {
