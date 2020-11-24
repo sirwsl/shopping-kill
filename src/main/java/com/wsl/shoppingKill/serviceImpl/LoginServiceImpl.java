@@ -8,6 +8,7 @@ import com.wsl.shoppingKill.mapper.LoginMapper;
 import com.wsl.shoppingKill.obj.bo.UserBO;
 import com.wsl.shoppingKill.obj.param.UserParam;
 import com.wsl.shoppingKill.service.LoginService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author : WangShiLei
@@ -24,6 +26,9 @@ import java.util.Objects;
  **/
 @Service
 public class LoginServiceImpl implements LoginService {
+
+    @Value("${jwt.redisToken}")
+    private Long redisToken;
 
     @Resource
     private LoginMapper loginMapper;
@@ -53,7 +58,7 @@ public class LoginServiceImpl implements LoginService {
         response.addCookie(new Cookie("name", URLEncoder.encode(userBO.getName(),"UTF-8")));
         response.addCookie(new Cookie("img",userBO.getUrl()));
         response.addCookie(new Cookie("token",JwtEnum.TOKEN_PREFIX+token));
-        redisTemplate.opsForValue().set(RedisEnum.VERIFY_TOKEN+token,userBO);
+        redisTemplate.opsForValue().set(RedisEnum.VERIFY_TOKEN+token,userBO,redisToken, TimeUnit.SECONDS);
         return true;
     }
 }

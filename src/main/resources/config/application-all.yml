@@ -32,3 +32,7 @@ jwt:
   newToken: 600
   keys: wslhome-shoppingKill-sirwsl
 
+verify:
+  imgCodeTimeOut: 300
+  phoneCodeTimeOut: 300
+

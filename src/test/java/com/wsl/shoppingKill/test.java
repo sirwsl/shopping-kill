@@ -1,23 +1,27 @@
 package com.wsl.shoppingKill;
 
-import java.math.BigDecimal;
+import org.junit.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.regex.Pattern;
 
 /**
  * @author : WangShiLei
  * @date : 2020/11/20 9:42 下午
  **/
+@SpringBootTest
 public class test {
-    public static void main(String[] args) {
-       Double money = new Double("10.0");
-       BigDecimal initPrice = new BigDecimal(money-tt(2.0)+"");
 
-       System.out.println(initPrice);
-    }
+    @Test
+    public void main() {
 
-    public static Double tt(Double bd){
-        if (bd == null){
-            bd = 0.0;
+    String[] str = {"-0.85","10052555555555555555555555555555","0.085","1.00","a.12","as.asd","1","阿斯顿.asd"};
+    Pattern pattern = Pattern.compile("-?[0-9]+.?[0-9]*");
+        for (String s : str) {
+            System.out.println(pattern.matcher(s).matches());
         }
-        return bd;
+
+
     }
 }
+

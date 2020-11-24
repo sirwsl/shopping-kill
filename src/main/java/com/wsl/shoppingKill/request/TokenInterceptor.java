@@ -71,7 +71,8 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
                 }
                 String newToken = jwtComponent.getToken(userBO);
                 response.setHeader(JwtEnum.AUTH_HEADER_KEY, JwtEnum.TOKEN_PREFIX + newToken);
-                redisTemplate.opsForValue().set(RedisEnum.VERIFY_TOKEN + newToken,userBO,redisToken, TimeUnit.MILLISECONDS);
+                redisTemplate.delete(RedisEnum.VERIFY_TOKEN + token);
+                redisTemplate.opsForValue().set(RedisEnum.VERIFY_TOKEN + newToken,userBO,redisToken, TimeUnit.SECONDS);
             }
         } catch (Exception e) {
             Log.info("token令牌无效");

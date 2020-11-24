@@ -1,47 +1,39 @@
-package com.wsl.shoppingKill.controller.verify;
-
+package com.wsl.shoppingKill.component;
 
 import com.google.code.kaptcha.impl.DefaultKaptcha;
-import com.wsl.shoppingKill.constant.RedisEnum;
-import com.wsl.shoppingKill.domain.User;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
-import java.util.concurrent.TimeUnit;
 
 /**
- *   验证码的生成
- * @author wsl
- */
-@RestController
+ * @author WangShilei
+ * @date 2020/11/24-10:38
+ **/
 @Slf4j
-@RequestMapping("/verify")
-public class KaptChaController {
+@Component
+public class VerifyComponent {
 
-    /**
-     * 1、验证码工具
-     */
+    @Value("${verify.imgCodeTimeOut}")
+    private Integer imgCodeTimeOut;
+
+
     @Resource
     private DefaultKaptcha katha;
-    @Resource
-    private StringRedisTemplate stringRedisTemplate;
 
     /**
      * 生成验证码
      * @param httpServletResponse:获取方式
-     * @param user:用户
      * @throws Exception:验证码生成异常
      */
-    @RequestMapping("/jpg")
-    public void getKaptCha(HttpServletResponse httpServletResponse, User user)
+    public void getKaptCha(HttpServletResponse httpServletResponse, HttpServletRequest request)
             throws Exception {
         byte[] captchaChallengeAsJpeg;
         ByteArrayOutputStream jpegOutputStream = new ByteArrayOutputStream();
@@ -49,9 +41,8 @@ public class KaptChaController {
             // 生产验证码字符串并保存到redis中
             String rightCode = katha.createText();
             log.info("rightCode:{}", rightCode);
-            stringRedisTemplate.opsForValue().set(RedisEnum.VERIFY_CODE +user.getId(), rightCode,
-                    RedisEnum.CAPTCHA_EXPIRE_TIME, TimeUnit.SECONDS);
-
+            request.getSession().setAttribute("code",rightCode);
+            request.getSession().setMaxInactiveInterval(imgCodeTimeOut);
             // 使用生产的验证码字符串返回一个BufferedImage对象并转为byte写入到byte数组中
             BufferedImage challenge = katha.createImage(rightCode);
             ImageIO.write(challenge, "jpg", jpegOutputStream);
@@ -71,17 +62,16 @@ public class KaptChaController {
         responseOutputStream.close();
     }
 
-
     /**
      * 校对验证码
-     * @param user:使用者
+     * @param request:
      * @param tryCode:输入的验证码
      * @return bool:判断结果
      */
-    public Boolean imgVerifyCode(User user, String tryCode) {
-        String rightCode = stringRedisTemplate.opsForValue().get(RedisEnum.VERIFY_CODE + user.getId());
-        log.info("rightCode={}, tryCode={}", rightCode, tryCode);
-        return tryCode.equals(rightCode);
+    public Boolean imgVerifyCode(String tryCode,HttpServletRequest request) {
+        String code = request.getSession().getAttribute("code").toString();
+        log.info("rightCode={}, tryCode={}", code, tryCode);
+        return tryCode.equals(code);
     }
-}
 
+}
