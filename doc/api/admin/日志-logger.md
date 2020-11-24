@@ -1,5 +1,5 @@
-###日志接口
-###获取日志
+### 日志接口
+### 获取日志
 方法：GET
 
 地址：/admin/getAllLoggerByType/v1

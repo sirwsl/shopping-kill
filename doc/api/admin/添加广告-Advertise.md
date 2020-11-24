@@ -1,6 +1,6 @@
-###广告api
+### 广告api
 
-####添加一条广告
+#### 添加一条广告
 方式：POST
 
 接口：/admin/addAdvertise/v1
@@ -24,7 +24,7 @@
 }
 ```
 
-####修改一条广告
+#### 修改一条广告
 方式：PUT
 
 接口：/admin/updateAdvertise/v1
@@ -50,7 +50,7 @@
 ```
 
 
-####删除一条广告
+#### 删除一条广告
 方式：DELETE
 
 接口：/admin/delAdvertise/v1
@@ -73,7 +73,7 @@
 ```
 
 
-####前端获取广告进行展示
+#### 前端获取广告进行展示
 方式：GET
 
 接口：/admin/getAdvertiseForView/v1
@@ -103,7 +103,7 @@
 ```
 
 
-####前端获取广告进行展示
+#### 前端获取广告进行展示
 方式：GET
 
 接口：/admin/getAdvertiseForView/v1
@@ -133,7 +133,7 @@
 ```
 
 
-####获取所有广告
+#### 获取所有广告
 方式：GET
 
 接口：/admin/getAdvertiseAll/v1
@@ -185,7 +185,7 @@
 
 
 
-####获取未开始广告
+#### 获取未开始广告
 方式：GET
 
 接口：/admin/getAdvertiseBegin/v1
@@ -252,7 +252,7 @@
 ```
 
 
-####获取进行中广告
+#### 获取进行中广告
 方式：GET
 
 接口：/admin/getAdvertiseDoing/v1
@@ -318,7 +318,7 @@
 }
 ```
 
-####获取已结束广告
+#### 获取已结束广告
 方式：GET
 
 接口：/admin/getAdvertiseOver/v1

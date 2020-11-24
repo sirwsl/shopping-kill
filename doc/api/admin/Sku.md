@@ -1,5 +1,5 @@
-###SKU库存管理
-####获取全部SKU列表
+### SKU库存管理
+#### 获取全部SKU列表
 方式：GET
 
 路径：/admin/getSkuAll/v1
@@ -78,7 +78,7 @@
 ```
 
 
-####根据id更新指定SKU
+#### 根据id更新指定SKU
 方式：
 
 路径：
@@ -111,7 +111,7 @@
 ```
 
 
-####根据id删除SKU
+#### 根据id删除SKU
 方式：DELETE
 
 路径：/admin/delSkuById/v1?id=1
