@@ -21,7 +21,7 @@ public class RedisCountTask {
     @Resource
     private StringRedisTemplate stringRedisTemplate;
 
-    @Scheduled(cron = "0 0 * * *")
+    @Scheduled(cron = "0 0 0 * * *")
     private void configureTasks() {
         stringRedisTemplate.opsForValue().set(RedisEnum.COUNT_USER_SUM,"0");
         stringRedisTemplate.opsForValue().set(RedisEnum.COUNT_ORDER_SUM,"0");

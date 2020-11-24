@@ -14,11 +14,10 @@ spring:
     name: shopping-kill
   # spring 静态资源扫描路径
   resources:
-    static-locations: classpath:/static/,classpath:/templates/
+    static-locations: classpath:/ftl/,classpath:/templates/
   #环境修改
   profiles:
     active: dev,all
-
   
 
 
@@ -26,6 +25,10 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT-8
     default-property-inclusion: non_null
+  mvc:
+    view:
+      suffix: .html
+      prefix: classpath:/templates/
 
 mybatis-plus:
   type-aliases-package: com.wsl.shoppingKill.constant

@@ -61,7 +61,7 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
         //解析请求头（防止伪造token，token内容以"shoppingKill "作为开头）
 
         if (!header.startsWith(JwtEnum.TOKEN_PREFIX)) {
-            throw new TokenRuntimeException("Token无效");
+            throw new TokenRuntimeException("Token无效,请重新登录");
         }
 
         String token = header.substring(JwtEnum.TOKEN_PREFIX.length());
