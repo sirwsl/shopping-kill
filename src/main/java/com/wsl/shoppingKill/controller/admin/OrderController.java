@@ -72,7 +72,7 @@ public class OrderController {
      */
     public Result<Boolean> remind2Pay(Long orderId){
         //TODO
-
+        return Result.error();
     }
 
     /**
@@ -84,6 +84,7 @@ public class OrderController {
      */
     public Result<Boolean> modifyPrice(Long orderId){
         //TODO：
+        return Result.error();
     }
 
     /**
@@ -95,6 +96,7 @@ public class OrderController {
      */
     public Result<Boolean> outGoods(Long orderId){
         //TODO
+        return Result.error();
     }
 
     /**
@@ -106,5 +108,6 @@ public class OrderController {
      */
     public Result<Boolean> reminderEvaluation(Long orderId){
         //TODO：
+        return Result.error();
     }
 }

@@ -44,9 +44,9 @@ public class SubscriptionHistoryServiceImpl extends ServiceImpl<SubscriptionHist
         subscriptionHistory.setAdminId(abstractCurrentRequestComponent.getCurrentUser().getId());
         subscriptionHistoryMapper.insert(subscriptionHistory);
         if (subscriptionHistory.getType().equals(BaseEnum.PHONE)) {
-            rabbitTemplate.convertAndSend(RabbitMqEnum.Exchange.EXCHANGE_USER, RabbitMqEnum.Key.KEY_SUBSCRIPTION_SMS, subscriptionHistory);
+            rabbitTemplate.convertAndSend(RabbitMqEnum.Exchange.EXCHANGE_NOTICE, RabbitMqEnum.Key.KEY_SUBSCRIPTION_SMS, subscriptionHistory);
         } else if (subscriptionHistory.getType().equals(BaseEnum.EMAIL)) {
-            rabbitTemplate.convertAndSend(RabbitMqEnum.Exchange.EXCHANGE_USER, RabbitMqEnum.Key.KEY_SUBSCRIPTION_EMAIL, subscriptionHistory);
+            rabbitTemplate.convertAndSend(RabbitMqEnum.Exchange.EXCHANGE_NOTICE, RabbitMqEnum.Key.KEY_SUBSCRIPTION_MAIL, subscriptionHistory);
         }
         return true;
     }

@@ -64,7 +64,7 @@ public class LimitListController {
      **/
     @GetMapping("/selectBlackListByPhone/v1")
     public Result<List<LimitList>> getLimitListByPhone( String num){
-        if (StringUtils.isEmpty(num)){
+        if (StringUtils.isEmpty(num)|| num.isEmpty()){
             return Result.error("error","手机号不能为空");
         }
         return Result.success(limitListService.getBlackListByNumber(num, BaseEnum.PHONE));
@@ -79,7 +79,7 @@ public class LimitListController {
      **/
     @GetMapping("/selectBlackListByIp/v1")
     public Result<List<LimitList>> getLimitListByIp( String num){
-        if (StringUtils.isEmpty(num)){
+        if (StringUtils.isEmpty(num)||num.isEmpty()){
             return Result.error("error","IP不能为空");
         }
         return Result.success(limitListService.getBlackListByNumber(num,BaseEnum.IP));
@@ -146,6 +146,9 @@ public class LimitListController {
     @DeleteMapping("delBlackListById/v1")
     @MyLog(detail = "移除黑名单",grade = LoggerEnum.SERIOUS,value = "#id")
     public Result<Boolean> removeLimitListById(Long id){
+        if (id ==null || id == 0){
+            return Result.error("error","id不能为空");
+        }
         return Result.success(limitListService.removeById(id));
     }
 

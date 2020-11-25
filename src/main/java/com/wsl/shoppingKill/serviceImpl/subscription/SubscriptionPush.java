@@ -10,6 +10,7 @@ import com.wsl.shoppingKill.constant.RabbitMqEnum;
 import com.wsl.shoppingKill.constant.SmsEnum;
 import com.wsl.shoppingKill.domain.Subscriber;
 import com.wsl.shoppingKill.domain.SubscriptionHistory;
+import com.wsl.shoppingKill.obj.bo.MailObject;
 import com.wsl.shoppingKill.service.SubscriberService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
@@ -21,7 +22,10 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -50,7 +54,7 @@ public class SubscriptionPush {
      **/
     @RabbitListener(bindings = @QueueBinding(
             value = @Queue(value = RabbitMqEnum.Queue.QUEUE_SUBSCRIPTION_SMS,exclusive = "false",autoDelete = "false",durable = "true"),
-            exchange = @Exchange(RabbitMqEnum.Exchange.EXCHANGE_USER),
+            exchange = @Exchange(RabbitMqEnum.Exchange.EXCHANGE_NOTICE),
             key = RabbitMqEnum.Key.KEY_SUBSCRIPTION_SMS,
             ignoreDeclarationExceptions = "true"
     ))
@@ -66,7 +70,7 @@ public class SubscriptionPush {
         text[2] = subscriptionHistory.getDetail();
         phoneList.forEach(li-> {
             text[0] = li;
-            smsComponent.send(SmsEnum.SUBSCRIPTION.getCode(),text,li);
+            smsComponent.send(SmsEnum.SUBSCRIPTION.getCode(), Arrays.asList(text),li);
         });
         subscriptionHistory.setRealFlag(true).updateById();
     }
@@ -79,8 +83,8 @@ public class SubscriptionPush {
      **/
     @RabbitListener(bindings = @QueueBinding(
             value = @Queue(value = RabbitMqEnum.Queue.QUEUE_SUBSCRIPTION_MAIL,exclusive = "false",autoDelete = "false",durable = "true"),
-            exchange = @Exchange(RabbitMqEnum.Exchange.EXCHANGE_USER),
-            key = RabbitMqEnum.Key.KEY_SUBSCRIPTION_EMAIL,
+            exchange = @Exchange(RabbitMqEnum.Exchange.EXCHANGE_NOTICE),
+            key = RabbitMqEnum.Key.KEY_SUBSCRIPTION_MAIL,
             ignoreDeclarationExceptions = "true"
     ))
     public void emailConsumerSubscription(SubscriptionHistory subscriptionHistory, Channel channel, Message message) throws IOException {
@@ -91,9 +95,15 @@ public class SubscriptionPush {
                     .stream()
                     .map(Subscriber::getNumber)
                     .collect(Collectors.toList());
+            MailObject mailObject = new MailObject();
+            Map<String,String> map = new HashMap<>(8);
+            map.put("title",subscriptionHistory.getTitle());
+            map.put("detail",subscriptionHistory.getDetail());
+            mailObject.setContent(map).setTemplate("Subscription.ftl").setSubject(subscriptionHistory.getTitle());
             emailList.forEach(li-> {
+                mailObject.setNumber(li);
                 try {
-                    mailComponent.sendSubscription(li,subscriptionHistory);
+                    mailComponent.sendMail2Html(mailObject);
                 } catch (Exception e) {
                     log.error("邮件推送失败用户mail：{}，内容为：{}",li,subscriptionHistory.getTitle());
                     e.printStackTrace();

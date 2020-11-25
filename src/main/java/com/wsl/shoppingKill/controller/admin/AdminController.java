@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Objects;
 
@@ -65,7 +64,10 @@ public class AdminController {
      * @date 2020/11/9 11:35
      **/
     @DeleteMapping("/delAdmin/v1")
-    public Result<Boolean> delAdmin(@NotNull(message = "id不能为空") Long id){
+    public Result<Boolean> delAdmin(Long id){
+        if (id == null || id == 0){
+            return Result.error("error","id不能为空");
+        }
         if (!component.getCurrentUser().getFlag().equals(BaseEnum.ADMIN)){
             return Result.error("error","只有超级管理员有权限");
         }
