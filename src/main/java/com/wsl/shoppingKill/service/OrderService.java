@@ -22,4 +22,42 @@ public interface OrderService extends IService<Order> {
      * @return IPage<com.wsl.shoppingKill.obj.vo.OrderVO>
      */
     IPage<OrderVO> getAllOrder(OrderParam orderParam, Long current, Long size);
+
+
+    /**
+     * 提醒支付
+     * @author wangShilei
+     * @date 2020/11/25 18:50
+     * @param orderId :
+     * @return boolean
+     */
+    boolean remind2Pay(Long orderId);
+
+    /**
+     * 修改价格
+     * @author wangShilei
+     * @date 2020/11/25 18:50
+     * @param orderId :
+     * @return boolean
+     */
+    boolean modifyPrice(Long orderId);
+
+    /**
+     * 出库短信通知
+     * @author wangShilei
+     * @date 2020/11/25 18:50
+     * @param orderId :
+     * @return boolean
+     */
+    boolean outGoods(Long orderId);
+
+    /**
+     * 提醒评价
+     * @author wangShilei
+     * @date 2020/11/25 18:49
+     * @param orderId :
+     * @return boolean
+     */
+    boolean reminderEvaluation(Long orderId);
+
 }

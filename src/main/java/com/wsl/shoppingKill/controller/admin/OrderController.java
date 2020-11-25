@@ -62,4 +62,49 @@ public class OrderController {
         }
         return Result.error("error","缺少必要参数");
     }
+
+    /**
+     * 提醒支付
+     * @author wangShilei
+     * @date 2020/11/25 18:45
+     * @param orderId :
+     * @return Result<java.lang.Boolean>
+     */
+    public Result<Boolean> remind2Pay(Long orderId){
+        //TODO
+
+    }
+
+    /**
+     * 修改价格
+     * @author wangShilei
+     * @date 2020/11/25 18:47
+     * @param orderId :
+     * @return Result<java.lang.Boolean>
+     */
+    public Result<Boolean> modifyPrice(Long orderId){
+        //TODO：
+    }
+
+    /**
+     * 出库短信通知
+     * @author wangShilei
+     * @date 2020/11/25 18:46
+     * @param orderId :
+     * @return Result<java.lang.Boolean>
+     */
+    public Result<Boolean> outGoods(Long orderId){
+        //TODO
+    }
+
+    /**
+     * 提醒评价
+     * @author wangShilei
+     * @date 2020/11/25 18:46
+     * @param orderId :
+     * @return Result<java.lang.Boolean>
+     */
+    public Result<Boolean> reminderEvaluation(Long orderId){
+        //TODO：
+    }
 }

@@ -25,4 +25,24 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     public IPage<OrderVO> getAllOrder(OrderParam orderParam, Long current, Long size){
         return orderMapper.getAllOrder(new Page<>(current,size),orderParam);
     }
+
+    @Override
+    public boolean remind2Pay(Long orderId) {
+        return false;
+    }
+
+    @Override
+    public boolean modifyPrice(Long orderId) {
+        return false;
+    }
+
+    @Override
+    public boolean outGoods(Long orderId) {
+        return false;
+    }
+
+    @Override
+    public boolean reminderEvaluation(Long orderId) {
+        return false;
+    }
 }
