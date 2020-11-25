@@ -52,8 +52,8 @@ public class CuratorFrameworkConfig {
         }catch (Exception e){
             curatorFramework.close();
             Log.warn("zk启动异常{}尝试重新启动",e.getLocalizedMessage());
-//            curatorFramework.start();
-//            Log.info("zk正常启动");
+            curatorFramework.start();
+            Log.info("zk正常启动");
         }
 
         return curatorFramework;

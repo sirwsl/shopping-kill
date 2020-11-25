@@ -101,7 +101,7 @@ public class Order extends Model<Order> implements Serializable {
     private String remark;
 
     /**
-    * 订单状态(0-已下单未支付 1-已支付 2-已出库 3-已收货 4-已评价)
+    * 订单状态(0-取消订单 1-已下单未支付 2-已支付 3-已出库 4-已收货 5-已评价)
     */
     private Integer status;
 

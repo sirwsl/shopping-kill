@@ -58,6 +58,17 @@ public class Admin extends Model<Admin> implements Serializable {
 
 
     /**
+     * 用户姓名
+     */
+    private String nickName;
+
+
+    /**
+     * 用户头像
+     */
+    private String img;
+
+    /**
      * 性别
      */
     @JSONField(serializeUsing = BaseEnumSerializer.class)
@@ -124,6 +135,10 @@ public class Admin extends Model<Admin> implements Serializable {
     public static final String NAME = "name";
 
     public static final String PASSWORD = "password";
+
+    public static final String NICK_NAME = "nick_name";
+
+    public static final String IMG = "img";
 
     public static final String SEX = "sex";
 
