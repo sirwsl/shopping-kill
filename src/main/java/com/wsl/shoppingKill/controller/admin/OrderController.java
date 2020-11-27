@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.lang.reflect.Field;
+import java.math.BigDecimal;
 import java.util.Objects;
 
 /**
@@ -70,9 +71,12 @@ public class OrderController {
      * @param orderId :
      * @return Result<java.lang.Boolean>
      */
+    @GetMapping("/remind2Pay/v1")
     public Result<Boolean> remind2Pay(Long orderId){
-        //TODO
-        return Result.error();
+        if (orderId==null||orderId==0){
+            return Result.error("error","订单id不能为空");
+        }
+        return Result.success(orderService.remind2Pay(orderId));
     }
 
     /**
@@ -82,9 +86,15 @@ public class OrderController {
      * @param orderId :
      * @return Result<java.lang.Boolean>
      */
-    public Result<Boolean> modifyPrice(Long orderId){
-        //TODO：
-        return Result.error();
+    @GetMapping("/modifyPrice/v1")
+    public Result<Boolean> modifyPrice(Long orderId, BigDecimal bigDecimal){
+        if (orderId==null||orderId==0){
+            return Result.error("error","订单id不能为空");
+        }
+        if(bigDecimal==null||bigDecimal.compareTo(BigDecimal.ZERO)<=0){
+            return Result.error("error","价格不能为空，更不能小于0");
+        }
+        return Result.success(orderService.modifyPrice(orderId, bigDecimal));
     }
 
     /**
@@ -94,9 +104,12 @@ public class OrderController {
      * @param orderId :
      * @return Result<java.lang.Boolean>
      */
+    @GetMapping("/outGoods/v1")
     public Result<Boolean> outGoods(Long orderId){
-        //TODO
-        return Result.error();
+        if (orderId==null||orderId==0){
+            return Result.error("error","订单id不能为空");
+        }
+        return Result.success(orderService.outGoods(orderId));
     }
 
     /**
@@ -106,8 +119,11 @@ public class OrderController {
      * @param orderId :
      * @return Result<java.lang.Boolean>
      */
+    @GetMapping("/reminderEvaluation/v1")
     public Result<Boolean> reminderEvaluation(Long orderId){
-        //TODO：
-        return Result.error();
+        if (orderId==null||orderId==0){
+            return Result.error("error","订单id不能为空");
+        }
+        return Result.success(orderService.reminderEvaluation(orderId));
     }
 }

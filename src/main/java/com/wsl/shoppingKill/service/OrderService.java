@@ -6,6 +6,8 @@ import com.wsl.shoppingKill.domain.Order;
 import com.wsl.shoppingKill.obj.param.OrderParam;
 import com.wsl.shoppingKill.obj.vo.OrderVO;
 
+import java.math.BigDecimal;
+
 /**
  * @author wangShilei
  */
@@ -38,9 +40,10 @@ public interface OrderService extends IService<Order> {
      * @author wangShilei
      * @date 2020/11/25 18:50
      * @param orderId :
+     * @param bigDecimal :
      * @return boolean
      */
-    boolean modifyPrice(Long orderId);
+    boolean modifyPrice(Long orderId, BigDecimal bigDecimal);
 
     /**
      * 出库短信通知

@@ -68,4 +68,13 @@
         </where>
         AND to2.del_flag = 0
     </select>
+
+    <select id="getOrderSendInfo" resultType="com.wsl.shoppingKill.obj.bo.OrderMqBO">
+        select tu.nick_name as userName, tg.name as goodsName,tu.phone, tu.email
+        from t_order
+                     left join t_user tu on tu.id = t_order.user_id
+                     left join t_goods tg on tg.id = (select t_sku.goods_id from t_sku where t_sku.id = t_order.sku_id)
+        where t_order.id = #{id}
+          and t_order.del_flag = 0
+    </select>
 </mapper>

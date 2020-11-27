@@ -36,7 +36,7 @@ public class Order extends Model<Order> implements Serializable {
     */
     @Id
     @TableId()
-    private String id;
+    private Long id;
 
     /**
     * 买家id

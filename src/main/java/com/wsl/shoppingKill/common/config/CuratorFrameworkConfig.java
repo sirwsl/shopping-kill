@@ -51,9 +51,9 @@ public class CuratorFrameworkConfig {
                     .forPath("/monitor/"+ip);
         }catch (Exception e){
             curatorFramework.close();
-            Log.warn("zk启动异常{}尝试重新启动",e.getLocalizedMessage());
-            curatorFramework.start();
-            Log.info("zk正常启动");
+            Log.warn("zk启动异常{}",e.getLocalizedMessage());
+           // curatorFramework.start();
+           // Log.info("zk正常启动");
         }
 
         return curatorFramework;
