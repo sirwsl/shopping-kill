@@ -11,7 +11,7 @@
  Target Server Version : 80019
  File Encoding         : 65001
 
- Date: 25/11/2020 17:50:49
+ Date: 27/11/2020 11:44:13
 */
 
 SET NAMES utf8mb4;
@@ -24,7 +24,7 @@ DROP TABLE IF EXISTS `t_activity`;
 CREATE TABLE `t_activity`  (
   `id` bigint NOT NULL AUTO_INCREMENT COMMENT '秒杀活动',
   `sku_id` bigint NOT NULL COMMENT 'skuid',
-  `num` int NOT NULL DEFAULT 50 COMMENT '上架数量',
+  `num` int NOT NULL DEFAULT 50 COMMENT '剩余数量',
   `money` decimal(10, 2) NULL DEFAULT NULL COMMENT '售价',
   `start_time` datetime(0) NOT NULL COMMENT '开始时间',
   `end_time` datetime(0) NOT NULL COMMENT '结束时间',
@@ -33,6 +33,21 @@ CREATE TABLE `t_activity`  (
   `del_flag` tinyint(1) NULL DEFAULT 0 COMMENT '逻辑删除',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '限时抢购活动表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for t_activity_log
+-- ----------------------------
+DROP TABLE IF EXISTS `t_activity_log`;
+CREATE TABLE `t_activity_log`  (
+  `id` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT,
+  `sku_id` bigint NOT NULL COMMENT 'SkuId',
+  `love` int NOT NULL DEFAULT 0 COMMENT '收藏人数',
+  `sell_num` int NULL DEFAULT NULL COMMENT '上架数量',
+  `creat_time` datetime(0) NULL DEFAULT NULL,
+  `update_time` datetime(0) NULL DEFAULT NULL,
+  `del_flag` tinyint(1) NULL DEFAULT NULL COMMENT '逻辑删除',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for t_address
@@ -50,7 +65,7 @@ CREATE TABLE `t_address`  (
   `update_time` datetime(0) NOT NULL COMMENT '修改时间',
   `del_flag` tinyint(1) NOT NULL DEFAULT 0 COMMENT '是否删除',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '收货地址' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '收货地址' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Table structure for t_admin
