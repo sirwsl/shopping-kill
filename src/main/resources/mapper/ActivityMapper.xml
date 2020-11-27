@@ -6,13 +6,28 @@
     <!--@Table t_activity-->
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="sku_id" jdbcType="INTEGER" property="skuId" />
-    <result column="num" jdbcType="INTEGER" property="num" />
-    <result column="money" jdbcType="DECIMAL" property="money" />
+    <result column="love" jdbcType="INTEGER" property="love" />
+    <result column="sell_num" jdbcType="INTEGER" property="sellNum" />
+    <result column="total_num" jdbcType="INTEGER" property="totalNum" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
     <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
     <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
     <result column="creat_time" jdbcType="TIMESTAMP" property="creatTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="del_flag" jdbcType="BOOLEAN" property="delFlag" />
+  </resultMap>
+
+  <resultMap id="getActivityAll" type="com.wsl.shoppingKill.obj.vo.ActivityVO">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="goodsName" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <collection property="skuList" ofType="com.wsl.shoppingKill.obj.vo.ActivityVO$Goods2Sku" >
+      <result column="sku_name" property="skuName"/>
+      <result column="money" property="money"/>
+      <result column="total_num" property="totalNum"/>
+      <result column="last_num" property="lastNum"/>
+    </collection>
   </resultMap>
 
 </mapper>
