@@ -1,33 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wsl.shoppingKill.mapper.ActivityMapper">
-  <resultMap id="BaseResultMap" type="com.wsl.shoppingKill.domain.Activity">
-    <!--@mbg.generated-->
-    <!--@Table t_activity-->
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="sku_id" jdbcType="INTEGER" property="skuId" />
-    <result column="love" jdbcType="INTEGER" property="love" />
-    <result column="sell_num" jdbcType="INTEGER" property="sellNum" />
-    <result column="total_num" jdbcType="INTEGER" property="totalNum" />
-    <result column="price" jdbcType="DECIMAL" property="price" />
-    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
-    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
-    <result column="creat_time" jdbcType="TIMESTAMP" property="creatTime" />
-    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
-    <result column="del_flag" jdbcType="BOOLEAN" property="delFlag" />
-  </resultMap>
+    <resultMap id="BaseResultMap" type="com.wsl.shoppingKill.domain.Activity">
+        <!--@mbg.generated-->
+        <!--@Table t_activity-->
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="sku_id" jdbcType="INTEGER" property="skuId"/>
+        <result column="love" jdbcType="INTEGER" property="love"/>
+        <result column="sell_num" jdbcType="INTEGER" property="sellNum"/>
+        <result column="total_num" jdbcType="INTEGER" property="totalNum"/>
+        <result column="price" jdbcType="DECIMAL" property="price"/>
+        <result column="start_time" jdbcType="TIMESTAMP" property="startTime"/>
+        <result column="end_time" jdbcType="TIMESTAMP" property="endTime"/>
+        <result column="creat_time" jdbcType="TIMESTAMP" property="creatTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="del_flag" jdbcType="BOOLEAN" property="delFlag"/>
+    </resultMap>
 
-  <resultMap id="getActivityAll" type="com.wsl.shoppingKill.obj.vo.ActivityVO">
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="goodsName" />
-    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
-    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
-    <collection property="skuList" ofType="com.wsl.shoppingKill.obj.vo.ActivityVO$Goods2Sku" >
-      <result column="sku_name" property="skuName"/>
-      <result column="money" property="money"/>
-      <result column="total_num" property="totalNum"/>
-      <result column="last_num" property="lastNum"/>
-    </collection>
-  </resultMap>
+    <resultMap id="ActivityByKill" type="com.wsl.shoppingKill.obj.vo.ActivityVO">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="goodsName"/>
+        <result column="start_time" jdbcType="TIMESTAMP" property="startTime"/>
+        <result column="end_time" jdbcType="TIMESTAMP" property="endTime"/>
+        <collection property="skuList" ofType="com.wsl.shoppingKill.obj.vo.ActivityVO$Goods2Sku">
+            <id column="sid" jdbcType="BIGINT" property="id"/>
+            <result column="attribute" property="name"/>
+            <result column="price" property="price"/>
+            <result column="total_num" property="totalNum"/>
+            <result column="sell_num" property="sellNum"/>
+        </collection>
+    </resultMap>
 
+    <select id="getActivityAll" resultMap="ActivityByKill">
+        select ta.id,
+               tg.name,
+               ta.start_time,
+               ta.end_time,
+               ts.id as sid,
+               ts.attribute,
+               ta.price,
+               ta.total_num,
+               ta.sell_num
+
+                from
+                (
+                select ta.id,
+                       ta.start_time,
+                       ta.end_time,
+                       ta.price,
+                       ta.total_num,
+                       ta.sell_num,
+                        ta.sku_id
+                from t_activity ta
+        <where>
+            <if test="activity.id != null and activity.id != ''">
+                <bind name="ids" value="'%' + activity.id + '%'"/>
+                ta.id like #{ids}
+            </if>
+            <if test="activity.startTime != null">
+                and ta.start_time <![CDATA[ >= ]]> #{activity.startTime}
+            </if>
+            <if test="activity.endTime != null">
+                and ta.end_time <![CDATA[ <= ]]>#{activity.endTime}
+            </if>
+            and del_flag = 0
+        </where>
+        ) ta
+                left join(
+                select t_sku.id, t_sku.goods_id, t_sku.attribute
+                from t_sku
+                where del_flag = 0
+                ) ts on ts.id = ta.sku_id
+                left join(
+                select t_goods.id, t_goods.name
+                from t_goods
+        <where>
+            <if test="activity.name != null and activity.name != ''">
+                <bind name="names" value="'%' + activity.name + '%'"/>
+                name like #{names}
+            </if>
+        </where>
+        )tg on tg.id = ts.goods_id
+    </select>
 </mapper>

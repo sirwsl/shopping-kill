@@ -74,16 +74,17 @@ public class ActivityVO implements Serializable {
     @Accessors(chain = true)
     public static class Goods2Sku implements Serializable{
 
+        private Long id;
 
         /**
          * 物品属性
          */
-        private String skuName;
+        private String name;
 
         /**
          * 活动价格
          */
-        private BigDecimal money;
+        private BigDecimal price;
 
         /**
          * 上架数量
@@ -93,7 +94,7 @@ public class ActivityVO implements Serializable {
         /**
          * 剩余数量
          */
-        private Integer lastNum;
+        private Integer sellNum;
     }
 
 

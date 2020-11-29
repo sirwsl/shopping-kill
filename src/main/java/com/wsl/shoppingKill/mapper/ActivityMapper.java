@@ -15,5 +15,13 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface ActivityMapper extends BaseMapper<Activity> {
 
+   /**
+    * 获取秒杀活动列表详情
+    * @author wangShilei
+    * @date 2020/11/29 9:58 下午
+    * @param page :
+    * @param activityParam :
+    * @return IPage<com.wsl.shoppingKill.obj.vo.ActivityVO>
+    */
    IPage<ActivityVO> getActivityAll(Page<ActivityVO> page, @Param("activity") ActivityParam activityParam);
 }
