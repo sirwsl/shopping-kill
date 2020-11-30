@@ -51,5 +51,14 @@ public interface SkuService extends IService<Sku> {
      **/
     boolean delSku(Long id);
 
+    /**
+     * 根据活动id获取库存数量
+     * @author wangShilei
+     * @date 2020/11/30 14:20
+     * @param id :
+     * @return java.lang.Integer
+     */
+    Integer getMaxNumByActivity(Long id);
+
 
 }

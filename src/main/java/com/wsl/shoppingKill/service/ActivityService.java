@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.wsl.shoppingKill.domain.Activity;
 import com.wsl.shoppingKill.obj.param.ActivityParam;
+import com.wsl.shoppingKill.obj.param.ActivityUpdateParam;
 import com.wsl.shoppingKill.obj.vo.ActivityByGoodsVO;
 import com.wsl.shoppingKill.obj.vo.ActivityVO;
 
@@ -43,7 +44,7 @@ public interface ActivityService extends IService<Activity> {
      * @param activity :
      * @return boolean
      */
-    boolean updateActivity(Activity activity);
+    boolean addOrUpdateActivity(ActivityUpdateParam activity);
 
     /**
      * 根据id删除一个活动
@@ -55,11 +56,11 @@ public interface ActivityService extends IService<Activity> {
     boolean delActivity(Long id);
 
     /**
-     * 关闭一个活动
+     * 校验活动能否被修改
      * @author wangShilei
-     * @date 2020/11/30 9:15
+     * @date 2020/11/30 13:53
      * @param id :
-     * @return boolean
+     * @return 0-未开始  1-进行中  2-已结束
      */
-    boolean closeActivity(Long id);
+    Integer checkActivity(Long id);
 }

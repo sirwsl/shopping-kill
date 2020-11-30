@@ -40,4 +40,10 @@
                  and t_sku.del_flag = 0
              </where>
     </select>
+
+    <select id="getMaxNumByActivity" resultType="java.lang.Integer">
+        select num from  t_sku where id = (
+                select sku_id from t_activity where t_activity.id = #{id}
+        )
+    </select>
 </mapper>

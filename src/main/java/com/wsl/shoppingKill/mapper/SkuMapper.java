@@ -35,6 +35,13 @@ public interface SkuMapper extends BaseMapper<Sku> {
      **/
     IPage<SkuVO> getSkuAll(Page<SkuVO> page,@Param("id") Long id, @Param("name") String name);
 
-
+    /**
+     * 根据活动id获取最大库存数量
+     * @author wangShilei
+     * @date 2020/11/30 14:12
+     * @param id :
+     * @return java.lang.Integer
+     */
+    Integer getMaxNumByActivity(Long id);
 
 }

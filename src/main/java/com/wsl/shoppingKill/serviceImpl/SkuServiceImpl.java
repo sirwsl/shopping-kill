@@ -66,4 +66,9 @@ public class SkuServiceImpl extends ServiceImpl<SkuMapper, Sku> implements SkuSe
     public boolean delSku(Long id) {
         return skuMapper.deleteById(id)>0;
     }
+
+    @Override
+    public Integer getMaxNumByActivity(Long id) {
+        return skuMapper.getMaxNumByActivity(id);
+    }
 }
