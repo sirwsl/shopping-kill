@@ -20,7 +20,7 @@ public interface ActivityMapper extends BaseMapper<Activity> {
     * @author wangShilei
     * @date 2020/11/29 9:58 下午
     * @param page :
-    * @param activityParam :
+    * @param activityParam : status:1-未开始 2-进行中 3-已结束
     * @return IPage<com.wsl.shoppingKill.obj.vo.ActivityVO>
     */
    IPage<ActivityVO> getActivityAll(Page<ActivityVO> page, @Param("activity") ActivityParam activityParam);

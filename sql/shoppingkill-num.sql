@@ -11,7 +11,7 @@
  Target Server Version : 80019
  File Encoding         : 65001
 
- Date: 30/11/2020 08:54:34
+ Date: 27/11/2020 11:44:05
 */
 
 SET NAMES utf8mb4;
@@ -22,41 +22,43 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `t_activity`;
 CREATE TABLE `t_activity`  (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `sku_id` bigint NOT NULL COMMENT 'SkuId',
-  `love` int NOT NULL DEFAULT 0 COMMENT '收藏人数',
-  `sell_num` int NULL DEFAULT 0 COMMENT '已售数量',
-  `total_num` int NOT NULL DEFAULT 0 COMMENT '总数',
-  `price` decimal(10, 2) NULL DEFAULT 0.00 COMMENT '销售价格',
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '秒杀活动',
+  `sku_id` bigint NOT NULL COMMENT 'skuid',
+  `num` int NOT NULL DEFAULT 50 COMMENT '剩余数量',
+  `money` decimal(10, 2) NULL DEFAULT NULL COMMENT '售价',
   `start_time` datetime(0) NOT NULL COMMENT '开始时间',
   `end_time` datetime(0) NOT NULL COMMENT '结束时间',
-  `creat_time` datetime(0) NULL DEFAULT NULL,
-  `update_time` datetime(0) NULL DEFAULT NULL,
-  `del_flag` tinyint(1) NULL DEFAULT NULL COMMENT '逻辑删除',
+  `creat_time` datetime(0) NOT NULL COMMENT '创建时间',
+  `update_time` datetime(0) NOT NULL COMMENT '跟新时间',
+  `del_flag` tinyint(1) NULL DEFAULT 0 COMMENT '逻辑删除',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '限时抢购活动表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of t_activity
 -- ----------------------------
-INSERT INTO `t_activity` VALUES (1, 1, 10, 0, 200, 99.00, '2020-12-02 08:48:03', '2021-01-03 08:48:08', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
-INSERT INTO `t_activity` VALUES (2, 6, 9, 0, 200, 89.00, '2020-11-30 08:48:03', '2020-12-02 08:48:08', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
-INSERT INTO `t_activity` VALUES (3, 1, 8, 60, 200, 98.00, '2020-11-29 08:48:03', '2020-12-02 08:48:08', '2020-11-30 08:48:15', '2020-11-29 08:48:19', 0);
-INSERT INTO `t_activity` VALUES (4, 2, 50, 78, 200, 88.00, '2020-11-30 08:48:03', '2020-12-02 08:48:08', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
-INSERT INTO `t_activity` VALUES (5, 2, 20, 66, 200, 78.00, '2020-11-19 08:48:03', '2020-12-02 08:48:08', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
-INSERT INTO `t_activity` VALUES (6, 6, 33, 20, 200, 56.00, '2020-11-29 08:48:03', '2020-12-02 08:48:08', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
-INSERT INTO `t_activity` VALUES (7, 2, 66, 0, 200, 49.00, '2020-11-30 08:48:03', '2020-12-02 08:48:08', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
-INSERT INTO `t_activity` VALUES (8, 2, 78, 16, 200, 38.00, '2020-11-30 08:48:03', '2020-12-02 08:48:08', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
-INSERT INTO `t_activity` VALUES (9, 3, 10, 15, 200, 55.00, '2020-11-30 08:48:03', '2020-12-02 08:48:08', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
-INSERT INTO `t_activity` VALUES (10, 3, 85, 12, 200, 88.00, '2020-11-30 08:48:03', '2020-12-02 08:48:08', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
-INSERT INTO `t_activity` VALUES (11, 3, 10, 3, 200, 66.00, '2020-11-30 08:48:03', '2020-12-02 08:48:08', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
-INSERT INTO `t_activity` VALUES (12, 1, 66, 2, 100, 77.00, '2020-11-30 08:48:03', '2020-12-02 08:48:08', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
-INSERT INTO `t_activity` VALUES (13, 3, 78, 5, 100, 88.00, '2020-11-30 08:48:03', '2020-12-02 08:48:08', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
-INSERT INTO `t_activity` VALUES (14, 4, 10, 6, 100, 119.00, '2020-11-30 08:48:03', '2020-12-02 08:48:08', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
-INSERT INTO `t_activity` VALUES (15, 4, 88, 7, 100, 139.00, '2020-12-02 08:48:03', '2021-01-03 08:48:08', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
-INSERT INTO `t_activity` VALUES (16, 4, 10, 8, 100, 199.00, '2020-12-01 08:48:03', '2020-12-02 08:48:08', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
-INSERT INTO `t_activity` VALUES (17, 5, 8, 5, 100, 99.00, '2020-11-30 08:48:03', '2020-12-02 08:48:08', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
-INSERT INTO `t_activity` VALUES (18, 6, 6, 10, 100, 129.00, '2020-11-30 08:48:03', '2020-12-06 08:48:08', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
+INSERT INTO `t_activity` VALUES (1, 1, 50, 50.00, '2020-11-16 18:51:22', '2020-11-16 18:51:24', '2020-11-16 18:51:26', '2020-11-16 18:51:28', 0);
+INSERT INTO `t_activity` VALUES (2, 2, 50, 80.00, '2020-11-17 14:23:09', '2020-11-19 14:23:14', '2020-11-17 14:23:22', '2020-11-17 14:24:14', 0);
+INSERT INTO `t_activity` VALUES (3, 3, 50, 228.00, '2020-11-18 14:24:59', '2020-11-20 14:25:03', '2020-11-17 14:25:08', '2020-11-17 14:25:10', 0);
+
+-- ----------------------------
+-- Table structure for t_activity_log
+-- ----------------------------
+DROP TABLE IF EXISTS `t_activity_log`;
+CREATE TABLE `t_activity_log`  (
+  `id` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT,
+  `sku_id` bigint NOT NULL COMMENT 'SkuId',
+  `love` int NOT NULL DEFAULT 0 COMMENT '收藏人数',
+  `sell_num` int NULL DEFAULT NULL COMMENT '上架数量',
+  `creat_time` datetime(0) NULL DEFAULT NULL,
+  `update_time` datetime(0) NULL DEFAULT NULL,
+  `del_flag` tinyint(1) NULL DEFAULT NULL COMMENT '逻辑删除',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of t_activity_log
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for t_address
@@ -270,7 +272,7 @@ CREATE TABLE `t_loggers`  (
   `update_time` datetime(0) NOT NULL COMMENT '更新时间',
   `del_flag` tinyint(1) NOT NULL DEFAULT 0 COMMENT '是否删除',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 94 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 90 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of t_loggers

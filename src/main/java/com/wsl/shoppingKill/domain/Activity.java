@@ -34,7 +34,7 @@ public class Activity extends Model<Activity> implements Serializable {
     @Id
     @Column(name = "id")
     @GeneratedValue(generator = "JDBC")
-    private Integer id;
+    private Long id;
 
     /**
      * SkuId

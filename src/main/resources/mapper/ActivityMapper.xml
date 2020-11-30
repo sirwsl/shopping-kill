@@ -50,7 +50,7 @@
                        ta.price,
                        ta.total_num,
                        ta.sell_num,
-                        ta.sku_id
+                       ta.sku_id
                 from t_activity ta
         <where>
             <if test="activity.id != null and activity.id != ''">
@@ -62,6 +62,18 @@
             </if>
             <if test="activity.endTime != null">
                 and ta.end_time <![CDATA[ <= ]]>#{activity.endTime}
+            </if>
+            <if test="activity.status != null">
+                <if test="activity.status == 1">
+                    and ta.end_time <![CDATA[ <= ]]> #{activity.time}
+                </if>
+                <if test="activity.status == 2">
+                    and ta.start_time  <![CDATA[ <= ]]> #{activity.time}
+                    and ta.end_time <![CDATA[ >= ]]> #{activity.time}
+                </if>
+                <if test="activity.status == 3">
+                    and ta.start_time  <![CDATA[ >= ]]> #{activity.time}
+                </if>
             </if>
             and del_flag = 0
         </where>

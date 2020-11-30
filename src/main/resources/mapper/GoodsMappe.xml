@@ -15,6 +15,16 @@
     <result column="del_flag" jdbcType="BOOLEAN" property="delFlag" />
   </resultMap>
 
+    <resultMap id="ActivityByGoods" type="com.wsl.shoppingKill.obj.vo.ActivityByGoodsVO">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="goodsName"/>
+        <collection property="skuList" ofType="com.wsl.shoppingKill.obj.vo.ActivityByGoodsVO$Goods2Sku">
+            <id column="sid" jdbcType="BIGINT" property="id"/>
+            <result column="attribute" property="name"/>
+            <result column="num" property="num"/>
+        </collection>
+    </resultMap>
+
     <select id="getAllGoods" resultType="com.wsl.shoppingKill.obj.vo.GoodsVO">
         select tg.id,
                tg.name,
@@ -31,12 +41,29 @@
             </if>
             <if test="goods.name != null and goods.name != ''">
                 <bind name="names" value="'%' + goods.name + '%'"/>
-                tg.name = #{names}
+                and tg.name = #{names}
             </if>
             <if test="goods.shelf != null">
-                tg.shelf = #{goods.shelf}
+                and tg.shelf = #{goods.shelf}
             </if>
             and tg.del_flag = 0
         </where>
+    </select>
+
+  <select id="getActivityBuyGoods" resultMap="ActivityByGoods">
+      select tg.id,tg.name,ts.id as sid,ts.attribute,ts.num
+      from t_goods tg
+      left join t_sku ts on ts.goods_id = tg.id
+      <where>
+          tg.del_flag = 0 and ts.del_flag = 0
+          <if test="name != null and name != ''">
+              <bind name="names" value="'%' + name + '%'" />
+              and tg.name like #{names}
+          </if>
+          <if test="id != null">
+              <bind name="ids" value="'%' + id + '%'" />
+              and tg.id like #{ids}
+          </if>
+      </where>
     </select>
 </mapper>
