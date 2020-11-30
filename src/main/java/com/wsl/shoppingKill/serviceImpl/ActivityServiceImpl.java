@@ -23,10 +23,7 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -63,14 +60,14 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
         //获取对应商品的SKU数量
         Sku sku = new Sku();
         Map<Long, List<Sku>> collect = sku.selectList(new QueryWrapper<Sku>().select(Sku.ID, Sku.NUM)
-                .eq(Sku.ID,activity.getSkuList()
+                .in(Sku.ID,activity.getSkuList()
                         .stream()
                         .map(ActivityUpdateParam.Sku::getId)
                         .map(String::valueOf)
-                        .toArray()
+                        .collect(Collectors.toList())
         )).stream().collect(Collectors.groupingBy(Sku::getId));
 
-        System.err.println(activity.getSkuList().toString());
+        collect.forEach((k,v) -> System.err.println(k+"          "+v.toString()));
 
         //遍历判断
         activity.getSkuList().forEach(li -> {
