@@ -71,7 +71,7 @@ public class VerifyComponent {
     public Boolean imgVerifyCode(String tryCode,HttpServletRequest request) {
         String code = (String) request.getSession().getAttribute("code");
         log.info("rightCode={}, tryCode={}", code, tryCode);
-        return tryCode.equals(code);
+        return tryCode.equalsIgnoreCase(code);
     }
 
 }

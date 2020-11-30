@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-    <title> - 登录</title>
+    <title>Kill-后台登录</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
 
@@ -29,24 +29,32 @@
         <div>
             <div>
 
-                <h1 class="logo-name">h</h1>
+                <h1 class="logo-name">kill</h1>
 
             </div>
-            <h3>欢迎使用 hAdmin</h3>
+            <h3>欢迎使用 ShoppingKill</h3>
 
-            <form class="m-t" role="form" action="index.html">
+            <form class="m-t" role="form" id = "login" name = "login" enctype="multipart/form-data" action="http://localhost:8080/login/admin/v1" method="post" accept-charset="utf-8">
                 <div class="form-group">
-                    <input type="email" class="form-control" placeholder="用户名" required="">
+                    <input type="text" id ="name" name ="name" style="height: 40px; font-size: 1.3em;" class="form-control text-justify" placeholder="用户名" required="">
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" placeholder="密码" required="">
+                    <input type="password" id = "password" name="password" style="height: 40px; font-size: 1.3em;" class="form-control text-justify" placeholder="密码" required="">
                 </div>
-                <button type="submit" class="btn btn-primary block full-width m-b">登 录</button>
-
-
+				<div class="row">
+				    <div class="col-sm-7">
+				        <input style="height: 40px; font-size: 1.3em;" id = "code" name = "code" class="form-control text-justify" type="text" name="codeNum" maxlength="4"  placeholder="验证码">
+				    </div>
+				    <div class="col-sm-5">
+				        <img border="0" style="height: 40px;" id = "img" name ="img" style="cursor:pointer" alt="刷新" onclick="refresh(this)" src="http://localhost:8080/verify/getJpg/v1" >
+				    </div>
+					
+				</div>
+				</br>
+                <button type="button" id = "sub" class="btn btn-primary block full-width m-b">登 录</button>
                 <p class="text-muted text-center"> <a href="login.html#"><small>忘记密码了？</small></a> | <a href="register.html">注册一个新账号</a>
                 </p>
-
+				
             </form>
         </div>
     </div>
@@ -54,8 +62,42 @@
     <!-- 全局js -->
     <script src="../static/admin/js/jquery.min.js?v=2.1.4"></script>
     <script src="../static/admin/js/bootstrap.min.js?v=3.3.6"></script>
-
-    
+	<script src="../static/admin/js/jquery.form.js.js"></script>
+	<script type="application/javascript">
+		function refresh(obj){
+			obj.src="http://localhost:8080/verify/getJpg/v1?id="+Math.random();
+		};
+		
+		$("#sub").click(function () {
+		    $("#login").ajaxSubmit({
+				xhrFields: {withCredentials: true},
+				crossDomain: true,
+				success: function(re) {
+					alert(re.userMsg);
+					if (re.code==0){
+						window.location.href="/index.html"
+					}else{
+						$("img").attr("src","http://localhost:8080/verify/getJpg/v1?id="+ Math.random());
+					}
+				}
+		    });
+		});
+		
+		// $("#sub").click(function () {
+		//     $("#login").ajaxSubmit(function (re) {
+		// 		alert(re.userMsg);
+		//         if (re.code==0){
+		// 			window.location.href="/index.html"
+		// 		}else{
+		// 			$("img").attr("src","http://localhost:8080/verify/getJpg/v1?id="+ Math.random());
+				
+		// 		}
+				
+		//     });
+		// });
+		
+		
+	</script>	
     
 
 </body>
