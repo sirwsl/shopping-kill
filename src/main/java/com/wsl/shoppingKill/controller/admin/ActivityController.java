@@ -74,11 +74,11 @@ public class ActivityController {
      * @author wangShilei
      * @date 2020/11/30 15:24
      */
-    @PutMapping("/addOrUpdateActivity/v1")
-    public Result<Boolean> updateActivity(@Valid ActivityUpdateParam activity) {
+    @PostMapping("/addOrUpdateActivity/v1")
+    public Result<Boolean> updateActivity(@Valid @RequestBody ActivityUpdateParam activity) {
         //校验能否被修改
         if (activity.getId() != null && activity.getId() > 0) {
-            if (activityService.checkActivity(activity.getSkuList().get(0).getId()) != 0) {
+            if (activityService.checkActivity(activity.getId()) != 0) {
                 return Result.error("error", "当前活动不允许被修改");
             }
         }

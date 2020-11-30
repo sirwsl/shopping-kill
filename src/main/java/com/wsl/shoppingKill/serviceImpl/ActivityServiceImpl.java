@@ -26,6 +26,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -59,16 +60,17 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
     public boolean addOrUpdateActivity(ActivityUpdateParam activity) {
 
         List<Activity> activityList = new ArrayList<>(4);
-
         //获取对应商品的SKU数量
         Sku sku = new Sku();
-        Map<Long, List<Sku>> collect = sku.selectList(new QueryWrapper<Sku>().eq(Sku.ID,
-                activity.getSkuList()
+        Map<Long, List<Sku>> collect = sku.selectList(new QueryWrapper<Sku>().select(Sku.ID, Sku.NUM)
+                .eq(Sku.ID,activity.getSkuList()
                         .stream()
                         .map(ActivityUpdateParam.Sku::getId)
                         .map(String::valueOf)
                         .toArray()
-        ).select(Sku.ID, Sku.NUM)).stream().collect(Collectors.groupingBy(Sku::getId));
+        )).stream().collect(Collectors.groupingBy(Sku::getId));
+
+        System.err.println(activity.getSkuList().toString());
 
         //遍历判断
         activity.getSkuList().forEach(li -> {
@@ -91,6 +93,7 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
             }
 
             //数量不能超库存数量
+            //TODO: bug
             if (li.getTotalNum() <= collect.get(li.getId()).get(0).getNum()) {
                 activityTemp.setTotalNum(li.getTotalNum());
             } else {
@@ -114,7 +117,7 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
     }
 
     @Override
-    @MyLog(value = "#activity.id", detail = "删除一个活动", grade = LoggerEnum.SERIOUS)
+    @MyLog(value = "#id", detail = "删除一个活动", grade = LoggerEnum.SERIOUS)
     @Transactional(rollbackFor = Exception.class)
     public boolean delActivity(Long id) {
         try {
@@ -134,9 +137,10 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
 
     @Override
     public Integer checkActivity(Long id) {
-        Activity activity = activityMapper.selectOne(
-                new QueryWrapper<Activity>()
-                        .eq(Activity.ID, id));
+        Activity activity = activityMapper.selectById(id);
+        if (Objects.isNull(activity)){
+            return null;
+        }
         if (activity.getStartTime().isAfter(LocalDateTime.now())) {
             //未开始
             return 0;

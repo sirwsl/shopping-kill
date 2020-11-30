@@ -50,7 +50,7 @@ public class ActivityUpdateParam {
     private LocalDateTime endTime;
 
     @Valid
-    @NotNull(message = "sku不能未空")
+    @NotNull(message = "sku不能为空")
     private List<Sku> skuList;
 
     @Data

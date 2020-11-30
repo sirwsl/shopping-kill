@@ -1,6 +1,9 @@
 package com.wsl.shoppingKill.domain;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -11,10 +14,7 @@ import lombok.*;
 import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Table;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -28,12 +28,10 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @ToString
 @Accessors(chain = true)
-@Table(name = "t_activity")
+@TableName("t_activity")
 public class Activity extends Model<Activity> implements Serializable {
-
     @Id
-    @Column(name = "id")
-    @GeneratedValue(generator = "JDBC")
+    @TableId(type = IdType.AUTO)
     private Long id;
 
     /**

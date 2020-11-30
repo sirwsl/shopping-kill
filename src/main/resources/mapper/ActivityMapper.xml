@@ -65,14 +65,14 @@
             </if>
             <if test="activity.status != null">
                 <if test="activity.status == 1">
-                    and ta.end_time <![CDATA[ <= ]]> #{activity.time}
+                    and ta.start_time <![CDATA[ >= ]]> #{activity.time}
                 </if>
                 <if test="activity.status == 2">
                     and ta.start_time  <![CDATA[ <= ]]> #{activity.time}
                     and ta.end_time <![CDATA[ >= ]]> #{activity.time}
                 </if>
                 <if test="activity.status == 3">
-                    and ta.start_time  <![CDATA[ >= ]]> #{activity.time}
+                    and ta.end_time  <![CDATA[ <= ]]> #{activity.time}
                 </if>
             </if>
             and del_flag = 0
