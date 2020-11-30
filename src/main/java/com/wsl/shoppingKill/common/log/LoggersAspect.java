@@ -2,7 +2,7 @@ package com.wsl.shoppingKill.common.log;
 
 import com.alibaba.fastjson.JSON;
 import com.wsl.shoppingKill.common.util.IpUtils;
-import com.wsl.shoppingKill.component.request.AbstractCurrentRequestComponent;
+import com.wsl.shoppingKill.common.component.request.AbstractCurrentRequestComponent;
 import com.wsl.shoppingKill.domain.Loggers;
 import com.wsl.shoppingKill.obj.bo.UserBO;
 import org.aspectj.lang.JoinPoint;

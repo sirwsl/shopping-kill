@@ -1,9 +1,8 @@
 package com.wsl.shoppingKill.common.log;
 
-import com.wsl.shoppingKill.constant.LoggerEnum;
+import com.wsl.shoppingKill.obj.constant.LoggerEnum;
 
 import java.lang.annotation.*;
-import java.util.PrimitiveIterator;
 
 /**
  * 自定义注解类

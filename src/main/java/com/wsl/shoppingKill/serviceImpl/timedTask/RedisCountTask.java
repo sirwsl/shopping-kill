@@ -1,6 +1,6 @@
 package com.wsl.shoppingKill.serviceImpl.timedTask;
 
-import com.wsl.shoppingKill.constant.RedisEnum;
+import com.wsl.shoppingKill.obj.constant.RedisEnum;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.scheduling.annotation.Async;

@@ -2,7 +2,7 @@ package com.wsl.shoppingKill.controller.admin;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.wsl.shoppingKill.common.Result;
-import com.wsl.shoppingKill.constant.BaseEnum;
+import com.wsl.shoppingKill.obj.constant.BaseEnum;
 import com.wsl.shoppingKill.obj.param.AfterSalesParam;
 import com.wsl.shoppingKill.obj.param.AfterSalesResultParam;
 import com.wsl.shoppingKill.obj.vo.AfterSalesVO;

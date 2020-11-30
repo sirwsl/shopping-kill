@@ -1,9 +1,9 @@
 package com.wsl.shoppingKill.serviceImpl;
 
 import com.wsl.shoppingKill.common.util.RegexUtils;
-import com.wsl.shoppingKill.component.jwt.JwtComponent;
-import com.wsl.shoppingKill.constant.JwtEnum;
-import com.wsl.shoppingKill.constant.RedisEnum;
+import com.wsl.shoppingKill.common.component.jwt.JwtComponent;
+import com.wsl.shoppingKill.obj.constant.JwtEnum;
+import com.wsl.shoppingKill.obj.constant.RedisEnum;
 import com.wsl.shoppingKill.mapper.LoginMapper;
 import com.wsl.shoppingKill.obj.bo.UserBO;
 import com.wsl.shoppingKill.obj.param.UserParam;

@@ -1,6 +1,6 @@
 package com.wsl.shoppingKill.service;
 
-import com.wsl.shoppingKill.constant.SexEnum;
+import com.wsl.shoppingKill.obj.constant.SexEnum;
 import com.wsl.shoppingKill.domain.Admin;
 import org.junit.Test;
 import org.junit.runner.RunWith;

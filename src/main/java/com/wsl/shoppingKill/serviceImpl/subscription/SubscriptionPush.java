@@ -3,11 +3,11 @@ package com.wsl.shoppingKill.serviceImpl.subscription;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.rabbitmq.client.Channel;
-import com.wsl.shoppingKill.component.email.MailComponent;
-import com.wsl.shoppingKill.component.sms.SmsComponent;
-import com.wsl.shoppingKill.constant.BaseEnum;
-import com.wsl.shoppingKill.constant.RabbitMqEnum;
-import com.wsl.shoppingKill.constant.SmsEnum;
+import com.wsl.shoppingKill.common.component.email.MailComponent;
+import com.wsl.shoppingKill.common.component.sms.SmsComponent;
+import com.wsl.shoppingKill.obj.constant.BaseEnum;
+import com.wsl.shoppingKill.obj.constant.RabbitMqEnum;
+import com.wsl.shoppingKill.obj.constant.SmsEnum;
 import com.wsl.shoppingKill.domain.Subscriber;
 import com.wsl.shoppingKill.domain.SubscriptionHistory;
 import com.wsl.shoppingKill.obj.bo.MailObject;

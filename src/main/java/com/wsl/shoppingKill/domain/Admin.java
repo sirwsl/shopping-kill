@@ -10,7 +10,7 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.wsl.shoppingKill.common.fastjson.BaseEnumSerializer;
 import com.wsl.shoppingKill.common.fastjson.IEnumDeSerializer;
-import com.wsl.shoppingKill.constant.SexEnum;
+import com.wsl.shoppingKill.obj.constant.SexEnum;
 import lombok.*;
 import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;

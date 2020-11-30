@@ -1,6 +1,6 @@
 package com.wsl.shoppingKill.common.util;
 
-import com.wsl.shoppingKill.constant.SexEnum;
+import com.wsl.shoppingKill.obj.constant.SexEnum;
 import com.wsl.shoppingKill.domain.Admin;
 import lombok.extern.slf4j.Slf4j;
 

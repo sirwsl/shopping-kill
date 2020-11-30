@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.wsl.shoppingKill.common.fastjson.BaseEnumSerializer;
 import com.wsl.shoppingKill.common.fastjson.IEnumDeSerializer;
-import com.wsl.shoppingKill.constant.LoggerEnum;
+import com.wsl.shoppingKill.obj.constant.LoggerEnum;
 import lombok.*;
 import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;

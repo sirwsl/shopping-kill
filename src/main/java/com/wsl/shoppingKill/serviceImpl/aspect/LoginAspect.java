@@ -1,6 +1,6 @@
 package com.wsl.shoppingKill.serviceImpl.aspect;
 
-import com.wsl.shoppingKill.constant.RedisEnum;
+import com.wsl.shoppingKill.obj.constant.RedisEnum;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
