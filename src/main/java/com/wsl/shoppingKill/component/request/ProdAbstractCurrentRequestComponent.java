@@ -1,6 +1,6 @@
-package com.wsl.shoppingKill.common.component.request;
+package com.wsl.shoppingKill.component.request;
 
-import com.wsl.shoppingKill.common.component.jwt.JwtComponent;
+import com.wsl.shoppingKill.component.jwt.JwtComponent;
 import com.wsl.shoppingKill.obj.constant.JwtEnum;
 import com.wsl.shoppingKill.obj.constant.RedisEnum;
 import com.wsl.shoppingKill.obj.bo.UserBO;

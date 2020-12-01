@@ -1,6 +1,6 @@
-package com.wsl.shoppingKill.common.config.request;
+package com.wsl.shoppingKill.config.request;
 
-import com.wsl.shoppingKill.common.component.jwt.JwtComponent;
+import com.wsl.shoppingKill.component.jwt.JwtComponent;
 import com.wsl.shoppingKill.obj.bo.UserBO;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;

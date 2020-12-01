@@ -1,4 +1,4 @@
-package com.wsl.shoppingKill.common.config;
+package com.wsl.shoppingKill.config;
 
 import com.alibaba.druid.support.http.StatViewServlet;
 import com.alibaba.druid.support.http.WebStatFilter;

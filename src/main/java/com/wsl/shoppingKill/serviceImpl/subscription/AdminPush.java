@@ -1,8 +1,8 @@
 package com.wsl.shoppingKill.serviceImpl.subscription;
 
 import com.rabbitmq.client.Channel;
-import com.wsl.shoppingKill.common.component.email.MailComponent;
-import com.wsl.shoppingKill.common.component.sms.SmsComponent;
+import com.wsl.shoppingKill.component.email.MailComponent;
+import com.wsl.shoppingKill.component.sms.SmsComponent;
 import com.wsl.shoppingKill.obj.constant.RabbitMqEnum;
 import com.wsl.shoppingKill.obj.bo.MailObject;
 import com.wsl.shoppingKill.obj.bo.SmsObject;

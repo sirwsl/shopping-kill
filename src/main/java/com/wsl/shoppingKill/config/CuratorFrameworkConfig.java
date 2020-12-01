@@ -1,4 +1,4 @@
-package com.wsl.shoppingKill.common.config;
+package com.wsl.shoppingKill.config;
 
 import com.esotericsoftware.minlog.Log;
 import org.apache.curator.framework.CuratorFramework;

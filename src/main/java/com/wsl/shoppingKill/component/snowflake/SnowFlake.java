@@ -1,4 +1,4 @@
-package com.wsl.shoppingKill.common.component.snowflake;
+package com.wsl.shoppingKill.component.snowflake;
 
 import org.springframework.stereotype.Component;
 

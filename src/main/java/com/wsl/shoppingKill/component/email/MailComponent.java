@@ -1,4 +1,4 @@
-package com.wsl.shoppingKill.common.component.email;
+package com.wsl.shoppingKill.component.email;
 
 import com.wsl.shoppingKill.Application;
 import com.wsl.shoppingKill.obj.bo.MailObject;

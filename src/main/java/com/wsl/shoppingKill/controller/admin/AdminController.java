@@ -1,7 +1,7 @@
 package com.wsl.shoppingKill.controller.admin;
 
 import com.wsl.shoppingKill.common.Result;
-import com.wsl.shoppingKill.common.component.request.AbstractCurrentRequestComponent;
+import com.wsl.shoppingKill.component.request.AbstractCurrentRequestComponent;
 import com.wsl.shoppingKill.obj.constant.BaseEnum;
 import com.wsl.shoppingKill.domain.Admin;
 import com.wsl.shoppingKill.service.AdminService;

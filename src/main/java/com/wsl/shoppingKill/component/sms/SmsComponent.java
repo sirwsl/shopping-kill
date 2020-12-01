@@ -1,4 +1,4 @@
-package com.wsl.shoppingKill.common.component.sms;
+package com.wsl.shoppingKill.component.sms;
 
 import com.alibaba.fastjson.JSONObject;
 import com.zhenzi.sms.ZhenziSmsClient;

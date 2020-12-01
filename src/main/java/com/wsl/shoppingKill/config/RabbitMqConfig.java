@@ -1,4 +1,4 @@
-package com.wsl.shoppingKill.common.config;
+package com.wsl.shoppingKill.config;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.AcknowledgeMode;

@@ -1,4 +1,4 @@
-package com.wsl.shoppingKill.common.config;
+package com.wsl.shoppingKill.config;
 
 import com.baomidou.mybatisplus.core.parser.ISqlParser;
 import com.baomidou.mybatisplus.extension.incrementer.H2KeyGenerator;

@@ -1,4 +1,4 @@
-package com.wsl.shoppingKill.common.component.request;
+package com.wsl.shoppingKill.component.request;
 
 import com.wsl.shoppingKill.obj.bo.UserBO;
 import org.springframework.data.redis.core.StringRedisTemplate;

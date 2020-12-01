@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wsl.shoppingKill.common.log.MyLog;
-import com.wsl.shoppingKill.common.component.request.AbstractCurrentRequestComponent;
+import com.wsl.shoppingKill.component.request.AbstractCurrentRequestComponent;
 import com.wsl.shoppingKill.obj.constant.BaseEnum;
 import com.wsl.shoppingKill.obj.constant.LoggerEnum;
 import com.wsl.shoppingKill.obj.constant.RabbitMqEnum;

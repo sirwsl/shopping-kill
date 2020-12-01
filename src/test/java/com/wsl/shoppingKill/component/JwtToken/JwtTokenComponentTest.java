@@ -1,6 +1,6 @@
-package com.wsl.shoppingKill.common.component.JwtToken;
+package com.wsl.shoppingKill.component.JwtToken;
 
-import com.wsl.shoppingKill.common.component.jwt.JwtComponent;
+import com.wsl.shoppingKill.component.jwt.JwtComponent;
 import com.wsl.shoppingKill.obj.bo.UserBO;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;

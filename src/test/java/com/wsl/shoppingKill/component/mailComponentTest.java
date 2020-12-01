@@ -1,7 +1,7 @@
-package com.wsl.shoppingKill.common.component;
+package com.wsl.shoppingKill.component;
 
 import com.wsl.shoppingKill.Application;
-import com.wsl.shoppingKill.common.component.email.MailComponent;
+import com.wsl.shoppingKill.component.email.MailComponent;
 import com.wsl.shoppingKill.obj.bo.MailObject;
 import freemarker.template.Configuration;
 import freemarker.template.Template;

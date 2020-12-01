@@ -1,4 +1,4 @@
-package com.wsl.shoppingKill.common.component.oss;
+package com.wsl.shoppingKill.component.oss;
 
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;

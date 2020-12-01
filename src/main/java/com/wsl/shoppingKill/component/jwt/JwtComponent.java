@@ -1,4 +1,4 @@
-package com.wsl.shoppingKill.common.component.jwt;
+package com.wsl.shoppingKill.component.jwt;
 
 import com.wsl.shoppingKill.common.util.DateUtil;
 import com.wsl.shoppingKill.obj.constant.JwtEnum;

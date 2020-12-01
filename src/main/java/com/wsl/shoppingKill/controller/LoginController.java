@@ -1,7 +1,7 @@
 package com.wsl.shoppingKill.controller;
 
 import com.wsl.shoppingKill.common.Result;
-import com.wsl.shoppingKill.common.component.VerifyComponent;
+import com.wsl.shoppingKill.component.VerifyComponent;
 import com.wsl.shoppingKill.obj.constant.BaseEnum;
 import com.wsl.shoppingKill.obj.param.UserParam;
 import com.wsl.shoppingKill.service.LoginService;

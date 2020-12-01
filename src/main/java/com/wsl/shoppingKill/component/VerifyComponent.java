@@ -1,4 +1,4 @@
-package com.wsl.shoppingKill.common.component;
+package com.wsl.shoppingKill.component;
 
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import lombok.extern.slf4j.Slf4j;

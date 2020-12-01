@@ -2,8 +2,8 @@ package com.wsl.shoppingKill.controller;
 
 import com.wsl.shoppingKill.common.Result;
 import com.wsl.shoppingKill.common.util.RegexUtils;
-import com.wsl.shoppingKill.common.component.VerifyComponent;
-import com.wsl.shoppingKill.common.component.sms.SmsComponent;
+import com.wsl.shoppingKill.component.VerifyComponent;
+import com.wsl.shoppingKill.component.sms.SmsComponent;
 import com.wsl.shoppingKill.obj.constant.RedisEnum;
 import com.wsl.shoppingKill.obj.constant.SmsEnum;
 import lombok.extern.slf4j.Slf4j;
