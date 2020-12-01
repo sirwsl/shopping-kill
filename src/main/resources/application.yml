@@ -18,7 +18,11 @@ spring:
   #环境修改
   profiles:
     active: dev,all
-  
+
+  devtools:
+    restart:
+      enabled: true
+
 
 
   jackson:
@@ -31,7 +35,7 @@ spring:
       prefix: classpath:/templates/
 
 mybatis-plus:
-  type-aliases-package: com.wsl.shoppingKill.constant
+  type-aliases-package: com.wsl.shoppingkill.constant
   configuration:
     default-enum-type-handler: org.apache.ibatis.type.EnumOrdinalTypeHandler
   global-config:

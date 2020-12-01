@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.wsl.shoppingKill.mapper.LoggersMapper">
-  <resultMap id="BaseResultMap" type="com.wsl.shoppingKill.domain.Loggers">
+<mapper namespace="com.wsl.shoppingkill.mapper.LoggersMapper">
+  <resultMap id="BaseResultMap" type="com.wsl.shoppingkill.domain.Loggers">
     <!--@mbg.generated-->
     <!--@Table t_loggers-->
     <id column="id" jdbcType="INTEGER" property="id" />
@@ -15,7 +15,7 @@
     <result column="del_flag" jdbcType="BOOLEAN" property="delFlag" />
   </resultMap>
 
-  <resultMap id="LoggersVOMap" type="com.wsl.shoppingKill.obj.vo.LoggersVO">
+  <resultMap id="LoggersVOMap" type="com.wsl.shoppingkill.obj.vo.LoggersVO">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="detail" jdbcType="VARCHAR" property="detail" />
     <result column="man_id" jdbcType="INTEGER" property="manId" />

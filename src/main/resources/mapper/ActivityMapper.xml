@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.wsl.shoppingKill.mapper.ActivityMapper">
-    <resultMap id="BaseResultMap" type="com.wsl.shoppingKill.domain.Activity">
+<mapper namespace="com.wsl.shoppingkill.mapper.ActivityMapper">
+    <resultMap id="BaseResultMap" type="com.wsl.shoppingkill.domain.Activity">
         <!--@mbg.generated-->
         <!--@Table t_activity-->
         <id column="id" jdbcType="INTEGER" property="id"/>
@@ -17,12 +17,12 @@
         <result column="del_flag" jdbcType="BOOLEAN" property="delFlag"/>
     </resultMap>
 
-    <resultMap id="ActivityByKill" type="com.wsl.shoppingKill.obj.vo.ActivityVO">
+    <resultMap id="ActivityByKill" type="com.wsl.shoppingkill.obj.vo.ActivityVO">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="goodsName"/>
         <result column="start_time" jdbcType="TIMESTAMP" property="startTime"/>
         <result column="end_time" jdbcType="TIMESTAMP" property="endTime"/>
-        <collection property="skuList" ofType="com.wsl.shoppingKill.obj.vo.ActivityVO$Goods2Sku">
+        <collection property="skuList" ofType="com.wsl.shoppingkill.obj.vo.ActivityVO$Goods2Sku">
             <id column="sid" jdbcType="BIGINT" property="id"/>
             <result column="attribute" property="name"/>
             <result column="price" property="price"/>

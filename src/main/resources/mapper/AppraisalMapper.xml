@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.wsl.shoppingKill.mapper.AppraisalMapper">
-  <resultMap id="BaseResultMap" type="com.wsl.shoppingKill.domain.Appraisal">
+<mapper namespace="com.wsl.shoppingkill.mapper.AppraisalMapper">
+  <resultMap id="BaseResultMap" type="com.wsl.shoppingkill.domain.Appraisal">
     <!--@mbg.generated-->
     <!--@Table t_appraisal-->
     <id column="id" jdbcType="INTEGER" property="id" />
@@ -16,7 +16,7 @@
     <result column="del_flag" jdbcType="BOOLEAN" property="delFlag" />
   </resultMap>
 
-  <select id="getAppraisalAll" resultType="com.wsl.shoppingKill.obj.vo.AppraisalVO">
+  <select id="getAppraisalAll" resultType="com.wsl.shoppingkill.obj.vo.AppraisalVO">
     select ta.*, tu.name as userName,tu.nick_name as userNickName,tg.name as goodsName
     from t_appraisal ta
     left join t_user tu on ta.user_id = tu.id

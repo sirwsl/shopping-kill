@@ -23,7 +23,7 @@
         "records": [
             {
                 "id": 1,
-                "detail": "添加管理员[className:com.wsl.shoppingKill.serviceImpl.AdminServiceImpl]",
+                "detail": "添加管理员[className:com.wsl.shoppingkill.serviceImpl.AdminServiceImpl]",
                 "manId": 1,
                 "name": "ceshi123",
                 "type": 1,

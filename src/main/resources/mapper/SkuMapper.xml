@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.wsl.shoppingKill.mapper.SkuMapper">
-    <resultMap id="BaseResultMap" type="com.wsl.shoppingKill.domain.Sku">
+<mapper namespace="com.wsl.shoppingkill.mapper.SkuMapper">
+    <resultMap id="BaseResultMap" type="com.wsl.shoppingkill.domain.Sku">
         <!--@mbg.generated-->
         <!--@Table t_sku-->
         <id column="id" jdbcType="INTEGER" property="id"/>
@@ -19,13 +19,13 @@
         <result column="del_flag" jdbcType="BOOLEAN" property="delFlag"/>
     </resultMap>
 
-    <select id="getSku" resultType="com.wsl.shoppingKill.obj.vo.SkuVO">
+    <select id="getSku" resultType="com.wsl.shoppingkill.obj.vo.SkuVO">
         select t_sku.*, tg.id as googsId, tg.name as goodsName
         from t_sku left join t_goods tg on t_sku.goods_id = tg.id
             where t_sku.id = #{id} and t_sku.del_flag = 0
     </select>
 
-    <select id="getSkuAll" resultType="com.wsl.shoppingKill.obj.vo.SkuVO">
+    <select id="getSkuAll" resultType="com.wsl.shoppingkill.obj.vo.SkuVO">
         select t_sku.*, tg.id as googsId, tg.name as goodsName
         from t_sku left join t_goods tg on t_sku.goods_id = tg.id
              <where>

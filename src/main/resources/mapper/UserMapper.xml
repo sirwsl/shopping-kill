@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.wsl.shoppingKill.mapper.UserMapper">
-  <resultMap id="BaseResultMap" type="com.wsl.shoppingKill.domain.User">
+<mapper namespace="com.wsl.shoppingkill.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.wsl.shoppingkill.domain.User">
     <!--@mbg.generated-->
     <!--@Table t_user-->
     <id column="id" jdbcType="INTEGER" property="id" />

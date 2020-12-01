@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.wsl.shoppingKill.mapper.OrderMapper">
-    <resultMap id="BaseResultMap" type="com.wsl.shoppingKill.domain.Order">
+<mapper namespace="com.wsl.shoppingkill.mapper.OrderMapper">
+    <resultMap id="BaseResultMap" type="com.wsl.shoppingkill.domain.Order">
         <!--@mbg.generated-->
         <!--@Table t_order-->
         <id column="id" jdbcType="VARCHAR" property="id"/>
@@ -21,7 +21,7 @@
         <result column="del_flag" jdbcType="BOOLEAN" property="delFlag"/>
     </resultMap>
 
-    <select id="getAllOrder" resultType="com.wsl.shoppingKill.obj.vo.OrderVO">
+    <select id="getAllOrder" resultType="com.wsl.shoppingkill.obj.vo.OrderVO">
         select to2.id,
                tu.nick_name,
                tu.id    as userId,
@@ -69,7 +69,7 @@
         AND to2.del_flag = 0
     </select>
 
-    <select id="getOrderSendInfo" resultType="com.wsl.shoppingKill.obj.bo.OrderMqBO">
+    <select id="getOrderSendInfo" resultType="com.wsl.shoppingkill.obj.bo.OrderMqBO">
         select tu.nick_name as userName, tg.name as goodsName,tu.phone, tu.email
         from t_order
                      left join t_user tu on tu.id = t_order.user_id

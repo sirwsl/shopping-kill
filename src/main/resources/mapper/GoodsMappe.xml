@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.wsl.shoppingKill.mapper.GoodsMapper">
-  <resultMap id="BaseResultMap" type="com.wsl.shoppingKill.domain.Goods">
+<mapper namespace="com.wsl.shoppingkill.mapper.GoodsMapper">
+  <resultMap id="BaseResultMap" type="com.wsl.shoppingkill.domain.Goods">
     <!--@mbg.generated-->
     <!--@Table t_goods-->
     <id column="id" jdbcType="INTEGER" property="id" />
@@ -15,17 +15,17 @@
     <result column="del_flag" jdbcType="BOOLEAN" property="delFlag" />
   </resultMap>
 
-    <resultMap id="ActivityByGoods" type="com.wsl.shoppingKill.obj.vo.ActivityByGoodsVO">
+    <resultMap id="ActivityByGoods" type="com.wsl.shoppingkill.obj.vo.ActivityByGoodsVO">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="goodsName"/>
-        <collection property="skuList" ofType="com.wsl.shoppingKill.obj.vo.ActivityByGoodsVO$Goods2Sku">
+        <collection property="skuList" ofType="com.wsl.shoppingkill.obj.vo.ActivityByGoodsVO$Goods2Sku">
             <id column="sid" jdbcType="BIGINT" property="id"/>
             <result column="attribute" property="name"/>
             <result column="num" property="num"/>
         </collection>
     </resultMap>
 
-    <select id="getAllGoods" resultType="com.wsl.shoppingKill.obj.vo.GoodsVO">
+    <select id="getAllGoods" resultType="com.wsl.shoppingkill.obj.vo.GoodsVO">
         select tg.id,
                tg.name,
                tg.detail,

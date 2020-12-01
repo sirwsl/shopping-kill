@@ -30,7 +30,7 @@ jwt:
   redisToken: 4800
   expire: 3600
   newToken: 600
-  keys: wslhome-shoppingKill-sirwsl
+  keys: wslhome-shoppingkill-sirwsl
 
 verify:
   imgCodeTimeOut: 300
