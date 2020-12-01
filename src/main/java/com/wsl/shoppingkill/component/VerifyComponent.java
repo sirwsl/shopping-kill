@@ -34,6 +34,9 @@ public class VerifyComponent {
     @Value("${verify.imgCodeTimeOut}")
     private Integer imgCodeTimeOut;
 
+//    @Value("${req.doMainUrl}")
+//    private String doMainUrl;
+
     @Resource
     private StringRedisTemplate stringRedisTemplate;
 
@@ -62,7 +65,11 @@ public class VerifyComponent {
             //存入redis
             String token = String.valueOf(snowFlake.nextId());
             response.setHeader(JwtEnum.AUTH_HEADER_KEY, JwtEnum.TOKEN_PREFIX+token);
-            response.addCookie(new Cookie(JwtEnum.TOKEN, URLEncoder.encode(JwtEnum.TOKEN_PREFIX+token,"UTF-8")));
+            Cookie cookie = new Cookie(JwtEnum.TOKEN, URLEncoder.encode(JwtEnum.TOKEN_PREFIX + token, "UTF-8"));
+            cookie.setMaxAge(imgCodeTimeOut);
+            cookie.setPath("/");
+            //cookie.setDomain(doMainUrl);
+            response.addCookie(cookie);
             stringRedisTemplate.opsForValue().set(RedisEnum.VERIFY_CODE+token,rightCode,imgCodeTimeOut, TimeUnit.SECONDS);
 
             // 使用生产的验证码字符串返回一个BufferedImage对象并转为byte写入到byte数组中
@@ -96,8 +103,10 @@ public class VerifyComponent {
         String header = request.getHeader(JwtEnum.AUTH_HEADER_KEY);
 
         if (StringUtils.isEmpty(header)) {
-            if (request.getCookies()!=null&&JwtEnum.TOKEN.equals(request.getCookies()[0].getName())) {
-                header = request.getCookies()[0].getValue();
+            for (Cookie cookie : request.getCookies()) {
+                if (JwtEnum.TOKEN.equals(cookie.getName())){
+                    header = cookie.getValue();
+                }
             }
         }
         //解析请求头（防止伪造token，token内容以"shoppingkill "作为开头）

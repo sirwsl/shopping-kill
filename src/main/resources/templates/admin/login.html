@@ -46,7 +46,7 @@
 				        <input style="height: 40px; font-size: 1.3em;" id = "code" name = "code" class="form-control text-justify" type="text" name="codeNum" maxlength="4"  placeholder="验证码">
 				    </div>
 				    <div class="col-sm-5">
-				        <img border="0" style="height: 40px;" id = "img" name ="img" style="cursor:pointer" alt="刷新" onclick="refresh(this)" src="/verify/getJpg/v1" >
+				        <img border="0" style="height: 40px;" id = "img" name ="img" style="cursor:pointer" alt="刷新" onclick="refresh(this)" src="/verify/getJpg/v1?id=1" >
 				    </div>
 					
 				</div>
@@ -63,6 +63,7 @@
     <script src="../static/admin/js/jquery.min.js?v=2.1.4"></script>
     <script src="../static/admin/js/bootstrap.min.js?v=3.3.6"></script>
 	<script src="../static/admin/js/jquery.form.js.js"></script>
+    <script src="../static/admin/js/jquery.cookie.js"></script>
 	<script type="application/javascript">
 		function refresh(obj){
 			obj.src="/verify/getJpg/v1?id="+Math.random();
@@ -70,8 +71,6 @@
 		
 		$("#sub").click(function () {
 		    $("#login").ajaxSubmit({
-				xhrFields: {withCredentials: true},
-				crossDomain: true,
 				success: function(re) {
 					alert(re.userMsg);
 					if (re.code==0){
@@ -82,7 +81,13 @@
 				}
 		    });
 		});
-		
+
+        $.ajaxSetup({
+            headers : {'Authorization' : $.cookie("token")},
+            xhrFields: {withCredentials: true},
+            crossDomain: true
+        });
+
 		// $("#sub").click(function () {
 		//     $("#login").ajaxSubmit(function (re) {
 		// 		alert(re.userMsg);
