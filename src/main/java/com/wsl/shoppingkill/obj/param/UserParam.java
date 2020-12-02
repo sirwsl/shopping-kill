@@ -2,8 +2,11 @@ package com.wsl.shoppingkill.obj.param;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.validation.constraints.NotNull;
+
 
 /**
  * @author WangShilei
@@ -12,7 +15,8 @@ import javax.validation.constraints.NotNull;
 
 @Data
 @AllArgsConstructor
-@NotNull
+@NoArgsConstructor
+@ToString
 public class UserParam {
 
     private String phone;

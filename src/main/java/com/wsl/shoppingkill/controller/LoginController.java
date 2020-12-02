@@ -69,7 +69,8 @@ public class LoginController {
      * @return Result<java.lang.String>
      */
     @PostMapping("/admin/v1")
-    public Result<String> adminLogin(HttpServletResponse response, HttpServletRequest request, @Valid UserParam userParam) throws UnsupportedEncodingException {
+    public Result<String> adminLogin(@Valid UserParam userParam,HttpServletResponse response, HttpServletRequest request) throws UnsupportedEncodingException {
+        System.out.println(userParam.toString());
         try{
             if (!verifyComponent.imgVerifyCode(userParam.getCode(), request)) {
                 return Result.error("error", "验证码不正确");

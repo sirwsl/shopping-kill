@@ -34,8 +34,8 @@ public class VerifyComponent {
     @Value("${verify.imgCodeTimeOut}")
     private Integer imgCodeTimeOut;
 
-//    @Value("${req.doMainUrl}")
-//    private String doMainUrl;
+    @Value("${req.doMainUrl}")
+    private String doMainUrl;
 
     @Resource
     private StringRedisTemplate stringRedisTemplate;
@@ -68,7 +68,7 @@ public class VerifyComponent {
             Cookie cookie = new Cookie(JwtEnum.TOKEN, URLEncoder.encode(JwtEnum.TOKEN_PREFIX + token, "UTF-8"));
             cookie.setMaxAge(imgCodeTimeOut);
             cookie.setPath("/");
-            //cookie.setDomain(doMainUrl);
+            cookie.setDomain(doMainUrl);
             response.addCookie(cookie);
             stringRedisTemplate.opsForValue().set(RedisEnum.VERIFY_CODE+token,rightCode,imgCodeTimeOut, TimeUnit.SECONDS);
 

@@ -36,6 +36,6 @@ verify:
   imgCodeTimeOut: 300
   phoneCodeTimeOut: 300
 
-#req:
-#  doMainUrl:
+req:
+  doMainUrl: kill.wslhome.top
 

@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
 @EnableMethodCache(basePackages = { "com.wsl.shoppingkill" })
 @EnableCreateCacheAnnotation
-@EntityScan(basePackages = {"com.wsl.shoppingkill.entity"})
+@EntityScan(basePackages = {"com.wsl.shoppingkill.domain"})
 @EnableTransactionManagement
 public class Application {
 

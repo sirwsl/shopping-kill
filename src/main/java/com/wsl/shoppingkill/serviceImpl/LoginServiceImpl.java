@@ -30,8 +30,8 @@ public class LoginServiceImpl implements LoginService {
     @Value("${jwt.redisToken}")
     private Long redisToken;
 
- /*   @Value("${req.doMainUrl}")
-    private String doMainUrl;*/
+    @Value("${req.doMainUrl}")
+    private String doMainUrl;
 
     @Resource
     private LoginMapper loginMapper;
@@ -60,16 +60,16 @@ public class LoginServiceImpl implements LoginService {
         response.setHeader(JwtEnum.AUTH_HEADER_KEY, JwtEnum.TOKEN_PREFIX+token);
         Cookie name = new Cookie("name", URLEncoder.encode(userBO.getName(), "UTF-8"));
         name.setPath("/");
-        //name.setDomain(doMainUrl);
+        name.setDomain(doMainUrl);
         response.addCookie(name);
         Cookie img = new Cookie("img", userBO.getUrl());
         img.setPath("/");
-        //img.setDomain(doMainUrl);
+        img.setDomain(doMainUrl);
         response.addCookie(img);
         Cookie token1 = new Cookie("token", JwtEnum.TOKEN_PREFIX + token);
         token1.setMaxAge(redisToken.intValue());
         token1.setPath("/");
-        //token1.setDomain(doMainUrl);
+        token1.setDomain(doMainUrl);
         response.addCookie(token1);
         redisTemplate.opsForValue().set(RedisEnum.VERIFY_TOKEN+token,userBO,redisToken, TimeUnit.SECONDS);
         return true;

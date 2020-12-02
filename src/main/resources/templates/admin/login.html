@@ -34,7 +34,7 @@
             </div>
             <h3>欢迎使用 ShoppingKill</h3>
 
-            <form class="m-t" role="form" id = "login" name = "login" enctype="multipart/form-data" action="/login/admin/v1" method="post" accept-charset="utf-8">
+            <form class="m-t" role="form" id = "login" name = "login" enctype="application/x-www-form-urlencoded" method="post" accept-charset="utf-8">
                 <div class="form-group">
                     <input type="text" id ="name" name ="name" style="height: 40px; font-size: 1.3em;" class="form-control text-justify" placeholder="用户名" required="">
                 </div>
@@ -46,7 +46,7 @@
 				        <input style="height: 40px; font-size: 1.3em;" id = "code" name = "code" class="form-control text-justify" type="text" name="codeNum" maxlength="4"  placeholder="验证码">
 				    </div>
 				    <div class="col-sm-5">
-				        <img border="0" style="height: 40px;" id = "img" name ="img" style="cursor:pointer" alt="刷新" onclick="refresh(this)" src="/verify/getJpg/v1?id=1" >
+				        <img border="0" style="height: 40px;" id = "img" name ="img" style="cursor:pointer" alt="刷新" onclick="refresh(this)" src="http://localhost:8080/verify/getJpg/v1?id=1" >
 				    </div>
 					
 				</div>
@@ -66,21 +66,25 @@
     <script src="../static/admin/js/jquery.cookie.js"></script>
 	<script type="application/javascript">
 		function refresh(obj){
-			obj.src="/verify/getJpg/v1?id="+Math.random();
-		};
+			obj.src="http://localhost:8080/verify/getJpg/v1?id="+Math.random();
+		}
 		
-		$("#sub").click(function () {
-		    $("#login").ajaxSubmit({
-				success: function(re) {
-					alert(re.userMsg);
-					if (re.code==0){
-						window.location.href="/index.html"
-					}else{
-						$("img").attr("src","/verify/getJpg/v1?id="+ Math.random());
-					}
-				}
-		    });
-		});
+		$("#sub").click(function (){
+                var formData=$('#login_form').serialize();
+                $.ajax({
+                    type:'POST',
+                    url:'/login/admin/v1',
+                    data:formData,
+                    success:function(re){
+                        alert(re.userMsg);
+                        if (re.code==0){
+                            window.location.href="http://localhost:8080/admin/index.html"
+                        }else{
+                            $("img").attr("src","http://localhost:8080/verify/getJpg/v1?id="+ Math.random());
+                        }
+                    }
+                })
+        })
 
         $.ajaxSetup({
             headers : {'Authorization' : $.cookie("token")},
@@ -88,18 +92,6 @@
             crossDomain: true
         });
 
-		// $("#sub").click(function () {
-		//     $("#login").ajaxSubmit(function (re) {
-		// 		alert(re.userMsg);
-		//         if (re.code==0){
-		// 			window.location.href="/index.html"
-		// 		}else{
-		// 			$("img").attr("src","http://localhost:8080/verify/getJpg/v1?id="+ Math.random());
-				
-		// 		}
-				
-		//     });
-		// });
 
 		
 	</script>	
