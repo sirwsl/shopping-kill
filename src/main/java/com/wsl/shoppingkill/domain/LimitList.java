@@ -12,6 +12,7 @@ import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -43,12 +44,14 @@ public class LimitList extends Model<LimitList> implements Serializable {
     * 类型(0-手机号 1-ip)
     */
     @NotNull(message = "类型不能为空")
+    @NotBlank(message = "类型不能为空")
     private Integer type;
 
     /**
     * 号码
     */
     @NotNull(message = "名单不能为空")
+    @NotBlank(message = "名单不能为空")
     private String number;
 
     /**

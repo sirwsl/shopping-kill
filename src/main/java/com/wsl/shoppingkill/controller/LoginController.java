@@ -43,7 +43,7 @@ public class LoginController {
      * @return Result<java.lang.String>
      */
     @PostMapping("/user/v1")
-    public Result<String> userLogin(HttpServletResponse response, HttpServletRequest request, @Valid UserParam userParam) throws UnsupportedEncodingException {
+    public Result<String> userLogin(HttpServletResponse response, HttpServletRequest request, @Valid  UserParam userParam) throws UnsupportedEncodingException {
         try{
             if (!verifyComponent.imgVerifyCode(userParam.getCode(), request)) {
                 return Result.error("error", "验证码不正确");

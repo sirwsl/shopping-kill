@@ -13,6 +13,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -44,6 +45,7 @@ public class Goods extends Model<Goods> implements Serializable {
     * 商品名
     */
     @NotNull(message = "商品名称不能为空")
+    @NotBlank(message = "商品名称不能为空")
     private String name;
 
     /**
@@ -66,12 +68,14 @@ public class Goods extends Model<Goods> implements Serializable {
     * 是否上架
     */
     @NotNull(message = "请选择是否上架")
+    @NotBlank(message = "请选择是否上架")
     private Boolean shelf;
 
     /**
     * 商品描述
     */
     @NotNull(message = "商品描述不能为空")
+    @NotBlank(message = "商品描述不能为空")
     private String detail;
 
     /**

@@ -12,6 +12,7 @@ import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -38,12 +39,14 @@ public class Subscriber extends Model<Subscriber> implements Serializable {
     @Id
     @TableId()
     @NotNull(message = "订阅者账号")
+    @NotBlank(message = "订阅者账号")
     private String number;
 
     /**
     * 订阅类型(0-手机订阅 1-邮件订阅)
     */
     @NotNull(message = "订阅者类型不能为空")
+    @NotBlank(message = "订阅者类型不能为空")
     private Integer type;
 
     /**

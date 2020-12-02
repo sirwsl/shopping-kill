@@ -37,5 +37,5 @@ verify:
   phoneCodeTimeOut: 300
 
 req:
-  doMainUrl: kill.wslhome.top
+  doMainUrl: wslhome.top
 

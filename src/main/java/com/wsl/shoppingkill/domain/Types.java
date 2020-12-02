@@ -12,6 +12,7 @@ import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -43,6 +44,7 @@ public class Types extends Model<Types> implements Serializable {
     * 类别名字
     */
     @NotNull(message = "类别名称不能为空")
+    @NotBlank(message = "类别名称不能为空")
     private String name;
 
     /**

@@ -13,6 +13,7 @@ import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -44,12 +45,14 @@ public class User extends Model<User> implements Serializable {
     * 用户名
     */
     @NotNull(message = "用户名不能为空")
+    @NotBlank(message = "用户名不能为空")
     private String name;
 
     /**
     * 密码
     */
     @NotNull(message = "密码不能为空")
+    @NotBlank(message = "密码不能为空")
     @Length(min = 6,message = "密码不能少于6位")
     private String password;
 
@@ -57,6 +60,7 @@ public class User extends Model<User> implements Serializable {
     * 昵称
     */
     @NotNull(message = "昵称不能为空")
+    @NotBlank
     private String nickName;
 
     /**
@@ -68,6 +72,7 @@ public class User extends Model<User> implements Serializable {
     * 性别
     */
     @NotNull(message = "性别不能为空")
+    @NotBlank(message = "性别不能为空")
     private String sex;
 
     /**
@@ -79,6 +84,7 @@ public class User extends Model<User> implements Serializable {
     * 手机号
     */
     @NotNull(message = "手机号不能为空")
+    @NotBlank(message = "手机号不能为空")
     private String phone;
 
     /**

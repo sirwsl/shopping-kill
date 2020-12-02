@@ -6,6 +6,7 @@ import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
 
 /**
@@ -36,6 +37,7 @@ public class LimitListParam {
      * 号码
      */
     @NotBlank(message = "添加黑名单不能为空")
+    @NotEmpty(message = "添加黑名单不能为空")
     private String number;
 
 

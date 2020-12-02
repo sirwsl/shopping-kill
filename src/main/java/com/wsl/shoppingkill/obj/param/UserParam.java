@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 
@@ -22,12 +23,15 @@ public class UserParam {
     private String phone;
 
     @NotNull(message = "账号不能为空")
+    @NotBlank(message = "账号不能为空")
     private String name;
 
-    @NotNull(message = "密码不能未空")
+    @NotNull(message = "密码不能为空")
+    @NotBlank(message ="密码不能为空")
     private String password;
 
-    @NotNull(message = "验证码不能未空")
+    @NotNull(message = "验证码不能为空")
+    @NotBlank(message = "验证码不能为空")
     private String code;
 
     /**

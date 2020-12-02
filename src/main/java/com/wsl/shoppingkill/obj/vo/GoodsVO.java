@@ -7,6 +7,8 @@ import lombok.ToString;
 import lombok.experimental.Accessors;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
@@ -29,12 +31,14 @@ public class GoodsVO implements Serializable {
      * 商品id
      */
     @NotNull(message = "商品ID不能为空")
+    @NotEmpty(message = "商品ID不能为空")
     private Long id;
 
     /**
      * 商品名
      */
     @NotNull(message = "商品名称不能为空")
+    @NotBlank(message = "商品名称不能为空")
     private String name;
 
     /**

@@ -5,12 +5,16 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -36,7 +40,8 @@ public class ActivityUpdateParam {
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
-    @NotNull(message = "开始时间不能未空")
+    @NotNull(message = "开始时间不能为空")
+    @NotEmpty(message = "开始时间不能为空")
     private LocalDateTime startTime;
 
     /**
@@ -46,7 +51,8 @@ public class ActivityUpdateParam {
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
-    @NotNull(message = "结束时间不能未空")
+    @NotNull(message = "结束时间不能为空")
+    @NotEmpty(message = "结束时间不能为空")
     private LocalDateTime endTime;
 
     @Valid
@@ -61,14 +67,17 @@ public class ActivityUpdateParam {
     public static class Sku{
 
         @NotNull(message = "skuId不能为空")
+        @NotEmpty(message = "skuId不能为空")
         private Long id;
 
         @NotNull(message = "价格不能为空")
         @Min(value = 0,message = "价格不能低于0")
+        @NotEmpty(message = "价格不能为空")
         private BigDecimal price;
 
         @NotNull(message = "数量不能为空")
         @Min(value = 0,message = "数量不能小于0")
+        @NotEmpty(message = "数量不能为空")
         private Integer totalNum;
     }
 }
