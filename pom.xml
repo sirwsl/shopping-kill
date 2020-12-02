@@ -323,6 +323,17 @@
             </plugin>
         </plugins>
 
+        <!--打包跳过文件-->
+        <resources>
+            <resource>
+                <filtering>true</filtering>
+                <directory>src/main/resources</directory>
+                <excludes>
+                    <exclude>templates/**</exclude>
+                </excludes>
+            </resource>
+        </resources>
+
 
     </build>
 
