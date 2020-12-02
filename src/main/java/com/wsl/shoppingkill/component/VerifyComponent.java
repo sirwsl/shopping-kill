@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.net.URLEncoder;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -102,16 +103,19 @@ public class VerifyComponent {
 
         String header = request.getHeader(JwtEnum.AUTH_HEADER_KEY);
 
-        if (StringUtils.isEmpty(header)) {
+        if (StringUtils.isEmpty(header) && !Objects.isNull(request.getCookies()) ) {
             for (Cookie cookie : request.getCookies()) {
                 if (JwtEnum.TOKEN.equals(cookie.getName())){
                     header = cookie.getValue();
                 }
             }
         }
+        if (StringUtils.isBlank(header)){
+            throw new TokenRuntimeException("跨域异常，别瞎搞");
+        }
         //解析请求头（防止伪造token，token内容以"shoppingkill "作为开头）
         if (!header.startsWith(JwtEnum.TOKEN_PREFIX)) {
-            throw new TokenRuntimeException("验证出现问题，请稍后再试");
+            throw new TokenRuntimeException("这token怕是你伪造的吧，请重试");
         }
         String token = header.substring(JwtEnum.TOKEN_PREFIX.length());
         try {

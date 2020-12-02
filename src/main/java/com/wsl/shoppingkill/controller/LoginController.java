@@ -32,25 +32,23 @@ public class LoginController {
     private VerifyComponent verifyComponent;
 
 
-
     /**
      * 用户登录接口
-     * @author wangShilei
-     * @date 2020/11/24 11:48
-     * @param response :
-     * @param request :
+     *
+     * @param response  :
+     * @param request   :
      * @param userParam :
      * @return Result<java.lang.String>
+     * @author wangShilei
+     * @date 2020/11/24 11:48
      */
     @PostMapping("/user/v1")
-    public Result<String> userLogin(HttpServletResponse response, HttpServletRequest request, @Valid  UserParam userParam) throws UnsupportedEncodingException {
-        try{
-            if (!verifyComponent.imgVerifyCode(userParam.getCode(), request)) {
-                return Result.error("error", "验证码不正确");
-            }
-        }catch (Exception e){
-            return Result.error("error","连接异常，请刷新重试");
+    public Result<String> userLogin(HttpServletResponse response, HttpServletRequest request, @Valid UserParam userParam) throws UnsupportedEncodingException {
+
+        if (!verifyComponent.imgVerifyCode(userParam.getCode(), request)) {
+            return Result.error("error", "验证码不正确");
         }
+
         userParam.setType(BaseEnum.USER);
         if (loginService.login(response, userParam)) {
             return Result.success("登录成功");
@@ -61,23 +59,22 @@ public class LoginController {
 
     /**
      * 管理员登录接口
-     * @author wangShilei
-     * @date 2020/11/24 11:48
-     * @param response :
-     * @param request :
+     *
+     * @param response  :
+     * @param request   :
      * @param userParam :
      * @return Result<java.lang.String>
+     * @author wangShilei
+     * @date 2020/11/24 11:48
      */
     @PostMapping("/admin/v1")
-    public Result<String> adminLogin(@Valid UserParam userParam,HttpServletResponse response, HttpServletRequest request) throws UnsupportedEncodingException {
+    public Result<String> adminLogin(@Valid UserParam userParam, HttpServletResponse response, HttpServletRequest request) throws UnsupportedEncodingException {
         System.out.println(userParam.toString());
-        try{
-            if (!verifyComponent.imgVerifyCode(userParam.getCode(), request)) {
-                return Result.error("error", "验证码不正确");
-            }
-        }catch (Exception e){
-            return Result.error("error","连接异常，请刷新重试");
+
+        if (!verifyComponent.imgVerifyCode(userParam.getCode(), request)) {
+            return Result.error("error", "验证码不正确");
         }
+
         userParam.setType(BaseEnum.ADMIN);
         if (loginService.login(response, userParam)) {
             return Result.success("登录成功");
