@@ -71,32 +71,18 @@
 			                <h5>操作日志记录</h5>
 			            </div>
 			            <div class="ibox-content">
-			                <table class="footable table table-stripped" data-page-size="8" data-filter=#filter>
+							
+			                <table data-toggle="table" id="admin" data-classes="footable table  table-stripped " >
 			                    <thead>
 			                            <tr>
-			                                <th>操作人</th>
-			                                <th>等级</th>
-			                                <th>内容</th>
-			                                <th>时间</th>
-			                                <th>IP</th>
+			                                <th data-field="id" data-align="center">id</th>
+			                                <th data-field="detail" data-align="center">操作细节</th>
+			                                <th data-field="manId" data-align="center">操作人ID</th>
+			                                <th data-field="ip" data-align="center">IP</th>
+											<th data-field="grade" data-align="center">等级</th>                          
 			                            </tr>
 			                        </thead>
-			                        <tbody>
-			                            <tr class="gradeX">
-			                                <td>王世磊</td>
-			                                <td>严重</td>
-			                                <td>删除测试记记录内容</td>
-			                                <td class="center">2020-11-11 08:00:00</td>
-			                                <td class="center">127.0.0.1</td>
-			                            </tr>
-			                           <tr class="gradeA">
-			                               <td>王世磊</td>
-			                               <td>严重</td>
-			                               <td>删除测试记记录内容</td>
-			                               <td class="center">2020-11-11 08:00:00</td>
-			                               <td class="center">127.0.0.1</td>
-			                           </tr>
-			                        </tbody>
+			                        
 			                        <tfoot>
 			                            <tr>
 			                                <td colspan="5">
@@ -110,42 +96,22 @@
 					</div>
 					<div class="col-sm-6">
 						<div class="col-sm-12">
-						    <div class="ibox float-e-margins">
+						    <div class="ibox float-e-margins example">
 						        <div class="ibox-title">
 						            <h5>用户操作记录</h5>
 						        </div>
 									
-						            <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="8">
+						            <table data-toggle="table" id="user" data-classes="footable table table-stripped toggle-arrow-tiny" >
 						                <thead>
 						                <tr>
-						                    <th data-toggle="true">id</th>
-						                    <th>名字</th>
-						                    <th>内容</th>
-						                    
+						                    <th data-field="id" data-align="center">id</th>
+						                    <th data-field="detail" data-align="center">操作细节</th>
+						                    <th data-field="manId" data-align="center">操作人ID</th>
+						                    <th data-field="ip" data-align="center">IP</th>
+						                	<th data-field="grade" data-align="center">等级</th>                          
 						                </tr>
 						                </thead>
-						                <tbody>
-						                <tr>
-											<td>12318513584</td>
-						                    <td>测试用户</td>
-						                    <td>注册了系统</td>
-						                </tr>
-						                <tr>
-											<td>12318513584</td>
-											<td>测试用户</td>
-											<td>注册了系统</td>
-						                </tr>
-										<tr>
-											<td>12318513584</td>
-										    <td>测试用户</td>
-										    <td>注册了系统</td>
-										</tr>
-										<tr>
-											<td>12318513584</td>
-											<td>测试用户</td>
-											<td>注册了系统</td>
-										</tr>
-						                </tbody>
+						                
 						                <tfoot>
 						                <tr>
 						                    <td colspan="5">
@@ -163,20 +129,44 @@
 </body>
 	
 	<!-- 全局js -->
+	
 	<script src="../static/admin/js/jquery.min.js?v=2.1.4"></script>
 	<script src="../static/admin/js/bootstrap.min.js?v=3.3.6"></script>
 	<script src="../static/admin/js/plugins/footable/footable.all.min.js"></script>
-	
+		
 	<!-- 自定义js -->
+	<script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+	 <script src="../static/admin/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+	 <script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+	 
+	 
 	<script src="../static/admin/js/content.js?v=1.0.0"></script>
 	<script>
+	
+	 $.ajax({
+		type: "GET",
+		url: "http://test.wslhome.top/admin/getLoggersAll/v1",           
+		dataType: "json",
+		success: function (re) {
+			console.log(re);
+		    $("#admin").bootstrapTable('load', re.data.admin.records);
+			$('#admin').bootstrapTable("hideLoading");
+			$("#user").bootstrapTable('load', re.data.user.records);
+			$('#user').bootstrapTable("hideLoading");
+		},
+		error: function () {
+		    alert("错误");
+		}
+	});
+			
+		
 	    $(document).ready(function() {
 	
 	        $('.footable').footable();
 	        $('.footable2').footable();
 	
 	    });
-	
+	 
 	</script>
 	
 </html>		
