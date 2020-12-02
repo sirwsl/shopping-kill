@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,9 +48,9 @@ public class VerifyController {
      * @throws Exception:验证码生成异常
      */
     @RequestMapping("/getJpg/v1")
-    public void getKatChap1(HttpServletResponse response)
+    public void getKatChap1(HttpServletResponse response, HttpServletRequest request)
             throws Exception {
-        verifyComponent.getKaptCha(response);
+        verifyComponent.getKaptCha(response,request);
     }
 
 
