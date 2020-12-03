@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--360浏览器优先以webkit内核解析-->
+
+
+    <title> - 主页示例</title>
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="../static/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../static/admin/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+
+    <link href="../static/admin/css/animate.css" rel="stylesheet">
+    <link href="../static/admin/css/style.css?v=4.1.0" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content">
+        <div class="row">
+            <div class="col-sm-12">
+				<div class="row row-sm text-center">
+                    <div class="col-xs-3">
+                        <div class="panel padder-v item">
+                            <div class="h1 text-info font-thin h1">521</div>
+                            <span class="text-muted text-xs">今日访问</span>
+                            <div class="top text-right w-full">
+                                <i class="fa fa-caret-down text-warning m-r-sm"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-3">
+                        <div class="panel padder-v item bg-primary">
+                            <div class="h1 text-fff font-thin h1">521</div>
+                            <span class="text-muted text-xs">今天下单</span>
+                            <div class="top text-right w-full">
+                                <i class="fa fa-caret-down text-warning m-r-sm"></i>
+                            </div>
+                        </div>
+                    </div>
+					
+                    <div class="col-xs-3">
+                        <div class="panel padder-v item">
+                            <div class="font-thin h1">88</div>
+                            <span class="text-muted text-xs">今日出库</span>
+                            <div class="bottom text-left">
+                                <i class="fa fa-caret-up text-warning m-l-sm"></i>
+                            </div>
+                        </div>
+                    </div>
+					<div class="col-xs-3">
+					    <div class="panel padder-v item badge-danger">
+					        <div class="font-thin h1">88</div>
+					        <span class="text-muted text-xs">会员总数</span>
+					        <div class="bottom text-left">
+					            <i class="fa fa-caret-up text-warning m-l-sm"></i>
+					        </div>
+					    </div>
+					</div>
+                </div>
+            </div>
+			<div class="row">
+			    <div class="col-sm-12">
+					<div class="col-sm-6">
+			        <div class="ibox float-e-margins center">
+			            <div class="ibox-title ">
+			                <h5>操作日志记录</h5>
+			            </div>
+			            <div class="mytab">
+							<table id="mytab" class="table table-hover"></table>
+			            </div>
+
+			        </div>
+					</div>
+					<div class="col-sm-6">
+						<div class="col-sm-12">
+						    <div class="ibox float-e-margins example">
+						        <div class="ibox-title">
+						            <h5>用户操作记录</h5>
+						        </div>
+									
+							</div>
+					</div>
+			    </div>
+        </div>
+	</div>
+</body>
+	
+	<!-- 全局js -->
+	
+	<script src="../static/admin/js/jquery.min.js?v=2.1.4"></script>
+	<script src="../static/admin/js/bootstrap.min.js?v=3.3.6"></script>
+	<script src="../static/admin/js/plugins/footable/footable.all.min.js"></script>
+		
+	<!-- 自定义js -->
+	<script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+	 <script src="../static/admin/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+	 <script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+	 
+	 
+	<script src="../static/admin/js/content.js?v=1.0.0"></script>
+	<script>
+	$(function() {
+	
+	    $('#mytab').bootstrapTable({
+	        method : 'get',
+	        // contentType: "application/x-www-form-urlencoded",//当请求方法为post的时候,必须要有！！！！
+	        url : "http://test.wslhome.top/admin/getLoggersAll/v1",
+	        striped : true, // 是否显示行间隔色
+	        pageNumber : 1, // 初始化加载第一页
+	        pagination : true,// 是否分页
+	        sidePagination : 'client',// server:服务器端分页|client：前端分页
+	        pageSize : 4,// 单页记录数
+	        pageList : [ 5, 10, 20, 30 ],// 可选择单页记录数
+	        //showRefresh : true,// 刷新按钮
+	        queryParams : function(params) {// 上传服务器的参数
+	            var temp = {// 如果是在服务器端实现分页，limit、offset这两个参数是必须的
+	                limit : params.limit, // 每页显示数量
+	                offset : params.offset, // SQL语句起始索引
+	            // page: (params.offset / params.limit) + 1, //当前页码
+	 
+	            };
+	            return temp;
+	        },
+			 responseHandler: function (res) {
+			                    console.log(res.data.admin)
+			                    return eval(res.data.admin)
+			                },
+	        columns : [ {
+	            title : 'id',
+	            field : 'id',
+	            formatter : function(value,records, index){   //主要配置在这里
+				console.log(records.id)
+	                            return row.records.id;
+	                        }
+	        }, {
+	            title : '操作细节',
+	            field : 'detail',
+	            sortable : true
+	        }, {
+	            title : '操作人',
+	            field : 'manId',
+	        }, {
+	            title : 'IP',
+	            field : 'ip',
+				sortable : true
+	        } , {
+	            title : '创建时间',
+	            field : 'creatTime',
+				sortable : true
+	        }, {
+	            title : '等级',
+	            field : 'grade',
+				sortable : true
+	        }]
+	    })
+	 
+	    // 定义删除、更新操作
+	    function option(value, row, index) {
+	        var htm = '<button id="delUser" userId='
+	                + value
+	                + ' onclick="delUser(this)">删除</button><button id="dupUser" onclick="updUser('
+	                + value + ')">修改</button>'
+	        return htm;
+	    }
+	 
+	    // 查询按钮事件
+	    $('#search_btn').click(function() {
+	        $('#mytab').bootstrapTable('refresh', {
+	            url : path + '/user/list'
+	        });
+	    })
+	 
+	    // 添加用户
+	    $("#userAdd").on("click", function() {
+	        layer.open({
+	            type : 2,
+	            title : '添加用户',
+	            area : [ '500px', '440px' ],
+	            fix : false, // �
+	            content : path + '/user/pageAdd',
+	            end : function() {
+	                $("#mytab").bootstrapTable('refresh', {
+	                    url : path + "/user/list"
+	                });
+	            }
+	        });
+	    });
+	 
+	})
+	 
+	// 删除用户
+	function delUser(dom) {
+	   
+	    var mymessage = confirm("确认删除嘛？");
+	    if (mymessage == true) {
+	        $.ajax({
+	            url : path + '/user/' + $(dom).attr("userId"),
+	            type : 'delete',
+	            success : function(data) {
+	                $(dom).parent().parent().hide();
+	            },
+	            error : function(data){
+	                alert("服务器繁忙")
+	            }
+	        });
+	    }
+	}
+	 
+	// 编辑用户
+	function updUser(id) {
+	    layer.open({
+	        type : 2,
+	        title : '编辑用户',
+	        area : [ '500px', '440px' ],
+	        fix : false, // �
+	        content : path + '/user/pageUpd/' + id,
+	        end : function() {
+	            $("#mytab").bootstrapTable('refresh', {
+	                url : path + "/user/list"
+	            });
+	        }
+	    });
+	}
+	 
+	// 获取项目路径
+	function getContextPath() {
+	    var currentPath = window.document.location.href;
+	    var pathName = window.document.location.pathname;
+	    var pos = currentPath.indexOf(pathName);
+	    var localhostPath = currentPath.substring(0, pos);
+	    var projectName = pathName
+	            .substring(0, pathName.substr(1).indexOf('/') + 1);
+	    return (localhostPath + projectName);
+	}
+
+	 
+	</script>
+	
+</html>		
