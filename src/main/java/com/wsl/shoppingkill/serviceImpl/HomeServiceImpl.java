@@ -67,10 +67,10 @@ public class HomeServiceImpl implements HomeService {
     }
 
     @Override
-    public Map<String, IPage<Loggers>> getLoggersAll(Long current,Long size) {
+    public Map<String, IPage<Loggers>> getLoggersAll(Long current1,Long size1,Long current2,Long size2) {
         Map<String, IPage<Loggers>> loggers = new HashMap<>();
-        IPage<Loggers> adminLog = loggersMapper.selectPage(new Page<>(current, size), new QueryWrapper<Loggers>().eq(Loggers.TYPE, BaseEnum.ADMIN));
-        IPage<Loggers> userLog = loggersMapper.selectPage(new Page<>(current, size), new QueryWrapper<Loggers>().eq(Loggers.TYPE, BaseEnum.USER));
+        IPage<Loggers> adminLog = loggersMapper.selectPage(new Page<>(current1, size1), new QueryWrapper<Loggers>().eq(Loggers.TYPE, BaseEnum.ADMIN).orderByDesc(Loggers.ID));
+        IPage<Loggers> userLog = loggersMapper.selectPage(new Page<>(current2, size2), new QueryWrapper<Loggers>().eq(Loggers.TYPE, BaseEnum.USER).orderByDesc(Loggers.ID));
         loggers.put("admin",adminLog);
         loggers.put("user",userLog);
         return loggers;

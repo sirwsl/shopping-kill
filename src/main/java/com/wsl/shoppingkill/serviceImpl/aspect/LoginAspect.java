@@ -37,4 +37,15 @@ public class LoginAspect {
     }
 
 
+    @Pointcut("execution(public * com.wsl.shoppingkill.controller.LoginController.adminLogin(..))")
+    public void adminLogin(){
+
+    }
+
+    @After("adminLogin()")
+    public void afterAdminLogin(){
+        stringRedisTemplate.boundValueOps(RedisEnum.COUNT_USER_SUM).increment(1);
+    }
+
+
 }

@@ -54,9 +54,11 @@ public interface HomeService {
      * 获取所有登录日志
      * @author wangShilei
      * @date 2020/11/24 16:51
-     * @param current :
-     * @param size :
+     * @param current1 :
+     * @param size1 :
+     * @param current2 :
+     * @param size2 :
      * @return Map<String,IPage<Loggers>>
      */
-    Map<String, IPage<Loggers>> getLoggersAll(Long current,Long size);
+    Map<String, IPage<Loggers>> getLoggersAll(Long current1,Long size1,Long current2,Long size2);
 }

@@ -51,7 +51,8 @@ public class HomeController {
      * @return com.wsl.shoppingkill.common.Result<com.wsl.shoppingkill.domain.Loggers>
      */
     @GetMapping("/getLoggersAll/v1")
-    public Result<Map<String, IPage<Loggers>>> getLoggersAll(@RequestParam(defaultValue = "1") Long current,@RequestParam(defaultValue = "10")Long size){
-        return Result.success(homeService.getLoggersAll(current,size));
+    public Result<Map<String, IPage<Loggers>>> getLoggersAll(@RequestParam(defaultValue = "1") Long current1,@RequestParam(defaultValue = "15")Long size1,
+                                                             @RequestParam(defaultValue = "1") Long current2,@RequestParam(defaultValue = "16")Long size2){
+        return Result.success(homeService.getLoggersAll(current1,size1,current2,size2));
     }
 }

@@ -5,6 +5,7 @@ import com.wsl.shoppingkill.common.util.IpUtils;
 import com.wsl.shoppingkill.component.request.AbstractCurrentRequestComponent;
 import com.wsl.shoppingkill.domain.Loggers;
 import com.wsl.shoppingkill.obj.bo.UserBO;
+import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
@@ -60,7 +61,10 @@ public class LoggersAspect {
             Object[] args = joinPoint.getArgs();
             //将参数所在的数组转换成json
             String params = JSON.toJSONString(args);
-            String num =  AspectSupport.getKeyValue(joinPoint, myLog.value()).toString();
+            String num =  "0";
+            if (StringUtils.isNotBlank(myLog.value())){
+                num = AspectSupport.getKeyValue(joinPoint, myLog.value()).toString();
+            }
 
 
             //保存获取的操作

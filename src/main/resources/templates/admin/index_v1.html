@@ -26,7 +26,7 @@
 				<div class="row row-sm text-center">
                     <div class="col-xs-3">
                         <div class="panel padder-v item">
-                            <div class="h1 text-info font-thin h1">521</div>
+                            <div id = "TodayNum" name = "TodayNum" class="h1 text-info font-thin h1"></div>
                             <span class="text-muted text-xs">今日访问</span>
                             <div class="top text-right w-full">
                                 <i class="fa fa-caret-down text-warning m-r-sm"></i>
@@ -35,7 +35,8 @@
                     </div>
                     <div class="col-xs-3">
                         <div class="panel padder-v item bg-primary">
-                            <div class="h1 text-fff font-thin h1">521</div>
+                            <div id = "TodayOrder" name ="TodayOrder" class="h1 text-fff font-thin h1">
+							</div>
                             <span class="text-muted text-xs">今天下单</span>
                             <div class="top text-right w-full">
                                 <i class="fa fa-caret-down text-warning m-r-sm"></i>
@@ -45,7 +46,7 @@
 					
                     <div class="col-xs-3">
                         <div class="panel padder-v item">
-                            <div class="font-thin h1">88</div>
+                            <div id = "TodayOut" name = "TodayOut" class="font-thin h1"></div>
                             <span class="text-muted text-xs">今日出库</span>
                             <div class="bottom text-left">
                                 <i class="fa fa-caret-up text-warning m-l-sm"></i>
@@ -54,7 +55,7 @@
                     </div>
 					<div class="col-xs-3">
 					    <div class="panel padder-v item badge-danger">
-					        <div class="font-thin h1">88</div>
+					        <div id = "Number" name = "Number" class="font-thin h1"></div>
 					        <span class="text-muted text-xs">会员总数</span>
 					        <div class="bottom text-left">
 					            <i class="fa fa-caret-up text-warning m-l-sm"></i>
@@ -82,14 +83,6 @@
 											<th data-field="grade" data-align="center">等级</th>                          
 			                            </tr>
 			                        </thead>
-			                        
-			                        <tfoot>
-			                            <tr>
-			                                <td colspan="5">
-			                                    <ul class="pagination pull-right"></ul>
-			                                </td>
-			                            </tr>
-			                        </tfoot>
 			                </table>
 			            </div>
 			        </div>
@@ -113,11 +106,7 @@
 						                </thead>
 						                
 						                <tfoot>
-						                <tr>
-						                    <td colspan="5">
-						                        <ul class="pagination pull-right"></ul>
-						                    </td>
-						                </tr>
+				
 						                </tfoot>
 						            </table>
 						        </div>
@@ -138,9 +127,7 @@
 	<script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
 	 <script src="../static/admin/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
 	 <script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
-	 
-	 
-	<script src="../static/admin/js/content.js?v=1.0.0"></script>
+	
 	<script>
 	
 	 $.ajax({
@@ -155,18 +142,26 @@
 			$('#user').bootstrapTable("hideLoading");
 		},
 		error: function () {
-		    alert("错误");
+		    alert("获取失败");
 		}
 	});
-			
-		
-	    $(document).ready(function() {
 	
-	        $('.footable').footable();
-	        $('.footable2').footable();
-	
-	    });
-	 
+	$.ajax({
+		type: "GET",
+		url: "http://test.wslhome.top/admin/getTotalToday/v1",           
+		dataType: "json",
+		success: function (re) {
+			console.log(re.data.Number);
+		    $("#Number").html(re.data.Number);
+			$('#TodayOrder').html(re.data.TodayOrder) ;
+			$("#TodayNum").html(re.data.TodayNum) ;
+			$('#TodayOut').html(re.data.TodayOut) ;
+		},
+		error: function () {
+		    alert("获取失败");
+		}
+	});
+
 	</script>
 	
 </html>		
