@@ -53,15 +53,16 @@
 	<script src="../static/admin/js/content.js?v=1.0.0"></script>
 	<script>
 	$(function() {
-	
+	var flag = 0;
 	    $('#mytab').bootstrapTable({
 	        method : 'get',
 	        // contentType: "application/x-www-form-urlencoded",//当请求方法为post的时候,必须要有！！！！
-	        url : "http://test.wslhome.top/admin/getLoggersAll/v1",
+	        url : "http://test.wslhome.top/admin/getActivityAll/v1",
+			dataType: "json",
 	        striped : true, // 是否显示行间隔色
 	        pageNumber : 1, // 初始化加载第一页
 	        pagination : true,// 是否分页
-	        sidePagination : 'client',// server:服务器端分页|client：前端分页
+	        sidePagination : 'server',// server:服务器端分页|client：前端分页
 	        pageSize : 4,// 单页记录数
 	        pageList : [ 5, 10, 20, 30 ],// 可选择单页记录数
 	        //showRefresh : true,// 刷新按钮
@@ -69,44 +70,53 @@
 	            var temp = {// 如果是在服务器端实现分页，limit、offset这两个参数是必须的
 	                limit : params.limit, // 每页显示数量
 	                offset : params.offset, // SQL语句起始索引
+					status : flag
 	            // page: (params.offset / params.limit) + 1, //当前页码
 	 
 	            };
 	            return temp;
 	        },
 			 responseHandler: function (res) {
-			                    console.log(res.data.admin)
-			                    return eval(res.data.admin)
+			                    console.log({"rows":res.data.records,"total": res.data.total})
+			                    return {
+									"rows":res.data.records,
+									"total": res.data.total
+								}
 			                },
-	        columns : [ {
-	            title : 'id',
-	            field : 'id',
-	            formatter : function(value,records, index){   //主要配置在这里
-				console.log(records.id)
-	                            return row.records.id;
-	                        }
-	        }, {
-	            title : '操作细节',
-	            field : 'detail',
-	            sortable : true
-	        }, {
-	            title : '操作人',
-	            field : 'manId',
-	        }, {
-	            title : 'IP',
-	            field : 'ip',
-				sortable : true
-	        } , {
-	            title : '创建时间',
-	            field : 'creatTime',
-				sortable : true
-	        }, {
-	            title : '等级',
-	            field : 'grade',
-				sortable : true
-	        }]
+	      columns : [ {
+	          title : 'id',
+	          field : 'id',
+	          sortable : true
+	      }, {
+	          title : '商品名',
+	          field : 'goodsName',
+	          sortable : true
+	      }, {
+	          title : '开始时间',
+	          field : 'startTime',
+	      }, {
+	          title : '结束时间',
+	          field : 'endTime',
+	      	sortable : true
+	      } , {
+	          title : '创建时间',
+	          field : 'creatTime',
+	      	sortable : true
+	      }, {
+	          title : '商品列表',
+	          field : 'skuList',
+	      	formatter : function(value,row, index){   //主要配置在这里
+	      	console.log(row.id)
+	      	                return row.id;
+	      	            }
+	      }] 
 	    })
 	 
+	 /**
+	  * formatter : function(value,records, index){   //主要配置在这里
+				console.log(records.id)
+	                            return row.records.id;
+	                        }*/
 	    // 定义删除、更新操作
 	    function option(value, row, index) {
 	        var htm = '<button id="delUser" userId='
