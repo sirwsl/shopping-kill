@@ -153,7 +153,7 @@
 					<div class="navbar-header"><a class="navbar-minimalize minimalize-styl-2 btn btn-info " href="#"><i class="fa fa-bars"></i> </a></div>
 				<ul class="nav navbar-top-links navbar-right">
 				    <li class="dropdown" style="margin-top: 10px;">
-				    	<button class="btn btn-danger btn-sm ">退出系统</button>
+				    	<button id = "exits" class="btn btn-danger btn-sm">退出系统</button>
 				    </li>		
 				</ul>	
 				</nav>
@@ -167,21 +167,48 @@
         <!--右侧部分结束-->
     </div>
 
+</body>
+
+</html>
+
+
     <!-- 全局js -->
     <script src="../static/admin/js/jquery.min.js?v=2.1.4"></script>
     <script src="../static/admin/js/bootstrap.min.js?v=3.3.6"></script>
     <script src="../static/admin/js/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="../static/admin/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-    <script src="../static/admin/js/plugins/layer/layer.min.js"></script>
 
     <!-- 自定义js -->
     <script src="../static/admin/js/hAdmin.js?v=4.1.0"></script>
-    <script type="text/javascript" src="../static/admin/js/index.js"></script>
+    <script src="../static/admin/js/index.js"></script>
+	<script src="../static/admin/js/jquery.cookie.js"></script>
 
     <!-- 第三方插件 -->
-    <script src="../static/admin/js/plugins/pace/pace.min.js"></script>
-<div style="text-align:center;">
-</div>
-</body>
-
-</html>
+ 
+	<script type="text/javascript">
+		$(function(){
+		　　if($.cookie("token") == null || $.cookie("token") == ""){
+			window.location.href = "/admin/login.html"
+		}
+		});
+		$("#exits").click(function(){
+			 $.get("http://test.wslhome.top/login/exit/v1",null,
+			 function(obj){
+				 if (obj.code == 0 && obj.data){
+					 window.location.href = "/admin/login.html"
+				 }
+			 },"json");
+		})
+		
+		$.ajaxSetup({
+			headers: {
+				'Authorization': $.cookie("token")
+			},
+			xhrFields: {
+				withCredentials: true
+			},
+			crossDomain: true
+		});
+		
+		
+	</script>

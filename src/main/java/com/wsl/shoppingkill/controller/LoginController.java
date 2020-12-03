@@ -5,6 +5,7 @@ import com.wsl.shoppingkill.component.VerifyComponent;
 import com.wsl.shoppingkill.obj.constant.BaseEnum;
 import com.wsl.shoppingkill.obj.param.UserParam;
 import com.wsl.shoppingkill.service.LoginService;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -69,7 +70,6 @@ public class LoginController {
      */
     @PostMapping("/admin/v1")
     public Result<String> adminLogin(@Valid UserParam userParam, HttpServletResponse response, HttpServletRequest request) throws UnsupportedEncodingException {
-        System.out.println(userParam.toString());
 
         if (!verifyComponent.imgVerifyCode(userParam.getCode(), request)) {
             return Result.error("error", "验证码不正确");
@@ -80,5 +80,18 @@ public class LoginController {
             return Result.success("登录成功");
         }
         return Result.error("error", "登录失败");
+    }
+
+    /**
+     * 退出系统
+     * @author wangShilei
+     * @date 2020/12/3 14:08
+     * @param response :
+     * @param request :
+     * @return Result<java.lang.Boolean>
+     */
+    @GetMapping("/exit/v1")
+    public Result<Boolean> exitLogin(HttpServletResponse response, HttpServletRequest request){
+        return Result.success(loginService.exit(response,request));
     }
 }

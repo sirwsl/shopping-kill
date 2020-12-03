@@ -68,6 +68,7 @@
 		<script src="../static/admin/js/bootstrap.min.js?v=3.3.6"></script>
 		<script src="../static/admin/js/jquery.form.js"></script>
 		<script src="../static/admin/js/jquery.cookie.js"></script>
+		<script src="../static/admin/js/jquery.cookie.js"></script>
 		<script type="application/javascript">
 			function refresh(obj) {
 				obj.src = "http://test.wslhome.top/verify/getJpg/v1?id=" + Math.random();
@@ -86,6 +87,7 @@
 					} */
 				});
 			});
+			
 			$.ajaxSetup({
 				headers: {
 					'Authorization': $.cookie("token")

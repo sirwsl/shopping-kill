@@ -11,9 +11,9 @@
 
     <title> - 主页示例</title>
 
-    <link rel="shortcut icon" href="favicon.ico"> <link href="../static/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link rel="shortcut icon" href="favicon.ico">
+	<link href="../static/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
     <link href="../static/admin/css/font-awesome.css?v=4.4.0" rel="stylesheet">
-
     <link href="../static/admin/css/animate.css" rel="stylesheet">
     <link href="../static/admin/css/style.css?v=4.1.0" rel="stylesheet">
 
@@ -122,24 +122,34 @@
 	<script src="../static/admin/js/jquery.min.js?v=2.1.4"></script>
 	<script src="../static/admin/js/bootstrap.min.js?v=3.3.6"></script>
 	<script src="../static/admin/js/plugins/footable/footable.all.min.js"></script>
-		
-	<!-- 自定义js -->
 	<script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
-	 <script src="../static/admin/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
-	 <script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
-	
+	<script src="../static/admin/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+	<script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+	<script src="../static/admin/js/jquery.cookie.js"></script>
 	<script>
-	
+	$.ajaxSetup({
+				headers: {
+					'Authorization': $.cookie("token")
+				},
+				xhrFields: {
+					withCredentials: false
+				},
+				crossDomain: true
+			});
+			
 	 $.ajax({
 		type: "GET",
 		url: "http://test.wslhome.top/admin/getLoggersAll/v1",           
 		dataType: "json",
 		success: function (re) {
-			console.log(re);
-		    $("#admin").bootstrapTable('load', re.data.admin.records);
+			if (re.code == 0 && re.data != null){
+				console.log(re);
+				$("#admin").bootstrapTable('load', re.data.admin.records);		
+				$("#user").bootstrapTable('load', re.data.user.records);
+			}
 			$('#admin').bootstrapTable("hideLoading");
-			$("#user").bootstrapTable('load', re.data.user.records);
 			$('#user').bootstrapTable("hideLoading");
+			
 		},
 		error: function () {
 		    alert("获取失败");
@@ -151,17 +161,24 @@
 		url: "http://test.wslhome.top/admin/getTotalToday/v1",           
 		dataType: "json",
 		success: function (re) {
-			console.log(re.data.Number);
-		    $("#Number").html(re.data.Number);
-			$('#TodayOrder').html(re.data.TodayOrder) ;
-			$("#TodayNum").html(re.data.TodayNum) ;
-			$('#TodayOut').html(re.data.TodayOut) ;
+			if (re.code == 0 && re.data != null){
+				$("#Number").html(re.data.Number);
+				$('#TodayOrder').html(re.data.TodayOrder) ;
+				$("#TodayNum").html(re.data.TodayNum) ;
+				$('#TodayOut').html(re.data.TodayOut) ;
+			}else{
+				$("#Number").html(0);
+				$('#TodayOrder').html(0) ;
+				$("#TodayNum").html(0) ;
+				$('#TodayOut').html(0) ;
+			}
 		},
 		error: function () {
 		    alert("获取失败");
 		}
 	});
 
+	
 	</script>
 	
 </html>		

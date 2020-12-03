@@ -66,7 +66,7 @@ public class JwtComponent {
     public Long getTokenTime(String token){
         Jws<Claims> claimsJws = Jwts.parser().setSigningKey(getKeyInstance()).parseClaimsJws(token);
         Claims claims = claimsJws.getBody();
-        System.out.println(claims.getExpiration());
+
        return DateUtil.distanceSecond(new Date(),claims.getExpiration());
     }
 }

@@ -2,6 +2,7 @@ package com.wsl.shoppingkill.service;
 
 import com.wsl.shoppingkill.obj.param.UserParam;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 
@@ -21,4 +22,14 @@ public interface LoginService {
      * @throws UnsupportedEncodingException:
      */
     boolean login(HttpServletResponse response, UserParam userParam) throws UnsupportedEncodingException;
+
+    /**
+     * 推出登录实现
+     * @author wangShilei
+     * @date 2020/12/3 11:27
+     * @param response :
+     * @param request :
+     * @return boolean:
+     */
+    boolean exit(HttpServletResponse response, HttpServletRequest request);
 }
