@@ -54,6 +54,10 @@
 	<script>
 	$(function() {
 	var flag = 0;
+	var id = null;
+	var name = null;
+	var startTime = null;
+	var endTime = null;
 	    $('#mytab').bootstrapTable({
 	        method : 'get',
 	        // contentType: "application/x-www-form-urlencoded",//当请求方法为post的时候,必须要有！！！！
@@ -63,26 +67,12 @@
 	        pageNumber : 1, // 初始化加载第一页
 	        pagination : true,// 是否分页
 	        sidePagination : 'server',// server:服务器端分页|client：前端分页
-	        pageSize : 4,// 单页记录数
-	        pageList : [ 5, 10, 20, 30 ],// 可选择单页记录数
-	        //showRefresh : true,// 刷新按钮
-	        queryParams : function(params) {// 上传服务器的参数
-	            var temp = {// 如果是在服务器端实现分页，limit、offset这两个参数是必须的
-	                limit : params.limit, // 每页显示数量
-	                offset : params.offset, // SQL语句起始索引
-					status : flag
-	            // page: (params.offset / params.limit) + 1, //当前页码
-	 
-	            };
-	            return temp;
-	        },
-			 responseHandler: function (res) {
-			                    console.log({"rows":res.data.records,"total": res.data.total})
-			                    return {
-									"rows":res.data.records,
-									"total": res.data.total
-								}
-			                },
+	        pageSize : 10,
+	        pageList : [ 5, 10, 20, 30 ],
+	        showRefresh : true,//刷新按钮
+			
+	        queryParams : queryParams,
+			 responseHandler: returnFormat,
 	      columns : [ {
 	          title : 'id',
 	          field : 'id',
@@ -105,10 +95,21 @@
 	      }, {
 	          title : '商品列表',
 	          field : 'skuList',
-	      	formatter : function(value,row, index){   //主要配置在这里
-	      	console.log(row.id)
-	      	                return row.id;
-	      	            }
+	      	formatter : function(value,row, index){
+	      	        
+					for (sku in row.skuList
+					){
+						console.log(sku);
+					}
+					
+					return row.id;
+					}
+	      },{
+              title:'操作',
+              field:'Button',
+              align:'center',
+              formatter:AddFunctionAlty//添加按钮
+           
 	      }] 
 	    })
 	 
@@ -116,7 +117,35 @@
 	  * formatter : function(value,records, index){   //主要配置在这里
 				console.log(records.id)
 	                            return row.records.id;
-	                        }*/
+	    }*/
+		
+		function queryParams(params) {
+		    var temp = {
+		        size : params.limit,
+		        current : (params.offset / params.limit) + 1,
+				status : flag,
+				id: id,
+				name: name,
+				startTime: startTime,
+				endTime:endTime
+		    };
+		    return temp;
+		}
+		
+		function returnFormat(res) {
+		    console.log({"rows":res.data.records,"total": res.data.total})
+		    return {
+				"rows":res.data.records,
+				"total": res.data.total
+				}
+		}
+					   
+		//列表行‘操作’按钮
+		  function AddFunctionAlty(value, row, index) {
+		   return '<button id="TableView" type="button" class="btn btn-default">查看</button>'
+		
+		}
+		
 	    // 定义删除、更新操作
 	    function option(value, row, index) {
 	        var htm = '<button id="delUser" userId='
