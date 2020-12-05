@@ -17,8 +17,11 @@
         <result column="del_flag" jdbcType="BOOLEAN" property="delFlag"/>
     </resultMap>
 
+    <!--此处由于需要根据物品显示，物品，时间对得上视为统一活动，所以采用result
+    不实用<id> 如果使用id，则会进行过滤，只会根据物品个数显示相应条数
+    使用result 则id，name，start，endTime相同会过滤-->
     <resultMap id="ActivityByKill" type="com.wsl.shoppingkill.obj.vo.ActivityVO">
-        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="id" jdbcType="BIGINT" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="goodsName"/>
         <result column="start_time" jdbcType="TIMESTAMP" property="startTime"/>
         <result column="end_time" jdbcType="TIMESTAMP" property="endTime"/>
@@ -32,7 +35,7 @@
     </resultMap>
 
     <select id="getActivityAll" resultMap="ActivityByKill">
-        select tg.id,
+        select tg .id,
                tg.name,
                ta.start_time,
                ta.end_time,
