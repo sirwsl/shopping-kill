@@ -32,7 +32,7 @@
     </resultMap>
 
     <select id="getActivityAll" resultMap="ActivityByKill">
-        select ta.id,
+        select tg.id,
                tg.name,
                ta.start_time,
                ta.end_time,
@@ -78,7 +78,7 @@
             and del_flag = 0
         </where>
         ) ta
-                left join(
+        left join(
                 select t_sku.id, t_sku.goods_id, t_sku.attribute
                 from t_sku
                 where del_flag = 0

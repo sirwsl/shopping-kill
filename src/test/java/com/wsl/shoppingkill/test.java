@@ -1,8 +1,12 @@
 package com.wsl.shoppingkill;
 
-import org.junit.Test;
+import com.wsl.shoppingkill.domain.Types;
+import com.wsl.shoppingkill.service.TypesService;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import javax.annotation.Resource;
+import java.time.LocalDateTime;
 import java.util.regex.Pattern;
 
 /**
@@ -11,6 +15,9 @@ import java.util.regex.Pattern;
  **/
 @SpringBootTest
 public class test {
+
+    @Resource
+    private TypesService typesService;
 
     @Test
     public void main() {
@@ -21,7 +28,16 @@ public class test {
             System.out.println(pattern.matcher(s).matches());
         }
 
+    }
 
+    @Test
+    public void testsss(){
+        Types types = new Types();
+        types.setName("测试分类111").setCreatTime(LocalDateTime.now()).setUpdateTime(LocalDateTime.now());
+        System.out.println(types);
+        typesService.save(types);
+        System.out.println(types);
+        System.err.println(types);
     }
 }
 

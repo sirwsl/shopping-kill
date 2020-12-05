@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * @author WangShilei
@@ -27,21 +28,17 @@ public class ActivityController {
     /**
      * 获取活动
      *
-     * @param current       :
-     * @param size          :
      * @param activityParam :
-     * @return Result<IPage < com.wsl.shoppingkill.obj.vo.ActivityVO>>
+     * @return Result<List < ActivityVO>>
      * @author wangShilei
      * @date 2020/11/30 15:23
      */
     @GetMapping("/getActivityAll/v1")
-    public Result<IPage<ActivityVO>> getActivityAll(@RequestParam(defaultValue = "1") Long current,
-                                                    @RequestParam(defaultValue = "10") Long size,
-                                                    ActivityParam activityParam) {
+    public Result<List<ActivityVO>> getActivityAll(ActivityParam activityParam) {
         if (activityParam.getStatus() == null || activityParam.getStatus() < 0) {
             return Result.error("error", "参数错误，status");
         }
-        return Result.success(activityService.getActivityAll(current, size, activityParam));
+        return Result.success(activityService.getActivityAll(activityParam));
     }
 
 

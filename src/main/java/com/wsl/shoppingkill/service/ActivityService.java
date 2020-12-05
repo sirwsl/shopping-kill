@@ -8,6 +8,8 @@ import com.wsl.shoppingkill.obj.param.ActivityUpdateParam;
 import com.wsl.shoppingkill.obj.vo.ActivityByGoodsVO;
 import com.wsl.shoppingkill.obj.vo.ActivityVO;
 
+import java.util.List;
+
 /**
  * @author wangShilei
  */
@@ -17,12 +19,10 @@ public interface ActivityService extends IService<Activity> {
      * 获取活动列表
      * @author wangShilei
      * @date 2020/11/30 9:10
-     * @param current :
-     * @param size :
      * @param activityParam :
-     * @return IPage<com.wsl.shoppingkill.obj.vo.ActivityVO>
+     * @return List<ActivityVO>
      */
-    IPage<ActivityVO> getActivityAll(Long current, Long size, ActivityParam activityParam);
+    List<ActivityVO> getActivityAll(ActivityParam activityParam);
 
 
     /**

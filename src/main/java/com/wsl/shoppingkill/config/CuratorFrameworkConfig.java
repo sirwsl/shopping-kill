@@ -1,6 +1,5 @@
 package com.wsl.shoppingkill.config;
 
-import com.esotericsoftware.minlog.Log;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.framework.api.CuratorEvent;
@@ -51,7 +50,7 @@ public class CuratorFrameworkConfig {
                     .forPath("/monitor/"+ip);
         }catch (Exception e){
             curatorFramework.close();
-            Log.warn("zk启动异常{}",e.getLocalizedMessage());
+
            // curatorFramework.start();
            // Log.info("zk正常启动");
         }

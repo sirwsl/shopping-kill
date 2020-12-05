@@ -40,9 +40,9 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
     private GoodsMapper goodsMapper;
 
     @Override
-    public IPage<ActivityVO> getActivityAll(Long current, Long size, ActivityParam activityParam) {
+    public List<ActivityVO> getActivityAll(ActivityParam activityParam) {
         activityParam.setTime(LocalDateTime.now());
-        return activityMapper.getActivityAll(new Page<>(current, size), activityParam);
+        return activityMapper.getActivityAll( activityParam);
     }
 
     @Override
