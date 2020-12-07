@@ -76,7 +76,8 @@ public class ActivityController {
      * @date 2020/11/30 15:24
      */
     @PostMapping("/addOrUpdateActivity/v1")
-    public Result<Boolean> updateActivity(@Valid @RequestBody ActivityUpdateParam activity) {
+    public Result<Boolean> updateActivity(@Valid ActivityUpdateParam activity) {
+        log.info(activity.toString());
         //校验能否被修改
         List<Long> collect = activity.getSkuList().stream().map(ActivityUpdateParam.Sku::getAId).collect(Collectors.toList());
         if (activityService.checkActivity(collect)) {

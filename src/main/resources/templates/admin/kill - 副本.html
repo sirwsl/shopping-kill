@@ -68,25 +68,26 @@
 					<div class="modal-body">
 						<div class="row">
 							<h3 class="m-t-none m-b">限时抢购活动编辑</h3>
-							<form role="form">
+							<form role="form" id= "activity" enctype="application/x-www-form-urlencoded" method="post" action="http://test.wslhome.top/admin/addOrUpdateActivity/v1" />
 								<div class="col-sm-6">
 									<div class="form-group">
+										<input name ="aid" id = "aid"/>
 										<div class="form-group">
 											<label class="col-xl-3 control-label">商品编号</label>
 											<div class="col-xl-9">
-												<input class="form-control layer-date" id = "goodsId">
+												<input class="form-control layer-date" name ="id" id = "id" >
 											</div>
 										</div>
 										<div class="form-group">
 											<label class="col-xl-3 control-label">商品名称</label>
 											<div class="col-xl-9">
-												<input class="form-control layer-date" id = "goodsName">
+												<input class="form-control layer-date" name = "goodsName" id = "goodsName">
 											</div>
 										</div>
 										<div class="form-group">
 											<label class="col-xl-3 control-label">开始时间</label>
-											<div class="col-xl-9">
-												<input id = "startTime" class="form-control layer-date" placeholder="YYYY-MM-DD hh:mm:ss" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+											<div class="col-xl-3">
+												<input id = "startTime" name = "startTime" class="form-control layer-date" placeholder="YYYY-MM-DD hh:mm:ss" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
 											</div>
 										</div>
 									</div>
@@ -94,7 +95,7 @@
 										<div class="form-group">
 											<label class="col-xl-3 control-label">开始时间</label>
 											<div class="col-xl-9">
-												<input id = "endTime" class="form-control layer-date" placeholder="YYYY-MM-DD hh:mm:ss" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+												<input id = "endTime" name = "endTime" class="form-control layer-date" placeholder="YYYY-MM-DD hh:mm:ss" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
 											</div>
 										</div>
 									</div>
@@ -102,8 +103,8 @@
 								<div class="col-sm-6">
 									<div id = "details"> </div>
 								</div>
-								<button class="btn btn-default"> 取消</button>
-								<button class="btn btn-primary">确定修改</button>
+								<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+								<a type="button" class="btn btn-primary" id = "sub">确定修改</a>
 							</form>
 						</div>
 					</div>
@@ -119,6 +120,8 @@
 	<script src="../static/admin/js/plugins/footable/footable.all.min.js"></script>
 	<!-- layerDate plugin javascript -->
 	<script src="../static/admin/js/plugins/layer/laydate/laydate.js"></script>
+	<script src="../static/admin/js/jquery.form.js"></script>
+	<script src="../static/admin/js/jquery.cookie.js"></script>
 
 	<!-- 自定义js -->
 	<script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
@@ -170,13 +173,13 @@
 					field: 'endTime',
 					sortable: true
 				}, {
-					title: '<table><thead><tr><th style="width:110px">skuId</th><th style="width:500px">商品属性</th><th style="width:150px">价格</th><th style="width:150px">已售</th><th>总数</th></tr></thead></table>',
+					title: '<table><thead><tr><th style="width:110px">skuId</th><th style="width:450px">商品属性</th><th style="width:130px">价格</th><th style="width:130px">已售</th><th>总数</th></tr></thead></table>',
 					field: 'skuList',
 					formatter: function(value, row, index) {
 						var html = "<table class='table'>";
 						$.each(row.skuList, function(i, sku) {
-							html += "<tr><td style='width:100px'>" + sku.id + "</td><td style='width:500px'>" + sku.name +
-								"</td><td style='width:150px'>" + sku.price + "</td><td style='width:150px'>" + sku.sellNum +
+							html += "<tr><td style='width:100px'>" + sku.id + "</td><td style='width:450px'>" + sku.name +
+								"</td><td style='width:130px'>" + sku.price + "</td><td style='width:130px'>" + sku.sellNum +
 								"</td><td >" + sku.totalNum + "</td></tr>";
 						})
 						html += "</table>"
@@ -278,16 +281,16 @@
 					field: 'goodsName',
 					sortable: true
 				}, {
-					title: '<table><thead><tr><th style="width:110px">skuId</th><th style="width:500px">商品属性</th><th style="width:150px">进价</th><th style="width:150px">售价</th><th style="width:150px">成本价</th><th>总数</th></tr></thead></table>',
+					title: '<table><thead><tr><th style="width:110px">skuId</th><th style="width:450px">商品属性</th><th style="width:130px">进价</th><th style="width:130px">售价</th><th style="width:130px">成本价</th><th>总数</th></tr></thead></table>',
 					field: 'skuList',
 					formatter: function(value, row, index) {
 						var html = "<table class='table'>";
 						$.each(row.skuList, function(i, sku) {
 							html += "<tr><td style='width:100px'>" + sku.id +
-								"</td><td style='width:500px'>" + sku.name +
-								"</td><td style='width:150px'>" + sku.realPrice + 
-								"</td><td style='width:150px'>" + sku.sellPrice + 
-								"</td><td style='width:150px'>" + sku.costPrice + 
+								"</td><td style='width:450px'>" + sku.name +
+								"</td><td style='width:130px'>" + sku.realPrice + 
+								"</td><td style='width:130px'>" + sku.price + 
+								"</td><td style='width:130px'>" + sku.costPrice + 
 								"</td><td>"+ sku.totalNum + "</td></tr>";
 						})
 						html += "</table>"
@@ -325,36 +328,50 @@
 			}
 		});
 			
-			function setValue(vals){
+			function setValue(vals,index){
+				
 				$('#modal-form').on('show.bs.modal', function (event) {
 					    var value = $(event.relatedTarget).data('id');; //触发事件的按钮
 					    var modal = $(this);  //当前模态框
-					    modal.find("#goodsId").val(vals.id);
+						modal.find("#id").val(vals.id);
 						modal.find("#goodsName").val(vals.goodsName);
 						modal.find("#startTime").val(vals.startTime);
 						modal.find("#endTime").val(vals.endTime);
-						console.log(vals);
 						var html ='';
+						
 						 $.each(vals.skuList, function(i, sku) {
-						 	
-							html +='<div class="form-group"><label><input type="checkbox" class="i-checks col-xl-4" checked="true">'+sku.name+'</label>'
-							+'<input type="number" placeholder="数量" class="form-control" value = "'+sku.totalNum+'"/></div></div>'
+							 modal.find("#aid").val(sku.aid);
+						 	html +='<div class="form-group"><label><input name = "skuList['+i+'].id" type="checkbox" class="i-checks col-xl-4" checked="true" value="'+sku.id+'">'+sku.name+'</label></br>'
+							+'<label>数量</label><input name = "skuList['+i+'].totalNum" type="number" placeholder="数量" class="form-control" style="width:60%" value = "'+(sku.totalNum/2)+'" max = "'+sku.totalNum+'"/>'
+							+'<label>价格</label><input name = "skuList['+i+'].price"class="form-control " style="width:60%" value ="'+sku.price+'" min = "'+(sku.price-20)+'"/></div>';
 						 })
 						
-						$("#details").append(html);			
-											
-										
+						$("#details").append(html);							
 				});
 				
 			}
 				
 			
-
-
-
+			$("#sub").click(function() {
+				$("#activity").ajaxSubmit(function(re) {
+					if (re.code == 0) {
+						alert("添加成功");
+					} else {
+						alert(re.userMsg);
+					}
+					
+				});
+			});
 			
-				
-
+			$.ajaxSetup({
+				headers: {
+					'Authorization': $.cookie("token")
+				},
+				xhrFields: {
+					withCredentials: true
+				},
+				crossDomain: true
+			});
 
 
 		// 查询按钮事件
