@@ -50,17 +50,36 @@ public interface ActivityService extends IService<Activity> {
      * 根据id删除一个活动
      * @author wangShilei
      * @date 2020/11/30 9:12
-     * @param id :
+     * @param ids :
      * @return boolean
      */
-    boolean delActivity(Long id);
+    boolean delActivity(Long[] ids);
 
     /**
      * 校验活动能否被修改
      * @author wangShilei
      * @date 2020/11/30 13:53
      * @param id :
-     * @return 0-未开始  1-进行中  2-已结束
+     * @return 0-未开始 true
      */
-    Integer checkActivity(Long id);
+    boolean checkActivity(Long[] id);
+
+
+    /**
+     * 校验活动能否被修改
+     * @author wangShilei
+     * @date 2020/11/30 13:53
+     * @param id :
+     * @return 0-未开始 true
+     */
+    boolean checkActivity(Long id);
+
+    /**
+     * 校验活动能否被修改
+     * @author wangShilei
+     * @date 2020/11/30 13:53
+     * @param id :
+     * @return 0-未开始 true
+     */
+    boolean checkActivity(List<Long> id);
 }

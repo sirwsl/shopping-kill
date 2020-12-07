@@ -18,12 +18,9 @@
     <resultMap id="ActivityByGoods" type="com.wsl.shoppingkill.obj.vo.ActivityByGoodsVO">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="goodsName"/>
-        <collection property="skuList" ofType="com.wsl.shoppingkill.obj.vo.ActivityByGoodsVO$Goods2Sku">
-            <id column="sid" jdbcType="BIGINT" property="id"/>
-            <result column="attribute" property="name"/>
-            <result column="num" property="num"/>
-        </collection>
+        <collection property="skuList" ofType="com.wsl.shoppingkill.obj.vo.ActivityByGoodsVO$Goods2Sku" select="getGoods" column="id" />
     </resultMap>
+
 
     <select id="getAllGoods" resultType="com.wsl.shoppingkill.obj.vo.GoodsVO">
         select tg.id,
@@ -51,11 +48,10 @@
     </select>
 
   <select id="getActivityBuyGoods" resultMap="ActivityByGoods">
-      select tg.id,tg.name,ts.id as sid,ts.attribute,ts.num
+      select tg.id,tg.name
       from t_goods tg
-      left join t_sku ts on ts.goods_id = tg.id
       <where>
-          tg.del_flag = 0 and ts.del_flag = 0
+          tg.del_flag = 0
           <if test="name != null and name != ''">
               <bind name="names" value="'%' + name + '%'" />
               and tg.name like #{names}
@@ -65,5 +61,10 @@
               and tg.id like #{ids}
           </if>
       </where>
+    </select>
+    <select id="getGoods" resultType="com.wsl.shoppingkill.obj.vo.ActivityByGoodsVO$Goods2Sku" >
+        select ts.id,ts.attribute as name,ts.num as totalNum,ts.sell_price as price,ts.real_price,ts.cost_price
+        from t_sku ts
+        where ts.goods_id  = #{id} and ts.del_flag = 0
     </select>
 </mapper>

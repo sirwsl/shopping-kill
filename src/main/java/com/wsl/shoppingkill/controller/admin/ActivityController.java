@@ -7,12 +7,14 @@ import com.wsl.shoppingkill.obj.param.ActivityUpdateParam;
 import com.wsl.shoppingkill.obj.vo.ActivityByGoodsVO;
 import com.wsl.shoppingkill.obj.vo.ActivityVO;
 import com.wsl.shoppingkill.service.ActivityService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author WangShilei
@@ -20,6 +22,7 @@ import java.util.List;
  **/
 @RestController
 @RequestMapping("/admin")
+@Slf4j
 public class ActivityController {
 
     @Resource
@@ -38,6 +41,7 @@ public class ActivityController {
         if (activityParam.getStatus() == null || activityParam.getStatus() < 0) {
             return Result.error("error", "参数错误，status");
         }
+        log.info("{}",activityService.getActivityAll(activityParam));
         return Result.success(activityService.getActivityAll(activityParam));
     }
 
@@ -74,11 +78,11 @@ public class ActivityController {
     @PostMapping("/addOrUpdateActivity/v1")
     public Result<Boolean> updateActivity(@Valid @RequestBody ActivityUpdateParam activity) {
         //校验能否被修改
-        if (activity.getId() != null && activity.getId() > 0) {
-            if (activityService.checkActivity(activity.getId()) != 0) {
+        List<Long> collect = activity.getSkuList().stream().map(ActivityUpdateParam.Sku::getAId).collect(Collectors.toList());
+        if (activityService.checkActivity(collect)) {
                 return Result.error("error", "当前活动不允许被修改");
-            }
         }
+
         if (activity.getEndTime().isBefore(activity.getStartTime().plusHours(1))) {
             return Result.error("error", "结束时间不能小于开始时间1小时");
         }
@@ -98,12 +102,14 @@ public class ActivityController {
      * @date 2020/11/30 15:24
      */
     @DeleteMapping("/delActivity/v1")
-    public Result<Boolean> delActivity(Long id) {
+    public Result<Boolean> delActivity(@RequestParam(value="id[]") Long[] id) {
+        log.info(id.toString());
         //0-未开始  1-进行中  2-已结束
-        if (activityService.checkActivity(id) != 0) {
+        if (!activityService.checkActivity(id)) {
             return Result.error("error", "只能删除未开始活动");
         }
         return Result.success(activityService.delActivity(id));
+
     }
 
 

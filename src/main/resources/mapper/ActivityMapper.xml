@@ -27,6 +27,7 @@
         <result column="end_time" jdbcType="TIMESTAMP" property="endTime"/>
         <collection property="skuList" ofType="com.wsl.shoppingkill.obj.vo.ActivityVO$Goods2Sku">
             <id column="sid" jdbcType="BIGINT" property="id"/>
+            <result column="aid" property="aid" />
             <result column="attribute" property="name"/>
             <result column="price" property="price"/>
             <result column="total_num" property="totalNum"/>
@@ -41,6 +42,7 @@
                ta.end_time,
                ts.id as sid,
                ts.attribute,
+               ta.id as aid,
                ta.price,
                ta.total_num,
                ta.sell_num

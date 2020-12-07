@@ -25,9 +25,7 @@
 			<div class="row">
 			    <div class="col-sm-12">
 			        <div class="ibox float-e-margins center">
-			            <div class="ibox-title ">
-			                <h5>操作日志记录</h5>
-			            </div>
+			            
 			            <div class="mytab">
 							<table id="mytab" class="table table-hover"></table>
 			            </div>
@@ -46,8 +44,8 @@
 		
 	<!-- 自定义js -->
 	<script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
-	 <script src="../static/admin/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
-	 <script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+	<script src="../static/admin/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+	<script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
 	 
 	 
 	<script src="../static/admin/js/content.js?v=1.0.0"></script>
@@ -121,8 +119,6 @@
 		
 		function queryParams(params) {
 		    var temp = {
-		        size : params.limit,
-		        current : (params.offset / params.limit) + 1,
 				status : flag,
 				id: id,
 				name: name,
@@ -133,7 +129,7 @@
 		}
 		
 		function returnFormat(res) {
-		    console.log({"rows":res.data.records,"total": res.data.total})
+		    console.log(res);
 		    return {
 				"rows":res.data.records,
 				"total": res.data.total

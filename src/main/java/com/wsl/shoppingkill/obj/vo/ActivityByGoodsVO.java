@@ -7,6 +7,7 @@ import lombok.ToString;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -59,7 +60,22 @@ public class ActivityByGoodsVO implements Serializable {
         /**
          * 上架数量
          */
-        private Integer num;
+        private Integer totalNum;
+
+        /**
+         * 售价
+         */
+        private BigDecimal price;
+
+        /**
+         * 进价
+         */
+        private BigDecimal realPrice;
+
+        /**
+         * 成本价
+         */
+        private BigDecimal costPrice;
     }
 
 

@@ -1,303 +1,369 @@
 <!DOCTYPE html>
 <html>
 
-<head>
+	<head>
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-    <title>秒杀界面</title>
-    <meta name="keywords" content="">
-    <meta name="description" content="">
+		<title>秒杀界面</title>
+		<meta name="keywords" content="">
+		<meta name="description" content="">
 
-    <link rel="shortcut icon" href="favicon.ico"> <link href="../static/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
-    <link href="../static/admin/css/font-awesome.css?v=4.4.0" rel="stylesheet">
-    <link href="../static/admin/css/animate.css" rel="stylesheet">
-    <link href="../static/admin/css/style.css?v=4.1.0" rel="stylesheet">
-	<link href="../static/admin/css/plugins/footable/footable.core.css" rel="stylesheet">
-</head>
+		<link rel="shortcut icon" href="favicon.ico">
+		<link href="../static/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+		<link href="../static/admin/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+		<link href="../static/admin/css/animate.css" rel="stylesheet">
+		<link href="../static/admin/css/style.css?v=4.1.0" rel="stylesheet">
+		<link href="../static/admin/css/plugins/footable/footable.core.css" rel="stylesheet">
+	</head>
 
-<body class="gray-bg">
-    <div class="wrapper wrapper-content animated fadeIn">
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="tabs-container">
-                    <ul class="nav nav-tabs">
-                        <li class="active"><a data-toggle="tab" href="#tab-1" aria-expanded="true">进行中</a>
-                        </li>
-                        <li class=""><a data-toggle="tab" href="#tab-2" aria-expanded="false">未开始</a>
-                        </li>
-						<li class=""><a data-toggle="tab" href="#tab-3" aria-expanded="false">已结束</a>
-						</li>
-						<li class=""><a data-toggle="tab" href="#tab-4" aria-expanded="false">待添加</a>
-						</li>
-                    </ul>
-                    <div class="tab-content">
-                        <div id="tab-1" class="tab-pane active">
-                            <div class="panel-body">
-                                <div class="ibox float-e-margins">
-                                	<div class="ibox-content">
-                                	   <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="8">
-                                		   <thead>
-                                		   <tr>
-                                			   <th data-toggle="true">id</th>
-                                			   <th>商品</th>
-                                			   <th>开始时间</th>
-                                			   <th>结束时间</th>
-                                			   <th data-hide="all">预售数量</th>
-                                			   <th data-hide="all">销售数量</th>
-                                			   <th data-hide="all">销售比</th>                             			   
-                                			   <th>操作</th>
-                                		   </tr>
-                                		   </thead>
-                                	   </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="tab-2" class="tab-pane">
-                            <div class="panel-body">
-                                <div class="ibox float-e-margins">
-                                	<div class="ibox-content">
-                                	   <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="8">
-                                		   <thead>
-                                		   <tr>
-                                			   <th data-toggle="true">id</th>
-                                			   <th>商品</th>
-                                			   <th>开始时间</th>
-                                			   <th>结束时间</th>
-                                			   <th data-hide="all">预售数量</th>
-                                			   <th data-hide="all">收藏人数</th>                                			   
-                                			   <th>操作</th>
-                                		   </tr>
-                                		   </thead>
-                                		   <tbody>
-                                		   <tr>
-                                			   <td>1123</td>
-                                			   <td>华为P30</td>
-                                			   <td>2020-11-12 12:00</td>
-                                			   <td>2020-11-12 12:00</td>
-                                			   <td>白色：65 灰色：88 彩色：86</td>
-                                			   <td>82</td>					
-                                			   <td>
-                            				   <a data-toggle="modal" class="btn btn-primary" href="#modal-form">编辑</a>
-                            				   <a data-toggle="modal" class="btn btn-danger" href="#modal-form" data-toggle="modal" data-target="#myModal">删除</a>
-                            				   </td>
-                                		   </tr>
-                                		  
-                                		   </tbody>
-                                		   <tfoot>
-                                		   <tr>
-                                			   <td colspan="5">
-                                				   <ul class="pagination pull-right"></ul>
-                                			   </td>
-                                		   </tr>
-                                		   </tfoot>
-                                	   </table>
-                                    </div>
-                                </div>
-                            </div>
-					    </div>
-						<div id="tab-3" class="tab-pane">
-						    <div class="panel-body">
-								<div class="ibox float-e-margins">
-									<div class="ibox-content">
-									   <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="8">
-										   <thead>
-										   <tr>
-											   <th data-toggle="true">id</th>
-											   <th>商品</th>
-											   <th>开始时间</th>
-											   <th>结束时间</th>
-											   <th data-hide="all">剩余数量</th>
-											   <th data-hide="all">销售数量</th>
-											   <th data-hide="all">销售比</th>
-											   <th>状态</th>
-										   </tr>
-										   </thead>
-										   <tbody>
-										   <tr>
-											   <td>1123</td>
-											   <td>华为P30</td>
-											   <td>2020-11-12 12:00</td>
-											   <td>2020-11-12 12:00</td>
-											   <td>白色：65 灰色：88 彩色：86</td>
-											   <td>白色：99  灰色：32 彩色：66</td>
-											   <td>82%</td>					
-											   <td><i class="fa fa-check text-navy"></i>已结束</td>
-										   </tr>
-										  
-										   </tbody>
-										   <tfoot>
-										   <tr>
-											   <td colspan="5">
-												   <ul class="pagination pull-right"></ul>
-											   </td>
-										   </tr>
-										   </tfoot>
-									   </table>
-						            </div>
+	<body class="gray-bg">
+		<div class="wrapper wrapper-content animated fadeIn">
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="tabs-container">
+						<ul class="nav nav-tabs">
+							<li class="active"><a onclick="col(2)" data-toggle="tab" href="#tab-1" aria-expanded="true">进行中</a>
+							</li>
+							<li><a onclick="col(3)" data-toggle="tab" href="#tab-1" aria-expanded="false">已结束</a>
+							</li>
+							<li><a onclick="col(1)" data-toggle="tab" href="#tab-1" aria-expanded="false">未开始</a>
+							</li>
+							<li><a data-toggle="tab" href="#tab-2" aria-expanded="false" id="goods" name = "goods">待添加</a>
+							</li>
+						</ul>
+						<div class="tab-content">
+							<div id="tab-1" class="tab-pane active">
+								<div class="panel-body">
+									<div class="ibox float-e-margins">
+										<div class="ibox-content">
+											<table id="killAvtivity" class="footable table table-stripped toggle-arrow-tiny" data-page-size="8">
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div id="tab-2" class="tab-pane active">
+								<div class="panel-body">
+									<div class="ibox float-e-margins">
+										<div class="ibox-content">
+											<table id="goodsActivity" class="footable table table-stripped toggle-arrow-tiny" data-page-size="8">
+											</table>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
-						
-						<div id="tab-4" class="tab-pane">
-							<div class="ibox-content">
-							    <div class="row">
-							        <div class="col-sm-4">
-							            <div class="input-group">
-							                <input type="text" placeholder="请输入关键词" class="input-sm form-control"> <span class="input-group-btn">
-							                    <button type="button" class="btn btn-sm btn-primary"> 搜索</button> </span>
-							            </div>
-							        </div>
-							        
-							        <div class="col-sm-3">
-							            <div class="input-group">
-							                <input type="text" placeholder="请输入id" class="input-sm form-control"> <span class="input-group-btn">
-							                    <button type="button" class="btn btn-sm btn-primary"> 搜索</button> </span>
-							            </div>
-							        </div>
-							    </div>	
-							</div>	
-						    <div class="panel-body">
-								<div class="ibox float-e-margins">
-									<div class="ibox-content">
-									   <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="8">
-										   <thead>
-										   <tr>
-											   <th data-toggle="true">id</th>
-											   <th>商品</th>
-											   <th>SKU</th>
-											   <th>操作</th>
-										   </tr>
-										   </thead>
-										   <tbody>
-										   <tr>
-											   <td>1123</td>
-											   <td>华为P30</td>
-											   <td>白色：65 灰色：88 彩色：86</td>
-												<td>
-													<a data-toggle="modal" class="btn btn-success" href="#modal-form">开启</a>
-											   </td>		
-										   </tr>
-										  
-										   </tbody>
-										   <tfoot>
-										   <tr>
-											   <td colspan="5">
-												   <ul class="pagination pull-right"></ul>
-											   </td>
-										   </tr>
-										   </tfoot>
-									   </table>
-						            </div>
-								</div>
-							</div>
-						</div>
-                    </div>
-                </div>
-            </div>
-		</div>	
-	</div>		
-	
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-						&times;
-					</button>
-					<h4 class="modal-title" id="myModalLabel">
-						二次确认操作
-					</h4>
+					</div>
 				</div>
-				<div class="modal-body">
-					您确定要删除或结束活动吗？
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">取消
-					</button>
-					<button type="button" class="btn btn-primary">
-						确定
-					</button>
-				</div>
-			</div><!-- /.modal-content -->
-		</div><!-- /.modal -->
-	</div>
-	
-	<div id="modal-form" class="modal fade" aria-hidden="true">
-	    <div class="modal-dialog">
-	        <div class="modal-content">
-	            <div class="modal-body">
-	                <div class="row">
-	                        <h3 class="m-t-none m-b">限时抢购活动编辑</h3>
-	                        <form role="form">
-	                            <div class="col-sm-6">
+			</div>
+		</div>
+
+
+		<div id="modal-form" class="modal fade" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-body">
+						<div class="row">
+							<h3 class="m-t-none m-b">限时抢购活动编辑</h3>
+							<form role="form">
+								<div class="col-sm-6">
 									<div class="form-group">
-									    <div class="form-group">
-									        <label class="col-xl-3 control-label">开始时间</label>
-									        <div class="col-xl-9">
-									            <input class="form-control layer-date" placeholder="YYYY-MM-DD hh:mm:ss" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
-									        </div>
-									    </div>
+										<div class="form-group">
+											<label class="col-xl-3 control-label">商品编号</label>
+											<div class="col-xl-9">
+												<input class="form-control layer-date" id = "goodsId">
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-xl-3 control-label">商品名称</label>
+											<div class="col-xl-9">
+												<input class="form-control layer-date" id = "goodsName">
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-xl-3 control-label">开始时间</label>
+											<div class="col-xl-9">
+												<input id = "startTime" class="form-control layer-date" placeholder="YYYY-MM-DD hh:mm:ss" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+											</div>
+										</div>
 									</div>
 									<div class="form-group">
 										<div class="form-group">
 											<label class="col-xl-3 control-label">开始时间</label>
 											<div class="col-xl-9">
-												<input class="form-control layer-date" placeholder="YYYY-MM-DD hh:mm:ss" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+												<input id = "endTime" class="form-control layer-date" placeholder="YYYY-MM-DD hh:mm:ss" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
 											</div>
 										</div>
 									</div>
 								</div>
 								<div class="col-sm-6">
-									<div class="form-group">
-									    <label><input type="checkbox" class="i-checks col-xl-4" checked="true">白色款式</label>
-									    <div class="col-xl-8">
-											<input type="number" placeholder="数量" class="form-control">
-										</div>
-									</div>
-									<div class="form-group">
-									    <label><input type="checkbox" class="i-checks col-xl-4" checked="true">白色款式</label>
-									    <div class="col-xl-8">
-											<input type="number" placeholder="数量" class="form-control col-xl-4">
-										</div>
-									</div>
-									<div class="form-group">
-									   <label><input type="checkbox" class="i-checks col-xl-4" checked="true">白色款式</label>
-									    <div class="col-xl-8">
-											<input type="number" placeholder="数量" class="form-control col-xl-4">
-										</div>
-									</div>
-									<div class="form-group">
-									    <label><input type="checkbox" class="i-checks col-xl-4 " checked="true">白色款式</label>
-									    <div class="col-xl-8">
-											<input type="number" placeholder="数量" class="form-control">
-										</div>
-									</div>
+									<div id = "details"> </div>
 								</div>
 								<button class="btn btn-default"> 取消</button>
-								<button class="btn btn-primary" >确定修改</button>
-	                        </form>
-	                </div>
-	            </div>
-	        </div>
-	    </div>
-	</div>
-	
+								<button class="btn btn-primary">确定修改</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
 	</body>
-	
+
 	<!-- 全局js -->
 	<script src="../static/admin/js/jquery.min.js?v=2.1.4"></script>
 	<script src="../static/admin/js/bootstrap.min.js?v=3.3.6"></script>
 	<script src="../static/admin/js/plugins/footable/footable.all.min.js"></script>
 	<!-- layerDate plugin javascript -->
 	<script src="../static/admin/js/plugins/layer/laydate/laydate.js"></script>
-	
+
 	<!-- 自定义js -->
+	<script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+	<script src="../static/admin/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+	<script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+
+
 	<script src="../static/admin/js/content.js?v=1.0.0"></script>
 	<script>
+		var arrTemp = new Array();
+		var flag = 1; //1-未开始 2-进行中 3-已结束
+		var id;
+		var name;
+		var startTime;
+		var endTime;
+
+		function col(num) {
+			flag = num;
+			$('#killAvtivity').bootstrapTable('refresh');
+		}
+		$(function killActivity() {
+			$('#killAvtivity').bootstrapTable({
+				method: 'get',
+				url: "http://test.wslhome.top/admin/getActivityAll/v1",
+				dataType: "json",
+				striped: true,
+				pageNumber: 1,
+				pagination: true,
+				sidePagination: 'client',
+				pageSize: 10,
+				pageList: [5, 10, 20, 30],
+				showRefresh: true,
+
+				queryParams: queryParams,
+				responseHandler: returnFormat,
+				columns: [{
+					title: 'Id',
+					field: 'id',
+					sortable: true
+				}, {
+					title: '商品名',
+					field: 'goodsName',
+					sortable: true
+				}, {
+					title: '开始时间',
+					field: 'startTime',
+				}, {
+					title: '结束时间',
+					field: 'endTime',
+					sortable: true
+				}, {
+					title: '<table><thead><tr><th style="width:110px">skuId</th><th style="width:500px">商品属性</th><th style="width:150px">价格</th><th style="width:150px">已售</th><th>总数</th></tr></thead></table>',
+					field: 'skuList',
+					formatter: function(value, row, index) {
+						var html = "<table class='table'>";
+						$.each(row.skuList, function(i, sku) {
+							html += "<tr><td style='width:100px'>" + sku.id + "</td><td style='width:500px'>" + sku.name +
+								"</td><td style='width:150px'>" + sku.price + "</td><td style='width:150px'>" + sku.sellNum +
+								"</td><td >" + sku.totalNum + "</td></tr>";
+						})
+						html += "</table>"
+						return html;
+					}
+				}, {
+					title: '操作',
+					field: 'Button',
+					align: 'center',
+					formatter: option
+
+				}]
+			})
+
+			function queryParams(params) {
+				var temp = {
+					status: flag,
+					id: id,
+					name: name,
+					startTime: startTime,
+					endTime: endTime
+				};
+				return temp;
+			}
+
+			function returnFormat(res) {
+				
+				return res.data;
+			}
+
+			function option(value, row, index) {
+				var arr = new Array();
+				$.each(row.skuList, function(i, sku) {
+					arr[i] = sku.aid;
+				})
+				arrTemp[index] = arr;
+				
+			
+				if (flag == 1) {
+					var htm = '<a data-toggle="modal" class="btn btn-primary" href="#modal-form" onclick="setValue('+JSON.stringify(row).replace(/"/g, '&quot;')+') ">编辑</a></br>' +
+						'<a data-toggle="modal" class="btn btn-danger" onclick = "delActivity(' + index + ')">删除</a>';
+					return htm;
+				} else if (flag == 2) {
+					return '<i class="fa fa-check text-navy">进行中</i>';
+				} else if (flag == 3) {
+					return '<i class="fa fa-check text-navy">已结束</i>';
+				}
+			}
+		})
+
+		function delActivity(index) {
+			
+			var mymessage = confirm("确认删除嘛？");
+			if (mymessage == true) {
+				$.ajax({
+					url: "http://test.wslhome.top/admin/delActivity/v1",
+					data: {
+						id: arrTemp[index]
+					},
+					type: 'delete',
+					success: function(data) {
+						if (data.code == 0) {
+							alert("删除成功");
+							$('#killAvtivity').bootstrapTable('refresh');
+						} else {
+							alert(data.userMsg);
+						}
+					},
+					error: function(data) {
+						alert("服务器繁忙");
+					}
+				});
+
+			}
+
+		}
+
+		$("#goods").click(function(){
+			$('#goodsActivity').bootstrapTable({
+				method: 'get',
+				url: "http://test.wslhome.top/admin/getActivityByGoods/v1",
+				dataType: "json",
+				striped: true, // 是否显示行间隔色
+				pageNumber: 1, // 初始化加载第一页
+				pagination: true, // 是否分页
+				sidePagination: 'server', // server:服务器端分页|client：前端分页
+				pageSize: 10,
+				pageList: [5, 10, 20, 30],
+				showRefresh: true, //刷新按钮
+
+				queryParams: queryParams,
+				responseHandler: returnFormat,
+				columns: [{
+					title: 'Id',
+					field: 'id',
+					sortable: true
+				}, {
+					title: '商品名',
+					field: 'goodsName',
+					sortable: true
+				}, {
+					title: '<table><thead><tr><th style="width:110px">skuId</th><th style="width:500px">商品属性</th><th style="width:150px">进价</th><th style="width:150px">售价</th><th style="width:150px">成本价</th><th>总数</th></tr></thead></table>',
+					field: 'skuList',
+					formatter: function(value, row, index) {
+						var html = "<table class='table'>";
+						$.each(row.skuList, function(i, sku) {
+							html += "<tr><td style='width:100px'>" + sku.id +
+								"</td><td style='width:500px'>" + sku.name +
+								"</td><td style='width:150px'>" + sku.realPrice + 
+								"</td><td style='width:150px'>" + sku.sellPrice + 
+								"</td><td style='width:150px'>" + sku.costPrice + 
+								"</td><td>"+ sku.totalNum + "</td></tr>";
+						})
+						html += "</table>"
+						return html;
+					}
+				}, {
+					title: '操作',
+					field: 'Button',
+					align: 'center',
+					formatter: AddFunctionAlty
+				
+				}]
+			})
+
+			function queryParams(params) {
+				var temp = {
+					current : (params.offset / params.limit) + 1,
+					size: params.limit,
+					id: id,
+					name: name
+				};
+				return temp;
+			}
+			function returnFormat(res) {
+				console.log(res);
+				return {
+					"rows": res.data.records,
+					"total": res.data.total
+				}
+			}
+
+			//列表行‘操作’按钮
+			function AddFunctionAlty(value, row, index) {
+				return '<a data-toggle="modal" class="btn btn-success" href="#modal-form" onclick="setValue('+JSON.stringify(row).replace(/"/g, '&quot;')+')">开启</a>'
+			}
+		});
+			
+			function setValue(vals){
+				$('#modal-form').on('show.bs.modal', function (event) {
+					    var value = $(event.relatedTarget).data('id');; //触发事件的按钮
+					    var modal = $(this);  //当前模态框
+					    modal.find("#goodsId").val(vals.id);
+						modal.find("#goodsName").val(vals.goodsName);
+						modal.find("#startTime").val(vals.startTime);
+						modal.find("#endTime").val(vals.endTime);
+						console.log(vals);
+						var html ='';
+						 $.each(vals.skuList, function(i, sku) {
+						 	
+							html +='<div class="form-group"><label><input type="checkbox" class="i-checks col-xl-4" checked="true">'+sku.name+'</label>'
+							+'<input type="number" placeholder="数量" class="form-control" value = "'+sku.totalNum+'"/></div></div>'
+						 })
+						
+						$("#details").append(html);			
+											
+										
+				});
+				
+			}
+				
+			
+
+
+
+			
+				
+
+
+
+		// 查询按钮事件
+		$('#search_btn').click(function() {
+			$('#mytab').bootstrapTable('refresh', {
+				url: path + '/user/list'
+			});
+		})
+
 	
 	</script>
 </html>

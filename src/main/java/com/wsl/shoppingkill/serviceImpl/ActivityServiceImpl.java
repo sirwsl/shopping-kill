@@ -5,17 +5,18 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wsl.shoppingkill.common.log.MyLog;
-import com.wsl.shoppingkill.obj.constant.LoggerEnum;
 import com.wsl.shoppingkill.domain.Activity;
 import com.wsl.shoppingkill.domain.Sku;
 import com.wsl.shoppingkill.mapper.ActivityMapper;
 import com.wsl.shoppingkill.mapper.GoodsMapper;
+import com.wsl.shoppingkill.obj.constant.LoggerEnum;
 import com.wsl.shoppingkill.obj.param.ActivityParam;
 import com.wsl.shoppingkill.obj.param.ActivityUpdateParam;
 import com.wsl.shoppingkill.obj.vo.ActivityByGoodsVO;
 import com.wsl.shoppingkill.obj.vo.ActivityVO;
 import com.wsl.shoppingkill.service.ActivityService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
@@ -23,7 +24,10 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -67,7 +71,6 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
                         .collect(Collectors.toList())
         )).stream().collect(Collectors.groupingBy(Sku::getId));
 
-        collect.forEach((k,v) -> System.err.println(k+"          "+v.toString()));
 
         //遍历判断
         activity.getSkuList().forEach(li -> {
@@ -114,15 +117,15 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
     }
 
     @Override
-    @MyLog(value = "#id", detail = "删除一个活动", grade = LoggerEnum.SERIOUS)
+    @MyLog(detail = "删除一个活动", grade = LoggerEnum.SERIOUS)
     @Transactional(rollbackFor = Exception.class)
-    public boolean delActivity(Long id) {
+    public boolean delActivity(Long[] ids) {
         try {
             //TODO：删除redis
-            if (activityMapper.deleteById(id) > 0) {
+            if (activityMapper.deleteBatchIds(Arrays.asList(ids)) ==ids.length) {
                 return true;
             } else {
-                throw new Exception();
+                throw new Exception("删除出错");
             }
 
         } catch (Exception e) {
@@ -133,21 +136,35 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
     }
 
     @Override
-    public Integer checkActivity(Long id) {
-        Activity activity = activityMapper.selectById(id);
-        if (Objects.isNull(activity)){
-            return null;
+    public boolean checkActivity(Long[] id) {
+        return checkActivity(Arrays.asList(id));
+    }
+
+    @Override
+    public boolean checkActivity(Long id) {
+        Long[] arr = new Long[1];
+        arr[0] = id;
+        return checkActivity(arr);
+    }
+
+    @Override
+    public boolean checkActivity(List<Long> id) {
+        if (CollectionUtils.isEmpty(id)){
+            return false;
         }
-        if (activity.getStartTime().isAfter(LocalDateTime.now())) {
-            //未开始
-            return 0;
-        } else if (activity.getStartTime().isBefore(LocalDateTime.now()) && activity.getEndTime().isAfter(LocalDateTime.now())) {
-            //进行中
-            return 1;
-        } else if (activity.getEndTime().isBefore(LocalDateTime.now())) {
-            //已结束
-            return 2;
+
+        List<Activity> activities = activityMapper.selectBatchIds(id);
+
+        if (CollectionUtils.isEmpty(id)){
+            return false;
         }
-        return null;
+        for (Activity activity : activities) {
+            if (!activity.getStartTime().isAfter(LocalDateTime.now())) {
+                //未开始
+                return false;
+            }
+        }
+        return true;
+
     }
 }

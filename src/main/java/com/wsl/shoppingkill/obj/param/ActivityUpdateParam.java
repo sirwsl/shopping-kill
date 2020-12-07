@@ -66,6 +66,13 @@ public class ActivityUpdateParam {
     @Accessors(chain = true)
     public static class Sku{
 
+        /**
+         * 活动id
+         */
+        @NotNull(message = "活动不能为空")
+        @NotEmpty(message = "活动不能为空")
+        private Long aId;
+
         @NotNull(message = "skuId不能为空")
         @NotEmpty(message = "skuId不能为空")
         private Long id;

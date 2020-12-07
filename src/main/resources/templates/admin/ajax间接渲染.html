@@ -61,6 +61,7 @@
 		        data:{"status":0},
 		        dataType: "json",
 		        success: function (msg) {
+					console.log(msg);
 		            if (msg.data) {
 		                var map = {};
 						map.total = msg.data.total;

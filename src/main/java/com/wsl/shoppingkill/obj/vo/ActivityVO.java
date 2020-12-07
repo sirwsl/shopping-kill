@@ -74,6 +74,14 @@ public class ActivityVO implements Serializable {
     @Accessors(chain = true)
     public static class Goods2Sku implements Serializable{
 
+        /**
+         * 活动id
+         */
+        private Long aid;
+
+        /**
+         * skuId
+         */
         private Long id;
 
         /**
