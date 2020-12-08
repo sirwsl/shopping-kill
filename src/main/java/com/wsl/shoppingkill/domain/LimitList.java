@@ -41,7 +41,7 @@ public class LimitList extends Model<LimitList> implements Serializable {
     private Long id;
 
     /**
-    * 类型(0-手机号 1-ip)
+    * 类型(1-手机号 2-ip)
     */
     @NotNull(message = "类型不能为空")
     @NotBlank(message = "类型不能为空")
