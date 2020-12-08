@@ -180,6 +180,15 @@
 				method: 'get',
 				url: "http://test.wslhome.top/admin/getActivityAll/v1",
 				dataType: "json",
+				headers: {
+					'Authorization': $.cookie("token")
+				},
+				ajaxOptions: {
+				        xhrFields: {        //跨域
+				            withCredentials: false
+				        },
+				        crossDomain: true
+				},
 				striped: true,
 				pageNumber: 1,
 				pagination: true,
@@ -296,6 +305,15 @@
 				method: 'get',
 				url: "http://test.wslhome.top/admin/getActivityByGoods/v1",
 				dataType: "json",
+				headers: {
+					'Authorization': $.cookie("token")
+				},
+				ajaxOptions: {
+				        xhrFields: {        //跨域
+				            withCredentials: false
+				        },
+				        crossDomain: true
+				},
 				striped: true, // 是否显示行间隔色
 				pageNumber: 1, // 初始化加载第一页
 				pagination: true, // 是否分页
@@ -422,7 +440,7 @@
 			}else{
 				goodName = $("#searchName").val();
 				goodId = $("#searchId").val();
-				$('#killAvtivity').bootstrapTable('refresh');
+				$('#goodsAvtivity').bootstrapTable('refresh');
 			}
 			
 		}

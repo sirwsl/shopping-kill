@@ -184,10 +184,26 @@
 	<script src="../static/admin/js/jquery.cookie.js"></script>
 	<script src="../static/admin/js/all.js"></script>
     <!-- 第三方插件 -->
- <script src="../static/admin/js/jquery.cookie.js"></script>
- <script src="../static/admin/js/all.js"></script>
+	 <script src="../static/admin/js/jquery.cookie.js"></script>
+	 <script src="../static/admin/js/all.js"></script>
  
 	<script type="text/javascript">
+		
+		$.ajaxSetup({
+			headers: {
+				'Authorization': $.cookie("token")
+			},
+			xhrFields: {
+				withCredentials: false
+			},
+			crossDomain: true
+		});
+		
+		$(function(){
+		　　if($.cookie("token") == null || $.cookie("token") == ""){
+			window.location.href = "/admin/login.html"
+		}
+		});
 		
 		$("#exits").click(function(){
 			 $.get("http://test.wslhome.top/login/exit/v1",null,
