@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : localhost
+ Source Server         :
  Source Server Type    : MySQL
- Source Server Version : 80019
- Source Host           : localhost:3306
+ Source Server Version : 50731
+ Source Host           : :3306
  Source Schema         : shoppingkill
 
  Target Server Type    : MySQL
- Target Server Version : 80019
+ Target Server Version : 50731
  File Encoding         : 65001
 
- Date: 04/12/2020 18:36:53
+ Date: 08/12/2020 11:10:05
 */
 
 SET NAMES utf8mb4;
@@ -22,70 +22,101 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `t_activity`;
 CREATE TABLE `t_activity`  (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `sku_id` bigint NOT NULL COMMENT 'SkuId',
-  `love` int NOT NULL DEFAULT 0 COMMENT '收藏人数',
-  `sell_num` int NULL DEFAULT 0 COMMENT '已售数量',
-  `total_num` int NOT NULL DEFAULT 0 COMMENT '总数',
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `sku_id` bigint(20) NOT NULL COMMENT 'SkuId',
+  `love` int(11) NOT NULL DEFAULT 0 COMMENT '收藏人数',
+  `sell_num` int(11) NULL DEFAULT 0 COMMENT '已售数量',
+  `total_num` int(11) NOT NULL DEFAULT 0 COMMENT '总数',
   `price` decimal(10, 2) NULL DEFAULT 0.00 COMMENT '销售价格',
   `start_time` datetime(0) NOT NULL COMMENT '开始时间',
   `end_time` datetime(0) NOT NULL COMMENT '结束时间',
   `creat_time` datetime(0) NULL DEFAULT NULL,
   `update_time` datetime(0) NULL DEFAULT NULL,
-  `del_flag` tinyint(1) NULL DEFAULT NULL COMMENT '逻辑删除',
+  `del_flag` tinyint(1) NULL DEFAULT 0 COMMENT '逻辑删除',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 67 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of t_activity
 -- ----------------------------
-INSERT INTO `t_activity` VALUES (1, 1, 10, 0, 200, 99.00, '2020-12-02 08:48:03', '2021-01-03 08:48:08', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 1);
-INSERT INTO `t_activity` VALUES (2, 6, 9, 0, 200, 89.00, '2020-11-30 08:48:03', '2020-11-30 08:48:08', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
-INSERT INTO `t_activity` VALUES (3, 1, 8, 60, 200, 98.00, '2020-11-29 08:48:03', '2020-11-30 08:48:08', '2020-11-30 08:48:15', '2020-11-29 08:48:19', 0);
-INSERT INTO `t_activity` VALUES (4, 2, 50, 78, 200, 88.00, '2020-11-30 08:48:03', '2020-11-30 08:48:08', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
-INSERT INTO `t_activity` VALUES (5, 2, 20, 66, 200, 78.00, '2020-11-19 08:48:03', '2020-11-30 08:48:08', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
-INSERT INTO `t_activity` VALUES (6, 6, 33, 20, 200, 56.00, '2020-11-29 08:48:03', '2020-11-30 08:48:08', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
-INSERT INTO `t_activity` VALUES (7, 2, 66, 0, 200, 49.00, '2020-11-30 08:48:03', '2020-11-30 08:48:08', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
-INSERT INTO `t_activity` VALUES (8, 2, 78, 16, 200, 38.00, '2020-11-30 19:48:03', '2020-12-02 08:48:08', '2020-11-30 08:48:15', '2020-11-30 19:08:08', 0);
-INSERT INTO `t_activity` VALUES (9, 3, 10, 15, 200, 55.00, '2020-11-30 08:48:03', '2020-12-02 08:48:08', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
-INSERT INTO `t_activity` VALUES (10, 3, 85, 12, 200, 88.00, '2020-11-30 08:48:03', '2020-12-02 08:48:08', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
-INSERT INTO `t_activity` VALUES (11, 3, 10, 3, 200, 66.00, '2020-11-30 08:48:03', '2020-12-02 08:48:08', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
-INSERT INTO `t_activity` VALUES (12, 1, 66, 2, 100, 77.00, '2020-11-30 08:48:03', '2020-12-02 08:48:08', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
-INSERT INTO `t_activity` VALUES (13, 3, 78, 5, 100, 88.00, '2020-11-30 08:48:03', '2020-12-02 08:48:08', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
-INSERT INTO `t_activity` VALUES (14, 4, 10, 6, 100, 119.00, '2020-12-02 08:48:03', '2021-01-03 08:48:08', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
-INSERT INTO `t_activity` VALUES (15, 4, 88, 7, 100, 139.00, '2020-12-02 08:48:03', '2021-01-03 08:48:08', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
-INSERT INTO `t_activity` VALUES (16, 4, 10, 8, 100, 199.00, '2020-12-01 08:48:03', '2020-12-02 08:48:08', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
-INSERT INTO `t_activity` VALUES (17, 5, 8, 5, 100, 99.00, '2020-11-30 08:48:03', '2020-12-02 08:48:08', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
-INSERT INTO `t_activity` VALUES (18, 6, 6, 10, 100, 129.00, '2020-11-30 08:48:03', '2020-12-06 08:48:08', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
-INSERT INTO `t_activity` VALUES (19, 6, 9, 0, 200, 89.00, '2020-11-30 08:48:03', '2020-11-30 08:48:08', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
-INSERT INTO `t_activity` VALUES (20, 1, 8, 60, 200, 98.00, '2020-11-29 08:48:03', '2020-11-30 08:48:08', '2020-11-30 08:48:15', '2020-11-29 08:48:19', 0);
-INSERT INTO `t_activity` VALUES (21, 2, 50, 78, 200, 88.00, '2020-11-30 08:48:03', '2020-11-30 08:48:08', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
-INSERT INTO `t_activity` VALUES (22, 2, 20, 66, 200, 78.00, '2020-11-19 08:48:03', '2020-11-30 08:48:08', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
-INSERT INTO `t_activity` VALUES (23, 6, 33, 20, 200, 56.00, '2020-11-29 08:48:03', '2020-11-30 08:48:08', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
-INSERT INTO `t_activity` VALUES (24, 2, 66, 0, 200, 49.00, '2020-11-30 08:48:03', '2020-11-30 08:48:08', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
-INSERT INTO `t_activity` VALUES (25, 2, 78, 16, 200, 38.00, '2020-11-30 19:48:03', '2020-12-02 08:48:08', '2020-11-30 08:48:15', '2020-11-30 19:08:08', 0);
-INSERT INTO `t_activity` VALUES (26, 3, 10, 15, 200, 55.00, '2020-11-30 08:48:03', '2020-12-02 08:48:08', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
-INSERT INTO `t_activity` VALUES (27, 3, 85, 12, 200, 88.00, '2020-11-30 08:48:03', '2020-12-02 08:48:08', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
-INSERT INTO `t_activity` VALUES (28, 3, 10, 3, 200, 66.00, '2020-11-30 08:48:03', '2020-12-02 08:48:08', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
-INSERT INTO `t_activity` VALUES (29, 1, 66, 2, 100, 77.00, '2020-11-30 08:48:03', '2020-12-02 08:48:08', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
-INSERT INTO `t_activity` VALUES (30, 3, 78, 5, 100, 88.00, '2020-11-30 08:48:03', '2020-12-02 08:48:08', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
-INSERT INTO `t_activity` VALUES (31, 4, 10, 6, 100, 119.00, '2020-12-02 08:48:03', '2021-01-03 08:48:08', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
-INSERT INTO `t_activity` VALUES (32, 4, 88, 7, 100, 139.00, '2020-12-02 08:48:03', '2021-01-03 08:48:08', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
-INSERT INTO `t_activity` VALUES (33, 4, 10, 8, 100, 199.00, '2020-12-01 08:48:03', '2020-12-02 08:48:08', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
-INSERT INTO `t_activity` VALUES (34, 5, 8, 5, 100, 99.00, '2020-11-30 08:48:03', '2020-12-02 08:48:08', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
-INSERT INTO `t_activity` VALUES (35, 6, 6, 10, 100, 129.00, '2020-11-30 08:48:03', '2020-12-06 08:48:08', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
+INSERT INTO `t_activity` VALUES (1, 1, 10, 10, 200, 99.00, '2020-12-05 08:48:03', '2021-01-03 08:48:08', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
+INSERT INTO `t_activity` VALUES (2, 2, 9, 2, 200, 89.00, '2020-12-05 08:48:03', '2021-01-03 08:48:08', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
+INSERT INTO `t_activity` VALUES (3, 3, 8, 32, 200, 98.00, '2020-12-05 08:48:03', '2021-01-03 08:48:08', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
+INSERT INTO `t_activity` VALUES (4, 1, 50, 34, 200, 88.00, '2020-02-02 12:22:22', '2020-02-12 12:22:22', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
+INSERT INTO `t_activity` VALUES (5, 2, 20, 56, 200, 78.00, '2020-02-02 12:22:22', '2020-02-12 12:22:22', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
+INSERT INTO `t_activity` VALUES (6, 3, 33, 20, 200, 56.00, '2020-02-02 12:22:22', '2020-02-12 12:22:22', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
+INSERT INTO `t_activity` VALUES (7, 1, 66, 65, 200, 1000.00, '2020-12-30 00:00:00', '2021-08-12 12:00:00', '2020-11-30 08:48:15', '2020-12-08 10:23:56', 0);
+INSERT INTO `t_activity` VALUES (8, 2, 78, 65, 100, 38.00, '2020-12-30 00:00:00', '2021-08-12 12:00:00', '2020-11-30 08:48:15', '2020-12-08 10:23:56', 0);
+INSERT INTO `t_activity` VALUES (9, 3, 10, 3, 100, 55.00, '2020-12-30 00:00:00', '2021-08-12 12:00:00', '2020-11-30 08:48:15', '2020-12-08 10:23:56', 0);
+INSERT INTO `t_activity` VALUES (10, 4, 85, 4, 200, 88.00, '2020-12-05 08:48:03', '2021-01-03 08:48:08', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
+INSERT INTO `t_activity` VALUES (11, 5, 10, 32, 200, 66.00, '2020-12-05 08:48:03', '2021-01-03 08:48:08', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
+INSERT INTO `t_activity` VALUES (12, 6, 66, 23, 100, 77.00, '2020-12-05 08:48:03', '2021-01-03 08:48:08', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
+INSERT INTO `t_activity` VALUES (13, 4, 78, 2, 100, 88.00, '2020-02-02 12:22:22', '2020-02-12 12:22:22', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
+INSERT INTO `t_activity` VALUES (14, 5, 10, 23, 100, 119.00, '2020-02-02 12:22:22', '2020-02-12 12:22:22', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
+INSERT INTO `t_activity` VALUES (15, 6, 88, 7, 100, 139.00, '2020-02-02 12:22:22', '2020-02-12 12:22:22', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
+INSERT INTO `t_activity` VALUES (16, 4, 10, 23, 100, 199.00, '2020-12-30 00:00:00', '2021-08-12 12:00:00', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
+INSERT INTO `t_activity` VALUES (17, 5, 8, 2, 100, 99.00, '2020-12-30 00:00:00', '2021-08-12 12:00:00', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
+INSERT INTO `t_activity` VALUES (18, 6, 6, 2, 100, 129.00, '2020-12-30 00:00:00', '2021-08-12 12:00:00', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
+INSERT INTO `t_activity` VALUES (19, 7, 9, 3, 200, 89.00, '2020-12-05 08:48:03', '2021-01-03 08:48:08', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
+INSERT INTO `t_activity` VALUES (20, 8, 8, 4, 200, 98.00, '2020-12-05 08:48:03', '2021-01-03 08:48:08', '2020-11-30 08:48:15', '2020-11-29 08:48:19', 0);
+INSERT INTO `t_activity` VALUES (21, 7, 50, 64, 200, 88.00, '2020-02-02 12:22:22', '2020-02-12 12:22:22', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
+INSERT INTO `t_activity` VALUES (22, 8, 20, 34, 200, 78.00, '2020-02-02 12:22:22', '2020-02-12 12:22:22', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
+INSERT INTO `t_activity` VALUES (23, 7, 33, 20, 200, 56.00, '2020-12-30 00:00:00', '2021-08-12 12:00:00', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
+INSERT INTO `t_activity` VALUES (24, 8, 66, 65, 200, 49.00, '2020-12-30 00:00:00', '2021-08-12 12:00:00', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
+INSERT INTO `t_activity` VALUES (25, 1, 78, 76, 200, 38.00, '2020-12-16 00:00:00', '2021-08-12 12:00:00', '2020-11-30 08:48:15', '2020-11-30 19:08:08', 0);
+INSERT INTO `t_activity` VALUES (26, 2, 10, 4, 200, 55.00, '2020-12-16 00:00:00', '2021-08-12 12:00:00', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
+INSERT INTO `t_activity` VALUES (27, 3, 85, 34, 200, 88.00, '2020-12-04 00:00:00', '2020-12-02 08:48:08', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
+INSERT INTO `t_activity` VALUES (28, 1, 10, 23, 200, 66.00, '2020-12-04 00:00:00', '2020-12-02 08:48:08', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
+INSERT INTO `t_activity` VALUES (29, 2, 66, 23, 100, 77.00, '2020-02-02 12:22:22', '2020-02-02 12:22:22', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
+INSERT INTO `t_activity` VALUES (30, 3, 78, 23, 100, 88.00, '2020-02-02 12:22:22', '2020-02-02 12:22:22', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
+INSERT INTO `t_activity` VALUES (31, 4, 10, 4, 100, 119.00, '2020-11-02 08:48:03', '2020-12-06 15:18:38', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
+INSERT INTO `t_activity` VALUES (32, 5, 88, 7, 100, 139.00, '2020-11-02 08:48:03', '2020-12-06 15:18:38', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
+INSERT INTO `t_activity` VALUES (33, 6, 10, 67, 100, 199.00, '2020-11-02 08:48:03', '2020-12-06 15:18:38', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
+INSERT INTO `t_activity` VALUES (34, 4, 8, 98, 100, 99.00, '2020-11-02 08:48:03', '2020-12-06 15:18:38', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
+INSERT INTO `t_activity` VALUES (35, 7, 6, 10, 100, 129.00, '2020-11-02 08:48:03', '2020-12-06 15:18:38', '2020-11-30 08:48:15', '2020-11-30 08:48:19', 0);
+INSERT INTO `t_activity` VALUES (36, 8, 0, 565, 0, 0.00, '2020-11-02 08:48:03', '2020-12-06 15:18:38', '2020-12-05 15:18:45', '2020-12-05 15:18:50', 0);
+INSERT INTO `t_activity` VALUES (37, 1, 0, 0, 498, 1695.00, '2020-12-09 00:00:00', '2020-12-31 00:00:00', '2020-12-08 10:30:20', '2020-12-08 10:30:20', 0);
+INSERT INTO `t_activity` VALUES (38, 2, 0, 0, 500, 1695.00, '2020-12-09 00:00:00', '2020-12-31 00:00:00', '2020-12-08 10:30:20', '2020-12-08 10:30:20', 0);
+INSERT INTO `t_activity` VALUES (39, 3, 0, 0, 330, 1695.00, '2020-12-09 00:00:00', '2020-12-31 00:00:00', '2020-12-08 10:30:20', '2020-12-08 10:30:20', 0);
+INSERT INTO `t_activity` VALUES (40, 4, 0, 0, 600, 8766.00, '2020-12-11 00:00:00', '2020-12-30 00:00:00', '2020-12-08 10:32:28', '2020-12-08 10:32:28', 0);
+INSERT INTO `t_activity` VALUES (41, 5, 0, 0, 600, 8766.00, '2020-12-11 00:00:00', '2020-12-30 00:00:00', '2020-12-08 10:32:28', '2020-12-08 10:32:28', 0);
+INSERT INTO `t_activity` VALUES (42, 6, 0, 0, 600, 8766.00, '2020-12-11 00:00:00', '2020-12-30 00:00:00', '2020-12-08 10:32:28', '2020-12-08 10:32:28', 0);
+INSERT INTO `t_activity` VALUES (43, 1, 0, 0, 498, 1695.00, '2020-12-30 00:00:00', '2021-12-08 00:00:00', '2020-12-08 10:40:11', '2020-12-08 10:40:11', 0);
+INSERT INTO `t_activity` VALUES (44, 2, 0, 0, 500, 1695.00, '2020-12-30 00:00:00', '2021-12-08 00:00:00', '2020-12-08 10:40:11', '2020-12-08 10:40:11', 0);
+INSERT INTO `t_activity` VALUES (45, 3, 0, 0, 330, 1695.00, '2020-12-30 00:00:00', '2021-12-08 00:00:00', '2020-12-08 10:40:11', '2020-12-08 10:40:11', 0);
+INSERT INTO `t_activity` VALUES (46, 1, 0, 0, 498, 1695.00, '2020-12-16 00:00:00', '2021-12-08 00:00:00', '2020-12-08 10:44:38', '2020-12-08 10:44:38', 0);
+INSERT INTO `t_activity` VALUES (47, 2, 0, 0, 500, 1695.00, '2020-12-16 00:00:00', '2021-12-08 00:00:00', '2020-12-08 10:44:38', '2020-12-08 10:44:38', 0);
+INSERT INTO `t_activity` VALUES (48, 3, 0, 0, 330, 1695.00, '2020-12-16 00:00:00', '2021-12-08 00:00:00', '2020-12-08 10:44:38', '2020-12-08 10:44:38', 0);
+INSERT INTO `t_activity` VALUES (49, 1, 0, 0, 498, 1695.00, '2020-12-16 00:00:00', '2021-12-08 00:00:00', '2020-12-08 10:46:40', '2020-12-08 10:46:40', 0);
+INSERT INTO `t_activity` VALUES (50, 2, 0, 0, 500, 1695.00, '2020-12-16 00:00:00', '2021-12-08 00:00:00', '2020-12-08 10:46:40', '2020-12-08 10:46:40', 0);
+INSERT INTO `t_activity` VALUES (51, 3, 0, 0, 330, 1695.00, '2020-12-16 00:00:00', '2021-12-08 00:00:00', '2020-12-08 10:46:40', '2020-12-08 10:46:40', 0);
+INSERT INTO `t_activity` VALUES (52, 1, 0, 0, 498, 1695.00, '2020-12-16 00:00:00', '2021-12-08 00:00:00', '2020-12-08 10:47:21', '2020-12-08 10:47:21', 0);
+INSERT INTO `t_activity` VALUES (53, 2, 0, 0, 500, 1695.00, '2020-12-16 00:00:00', '2021-12-08 00:00:00', '2020-12-08 10:47:21', '2020-12-08 10:47:21', 0);
+INSERT INTO `t_activity` VALUES (54, 3, 0, 0, 330, 1695.00, '2020-12-16 00:00:00', '2021-12-08 00:00:00', '2020-12-08 10:47:21', '2020-12-08 10:47:21', 0);
+INSERT INTO `t_activity` VALUES (55, 1, 0, 0, 498, 1695.00, '2020-12-16 00:00:00', '2021-12-08 00:00:00', '2020-12-08 10:53:02', '2020-12-08 10:53:02', 0);
+INSERT INTO `t_activity` VALUES (56, 2, 0, 0, 500, 1695.00, '2020-12-16 00:00:00', '2021-12-08 00:00:00', '2020-12-08 10:53:02', '2020-12-08 10:53:02', 0);
+INSERT INTO `t_activity` VALUES (57, 3, 0, 0, 330, 1695.00, '2020-12-16 00:00:00', '2021-12-08 00:00:00', '2020-12-08 10:53:02', '2020-12-08 10:53:02', 0);
+INSERT INTO `t_activity` VALUES (58, 1, 0, 0, 498, 1695.00, '2020-12-16 00:00:00', '2021-12-08 00:00:00', '2020-12-08 10:53:32', '2020-12-08 10:53:32', 0);
+INSERT INTO `t_activity` VALUES (59, 2, 0, 0, 500, 1695.00, '2020-12-16 00:00:00', '2021-12-08 00:00:00', '2020-12-08 10:53:32', '2020-12-08 10:53:32', 0);
+INSERT INTO `t_activity` VALUES (60, 3, 0, 0, 330, 1695.00, '2020-12-16 00:00:00', '2021-12-08 00:00:00', '2020-12-08 10:53:32', '2020-12-08 10:53:32', 0);
+INSERT INTO `t_activity` VALUES (61, 1, 0, 0, 498, 1695.00, '2020-12-22 00:00:00', '2020-12-31 00:00:00', '2020-12-08 10:57:17', '2020-12-08 10:57:17', 0);
+INSERT INTO `t_activity` VALUES (62, 2, 0, 0, 500, 1695.00, '2020-12-22 00:00:00', '2020-12-31 00:00:00', '2020-12-08 10:57:17', '2020-12-08 10:57:17', 0);
+INSERT INTO `t_activity` VALUES (63, 3, 0, 0, 330, 1695.00, '2020-12-22 00:00:00', '2020-12-31 00:00:00', '2020-12-08 10:57:17', '2020-12-08 10:57:17', 0);
+INSERT INTO `t_activity` VALUES (64, 1, 0, 0, 498, 1695.00, '2020-12-30 00:00:00', '2021-12-16 00:00:00', '2020-12-08 11:04:25', '2020-12-08 11:04:25', 0);
+INSERT INTO `t_activity` VALUES (65, 2, 0, 0, 500, 1695.00, '2020-12-30 00:00:00', '2021-12-16 00:00:00', '2020-12-08 11:04:25', '2020-12-08 11:04:25', 0);
+INSERT INTO `t_activity` VALUES (66, 3, 0, 0, 330, 1695.00, '2020-12-30 00:00:00', '2021-12-16 00:00:00', '2020-12-08 11:04:25', '2020-12-08 11:04:25', 0);
 
 -- ----------------------------
 -- Table structure for t_address
 -- ----------------------------
 DROP TABLE IF EXISTS `t_address`;
 CREATE TABLE `t_address`  (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '地址id',
-  `user_id` bigint NOT NULL COMMENT '用户id',
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '地址id',
+  `user_id` bigint(20) NOT NULL COMMENT '用户id',
   `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '收件人姓名',
   `phone` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '收件人电话',
   `address` varchar(80) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '地址',
-  `address_num` int NULL DEFAULT NULL COMMENT '邮编',
+  `address_num` int(11) NULL DEFAULT NULL COMMENT '邮编',
   `status` tinyint(1) NOT NULL DEFAULT 0 COMMENT '是否是默认的',
   `creat_time` datetime(0) NOT NULL COMMENT '创建时间',
   `update_time` datetime(0) NOT NULL COMMENT '修改时间',
@@ -110,11 +141,11 @@ INSERT INTO `t_address` VALUES (8, 1, '王世磊', '1562253547', '云南昆明',
 -- ----------------------------
 DROP TABLE IF EXISTS `t_admin`;
 CREATE TABLE `t_admin`  (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',
   `nick_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '姓名',
   `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '账户',
   `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '密码',
-  `sex` int NOT NULL COMMENT '性别',
+  `sex` int(11) NOT NULL COMMENT '性别',
   `id_card` varchar(18) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '身份证号',
   `phone` char(11) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '手机号',
   `img` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '头像',
@@ -137,7 +168,7 @@ INSERT INTO `t_admin` VALUES (56, 'wsl', 'sirwsl', '123', 0, '532923199701161916
 -- ----------------------------
 DROP TABLE IF EXISTS `t_advertise`;
 CREATE TABLE `t_advertise`  (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '广告id',
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '广告id',
   `img_url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '广告图片链接',
   `target_url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '目标url',
   `start_time` datetime(0) NOT NULL COMMENT '开始时间',
@@ -157,12 +188,12 @@ CREATE TABLE `t_advertise`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `t_after_sales`;
 CREATE TABLE `t_after_sales`  (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',
   `order_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '订单id',
-  `admin_id` bigint NULL DEFAULT NULL COMMENT '处理人id',
+  `admin_id` bigint(20) NULL DEFAULT NULL COMMENT '处理人id',
   `detail` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '售后内容',
   `result_detail` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '处理内容',
-  `type` int NOT NULL COMMENT '处理类型 （3-退货退款 2-换货 1-仅退款）',
+  `type` int(11) NOT NULL COMMENT '处理类型 （3-退货退款 2-换货 1-仅退款）',
   `deal_time` datetime(0) NULL DEFAULT NULL COMMENT '处理时间',
   `result` tinyint(1) NOT NULL DEFAULT 0 COMMENT '是否解决（0-未解决 1-已解决  默认0）',
   `creat_time` datetime(0) NOT NULL COMMENT '创建时间',
@@ -183,12 +214,12 @@ INSERT INTO `t_after_sales` VALUES (3, '23124234125', 1, '申请换货啦啦啦�
 -- ----------------------------
 DROP TABLE IF EXISTS `t_appraisal`;
 CREATE TABLE `t_appraisal`  (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT 'id',
-  `user_id` bigint NOT NULL COMMENT '用户id',
-  `goods_id` bigint NOT NULL COMMENT '商品id',
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `user_id` bigint(20) NOT NULL COMMENT '用户id',
+  `goods_id` bigint(20) NOT NULL COMMENT '商品id',
   `detail` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '评价内容',
   `img_url` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '评价图片',
-  `grade` int NOT NULL DEFAULT 5 COMMENT '评价星级（1-5）',
+  `grade` int(11) NOT NULL DEFAULT 5 COMMENT '评价星级（1-5）',
   `creat_time` datetime(0) NOT NULL COMMENT '创建时间（评价时间）',
   `update_time` datetime(0) NOT NULL COMMENT '更新时间',
   `del_flag` tinyint(1) NOT NULL DEFAULT 0 COMMENT '是否删除',
@@ -210,12 +241,12 @@ INSERT INTO `t_appraisal` VALUES (6, 6, 6, '测试评价1', NULL, 5, '2020-11-18
 -- ----------------------------
 DROP TABLE IF EXISTS `t_cart`;
 CREATE TABLE `t_cart`  (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '购物车id',
-  `user_id` bigint NOT NULL COMMENT '用户id',
-  `sku_id` bigint NOT NULL COMMENT 'sku_id',
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '购物车id',
+  `user_id` bigint(20) NOT NULL COMMENT '用户id',
+  `sku_id` bigint(20) NOT NULL COMMENT 'sku_id',
   `creat_time` datetime(0) NOT NULL COMMENT '创建时间（加入时间）',
   `update_time` datetime(0) NOT NULL COMMENT '更新时间',
-  `status` int NULL DEFAULT 0 COMMENT '状态(0-正常 1-已失效)',
+  `status` int(11) NULL DEFAULT 0 COMMENT '状态(0-正常 1-已失效)',
   `del_flag` tinyint(1) NOT NULL DEFAULT 0 COMMENT '是否删除',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '购物车' ROW_FORMAT = DYNAMIC;
@@ -229,37 +260,37 @@ CREATE TABLE `t_cart`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `t_goods`;
 CREATE TABLE `t_goods`  (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '商品id',
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '商品id',
   `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '商品名',
-  `type_id` int NULL DEFAULT NULL COMMENT '类别id',
+  `type_id` int(11) NULL DEFAULT NULL COMMENT '类别id',
   `img_url` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '图片地址',
   `shelf` tinyint(1) NOT NULL DEFAULT 1 COMMENT '是否上架',
   `detail` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '商品描述',
+  `spreadPrice` decimal(10, 2) NULL DEFAULT NULL COMMENT '差价',
   `creat_time` datetime(0) NOT NULL COMMENT '创建时间',
   `update_time` datetime(0) NOT NULL COMMENT '更新时间',
   `del_flag` tinyint(1) NOT NULL DEFAULT 0 COMMENT '逻辑删除',
-  `spreadPrice` decimal(10, 2) NULL DEFAULT NULL COMMENT '差价',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of t_goods
 -- ----------------------------
-INSERT INTO `t_goods` VALUES (1, '手机', 1, '/url/img/img.jpg', 0, '这就是一个手机，一个很牛逼的手机', '2020-11-17 14:27:07', '2020-11-21 14:27:11', 0, NULL);
-INSERT INTO `t_goods` VALUES (2, '电脑', 1, 'https://www.wslhome.top/img/imgs/asdasasdf.jpg', 1, '电脑电脑电脑电脑电脑', '2020-11-17 14:28:26', '2020-11-20 14:02:14', 0, NULL);
-INSERT INTO `t_goods` VALUES (3, '充电宝', 2, 'https://wslhome.top/test/upload/test.jpg', 1, '充电宝', '2020-11-19 14:30:05', '2020-11-20 14:06:02', 0, NULL);
-INSERT INTO `t_goods` VALUES (4, '手机壳', 2, 'img/jeisjfoiaw.jpeg', 0, '这就是个测试手机壳', '2020-11-17 14:30:52', '2020-11-17 14:30:54', 0, NULL);
-INSERT INTO `t_goods` VALUES (5, 'test1', 1, 'http://static.wslhome.top/goods/8bba6198-91a8-4389-9488-e43fec38358d.jpg', 0, '测试描述', '2020-11-20 11:12:34', '2020-11-20 13:42:56', 0, NULL);
+INSERT INTO `t_goods` VALUES (1, '手机', 1, '/url/img/img.jpg', 0, '这就是一个手机，一个很牛逼的手机', NULL, '2020-11-17 14:27:07', '2020-11-21 14:27:11', 0);
+INSERT INTO `t_goods` VALUES (2, '电脑', 1, 'https://www.wslhome.top/img/imgs/asdasasdf.jpg', 1, '电脑电脑电脑电脑电脑', NULL, '2020-11-17 14:28:26', '2020-11-20 14:02:14', 0);
+INSERT INTO `t_goods` VALUES (3, '充电宝', 2, 'https://wslhome.top/test/upload/test.jpg', 1, '充电宝', NULL, '2020-11-19 14:30:05', '2020-11-20 14:06:02', 0);
+INSERT INTO `t_goods` VALUES (4, '手机壳', 2, 'img/jeisjfoiaw.jpeg', 0, '这就是个测试手机壳', NULL, '2020-11-17 14:30:52', '2020-11-17 14:30:54', 0);
+INSERT INTO `t_goods` VALUES (5, 'test1', 1, 'http://static.wslhome.top/goods/8bba6198-91a8-4389-9488-e43fec38358d.jpg', 0, '测试描述', NULL, '2020-11-20 11:12:34', '2020-11-20 13:42:56', 0);
 
 -- ----------------------------
 -- Table structure for t_limit_list
 -- ----------------------------
 DROP TABLE IF EXISTS `t_limit_list`;
 CREATE TABLE `t_limit_list`  (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT 'id',
-  `type` int NOT NULL COMMENT '类型(0-手机号 1-ip)',
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `type` int(11) NOT NULL COMMENT '类型(0-手机号 1-ip)',
   `number` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '号码',
-  `status` int NULL DEFAULT 0 COMMENT '状态（0-黑名单 1-白名单）',
+  `status` int(11) NULL DEFAULT 0 COMMENT '状态（0-黑名单 1-白名单）',
   `start_time` datetime(0) NOT NULL COMMENT '开始时间',
   `end_time` datetime(0) NOT NULL COMMENT '结束时间',
   `creat_time` datetime(0) NOT NULL COMMENT '创建时间',
@@ -277,17 +308,17 @@ CREATE TABLE `t_limit_list`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `t_loggers`;
 CREATE TABLE `t_loggers`  (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '日志id',
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '日志id',
   `detail` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '操作内容',
-  `man_id` bigint NOT NULL COMMENT '操作人id',
-  `type` int NOT NULL COMMENT '操作类型(0-用户 1-管理员)',
-  `grade` int NULL DEFAULT NULL COMMENT '等级(0-正常 1-良好 2-严重 3-极其严重)',
+  `man_id` bigint(20) NOT NULL COMMENT '操作人id',
+  `type` int(11) NOT NULL COMMENT '操作类型(0-用户 1-管理员)',
+  `grade` int(11) NULL DEFAULT NULL COMMENT '等级(0-正常 1-良好 2-严重 3-极其严重)',
   `ip` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'ip',
   `creat_time` datetime(0) NOT NULL COMMENT '创建时间(操作时间)',
   `update_time` datetime(0) NOT NULL COMMENT '更新时间',
   `del_flag` tinyint(1) NOT NULL DEFAULT 0 COMMENT '是否删除',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 96 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 124 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of t_loggers
@@ -375,24 +406,51 @@ INSERT INTO `t_loggers` VALUES (91, '物品出库->[操作参数：1231242888]->
 INSERT INTO `t_loggers` VALUES (92, '物品出库->[操作参数：1231242888]->[Class：OrderServiceImpl]', 1, 1, 2, '127.0.0.1', '2020-11-27 11:02:30', '2020-11-27 11:02:30', 0);
 INSERT INTO `t_loggers` VALUES (93, '物品出库->[操作参数：1231242888]->[Class：OrderServiceImpl]', 1, 1, 2, '127.0.0.1', '2020-11-27 11:03:00', '2020-11-27 11:03:00', 0);
 INSERT INTO `t_loggers` VALUES (94, '删除一个活动->[操作参数：1]->[Class：ActivityServiceImpl]', 1, 1, 3, '0:0:0:0:0:0:0:1', '2020-11-30 18:35:05', '2020-11-30 18:35:05', 0);
+INSERT INTO `t_loggers` VALUES (96, '删除一个活动->[操作参数：[Ljava.lang.Long;@61c57130]->[Class：ActivityServiceImpl]', 1, 1, 3, '127.0.0.1', '2020-12-07 14:06:55', '2020-12-07 14:06:55', 0);
+INSERT INTO `t_loggers` VALUES (97, '删除一个活动->[操作参数：0]->[Class：ActivityServiceImpl]', 1, 1, 3, '127.0.0.1', '2020-12-07 15:04:04', '2020-12-07 15:04:04', 0);
+INSERT INTO `t_loggers` VALUES (98, '删除一个活动->[操作参数：0]->[Class：ActivityServiceImpl]', 1, 1, 3, '127.0.0.1', '2020-12-07 15:04:57', '2020-12-07 15:04:57', 0);
+INSERT INTO `t_loggers` VALUES (99, '删除一个活动->[操作参数：0]->[Class：ActivityServiceImpl]', 1, 1, 3, '127.0.0.1', '2020-12-07 15:05:07', '2020-12-07 15:05:07', 0);
+INSERT INTO `t_loggers` VALUES (100, '删除一个活动->[操作参数：0]->[Class：ActivityServiceImpl]', 1, 1, 3, '127.0.0.1', '2020-12-07 15:05:11', '2020-12-07 15:05:11', 0);
+INSERT INTO `t_loggers` VALUES (101, '删除一个活动->[操作参数：0]->[Class：ActivityServiceImpl]', 1, 1, 3, '127.0.0.1', '2020-12-07 15:16:43', '2020-12-07 15:16:43', 0);
+INSERT INTO `t_loggers` VALUES (102, '删除一个活动->[操作参数：0]->[Class：ActivityServiceImpl]', 1, 1, 3, '127.0.0.1', '2020-12-07 15:17:05', '2020-12-07 15:17:05', 0);
+INSERT INTO `t_loggers` VALUES (103, '删除一个活动->[操作参数：0]->[Class：ActivityServiceImpl]', 1, 1, 3, '127.0.0.1', '2020-12-07 15:19:08', '2020-12-07 15:19:08', 0);
+INSERT INTO `t_loggers` VALUES (105, '删除一个活动->[操作参数：0]->[Class：ActivityServiceImpl]', 1, 1, 3, '127.0.0.1', '2020-12-07 15:19:20', '2020-12-07 15:19:20', 0);
+INSERT INTO `t_loggers` VALUES (106, '删除一个活动->[操作参数：0]->[Class：ActivityServiceImpl]', 1, 1, 3, '127.0.0.1', '2020-12-07 15:21:04', '2020-12-07 15:21:04', 0);
+INSERT INTO `t_loggers` VALUES (107, '删除一个活动->[操作参数：0]->[Class：ActivityServiceImpl]', 1, 1, 3, '127.0.0.1', '2020-12-07 15:22:16', '2020-12-07 15:22:16', 0);
+INSERT INTO `t_loggers` VALUES (108, '删除一个活动->[操作参数：0]->[Class：ActivityServiceImpl]', 1, 1, 3, '127.0.0.1', '2020-12-07 15:25:54', '2020-12-07 15:25:54', 0);
+INSERT INTO `t_loggers` VALUES (109, '删除一个活动->[操作参数：0]->[Class：ActivityServiceImpl]', 1, 1, 3, '127.0.0.1', '2020-12-07 15:28:32', '2020-12-07 15:28:32', 0);
+INSERT INTO `t_loggers` VALUES (110, '删除一个活动->[操作参数：0]->[Class：ActivityServiceImpl]', 1, 1, 3, '127.0.0.1', '2020-12-07 15:29:25', '2020-12-07 15:29:25', 0);
+INSERT INTO `t_loggers` VALUES (111, '删除一个活动->[操作参数：0]->[Class：ActivityServiceImpl]', 1, 1, 3, '127.0.0.1', '2020-12-07 15:30:02', '2020-12-07 15:30:02', 0);
+INSERT INTO `t_loggers` VALUES (112, '删除一个活动->[操作参数：0]->[Class：ActivityServiceImpl]', 1, 1, 3, '127.0.0.1', '2020-12-07 15:30:23', '2020-12-07 15:30:23', 0);
+INSERT INTO `t_loggers` VALUES (113, '添加/更新一个活动->[操作参数：0]->[Class：ActivityServiceImpl]', 1, 1, 2, '127.0.0.1', '2020-12-08 10:23:57', '2020-12-08 10:23:57', 0);
+INSERT INTO `t_loggers` VALUES (114, '添加/更新一个活动->[操作参数：0]->[Class：ActivityServiceImpl]', 1, 1, 2, '127.0.0.1', '2020-12-08 10:30:20', '2020-12-08 10:30:20', 0);
+INSERT INTO `t_loggers` VALUES (115, '添加/更新一个活动->[操作参数：0]->[Class：ActivityServiceImpl]', 1, 1, 2, '127.0.0.1', '2020-12-08 10:32:28', '2020-12-08 10:32:28', 0);
+INSERT INTO `t_loggers` VALUES (116, '添加/更新一个活动->[操作参数：0]->[Class：ActivityServiceImpl]', 1, 1, 2, '127.0.0.1', '2020-12-08 10:40:12', '2020-12-08 10:40:12', 0);
+INSERT INTO `t_loggers` VALUES (117, '添加/更新一个活动->[操作参数：0]->[Class：ActivityServiceImpl]', 1, 1, 2, '127.0.0.1', '2020-12-08 10:44:38', '2020-12-08 10:44:38', 0);
+INSERT INTO `t_loggers` VALUES (118, '添加/更新一个活动->[操作参数：0]->[Class：ActivityServiceImpl]', 1, 1, 2, '127.0.0.1', '2020-12-08 10:46:41', '2020-12-08 10:46:41', 0);
+INSERT INTO `t_loggers` VALUES (119, '添加/更新一个活动->[操作参数：0]->[Class：ActivityServiceImpl]', 1, 1, 2, '127.0.0.1', '2020-12-08 10:47:21', '2020-12-08 10:47:21', 0);
+INSERT INTO `t_loggers` VALUES (120, '添加/更新一个活动->[操作参数：0]->[Class：ActivityServiceImpl]', 1, 1, 2, '127.0.0.1', '2020-12-08 10:53:03', '2020-12-08 10:53:03', 0);
+INSERT INTO `t_loggers` VALUES (121, '添加/更新一个活动->[操作参数：0]->[Class：ActivityServiceImpl]', 1, 1, 2, '127.0.0.1', '2020-12-08 10:53:33', '2020-12-08 10:53:33', 0);
+INSERT INTO `t_loggers` VALUES (122, '添加/更新一个活动->[操作参数：0]->[Class：ActivityServiceImpl]', 1, 1, 2, '127.0.0.1', '2020-12-08 10:57:17', '2020-12-08 10:57:17', 0);
+INSERT INTO `t_loggers` VALUES (123, '添加/更新一个活动->[操作参数：0]->[Class：ActivityServiceImpl]', 1, 1, 2, '127.0.0.1', '2020-12-08 11:04:25', '2020-12-08 11:04:25', 0);
 
 -- ----------------------------
 -- Table structure for t_order
 -- ----------------------------
 DROP TABLE IF EXISTS `t_order`;
 CREATE TABLE `t_order`  (
-  `id` bigint NOT NULL COMMENT '订单id',
-  `user_id` bigint NOT NULL COMMENT '买家id',
-  `sku_id` bigint NOT NULL COMMENT 'sku_id',
-  `num` int NOT NULL COMMENT '购买数量',
+  `id` bigint(20) NOT NULL COMMENT '订单id',
+  `user_id` bigint(20) NOT NULL COMMENT '买家id',
+  `sku_id` bigint(20) NOT NULL COMMENT 'sku_id',
+  `num` int(11) NOT NULL COMMENT '购买数量',
   `order_time` datetime(0) NULL DEFAULT NULL COMMENT '下单时间',
   `pay_time` datetime(0) NULL DEFAULT NULL COMMENT '支付时间',
   `send_time` datetime(0) NULL DEFAULT NULL COMMENT '发货时间',
-  `pay_type` int NULL DEFAULT NULL COMMENT '支付类型 (0-支付宝 1-微信 2-银行...)',
-  `address_id` bigint NULL DEFAULT NULL COMMENT '地址id',
+  `pay_type` int(11) NULL DEFAULT NULL COMMENT '支付类型 (0-支付宝 1-微信 2-银行...)',
+  `address_id` bigint(20) NULL DEFAULT NULL COMMENT '地址id',
   `pay_price` decimal(10, 2) NULL DEFAULT NULL COMMENT '支付金额',
   `remark` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备注',
-  `status` int NULL DEFAULT NULL COMMENT '订单状态(0-已下单未支付 1-已支付 2-已出库 3-已收货 4-已评价)',
+  `status` int(11) NULL DEFAULT NULL COMMENT '订单状态(0-已下单未支付 1-已支付 2-已出库 3-已收货 4-已评价)',
   `creat_time` datetime(0) NOT NULL COMMENT '创建时间',
   `update_time` datetime(0) NOT NULL COMMENT '更新时间',
   `del_flag` tinyint(1) NOT NULL DEFAULT 0 COMMENT '是否删除',
@@ -432,15 +490,15 @@ INSERT INTO `t_order` VALUES (2468464684465544564, 1, 2, 1, '2020-11-20 23:22:36
 -- ----------------------------
 DROP TABLE IF EXISTS `t_sku`;
 CREATE TABLE `t_sku`  (
-  `id` bigint NOT NULL COMMENT 'SKU_ID',
-  `goods_id` bigint NOT NULL COMMENT '商品id',
+  `id` bigint(20) NOT NULL COMMENT 'SKU_ID',
+  `goods_id` bigint(20) NOT NULL COMMENT '商品id',
   `attribute` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '商品属性',
   `img_url` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '商品图片',
   `real_price` decimal(10, 2) NOT NULL COMMENT '进价',
   `cost_price` decimal(10, 2) NOT NULL COMMENT '成本价',
   `sell_price` decimal(10, 2) NOT NULL COMMENT '售价',
-  `num` int NOT NULL COMMENT '数量',
-  `warn_num` int NOT NULL DEFAULT 10 COMMENT '预警量（默认10）',
+  `num` int(11) NOT NULL COMMENT '数量',
+  `warn_num` int(11) NOT NULL DEFAULT 10 COMMENT '预警量（默认10）',
   `exp_price` decimal(10, 2) NULL DEFAULT NULL COMMENT '快递费用',
   `creat_time` datetime(0) NOT NULL COMMENT '创建时间',
   `update_time` datetime(0) NOT NULL COMMENT '更新时间',
@@ -459,6 +517,10 @@ INSERT INTO `t_sku` VALUES (5, 2, '1T硬盘 32G内存 黑色', 'upload/isdfg/img
 INSERT INTO `t_sku` VALUES (6, 2, '1T硬盘  内存', 'upload/isdfg/img.jpeg', 4999.00, 5899.00, 8766.00, 1200, 124, 200.00, '2020-11-17 14:33:26', '2020-11-17 14:33:33', 0);
 INSERT INTO `t_sku` VALUES (7, 3, '白色', 'upload/isdfg/img.jpeg', 59.00, 62.00, 99.00, 200, 5, 5.00, '2020-11-17 14:33:26', '2020-11-17 14:33:33', 0);
 INSERT INTO `t_sku` VALUES (8, 3, '黑色', 'upload/isdfg/img.jpeg', 59.00, 62.00, 99.00, 200, 5, 5.00, '2020-11-17 14:33:26', '2020-11-17 14:33:33', 0);
+INSERT INTO `t_sku` VALUES (9, 4, '粉色', 'upload/isdfg/img.jpeg', 59.00, 62.00, 99.00, 200, 5, 5.00, '2020-11-17 14:33:26', '2020-11-17 14:33:33', 0);
+INSERT INTO `t_sku` VALUES (10, 4, '紫色', 'upload/isdfg/img.jpeg', 59.00, 62.00, 99.00, 200, 5, 5.00, '2020-11-17 14:33:26', '2020-11-17 14:33:33', 0);
+INSERT INTO `t_sku` VALUES (11, 4, '蓝色', 'upload/isdfg/img.jpeg', 59.00, 62.00, 99.00, 200, 5, 5.00, '2020-11-17 14:33:26', '2020-11-17 14:33:33', 0);
+INSERT INTO `t_sku` VALUES (12, 4, '白色', 'upload/isdfg/img.jpeg', 59.00, 62.00, 99.00, 200, 5, 5.00, '2020-11-17 14:33:26', '2020-11-17 14:33:33', 0);
 
 -- ----------------------------
 -- Table structure for t_subscriber
@@ -466,8 +528,8 @@ INSERT INTO `t_sku` VALUES (8, 3, '黑色', 'upload/isdfg/img.jpeg', 59.00, 62.0
 DROP TABLE IF EXISTS `t_subscriber`;
 CREATE TABLE `t_subscriber`  (
   `number` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '订阅者号',
-  `type` int NOT NULL COMMENT '订阅类型(1-手机订阅 0-邮件订阅)',
-  `status` int NULL DEFAULT 0 COMMENT '状态(0-正常  1-取消)',
+  `type` int(11) NOT NULL COMMENT '订阅类型(1-手机订阅 0-邮件订阅)',
+  `status` int(11) NULL DEFAULT 0 COMMENT '状态(0-正常  1-取消)',
   `creat_time` datetime(0) NOT NULL COMMENT '创建时间',
   `update_time` datetime(0) NOT NULL COMMENT '更新时间',
   `del_flag` tinyint(1) NOT NULL DEFAULT 0 COMMENT '逻辑删除',
@@ -483,11 +545,11 @@ CREATE TABLE `t_subscriber`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `t_subscription_history`;
 CREATE TABLE `t_subscription_history`  (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',
   `title` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '标题',
   `detail` varchar(999) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '订阅内容',
-  `type` int NOT NULL COMMENT '类型(0-手机  1-邮件)',
-  `admin_id` int NOT NULL COMMENT '发布者id',
+  `type` int(11) NOT NULL COMMENT '类型(0-手机  1-邮件)',
+  `admin_id` int(11) NOT NULL COMMENT '发布者id',
   `real_flag` tinyint(1) NOT NULL DEFAULT 0 COMMENT '是否成功(0-失败  1-成功)',
   `creat_time` datetime(0) NOT NULL COMMENT '创建时间(发布时间)',
   `update_time` datetime(0) NOT NULL COMMENT '更新时间',
@@ -509,7 +571,7 @@ INSERT INTO `t_subscription_history` VALUES (5, '而无法华为啊否和', '沙
 -- ----------------------------
 DROP TABLE IF EXISTS `t_types`;
 CREATE TABLE `t_types`  (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '类别id',
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '类别id',
   `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '类别名字',
   `creat_time` datetime(0) NOT NULL COMMENT '创建时间',
   `update_time` datetime(0) NOT NULL COMMENT '更新时间',
@@ -531,7 +593,7 @@ INSERT INTO `t_types` VALUES (5, '123', '2020-11-18 17:22:42', '2020-11-18 17:22
 -- ----------------------------
 DROP TABLE IF EXISTS `t_user`;
 CREATE TABLE `t_user`  (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',
   `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '账号',
   `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '密码',
   `nick_name` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '昵称',

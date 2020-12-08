@@ -71,7 +71,7 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
                         .collect(Collectors.toList())
         )).stream().collect(Collectors.groupingBy(Sku::getId));
 
-
+        log.info(activity.getSkuList().toString());
         //遍历判断
         activity.getSkuList().forEach(li -> {
             Activity activityTemp = new Activity();
@@ -81,8 +81,8 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
                     .setUpdateTime(LocalDateTime.now())
                     .setSkuId(li.getId());
             //设置id更新
-            if (activity.getId() != null && activity.getId() > 0) {
-                activityTemp.setId(activity.getId());
+            if (li.getAId() != null && li.getAId() > 0) {
+                activityTemp.setId(li.getAId());
             } else {
                 activityTemp.setCreatTime(LocalDateTime.now());
             }
@@ -101,7 +101,7 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
             }
             activityList.add(activityTemp);
         });
-
+        log.info(activityList.toString());
         //批量更新
         try {
             saveOrUpdateBatch(activityList);

@@ -8,6 +8,7 @@ import com.wsl.shoppingkill.obj.vo.ActivityByGoodsVO;
 import com.wsl.shoppingkill.obj.vo.ActivityVO;
 import com.wsl.shoppingkill.service.ActivityService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -80,7 +81,7 @@ public class ActivityController {
         log.info(activity.toString());
         //校验能否被修改
         List<Long> collect = activity.getSkuList().stream().map(ActivityUpdateParam.Sku::getAId).collect(Collectors.toList());
-        if (activityService.checkActivity(collect)) {
+        if (CollectionUtils.isNotEmpty(collect) && !activityService.checkActivity(collect)) {
                 return Result.error("error", "当前活动不允许被修改");
         }
 

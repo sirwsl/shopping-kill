@@ -71,7 +71,6 @@
 							<form role="form" id= "activity" enctype="application/x-www-form-urlencoded" method="post" action="http://test.wslhome.top/admin/addOrUpdateActivity/v1" />
 								<div class="col-sm-6">
 									<div class="form-group">
-										<input name ="aid" id = "aid"/>
 										<div class="form-group">
 											<label class="col-xl-3 control-label">商品编号</label>
 											<div class="col-xl-9">
@@ -340,12 +339,16 @@
 						var html ='';
 						
 						 $.each(vals.skuList, function(i, sku) {
-							 modal.find("#aid").val(sku.aid);
-						 	html +='<div class="form-group"><label><input name = "skuList['+i+'].id" type="checkbox" class="i-checks col-xl-4" checked="true" value="'+sku.id+'">'+sku.name+'</label></br>'
-							+'<label>数量</label><input name = "skuList['+i+'].totalNum" type="number" placeholder="数量" class="form-control" style="width:60%" value = "'+(sku.totalNum/2)+'" max = "'+sku.totalNum+'"/>'
-							+'<label>价格</label><input name = "skuList['+i+'].price"class="form-control " style="width:60%" value ="'+sku.price+'" min = "'+(sku.price-20)+'"/></div>';
+							var aid = 0;
+							if (sku.aid !=null && sku.aid >0){
+								aid = sku.aid;
+							}
+							html +='<div class="form-group"><input name ="skuList['+i+'].aId"  value="'+aid+'"/>'
+							+'<label><input name = "skuList['+i+'].id" type="hidden" class="i-checks col-xl-4" checked="true" value="'+sku.id+'">'+sku.name+'</label></br>'
+							+'<label>数量</label><input name = "skuList['+i+'].totalNum" type="number" placeholder="数量" class="form-control" style="width:60%" value = "'+(parseInt(sku.totalNum/2))+'" max = "'+sku.totalNum+'"/>'
+							+'<label>价格</label><input name = "skuList['+i+'].price" class="form-control " style="width:60%" value ="'+sku.price+'" min = "'+(sku.price-20)+'"/></div>';
 						 })
-						
+						 $("#details").empty();							
 						$("#details").append(html);							
 				});
 				
