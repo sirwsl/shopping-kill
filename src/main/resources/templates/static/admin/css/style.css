@@ -4,7 +4,6 @@
  *   version 4.0
  *
 */
-
 h1,
 h2,
 h3,
@@ -4405,7 +4404,7 @@ a.close-canvas-menu:hover {
 }
 
 .modal-backdrop {
-    z-index: 2040 !important;
+    z-index: 240 !important;
 }
 
 .modal {

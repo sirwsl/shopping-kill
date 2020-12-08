@@ -58,10 +58,7 @@
                        ta.sku_id
                 from t_activity ta
         <where>
-            <if test="activity.id != null and activity.id != ''">
-                <bind name="ids" value="'%' + activity.id + '%'"/>
-                ta.id like #{ids}
-            </if>
+
             <if test="activity.startTime != null">
                 and ta.start_time <![CDATA[ >= ]]> #{activity.startTime}
             </if>
@@ -88,13 +85,17 @@
                 from t_sku
                 where del_flag = 0
                 ) ts on ts.id = ta.sku_id
-                left join(
+        INNER JOIN(
                 select t_goods.id, t_goods.name
                 from t_goods
         <where>
             <if test="activity.name != null and activity.name != ''">
                 <bind name="names" value="'%' + activity.name + '%'"/>
                 name like #{names}
+            </if>
+            <if test="activity.id != null and activity.id != ''">
+                <bind name="ids" value="'%' + activity.id + '%'"/>
+                and id like #{ids}
             </if>
         </where>
         )tg on tg.id = ts.goods_id

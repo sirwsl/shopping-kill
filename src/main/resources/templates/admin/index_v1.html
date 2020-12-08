@@ -105,9 +105,6 @@
 						                </tr>
 						                </thead>
 						                
-						                <tfoot>
-				
-						                </tfoot>
 						            </table>
 						        </div>
 							</div>
@@ -120,22 +117,14 @@
 	<!-- 全局js -->
 	
 	<script src="../static/admin/js/jquery.min.js?v=2.1.4"></script>
-	<script src="../static/admin/js/bootstrap.min.js?v=3.3.6"></script>
 	<script src="../static/admin/js/plugins/footable/footable.all.min.js"></script>
 	<script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
 	<script src="../static/admin/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
 	<script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
 	<script src="../static/admin/js/jquery.cookie.js"></script>
+	<script src="../static/admin/js/all.js"></script>
 	<script>
-	$.ajaxSetup({
-				headers: {
-					'Authorization': $.cookie("token")
-				},
-				xhrFields: {
-					withCredentials: false
-				},
-				crossDomain: true
-			});
+	
 			
 	 $.ajax({
 		type: "GET",
@@ -178,7 +167,6 @@
 		}
 	});
 
-	
 	</script>
 	
 </html>		
