@@ -2,15 +2,11 @@
 <html>
 
 <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-    <title> - 基础表格</title>
+    <title>日志记录</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
-
     <link rel="shortcut icon" href="favicon.ico"> <link href="../static/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
     <link href="../static/admin/css/font-awesome.css?v=4.4.0" rel="stylesheet">
     <link href="../static/admin/css/plugins/iCheck/custom.css" rel="stylesheet">
@@ -25,104 +21,25 @@
 	    <div class="col-sm-12">
 	        <div class="tabs-container">
 	            <ul class="nav nav-tabs">
-	                <li class="active"><a data-toggle="tab" href="#tab-1" aria-expanded="true"> 系统日志</a>
+	                <li class="active"><a data-toggle="tab" href="#tab-1" aria-expanded="true" onclick="logger(1)"> 系统日志</a>
 	                </li>
-	                <li class=""><a data-toggle="tab" href="#tab-2" aria-expanded="false">用户日志</a>
+	                <li class=""><a data-toggle="tab" href="#tab-1" aria-expanded="false" onclick="logger(0)">用户日志</a>
 	                </li>
 	            </ul>
 	            <div class="tab-content">
 	                <div id="tab-1" class="tab-pane active">
 	                    <div class="panel-body">
-	                        
-						<div class="row">
+	                    <div class="row">
 						    <div class="col-sm-12">
 						        <div class="ibox float-e-margins">
-						            <div class="ibox-title">
-						                <h5>系统日志</h5>
-						                <div class="ibox-tools">     
-						                    <a class="dropdown-toggle" data-toggle="dropdown" href="table_basic.html#">
-						                        <i class="fa fa-wrench"></i>
-						                    </a>
-						                </div>
-						            </div>
+						            
 						            <div class="ibox-content">
-						
-						                <table class="table">
-						                    <thead>
-						                        <tr>
-						                            <th>id</th>
-						                            <th>姓名</th>
-						                            <th>记录时间</th>
-						                            <th>操作内容</th>
-													<th>等级</th>
-						                        </tr>
-						                    </thead>
-						                    <tbody>
-						                        <tr>
-						                            <td>1</td>
-						                            <td>张三</td>
-						                            <td>2020-2-20 12:00:00</td>
-													<td>删除数据库操作</td>
-						                            <td style="color: red;">严重</td>
-						                        </tr>
-						                        <tr>
-						                            <td>2</td>
-						                            <td>李四</td>
-													<td>2020-12-20 12:00:00</td>
-						                            <td>订单出库</td>
-						                            <td style="color:green">一般</td>
-						                        </tr>
-						                    </tbody>
+						                <table class="table" ID= "adminLog">
 						                </table>
 						            </div>
 						        </div>
 						    </div>
 						</div>
-							
-	                    </div>
-	                </div>
-	                <div id="tab-2" class="tab-pane">
-	                    <div class="panel-body">
-	                    
-						<div class="row">
-						    <div class="col-sm-12">
-						        <div class="ibox float-e-margins">
-						            <div class="ibox-title">
-						                <h5>用户日志</h5>
-						                <div class="ibox-tools">     
-						                    <a class="dropdown-toggle" data-toggle="dropdown" href="table_basic.html#">
-						                        <i class="fa fa-wrench"></i>
-						                    </a>
-						                </div>
-						            </div>
-						            <div class="ibox-content">
-						
-						                <table class="table">
-						                    <thead>
-						                        <tr>
-						                            <th>id</th>
-						                            <th>姓名</th>
-						                            <th>记录时间</th>
-						                            <th>操作内容</th>
-													<th>等级</th>
-						                        </tr>
-						                    </thead>
-						                    <tbody>
-						                        <tr>
-						                            <td>1</td>
-						                            <td>张三</td>
-						                            <td>2020-2-20 12:00:00</td>
-													<td>删除数据库操作</td>
-						                            <td style="color: red;">严重</td>
-						                        </tr>
-						                        
-						                    </tbody>
-						                </table>
-						            </div>
-						        </div>
-						    </div>
-						</div>
-						
 						</div>
 	                </div>
 	            </div>
@@ -134,34 +51,107 @@
 
 		
     <!-- 全局js -->
+	<script src="../static/admin/js/jquery.min.js?v=2.1.4"></script>
     <script src="../static/admin/js/jquery.min.js?v=2.1.4"></script>
     <script src="../static/admin/js/bootstrap.min.js?v=3.3.6"></script>
+	<script src="../static/admin/js/jquery.form.js"></script>
+	<script src="../static/admin/js/jquery.cookie.js"></script>
+	<script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+	<script src="../static/admin/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+	<script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
 
-
-
-    <!-- Peity -->
-    <script src="../static/admin/js/plugins/peity/jquery.peity.min.js"></script>
-
-    <!-- 自定义js -->
-    <script src="../static/admin/js/content.js?v=1.0.0"></script>
-
-
-    <!-- iCheck -->
-    <script src="../static/admin/js/plugins/iCheck/icheck.min.js"></script>
-
-    <!-- Peity -->
-    <script src="../static/admin/js/demo/peity-demo.js"></script>
-
-    <script>
-        $(document).ready(function () {
-            $('.i-checks').iCheck({
-                checkboxClass: 'icheckbox_square-green',
-                radioClass: 'iradio_square-green',
-            });
-        });
-    </script>
-
-    
+    <script type="application/javascript">
+		
+		$(function(){logger(1)})
+		function logClick(num){
+			logger(num);
+			$('#adminLog').bootstrapTable('refresh');
+		}
+		function logger(type) {
+			$('#adminLog').bootstrapTable('destroy'); 
+			$('#adminLog').bootstrapTable({
+				method: 'get',
+				url: "http://test.wslhome.top/admin/getAllLoggerByType/v1",
+				dataType: "json",
+				headers: {
+					'Authorization': $.cookie("token")
+				},
+				ajaxOptions: {
+				    xhrFields: {
+				        withCredentials: false
+				    },
+				    crossDomain: true
+				},
+				striped: true,
+				pageNumber: 1,
+				pagination: true,
+				sidePagination: 'server',
+				pageSize: 5,
+				pageList: [5, 10, 20, 30],
+				showRefresh: false,
+				silent: true, 
+				cache: false,
+				queryParams: queryParams,
+				responseHandler: returnFormat,
+				columns: [{
+					title: 'Id',
+					field: 'id',
+					sortable: true
+				}, {
+					title: '操作细节',
+					field: 'detail',
+					sortable: true
+				}, {
+					title: '操作人姓名',
+					field: 'name',
+					sortable: true
+				}, {
+					title: '操作人Id',
+					field: 'manId',
+					sortable: true
+				}, {
+					title: 'IP地址',
+					field: 'ip',
+					sortable: true
+				} , {
+					title: '操作时间',
+					field: 'creatTime',
+					sortable: true
+				}, {
+					title: '操作等级',
+					field: 'grade',
+					formatter: function(value, row, index) {
+						var html = "";
+						if (row.grade == 1){
+							html = '<t style="color:green">正常</t>';
+						}else if(row.grade == 2){
+							html = '<t style="color:blue">一般</t>';
+						}else if(row.grade == 3){
+							html = '<t style="color:pink">严重</t>';
+						}else if(row.grade == 4){
+							html = '<t style="color:red">非常严重</t>';
+						}
+						return html;
+					}
+				}]
+			})
+			function queryParams(params) {
+				var temp = {
+					current : (params.offset / params.limit) + 1,
+					size: params.limit,
+					type: type					
+				};
+				return temp;
+			}
+		
+			function returnFormat(res) {
+				return {
+					"rows":res.data.records,
+					"total": res.data.total
+				};
+			}
+		}
+	</script>
     
 
 </body>
