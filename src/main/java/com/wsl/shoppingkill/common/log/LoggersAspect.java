@@ -5,6 +5,7 @@ import com.wsl.shoppingkill.common.util.IpUtils;
 import com.wsl.shoppingkill.component.request.AbstractCurrentRequestComponent;
 import com.wsl.shoppingkill.domain.Loggers;
 import com.wsl.shoppingkill.obj.bo.UserBO;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -24,6 +25,7 @@ import java.lang.reflect.Method;
  **/
 @Aspect
 @Component
+@Slf4j
 public class LoggersAspect {
 
 
@@ -62,8 +64,12 @@ public class LoggersAspect {
             //将参数所在的数组转换成json
             String params = JSON.toJSONString(args);
             String num =  "0";
-            if (StringUtils.isNotBlank(myLog.value())){
-                num = AspectSupport.getKeyValue(joinPoint, myLog.value()).toString();
+            try {
+                if (StringUtils.isNotBlank(myLog.value())){
+                    num = AspectSupport.getKeyValue(joinPoint, myLog.value()).toString();
+                }
+            }catch (Exception e){
+                log.error("日志切面获取数据异常{}",e.getLocalizedMessage());
             }
 
 

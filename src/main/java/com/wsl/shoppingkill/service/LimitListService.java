@@ -5,8 +5,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.wsl.shoppingkill.domain.LimitList;
 import com.wsl.shoppingkill.obj.param.LimitListParam;
 
-import java.util.List;
-
 /**
  * @author wangShilei
  */
@@ -50,5 +48,5 @@ public interface LimitListService extends IService<LimitList> {
      * @param type :
      * @return LimitList
      **/
-    List<LimitList> getBlackListByNumber(String num,Integer type);
+    IPage<LimitList> getBlackListByNumber(Long page,Long num,String number,Integer type);
 }

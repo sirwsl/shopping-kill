@@ -6,18 +6,17 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wsl.shoppingkill.common.log.MyLog;
 import com.wsl.shoppingkill.common.util.DateUtil;
+import com.wsl.shoppingkill.domain.LimitList;
+import com.wsl.shoppingkill.mapper.LimitListMapper;
 import com.wsl.shoppingkill.obj.constant.BaseEnum;
 import com.wsl.shoppingkill.obj.constant.LoggerEnum;
 import com.wsl.shoppingkill.obj.convert.LimitListConverter;
-import com.wsl.shoppingkill.domain.LimitList;
-import com.wsl.shoppingkill.mapper.LimitListMapper;
 import com.wsl.shoppingkill.obj.param.LimitListParam;
 import com.wsl.shoppingkill.service.LimitListService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
-import java.util.List;
 
 /**
  * @author WangShilei
@@ -30,7 +29,7 @@ public class LimitListServiceImpl extends ServiceImpl<LimitListMapper, LimitList
 
 
     @Override
-    @MyLog(detail = "添加黑名单",grade = LoggerEnum.SERIOUS,value = "#limitListParam.id")
+    @MyLog(detail = "添加黑名单",grade = LoggerEnum.SERIOUS,value = "#limitListParam.number")
     public boolean addBlackList(LimitListParam limitListParam){
         if (limitListParam.getStartTime() == null || DateUtil.isAfter(limitListParam.getStartTime())){
             limitListParam.setStartTime(LocalDateTime.now());
@@ -70,9 +69,9 @@ public class LimitListServiceImpl extends ServiceImpl<LimitListMapper, LimitList
     }
 
     @Override
-    public List<LimitList> getBlackListByNumber(String num,Integer type) {
-        return limitListMapper.selectList(new QueryWrapper<LimitList>()
-                .like(LimitList.NUMBER,num)
+    public IPage<LimitList> getBlackListByNumber(Long page,Long num,String number,Integer type) {
+        return limitListMapper.selectPage(new Page<>(page,num),new QueryWrapper<LimitList>()
+                .like(LimitList.NUMBER,number)
                 .eq(LimitList.TYPE,type));
     }
 

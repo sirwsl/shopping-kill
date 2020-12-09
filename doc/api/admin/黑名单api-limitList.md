@@ -189,7 +189,9 @@
 
 |  参数  |  类型  |  是否必须  |  说明  |
 | ---- | ---- | ---- | ---- |
-|num|String|是|IP or Phone|
+|number|String|是|IP or Phone|
+|page|Integer|否|第几页|
+|num|Integer|否|每页数量 default = 10|
 返回值：
 ```json
 {

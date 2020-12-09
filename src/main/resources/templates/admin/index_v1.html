@@ -110,6 +110,7 @@
 					</div>
 				</div>
 			</div>
+		</div>
 	</body>
 
 	<!-- 全局js -->
@@ -143,7 +144,6 @@
 			dataType: "json",
 			success: function(re) {
 				if (re.code == 0 && re.data != null) {
-					console.log(re);
 					$("#admin").bootstrapTable('load', re.data.admin.records);
 					$("#user").bootstrapTable('load', re.data.user.records);
 				}

@@ -25,9 +25,9 @@
 	    <div class="col-sm-12">
 	        <div class="tabs-container">
 	            <ul class="nav nav-tabs">
-	                <li class="active"><a data-toggle="tab" href="#tab-1" aria-expanded="true"> 手机号</a>
+	                <li class="active"><a data-toggle="tab" href="#tab-1" aria-expanded="true" onclick="change(100)"> 手机号</a>
 	                </li>
-	                <li class=""><a data-toggle="tab" href="#tab-2" aria-expanded="false">IP地址</a>
+	                <li class=""><a data-toggle="tab" href="#tab-2" aria-expanded="false" onclick="change(10)">IP地址</a>
 	                </li>
 	            </ul>
 	            <div class="tab-content">
@@ -39,55 +39,25 @@
 							        <div class="col-sm-12">
 							            <div class="ibox float-e-margins">
 							                <div class="ibox-title">
-							                    <h5>手机名单列表</h5>                      
+							                    <h5 id = "titles"></h5>                      
 							                </div>
 							                <div class="ibox-content">
 							                    <div class="row">
 							                        <div class="col-sm-4">
 							                            <div class="input-group">
-							                                <input type="text" placeholder="请输入关键词" class="input-sm form-control"> <span class="input-group-btn">
-							                                    <button type="button" class="btn btn-sm btn-primary"> 搜索</button> </span>
+							                                <input type="text" id = "seNum" placeholder="" class="input-sm form-control"> <span class="input-group-btn">
+							                                    <button type="button" class="btn btn-sm btn-primary" id = "search"> 搜索</button> </span>
 							                            </div>
 							                        </div>
-													<div class="col-sm-7"></div>
-													<div class="m-b-xs">
-													    <a data-toggle="modal" class="btn btn-success" href="#modal-form" data-toggle="modal" data-target="#EditModal">添加</a>
-														<a data-toggle="modal" class="btn btn-danger" href="#modal-form" data-toggle="modal" data-target="#myModal">删除</a>
+
+													<div class="m-b-xs" style="text-align:right">
+													    <a data-toggle="modal" style=" float:right" class="btn btn-success" href="#modal-form" data-toggle="modal" data-target="#EditModal" id = "addLimit">添加</a>
+														<a data-toggle="modal"  style=" float:right" class="btn btn-danger" href="#modal-form" data-toggle="modal" id= "del">删除</a>
 													</div>
 							                    </div>
 							                    <div class="table-responsive">
-							                        <table class="table table-striped table-bordered table-hover dataTables-example">
-							                            <thead>
-							                                <tr>
-							                                    <th>手机号</th>
-							                                    <th>开始时间</th>
-																<th>结束时间</th>
-																<th>属性</th>
-							                                    <th>操作</th>                           
-							                                </tr>
-							                            </thead>
-							                            <tbody>
-							                                <tr>   
-							                                    <td>18314263373</td>
-							                                    <td>2017-01-01 11:00:00</td>
-																<td>2017-01-01 11:00:00</td>
-							                                    <td>黑名单</td>
-							                                    <td><a data-toggle="modal" class="btn btn-info" href="#modal-form" data-toggle="modal" data-target="#EditModal">编辑</a>
-																<a data-toggle="modal" class="btn btn-danger" href="#modal-form" data-toggle="modal" data-target="#myModal">删除</a>
-							                                    </td>
-							                                </tr> 
-							                            </tbody>
+							                        <table id = "limitList" class="table table-striped table-bordered table-hover dataTables-example">
 							                        </table>	
-													<div class="row col-sm-5"></div>
-													<ul class="pagination pagination-lg">
-														<li><a href="#">&laquo;</a></li>
-														<li><a href="#">1</a></li>
-														<li><a href="#">2</a></li>
-														<li><a href="#">3</a></li>
-														<li><a href="#">4</a></li>
-														<li><a href="#">5</a></li>
-														<li><a href="#">&raquo;</a></li>
-													</ul>	
 							                    </div>
 							                </div>
 							            </div>
@@ -97,110 +67,13 @@
 							
 	                    </div>
 	                </div>
-	                <div id="tab-2" class="tab-pane">
-	                    <div class="panel-body">
-	                    
-						<div class="wrapper wrapper-content animated fadeInRight">
-						    <div class="row">
-						        <div class="col-sm-12">
-						            <div class="ibox float-e-margins">
-						                <div class="ibox-title">
-						                    <h5>IP名单</h5>                      
-						                </div>
-						                <div class="ibox-content">
-						                    <div class="row">
-						                        <div class="col-sm-4">
-						                            <div class="input-group">
-						                                <input type="text" placeholder="请输入IP地址" class="input-sm form-control"> <span class="input-group-btn">
-						                                    <button type="button" class="btn btn-sm btn-primary"> 搜索</button> </span>
-						                            </div>
-						                        </div>
-												<div class="col-sm-7"></div>
-												<div class="m-b-xs">
-												    <a data-toggle="modal" class="btn btn-success" href="#modal-form" data-toggle="modal" data-target="#EditModalIP">添加</a>
-													<a data-toggle="modal" class="btn btn-danger" href="#modal-form" data-toggle="modal" data-target="#myModal">删除</a>
-												</div>
-						                    </div>
-						                    <div class="table-responsive">
-						                        <table class="table table-striped table-bordered table-hover dataTables-example">
-						                            <thead>
-						                                <tr>
-						                                    <th>IP地址</th>
-						                                    <th>开始时间</th>
-															<th>结束时间</th>
-															<th>属性</th>
-						                                    <th>操作</th>                           
-						                                </tr>
-						                            </thead>
-						                            <tbody>
-						                                <tr>   
-						                                    <td>121.196.187.160</td>
-						                                    <td>2017-01-01 11:00:00</td>
-															<td>2017-01-01 11:00:00</td>
-						                                    <td>白名单</td>
-						                                    <td><a data-toggle="modal" class="btn btn-info" href="#modal-form" data-toggle="modal" data-target="#EditModal">编辑</a>
-															<a data-toggle="modal" class="btn btn-danger" href="#modal-form" data-toggle="modal" data-target="#myModal">删除</a>
-						                                    </td>
-						                                </tr> 
-						                            </tbody>
-						                        </table>	
-												<div class="row col-sm-5"></div>
-												<ul class="pagination pagination-lg">
-													<li><a href="#">&laquo;</a></li>
-													<li><a href="#">1</a></li>
-													<li><a href="#">2</a></li>
-													<li><a href="#">3</a></li>
-													<li><a href="#">4</a></li>
-													<li><a href="#">5</a></li>
-													<li><a href="#">&raquo;</a></li>
-												</ul>	
-						                    </div>
-						                </div>
-						            </div>
-						        </div>
-						    </div>
-						</div>
-						
-						</div>
-	                </div>
 	            </div>
-	
-	
 	        </div>
 	    </div>
 	</div>	
 	
-    
-        
-		
-		
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-						&times;
-					</button>
-					<h4 class="modal-title" id="myModalLabel">
-						二次确认操作
-					</h4>
-				</div>
-				<div class="modal-body">
-					您确定要移出名单吗？
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">取消
-					</button>
-					<button type="button" class="btn btn-primary">
-						确定
-					</button>
-				</div>
-			</div><!-- /.modal-content -->
-		</div><!-- /.modal -->
-	</div>
-	
 	<div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
+		<div class="modal-dialog" style="width:15%;">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
@@ -213,9 +86,9 @@
 				<div class="modal-body">
 					<div class="form-group">
 					    <div class="form-group">
-					        <label class="col-xl-3 control-label">手机号</label>
+					        <label class="col-xl-3 control-label" id = "addtitle"></label>
 					        <div class="col-xl-9">
-					            <input type="text" class="form-control layer-date" />
+					            <input type="text" class="form-control layer-date" id = "adress" placeholder="" autocomplete="off"/>
 					        </div>
 					    </div>
 					</div>
@@ -224,7 +97,7 @@
 					    <div class="form-group">
 					        <label class="col-xl-3 control-label">开始时间</label>
 					        <div class="col-xl-9">
-					            <input class="form-control layer-date" placeholder="YYYY-MM-DD hh:mm:ss" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+					            <input id = "startTime" class="form-control layer-date" placeholder="YYYY-MM-DD hh:mm:ss"autocomplete="off" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" />
 					        </div>
 					    </div>
 					</div>
@@ -232,149 +105,229 @@
 						<div class="form-group">
 							<label class="col-xl-3 control-label">开始时间</label>
 							<div class="col-xl-9">
-								<input class="form-control layer-date" placeholder="YYYY-MM-DD hh:mm:ss" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+								<input id = "endTime" class="form-control layer-date" placeholder="YYYY-MM-DD hh:mm:ss" autocomplete="off" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" />
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">取消
-					</button>
-					<button type="button" class="btn btn-primary">
-						添加
-					</button>
+					<a type="button" class="btn btn-default" data-dismiss="modal">取消</a>
+					<a type="button" class="btn btn-primary" data-dismiss="modal" id = "submits">添加</a>
 				</div>
-			</div><!-- /.modal-content -->
-		</div><!-- /.modal -->
+			</div>
+		</div>
 	</div>
-	
-	<div class="modal fade" id="EditModalIP" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-						&times;
-					</button>
-					<h4 class="modal-title" id="myModalLabel">
-						二次确认操作
-					</h4>
-				</div>
-				<div class="modal-body">
-					<div class="form-group">
-					    <div class="form-group">
-					        <label class="col-xl-3 control-label">IP地址</label>
-					        <div class="col-xl-9">
-					            <input type="text" class="form-control layer-date" />
-					        </div>
-					    </div>
-					</div>
-					
-					<div class="form-group">
-					    <div class="form-group">
-					        <label class="col-xl-3 control-label">开始时间</label>
-					        <div class="col-xl-9">
-					            <input class="form-control layer-date" placeholder="YYYY-MM-DD hh:mm:ss" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
-					        </div>
-					    </div>
-					</div>
-					<div class="form-group">
-						<div class="form-group">
-							<label class="col-xl-3 control-label">开始时间</label>
-							<div class="col-xl-9">
-								<input class="form-control layer-date" placeholder="YYYY-MM-DD hh:mm:ss" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">取消
-					</button>
-					<button type="button" class="btn btn-primary">
-						添加
-					</button>
-				</div>
-			</div><!-- /.modal-content -->
-		</div><!-- /.modal -->
-	</div>
-			
+</body>			
     <!-- 全局js -->
     <script src="../static/admin/js/jquery.min.js?v=2.1.4"></script>
     <script src="../static/admin/js/bootstrap.min.js?v=3.3.6"></script>
-    
-	<!-- layerDate plugin javascript -->
-	<script src="../static/admin/js/plugins/layer/laydate/laydate.js"></script>
-    
-    <!-- Peity -->
-    <script src="../static/admin/js/plugins/peity/jquery.peity.min.js"></script>
-    
-    <!-- 自定义js -->
-    <script src="../static/admin/js/content.js?v=1.0.0"></script>
-    
-    
-    <!-- iCheck -->
-    <script src="../static/admin/js/plugins/iCheck/icheck.min.js"></script>
-    
-    <!-- Peity -->
-    <script src="../static/admin/js/demo/peity-demo.js"></script>
-    
-    <script>
-        $(document).ready(function () {
-            $('.i-checks').iCheck({
-                checkboxClass: 'icheckbox_square-green',
-                radioClass: 'iradio_square-green',
-            });
-        });
-    </script>
-        
-    <script>
-		$(function(){  
-		            function initTableCheckbox() {  
-		                var $thr = $('table thead tr');  
-		                var $checkAllTh = $('<th><input  type="checkbox" checked class="i-checks" id="checkAll" name="checkAll" /></th>');    
-		                $thr.prepend($checkAllTh);  
-		                /*“全选/反选”复选框*/  
-		                var $checkAll = $thr.find('input');  
-		                $checkAll.click(function(event){  
-		                    /*将所有行的选中状态设成全选框的选中状态*/  
-		                    $tbr.find('input').prop('checked',$(this).prop('checked'));  
-		                    /*并调整所有选中行的CSS样式*/  
-		                    if ($(this).prop('checked')) {  
-		                        $tbr.find('input').parent().parent().addClass('warning');  
-		                    } else{  
-		                        $tbr.find('input').parent().parent().removeClass('warning');  
-		                    }  
-		                    /*阻止向上冒泡，以防再次触发点击操作*/  
-		                    event.stopPropagation();  
-		                });  
-		                /*点击全选框所在单元格时也触发全选框的点击操作*/  
-		                $checkAllTh.click(function(){  
-		                    $(this).find('input').click();  
-		                });  
-		                var $tbr = $('table tbody tr');  
-		                var $checkItemTd = $('<td><input type="checkbox" class="i-checks" name="checkItem" /></td>');  
-		                /*每一行都在最前面插入一个选中复选框的单元格*/  
-		                $tbr.prepend($checkItemTd);  
-		                /*点击每一行的选中复选框时*/  
-		                $tbr.find('input').click(function(event){  
-		                    /*调整选中行的CSS样式*/  
-		                    $(this).parent().parent().toggleClass('warning');  
-		                    /*如果已经被选中行的行数等于表格的数据行数，将全选框设为选中状态，否则设为未选中状态*/  
-		                    $checkAll.prop('checked',$tbr.find('input:checked').length == $tbr.length ? true : false);  
-		                    /*阻止向上冒泡，以防再次触发点击操作*/  
-		                    event.stopPropagation();  
-		                });  
-		                /*点击每一行时也触发该行的选中操作*/  
-		                $tbr.click(function(){  
-		                    $(this).find('input').click();  
-		                });  
-		            }  
-		            initTableCheckbox();  
-		        });  
+    <script src="../static/admin/js/jquery.form.js"></script>
+    <script src="../static/admin/js/jquery.cookie.js"></script>
+    <script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="../static/admin/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <!-- layerDate plugin javascript -->
+    <script src="../static/admin/js/plugins/layer/laydate/laydate.js"></script>
+    <script type="application/javascript">
+		$.ajaxSetup({
+			headers: {
+				'Authorization': $.cookie("token")
+			},
+			xhrFields: {
+				withCredentials: false
+			},
+			crossDomain: true
+		});
 		
-	</script>
-            
-        
-        </body>
-        
-        </html>
+		$(function() {
+			if ($.cookie("token") == null || $.cookie("token") == "") {
+				window.location.href = "/admin/login.html"
+			}
+		});
+		
+		
+		var flag = true;
+		var url = "http://test.wslhome.top/admin/getBlackListForPhone/v1";
+		var number = "";
+	$(function(){
+		limit();
+		$("#titles").html("手机黑名单");
+		$("#seNum").attr("placeholder","请输入手机号查询");
+	});
+	
+	function change(num){
+		$("#titles").html("手机号黑名单");
+		if (num == 10){
+			url="http://test.wslhome.top/admin/getBlackListForIp/v1";
+			flag = false;
+			$("#titles").html("IP地址黑名单");
+			$("#seNum").attr("placeholder","请输入IP地址查询");
+		}
+		limit();
+		$('#limitList').bootstrapTable('refresh');
+	}
+	
+	$("#search").click(function(){
+		url = "http://test.wslhome.top/admin/selectBlackListByPhone/v1";
+		if(!flag){
+		url = "http://test.wslhome.top/admin/selectBlackListByIp/v1";
+		}
+		number = $("#seNum").val();
+		limit();
+		$('#limitList').bootstrapTable('refresh');
+	})
+	
+	
+	function limit() {
+		$('#limitList').bootstrapTable('destroy'); 
+		$('#limitList').bootstrapTable({
+			method: 'get',
+			url: url,
+			dataType: "json",
+			headers: {
+				'Authorization': $.cookie("token")
+			},
+			ajaxOptions: {
+			    xhrFields: {
+			        withCredentials: false
+			    },
+			    crossDomain: true
+			},
+			striped: true,
+			pageNumber: 1,
+			pagination: true,
+			sidePagination: 'server',
+			pageSize: 10,
+			pageList: [5, 10, 20, 30],
+			showRefresh: true,
+			silent: true, 
+			cache: false,
+			queryParams: queryParams,
+			responseHandler: returnFormat,
+			columns: [{
+				checkbox : true
+			},{
+				title: 'Id',
+				field: 'id',
+				sortable: true
+			}, {
+				title: '号码/地址',
+				field: 'number',
+				sortable: true
+			}, {
+				title: '开始时间',
+				field: 'startTime',
+				sortable: true
+			}, {
+				title: '结束时间',
+				field: 'endTime',
+				sortable: true
+			}, {
+				title: '更新时间',
+				field: 'updateTime',
+				sortable: true
+			}]
+		})
+		function queryParams(params) {
+			var temp = {
+				page : (params.offset / params.limit) + 1,
+				num: params.limit,
+				number:number
+			};
+			return temp;
+		}
+	
+		function returnFormat(res) {
+			return {
+				"rows":res.data.records,
+				"total": res.data.total
+			};
+		}
+	}
+	$("#del").on("click", function() {
+	    if (!confirm("是否确认删除？"))
+	        return;
+	    var rows = $("#limitList").bootstrapTable('getSelections');
+	    if (rows.length == 0) {
+	        alert("请先选择要删除的记录!");
+	        return;
+	    } else {
+	        var ids = new Array();
+	        $(rows).each(function() {
+	            ids.push(this.id);
+	        });
+	        deleteMs(ids)
+	    }
+	})
+	function deleteMs(ids) {
+	    $.ajax({
+	        url : "http://test.wslhome.top/admin/delBlackListByIds/v1",
+	        data : "ids=" + ids,
+	        type : "delete",
+	        dataType : "json",
+	        success : function(data) {
+	            $('#limitList').bootstrapTable('refresh');
+	        }
+	    });
+	}
+
+	$('#addLimit').click(function(){
+		if(flag){
+			$("#addtitle").html("添加手机号");
+			$("#adress").attr("placeholder","请输入手机号，eg: 18300000000");
+		}else{
+			$("#addtitle").html("添加IP地址");
+			$("#adress").attr("placeholder","请输入ip地址，eg: 127.0.0.1");
+		}
+	})
+	
+	$("#submits").on("click",function(){
+		
+		var url = "http://test.wslhome.top/admin/addBlackListByPhone/v1";
+		if (!flag){
+			url = "http://test.wslhome.top/admin/addBlackListByIp/v1";
+		}
+		
+		var num = $("#adress").val();
+		var sTime = $("#startTime").val();
+		var eTime = $("#endTime").val();
+		
+		 var myreg = /^[1][3,4,5,7,8][0-9]{9}$/;
+		    if (flag && !myreg.test(num)) {
+		      alert("手机号不正确");
+			  return ;
+		    }
+		var reg = /^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$/;
+		if(!flag && !reg.test(num)){
+			alert("IP地址不正确");
+			return ;
+		}
+		
+		$.ajax({
+			type: "POST",
+			url: url,
+			dataType: "json",
+			data:{
+				"number":num,
+				"startTime":sTime,
+				"endTime":eTime
+			},
+			success: function(re) {
+				console.log(re);
+				if (re.code == 0 && re.data==true){
+					alert("添加成功");
+				}else{
+					alert("添加失败，请检查是否存在");
+				}
+				$('#limitList').bootstrapTable('refresh');
+			},
+			error: function() {
+				alert("添加失败,请稍后再试");
+			}
+		});
+		
+	})
+	</script>    
+       
+</html>
         

@@ -5,10 +5,10 @@ import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.wsl.shoppingkill.common.Result;
 import com.wsl.shoppingkill.common.log.MyLog;
-import com.wsl.shoppingkill.obj.constant.BaseEnum;
-import com.wsl.shoppingkill.obj.constant.LoggerEnum;
 import com.wsl.shoppingkill.domain.LimitList;
 import com.wsl.shoppingkill.domain.User;
+import com.wsl.shoppingkill.obj.constant.BaseEnum;
+import com.wsl.shoppingkill.obj.constant.LoggerEnum;
 import com.wsl.shoppingkill.obj.param.LimitListParam;
 import com.wsl.shoppingkill.service.LimitListService;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -19,7 +19,6 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * @author : WangShiLei
@@ -35,67 +34,79 @@ public class LimitListController {
 
     /**
      * 获取黑名单手机号列表
+     *
+     * @return Result<Page < LimitListParam>>
      * @author : WangShiLei
      * @date : 2020/11/8 12:28 下午
-     * @return Result<Page<LimitListParam>>
      **/
     @GetMapping("/getBlackListForPhone/v1")
-    public Result<IPage<LimitList>> getLimitListForPhone(Integer page, Integer num){
-        return Result.success(limitListService.getBlackListForPhone(page,num));
+    public Result<IPage<LimitList>> getLimitListForPhone(Integer page, Integer num) {
+        return Result.success(limitListService.getBlackListForPhone(page, num));
     }
 
     /**
      * 获取黑名单IP列表
+     *
+     * @return Result<Page < LimitListParam>>
      * @author : WangShiLei
      * @date : 2020/11/8 12:28 下午
-     * @return Result<Page<LimitListParam>>
      **/
     @GetMapping("/getBlackListForIp/v1")
-    public Result<IPage<LimitList>> getLimitListForIp(Integer page, Integer num){
-        return Result.success(limitListService.getBlackListForIp(page,num));
+    public Result<IPage<LimitList>> getLimitListForIp(Integer page, Integer num) {
+        return Result.success(limitListService.getBlackListForIp(page, num));
     }
 
     /**
      * 更具手机号进行查询
+     *
+     * @param num:
+     * @return Result<java.util.List < LimitList>>
      * @author : WangShiLei
      * @date : 2020/11/8 5:28 下午
-     * @param num:
-     * @return com.wsl.shoppingkill.common.Result<java.util.List<com.wsl.shoppingkill.domain.LimitList>>
      **/
     @GetMapping("/selectBlackListByPhone/v1")
-    public Result<List<LimitList>> getLimitListByPhone( String num){
-        if (StringUtils.isEmpty(num)|| num.isEmpty()){
-            return Result.error("error","手机号不能为空");
+    public Result<IPage<LimitList>> getLimitListByPhone(String number,@RequestParam(defaultValue = "1") Long page, @RequestParam(defaultValue = "10")Long num) {
+        if (StringUtils.isEmpty(number) || number.isEmpty()) {
+            return Result.error("error", "手机号不能为空");
         }
-        return Result.success(limitListService.getBlackListByNumber(num, BaseEnum.PHONE));
+        return Result.success(limitListService.getBlackListByNumber(page,num,number, BaseEnum.PHONE));
     }
 
     /**
      * 更具IP查询
+     *
+     * @param number:
+     * @return com.wsl.shoppingkill.common.Result<java.util.List < com.wsl.shoppingkill.domain.LimitList>>
      * @author : WangShiLei
      * @date : 2020/11/8 5:28 下午
-     * @param num:
-     * @return com.wsl.shoppingkill.common.Result<java.util.List<com.wsl.shoppingkill.domain.LimitList>>
      **/
     @GetMapping("/selectBlackListByIp/v1")
-    public Result<List<LimitList>> getLimitListByIp( String num){
-        if (StringUtils.isEmpty(num)||num.isEmpty()){
-            return Result.error("error","IP不能为空");
+    public Result<IPage<LimitList>> getLimitListByIp(String number,@RequestParam(defaultValue = "1") Long page, @RequestParam(defaultValue = "10")Long num) {
+        if (StringUtils.isEmpty(number) || number.isEmpty()) {
+            return Result.error("error", "IP不能为空");
         }
-        return Result.success(limitListService.getBlackListByNumber(num,BaseEnum.IP));
+        return Result.success(limitListService.getBlackListByNumber(page,num,number, BaseEnum.IP));
     }
 
     /**
-     *  添加用户黑名单
-     * @author : WangShiLei
-     * @date : 2020/11/7 5:02 下午
+     * 添加用户黑名单
+     *
      * @param limitListParam:
      * @return : com.wsl.shoppingkill.common.Result<java.lang.Boolean>
+     * @author : WangShiLei
+     * @date : 2020/11/7 5:02 下午
      **/
     @PostMapping("/addBlackListByPhone/v1")
-    public Result<Boolean> addLimitListByPhone(@Valid LimitListParam limitListParam){
+    public Result<Boolean> addLimitListByPhone(@Valid  LimitListParam limitListParam) {
         return Result.success(limitListService.addBlackList(
                 limitListParam.setType(BaseEnum.PHONE)
+        ));
+    }
+
+    @PostMapping("/addBlackListByIp/v1")
+    public Result<Boolean> addLimitListByIp(@Valid  LimitListParam limitListParam) {
+         return Result.success(limitListService.addBlackList(
+                limitListParam.setType(BaseEnum.IP)
         ));
     }
 
@@ -124,53 +135,44 @@ public class LimitListController {
                 .setEndTime(endTime)));
     }
 
-    @PostMapping("/addBlackListByIp/v1")
-    public Result<Boolean> addLimitListByIp(@Valid LimitListParam limitListParam){
-        try {
-            limitListService.addBlackList(
-                    limitListParam.setType(BaseEnum.IP)
-            );
-        }catch (Exception e){
-            return Result.error("error","数据已经存在");
-        }
-        return Result.success();
-    }
 
     /**
      * 移除黑名单
-     * @author : WangShiLei
-     * @date : 2020/11/8 10:46 上午
+     *
      * @param id:
      * @return com.wsl.shoppingkill.common.Result<java.lang.Boolean>
+     * @author : WangShiLei
+     * @date : 2020/11/8 10:46 上午
      **/
     @DeleteMapping("delBlackListById/v1")
-    @MyLog(detail = "移除黑名单",grade = LoggerEnum.SERIOUS,value = "#id")
-    public Result<Boolean> removeLimitListById(Long id){
-        if (id ==null || id == 0){
-            return Result.error("error","id不能为空");
+    @MyLog(detail = "移除黑名单", grade = LoggerEnum.SERIOUS, value = "#id")
+    public Result<Boolean> removeLimitListById(Long id) {
+        if (id == null || id == 0) {
+            return Result.error("error", "id不能为空");
         }
         return Result.success(limitListService.removeById(id));
     }
 
     @DeleteMapping("/delBlackListByIds/v1")
-    @MyLog(detail = "移除黑名单",grade = LoggerEnum.SERIOUS,value = "#id")
-    public Result<Boolean> removeLimitListByIds(Integer[] ids){
-        if(ids.length <=0){
-            return Result.error("error","移除id不能为空");
+    @MyLog(detail = "移除黑名单", grade = LoggerEnum.SERIOUS, value = "#ids")
+    public Result<Boolean> removeLimitListByIds(Integer[] ids) {
+        if (ids.length <= 0) {
+            return Result.error("error", "移除id不能为空");
         }
         return Result.success(limitListService.removeByIds(Arrays.asList(ids)));
     }
 
     /**
      * 更新黑名单列表
-     * @author : WangShiLei
-     * @date : 2020/11/8 11:06 上午
+     *
      * @param limitList: 更新资源
      * @return boolean
+     * @author : WangShiLei
+     * @date : 2020/11/8 11:06 上午
      **/
     @PutMapping("/updateBlackListById/v1")
-    @MyLog(detail = "更新黑名单",grade = LoggerEnum.SERIOUS,value = "#id")
-    public Result<Boolean> updateLimitList(@Valid LimitList limitList){
+    @MyLog(detail = "更新黑名单", grade = LoggerEnum.SERIOUS, value = "#id")
+    public Result<Boolean> updateLimitList(@Valid LimitList limitList) {
         return Result.success(limitListService.updateById(limitList));
     }
 }
