@@ -102,8 +102,8 @@
 				pageNumber: 1,
 				pagination: true,
 				sidePagination: 'server',
-				pageSize: 5,
-				pageList: [5, 10, 20, 30],
+				pageSize: 15,
+				pageList: [5, 10, 15,20, 30,50],
 				showRefresh: false,
 				silent: true, 
 				cache: false,
@@ -153,8 +153,8 @@
 			})
 			function queryParams(params) {
 				var temp = {
-					current : (params.offset / params.limit) + 1,
-					size: params.limit,
+					page : (params.offset / params.limit) + 1,
+					num: params.limit,
 					type: type					
 				};
 				return temp;
