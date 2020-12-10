@@ -43,9 +43,9 @@ public class AdvertiseController {
      * @author : WangShiLei
      * @date : 2020/11/9 11:22 下午
      * @param advertise:
-     * @return com.wsl.shoppingkill.common.Result<java.lang.Boolean>
+     * @return Result<java.lang.Boolean>
      **/
-    @PutMapping("/updateAdvertise/v1")
+    @PostMapping("/updateAdvertise/v1")
     public Result<String> updateAdvertise(@Valid Advertise advertise){
         if (advertise.getId()==null ||advertise.getId() == 0){
             return Result.error("error","id不能为空");

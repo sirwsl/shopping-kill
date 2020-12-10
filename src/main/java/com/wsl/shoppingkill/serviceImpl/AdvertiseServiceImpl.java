@@ -59,7 +59,7 @@ public class AdvertiseServiceImpl extends ServiceImpl<AdvertiseMapper, Advertise
         if (CollectionUtils.isEmpty(advertises)){
             return null;
         }
-        List<Advertise> changeAdvertise = changeUrl(advertises);
+        List<Advertise> changeAdvertise = changeUrl(advertises,false);
         return AdvertiseConverter.CONVERTER.advertise2VO(changeAdvertise);
     }
 
@@ -183,8 +183,17 @@ public class AdvertiseServiceImpl extends ServiceImpl<AdvertiseMapper, Advertise
      * @param advertiseList :
      * @return java.util.List<Advertise>
      */
-    private List<Advertise> changeUrl(List<Advertise> advertiseList){
-        advertiseList.forEach(li->li.setImgUrl(target+li.getImgUrl()));
+    private List<Advertise> changeUrl(List<Advertise> advertiseList,boolean flag){
+        String min = "?x-oss-process=image/resize,m_fill,h_50,w_50";
+        if (flag){
+            advertiseList.forEach(li->li.setImgUrl(li.getImgUrl()+min));
+        }else{
+            advertiseList.forEach(li->li.setImgUrl(li.getImgUrl()));
+        }
         return advertiseList;
+    }
+
+    private List<Advertise> changeUrl(List<Advertise> advertiseList){
+        return changeUrl(advertiseList,true);
     }
 }

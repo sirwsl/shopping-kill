@@ -58,30 +58,59 @@
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
 						&times;
 					</button>
-					<h4 class="modal-title" id="myModalLabel">
-						二次确认操作
+					<h4 class="modal-title" id="myLabel">
+						 
 					</h4>
 				</div>
 				<div class="modal-body">
 					<div class="form-group">
-					    <div class="form-group">
-					        <label class="col-xl-3 control-label">邮箱</label>
-					        <div class="col-xl-9">
-					            <input type="text" class="form-control layer-date" />
-					        </div>
-					    </div>
+					    <form role="form" id = "advertise" >
+							<div class="row">
+								<div class="col-sm-6">
+									<div class="form-group">
+										<input id = "id" name = "id" style="display:none" value = "" />
+										<label class="col-xl-3 control-label">广告图片</label>
+										<div class="col-xl-9">
+										<div class="file-container" style="display:inline-block;position:relative;overflow: hidden;vertical-align:middle">
+										        <button class="btn btn-success fileinput-button" type="button">上传</button>
+										        <input type="file" id="file" name = "file" multiple="multiple" onchange="loadFile(this.files[0])" style="position:absolute;top:0;left:0;font-size:34px; opacity:0">
+										    </div>
+										    <span id="imgUrl" name = "imgUrl" style="vertical-align: middle">未上传文件</span>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-xl-3 control-label">目标地址</label>
+										<div class="col-xl-9">
+											<input type="text" id = "targetUrl" name = "targetUrl" class="form-control layer-date" />
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label class="col-xl-3 control-label">开始时间</label>
+										<div class="col-xl-9 ">
+											<input type="text" id = "startTime" name = "startTime" class="form-control layer-date" placeholder="YYYY-MM-DD hh:mm:ss"autocomplete="off" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" />
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-xl-3 control-label">结束时间</label>
+										<div class="col-xl-9">
+											<input type="text" id = "endTime" name = "endTime" class="form-control layer-date" placeholder="YYYY-MM-DD hh:mm:ss"autocomplete="off" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" />
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
 					</div>
 					
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">取消
 					</button>
-					<button type="button" class="btn btn-primary">
-						添加
-					</button>
+					<button type="button" class="btn btn-primary" id = "sub" data-dismiss="modal">确定</button>
 				</div>
-			</div><!-- /.modal-content -->
-		</div><!-- /.modal -->
+			</div>
+		</div>
 	</div>
 
 
@@ -96,7 +125,57 @@
 
 
 	<script src="../static/admin/js/content.js?v=1.0.0"></script>
+	 <script src="../static/admin/js/plugins/layer/laydate/laydate.js"></script>
 	<script>
+		$.ajaxSetup({
+			headers: {
+				'Authorization': $.cookie("token")
+			},
+			xhrFields: {
+				withCredentials: false
+			},
+			crossDomain: true
+		});
+		
+		$(function() {
+			if ($.cookie("token") == null || $.cookie("token") == "") {
+				window.location.href = "/admin/login.html"
+			}
+		});
+		
+		
+		
+		var flag = false;
+		
+		function loadFile(file){
+		    $("#imgUrl").html(file.name);
+		}
+		
+		$("#sub").click(function() {
+			var url = "http://test.wslhome.top/admin/addAdvertise/v1";
+			if (flag){
+				url = "http://test.wslhome.top/admin/updateAdvertise/v1";
+				flag = false;
+			}
+			
+			if ($("#targetUrl").val() == null){
+				alert("目标地址不能为空");
+				return;
+			}
+			var data = new FormData(document.getElementById("advertise"));
+			$.ajax({
+			        type: "post",
+			        url: url,
+			        data: data,
+					contentType:false,
+					processData:false,
+			        dataType: "json",
+			        success: function (msg) {
+						alert(msg.userMsg);
+						$('#advertiesmant').bootstrapTable("refresh");
+			        }
+			    })
+		});
 		
 		function col(num){
 			var url;
@@ -187,8 +266,7 @@
 	    	}
 	    
 	    	function returnFormat(res) {
-				console.log(res.data.records);
-	    		return {
+				return {
 					"rows":res.data.records,
 					"total": res.data.total
 				}
@@ -196,12 +274,38 @@
 	    
 	    	function option(value, row, index) {
 	    		var arr = new Array();
-				var htm = '<a data-toggle="modal" class="btn btn-primary" href="#modal-form" onclick="setValue('+JSON.stringify(row).replace(/"/g, '&quot;')+') ">编辑</a></br>' +
-	    			'<a data-toggle="modal" class="btn btn-danger" onclick = "delActivity(' + index + ')">删除</a>';
+				var htm = '<a data-toggle="modal" class="btn btn-primary" href="#Editupdate" onclick="setValue('+JSON.stringify(row).replace(/"/g, '&quot;')+') ">编辑</a></br>' +
+	    			'<a data-toggle="modal" class="btn btn-danger" onclick = "del(' + row.id + ')">删除</a>';
 	    		return htm;
 	    		
 	    	}
 	    }
+		
+		function setValue(vals,index){
+			$("#myLabel").html("广告id: "+vals.id);
+			$("#id").val(vals.id);
+			$("#imgUrl").html(vals.imgUrl.slice(25,-44));
+			$("#targetUrl").val(vals.targetUrl);
+			$("#startTime").val(vals.startTime);
+			$("#endTime").val(vals.endTime);
+			flag = true;
+		}
+		
+		function del(num){
+			var mymessage = confirm("确认删除吗？");
+			if (mymessage == true) {
+				$.ajax({
+					type: "delete",
+					url: "http://test.wslhome.top/admin/delAdvertise/v1",
+					data:{"id":num},
+					dateType:"json",
+					success: function (msg) {
+						alert(msg.userMsg);
+						$('#advertiesmant').bootstrapTable("refresh");
+					}
+				 })
+			 }
+		}		
 	</script>
 	    
 	
