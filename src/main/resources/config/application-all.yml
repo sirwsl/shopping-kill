@@ -39,3 +39,8 @@ verify:
 req:
   doMainUrl: wslhome.top
 
+url:
+  image: http://static.wslhome.top/
+  webPage: http://test.wslhome.top/
+  server: http://kill.wslhome.top/
+

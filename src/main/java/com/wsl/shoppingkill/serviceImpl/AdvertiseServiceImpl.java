@@ -7,13 +7,14 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wsl.shoppingkill.common.log.MyLog;
 import com.wsl.shoppingkill.component.oss.OssComponent;
-import com.wsl.shoppingkill.obj.constant.BaseEnum;
-import com.wsl.shoppingkill.obj.constant.LoggerEnum;
 import com.wsl.shoppingkill.domain.Advertise;
 import com.wsl.shoppingkill.mapper.AdvertiseMapper;
+import com.wsl.shoppingkill.obj.constant.BaseEnum;
+import com.wsl.shoppingkill.obj.constant.LoggerEnum;
 import com.wsl.shoppingkill.obj.convert.AdvertiseConverter;
 import com.wsl.shoppingkill.obj.vo.AdvertiseVO;
 import com.wsl.shoppingkill.service.AdvertiseService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
@@ -34,11 +35,15 @@ public class AdvertiseServiceImpl extends ServiceImpl<AdvertiseMapper, Advertise
     @Resource
     private OssComponent ossComponent;
 
+    @Value("${url.image}")
+    private String target;
+
     @Override
     public IPage<Advertise> getAdvertisePage(Long page,Long size) {
         Page<Advertise> pages = new Page<>(page,size);
         IPage<Advertise> iPage = advertiseMapper.selectPage(pages, new QueryWrapper<>());
         if (iPage.getSize()>0) {
+            iPage.setRecords(changeUrl(iPage.getRecords()));
             return iPage;
         }
         return null;
@@ -54,7 +59,8 @@ public class AdvertiseServiceImpl extends ServiceImpl<AdvertiseMapper, Advertise
         if (CollectionUtils.isEmpty(advertises)){
             return null;
         }
-        return AdvertiseConverter.CONVERTER.advertise2VO(advertises);
+        List<Advertise> changeAdvertise = changeUrl(advertises);
+        return AdvertiseConverter.CONVERTER.advertise2VO(changeAdvertise);
     }
 
     @Override
@@ -67,6 +73,7 @@ public class AdvertiseServiceImpl extends ServiceImpl<AdvertiseMapper, Advertise
         );
 
         if (advertisePage.getSize()>0) {
+            advertisePage.setRecords(changeUrl(advertisePage.getRecords()));
             return advertisePage;
         }
 
@@ -83,6 +90,7 @@ public class AdvertiseServiceImpl extends ServiceImpl<AdvertiseMapper, Advertise
         );
 
         if (advertisePage.getSize()>0) {
+            advertisePage.setRecords(changeUrl(advertisePage.getRecords()));
             return advertisePage;
         }
 
@@ -98,6 +106,7 @@ public class AdvertiseServiceImpl extends ServiceImpl<AdvertiseMapper, Advertise
         );
 
         if (advertisePage.getSize()>0) {
+            advertisePage.setRecords(changeUrl(advertisePage.getRecords()));
             return advertisePage;
         }
 
@@ -165,5 +174,17 @@ public class AdvertiseServiceImpl extends ServiceImpl<AdvertiseMapper, Advertise
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return e.getMessage();
         }
+    }
+
+    /**
+     * 获取路径拼接
+     * @author wangShilei
+     * @date 2020/12/10 17:43
+     * @param advertiseList :
+     * @return java.util.List<Advertise>
+     */
+    private List<Advertise> changeUrl(List<Advertise> advertiseList){
+        advertiseList.forEach(li->li.setImgUrl(target+li.getImgUrl()));
+        return advertiseList;
     }
 }

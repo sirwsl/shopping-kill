@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-    <title> - 基础表格</title>
+    <title>广告管理</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
 
@@ -21,94 +21,36 @@
 
 <body class="gray-bg">
 	<div class="row">
-		<div class="m-b-xs" style="padding: 10px 36px">
+		<div class="m-b-xs" style="padding: 10px 36px; float: right;">
 		    <a data-toggle="modal" class="btn btn-success" href="#modal-form" data-toggle="modal" data-target="#Editupdate">添加广告</a>
 		</div>
-	    <div class="col-sm-12">
-		    <div class="ibox float-e-margins">
-		        <div class="ibox-title">
-		            <h5>广告管理</h5>
-		        </div>
-		        <div class="ibox-content">
-		
-		            <table class="table table-hover">
-		                <thead>
-		                    <tr>
-		                        <th>id</th>
-		                        <th>图片</th>
-		                        <th>URL</th>
-		                        <th>开始时间</th>
-								<th>结束时间</th>
-								<th>操作</th>
-		                    </tr>
-		                </thead>
-		                <tbody>
-		                    <tr>
-		                        <td>1</td>
-		                        <td>
-									<img src="../static/admin/img/a9.jpg" style="width: 50px; height: 50px;" />
-		                        </td>
-		                        <td>/test/pyOrder?01</td>
-		                        <td>2019-12-12 12:00:35</td>
-								<td>2021-12-00 12:00:00</td>
-								<td>
-									<a data-toggle="modal" class="btn btn-success" href="#modal-form" data-toggle="modal" data-target="#EditModal">编辑</a>
-								</td>
-		                    </tr>
-							<tr>
-							    <td>2</td>
-							    <td>
-									<img src="../static/admin/img/a1.jpg" style="width: 50px; height: 50px;" />
-							    </td>
-							    <td>/test/pyOrder?01</td>
-							    <td>2019-12-12 12:00:35</td>
-								<td>2021-12-00 12:00:00</td>
-								<td>
-									<a data-toggle="modal" class="btn btn-success" href="#modal-form" data-toggle="modal" data-target="#EditModal">编辑</a>
-								</td>
-							</tr>
-		                </tbody>
-		            </table>
-		        </div>
-		    </div>
-		    </div>
-		</div>
-	
-	<div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-						&times;
-					</button>
-					<h4 class="modal-title" id="myModalLabel">
-						二次确认操作
-					</h4>
-				</div>
-				<div class="modal-body">
-					<div class="form-group">
-					    <div class="form-group">
-					        <label class="col-xl-3 control-label">邮箱</label>
-					        <div class="col-xl-9">
-					            <input type="text" class="form-control layer-date" />
-					        </div>
-					    </div>
+		<div class="col-sm-12">
+			<div class="tabs-container">
+				<ul class="nav nav-tabs">
+					<li class="active"><a onclick="col(0)" data-toggle="tab" href="#tab-1" aria-expanded="true">全部广告</a>
+					</li>
+					<li><a onclick="col(1)" data-toggle="tab" href="#tab-1" aria-expanded="false">未开始</a>
+					</li>
+					<li><a onclick="col(2)" data-toggle="tab" href="#tab-1" aria-expanded="false">进行中</a>
+					</li>
+					<li><a  onclick="col(3)" data-toggle="tab" href="#tab-2" aria-expanded="false" id="goods" name = "goods">已结束</a>
+					</li>
+				</ul>
+			</div>				
+			<div class="tab-content">
+				<div id="tab-1" class="tab-pane active">
+					<div class="panel-body">
+						<div class="ibox float-e-margins">
+							<div class="ibox-content">
+								<table id="advertiesmant" class="footable table table-stripped toggle-arrow-tiny" data-page-size="8">
+								</table>
+							</div>
+						</div>
 					</div>
-					
 				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">取消
-					</button>
-					<button type="button" class="btn btn-primary">
-						添加
-					</button>
-				</div>
-			</div><!-- /.modal-content -->
-		</div><!-- /.modal -->
-	</div>
+			</div>
+		</div>	
 	
-	
-	<!--图片上传-->
 	<div class="modal fade" id="Editupdate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -146,30 +88,120 @@
 	<!-- 全局js -->
 	<script src="../static/admin/js/jquery.min.js?v=2.1.4"></script>
 	<script src="../static/admin/js/bootstrap.min.js?v=3.3.6"></script>
-	
-	<!-- layerDate plugin javascript -->
-	<script src="../static/admin/js/plugins/layer/laydate/laydate.js"></script>
-	
-	<!-- Peity -->
-	<script src="../static/admin/js/plugins/peity/jquery.peity.min.js"></script>
-	
-	<!-- 自定义js -->
+	<script src="../static/admin/js/jquery.form.js"></script>
+	<script src="../static/admin/js/jquery.cookie.js"></script>
+	<script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+	<script src="../static/admin/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+	<script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+
+
 	<script src="../static/admin/js/content.js?v=1.0.0"></script>
-	
-	
-	<!-- iCheck -->
-	<script src="../static/admin/js/plugins/iCheck/icheck.min.js"></script>
-	
-	<!-- Peity -->
-	<script src="../static/admin/js/demo/peity-demo.js"></script>
-	
 	<script>
-	    $(document).ready(function () {
-	        $('.i-checks').iCheck({
-	            checkboxClass: 'icheckbox_square-green',
-	            radioClass: 'iradio_square-green',
-	        });
-	    });
+		
+		function col(num){
+			var url;
+			if (num == 0){
+				url = "http://test.wslhome.top/admin/getAdvertiseAll/v1";
+			}else if (num == 1){
+				url = "http://test.wslhome.top/admin/getAdvertiseBegin/v1";
+			}else if (num == 2){
+				url = "http://test.wslhome.top/admin/getAdvertiseDoing/v1";
+			}else if (num == 3){
+				url = "http://test.wslhome.top/admin/getAdvertiseOver/v1";
+			}
+			dev(url);
+		}
+	    $(function(){
+			var url = "http://test.wslhome.top/admin/getAdvertiseAll/v1";
+			dev(url);
+		})
+		
+		function dev(url) {
+	    	$('#advertiesmant').bootstrapTable('destroy'); 
+	    	$('#advertiesmant').bootstrapTable({
+	    		method: 'get',
+	    		url: url,
+	    		dataType: "json",
+	    		headers: {
+	    			'Authorization': $.cookie("token")
+	    		},
+	    		ajaxOptions: {
+	    		    xhrFields: {        //跨域
+	    		        withCredentials: false
+	    		    },
+	    		crossDomain: true
+	    		},
+	    		striped: true,
+	    		pageNumber: 1,
+	    		pagination: true,
+	    		sidePagination: 'server',
+	    		pageSize: 10,
+	    		pageList: [5, 10, 20, 30],
+	    		showRefresh: true,
+	    		silent: true, 
+	    		cache: false,
+	    		queryParams: queryParams,
+	    		responseHandler: returnFormat,
+	    		columns: [{
+	    			title: 'Id',
+	    			field: 'id',
+	    			sortable: true
+	    		}, {
+	    			title: '广告图片',
+	    			field: 'imgUrl',
+	    			formatter: function(value, row, index) {
+						return '<img src="'+row.imgUrl+'" style="width: 50px; height: 50px;" />';
+	    			}
+	    		}, {
+	    			title: '目标地址',
+	    			field: 'targetUrl',
+					formatter: function(value, row, index) {
+						return '<a target="_blank" href="'+row.targetUrl+'">'+row.targetUrl+'</a>';
+					}
+	    		}, {
+	    			title: '开始时间',
+	    			field: 'startTime',
+	    			sortable: true
+	    		}, {
+	    			title: '结束时间',
+	    			field: 'endTime',
+	    			sortable: true
+	    		}, {
+	    			title: '更新时间',
+	    			field: 'updateTime',
+	    			sortable: true
+	    		}, {
+	    			title: '操作',
+	    			field: 'Button',
+	    			align: 'center',
+	    			formatter: option
+	    
+	    		}]
+	    	})
+	    	function queryParams(params) {
+	    		var temp = {
+	    			page : (params.offset / params.limit) + 1,
+	    			size: params.limit,
+	    		};
+	    		return temp;
+	    	}
+	    
+	    	function returnFormat(res) {
+				console.log(res.data.records);
+	    		return {
+					"rows":res.data.records,
+					"total": res.data.total
+				}
+	    	}
+	    
+	    	function option(value, row, index) {
+	    		var arr = new Array();
+				var htm = '<a data-toggle="modal" class="btn btn-primary" href="#modal-form" onclick="setValue('+JSON.stringify(row).replace(/"/g, '&quot;')+') ">编辑</a></br>' +
+	    			'<a data-toggle="modal" class="btn btn-danger" onclick = "delActivity(' + index + ')">删除</a>';
+	    		return htm;
+	    		
+	    	}
+	    }
 	</script>
 	    
 	
