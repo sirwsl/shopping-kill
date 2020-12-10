@@ -109,7 +109,7 @@
 
 
 ### 四、修改黑名单
-方式：put
+方式：post
 
 地址：
 **/updateBlackListById/v1**

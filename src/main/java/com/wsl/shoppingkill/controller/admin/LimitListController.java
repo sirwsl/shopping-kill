@@ -170,7 +170,7 @@ public class LimitListController {
      * @author : WangShiLei
      * @date : 2020/11/8 11:06 上午
      **/
-    @PutMapping("/updateBlackListById/v1")
+    @PostMapping("/updateBlackListById/v1")
     @MyLog(detail = "更新黑名单", grade = LoggerEnum.SERIOUS, value = "#id")
     public Result<Boolean> updateLimitList(@Valid LimitList limitList) {
         return Result.success(limitListService.updateById(limitList));

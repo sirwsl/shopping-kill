@@ -51,8 +51,8 @@
 							                        </div>
 
 													<div class="m-b-xs" style="text-align:right">
-													    <a data-toggle="modal" style=" float:right" class="btn btn-success" href="#modal-form" data-toggle="modal" data-target="#EditModal" id = "addLimit">添加</a>
-														<a data-toggle="modal"  style=" float:right" class="btn btn-danger" href="#modal-form" data-toggle="modal" id= "del">删除</a>
+													    <a data-toggle="modal" style=" float:right; margin: 5px;" class="btn btn-success" data-target="#EditModal" id = "addLimit">添加</a>
+														<a style=" float:right; margin: 5px; " class="btn btn-danger"  id= "del">删除</a>
 													</div>
 							                    </div>
 							                    <div class="table-responsive">
@@ -73,7 +73,7 @@
 	</div>	
 	
 	<div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog" style="width:15%;">
+		<div class="modal-dialog" style="width:20%;">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
@@ -112,7 +112,7 @@
 				</div>
 				<div class="modal-footer">
 					<a type="button" class="btn btn-default" data-dismiss="modal">取消</a>
-					<a type="button" class="btn btn-primary" data-dismiss="modal" id = "submits">添加</a>
+					<a type="button" class="btn btn-primary" data-dismiss="modal" onclick = "submits(true)">确定</a>
 				</div>
 			</div>
 		</div>
@@ -144,8 +144,8 @@
 				window.location.href = "/admin/login.html"
 			}
 		});
-		
-		
+		var id999;
+		var update = true;
 		var flag = true;
 		var url = "http://test.wslhome.top/admin/getBlackListForPhone/v1";
 		var number = "";
@@ -226,8 +226,19 @@
 				title: '更新时间',
 				field: 'updateTime',
 				sortable: true
+			},{
+				title:"操作",
+				field: 'Button',
+				align: 'center',
+				formatter: function(value, row, index) {
+					var html = '<a data-toggle="modal" style="margin: 5px;" class="btn btn-success" data-target="#EditModal" onclick = "updates('+JSON.stringify(row).replace(/"/g, '&quot;')+');">修改</a>'
+					+'<a style="margin: 5px;" class="btn btn-danger" onclick = "delonly(' + row.id + ');">删除</a>';
+				return html;
+				}
 			}]
 		})
+		
+		
 		function queryParams(params) {
 			var temp = {
 				page : (params.offset / params.limit) + 1,
@@ -244,6 +255,43 @@
 			};
 		}
 	}
+	
+
+	
+	function updates(vals,index){
+		if(flag){
+			$("#addtitle").html("添加手机号");
+		}else{
+			$("#addtitle").html("添加IP地址");
+		}
+		$('#EditModal').on('show.bs.modal', function (event) {
+			  	var value = $(event.relatedTarget).data('id');; //触发事件的按钮
+			  	var modal = $(this);  //当前模态框
+				modal.find("#adress").val(vals.number);
+				modal.find("#startTime").val(vals.startTime);
+				modal.find("#endTime").val(vals.endTime);
+				
+		})
+		id999 = vals.id;
+		update = false;
+		type = vals.type;
+		 
+	}
+	function delonly(ids) {
+		if (!confirm("是否确认删除？"))
+		    return;
+		$.ajax({
+		    url : "http://test.wslhome.top/admin/delBlackListById/v1",
+		    data : "id=" + ids,
+		    type : "delete",
+		    dataType : "json",
+		    success : function(data) {
+		        $('#limitList').bootstrapTable('refresh');
+		    }
+		});
+	}
+	
+	
 	$("#del").on("click", function() {
 	    if (!confirm("是否确认删除？"))
 	        return;
@@ -281,11 +329,14 @@
 		}
 	})
 	
-	$("#submits").on("click",function(){
+	function submits(num){
 		
 		var url = "http://test.wslhome.top/admin/addBlackListByPhone/v1";
 		if (!flag){
 			url = "http://test.wslhome.top/admin/addBlackListByIp/v1";
+		}
+		if (!update){
+			url = "http://test.wslhome.top/admin/updateBlackListById/v1";
 		}
 		
 		var num = $("#adress").val();
@@ -302,31 +353,30 @@
 			alert("IP地址不正确");
 			return ;
 		}
-		
+		console.log(update);
 		$.ajax({
 			type: "POST",
 			url: url,
 			dataType: "json",
 			data:{
+				"id": id999,
 				"number":num,
 				"startTime":sTime,
-				"endTime":eTime
+				"endTime":eTime,
+				
 			},
 			success: function(re) {
-				console.log(re);
-				if (re.code == 0 && re.data==true){
-					alert("添加成功");
-				}else{
-					alert("添加失败，请检查是否存在");
-				}
+				alert(re.userMsg);
 				$('#limitList').bootstrapTable('refresh');
 			},
 			error: function() {
-				alert("添加失败,请稍后再试");
+				alert("失败,请稍后再试");
 			}
 		});
-		
-	})
+		update = true;
+		id999="";
+		type="";
+	}
 	</script>    
        
 </html>

@@ -36,7 +36,6 @@ public class AdminController {
      **/
     @PostMapping("/addAdmin/v1")
     public Result<Boolean> addAdmin(@Valid Admin admin){
-        log.info(admin.toString());
         if (!component.getCurrentUser().getFlag().equals(BaseEnum.ADMIN)){
             return Result.error("error","只有超级管理员有权限");
         }

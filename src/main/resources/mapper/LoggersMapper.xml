@@ -39,7 +39,7 @@
     <if test="type ==0">
        left join t_user ad on lg.man_id = ad.id
     </if>
-    where lg.type = #{type};
+    where lg.type = #{type} ORDER BY creat_time DESC
   </select>
 
 </mapper>
