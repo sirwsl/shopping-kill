@@ -54,7 +54,7 @@ public class LoginController {
         if (loginService.login(response, userParam)) {
             return Result.success("登录成功");
         }
-        return Result.error("error", "登录失败");
+        return Result.error("error", "密码错误");
 
     }
 
@@ -79,7 +79,7 @@ public class LoginController {
         if (loginService.login(response, userParam)) {
             return Result.success("登录成功");
         }
-        return Result.error("error", "登录失败");
+        return Result.error("error", "密码错误");
     }
 
     /**

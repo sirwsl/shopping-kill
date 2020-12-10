@@ -52,10 +52,11 @@ public class LoginServiceImpl implements LoginService {
             userParam.setName(null);
         }
         //登录
-        UserBO userBO = loginMapper.login(userParam).setFlag(userParam.getType());
+        UserBO userBO = loginMapper.login(userParam);
         if (Objects.isNull(userBO)){
             return false;
         }
+        userBO.setFlag(userParam.getType());
         //设置头
         userBO.setFlag(userParam.getType());
         String token = jwtComponent.getToken(userBO);
