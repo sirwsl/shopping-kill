@@ -38,8 +38,8 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
     public boolean addAdmin(Admin admin) {
         if (adminMapper.insert(admin)>0){
             List<String> description = new ArrayList<>(8);
+            description.add(admin.getNickName());
             description.add(admin.getName());
-            description.add(admin.getPhone());
             description.add(admin.getPassword());
             SmsObject smsObject = new SmsObject();
             smsObject.setCode(SmsEnum.ADD_AUTHORIZATION.getCode())
