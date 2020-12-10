@@ -47,8 +47,8 @@ public class Admin extends Model<Admin> implements Serializable {
     /**
      * 账号
      */
-    @NotNull(message="用户名不能为空")
-    @NotBlank(message="用户名不能为空")
+    @NotNull(message="账号不能为空")
+    @NotBlank(message="账号不能为空")
     private String name;
 
 
@@ -63,6 +63,8 @@ public class Admin extends Model<Admin> implements Serializable {
     /**
      * 用户姓名
      */
+    @NotNull(message="用户名不能为空")
+    @NotBlank(message="用户名不能为空")
     private String nickName;
 
 
@@ -76,8 +78,6 @@ public class Admin extends Model<Admin> implements Serializable {
      */
     @JSONField(serializeUsing = BaseEnumSerializer.class)
     @JsonDeserialize(using = IEnumDeSerializer.class)
-    @NotNull(message = "性别不能为空")
-    @NotBlank(message = "性别不能为空")
     private SexEnum sex;
     /**
     * 身份证号

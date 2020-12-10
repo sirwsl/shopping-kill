@@ -5,6 +5,7 @@ import com.wsl.shoppingkill.component.request.AbstractCurrentRequestComponent;
 import com.wsl.shoppingkill.obj.constant.BaseEnum;
 import com.wsl.shoppingkill.domain.Admin;
 import com.wsl.shoppingkill.service.AdminService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -18,6 +19,7 @@ import java.util.Objects;
  **/
 @RestController
 @RequestMapping("/admin")
+@Slf4j
 public class AdminController {
 
     @Resource
@@ -34,6 +36,7 @@ public class AdminController {
      **/
     @PostMapping("/addAdmin/v1")
     public Result<Boolean> addAdmin(@Valid Admin admin){
+        log.info(admin.toString());
         if (!component.getCurrentUser().getFlag().equals(BaseEnum.ADMIN)){
             return Result.error("error","只有超级管理员有权限");
         }
