@@ -29,7 +29,7 @@ public class SubscriptionHistoryController {
      * @param subscriptionHistory:
      * @return com.wsl.shoppingKill.common.Result<java.lang.Boolean>
      **/
-    @PostMapping("/newsPush")
+    @PostMapping("/newsPush/v1")
     public Result<Boolean> send(SubscriptionHistory subscriptionHistory){
         if (subscriptionHistory.getType().equals(BaseEnum.PHONE)){
             if (subscriptionHistory.getTitle().length()>12){
