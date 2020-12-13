@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-    <title> - 基础表格</title>
+    <title>订阅管理</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
 
@@ -25,313 +25,234 @@
 	    <div class="col-sm-12">
 	        <div class="tabs-container">
 	            <ul class="nav nav-tabs">
-	                <li class="active"><a data-toggle="tab" href="#tab-1" aria-expanded="true"> 短信订阅</a>
+	                <li class="active"><a data-toggle="tab" href="#tab-1" aria-expanded="true" onclick="change(100)"> 短信订阅</a>
 	                </li>
-	                <li class=""><a data-toggle="tab" href="#tab-2" aria-expanded="false">邮箱订阅</a>
+	                <li class=""><a data-toggle="tab" href="#tab-1" aria-expanded="false" onclick="change(1000)">邮箱订阅</a>
 	                </li>
 	            </ul>
 	            <div class="tab-content">
 	                <div id="tab-1" class="tab-pane active">
 	                    <div class="panel-body">
-	                        
 							<div class="wrapper wrapper-content animated fadeInRight">
 							    <div class="row">
 							        <div class="col-sm-12">
 							            <div class="ibox float-e-margins">
 							                <div class="ibox-title">
-							                    <h5>手机名单列表</h5>                      
+							                    <h5 id = "title"></h5>
+												<div style="text-align:right">
+												    <a data-toggle="modal" style=" float:right;" class="btn btn-success" data-target="#EditModal" id = "addLimit">添加</a>
+												</div>
 							                </div>
 							                <div class="ibox-content">
-							                    <div class="row">
-							                        <div class="col-sm-4">
-							                            <div class="input-group">
-							                                <input type="text" placeholder="请输入关键词" class="input-sm form-control"> <span class="input-group-btn">
-							                                    <button type="button" class="btn btn-sm btn-primary"> 搜索</button> </span>
-							                            </div>
-							                        </div>
-													<div class="col-sm-7"></div>
-													<div class="m-b-xs">
-													    <a data-toggle="modal" class="btn btn-success" href="#modal-form" data-toggle="modal" data-target="#EditModal">添加</a>
-														<a data-toggle="modal" class="btn btn-danger" href="#modal-form" data-toggle="modal" data-target="#myModal">删除</a>
-													</div>
-							                    </div>
+							                    
 							                    <div class="table-responsive">
-							                        <table class="table table-striped table-bordered table-hover dataTables-example">
-							                            <thead>
-							                                <tr>
-																<th>id</th>
-							                                    <th>手机号</th>
-							                                    <th>操作</th>                           
-							                                </tr>
-							                            </thead>
-							                            <tbody>
-							                                <tr>
-																<td>23</td>
-							                                    <td>18314263373</td>
-							                                    <td><a data-toggle="modal" class="btn btn-info" href="#modal-form" data-toggle="modal" data-target="#EditModal">编辑</a>
-																<a data-toggle="modal" class="btn btn-danger" href="#modal-form" data-toggle="modal" data-target="#myModal">删除</a>
-							                                    </td>
-							                                </tr> 
-							                            </tbody>
+							                        <table id = "sub" class="table table-striped table-bordered table-hover dataTables-example"> 
 							                        </table>	
-													<div class="row col-sm-5"></div>
-													<ul class="pagination pagination-lg">
-														<li><a href="#">&laquo;</a></li>
-														<li><a href="#">1</a></li>
-														<li><a href="#">2</a></li>
-														<li><a href="#">3</a></li>
-														<li><a href="#">4</a></li>
-														<li><a href="#">5</a></li>
-														<li><a href="#">&raquo;</a></li>
-													</ul>	
+													
 							                    </div>
 							                </div>
 							            </div>
 							        </div>
 							    </div>
 							</div>
-							
 	                    </div>
 	                </div>
-	                <div id="tab-2" class="tab-pane">
-	                    <div class="panel-body">
-	                    
-						<div class="wrapper wrapper-content animated fadeInRight">
-						    <div class="row">
-						        <div class="col-sm-12">
-						            <div class="ibox float-e-margins">
-						                <div class="ibox-title">
-						                    <h5>IP名单</h5>                      
-						                </div>
-						                <div class="ibox-content">
-						                    <div class="row">
-						                        <div class="col-sm-4">
-						                            <div class="input-group">
-						                                <input type="text" placeholder="请输入邮箱" class="input-sm form-control"> <span class="input-group-btn">
-						                                    <button type="button" class="btn btn-sm btn-primary"> 搜索</button> </span>
-						                            </div>
-						                        </div>
-												<div class="col-sm-7"></div>
-												<div class="m-b-xs">
-												    <a data-toggle="modal" class="btn btn-success" href="#modal-form" data-toggle="modal" data-target="#EditModalIP">添加</a>
-													<a data-toggle="modal" class="btn btn-danger" href="#modal-form" data-toggle="modal" data-target="#myModal">删除</a>
-												</div>
-						                    </div>
-						                    <div class="table-responsive">
-						                        <table class="table table-striped table-bordered table-hover dataTables-example">
-						                            <thead>
-						                                <tr>
-						                                    <th>id</th>
-															<th>邮箱</th>
-						                                    <th>操作</th>                           
-						                                </tr>
-						                            </thead>
-						                            <tbody>
-						                                <tr>   
-						                                    <td>121</td>
-						                                    <td>138185438483@qq.com</td>
-						                                    
-						                                    <td><a data-toggle="modal" class="btn btn-info" href="#modal-form" data-toggle="modal" data-target="#EditModal">编辑</a>
-															<a data-toggle="modal" class="btn btn-danger" href="#modal-form" data-toggle="modal" data-target="#myModal">删除</a>
-						                                    </td>
-						                                </tr> 
-						                            </tbody>
-						                        </table>	
-												<div class="row col-sm-5"></div>
-												<ul class="pagination pagination-lg">
-													<li><a href="#">&laquo;</a></li>
-													<li><a href="#">1</a></li>
-													<li><a href="#">2</a></li>
-													<li><a href="#">3</a></li>
-													<li><a href="#">4</a></li>
-													<li><a href="#">5</a></li>
-													<li><a href="#">&raquo;</a></li>
-												</ul>	
-						                    </div>
-						                </div>
-						            </div>
-						        </div>
-						    </div>
-						</div>
-						
-						</div>
-	                </div>
 	            </div>
-	
-	
-	        </div>
-	    </div>
-	</div>	
-	
-    
-        
-		
-		
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-						&times;
-					</button>
-					<h4 class="modal-title" id="myModalLabel">
-						二次确认操作
-					</h4>
-				</div>
-				<div class="modal-body">
-					您确定要删除该名单吗？
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">取消
-					</button>
-					<button type="button" class="btn btn-primary">
-						确定
-					</button>
-				</div>
-			</div><!-- /.modal-content -->
-		</div><!-- /.modal -->
-	</div>
-	
+			</div>		
+		</div>
+	</div>		
 	<div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-						&times;
-					</button>
-					<h4 class="modal-title" id="myModalLabel">
-						二次确认操作
-					</h4>
-				</div>
-				<div class="modal-body">
-					<div class="form-group">
-					    <div class="form-group">
-					        <label class="col-xl-3 control-label">邮箱</label>
-					        <div class="col-xl-9">
-					            <input type="text" class="form-control layer-date" />
-					        </div>
-					    </div>
+				<form id = "addNumber" enctype="application/x-www-form-urlencoded" action="http://test.wslhome.top/admin/addSubscriber/v1" method="post">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+							&times;
+						</button>
+						<h4 class="modal-title" id="myModalLabel">
+							二次确认操作
+						</h4>
 					</div>
-					
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">取消
-					</button>
-					<button type="button" class="btn btn-primary">
-						添加
-					</button>
-				</div>
-			</div><!-- /.modal-content -->
-		</div><!-- /.modal -->
-	</div>
-	
-	<div class="modal fade" id="EditModalIP" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-						&times;
-					</button>
-					<h4 class="modal-title" id="myModalLabel">
-						二次确认操作
-					</h4>
-				</div>
-				<div class="modal-body">
-					<div class="form-group">
-					    <div class="form-group">
-					        <label class="col-xl-3 control-label">手机号</label>
-					        <div class="col-xl-9">
-					            <input type="text" class="form-control layer-date" />
-					        </div>
-					    </div>
+					<div class="modal-body">
+						<div class="form-group">
+						    <div class="form-group">
+						        <label class="col-xl-3 control-label" id = "add"></label>
+								<input id = "type" name = "type" value="" type="hidden"/>
+						        <div class="col-xl-9">
+						            <input type="text"  id = "number" name = "number" class="form-control layer-date" />
+						        </div>
+						    </div>
+						</div>
 					</div>
-					
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">取消
-					</button>
-					<button type="button" class="btn btn-primary">
-						添加
-					</button>
-				</div>
-			</div><!-- /.modal-content -->
-		</div><!-- /.modal -->
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消
+						</button>
+						<button id = "addsub" type="button" class="btn btn-primary" data-dismiss="modal">
+							添加
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
 	</div>
-			
-    <!-- 全局js -->
+
+
     <script src="../static/admin/js/jquery.min.js?v=2.1.4"></script>
     <script src="../static/admin/js/bootstrap.min.js?v=3.3.6"></script>
-    
-	<!-- layerDate plugin javascript -->
-	<script src="../static/admin/js/plugins/layer/laydate/laydate.js"></script>
-    
-    <!-- Peity -->
-    <script src="../static/admin/js/plugins/peity/jquery.peity.min.js"></script>
-    
-    <!-- 自定义js -->
-    <script src="../static/admin/js/content.js?v=1.0.0"></script>
-    
-    
-    <!-- iCheck -->
-    <script src="../static/admin/js/plugins/iCheck/icheck.min.js"></script>
-    
-    <!-- Peity -->
-    <script src="../static/admin/js/demo/peity-demo.js"></script>
+    <script src="../static/admin/js/jquery.form.js"></script>
+    <script src="../static/admin/js/jquery.cookie.js"></script>
+    <script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="../static/admin/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+	
     
     <script>
-        $(document).ready(function () {
-            $('.i-checks').iCheck({
-                checkboxClass: 'icheckbox_square-green',
-                radioClass: 'iradio_square-green',
-            });
-        });
-    </script>
-        
-    <script>
-		$(function(){  
-		            function initTableCheckbox() {  
-		                var $thr = $('table thead tr');  
-		                var $checkAllTh = $('<th><input  type="checkbox" checked class="i-checks" id="checkAll" name="checkAll" /></th>');    
-		                $thr.prepend($checkAllTh);  
-		                /*“全选/反选”复选框*/  
-		                var $checkAll = $thr.find('input');  
-		                $checkAll.click(function(event){  
-		                    /*将所有行的选中状态设成全选框的选中状态*/  
-		                    $tbr.find('input').prop('checked',$(this).prop('checked'));  
-		                    /*并调整所有选中行的CSS样式*/  
-		                    if ($(this).prop('checked')) {  
-		                        $tbr.find('input').parent().parent().addClass('warning');  
-		                    } else{  
-		                        $tbr.find('input').parent().parent().removeClass('warning');  
-		                    }  
-		                    /*阻止向上冒泡，以防再次触发点击操作*/  
-		                    event.stopPropagation();  
-		                });  
-		                /*点击全选框所在单元格时也触发全选框的点击操作*/  
-		                $checkAllTh.click(function(){  
-		                    $(this).find('input').click();  
-		                });  
-		                var $tbr = $('table tbody tr');  
-		                var $checkItemTd = $('<td><input type="checkbox" class="i-checks" name="checkItem" /></td>');  
-		                /*每一行都在最前面插入一个选中复选框的单元格*/  
-		                $tbr.prepend($checkItemTd);  
-		                /*点击每一行的选中复选框时*/  
-		                $tbr.find('input').click(function(event){  
-		                    /*调整选中行的CSS样式*/  
-		                    $(this).parent().parent().toggleClass('warning');  
-		                    /*如果已经被选中行的行数等于表格的数据行数，将全选框设为选中状态，否则设为未选中状态*/  
-		                    $checkAll.prop('checked',$tbr.find('input:checked').length == $tbr.length ? true : false);  
-		                    /*阻止向上冒泡，以防再次触发点击操作*/  
-		                    event.stopPropagation();  
-		                });  
-		                /*点击每一行时也触发该行的选中操作*/  
-		                $tbr.click(function(){  
-		                    $(this).find('input').click();  
-		                });  
-		            }  
-		            initTableCheckbox();  
-		        });  
+	$.ajaxSetup({
+		headers: {
+			'Authorization': $.cookie("token")
+		},
+		xhrFields: {
+			withCredentials: false
+		},
+		crossDomain: true
+	});
+	
+	$(function() {
+		if ($.cookie("token") == null || $.cookie("token") == "") {
+			window.location.href = "/admin/login.html"
+		}
+	});
+	
+	var flag = true;	
+	$(function(){
+		var url = "http://test.wslhome.top/admin/getSubscriberBySms/v1";
+		$("#title").html("短信订阅列表");
+		logger(url);
+		view();
+	})
+	function change(num){
+		if (num == 100){
+			url = "http://test.wslhome.top/admin/getSubscriberBySms/v1";
+			flag = true;
+		}else{
+			url = "http://test.wslhome.top/admin/getSubscriberByEmail/v1";
+			flag = false;
+		}
+		logger(url);
+		view();
+	}
+	
+	function view(){
+		if (flag){
+			$("#title").html("短信订阅列表");
+			$("#add").html("短信订阅（手机号）");
+			$("#type").val(1);
+		}else{
+			$("#title").html("邮箱订阅列表");
+			$("#add").html("邮件订阅");
+			$("#type").val(0);
+		}
+	}
 		
+	$("#addLimit").click(function(){
+		view();
+	})
+	
+	$("#addsub").click(function() {
+		$("#addNumber").ajaxSubmit(function(re) {
+			alert(re.userMsg);
+			$('#sub').bootstrapTable('refresh');
+		});
+	});
+	
+	function logger(url) {
+		$('#sub').bootstrapTable('destroy'); 
+		$('#sub').bootstrapTable({
+			method: 'get',
+			url: url,
+			dataType: "json",
+			headers: {
+				'Authorization': $.cookie("token")
+			},
+			ajaxOptions: {
+			    xhrFields: {
+			        withCredentials: false
+			    },
+			    crossDomain: true
+			},
+			striped: true,
+			pageNumber: 1,
+			pagination: true,
+			sidePagination: 'server',
+			pageSize: 15,
+			pageList: [5, 10, 15,20, 30,50],
+			showRefresh: false,
+			silent: true, 
+			cache: false,
+			queryParams: queryParams,
+			responseHandler: returnFormat,
+			columns: [{
+				checkbox : true
+			},{
+				title: 'Id',
+				field: 'id',
+				sortable: true
+			},{
+				title: '号码',
+				field: 'number',
+				sortable: true
+			}, {
+				title: '是否订阅',
+				field: 'status',
+				formatter: function(value, row, index) {
+					if (row.status == 0){
+						return "是";
+					}else{
+						return "否";
+					}
+				}
+			},{
+				title:"操作",
+				field: 'Button',
+				align: 'center',
+				formatter: function(value, row, index) {
+				return '<a style="margin: 5px;" class="btn btn-danger" onclick = "delonly(' + row.id + ');">删除</a>';
+				}
+			}]
+		})
+		function queryParams(params) {
+			var temp = {
+				current : (params.offset / params.limit) + 1,
+				size: params.limit				
+			};
+			return temp;
+		}
+	
+		function returnFormat(res) {
+		
+			return {
+				"rows":res.data.records,
+				"total": res.data.total
+			};
+		}
+	}
+	
+	function delonly(ids) {
+		if (!confirm("是否确认删除？"))
+		    return;
+		$.ajax({
+		    url : "http://test.wslhome.top/admin/delSubscriber/v1",
+		    data : "id=" + ids,
+		    type : "delete",
+		    dataType : "json",
+		    success : function(data) {
+				alert(data.userMsg);
+		        $('#sub').bootstrapTable('refresh');
+		    }
+		});
+	}
+	
+	
 	</script>
             
         

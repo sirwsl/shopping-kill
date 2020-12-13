@@ -2,10 +2,9 @@ package com.wsl.shoppingkill.controller.admin;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.wsl.shoppingkill.common.Result;
-import com.wsl.shoppingkill.obj.constant.BaseEnum;
 import com.wsl.shoppingkill.domain.Subscriber;
+import com.wsl.shoppingkill.obj.constant.BaseEnum;
 import com.wsl.shoppingkill.service.SubscriberService;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -61,16 +60,16 @@ public class SubscriberController {
 
     /**
      * 删除订阅者
-     * @param number :
+     * @param id :
      * @return Boolean
      * @author wangshilei
      * @date 2020/11/16 15:38
      **/
     @DeleteMapping("/delSubscriber/v1")
-    public Result<Boolean> delSubscriber(@Valid String number){
-        if (StringUtils.isBlank(number)){
+    public Result<Boolean> delSubscriber(Long id){
+        if (id == null || id < 0){
             return Result.error("error","删除订阅者id不能为空");
         }
-        return Result.success(subscriberService.delSubscriber(number));
+        return Result.success(subscriberService.delSubscriber(id));
     }
 }

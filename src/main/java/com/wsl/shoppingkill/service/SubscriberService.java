@@ -36,6 +36,6 @@ public interface SubscriberService extends IService<Subscriber> {
      * @author wangshilei
      * @date 2020/11/16 15:38
      **/
-    boolean delSubscriber (String number);
+    boolean delSubscriber (Long number);
 
 }

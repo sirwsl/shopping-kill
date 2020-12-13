@@ -33,11 +33,13 @@ import java.time.LocalDateTime;
 public class Subscriber extends Model<Subscriber> implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    @Id
+    @TableId(type = IdType.AUTO)
+    private Long id;
+
     /**
     * 订阅者号
     */
-    @Id
-    @TableId()
     @NotNull(message = "订阅者账号")
     @NotBlank(message = "订阅者账号")
     private String number;
@@ -46,7 +48,6 @@ public class Subscriber extends Model<Subscriber> implements Serializable {
     * 订阅类型(0-手机订阅 1-邮件订阅)
     */
     @NotNull(message = "订阅者类型不能为空")
-    @NotBlank(message = "订阅者类型不能为空")
     private Integer type;
 
     /**
@@ -81,6 +82,7 @@ public class Subscriber extends Model<Subscriber> implements Serializable {
     private Boolean delFlag;
 
 
+    private static final String ID = "id";
 
     public static final String NUMBER = "number";
 

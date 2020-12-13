@@ -33,7 +33,7 @@ public class SubscriberServiceImpl extends ServiceImpl<SubscriberMapper, Subscri
     }
 
     @Override
-    public boolean delSubscriber(String number) {
+    public boolean delSubscriber(Long number) {
         return subscriberMapper.deleteById(number)>0;
     }
 }
