@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-    <title> - 拖动面板</title>
+    <title>订阅历史记录</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
 
@@ -20,55 +20,131 @@
 
 <body class="gray-bg">
     <div class="wrapper wrapper-content  animated fadeInRight">
+		<div class="row" style="margin-left: 10px;">
+		    <div>
+				<label class="form-inline" />开始时间：
+					<input id = "startTime" name = "startTime" type="text" class="form-control layer-date" placeholder="YYYY-MM-DD hh:mm:ss"autocomplete="off" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" />
+				</label>
+				<label class="form-inline" />结束时间：
+					<input id = "endTime" name = "endTime" type="text" class="form-control layer-date" placeholder="YYYY-MM-DD hh:mm:ss"autocomplete="off" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" />
+				</label>
+				<button class="btn btn-primary" id = "search">搜 索</button>
+		    </div>
+		</div>
+		
+       <table class="table" id = "history"> 
+	   </table> 
         
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>历史订阅</h5>
-                        
-                    </div>
-                    <div class="ibox-content">
-                        <h2>版本 1.2.1 中的新功能</h2>
-                        <p>
-                            攻城狮们夜以继日的疯狂加班，毛都快掉光了，解决了下列问题，赶快升级吧！
-                            <br>1.新版智慧公交，增加定位、地图、预估到达时间等功能。
-                            <br>2.丰富幼儿故事资源，宝宝爱学，妈妈放心。
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 
 
     <!-- 全局js -->
     <script src="../static/admin/js/jquery.min.js?v=2.1.4"></script>
     <script src="../static/admin/js/bootstrap.min.js?v=3.3.6"></script>
+	<script src="../static/admin/js/jquery.form.js"></script>
+	<script src="../static/admin/js/jquery.cookie.js"></script>
+	<!-- layerDate plugin javascript -->
+	<script src="../static/admin/js/plugins/layer/laydate/laydate.js"></script>
+	<script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+	<script src="../static/admin/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+	<script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+
+<script type="application/javascript">
+	$.ajaxSetup({
+		headers: {
+			'Authorization': $.cookie("token")
+		},
+		xhrFields: {
+			withCredentials: false
+		},
+		crossDomain: true
+	});
+	
+	$(function() {
+		if ($.cookie("token") == null || $.cookie("token") == "") {
+			window.location.href = "/admin/login.html"
+		}
+	});
+	
+	
+	var url =  "http://test.wslhome.top/admin/getAllSubscription/v1";
+	var stime;
+	var etime;
+	$(function(){
+		logger();
+	})
+	$("#search").click(function(){
+		url = "http://test.wslhome.top/admin/getSubscriptionByTime/v1";
+		stime = $("#startTime").val();
+		etime = $("#endTime").val();
+		logger();
+	})
+	
 
 
+	function logger() {
+		
+		$('#history').bootstrapTable('destroy'); 
+		$('#history').bootstrapTable({
+			method: 'get',
+			url:url,
+			dataType: "json",
+			headers: {
+				'Authorization': $.cookie("token")
+			},
+			ajaxOptions: {
+				xhrFields: {
+					withCredentials: false
+				},
+				crossDomain: true
+			},
+			striped: true,
+			pageNumber: 1,
+			pagination: true,
+			sidePagination: 'server',
+			pageSize: 10,
+			pageList: [5, 10, 15,20, 30,50],
+			showRefresh: false,
+			silent: true, 
+			cache: false,
+			queryParams: queryParams,
+			responseHandler: returnFormat,
+			columns: [{
+				formatter: function(value, row, index) {
+					console.log(row);
+					var type = '短信订阅';
+					if(row.type==0){
+						type = "邮件订阅";
+					}
+					var html = '<div class="row"><div class="col-sm-12"><div class="ibox float-e-margins">'
+					+'<div class="ibox-title"><h5>'+type+'&nbsp'+'id:'+row.id+'</h5>'
+					+'</div><div class="ibox-content"><h2>'+row.title+'</h2>'
+					+'<p>'+row.detail+'</p>'
+					+'<hr/><h4>创建时间：'+row.creatTime+'</h4>'
+					+'<h4>发布者Id：'+row.adminId+'</h4></div></div></div></div>';
+					
+					return html;
+				}
+			}]
+		})
+		function queryParams(params) {
+			var temp = {
+				page : (params.offset / params.limit) + 1,
+				num: params.limit,
+				beginTime: stime,
+				endTime: etime					
+			};
+			return temp;
+		}
 
-    <!-- Peity -->
-    <script src="../static/admin/js/plugins/peity/jquery.peity.min.js"></script>
-
-    <!-- 自定义js -->
-    <script src="../static/admin/js/content.js?v=1.0.0"></script>
-
-
-    <script src="../static/admin/js/plugins/jquery-ui/jquery-ui.min.js"></script>
-
-    <!-- iCheck -->
-    <script src="../static/admin/js/plugins/iCheck/icheck.min.js"></script>
-
-    <!-- Peity d data  -->
-    <script src="../static/admin/js/demo/peity-demo.js"></script>
-
-    <script>
-        $(document).ready(function () {
-            WinMove();
-        });
-    </script>
-
+		function returnFormat(res) {
+			return {
+				"rows":res.data.records,
+				"total": res.data.total
+			};
+		}
+	}
+</script>
     
     
 
