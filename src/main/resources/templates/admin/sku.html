@@ -155,21 +155,21 @@
 	<script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
 
     <script type="application/javascript">
-		// $.ajaxSetup({
-		// 	headers: {
-		// 		'Authorization': $.cookie("token")
-		// 	},
-		// 	xhrFields: {
-		// 		withCredentials: false
-		// 	},
-		// 	crossDomain: true
-		// });
+		$.ajaxSetup({
+			headers: {
+				'Authorization': $.cookie("token")
+			},
+			xhrFields: {
+				withCredentials: false
+			},
+			crossDomain: true
+		});
 		
-		// $(function() {
-		// 	if ($.cookie("token") == null || $.cookie("token") == "") {
-		// 		window.location.href = "/admin/login.html"
-		// 	}
-		// });
+		$(function() {
+			if ($.cookie("token") == null || $.cookie("token") == "") {
+				window.location.href = "/admin/login.html"
+			}
+		});
 		
 		
 		$("#search").click(function(){
