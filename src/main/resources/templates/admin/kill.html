@@ -151,7 +151,21 @@
 	<script src="../static/admin/js/content.js?v=1.0.0"></script>
 	 <script src="../static/admin/js/all.js"></script>
 	<script>
-		
+		$.ajaxSetup({
+			headers: {
+				'Authorization': $.cookie("token")
+			},
+			xhrFields: {
+				withCredentials: false
+			},
+			crossDomain: true
+		});
+
+		$(function() {
+			if ($.cookie("token") == null || $.cookie("token") == "") {
+				window.location.href = "/admin/login.html"
+			}
+		});
 		$(".modal-backdrop").remove();
 		var arrTemp = new Array();
 		var flag = 2; //1-未开始 2-进行中 3-已结束
