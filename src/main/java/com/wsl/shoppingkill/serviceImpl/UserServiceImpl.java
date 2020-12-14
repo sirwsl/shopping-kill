@@ -59,13 +59,15 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @MyLog(detail = "删除会员",grade = LoggerEnum.SERIOUS,value = "#id")
     public boolean delUserInfo(Long id) {
         User user = userMapper.selectById(id);
-        if (StringUtils.isNotBlank(user.getPhone())){
-            rabbitTemplate.convertAndSend(RabbitMqEnum.Exchange.EXCHANGE_NOTICE,RabbitMqEnum.Key.KEY_NOTICE_SMS,
-                    getSmsObject(user,SmsEnum.REMOVE_AUTHORIZATION.getCode()));
-        }
-        if (StringUtils.isNotBlank(user.getEmail())){
-            rabbitTemplate.convertAndSend(RabbitMqEnum.Exchange.EXCHANGE_NOTICE,RabbitMqEnum.Key.KEY_NOTICE_MAIL,
-                    getMailObject(user,"DelUser.flt","删除账号通知"));
+        if(userMapper.deleteById(id)>0){
+            if (StringUtils.isNotBlank(user.getPhone())){
+                rabbitTemplate.convertAndSend(RabbitMqEnum.Exchange.EXCHANGE_NOTICE,RabbitMqEnum.Key.KEY_NOTICE_SMS,
+                        getSmsObject(user,SmsEnum.REMOVE_AUTHORIZATION.getCode()));
+            }
+            if (StringUtils.isNotBlank(user.getEmail())){
+                rabbitTemplate.convertAndSend(RabbitMqEnum.Exchange.EXCHANGE_NOTICE,RabbitMqEnum.Key.KEY_NOTICE_MAIL,
+                        getMailObject(user,"DelUser.flt","删除账号通知"));
+            }
         }
 
         return true;

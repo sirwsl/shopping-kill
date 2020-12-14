@@ -130,9 +130,10 @@ public class LimitListController {
         user = user.selectById(id);
         LimitListParam limitList = new LimitListParam();
         return Result.success(limitListService.addBlackList(limitList
-                .setId(Long.getLong(user.getPhone()))
+                .setNumber(user.getPhone())
                 .setStartTime(beginTime)
-                .setEndTime(endTime)));
+                .setEndTime(endTime)
+                .setType(BaseEnum.PHONE)));
     }
 
 
