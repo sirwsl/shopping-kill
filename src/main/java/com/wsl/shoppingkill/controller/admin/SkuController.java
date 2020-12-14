@@ -39,7 +39,7 @@ public class SkuController {
         return Result.success(skuService.getSkuAll(current, size, id, name));
     }
 
-    @PutMapping("/updateSkuInfo/v1")
+    @PostMapping("/updateSkuInfo/v1")
     public Result<Boolean> updateSkuInfo(@Valid SkuVO skuVO) {
         if (StringUtils.isBlank(skuVO.getImgUrl()) && skuVO.getImg().getName().isEmpty()) {
             return Result.error("error", "图片不能为空");

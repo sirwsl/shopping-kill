@@ -79,9 +79,9 @@
 
 
 #### 根据id更新指定SKU
-方式：
+方式:POST
 
-路径：
+路径：/updateSkuInfo/v1
 
 参数：
 

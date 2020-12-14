@@ -11,7 +11,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -34,14 +33,12 @@ public class SkuVO implements Serializable {
      * SKU_ID
      */
     @NotNull(message = "sku_id不能为空")
-    @NotEmpty(message = "sku_id不能为空")
     private Long id;
 
     /**
      * 商品id
      */
     @NotNull(message = "goodsId不能为空")
-    @NotEmpty(message = "goodsId不能为空")
     private Long goodsId;
 
     /**
@@ -72,7 +69,6 @@ public class SkuVO implements Serializable {
      * 进价
      */
     @NotNull(message = "进价不能为空")
-    @NotEmpty(message = "进价不能为空")
     @Min(value = 0,message = "进价不能为服输")
     private BigDecimal realPrice;
 
@@ -80,7 +76,6 @@ public class SkuVO implements Serializable {
      * 成本价
      */
     @NotNull(message = "成本价不能为空")
-    @NotEmpty(message = "成本价不能为空")
     @Min(value = 0,message = "成本价不能为服输")
     private BigDecimal costPrice;
 
@@ -88,7 +83,6 @@ public class SkuVO implements Serializable {
      * 售价
      */
     @NotNull(message = "售价不能为空")
-    @NotEmpty(message = "售价不能为空")
     @Min(value = 0,message = "售价不能为服输")
     private BigDecimal sellPrice;
 
@@ -96,7 +90,6 @@ public class SkuVO implements Serializable {
      * 数量
      */
     @NotNull(message = "数量不能为空")
-    @NotEmpty(message = "数量不能为空")
     @Min(value = 0,message = "数量不能小于0")
     private Integer num;
 
@@ -104,7 +97,6 @@ public class SkuVO implements Serializable {
      * 预警量（默认10）
      */
     @NotNull(message = "预警量不能为空")
-    @NotEmpty(message = "预警量不能为空")
     private Integer warnNum;
 
     /**

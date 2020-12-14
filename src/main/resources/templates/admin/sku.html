@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-    <title> - 基础表格</title>
+    <title>Sku属性</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
 
@@ -23,52 +23,32 @@
     <div class="wrapper wrapper-content animated fadeInRight">
 		<div class="row">
 		    <div class="col-sm-12">
+				<div>
+					<div class="ibox-content" style="padding-bottom:0px;">
+					    <div>
+							<label class="form-inline" />SkuId：
+					        <input type="text" class="form-control" id = "SId"/></label>
+							<label class="form-inline" />商品名称：
+							<input type="text" class="form-control" id = "GName"/></label>
+							<button type="button" class="btn btn-sm btn-primary" id = "search" > 搜索</button> </span>
+					    </div>
+					</div>
+				</div>
+				
 		        <div class="ibox float-e-margins">
 		            <div class="ibox-title">
 		                <h5>库存管理</h5>
-		                <div class="ibox-tools">
-		                    <a data-toggle="modal" class="btn btn-info" href="#modal-form" data-toggle="modal" data-target="#myModal">添加</a>
-		                </div>
 		            </div>
 		            <div class="ibox-content">
-		
-		                <table class="table table-bordered">
-		                    <thead>
-		                        <tr>
-		                            <th>id</th>
-		                            <th>名称</th>
-		                            <th>属性</th>
-									<th>进价</th>
-		                            <th>售价</th>
-									<th>图片</th>
-									<th>配置</th>
-									<th>数量</th>
-									<th>预警量</th>
-		                        </tr>
-		                    </thead>
-		                    <tbody>
-		                        <tr>
-		                            <td>12345</td>
-									<td>手机</td>
-									<td><input class="form-control" value="64G"/></td>
-									<td><input class="form-control" value="1280"/></td>
-									<td><input class="form-control" value="2560"/></td>
-									<td><input class="form-control" value="/img/003jpg"/></td>
-									<td><input class="form-control" value="256G 32G 白色"/></td>
-									<td><input class="form-control" value="100"/></td>
-									<td><input class="form-control" value="10"/></td>
-		                        </tr>
-		                        
-		                    </tbody>
+						<table id = "sku" class="table table-bordered">
 		                </table>
-		
 		            </div>
 		        </div>
 		    </div>
 	    </div>
     </div>
 
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -76,70 +56,282 @@
 						&times;
 					</button>
 					<h4 class="modal-title" id="myModalLabel">
-						用户编辑
+						Sku编辑
 					</h4>
 				</div>
 				<div class="modal-body">
-					<form class="form-horizontal">
-						添加库存内容
-					    <div class="form-group">
-					        <label class="col-sm-3 control-label">属性：</label>
-					
-					        <div class="col-sm-8">
-					            <input type="text" placeholder="属性" class="form-control"> 
-					            
-					        </div>
-					    </div>
-					    <div class="form-group">
-					        <label class="col-sm-3 control-label">数量：</label>
-					        <div class="col-sm-8">
-					            <input type="number" placeholder="数量" class="form-control">
-					        </div>
-					    </div>
-					   
+					<div class="form-group">
+					<form role="form" id = "addOrUpdateSku">
+						<div class="row">
+							<div class="col-sm-6">
+								<input id = "id" name = "id" style="display:none" readonly="true" value = "" />
+								<input id = "goodsId" name = "goodsId" style="display:none" readonly="true" value = "" />
+								<div class="form-group">
+									<div class="form-group">
+										<label class="col-xl-3 control-label">物品名称</label>
+										<div class="col-xl-9">
+											<input type="text" id = "goodsName" name = "goodsName" readonly="true" class="form-control layer-date" />
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-xl-3 control-label">属性</label>
+										<div class="col-xl-9">
+											<input type="text" id = "attribute" name = "attribute" class="form-control layer-date" />
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-xl-3 control-label">库存</label>
+										<div class="col-xl-9">
+											<input type="number" id = "num" name = "num" class="form-control layer-date" />
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-xl-3 control-label">预警量</label>
+										<div class="col-xl-9">
+											<input type="number" id = "warnNum" name = "warnNum" class="form-control layer-date" />
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-xl-3 control-label">图片</label>
+										<div class="col-xl-9">
+											<div class="file-container" style="display:inline-block;position:relative;overflow: hidden;vertical-align:middle">
+												<button class="btn btn-success fileinput-button" type="button">上传</button>
+												<input type="file" id="img" name = "img" multiple="multiple" onchange="loadFile(this.files[0])" style="position:absolute;top:0;left:0;font-size:34px; opacity:0">
+											</div>
+											<span id="imgUrl" name = "imgUrl" style="vertical-align: middle">未上传文件</span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<div class="form-group">
+									<label class="col-xl-3 control-label">进价</label>
+									<div class="col-xl-9 ">
+										<input type="text" id = "realPrice" name = "realPrice" class="form-control" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-xl-3 control-label">成本价</label>
+									<div class="col-xl-9 ">
+										<input type="text" id = "costPrice" name = "costPrice" class="form-control" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-xl-3 control-label">售价</label>
+									<div class="col-xl-9 ">
+										<input type="text" id = "sellPrice" name = "sellPrice" class="form-control" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-xl-3 control-label">邮费</label>
+									<div class="col-xl-9 ">
+										<input type="text" id = "expPrice" name = "expPrice" class="form-control" />
+									</div>
+								</div>
+								
+							</div>
+						</div>
 					</form>
+					</div>
 					
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">取消
-					</button>
-					<button type="button" class="btn btn-primary">
-						确定
-					</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-primary" id = "sub" data-dismiss="modal" >确定</button>
 				</div>
-			</div><!-- /.modal-content -->
-		</div><!-- /.modal -->
+			</div>
+		</div>
 	</div>
 
 
 
 <!-- 全局js -->
-<script src="../static/admin/js/jquery.min.js?v=2.1.4"></script>
-<script src="../static/admin/js/bootstrap.min.js?v=3.3.6"></script>
+	<script src="../static/admin/js/jquery.min.js?v=2.1.4"></script>
+	<script src="../static/admin/js/bootstrap.min.js?v=3.3.6"></script>
+	<script src="../static/admin/js/jquery.form.js"></script>
+	<script src="../static/admin/js/jquery.cookie.js"></script>
+	<script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+	<script src="../static/admin/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+	<script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
 
-
-
-<!-- Peity -->
-<script src="../static/admin/js/plugins/peity/jquery.peity.min.js"></script>
-
-<!-- 自定义js -->
-<script src="../static/admin/js/content.js?v=1.0.0"></script>
-
-
-<!-- iCheck -->
-<script src="../static/admin/js/plugins/iCheck/icheck.min.js"></script>
-
-<!-- Peity -->
-<script src="../static/admin/js/demo/peity-demo.js"></script>
-
-<script>
-    $(document).ready(function () {
-        $('.i-checks').iCheck({
-            checkboxClass: 'icheckbox_square-green',
-            radioClass: 'iradio_square-green',
-        });
-    });
-</script>
+    <script type="application/javascript">
+		// $.ajaxSetup({
+		// 	headers: {
+		// 		'Authorization': $.cookie("token")
+		// 	},
+		// 	xhrFields: {
+		// 		withCredentials: false
+		// 	},
+		// 	crossDomain: true
+		// });
+		
+		// $(function() {
+		// 	if ($.cookie("token") == null || $.cookie("token") == "") {
+		// 		window.location.href = "/admin/login.html"
+		// 	}
+		// });
+		
+		
+		$("#search").click(function(){
+			logger($("#SId").val(),$("#SName").val());
+		})
+		$(function(){logger()})
+		function logger(id,name) {
+			$('#sku').bootstrapTable('destroy'); 
+			$('#sku').bootstrapTable({
+				method: 'get',
+				url: "http://test.wslhome.top/admin/getSkuAll/v1",
+				dataType: "json",
+				headers: {
+					'Authorization': $.cookie("token")
+				},
+				ajaxOptions: {
+				    xhrFields: {
+				        withCredentials: false
+				    },
+				    crossDomain: true
+				},
+				striped: true,
+				pageNumber: 1,
+				pagination: true,
+				sidePagination: 'server',
+				pageSize: 10,
+				pageList: [5, 10, 20, 30,50],
+				showRefresh: false,
+				silent: true, 
+				cache: false,
+				queryParams: queryParams,
+				responseHandler: returnFormat,
+				columns: [{
+					title: 'Id',
+					field: 'id',
+					sortable: true
+				}, {
+					title: '物品id',
+					field: 'goodsId',
+					sortable: true
+				}, {
+					title: '物品名称',
+					field: 'goodsName',
+					sortable: true
+				}, {
+					title: '属性',
+					field: 'attribute',
+					sortable: true
+				}, {
+					title: '展示图',
+					field: 'imgUrl',
+					formatter: function(value, row, index) {
+						return '<img src= "'+row.imgUrl+'" ></img>';
+					}
+				} , {
+					title: '进价',
+					field: 'realPrice',
+					sortable: true
+				}, {
+					title: '成本价',
+					field: 'costPrice',
+					sortable: true
+				}, {
+					title: '售价',
+					field: 'sellPrice',
+					sortable: true
+				}, {
+					title: '剩余数量',
+					field: 'num',
+					sortable: true
+				}, {
+					title: '预警量',
+					field: 'warnNum',
+					sortable: true
+				}, {
+					title: '邮费',
+					field: 'expPrice',
+					sortable: true
+				}, {
+					title: '操作',
+					formatter: function(value, row, index) {
+						return '<a data-toggle="modal" class="btn btn-primary" href="#myModal" onclick="setValue('+JSON.stringify(row).replace(/"/g, '&quot;')+') ">编辑</a></br>' +
+							'<a data-toggle="modal" class="btn btn-danger" onclick = "delActivity(' + row.id + ')">删除</a>';
+						
+					}
+				}]
+			})
+			function queryParams(params) {
+				var temp = {
+					current : (params.offset / params.limit) + 1,
+					size: params.limit,
+					id : id,
+					name: name
+				};
+				return temp;
+			}
+		
+			function returnFormat(res) {
+				return {
+					"rows":res.data.records,
+					"total": res.data.total
+				};
+			}
+		}
+		
+		function delActivity(id) {
+			
+			var mymessage = confirm("确认删除嘛？");
+			if (mymessage == true) {
+				$.ajax({
+					url: "http://test.wslhome.top/admin/delSkuById/v1?id=1",
+					data: {
+						id: id
+					},
+					type: 'delete',
+					success: function(data) {
+						if (data.code == 0) {
+							alert("删除成功");
+							$('#sku').bootstrapTable('refresh');
+						} else {
+							alert(data.userMsg);
+						}
+					},
+					error: function(data) {
+						alert("服务器繁忙");
+					}
+				});
+			}
+		}
+		function setValue(vals){
+			
+			$("#id").val(vals.id);
+			$("#goodsId").val(vals.goodsId);
+			$("#goodsName").val(vals.goodsName);
+			$("#attribute").val(vals.attribute);
+			$("#imgUrl").html(vals.imgUrl.slice(0,-44));
+			$("#realPrice").val(vals.realPrice);
+			$("#costPrice").val(vals.costPrice);
+			$("#sellPrice").val(vals.sellPrice);
+			$("#num").val(vals.num);
+			$("#warnNum").val(vals.warnNum);
+			$("#expPrice").val(vals.expPrice);	
+		}
+		
+		$("#sub").click(function() {
+			
+			var data = new FormData(document.getElementById("addOrUpdateSku"));
+			$.ajax({
+				type: "post",
+				url: "http://test.wslhome.top/admin/updateSkuInfo/v1",
+				data: data,
+				contentType:false,
+				processData:false,
+			    dataType: "json",
+			    success: function (msg) {
+					alert(msg.userMsg);
+					$('#sku').bootstrapTable("refresh");
+				}
+			})
+			
+		});
+	</script>
 
 
 

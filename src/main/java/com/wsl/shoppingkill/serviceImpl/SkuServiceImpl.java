@@ -4,10 +4,10 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wsl.shoppingkill.component.oss.OssComponent;
-import com.wsl.shoppingkill.obj.constant.BaseEnum;
 import com.wsl.shoppingkill.domain.Goods;
 import com.wsl.shoppingkill.domain.Sku;
 import com.wsl.shoppingkill.mapper.SkuMapper;
+import com.wsl.shoppingkill.obj.constant.BaseEnum;
 import com.wsl.shoppingkill.obj.vo.SkuVO;
 import com.wsl.shoppingkill.service.SkuService;
 import org.springframework.stereotype.Service;
@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * @author WangShilei
@@ -35,7 +36,9 @@ public class SkuServiceImpl extends ServiceImpl<SkuMapper, Sku> implements SkuSe
 
     @Override
     public IPage<SkuVO> getSkuAll(Long current, Long size, Long id, String name) {
-        return skuMapper.getSkuAll(new Page<>(current,size),id,name);
+        IPage<SkuVO> skuAll = skuMapper.getSkuAll(new Page<>(current, size), id, name);
+            skuAll.setRecords(changeUrl(skuAll.getRecords()));
+        return skuAll;
     }
 
 
@@ -58,7 +61,7 @@ public class SkuServiceImpl extends ServiceImpl<SkuMapper, Sku> implements SkuSe
                 .setId(skuVO.getId())
                 .setNum(skuVO.getNum())
                 .setUpdateTime(LocalDateTime.now())
-                .updateById();
+                .insertOrUpdate();
         return true;
     }
 
@@ -70,5 +73,19 @@ public class SkuServiceImpl extends ServiceImpl<SkuMapper, Sku> implements SkuSe
     @Override
     public Integer getMaxNumByActivity(Long id) {
         return skuMapper.getMaxNumByActivity(id);
+    }
+
+
+    /**
+     * 获取路径拼接
+     * @author wangShilei
+     * @date 2020/12/10 17:43
+     * @param skuVO :
+     * @return java.util.List<Advertise>
+     */
+    private List<SkuVO> changeUrl(List<SkuVO> skuVO){
+        String min = "?x-oss-process=image/resize,m_fill,h_50,w_50";
+        skuVO.forEach(li->li.setImgUrl(li.getImgUrl()+min));
+        return skuVO;
     }
 }

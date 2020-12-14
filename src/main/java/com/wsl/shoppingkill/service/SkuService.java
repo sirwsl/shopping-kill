@@ -34,7 +34,7 @@ public interface SkuService extends IService<Sku> {
 
 
     /**
-     * 更新sku属性
+     * 更新sku属性或添加
      * @param sku :
      * @return boolean
      * @author wangshilei
