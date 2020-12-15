@@ -38,7 +38,6 @@ public class Goods extends Model<Goods> implements Serializable {
     */
     @Id
     @TableId(type = IdType.AUTO)
-
     private Long id;
 
     /**
@@ -68,7 +67,6 @@ public class Goods extends Model<Goods> implements Serializable {
     * 是否上架
     */
     @NotNull(message = "请选择是否上架")
-    @NotBlank(message = "请选择是否上架")
     private Boolean shelf;
 
     /**

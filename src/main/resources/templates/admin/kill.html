@@ -233,11 +233,13 @@
 					field: 'skuList',
 					formatter: function(value, row, index) {
 						var html = "<table class='table'>";
-						$.each(row.skuList, function(i, sku) {
-							html += "<tr><td style='width:100px'>" + sku.id + "</td><td style='width:450px'>" + sku.name +
-								"</td><td style='width:130px'>" + sku.price + "</td><td style='width:130px'>" + sku.sellNum +
-								"</td><td >" + sku.totalNum + "</td></tr>";
-						})
+						if (row.skuList !=null){
+							$.each(row.skuList, function(i, sku) {
+								html += "<tr><td style='width:100px'>" + sku.id + "</td><td style='width:450px'>" + sku.name +
+									"</td><td style='width:130px'>" + sku.price + "</td><td style='width:130px'>" + sku.sellNum +
+									"</td><td >" + sku.totalNum + "</td></tr>";
+							})
+						}
 						html += "</table>"
 						return html;
 					}

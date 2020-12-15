@@ -6,11 +6,12 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wsl.shoppingkill.common.log.MyLog;
 import com.wsl.shoppingkill.component.oss.OssComponent;
-import com.wsl.shoppingkill.obj.constant.BaseEnum;
-import com.wsl.shoppingkill.obj.constant.LoggerEnum;
 import com.wsl.shoppingkill.domain.Goods;
 import com.wsl.shoppingkill.domain.Sku;
 import com.wsl.shoppingkill.mapper.GoodsMapper;
+import com.wsl.shoppingkill.mapper.SkuMapper;
+import com.wsl.shoppingkill.obj.constant.BaseEnum;
+import com.wsl.shoppingkill.obj.constant.LoggerEnum;
 import com.wsl.shoppingkill.obj.convert.SkuConverter;
 import com.wsl.shoppingkill.obj.vo.GoodsVO;
 import com.wsl.shoppingkill.service.GoodsService;
@@ -35,6 +36,11 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
     @Resource
     private OssComponent ossComponent;
 
+    @Resource
+    private SkuMapper skuMapper;
+
+    String min = "?x-oss-process=image/resize,m_fill,h_50,w_50";
+
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean addGoods(Goods goods) throws Exception {
@@ -45,6 +51,7 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
     @Override
     public IPage<GoodsVO> getGoodsAll(Long current, Long size, Goods goods) {
         IPage<GoodsVO> allGoods = goodsMapper.getAllGoods(new Page<>(current, size), goods);
+        allGoods.getRecords().forEach(li->li.setImgUrl(li.getImgUrl()+min));
         Sku sku = new Sku();
         Map<Long, List<Sku>> collect = sku.selectList(new QueryWrapper<Sku>().in(Sku.GOODS_ID,
                 allGoods.getRecords()
@@ -81,6 +88,10 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
     @Override
     @MyLog(value = "#id", detail = "商品删除", grade = LoggerEnum.WORN)
     public boolean delGoods(Long id) {
+        long count = skuMapper.selectList(new QueryWrapper<Sku>().eq(Sku.GOODS_ID, id)).stream().filter(li -> li.getNum() > 0).count();
+        if (count > 0) {
+            return false;
+        }
         return goodsMapper.deleteById(id)>0;
     }
 }

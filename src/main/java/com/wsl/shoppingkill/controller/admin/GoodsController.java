@@ -65,11 +65,15 @@ public class GoodsController {
      */
     @PutMapping("/updateGoods/v1")
     public Result<Boolean> updateGoods(@Valid Goods goods){
+        System.err.println(goods);
         if (goods.getId()==null||goods.getId()==0){
             return Result.error("error","更新id不能为空");
         }
-        if (StringUtils.isBlank(goods.getImgUrl())&&goods.getFile().isEmpty()){
-            return Result.error("error","图片不能为空");
+        if (StringUtils.isBlank(goods.getImgUrl())){
+            if (goods.getFile()== null || goods.getFile().isEmpty()){
+                return Result.error("error","图片不能为空");
+            }
+
         }
         try{
             return Result.success(goodsService.updateGoods(goods));
@@ -86,11 +90,14 @@ public class GoodsController {
      * @return com.wsl.shoppingkill.common.Result<java.lang.Boolean>
      */
     @DeleteMapping("/delGoodsById/v1")
-    public Result<Boolean> delGoods(Long id){
+    public Result<String> delGoods(Long id){
         if (id == null || id <= 0){
             return Result.error("error","删除ID不合法");
         }
-        return Result.success(goodsService.delGoods(id));
+        if (!goodsService.delGoods(id)){
+            return Result.error("error","Sku数量大于0，不能被删除");
+        }
+        return Result.success("删除成功");
     }
 
     /**

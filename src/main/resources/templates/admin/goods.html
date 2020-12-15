@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-    <title>商品管理</title>
+    <title>上架管理</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
 
@@ -23,53 +23,32 @@
     <div class="wrapper wrapper-content animated fadeInRight">
 		<div class="row">
 		    <div class="col-sm-12">
+				<div>
+					<div class="ibox-content" style="padding-bottom:0px;">
+					    <div>
+							
+							<label class="form-inline" />是否上架：
+								<select name="shelf"  class="form-control" id="shelf" >
+									<option value="">全部</option>
+									<option value="true">已上架</option>
+									<option value="false">未上架</option>
+								</select>
+							</label>
+					        <label class="form-inline" />商品id：
+					        <input type="text" class="form-control" id = "searchId"/></label>
+							<label class="form-inline" />商品名称：
+							<input type="text" class="form-control" id = "searchName"/></label>
+							<button type="button" class="btn btn-sm btn-primary" id = "search" > 搜索</button> </span>
+							<a data-toggle="modal" class="btn btn-info" style="float: right;" href="#EditModal">添加</a>
+					    </div>
+					</div>
+				</div>
 		        <div class="ibox float-e-margins">
 		            <div class="ibox-title">
 		                <h5>商品管理</h5>
-		                <div class="ibox-tools">
-		                    <a data-toggle="modal" class="btn btn-info" href="#modal-form" data-toggle="modal" data-target="#myModal">添加</a>
-		                </div>
 		            </div>
 		            <div class="ibox-content">
-		
-		                <table class="table table-bordered">
-		                    <thead>
-		                        <tr>
-		                            <th>id</th>
-		                            <th>名称</th>
-		                            <th>参考图</th>
-									<th>描述</th>
-									<th>是否上架</th>
-									<th>操作</th>
-		                        </tr>
-		                    </thead>
-		                    <tbody>
-		                        <tr>
-		                            <td>12345</td>
-									<td>手机</td>
-									<td>
-										<img src="../static/admin/css/patterns/header-profile-skin-1.png" style="width: 38px;height: 38px;" />
-										<img src="../static/admin/css/patterns/header-profile-skin-1.png" style="width: 38px;height: 38px;" />
-										<img src="../static/admin/css/patterns/header-profile-skin-1.png" style="width: 38px;height: 38px;" />
-										<img src="../static/admin/css/patterns/header-profile-skin-1.png" style="width: 38px;height: 38px;" />
-										<img src="../static/admin/css/patterns/header-profile-skin-1.png" style="width: 38px;height: 38px;" />
-									</td>
-									<td>这是商品描述</td>
-									<td>
-										<label class="toggle toggle-positive">
-										  <input type="checkbox" checked="">
-										  <div class="track">
-										    <div class="handle"></div>
-										  </div>
-										</label>
-									</td>
-									<td>
-										<a data-toggle="modal" class="btn btn-info" href="#modal-form" data-toggle="modal" data-target="#EditModal">编辑</a>
-										<a data-toggle="modal" class="btn btn-danger" href="#" >删除</a>
-									</td>
-		                        </tr>
-		                        
-		                    </tbody>
+		                <table class="table table-stripped toggle-arrow-tiny" id = "goods" name = "goods">
 		                </table>
 		            </div>
 		        </div>
@@ -77,50 +56,8 @@
 	    </div>
     </div>
 
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModal" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-						&times;
-					</button>
-					<h4 class="modal-title" id="myModalLabel">
-						添加商品
-					</h4>
-				</div>
-				<div class="modal-body">
-					<form class="form-horizontal">
-						添加商品内容
-					    <div class="form-group">
-					        <label class="col-sm-3 control-label">属性：</label>
-					
-					        <div class="col-sm-8">
-					            <input type="text" placeholder="属性" class="form-control"> 
-					            
-					        </div>
-					    </div>
-					    <div class="form-group">
-					        <label class="col-sm-3 control-label">数量：</label>
-					        <div class="col-sm-8">
-					            <input type="number" placeholder="数量" class="form-control">
-					        </div>
-					    </div>
-					   
-					</form>
-					
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">取消
-					</button>
-					<button type="button" class="btn btn-primary">
-						确定
-					</button>
-				</div>
-			</div><!-- /.modal-content -->
-		</div><!-- /.modal -->
-	</div>
 
-<div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="myModal" aria-hidden="true">
+	<div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="myModal" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -132,72 +69,310 @@
 					</h4>
 				</div>
 				<div class="modal-body">
-					<form class="form-horizontal">
-						编辑商品内容
-					    <div class="form-group">
-					        <label class="col-sm-3 control-label">属性：</label>
-					
-					        <div class="col-sm-8">
-					            <input type="text" placeholder="属性" class="form-control"> 
-					            
-					        </div>
-					    </div>
-					    <div class="form-group">
-					        <label class="col-sm-3 control-label">数量：</label>
-					        <div class="col-sm-8">
-					            <input type="number" placeholder="数量" class="form-control">
-					        </div>
-					    </div>
-					   
-					</form>
-					
+					<div class="form-group">
+						<form role="form" id = "addOrUpdateGoods" enctype="multipart/form-data">
+							<div class="row">
+								<div class="col-sm-6">
+									<input id = "id" name = "id" style="display:none" readonly="true" value = "" />
+									
+									<div class="form-group">
+										<div class="form-group">
+											<label class="col-xl-3 control-label">物品名称</label>
+											<div class="col-xl-9">
+												<input type="text" id = "name" name = "name" class="form-control layer-date" />
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-xl-3 control-label">物品描述</label>
+											<div class="col-xl-9">
+												<textarea type="text" id = "detail" name = "detail" class="form-control layer-date" ></textarea>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label class="form-inline" />是否上架：
+											<select name="shelf"  class="form-control" id="shelf" >
+												<option value="true">上架</option>
+												<option value="false">下架</option>
+											</select>
+										</label>
+									</div>
+									<div class="form-group">
+										<label class="form-inline" />商品类别：
+											<select name="typeId"  class="form-control" id="typeId" ></select>
+											<!-- <button class="btn btn-info" style="width: 30px; font-size: 5px;">下</button> -->
+										</label>
+									</div>
+									<div class="form-group">
+										<label class="col-xl-3 control-label">图片</label>
+										<div class="col-xl-9">
+											<div class="file-container" style="display:inline-block;position:relative;overflow: hidden;vertical-align:middle">
+												<button class="btn btn-success fileinput-button" type="button">上传</button>
+												<input type="file" id="img" name = "img" multiple="multiple" onchange="loadFile(this.files[0])" style="position:absolute;top:0;left:0;font-size:34px; opacity:0">
+											</div>
+											<label id="imgUrl" name = "imgUrl" style="vertical-align: middle">未上传文件</span>
+										</div>
+									</div>
+									
+								</div>
+							</div>
+						</form>
+					</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">取消
 					</button>
-					<button type="button" class="btn btn-primary">
+					<button type="button" class="btn btn-primary" data-dismiss="modal" id = "sub">
 						确定
 					</button>
 				</div>
-			</div><!-- /.modal-content -->
-		</div><!-- /.modal -->
+			</div>
+		</div>
 	</div>
-
-
-<!-- 全局js -->
-<script src="../static/admin/js/jquery.min.js?v=2.1.4"></script>
-<script src="../static/admin/js/bootstrap.min.js?v=3.3.6"></script>
-
-
-<!--开关JS-->
-<script src="../static/admin/js/ionic.bundle.min.js"></script>
-<!-- Peity -->
-<script src="../static/admin/js/plugins/peity/jquery.peity.min.js"></script>
-
-<!-- 自定义js -->
-<script src="../static/admin/js/content.js?v=1.0.0"></script>
-
-
-<!-- iCheck -->
-<script src="../static/admin/js/plugins/iCheck/icheck.min.js"></script>
-
-<!-- Peity -->
-<script src="../static/admin/js/demo/peity-demo.js"></script>
-
-<script>
-    $(document).ready(function () {
-        $('.i-checks').iCheck({
-            checkboxClass: 'icheckbox_square-green',
-            radioClass: 'iradio_square-green',
-        });
-    });
-</script>
-
-
-
-
 </body>
 
+	<!-- 全局js -->
+	<script src="../static/admin/js/jquery.min.js?v=2.1.4"></script>
+		<script src="../static/admin/js/jquery-ui-1.10.4.min.js"></script>
+	<script src="../static/admin/js/bootstrap.min.js?v=3.3.6"></script>
+	<script src="../static/admin/js/jquery.form.js"></script>
+	<script src="../static/admin/js/jquery.cookie.js"></script>
+
+
+	
+	
+	<!-- 自定义js -->
+	<script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+	<script src="../static/admin/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+	<script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+	
+	
+
+
+<script>
+	function loadFile(file){
+		 $("#imgUrl").html(file.name);
+	}
+	
+	$(function() {
+	    var cusname = $('#typeName').val();
+	        $.ajax({
+	            url: "http://test.wslhome.top/admin/getTypesAll/v1",
+	            dataType: "json",
+	            type: "GET",
+	            data: {
+					size:100
+	            },
+	            success: function (res) {
+	                var data = res.data.records;
+				    var html;
+				   	$("#typeId").empty();
+				   	for(var i=0;i<data.length;i++){
+				   		html +=	'<option value="'+data[i].id+'">'+data[i].name+'</option>';
+					}
+					$("#typeId").append(html);
+	            },
+	            error: function () {
+	                alert('查询失败！请检查你的网络或稍后重试');
+	            },
+	        });
+	    
+	  });
+
+	
+	$("#search").click(function(){
+		goods($("#searchId").val(),$("#searchName").val(),$("#shelf").val());
+		
+	})
+	$(function(){
+		goods(null,null,null);
+	})
+		function goods(goodId,goodName,shelf) {
+			$('#goods').bootstrapTable('destroy'); 
+			$('#goods').bootstrapTable({
+				method: 'get',
+				url: "http://test.wslhome.top/admin/getGoods/v1",
+				dataType: "json",
+				headers: {
+					'Authorization': $.cookie("token")
+				},
+				ajaxOptions: {
+				        xhrFields: {        //跨域
+				            withCredentials: false
+				        },
+				        crossDomain: true
+				},
+				striped: true,
+				pageNumber: 1,
+				pagination: true,
+				sidePagination: 'server',
+				pageSize: 5,
+				pageList: [5, 10, 20, 30],
+				showRefresh: true,
+				silent: true, 
+				cache: false,
+				queryParams: queryParams,
+				responseHandler: returnFormat,
+				columns: [{
+					title: 'Id',
+					field: 'id',
+					sortable: true
+				}, {
+					title: '商品名',
+					field: 'name',
+					sortable: true
+				}, {
+					title: '展示图',
+					field: 'imgUrl',
+					formatter: function(value, row, index) {
+						return '<img src = "'+row.imgUrl+'"></img>';
+					}
+				}, {
+					title: '类别',
+					field: 'typeName',
+					sortable: true
+				}, {
+					title: '上架',
+					field: 'shelf',
+					formatter: function(value, row, index) {
+						if(row.shelf==true){
+							return "是";
+						}else{
+							return "否";
+						}
+					}
+				},{
+					title: '商品描述',
+					field: 'detail',
+					sortable: true
+				}, {
+					title: '<table><thead><tr><th style="width:110px">skuId</th><th style="width:400px">商品属性</th><th>总数</th></tr></thead></table>',
+					field: 'skuList',
+					formatter: function(value, row, index) {
+						
+						var html = "<table class='table'>";
+						if (row.skuList !=null){
+							$.each(row.skuList, function(i, sku) {
+								html += "<tr><td style='width:100px'>" + sku.id + "</td><td style='width:400px'>" + sku.attribute +
+									"</td><td >" + sku.num + "</td></tr>";
+							})	
+						}
+							
+						html += "</table>"
+						return html;
+					}
+				}, {
+					title: '操作',
+					field: 'Button',
+					align: 'center',
+					formatter: option
+
+				}]
+			})
+			function queryParams(params) {
+				var temp = {
+					current : (params.offset / params.limit) + 1,
+					size: params.limit,
+					id: goodId,
+					name: goodName,
+					shelf:shelf
+				};
+				return temp;
+			}
+
+			function returnFormat(res) {
+				if (res.code != 0){
+					alert('商品列表获取异常，请稍后再试');
+					return null;
+				}
+				
+				return {
+					"rows": res.data.records,
+					"total": res.data.total
+				}
+			}
+
+			function option(value, row, index) {
+				return '<a data-toggle="modal" class="btn btn-primary" href="#EditModal" onclick="setValue('+JSON.stringify(row).replace(/"/g, '&quot;')+') ">编辑</a></br>' +
+						'<a data-toggle="modal" class="btn btn-danger" onclick = "delGoods(' + row.id + ')">删除</a>';	
+			}
+			goodId = null;
+			goodName = null;
+			shelf = null;
+		}
+		
+		function delGoods(index) {
+			var mymessage = confirm("确认删除嘛？");
+			if (mymessage == true) {
+				$.ajax({
+					url: "http://test.wslhome.top/admin/delGoodsById/v1",
+					data: {
+						id: index
+					},
+					type: 'delete',
+					success: function(data) {
+						if (data.code == 0) {
+							alert(data.userMsg);
+							$('#goods').bootstrapTable('refresh');
+						} else {
+							alert(data.userMsg);
+						}
+					},
+					error: function(data) {
+						alert("服务器繁忙");
+					}
+				});
+		
+			}
+		
+		}
+		
+		
+		var url;
+		var method;
+		
+		$("#addGoods").click(function(){
+			url = "http://test.wslhome.top/admin/addGoods/v1";
+			method = "POST";
+		})
+		
+		
+		//更新
+		function setValue(vals,index){
+			$("#id").val(vals.id);
+			$("#name").val(vals.name);
+			$("#shelf").val(vals.shelf);
+			$("#detail").val(vals.detail);
+			$("#imgUrl").html(vals.imgUrl.slice(0,-44));
+			var temp = $("#typeId  option");
+			for (var i = 0;i < temp.length;i++){
+				if (temp[i].value==vals.typeId){
+					temp[i].selected = true;
+				}
+			}
+			url = "http://test.wslhome.top/admin/updateGoods/v1";
+			method = "PUT";
+		}
+		
+		$("#sub").click(function() {
+			var data = new FormData(document.getElementById("addOrUpdateGoods"));
+			$.ajax({
+				type: method,
+				url: url,
+				data: data,
+				contentType:false,
+				processData:false,
+			    dataType: "json",
+			    success: function (msg) {
+					alert(msg.userMsg);
+					$('#goods').bootstrapTable("refresh");
+				}
+			})
+			
+		});
+	</script>
 </html>
 
 		

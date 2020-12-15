@@ -33,12 +33,15 @@
         from t_goods as tg
         left join t_types tt on tg.type_id = tt.id
         <where>
-            <if test="goods.typeId != null">
+            <if test="goods.typeId != null and goods.typeId != ''">
                 tg.type_id = #{goods.typeId}
             </if>
+            <if test="goods.id != null and goods.id != ''">
+                and tg.id = #{goods.id}
+            </if>
             <if test="goods.name != null and goods.name != ''">
-                <bind name="names" value="'%' + goods.name + '%'"/>
-                and tg.name = #{names}
+                <bind name="names" value="'%' + goods.name + '%'" />
+                and tg.name like #{names}
             </if>
             <if test="goods.shelf != null">
                 and tg.shelf = #{goods.shelf}
