@@ -27,12 +27,12 @@ public class GoodsController {
      * @author wangShilei
      * @date 2020/11/19 10:21 下午
      * @param goods :
-     * @return com.wsl.shoppingkill.common.Result<java.lang.Boolean>
+     * @return Result<java.lang.Boolean>
      */
     @PostMapping("/addGoods/v1")
     public Result<Boolean> addGoods(@Valid Goods goods){
 //        StringUtils.isBlank(advertise.getFile().getOriginalFilename())){
-        if (goods.getFile().isEmpty()){
+        if (goods.getFile() == null || StringUtils.isBlank(goods.getFile().getName())){
             return Result.error("error","上传图片不能为空");
         }
         try {

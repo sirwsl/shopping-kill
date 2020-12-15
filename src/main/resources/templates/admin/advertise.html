@@ -68,13 +68,14 @@
 								<div class="col-sm-6">
 									<div class="form-group">
 										<input id = "id" name = "id" style="display:none" value = "" />
+										<input id = "imgUrl" name = "imgUrl" style="display:none" readonly="true" value = "" />
 										<label class="col-xl-3 control-label">广告图片</label>
 										<div class="col-xl-9">
 										<div class="file-container" style="display:inline-block;position:relative;overflow: hidden;vertical-align:middle">
 										        <button class="btn btn-success fileinput-button" type="button">上传</button>
 										        <input type="file" id="file" name = "file" multiple="multiple" onchange="loadFile(this.files[0])" style="position:absolute;top:0;left:0;font-size:34px; opacity:0">
 										    </div>
-										    <span id="imgUrl" name = "imgUrl" style="vertical-align: middle">未上传文件</span>
+										    <span id="imgUrls" name = "imgUrls" style="vertical-align: middle">未上传文件</span>
 										</div>
 									</div>
 									<div class="form-group">
@@ -147,7 +148,7 @@
 		var flag = false;
 		
 		function loadFile(file){
-		    $("#imgUrl").html(file.name);
+		    $("#imgUrls").html(file.name);
 		}
 		
 		$("#sub").click(function() {
@@ -161,6 +162,8 @@
 				alert("目标地址不能为空");
 				return;
 			}
+			
+			$("#imgUrl").val($("#imgUrls").text());
 			var data = new FormData(document.getElementById("advertise"));
 			$.ajax({
 			        type: "post",
@@ -283,7 +286,7 @@
 		function setValue(vals,index){
 			$("#myLabel").html("广告id: "+vals.id);
 			$("#id").val(vals.id);
-			$("#imgUrl").html(vals.imgUrl.slice(0,-44));
+			$("#imgUrls").html(vals.imgUrl.slice(0,-44));
 			$("#targetUrl").val(vals.targetUrl);
 			$("#startTime").val(vals.startTime);
 			$("#endTime").val(vals.endTime);

@@ -79,7 +79,7 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
     @MyLog(value = "#goods.id", detail = "商品更新" ,grade = LoggerEnum.INFO)
     @Transactional(rollbackFor = Exception.class)
     public boolean updateGoods(Goods goods) throws Exception {
-        if (StringUtils.isNotBlank(goods.getFile().getOriginalFilename())){
+        if (goods.getFile()!=null && StringUtils.isNotBlank(goods.getFile().getOriginalFilename())){
             goods.setImgUrl(ossComponent.uploadFile(BaseEnum.OSS_GOODS,goods.getFile()));
         }
         return goodsMapper.updateById(goods)>0;

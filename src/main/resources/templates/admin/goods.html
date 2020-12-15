@@ -39,7 +39,7 @@
 							<label class="form-inline" />商品名称：
 							<input type="text" class="form-control" id = "searchName"/></label>
 							<button type="button" class="btn btn-sm btn-primary" id = "search" > 搜索</button> </span>
-							<a data-toggle="modal" class="btn btn-info" style="float: right;" href="#EditModal">添加</a>
+							<a data-toggle="modal" class="btn btn-info" id = "addGoods" style="float: right;" href="#EditModal">添加</a>
 					    </div>
 					</div>
 				</div>
@@ -74,7 +74,7 @@
 							<div class="row">
 								<div class="col-sm-6">
 									<input id = "id" name = "id" style="display:none" readonly="true" value = "" />
-									
+									<input id = "imgUrl" name = "imgUrl" style="display:none" readonly="true" value = "" />
 									<div class="form-group">
 										<div class="form-group">
 											<label class="col-xl-3 control-label">物品名称</label>
@@ -110,9 +110,10 @@
 										<div class="col-xl-9">
 											<div class="file-container" style="display:inline-block;position:relative;overflow: hidden;vertical-align:middle">
 												<button class="btn btn-success fileinput-button" type="button">上传</button>
-												<input type="file" id="img" name = "img" multiple="multiple" onchange="loadFile(this.files[0])" style="position:absolute;top:0;left:0;font-size:34px; opacity:0">
+												<input type="file" id="file" name = "file" multiple="multiple" onchange="loadFile(this.files[0])" style="position:absolute;top:0;left:0;font-size:34px; opacity:0">
 											</div>
-											<label id="imgUrl" name = "imgUrl" style="vertical-align: middle">未上传文件</span>
+											<label id="imgUrls" name = "imgUrls" style="vertical-align: middle">未上传文件</span>
+											
 										</div>
 									</div>
 									
@@ -152,8 +153,26 @@
 
 
 <script>
+	
+	$.ajaxSetup({
+		headers: {
+			'Authorization': $.cookie("token")
+		},
+		xhrFields: {
+			withCredentials: false
+		},
+		crossDomain: true
+	});
+	
+	$(function() {
+		if ($.cookie("token") == null || $.cookie("token") == "") {
+			window.location.href = "/admin/login.html"
+		}
+	});
+	
+	
 	function loadFile(file){
-		 $("#imgUrl").html(file.name);
+		 $("#imgUrls").html(file.name);
 	}
 	
 	$(function() {
@@ -334,6 +353,7 @@
 		var method;
 		
 		$("#addGoods").click(function(){
+			console.log("进入");
 			url = "http://test.wslhome.top/admin/addGoods/v1";
 			method = "POST";
 		})
@@ -345,7 +365,7 @@
 			$("#name").val(vals.name);
 			$("#shelf").val(vals.shelf);
 			$("#detail").val(vals.detail);
-			$("#imgUrl").html(vals.imgUrl.slice(0,-44));
+			$("#imgUrls").html(vals.imgUrl.slice(0,-44));
 			var temp = $("#typeId  option");
 			for (var i = 0;i < temp.length;i++){
 				if (temp[i].value==vals.typeId){
@@ -357,6 +377,7 @@
 		}
 		
 		$("#sub").click(function() {
+			$("#imgUrl").val($("#imgUrls").text());
 			var data = new FormData(document.getElementById("addOrUpdateGoods"));
 			$.ajax({
 				type: method,

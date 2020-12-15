@@ -66,6 +66,7 @@
 							<div class="col-sm-6">
 								<input id = "id" name = "id" style="display:none" readonly="true" value = "" />
 								<input id = "goodsId" name = "goodsId" style="display:none" readonly="true" value = "" />
+								<input id = "imgUrl" name = "imgUrl" style="display:none" readonly="true" value = "" />
 								<div class="form-group">
 									<div class="form-group">
 										<label class="col-xl-3 control-label">物品名称</label>
@@ -98,7 +99,8 @@
 												<button class="btn btn-success fileinput-button" type="button">上传</button>
 												<input type="file" id="img" name = "img" multiple="multiple" onchange="loadFile(this.files[0])" style="position:absolute;top:0;left:0;font-size:34px; opacity:0">
 											</div>
-											<span id="imgUrl" name = "imgUrl" style="vertical-align: middle">未上传文件</span>
+											<span id="imgUrls" name = "imgUrls" style="vertical-align: middle">未上传文件</span>
+											
 										</div>
 									</div>
 								</div>
@@ -172,7 +174,7 @@
 		});
 		
 		function loadFile(file){
-		    $("#imgUrl").html(file.name);
+		    $("#imgUrls").html(file.name);
 		}
 		
 		$("#search").click(function(){
@@ -308,7 +310,7 @@
 			$("#goodsId").val(vals.goodsId);
 			$("#goodsName").val(vals.goodsName);
 			$("#attribute").val(vals.attribute);
-			$("#imgUrl").html(vals.imgUrl.slice(0,-44));
+			$("#imgUrls").html(vals.imgUrl.slice(0,-44));
 			$("#realPrice").val(vals.realPrice);
 			$("#costPrice").val(vals.costPrice);
 			$("#sellPrice").val(vals.sellPrice);
@@ -318,7 +320,7 @@
 		}
 		
 		$("#sub").click(function() {
-			
+			$("#imgUrl").val($("#imgUrls").text());
 			var data = new FormData(document.getElementById("addOrUpdateSku"));
 			$.ajax({
 				type: "post",
