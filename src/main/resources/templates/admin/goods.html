@@ -17,6 +17,7 @@
     <link href="../static/admin/css/animate.css" rel="stylesheet">
     <link href="../static/admin/css/style.css?v=4.1.0" rel="stylesheet">
 	<link href="../static/admin/css/ionic.css" rel="stylesheet">
+	
 </head>
 
 <body class="gray-bg">
@@ -94,8 +95,8 @@
 									<div class="form-group">
 										<label class="form-inline" />是否上架：
 											<select name="shelf"  class="form-control" id="shelf" >
-												<option value="true">上架</option>
-												<option value="false">下架</option>
+												<option value="true">下架</option>
+												<option value="false">上架</option>
 											</select>
 										</label>
 									</div>
@@ -149,7 +150,8 @@
 	<script src="../static/admin/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
 	<script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
 	
-	
+	<!--开关JS-->
+	<script src="../static/admin/js/ionic.bundle.min.js"></script>
 
 
 <script>
@@ -164,11 +166,11 @@
 		crossDomain: true
 	});
 	
-	$(function() {
-		if ($.cookie("token") == null || $.cookie("token") == "") {
-			window.location.href = "/admin/login.html"
-		}
-	});
+	// $(function() {
+	// 	if ($.cookie("token") == null || $.cookie("token") == "") {
+	// 		window.location.href = "/admin/login.html"
+	// 	}
+	// });
 	
 	$("#EditModal").on("hidden.bs.modal", function () {
 			$("#id").val("");
@@ -260,19 +262,20 @@
 					field: 'typeName',
 					sortable: true
 				}, {
-					title: '上架',
-					field: 'shelf',
-					formatter: function(value, row, index) {
-						if(row.shelf==true){
-							return "是";
-						}else{
-							return "否";
-						}
-					}
-				},{
 					title: '商品描述',
 					field: 'detail',
 					sortable: true
+				},{
+					title: '上架',
+					formatter: function(value, row, index) {
+						var html  = '<label class="toggle toggle-positive">';
+						if(row.shelf==true){
+							html = html+' <input type="checkbox" checked onclick="shelf('+row.id+')" />';
+						}else{
+							html = html+' <input type="checkbox" onclick="shelf('+row.id+')" />';
+						}
+						return html+'<div class="track"><div class="handle"></div></div></label>';
+					}
 				}, {
 					title: '<table><thead><tr><th style="width:110px">skuId</th><th style="width:400px">商品属性</th><th>总数</th></tr></thead></table>',
 					field: 'skuList',
@@ -400,7 +403,10 @@
 			
 		});
 		
-		
+	function shelf(obj){
+		console.log(obj);
+	}
+			
 	</script>
 </html>
 
