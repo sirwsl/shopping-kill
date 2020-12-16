@@ -3,6 +3,7 @@ package com.wsl.shoppingkill.controller.admin;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.wsl.shoppingkill.common.Result;
 import com.wsl.shoppingkill.obj.vo.SkuVO;
+import com.wsl.shoppingkill.obj.vo.SkuVOs;
 import com.wsl.shoppingkill.service.SkuService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -46,6 +47,19 @@ public class SkuController {
         }
         try {
             return Result.success(skuService.updateSku(skuVO));
+        }catch (Exception e){
+            log.error("SKU图片上传出错或数据库服务器异常");
+            return Result.error("error","文件上传出错或服务器异常");
+        }
+    }
+
+    @PostMapping("/addSkuInfo/v1")
+    public Result<Boolean> addSkuInfo(@Valid SkuVOs skuVO) {
+        if (skuVO.getImgs()==null || skuVO.getImgs().getName().isEmpty()) {
+            return Result.error("error", "图片不能为空");
+        }
+        try {
+            return Result.success(skuService.addSku(skuVO));
         }catch (Exception e){
             log.error("SKU图片上传出错或数据库服务器异常");
             return Result.error("error","文件上传出错或服务器异常");

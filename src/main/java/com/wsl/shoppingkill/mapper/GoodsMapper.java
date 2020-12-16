@@ -5,9 +5,12 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wsl.shoppingkill.domain.Goods;
 import com.wsl.shoppingkill.obj.vo.ActivityByGoodsVO;
+import com.wsl.shoppingkill.obj.vo.BaseVO;
 import com.wsl.shoppingkill.obj.vo.GoodsVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * @author wangShilei
@@ -37,4 +40,14 @@ public interface GoodsMapper extends BaseMapper<Goods> {
      */
     IPage<ActivityByGoodsVO> getActivityBuyGoods(Page<ActivityByGoodsVO> page,@Param("id") Long id,@Param("name") String name);
 
+    /**
+     * 获取所有物品名称
+     * <p>
+     *     Object ->(id,name)
+     * </p>
+     * @author wangShilei
+     * @date 2020/12/16 10:04
+     * @return java.util.List<java.lang.Object>
+     */
+    List<BaseVO> getGoodsNameAll();
 }

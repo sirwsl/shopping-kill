@@ -170,7 +170,14 @@
 		}
 	});
 	
-	
+	$("#EditModal").on("hidden.bs.modal", function () {
+			$("#id").val("");
+			$("#name").val("");
+			$("#shelf").val("");
+			$("#detail").val("");
+			$("#imgUrls").html("");
+	});
+
 	function loadFile(file){
 		 $("#imgUrls").html(file.name);
 	}
@@ -353,7 +360,6 @@
 		var method;
 		
 		$("#addGoods").click(function(){
-			console.log("进入");
 			url = "http://test.wslhome.top/admin/addGoods/v1";
 			method = "POST";
 		})
@@ -393,21 +399,12 @@
 			})
 			
 		});
+		
+		
 	</script>
 </html>
 
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-	</body>
+</body>
 </html>
 
 

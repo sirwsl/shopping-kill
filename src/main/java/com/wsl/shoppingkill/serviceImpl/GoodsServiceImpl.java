@@ -13,6 +13,7 @@ import com.wsl.shoppingkill.mapper.SkuMapper;
 import com.wsl.shoppingkill.obj.constant.BaseEnum;
 import com.wsl.shoppingkill.obj.constant.LoggerEnum;
 import com.wsl.shoppingkill.obj.convert.SkuConverter;
+import com.wsl.shoppingkill.obj.vo.BaseVO;
 import com.wsl.shoppingkill.obj.vo.GoodsVO;
 import com.wsl.shoppingkill.service.GoodsService;
 import org.apache.commons.lang3.StringUtils;
@@ -93,5 +94,10 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
             return false;
         }
         return goodsMapper.deleteById(id)>0;
+    }
+
+    @Override
+    public List<BaseVO> getGoodsNameAll() {
+        return goodsMapper.getGoodsNameAll();
     }
 }

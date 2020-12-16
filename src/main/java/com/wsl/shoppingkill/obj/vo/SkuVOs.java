@@ -26,81 +26,72 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @ToString
 @Accessors(chain = true)
-public class SkuVO implements Serializable {
+public class SkuVOs implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    /**
-     * SKU_ID
-     */
-
-    private Long id;
 
     /**
      * 商品id
      */
     @NotNull(message = "goodsId不能为空")
-    private Long goodsId;
+    private Long goodsIds;
 
-    /**
-     * 物品名称
-     */
-    private String goodsName;
 
     /**
      * 商品属性
      */
     @NotNull(message = "商品属性不能为空")
     @NotBlank(message = "商品属性不能为空")
-    private String attribute;
+    private String attributes;
 
     /**
      * 商品图片地址
      */
-    private String imgUrl;
+    private String imgUrls;
 
     /**
      * 商品图片
      */
     @TableField(exist = false)
-    private transient MultipartFile img;
+    private transient MultipartFile imgs;
     /**
      * 进价
      */
     @NotNull(message = "进价不能为空")
     @Min(value = 0,message = "进价不能为服输")
-    private BigDecimal realPrice;
+    private BigDecimal realPrices;
 
     /**
      * 成本价
      */
     @NotNull(message = "成本价不能为空")
     @Min(value = 0,message = "成本价不能为服输")
-    private BigDecimal costPrice;
+    private BigDecimal costPrices;
 
     /**
      * 售价
      */
     @NotNull(message = "售价不能为空")
     @Min(value = 0,message = "售价不能为服输")
-    private BigDecimal sellPrice;
+    private BigDecimal sellPrices;
 
     /**
      * 数量
      */
     @NotNull(message = "数量不能为空")
     @Min(value = 0,message = "数量不能小于0")
-    private Integer num;
+    private Integer nums;
 
     /**
      * 预警量（默认10）
      */
     @NotNull(message = "预警量不能为空")
-    private Integer warnNum;
+    private Integer warnNums;
 
     /**
      * 快递费用
      */
-    private BigDecimal expPrice;
+    private BigDecimal expPricess;
 
 
 }

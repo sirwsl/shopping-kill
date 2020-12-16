@@ -3,6 +3,7 @@ package com.wsl.shoppingkill.controller.admin;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.wsl.shoppingkill.common.Result;
 import com.wsl.shoppingkill.domain.Goods;
+import com.wsl.shoppingkill.obj.vo.BaseVO;
 import com.wsl.shoppingkill.obj.vo.GoodsVO;
 import com.wsl.shoppingkill.service.GoodsService;
 import org.apache.commons.lang3.StringUtils;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * @author : WangShiLei
@@ -113,5 +115,19 @@ public class GoodsController {
             return Result.error("error","删除ID不合法");
         }
         return Result.success(goodsService.merchandise(id,flag));
+    }
+
+    /**
+     * 获取所有物品
+     * <p>
+     *     Object -> (id,name)
+     * </p>
+     * @author wangShilei
+     * @date 2020/12/16 9:55
+     * @return com.wsl.shoppingkill.common.Result<java.util.List<java.lang.Object>>
+     */
+    @GetMapping("/getAllGoodsName/v1")
+    public Result<List<BaseVO>> getGoodsNameAll(){
+        return Result.success(goodsService.getGoodsNameAll());
     }
 }

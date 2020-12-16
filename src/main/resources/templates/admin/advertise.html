@@ -143,7 +143,14 @@
 			}
 		});
 		
-		
+		$("#Editupdate").on("hidden.bs.modal", function () {
+			$("#myLabel").html("添加广告");
+			$("#id").val("");
+			$("#imgUrls").html("");
+			$("#targetUrl").val("");
+			$("#startTime").val("");
+			$("#endTime").val("");
+		});
 		
 		var flag = false;
 		

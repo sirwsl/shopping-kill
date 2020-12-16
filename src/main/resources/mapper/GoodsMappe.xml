@@ -70,4 +70,8 @@
         from t_sku ts
         where ts.goods_id  = #{id} and ts.del_flag = 0
     </select>
+
+  <select id="getGoodsNameAll" resultType="com.wsl.shoppingkill.obj.vo.BaseVO">
+      select id,name from t_goods where del_flag = 0
+    </select>
 </mapper>

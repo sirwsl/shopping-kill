@@ -3,7 +3,10 @@ package com.wsl.shoppingkill.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.wsl.shoppingkill.domain.Goods;
+import com.wsl.shoppingkill.obj.vo.BaseVO;
 import com.wsl.shoppingkill.obj.vo.GoodsVO;
+
+import java.util.List;
 
 /**
  * @author wangShilei
@@ -60,5 +63,12 @@ public interface GoodsService extends IService<Goods> {
      */
     boolean delGoods(Long id);
 
+    /**
+     * 获取所有物品名称
+     * @author wangShilei
+     * @date 2020/12/16 9:45
+     * @return List<Object>
+     */
+    List<BaseVO> getGoodsNameAll();
 
 }

@@ -9,6 +9,7 @@ import com.wsl.shoppingkill.domain.Sku;
 import com.wsl.shoppingkill.mapper.SkuMapper;
 import com.wsl.shoppingkill.obj.constant.BaseEnum;
 import com.wsl.shoppingkill.obj.vo.SkuVO;
+import com.wsl.shoppingkill.obj.vo.SkuVOs;
 import com.wsl.shoppingkill.service.SkuService;
 import org.springframework.stereotype.Service;
 
@@ -60,8 +61,32 @@ public class SkuServiceImpl extends ServiceImpl<SkuMapper, Sku> implements SkuSe
                 .setExpPrice(skuVO.getExpPrice())
                 .setId(skuVO.getId())
                 .setNum(skuVO.getNum())
+                .setGoodsId(skuVO.getGoodsId())
                 .setUpdateTime(LocalDateTime.now())
                 .insertOrUpdate();
+        return true;
+    }
+
+
+    @Override
+    @Transactional(rollbackOn = Exception.class)
+    public boolean addSku(SkuVOs skuVO) throws Exception {
+        Sku sku = new Sku();
+       if (!skuVO.getImgs().isEmpty()){
+            skuVO.setImgUrls(ossComponent.uploadFile(BaseEnum.OSS_SKU,skuVO.getImgs()));
+        }
+        sku.setWarnNum(skuVO.getWarnNums())
+                .setSellPrice(skuVO.getSellPrices())
+                .setRealPrice(skuVO.getRealPrices())
+                .setImgUrl(skuVO.getImgUrls())
+                .setAttribute(skuVO.getAttributes())
+                .setCostPrice(skuVO.getCostPrices())
+                .setExpPrice(skuVO.getExpPricess())
+                .setNum(skuVO.getNums())
+                .setGoodsId(skuVO.getGoodsIds())
+                .setUpdateTime(LocalDateTime.now())
+                .setCreatTime(LocalDateTime.now())
+                .insert();
         return true;
     }
 

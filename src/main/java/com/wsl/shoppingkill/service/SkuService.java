@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.wsl.shoppingkill.domain.Sku;
 import com.wsl.shoppingkill.obj.vo.SkuVO;
+import com.wsl.shoppingkill.obj.vo.SkuVOs;
 
 /**
  * @author wangShilei
@@ -40,7 +41,11 @@ public interface SkuService extends IService<Sku> {
      * @author wangshilei
      * @date 2020/11/17 16:25
      **/
+    boolean addSku(SkuVOs sku) throws Exception;
+
+
     boolean updateSku(SkuVO sku) throws Exception;
+
 
     /**
      * 根据id删除sku

@@ -11,11 +11,13 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
 
-    <link rel="shortcut icon" href="favicon.ico"> <link href="../static/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link rel="shortcut icon" href="favicon.ico"> 
+	<link href="../static/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
     <link href="../static/admin/css/font-awesome.css?v=4.4.0" rel="stylesheet">
     <link href="../static/admin/css/plugins/iCheck/custom.css" rel="stylesheet">
     <link href="../static/admin/css/animate.css" rel="stylesheet">
     <link href="../static/admin/css/style.css?v=4.1.0" rel="stylesheet">
+	<link rel="stylesheet" href="../static/admin/css/comboselect.css">
 
 </head>
 
@@ -31,6 +33,7 @@
 							<label class="form-inline" />商品名称：
 							<input type="text" class="form-control" id = "GName"/></label>
 							<button type="button" class="btn btn-sm btn-primary" id = "search" > 搜索</button> </span>
+							<a data-toggle="modal" class="btn btn-info" href="#myModal2" id = "addGoods" style="float: right;" > 添加</a> </span>
 					    </div>
 					</div>
 				</div>
@@ -61,7 +64,7 @@
 				</div>
 				<div class="modal-body">
 					<div class="form-group">
-					<form role="form" id = "addOrUpdateSku">
+					<form role="form" id = "UpdateSku">
 						<div class="row">
 							<div class="col-sm-6">
 								<input id = "id" name = "id" style="display:none" readonly="true" value = "" />
@@ -71,40 +74,41 @@
 									<div class="form-group">
 										<label class="col-xl-3 control-label">物品名称</label>
 										<div class="col-xl-9">
-											<input type="text" id = "goodsName" name = "goodsName" readonly="true" class="form-control layer-date" />
-										</div>
-									</div>
-									<div class="form-group">
-										<label class="col-xl-3 control-label">属性</label>
-										<div class="col-xl-9">
-											<input type="text" id = "attribute" name = "attribute" class="form-control layer-date" />
-										</div>
-									</div>
-									<div class="form-group">
-										<label class="col-xl-3 control-label">库存</label>
-										<div class="col-xl-9">
-											<input type="number" id = "num" name = "num" class="form-control layer-date" />
-										</div>
-									</div>
-									<div class="form-group">
-										<label class="col-xl-3 control-label">预警量</label>
-										<div class="col-xl-9">
-											<input type="number" id = "warnNum" name = "warnNum" class="form-control layer-date" />
-										</div>
-									</div>
-									<div class="form-group">
-										<label class="col-xl-3 control-label">图片</label>
-										<div class="col-xl-9">
-											<div class="file-container" style="display:inline-block;position:relative;overflow: hidden;vertical-align:middle">
-												<button class="btn btn-success fileinput-button" type="button">上传</button>
-												<input type="file" id="img" name = "img" multiple="multiple" onchange="loadFile(this.files[0])" style="position:absolute;top:0;left:0;font-size:34px; opacity:0">
-											</div>
-											<span id="imgUrls" name = "imgUrls" style="vertical-align: middle">未上传文件</span>
-											
+											<input type="text" id = "goodsName" name = "goodsName" placeholder="请输入所属物品名称" class="form-control layer-date" />
 										</div>
 									</div>
 								</div>
+								<div class="form-group">
+									<label class="col-xl-3 control-label">属性</label>
+									<div class="col-xl-9">
+										<input type="text" id = "attribute" name = "attribute" class="form-control layer-date" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-xl-3 control-label">库存</label>
+									<div class="col-xl-9">
+										<input type="number" id = "num" name = "num" class="form-control layer-date" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-xl-3 control-label">预警量</label>
+									<div class="col-xl-9">
+										<input type="number" id = "warnNum" name = "warnNum" class="form-control layer-date" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-xl-3 control-label">图片</label>
+									<div class="col-xl-9">
+										<div class="file-container" style="display:inline-block;position:relative;overflow: hidden;vertical-align:middle">
+											<button class="btn btn-success fileinput-button" type="button">上传</button>
+											<input type="file" id="img" name = "img" multiple="multiple" onchange="loadFile(this.files[0])" style="position:absolute;top:0;left:0;font-size:34px; opacity:0">
+										</div>
+										<span id="imgUrles" name = "imgUrles" style="vertical-align: middle">未上传文件</span>
+										
+									</div>
+								</div>
 							</div>
+						
 							<div class="col-sm-6">
 								<div class="form-group">
 									<label class="col-xl-3 control-label">进价</label>
@@ -147,6 +151,102 @@
 
 
 
+	<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+						&times;
+					</button>
+					<h4 class="modal-title" id="myModalLabel">
+						Sku编辑
+					</h4>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+					<form role="form" id = "addSku">
+						<div class="row">
+							<div class="col-sm-6">
+								<div class="form-group">
+									<div class="form-group">
+										<label class="col-xl-3 control-label">物品名称</label>
+										<div class="col-xl-9">
+											<input type="text" id = "goodsIds" name = "goodsIds" placeholder="请输入所属物品名称" class="form-control layer-date" />
+										</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-xl-3 control-label">属性</label>
+									<div class="col-xl-9">
+										<input type="text" id = "attributes" name = "attributes" class="form-control layer-date" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-xl-3 control-label">库存</label>
+									<div class="col-xl-9">
+										<input type="number" id = "nums" name = "nums" class="form-control layer-date" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-xl-3 control-label">预警量</label>
+									<div class="col-xl-9">
+										<input type="number" id = "warnNums" name = "warnNums" class="form-control layer-date" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-xl-3 control-label">图片</label>
+									<div class="col-xl-9">
+										<div class="file-container" style="display:inline-block;position:relative;overflow: hidden;vertical-align:middle">
+											<button class="btn btn-success fileinput-button" type="button">上传</button>
+											<input type="file" id="imgs" name = "imgs" multiple="multiple" onchange="loadFile(this.files[0])" style="position:absolute;top:0;left:0;font-size:34px; opacity:0">
+										</div>
+										<span id="imgUrls" name = "imgUrls" style="vertical-align: middle">未上传文件</span>
+										
+									</div>
+								</div>
+							</div>
+						
+							<div class="col-sm-6">
+								<div class="form-group">
+									<label class="col-xl-3 control-label">进价</label>
+									<div class="col-xl-9 ">
+										<input type="text" id = "realPrices" name = "realPrices" class="form-control" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-xl-3 control-label">成本价</label>
+									<div class="col-xl-9 ">
+										<input type="text" id = "costPrices" name = "costPrices" class="form-control" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-xl-3 control-label">售价</label>
+									<div class="col-xl-9 ">
+										<input type="text" id = "sellPrices" name = "sellPrices" class="form-control" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-xl-3 control-label">邮费</label>
+									<div class="col-xl-9 ">
+										<input type="text" id = "expPrices" name = "expPrices" class="form-control" />
+									</div>
+								</div>
+								
+							</div>
+						</div>
+					</form>
+					</div>
+					
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-primary" id = "subs" data-dismiss="modal" >确定</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
 <!-- 全局js -->
 	<script src="../static/admin/js/jquery.min.js?v=2.1.4"></script>
 	<script src="../static/admin/js/bootstrap.min.js?v=3.3.6"></script>
@@ -155,24 +255,52 @@
 	<script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
 	<script src="../static/admin/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
 	<script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+	
+	<script type="text/javascript" src="../static/admin/js/comboselect.min.js" ></script>
+	<script type="text/javascript" src="../static/admin/js/b.comboselect.js" ></script>
 
     <script type="application/javascript">
-		$.ajaxSetup({
-			headers: {
-				'Authorization': $.cookie("token")
-			},
-			xhrFields: {
-				withCredentials: false
-			},
-			crossDomain: true
-		});
 		
-		$(function() {
-			if ($.cookie("token") == null || $.cookie("token") == "") {
-				window.location.href = "/admin/login.html"
+		
+		// $.ajaxSetup({
+		// 	headers: {
+		// 		'Authorization': $.cookie("token")
+		// 	},
+		// 	xhrFields: {
+		// 		withCredentials: false
+		// 	},
+		// 	crossDomain: true
+		// });
+		
+		// $(function() {
+		// 	if ($.cookie("token") == null || $.cookie("token") == "") {
+		// 		window.location.href = "/admin/login.html"
+		// 	}
+		// });
+		var index = true;
+		var flag = false;
+		$("#addGoods").click(function(){
+			flag = true;
+			if (index){
+				$.ajax({
+				    type: "get",
+				    url: "http://test.wslhome.top/admin/getAllGoodsName/v1",
+				    data:{"status":1},
+				    dataType: "json",
+				    success: function (msg) {
+						$('#goodsIds').bComboSelect({
+							showField : 'name',
+							keyField : 'id',
+							data : msg.data
+						});
+				    }
+				})
+				index = false;
 			}
-		});
-		
+			
+		})
+	
+
 		function loadFile(file){
 		    $("#imgUrls").html(file.name);
 		}
@@ -310,21 +438,42 @@
 			$("#goodsId").val(vals.goodsId);
 			$("#goodsName").val(vals.goodsName);
 			$("#attribute").val(vals.attribute);
-			$("#imgUrls").html(vals.imgUrl.slice(0,-44));
+			$("#imgUrles").html(vals.imgUrl.slice(0,-44));
 			$("#realPrice").val(vals.realPrice);
 			$("#costPrice").val(vals.costPrice);
 			$("#sellPrice").val(vals.sellPrice);
 			$("#num").val(vals.num);
 			$("#warnNum").val(vals.warnNum);
-			$("#expPrice").val(vals.expPrice);	
+			$("#expPrice").val(vals.expPrice);
+			$("#goodsName").attr("readonly",true);
+			var name = vals.goodsName;
+			var id = vals.goodsId
+			
 		}
 		
 		$("#sub").click(function() {
-			$("#imgUrl").val($("#imgUrls").text());
-			var data = new FormData(document.getElementById("addOrUpdateSku"));
+			$("#imgUrl").val($("#imgUrles").text());
+			var data = new FormData(document.getElementById("UpdateSku"));
 			$.ajax({
 				type: "post",
 				url: "http://test.wslhome.top/admin/updateSkuInfo/v1",
+				data: data,
+				contentType:false,
+				processData:false,
+			    dataType: "json",
+			    success: function (msg) {
+					alert(msg.userMsg);
+					$('#sku').bootstrapTable("refresh");
+				}
+			})
+			
+		});
+		
+		$("#subs").click(function() {
+			var data = new FormData(document.getElementById("addSku"));
+			$.ajax({
+				type: "post",
+				url: "http://test.wslhome.top/admin/addSkuInfo/v1",
 				data: data,
 				contentType:false,
 				processData:false,
