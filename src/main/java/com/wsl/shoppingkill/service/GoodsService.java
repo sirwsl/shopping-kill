@@ -39,10 +39,9 @@ public interface GoodsService extends IService<Goods> {
      * @author wangShilei
      * @date 2020/11/19 10:12 上午
      * @param id :
-     * @param flag :
      * @return boolean
      */
-    boolean merchandise(Long id,Boolean flag);
+    String merchandise(Long id);
 
     /**
      * 更新商品

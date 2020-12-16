@@ -1,7 +1,6 @@
 package com.wsl.shoppingkill.controller.admin;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.wsl.shoppingkill.common.Result;
 import com.wsl.shoppingkill.domain.Types;
 import com.wsl.shoppingkill.service.TypesService;
@@ -75,20 +74,6 @@ public class TypesController {
         return Result.success(typesService.getTypesAll(current, size));
     }
 
-    /**
-     * 根据id获取商品基本信息
-     * @author wangShilei
-     * @date 2020/11/18 16:56
-     * @param id :
-     * @return Result<com.wsl.shoppingkill.domain.Types>
-     */
-    @GetMapping("/getTypesById/v1")
-    public Result<Types> getTypesById(Integer id){
-        if (id == null || id == 0){
-            return Result.error("error","id不能为空值");
-        }
-        return Result.success(typesService.getTypesById(id));
-    }
 
     /**
      * 更具name模糊匹配
@@ -97,14 +82,11 @@ public class TypesController {
      * @param current :
      * @param size :
      * @param name :
-     * @return IPage<com.wsl.shoppingkill.domain.Types>>
+     * @return IPage<Types>>
      */
-    @GetMapping("/getTypesByName/v1")
-    public Result<IPage<Types>> getTypesByName(@RequestParam(defaultValue = "1")Long current,@RequestParam(defaultValue = "10")Long size,String name){
-        if (StringUtils.isEmpty(name)){
-            return Result.error("error","name不能为空");
-        }
-        return Result.success(typesService.getTypesByName(current, size, name));
+    @GetMapping("/getTypesByNameAndId/v1")
+    public Result<IPage<Types>> getTypesByName(@RequestParam(defaultValue = "1")Long current,@RequestParam(defaultValue = "10")Long size,String name,Integer id){
+        return Result.success(typesService.getTypesByNameAndId(current, size, name,id));
     }
 
 }

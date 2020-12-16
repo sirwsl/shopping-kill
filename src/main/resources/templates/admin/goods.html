@@ -166,11 +166,11 @@
 		crossDomain: true
 	});
 	
-	// $(function() {
-	// 	if ($.cookie("token") == null || $.cookie("token") == "") {
-	// 		window.location.href = "/admin/login.html"
-	// 	}
-	// });
+	$(function() {
+		if ($.cookie("token") == null || $.cookie("token") == "") {
+			window.location.href = "/admin/login.html"
+		}
+	});
 	
 	$("#EditModal").on("hidden.bs.modal", function () {
 			$("#id").val("");
@@ -190,6 +190,7 @@
 	            url: "http://test.wslhome.top/admin/getTypesAll/v1",
 	            dataType: "json",
 	            type: "GET",
+				async:true,
 	            data: {
 					size:100
 	            },
@@ -270,7 +271,7 @@
 					formatter: function(value, row, index) {
 						var html  = '<label class="toggle toggle-positive">';
 						if(row.shelf==true){
-							html = html+' <input type="checkbox" checked onclick="shelf('+row.id+')" />';
+							html = html+' <input type="checkbox"  checked onclick="shelf('+row.id+')" />';
 						}else{
 							html = html+' <input type="checkbox" onclick="shelf('+row.id+')" />';
 						}
@@ -341,6 +342,7 @@
 						id: index
 					},
 					type: 'delete',
+					async:true,
 					success: function(data) {
 						if (data.code == 0) {
 							alert(data.userMsg);
@@ -394,6 +396,7 @@
 				data: data,
 				contentType:false,
 				processData:false,
+				async:true,
 			    dataType: "json",
 			    success: function (msg) {
 					alert(msg.userMsg);
@@ -404,7 +407,17 @@
 		});
 		
 	function shelf(obj){
-		console.log(obj);
+		$.ajax({
+			type: "PUT",
+			url: "http://test.wslhome.top/admin/merchandise/v1",
+			data: {id:obj},
+		    dataType: "json",
+			async:true, 
+		    success: function (msg) {
+				alert(msg.data);
+				$('#goods').bootstrapTable("refresh");
+			}
+		})
 	}
 			
 	</script>

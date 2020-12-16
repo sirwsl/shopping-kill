@@ -45,15 +45,7 @@ public interface TypesService extends IService<Types> {
      * @return IPage<com.wsl.shoppingkill.domain.Types>
      */
     IPage<Types> getTypesAll(Long current,Long size);
-    
-    /**
-     * 根据获取商品类别
-     * @author wangShilei
-     * @date 2020/11/18 16:24
-     * @param id : 
-     * @return com.wsl.shoppingkill.domain.Types
-     */
-    Types getTypesById(Integer id);
+
     
     /**
      * 更具名字模糊查询全部分类
@@ -62,7 +54,8 @@ public interface TypesService extends IService<Types> {
      * @param current :
      * @param size :
      * @param name :
+     * @param id :
      * @return IPage<com.wsl.shoppingkill.domain.Types>
      */
-    IPage<Types> getTypesByName(Long current,Long size,String name);
+    IPage<Types> getTypesByNameAndId(Long current,Long size,String name,Integer id);
 }

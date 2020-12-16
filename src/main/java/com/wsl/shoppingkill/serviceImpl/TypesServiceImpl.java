@@ -9,6 +9,7 @@ import com.wsl.shoppingkill.obj.constant.LoggerEnum;
 import com.wsl.shoppingkill.domain.Types;
 import com.wsl.shoppingkill.mapper.TypesMapper;
 import com.wsl.shoppingkill.service.TypesService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -47,12 +48,15 @@ public class TypesServiceImpl extends ServiceImpl<TypesMapper, Types> implements
     }
 
     @Override
-    public Types getTypesById(Integer id) {
-        return typesMapper.selectById(id);
-    }
+    public IPage<Types> getTypesByNameAndId(Long current,Long size,String name,Integer id) {
+        QueryWrapper<Types> select = new QueryWrapper<>();
+        if (id != null){
+            select.like(Types.ID, id);
+        }
+        if (StringUtils.isNotBlank(name)){
+            select.like(Types.NAME, name);
+        }
 
-    @Override
-    public IPage<Types> getTypesByName(Long current,Long size,String name) {
-        return typesMapper.selectPage(new Page<>(current,size),new QueryWrapper<Types>().like(Types.NAME,name));
+        return typesMapper.selectPage(new Page<>(current,size),select);
     }
 }

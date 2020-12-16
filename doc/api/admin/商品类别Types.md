@@ -121,34 +121,9 @@
 }
 ```
 
-#### 根据id获取商品类别
-方式：GET
 
-地址：/admin/getTypesById/v1
 
-参数：
-
-|参数|类型|是否必须|说明|
-|---|---|---|---|
-|id|Integer|是|id|
-
-返回值：
-```json
-{
-    "code": 0,
-    "msg": "SUCCESS",
-    "userMsg": "操作成功",
-    "data": {
-        "id": 3,
-        "name": "测试分类电脑2",
-        "creatTime": "2020-11-18 17:13:54",
-        "updateTime": "2020-11-18 17:13:54",
-        "delFlag": false
-    }
-}
-```
-
-#### 根据name模糊查找商品类别
+#### 根据name,id模糊查找商品类别
 方式：GET
 
 地址：/admin/getTypesByName/v1

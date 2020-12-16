@@ -107,14 +107,14 @@ public class GoodsController {
      * @author wangShilei
      * @date 2020/11/19 10:48 下午
      * @param id :
-     * @return com.wsl.shoppingkill.common.Result<java.lang.Boolean>
+     * @return com.wsl.shoppingkill.common.Result<String>
      */
     @PutMapping("/merchandise/v1")
-    public Result<Boolean> merchandise(Long id,Boolean flag){
+    public Result<String> merchandise(Long id){
         if (id == null || id <= 0){
             return Result.error("error","删除ID不合法");
         }
-        return Result.success(goodsService.merchandise(id,flag));
+        return Result.success(goodsService.merchandise(id));
     }
 
     /**

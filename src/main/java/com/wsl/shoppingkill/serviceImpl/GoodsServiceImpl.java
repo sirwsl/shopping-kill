@@ -69,11 +69,28 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 
     @Override
     @MyLog(value = "#id", detail = "商品上架处理", grade = LoggerEnum.INFO)
-    public boolean merchandise(Long id,Boolean flag) {
-        if (flag == null || !flag){
-            return goodsMapper.updateById(new Goods().setId(id).setShelf(false))>0;
+    public String merchandise(Long id) {
+
+        Goods goods = goodsMapper.selectOne(new QueryWrapper<Goods>()
+                .eq(Goods.ID, id)
+                .select(Goods.ID,Goods.SHELF));
+
+        Boolean shelf = goods.getShelf();
+        System.err.println(shelf);
+        if (shelf){
+            if (goods.setShelf(false).updateById()){
+                return "下架成功";
+            }else{
+                return "下架失败";
+            }
+        }else{
+            if (goods.setShelf(true).updateById()){
+                return "上架成功";
+            }else{
+                return "下架失败";
+            }
         }
-        return goodsMapper.updateById(new Goods().setId(id).setShelf(true))>0;
+
     }
 
     @Override
