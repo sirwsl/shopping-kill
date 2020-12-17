@@ -79,18 +79,22 @@ public class AfterSalesServiceImpl extends ServiceImpl<AfterSalesMapper, AfterSa
                 .stream()
                 .collect(Collectors.groupingBy(Goods::getId));
 
-        afterSalesAll.getRecords().forEach(
-                li ->{
-                    Sku skuTemp = skuCollect.get(li.getSkuId()).get(0);
-                    li.setSkuDetail(skuTemp.getAttribute())
-                            .setGoodsId(skuTemp.getGoodsId())
-                            .setGoodsName(goodsCollect.get(li.getGoodsId()).get(0).getName());
-                    User userTemp = userCollect.get(li.getUserId()).get(0);
-                    li.setUserName(userTemp.getName())
-                            .setUserPhone(userTemp.getPhone())
-                            .setUserNickName(userTemp.getNickName());
-                }
-        );
+        for (AfterSalesVO afterSalesVO : afterSalesAll.getRecords()) {
+            List<Sku> skus = skuCollect.get(afterSalesVO.getSkuId());
+            if (CollectionUtils.isNotEmpty(skus)) {
+                Sku skuTemp = skus.get(0);
+                afterSalesVO.setSkuDetail(skuTemp.getAttribute())
+                        .setGoodsId(skuTemp.getGoodsId())
+                        .setGoodsName(goodsCollect.get(afterSalesVO.getGoodsId()).get(0).getName());
+            }
+            List<User> users = userCollect.get(afterSalesVO.getUserId());
+            if (CollectionUtils.isNotEmpty(users)){
+                User userTemp = users.get(0);
+                afterSalesVO.setUserName(userTemp.getName())
+                        .setUserPhone(userTemp.getPhone())
+                        .setUserNickName(userTemp.getNickName());
+            }
+        }
 
         Map<Long, List<Sku>> collect = sku.selectList(new QueryWrapper<Sku>().in(Sku.GOODS_ID,goodsId)
                 .select(Sku.ID, Sku.GOODS_ID, Sku.ATTRIBUTE, Sku.NUM))

@@ -13,7 +13,6 @@ import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -37,14 +36,12 @@ public class AfterSalesResultParam implements Serializable {
     * id
     */
     @NotNull(message = "id不能为空")
-    @NotEmpty(message = "id不能为空")
     private Long id;
 
     /**
     * 订单id
     */
     @NotNull(message = "原SKUId不能为空")
-    @NotEmpty(message = "原SKUId不能为空")
     private Long oldSkuId;
 
     /**
@@ -77,14 +74,12 @@ public class AfterSalesResultParam implements Serializable {
     * 是否解决（0-未解决 1-已解决  默认0）
     */
     @NotNull(message = "处理结果不能为空")
-    @NotEmpty(message = "处理结果不能为空")
     private Boolean result;
 
     /**
      * 处理类型
      */
     @NotNull(message = "处理类型不能为空")
-    @NotEmpty(message = "处理结果不能为空")
     private Integer type;
 
     /**

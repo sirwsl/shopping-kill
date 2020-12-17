@@ -22,42 +22,25 @@
     <div class="wrapper wrapper-content animated fadeIn">
         <div class="row">
             <div class="col-sm-12">
-
+				<div>
+					<div class="ibox-content" style="padding-bottom:0px;">
+					    <div>
+							<label class="form-inline" />评价id：
+					        <input type="text" class="form-control" id = "ids"/></label>
+							<label class="form-inline" />用户姓名：
+							<input type="text" class="form-control" id = "userNames"/></label>
+							<label class="form-inline" />物品名称：
+							<input type="text" class="form-control" id = "goodsNames"/></label>
+							<button type="button" class="btn btn-sm btn-primary" id = "search" > 搜索</button> </span>
+							
+					    </div>
+					</div>
+				</div>
+				
                 <div class="ibox float-e-margins">
                 	<div class="ibox-content">
-                	   <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="8">
-                		   <thead>
-                		   <tr>
-                			   <th data-toggle="true">id</th>
-                			   <th>用户id</th>
-							   <th>商品名称</th>
-                			   <th>评价时间</th>
-                			   <th>评价星级</th>
-                			   <th data-hide="all">评价内容</th>
-                			   <th>操作</th>
-                		   </tr>
-                		   </thead>
-                		   <tbody>
-                		   <tr>
-                			   <td>1123</td>
-							   <td>4186413851</td>
-                			   <td>华为P30</td>
-                			   <td>2020-11-12 12:00</td>
-                			   <td>5</td>
-                			   <td>测试评价内容666这个收到后及时到首都华盛顿覅u答复</td>
-                			   <td>				  
-								   <a data-toggle="modal" class="btn btn-danger" href="#">删除</a>
-								</td>
-                		   </tr>
-                		  
-                		   </tbody>
-                		   <tfoot>
-                		   <tr>
-                			   <td colspan="5">
-                				   <ul class="pagination pull-right"></ul>
-                			   </td>
-                		   </tr>
-                		   </tfoot>
+                	   <table class="footable table table-stripped toggle-arrow-tiny" id = "cheet" data-page-size="8">
+						  
                 	   </table>
                     </div>
                 </div>
@@ -73,26 +56,146 @@
 	<!-- 全局js -->
 	<script src="../static/admin/js/jquery.min.js?v=2.1.4"></script>
 	<script src="../static/admin/js/bootstrap.min.js?v=3.3.6"></script>
+	<script src="../static/admin/js/jquery.form.js"></script>
+	<script src="../static/admin/js/jquery.cookie.js"></script>
+	<script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+	<script src="../static/admin/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+	<script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
 	<script src="../static/admin/js/plugins/footable/footable.all.min.js"></script>
-	<!-- layerDate plugin javascript -->
-	<script src="../static/admin/js/plugins/layer/laydate/laydate.js"></script>
 	
-	<!-- 自定义js -->
-	<script src="../static/admin/js/content.js?v=1.0.0"></script>
-	<script>
-	    $(document).ready(function() {
-	        $('.footable').footable();
-	        $('.footable2').footable();
+	<script type="application/javascript">
+		$.ajaxSetup({
+			headers: {
+				'Authorization': $.cookie("token")
+			},
+			xhrFields: {
+				withCredentials: false
+			},
+			crossDomain: true
+		});
+		
+		$(function() {
+			if ($.cookie("token") == null || $.cookie("token") == "") {
+				window.location.href = "/admin/login.html"
+			}
+		});
+		
+		$(document).ready(function() {
+		
+		    $('.footable').footable();
+		});
+		
+		$("#search").on("click",function(){
+			logger($("#ids").val(),$("#userNames").val(),$("#goodsNames").val());
+				
+		})
+	$(function(){logger(null,null,null)})
+
+	function logger(id,userName,goodsName) {
+		$('#cheet').bootstrapTable('destroy'); 
+		$('#cheet').bootstrapTable({
+			method: 'get',
+			url: "http://test.wslhome.top/admin/getAppraisalAll/v1",
+			dataType: "json",
+			headers: {
+				'Authorization': $.cookie("token")
+			},
+			ajaxOptions: {
+			    xhrFields: {
+			        withCredentials: false
+			    },
+			    crossDomain: true
+			},
+			striped: true,
+			pageNumber: 1,
+			pagination: true,
+			sidePagination: 'server',
+			pageSize: 10,
+			pageList: [5, 10, 20, 30,50],
+			showRefresh: true,
+			silent: true, 
+			cache: false,
+			singleSelect: true,
+			showColumns: true,
+			queryParams: queryParams,
+			responseHandler: returnFormat,
+			columns: [{
+				title:"评价id",
+				field: 'id',
+				sortable: true
+			}, {
+				title:"用户姓名",
+				field: 'userName',
+			}, {
+				title:"用户昵称",
+				field: 'userNickName',
+			},{
+				title:"物品名称",
+				field: 'goodsName',
+			}, {
+				title:"评价等级",
+				field: 'grade',
+				sortable: true
+			}, {
+				title:"评价内容",
+				field: 'detail',
+				visible: false 
+			}, {
+				title:"创建时间",
+				field: 'creatTime',
+				sortable: true
+			} ,{
+				title:"操作",
+				field: 'tool',
+				formatter: function(value, row, index) {
+					return '<a data-toggle="modal" class="btn btn-danger" onclick = "delActivity(' + row.id + ')">删除</a>';
+					
+				}
+			}]
+		})
+		function queryParams(params) {
+			var temp = {
+				current : (params.offset / params.limit) + 1,
+				size: params.limit,
+				id : id,
+				userName: userName,
+				goodsName: goodsName
+			};
+			return temp;
+		}
 	
-	    });
-	</script>
+		function returnFormat(res) {
+			console.log(res);
+			return {
+				"rows":res.data.records,
+				"total": res.data.total
+			};
+		}
+	}
 	
-	<script>
-	    $(document).ready(function () {
-	        $('.i-checks').iCheck({
-	            checkboxClass: 'icheckbox_square-green',
-	            radioClass: 'iradio_square-green',
-	        });
-	    });
+	function delActivity(id) {
+		
+		var mymessage = confirm("确认删除嘛？");
+		if (mymessage == true) {
+			$.ajax({
+				url: "http://test.wslhome.top/admin/delAppraisalById/v1",
+				data: {
+					id: id
+				},
+				type: 'delete',
+				success: function(data) {
+					if (data.code == 0) {
+						alert("删除成功");
+						$('#cheet').bootstrapTable('refresh');
+					} else {
+						alert(data.userMsg);
+					}
+				},
+				error: function(data) {
+					alert("服务器繁忙");
+				}
+			});
+		}
+	}
 	</script>
 </html>
