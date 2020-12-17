@@ -56,7 +56,8 @@
 					</div>
 					</br>
 					<button type="button" id="sub" class="btn btn-primary block full-width m-b">登 录</button>
-					<p class="text-muted text-center"> <a href="login.html#"><small>忘记密码了？</small></a> | <a href="register.html">注册一个新账号</a>
+					<p class="text-muted text-center"> <a id = "subs"><small>忘记密码了？</small></a> 
+					| <a href="register.html">注册一个新账号</a>
 					</p>
 
 				</form>
@@ -69,6 +70,9 @@
 		<script src="../static/admin/js/jquery.form.js"></script>
 		<script src="../static/admin/js/jquery.cookie.js"></script>
 		<script type="application/javascript">
+			$("#subs").click(function(){
+				alert("请联系管理员sirwsl");
+			})
 			function refresh(obj) {
 				obj.src = "http://test.wslhome.top/verify/getJpg/v1?id=" + Math.random();
 			}
