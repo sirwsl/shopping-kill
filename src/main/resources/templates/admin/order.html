@@ -84,13 +84,14 @@
 	            <div class="modal-body">
 	                <div class="row">
 	                        <h3 class="m-t-none m-b">订单改价</h3>
-	                        <form role="form" id = "exchanges">
+	                        <form role="form" name = "exchanges" id = "exchanges" enctype="application/x-www-form-urlencoded" action="http://test.wslhome.top/admin/modifyPrice/v1"
+								method="get" accept-charset="utf-8">
 								<input id = "orderId" name = "orderId" style="display:none" readonly="true" value = "" />
 	                            <div class="col-sm-6">
 									<div class="form-group">
 									    <label>商品原价</label>
 									    <div class="col-xl-8">
-											<input type="number"  class="form-control" id = "oldMoney"/>
+											<input type="number"  class="form-control" id = "oldMoney" name = "oldMoney"/>
 										</div>
 									</div>
 								</div>	
@@ -98,7 +99,7 @@
 									<div class="form-group">
 									    <label>现在价格</label>
 									    <div class="col-xl-8">
-											<input type="number" placeholder="价格" class="form-control" id= "bigDecimal" />
+											<input type="number" class="form-control" id= "bigDecimal" name = "bigDecimal"/>
 										</div>
 									</div>
 								</div>
@@ -117,7 +118,7 @@
 	<!-- 全局js -->
 	<script src="../static/admin/js/jquery.min.js?v=2.1.4"></script>
 	<script src="../static/admin/js/bootstrap.min.js?v=3.3.6"></script>
-	<script src="../static/admin/js/plugins/footable/footable.all.min.js"></script>
+
 	<script src="../static/admin/js/jquery.form.js"></script>
 	<script src="../static/admin/js/jquery.cookie.js"></script>
 	<script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
@@ -135,11 +136,11 @@
 	    	crossDomain: true
 	    });
 	    
-	    // $(function() {
-	    // 	if ($.cookie("token") == null || $.cookie("token") == "") {
-	    // 		window.location.href = "/admin/login.html"
-	    // 	}
-	    // });
+	    $(function() {
+	    	if ($.cookie("token") == null || $.cookie("token") == "") {
+	    		window.location.href = "/admin/login.html"
+	    	}
+	    });
 	    function onclicks(num){
 	    		order(num,null,null,null,null,null);
 	    			
@@ -196,7 +197,6 @@
 	    		}, {
 	    			title:"支付金额",
 	    			field: 'payPrice',
-	    			visible: type == 2 || type == 3 ? true:false 
 	    		} , {
 	    			title:"创建时间",
 	    			field: 'orderTime',
@@ -268,21 +268,13 @@
 			$("#orderId").val(row.id);
 			$("#bigDecimal").val(row.payPrice);
 			$("#oldMoney").val(row.payPrice);
+			
 		}
 		$("#sub").click(function(){
-			var data = new FormData(document.getElementById("exchanges"));
-			$.ajax({
-				url: "http://test.wslhome.top/admin/modifyPrice/v1",
-				data: data,
-				type: 'get',
-				success: function(data) {
-					alert(data.userMsg);
-					$('#order').bootstrapTable('refresh'); 
-				},
-				error: function(data) {
-					alert("服务器繁忙");
-				}
-			});
+			$("#exchanges").ajaxSubmit(function(re) {
+				alert(re.userMsg);
+				
+			})
 		})
 		
 		function onpay(num){

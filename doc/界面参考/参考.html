@@ -11,11 +11,11 @@
 
     <title> - 主页示例</title>
 
-    <link rel="shortcut icon" href="favicon.ico"> <link href="../static/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
-    <link href="../static/admin/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link rel="shortcut icon" href="../../src/main/resources/templates/admin/favicon.ico"> <link href="../../src/main/resources/templates/static/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../../src/main/resources/templates/static/admin/css/font-awesome.css?v=4.4.0" rel="stylesheet">
 
-    <link href="../static/admin/css/animate.css" rel="stylesheet">
-    <link href="../static/admin/css/style.css?v=4.1.0" rel="stylesheet">
+    <link href="../../src/main/resources/templates/static/admin/css/animate.css" rel="stylesheet">
+    <link href="../../src/main/resources/templates/static/admin/css/style.css?v=4.1.0" rel="stylesheet">
 
 </head>
 
@@ -29,11 +29,10 @@
 			                <h5>操作日志记录</h5>
 			            </div>
 			            <div class="mytab">
-							<table id="table" class="table table-hover"></table>
+							<table id="mytab" class="table table-hover"></table>
 			            </div>
 
 			        </div>
-					
 			    </div>
         </div>
 	</div>
@@ -41,76 +40,71 @@
 	
 	<!-- 全局js -->
 	
-	<script src="../static/admin/js/jquery.min.js?v=2.1.4"></script>
-	<script src="../static/admin/js/bootstrap.min.js?v=3.3.6"></script>
-	<script src="../static/admin/js/plugins/footable/footable.all.min.js"></script>
+	<script src="../../src/main/resources/templates/static/admin/js/jquery.min.js?v=2.1.4"></script>
+	<script src="../../src/main/resources/templates/static/admin/js/bootstrap.min.js?v=3.3.6"></script>
+	<script src="../../src/main/resources/templates/static/admin/js/plugins/footable/footable.all.min.js"></script>
 		
 	<!-- 自定义js -->
-	<script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
-	 <script src="../static/admin/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
-	 <script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+	<script src="../../src/main/resources/templates/static/admin/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+	 <script src="../../src/main/resources/templates/static/admin/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+	 <script src="../../src/main/resources/templates/static/admin/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
 	 
 	 
-	<script src="../static/admin/js/content.js?v=1.0.0"></script>
+	<script src="../../src/main/resources/templates/static/admin/js/content.js?v=1.0.0"></script>
 	<script>
-		
 	$(function() {
-		$.ajax({
-		        type: "get",
-		        url: "http://test.wslhome.top/admin/getActivityAll/v1",
-		        data:{"status":1},
-		        dataType: "json",
-		        success: function (msg) {
-					console.log(msg);
-		            if (msg.data) {
-		                var map = {};
-						map.total = msg.data.total;
-						map.rows = msg.data.records;
-		                //将数据库中获取到的数据渲染到id为"table"的这个表格中
-						console.log(map);
-		                $('#table').bootstrapTable("load", msg.data.records);
-		            }
-		        }
-		    })
-			
-	    $('#table').bootstrapTable({
-	        method: "get",//请求方式
-	        striped: true,//是否隔行变色
-	        singleSelect: false,
-	        dataType: "json",
-	        pagination: true, //分页
-	        pageSize: 10,//每页的记录行数
-	        pageNumber: 1,//初始化加载第一页，默认第一页
-	        search: false, //显示搜索框
-	        // contentType: "application/x-www-form-urlencoded",
-	        queryParams: null,
+	
+	    $('#mytab').bootstrapTable({
+	        method : 'get',
+	        // contentType: "application/x-www-form-urlencoded",//当请求方法为post的时候,必须要有！！！！
+	        url : "http://test.wslhome.top/admin/getLoggersAll/v1",
+	        striped : true, // 是否显示行间隔色
+	        pageNumber : 1, // 初始化加载第一页
+	        pagination : true,// 是否分页
+	        sidePagination : 'client',// server:服务器端分页|client：前端分页
+	        pageSize : 4,// 单页记录数
+	        pageList : [ 5, 10, 20, 30 ],// 可选择单页记录数
+	        //showRefresh : true,// 刷新按钮
+	        queryParams : function(params) {// 上传服务器的参数
+	            var temp = {// 如果是在服务器端实现分页，limit、offset这两个参数是必须的
+	                limit : params.limit, // 每页显示数量
+	                offset : params.offset, // SQL语句起始索引
+	            // page: (params.offset / params.limit) + 1, //当前页码
+	 
+	            };
+	            return temp;
+	        },
+			 responseHandler: function (res) {
+			                    console.log(res.data.admin)
+			                    return eval(res.data.admin)
+			                },
 	        columns : [ {
 	            title : 'id',
 	            field : 'id',
+	            formatter : function(value,records, index){   //主要配置在这里
+				console.log(records.id)
+	                            return row.records.id;
+	                        }
+	        }, {
+	            title : '操作细节',
+	            field : 'detail',
 	            sortable : true
 	        }, {
-	            title : '商品名',
-	            field : 'goodsName',
-	            sortable : true
+	            title : '操作人',
+	            field : 'manId',
 	        }, {
-	            title : '开始时间',
-	            field : 'startTime',
-	        }, {
-	            title : '结束时间',
-	            field : 'endTime',
+	            title : 'IP',
+	            field : 'ip',
 				sortable : true
 	        } , {
 	            title : '创建时间',
 	            field : 'creatTime',
 				sortable : true
 	        }, {
-	            title : '商品列表',
-	            field : 'skuList',
-				formatter : function(value,row, index){   //主要配置在这里
-				console.log(row.id)
-				                return row.id;
-				            }
-	        }] 
+	            title : '等级',
+	            field : 'grade',
+				sortable : true
+	        }]
 	    })
 	 
 	    // 定义删除、更新操作
