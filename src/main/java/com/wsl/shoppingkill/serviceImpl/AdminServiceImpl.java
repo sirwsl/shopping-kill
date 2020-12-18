@@ -104,7 +104,9 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
                     .setMail(CommonUtil.replaceUserName(li.getMail()))
                     .setPassword(CommonUtil.replaceUserName(li.getPassword()))
                     .setPhone(CommonUtil.replaceUserName(li.getName()))
-                    .setWeChat(CommonUtil.replaceUserName(li.getWeChat())));
+                    .setWeChat(CommonUtil.replaceUserName(li.getWeChat()))
+                    .setNickName(CommonUtil.replaceUserName(li.getNickName())));
+
         }
         return admins;
     }

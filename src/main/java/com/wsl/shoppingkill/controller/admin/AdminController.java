@@ -1,9 +1,10 @@
 package com.wsl.shoppingkill.controller.admin;
 
 import com.wsl.shoppingkill.common.Result;
+import com.wsl.shoppingkill.common.util.CommonUtil;
 import com.wsl.shoppingkill.component.request.AbstractCurrentRequestComponent;
-import com.wsl.shoppingkill.obj.constant.BaseEnum;
 import com.wsl.shoppingkill.domain.Admin;
+import com.wsl.shoppingkill.obj.constant.BaseEnum;
 import com.wsl.shoppingkill.service.AdminService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -101,9 +102,14 @@ public class AdminController {
             return Result.error("error","登录异常，请重新尝试修改");
         }
         Admin admin = adminService.getById(id);
+
         if (Objects.isNull(admin)){
             return Result.error("error","当前登录id异常");
         }
+        admin.setWeChat(CommonUtil.replaceUserName(admin.getWeChat()))
+                .setPhone(CommonUtil.replaceUserName(admin.getPhone()))
+                .setIdCard(CommonUtil.replaceUserName(admin.getIdCard()))
+                .setNickName(CommonUtil.replaceUserName(admin.getNickName()));
         return Result.success(admin);
     }
 
