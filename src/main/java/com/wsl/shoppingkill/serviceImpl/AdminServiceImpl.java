@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wsl.shoppingkill.common.log.MyLog;
 import com.wsl.shoppingkill.common.util.CommonUtil;
+import com.wsl.shoppingkill.component.request.AbstractCurrentRequestComponent;
 import com.wsl.shoppingkill.domain.Admin;
 import com.wsl.shoppingkill.mapper.AdminMapper;
 import com.wsl.shoppingkill.obj.bo.MailObject;
@@ -12,6 +13,7 @@ import com.wsl.shoppingkill.obj.bo.SmsObject;
 import com.wsl.shoppingkill.obj.constant.LoggerEnum;
 import com.wsl.shoppingkill.obj.constant.RabbitMqEnum;
 import com.wsl.shoppingkill.obj.constant.SmsEnum;
+import com.wsl.shoppingkill.obj.exception.ExperienceException;
 import com.wsl.shoppingkill.service.AdminService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -21,6 +23,7 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author WangShilei
@@ -31,9 +34,11 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
     @Resource
     private AdminMapper adminMapper;
 
-
     @Resource
     private RabbitTemplate rabbitTemplate;
+
+    @Resource
+    private AbstractCurrentRequestComponent abstractCurrentRequestComponent;
 
     @Override
     @MyLog(detail = "添加管理员",grade = LoggerEnum.SERIOUS,value = "#admin.name")
@@ -62,7 +67,15 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
 
     @Override
     @MyLog(detail = "删除管理员",grade = LoggerEnum.SERIOUS,value = "#id")
-    public boolean delAdmin(Long id) {
+    public boolean delAdmin(Long id) throws ExperienceException{
+        try {
+            if(Objects.nonNull(abstractCurrentRequestComponent.getCurrentUser()) && abstractCurrentRequestComponent.getCurrentUser().getFlag() != null
+                    && abstractCurrentRequestComponent.getCurrentUser().getFlag()==1000){
+                throw new ExperienceException("体验账号权限不足");
+            }
+        }catch (Exception e){
+            throw new ExperienceException("体验账号权限不足");
+        }
         Admin admin = adminMapper.selectById(id);
         if (adminMapper.deleteById(id)>0){
             if (StringUtils.isNotBlank(admin.getPhone())){

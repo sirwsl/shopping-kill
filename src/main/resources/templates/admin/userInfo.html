@@ -189,7 +189,10 @@
 				        dataType: "json",
 				        success: function (msg) {
 							alert(msg.userMsg);
-				        }
+				        },
+						error: function(msg) {
+							alert(msg.userMsg);
+						}
 				    })
 			});
 		</script>

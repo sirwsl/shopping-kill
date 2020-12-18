@@ -246,7 +246,10 @@
 		    success : function(data) {
 				alert(data.userMsg);
 		        $('#sub').bootstrapTable('refresh');
-		    }
+		    },
+			error: function(msg) {
+				alert(msg.userMsg);
+			}
 		});
 	}
 	

@@ -182,7 +182,10 @@
 			        success: function (msg) {
 						alert(msg.userMsg);
 						$('#advertiesmant').bootstrapTable("refresh");
-			        }
+			        },
+					error: function(data) {
+						alert(data.userMsg);
+					}
 			    })
 		});
 		
@@ -311,6 +314,9 @@
 					success: function (msg) {
 						alert(msg.userMsg);
 						$('#advertiesmant').bootstrapTable("refresh");
+					},
+					error: function(msg) {
+						alert(msg.userMsg);
 					}
 				 })
 			 }

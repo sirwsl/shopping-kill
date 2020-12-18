@@ -328,8 +328,8 @@
 						alert(data.userMsg);
 					}
 				},
-				error: function(data) {
-					alert("服务器繁忙");
+				error: function(msg) {
+					alert(msg.userMsg);
 				}
 			});
 	

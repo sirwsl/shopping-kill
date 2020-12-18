@@ -264,8 +264,11 @@
 		  url: "http://test.wslhome.top/admin/delUser/v1",
 		  data: {id:value},
 		  success: function (res) {
-            alert(res.data);
+            alert(res.userMsg);
 			$('#userTable').bootstrapTable('refresh'); 
+			},
+			error: function(msg) {
+				alert(msg.userMsg);
 			}
 		});
 	})

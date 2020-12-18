@@ -339,6 +339,9 @@
 					}
 					
 					$('#afterSale').bootstrapTable("refresh");
+				},
+				error: function(msg) {
+					alert(msg.userMsg);
 				}
 			})
 		})	

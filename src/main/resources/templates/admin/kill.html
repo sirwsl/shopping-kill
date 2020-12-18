@@ -296,16 +296,16 @@
 						id: arrTemp[index]
 					},
 					type: 'delete',
-					success: function(data) {
-						if (data.code == 0) {
+					success: function(msg) {
+						if (msg.code == 0) {
 							alert("删除成功");
 							$('#killAvtivity').bootstrapTable('refresh');
 						} else {
-							alert(data.userMsg);
+							alert(msg.userMsg);
 						}
 					},
-					error: function(data) {
-						alert("服务器繁忙");
+					error: function(msg) {
+						alert(msg.userMsg);
 					}
 				});
 

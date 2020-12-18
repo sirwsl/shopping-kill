@@ -37,7 +37,7 @@ public class AdminController {
      * @date 2020/11/9 11:33
      **/
     @PostMapping("/addAdmin/v1")
-    public Result<Boolean> addAdmin(@Valid Admin admin){
+    public Result<Boolean> addAdmin(@Valid Admin admin) throws ExperienceException{
         if (!component.getCurrentUser().getFlag().equals(BaseEnum.ADMIN)){
             return Result.error("error","只有超级管理员有权限");
         }
@@ -72,7 +72,7 @@ public class AdminController {
      * @date 2020/11/9 11:35
      **/
     @DeleteMapping("/delAdmin/v1")
-    public Result<Boolean> delAdmin(Long id){
+    public Result<Boolean> delAdmin(Long id) throws ExperienceException{
         if (id == null || id == 0){
             return Result.error("error","id不能为空");
         }

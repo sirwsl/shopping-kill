@@ -269,11 +269,14 @@
 			},
 		     dataType: "json",
 		     success: function (msg) {
-		 		alert(msg.data);
+		 		alert(msg.userMsg);
 		 		if (re.code == 0) {
 		 			window.location.href = "/admin/login.html"
 		 		}
-		 	}
+		 	},
+			error: function(msg) {
+				alert(msg.userMsg);
+			}
 		 })
 		 
 	 })

@@ -7,13 +7,15 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wsl.shoppingkill.common.log.MyLog;
 import com.wsl.shoppingkill.common.util.CommonUtil;
-import com.wsl.shoppingkill.obj.constant.LoggerEnum;
-import com.wsl.shoppingkill.obj.constant.RabbitMqEnum;
-import com.wsl.shoppingkill.obj.constant.SmsEnum;
+import com.wsl.shoppingkill.component.request.AbstractCurrentRequestComponent;
 import com.wsl.shoppingkill.domain.User;
 import com.wsl.shoppingkill.mapper.UserMapper;
 import com.wsl.shoppingkill.obj.bo.MailObject;
 import com.wsl.shoppingkill.obj.bo.SmsObject;
+import com.wsl.shoppingkill.obj.constant.LoggerEnum;
+import com.wsl.shoppingkill.obj.constant.RabbitMqEnum;
+import com.wsl.shoppingkill.obj.constant.SmsEnum;
+import com.wsl.shoppingkill.obj.exception.ExperienceException;
 import com.wsl.shoppingkill.service.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -23,6 +25,7 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author WangShilei
@@ -36,6 +39,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Resource
     private RabbitTemplate rabbitTemplate;
 
+    @Resource
+    private AbstractCurrentRequestComponent abstractCurrentRequestComponent;
 
     @Override
     public IPage<User> getUserAll(Integer size, Integer current) {
@@ -53,7 +58,15 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     @MyLog(detail = "修改会员信息",grade = LoggerEnum.INFO,value = "#user.id")
-    public boolean updateUserInfo(User user) {
+    public boolean updateUserInfo(User user) throws ExperienceException{
+        try {
+            if(Objects.nonNull(abstractCurrentRequestComponent.getCurrentUser()) && abstractCurrentRequestComponent.getCurrentUser().getFlag() != null
+                    && abstractCurrentRequestComponent.getCurrentUser().getFlag()==1000){
+                throw new ExperienceException("体验账号权限不足");
+            }
+        }catch (Exception e){
+            throw new ExperienceException("体验账号权限不足");
+        }
         if (userMapper.updateById(user)>0){
             rabbitTemplate.convertAndSend(RabbitMqEnum.Exchange.EXCHANGE_NOTICE,RabbitMqEnum.Key.KEY_NOTICE_SMS,
                     getSmsObject(user,SmsEnum.UPDATE_INFO.getCode()));
@@ -68,7 +81,15 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     @MyLog(detail = "删除会员",grade = LoggerEnum.SERIOUS,value = "#id")
-    public boolean delUserInfo(Long id) {
+    public boolean delUserInfo(Long id) throws ExperienceException{
+        try {
+            if(Objects.nonNull(abstractCurrentRequestComponent.getCurrentUser()) && abstractCurrentRequestComponent.getCurrentUser().getFlag() != null
+                    && abstractCurrentRequestComponent.getCurrentUser().getFlag()==1000){
+                throw new ExperienceException("体验账号权限不足");
+            }
+        }catch (Exception e){
+            throw new ExperienceException("体验账号权限不足");
+        }
         User user = userMapper.selectById(id);
         if(userMapper.deleteById(id)>0){
             if (StringUtils.isNotBlank(user.getPhone())){

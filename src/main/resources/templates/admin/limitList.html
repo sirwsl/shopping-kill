@@ -285,9 +285,12 @@
 		    data : "id=" + ids,
 		    type : "delete",
 		    dataType : "json",
-		    success : function(data) {
+		    success : function(msg) {
 		        $('#limitList').bootstrapTable('refresh');
-		    }
+		    },
+			error: function(msg) {
+				alert(msg.userMsg);
+			}
 		});
 	}
 	

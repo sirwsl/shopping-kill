@@ -351,8 +351,8 @@
 							alert(data.userMsg);
 						}
 					},
-					error: function(data) {
-						alert("服务器繁忙");
+					error: function(msg) {
+						alert(msg.userMsg);
 					}
 				});
 		
@@ -401,6 +401,9 @@
 			    success: function (msg) {
 					alert(msg.userMsg);
 					$('#goods').bootstrapTable("refresh");
+				},
+				error: function(data) {
+					alert(data.userMsg);
 				}
 			})
 			
@@ -414,8 +417,11 @@
 		    dataType: "json",
 			async:true, 
 		    success: function (msg) {
-				alert(msg.data);
+				alert(msg.userMsg);
 				$('#goods').bootstrapTable("refresh");
+			},
+			error: function(msg) {
+				alert(msg.userMsg);
 			}
 		})
 	}

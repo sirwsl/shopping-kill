@@ -6,11 +6,12 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wsl.shoppingkill.common.log.MyLog;
 import com.wsl.shoppingkill.component.request.AbstractCurrentRequestComponent;
+import com.wsl.shoppingkill.domain.SubscriptionHistory;
+import com.wsl.shoppingkill.mapper.SubscriptionHistoryMapper;
 import com.wsl.shoppingkill.obj.constant.BaseEnum;
 import com.wsl.shoppingkill.obj.constant.LoggerEnum;
 import com.wsl.shoppingkill.obj.constant.RabbitMqEnum;
-import com.wsl.shoppingkill.domain.SubscriptionHistory;
-import com.wsl.shoppingkill.mapper.SubscriptionHistoryMapper;
+import com.wsl.shoppingkill.obj.exception.ExperienceException;
 import com.wsl.shoppingkill.obj.param.PageTimeParam;
 import com.wsl.shoppingkill.service.SubscriptionHistoryService;
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.Objects;
 
 /**
  * @author WangShilei
@@ -40,7 +42,15 @@ public class SubscriptionHistoryServiceImpl extends ServiceImpl<SubscriptionHist
     @Override
     @Transactional(rollbackFor = Exception.class)
     @MyLog(detail = "添加发布订阅内容", value = "#subscriptionHistory.id", grade = LoggerEnum.INFO)
-    public boolean sendNewsSubscription(SubscriptionHistory subscriptionHistory) {
+    public boolean sendNewsSubscription(SubscriptionHistory subscriptionHistory) throws ExperienceException{
+        try {
+            if(Objects.nonNull(abstractCurrentRequestComponent.getCurrentUser()) && abstractCurrentRequestComponent.getCurrentUser().getFlag() != null
+                    && abstractCurrentRequestComponent.getCurrentUser().getFlag()==1000){
+                throw new ExperienceException("体验账号权限不足");
+            }
+        }catch (Exception e){
+            throw new ExperienceException("体验账号权限不足");
+        }
         subscriptionHistory.setAdminId(abstractCurrentRequestComponent.getCurrentUser().getId());
         subscriptionHistoryMapper.insert(subscriptionHistory);
         if (subscriptionHistory.getType().equals(BaseEnum.PHONE)) {

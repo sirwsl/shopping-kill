@@ -173,8 +173,8 @@
 					$('#TodayOut').html(0);
 				}
 			},
-			error: function() {
-				alert("获取失败");
+			error: function(msg) {
+				alert(msg.userMsg);
 			}
 		});
 	</script>

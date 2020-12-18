@@ -293,7 +293,10 @@
 							keyField : 'id',
 							data : msg.data
 						});
-				    }
+				    },
+					error: function(msg) {
+						alert(msg.userMsg);
+					}
 				})
 				index = false;
 			}
@@ -426,8 +429,8 @@
 							alert(data.userMsg);
 						}
 					},
-					error: function(data) {
-						alert("服务器繁忙");
+					error: function(msg) {
+						alert(msg.userMsg);
 					}
 				});
 			}
@@ -464,6 +467,9 @@
 			    success: function (msg) {
 					alert(msg.userMsg);
 					$('#sku').bootstrapTable("refresh");
+				},
+				error: function(msg) {
+					alert(msg.userMsg);
 				}
 			})
 			

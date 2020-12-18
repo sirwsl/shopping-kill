@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wsl.shoppingkill.common.log.MyLog;
 import com.wsl.shoppingkill.common.util.CommonUtil;
+import com.wsl.shoppingkill.component.request.AbstractCurrentRequestComponent;
 import com.wsl.shoppingkill.domain.Order;
 import com.wsl.shoppingkill.mapper.OrderMapper;
 import com.wsl.shoppingkill.obj.bo.OrderMqBO;
@@ -14,6 +15,7 @@ import com.wsl.shoppingkill.obj.constant.LoggerEnum;
 import com.wsl.shoppingkill.obj.constant.RabbitMqEnum;
 import com.wsl.shoppingkill.obj.constant.RedisEnum;
 import com.wsl.shoppingkill.obj.constant.SmsEnum;
+import com.wsl.shoppingkill.obj.exception.ExperienceException;
 import com.wsl.shoppingkill.obj.param.OrderParam;
 import com.wsl.shoppingkill.obj.vo.OrderVO;
 import com.wsl.shoppingkill.service.OrderService;
@@ -41,6 +43,9 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     @Resource
     private StringRedisTemplate stringRedisTemplate;
 
+    @Resource
+    private AbstractCurrentRequestComponent abstractCurrentRequestComponent;
+
     @Override
     public IPage<OrderVO> getAllOrder(OrderParam orderParam, Long current, Long size){
         final IPage<OrderVO> allOrder = orderMapper.getAllOrder(new Page<>(current, size), orderParam);
@@ -53,7 +58,17 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     }
 
     @Override
-    public boolean remind2Pay(Long orderId) {
+    public boolean remind2Pay(Long orderId) throws ExperienceException {
+
+        try {
+            if(Objects.nonNull(abstractCurrentRequestComponent.getCurrentUser()) && abstractCurrentRequestComponent.getCurrentUser().getFlag() != null
+                    && abstractCurrentRequestComponent.getCurrentUser().getFlag()==1000){
+                throw new ExperienceException("体验账号权限不足");
+            }
+        }catch (Exception e){
+            throw new ExperienceException("体验账号权限不足");
+        }
+
         SmsObject smsObject = reminderInfoObjet(orderId).setCode(SmsEnum.REMIND_PAY.getCode());
         if(Objects.isNull(smsObject)){
             return false;
@@ -90,7 +105,15 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     }
 
     @Override
-    public boolean reminderEvaluation(Long orderId) {
+    public boolean reminderEvaluation(Long orderId) throws ExperienceException{
+        try {
+            if(Objects.nonNull(abstractCurrentRequestComponent.getCurrentUser()) && abstractCurrentRequestComponent.getCurrentUser().getFlag() != null
+                    && abstractCurrentRequestComponent.getCurrentUser().getFlag()==1000){
+                throw new ExperienceException("体验账号权限不足");
+            }
+        }catch (Exception e){
+            throw new ExperienceException("体验账号权限不足");
+        }
         SmsObject smsObject = reminderInfoObjet(orderId).setCode(SmsEnum.REMIND_EVALUATION.getCode());
         if(Objects.isNull(smsObject)){
             return false;

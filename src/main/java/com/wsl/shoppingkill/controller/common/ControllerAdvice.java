@@ -173,7 +173,7 @@ public class ControllerAdvice {
     }
 
     @ExceptionHandler(ExperienceException.class)
-    public Result<Object> experienceException(UnsupportedEncodingException e) {
+    public Result<Object> experienceException(ExperienceException e) {
         log.error("账号权限不足",e);
         return Result.paramError(getOutMsg(e), "账号权限不足，如需体验全部，请联系管理员");
     }
