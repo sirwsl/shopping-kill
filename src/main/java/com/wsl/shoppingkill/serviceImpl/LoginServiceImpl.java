@@ -100,7 +100,6 @@ public class LoginServiceImpl implements LoginService {
     }
 
     @Override
-    @MyLog(detail = "管理员登录",grade = LoggerEnum.INFO)
     public boolean experienceLogin(HttpServletResponse response, UserParam userParam) throws UnsupportedEncodingException {
         UserBO userBO = redisTemplate.opsForValue().get(RedisEnum.EXPERIENCE_LOGIN + userParam.getName());
         if (!Objects.isNull(userBO)){
