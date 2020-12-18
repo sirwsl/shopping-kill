@@ -1,8 +1,11 @@
 package com.wsl.shoppingkill.component;
 
 import com.google.code.kaptcha.impl.DefaultKaptcha;
+import com.wsl.shoppingkill.obj.constant.RedisEnum;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -29,6 +32,8 @@ public class VerifyComponent {
     @Resource
     private DefaultKaptcha katha;
 
+    @Resource
+    private StringRedisTemplate stringRedisTemplate;
 
     /**
      * 生成验证码
@@ -82,6 +87,18 @@ public class VerifyComponent {
             log.info("rightCode={}, tryCode={}", code, tryCode);
             return tryCode.equalsIgnoreCase(code);
 
+    }
+
+    /**
+     * 校验用户本周内是否使用过
+     * @author wangShilei
+     * @date 2020/12/18 18:17
+     * @param name :
+     * @return boolean
+     */
+    public boolean checkLogin(String name){
+        final String s = stringRedisTemplate.opsForValue().get(RedisEnum.EXPERIENCE_FLAG + name);
+        return !StringUtils.isBlank(s);
     }
 
 }

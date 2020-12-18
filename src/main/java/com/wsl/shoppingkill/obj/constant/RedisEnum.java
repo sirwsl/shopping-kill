@@ -19,4 +19,8 @@ public class RedisEnum {
 
     public static final String COUNT_LIKE_SUM="count:like";
 
+    public static final String EXPERIENCE_LOGIN = "experience:login:";
+
+    public static final String EXPERIENCE_FLAG = "experience:flag:";
+
 }

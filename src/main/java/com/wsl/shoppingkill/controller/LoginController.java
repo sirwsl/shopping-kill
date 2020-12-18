@@ -2,9 +2,12 @@ package com.wsl.shoppingkill.controller;
 
 import com.wsl.shoppingkill.common.Result;
 import com.wsl.shoppingkill.component.VerifyComponent;
+import com.wsl.shoppingkill.domain.Experience;
 import com.wsl.shoppingkill.obj.constant.BaseEnum;
 import com.wsl.shoppingkill.obj.param.UserParam;
+import com.wsl.shoppingkill.service.ExperienceService;
 import com.wsl.shoppingkill.service.LoginService;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,7 +35,8 @@ public class LoginController {
     @Resource
     private VerifyComponent verifyComponent;
 
-
+    @Resource
+    private ExperienceService experienceService;
     /**
      * 用户登录接口
      *
@@ -74,7 +78,13 @@ public class LoginController {
         if (!verifyComponent.imgVerifyCode(userParam.getCode(), request)) {
             return Result.error("error", "验证码不正确");
         }
+        if (verifyComponent.checkLogin(userParam.getName())){
+            return Result.error("error","您本周内已经体验过，如需再次体验，请联系管理员！ （管理员QQ:2572396933）");
+        }
 
+        if (loginService.experienceLogin(response,userParam)){
+            return Result.success("登录成功");
+        }
         userParam.setType(BaseEnum.ADMIN);
         if (loginService.login(response, userParam)) {
             return Result.success("登录成功");
@@ -93,5 +103,10 @@ public class LoginController {
     @GetMapping("/exit/v1")
     public Result<Boolean> exitLogin(HttpServletResponse response, HttpServletRequest request){
         return Result.success(loginService.exit(response,request));
+    }
+
+    @GetMapping("/getExperience/v1")
+    public Result<String> getExperience(@Validated Experience experience,HttpServletRequest request){
+        return Result.success(experienceService.getExp(experience,request));
     }
 }

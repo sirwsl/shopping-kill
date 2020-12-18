@@ -56,24 +56,8 @@ public class LoginServiceImpl implements LoginService {
         if (Objects.isNull(userBO)){
             return false;
         }
-        userBO.setFlag(userParam.getType());
-        //设置头
-        userBO.setFlag(userParam.getType());
         String token = jwtComponent.getToken(userBO);
-        response.setHeader(JwtEnum.AUTH_HEADER_KEY, JwtEnum.TOKEN_PREFIX+token);
-        Cookie name = new Cookie("name", URLEncoder.encode(userBO.getName(), "UTF-8"));
-        name.setPath("/");
-        name.setDomain(doMainUrl);
-        response.addCookie(name);
-        Cookie img = new Cookie("img", userBO.getUrl());
-        img.setPath("/");
-        img.setDomain(doMainUrl);
-        response.addCookie(img);
-        Cookie token1 = new Cookie("token", JwtEnum.TOKEN_PREFIX + token);
-        token1.setMaxAge(redisToken.intValue());
-        token1.setPath("/");
-        token1.setDomain(doMainUrl);
-        response.addCookie(token1);
+        setRes(response,token,userBO);
         redisTemplate.opsForValue().set(RedisEnum.VERIFY_TOKEN+token,userBO,redisToken, TimeUnit.SECONDS);
         return true;
     }
@@ -110,5 +94,35 @@ public class LoginServiceImpl implements LoginService {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public boolean experienceLogin(HttpServletResponse response, UserParam userParam) throws UnsupportedEncodingException {
+        UserBO userBO = redisTemplate.opsForValue().get(RedisEnum.EXPERIENCE_LOGIN + userParam.getName());
+        if (!Objects.isNull(userBO)){
+            String token = jwtComponent.getToken(userBO);
+            setRes(response,token,userBO);
+            return true;
+        }
+        return false;
+    }
+
+
+
+    private void setRes(HttpServletResponse response,String token,UserBO userBO) throws UnsupportedEncodingException {
+        response.setHeader(JwtEnum.AUTH_HEADER_KEY, JwtEnum.TOKEN_PREFIX+token);
+        Cookie name = new Cookie("name", URLEncoder.encode(userBO.getName(), "UTF-8"));
+        name.setPath("/");
+        name.setDomain(doMainUrl);
+        response.addCookie(name);
+        Cookie img = new Cookie("img", userBO.getUrl());
+        img.setPath("/");
+        img.setDomain(doMainUrl);
+        response.addCookie(img);
+        Cookie token1 = new Cookie("token", JwtEnum.TOKEN_PREFIX + token);
+        token1.setMaxAge(redisToken.intValue());
+        token1.setPath("/");
+        token1.setDomain(doMainUrl);
+        response.addCookie(token1);
     }
 }

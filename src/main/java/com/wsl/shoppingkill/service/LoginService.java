@@ -32,4 +32,15 @@ public interface LoginService {
      * @return boolean:
      */
     boolean exit(HttpServletResponse response, HttpServletRequest request);
+
+    /**
+     * 判断是否是体验用户
+     * @param response:
+     * @param userParam :
+     * @return boolean
+     * @throws UnsupportedEncodingException
+     */
+    boolean experienceLogin(HttpServletResponse response, UserParam userParam) throws UnsupportedEncodingException;
+
+
 }

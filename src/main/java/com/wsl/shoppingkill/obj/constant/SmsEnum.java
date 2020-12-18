@@ -68,8 +68,12 @@ public enum SmsEnum {
      *
      * 尊敬的{1}用户，您购买的{2}商品还未对其进行评价，在此邀请您对其做出评价，谢谢！
      */
-    REMIND_EVALUATION(2448,"提醒评价");
+    REMIND_EVALUATION(2448,"提醒评价"),
 
+    /**
+     * 尊敬的：{1}  用户。您的体验账号申请已经通过审核，登录账号为您的手机号：{2} ，密码为： {3}   。该账号体验时间为6小时。
+     */
+    EXPERIENCE_USER(2755,"体验用户");
 
     private final int code;
 

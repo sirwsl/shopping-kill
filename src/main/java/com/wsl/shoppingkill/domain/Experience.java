@@ -1,6 +1,5 @@
 package com.wsl.shoppingkill.domain;
 
-import com.alibaba.fastjson.annotation.JSONField;
 import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -8,11 +7,9 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
-import com.wsl.shoppingkill.common.fastjson.BaseEnumSerializer;
-import com.wsl.shoppingkill.common.fastjson.IEnumDeSerializer;
-import com.wsl.shoppingkill.obj.constant.SexEnum;
 import lombok.*;
 import lombok.experimental.Accessors;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Id;
@@ -27,14 +24,14 @@ import java.time.LocalDateTime;
  * @author wangshilei
  * @date 2020/11/4 16:31
  **/
-@TableName("t_admin")
+@TableName("t_experience")
 @EqualsAndHashCode(callSuper = true)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 @Accessors(chain = true)
-public class Admin extends Model<Admin> implements Serializable {
+public class Experience extends Model<Experience> implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
@@ -44,12 +41,10 @@ public class Admin extends Model<Admin> implements Serializable {
     @TableId(type = IdType.AUTO)
     private Long id;
 
-    /**
-     * 账号
-     */
-    @NotNull(message="账号不能为空")
-    @NotBlank(message="账号不能为空")
-    private String name;
+
+    @NotNull(message="体验者用户姓名")
+    @NotBlank(message="体验者用户姓名")
+    private String userName;
 
 
     /**
@@ -57,34 +52,10 @@ public class Admin extends Model<Admin> implements Serializable {
     */
     @NotNull(message = "密码不能为空")
     @NotBlank(message = "密码不能为空")
+    @Length(min =  6)
     private String password;
 
 
-    /**
-     * 用户姓名
-     */
-    @NotNull(message="用户名不能为空")
-    @NotBlank(message="用户名不能为空")
-    private String nickName;
-
-
-    /**
-     * 用户头像
-     */
-    private String img;
-
-    /**
-     * 性别
-     */
-    @JSONField(serializeUsing = BaseEnumSerializer.class)
-    @JsonDeserialize(using = IEnumDeSerializer.class)
-    private SexEnum sex;
-    /**
-    * 身份证号
-    */
-    @NotNull(message = "身份证号不能为空")
-    @NotBlank(message="用户名不能为空")
-    private String idCard;
 
     /**
     * 手机号
@@ -96,24 +67,13 @@ public class Admin extends Model<Admin> implements Serializable {
     /**
      * 邮箱
      */
-    private String mail;
+    private String ip;
 
-    /**
-    * 家庭住址
-    */
-    @NotNull(message = "家庭住址不能为空")
-    @NotBlank(message = "家庭住址不能为空")
-    private String address;
+    @NotNull(message = "申请内容不能为空")
+    @NotBlank(message = "申请内容不能为空")
+    private String detail;
 
-    /**
-    * 微信
-    */
-    private String weChat;
 
-    /**
-     * 等级
-     */
-    private Integer flag;
 
     /**
     * 创建时间
@@ -144,29 +104,19 @@ public class Admin extends Model<Admin> implements Serializable {
 
     public static final String ID = "id";
 
-    public static final String NAME = "name";
+    public static final String USER_NAME = "user_name";
 
     public static final String PASSWORD = "password";
 
-    public static final String NICK_NAME = "nick_name";
-
-    public static final String IMG = "img";
-
-    public static final String SEX = "sex";
-
-    public static final String ID_CARD = "id_card";
-
     public static final String PHONE = "phone";
 
-    public static final String ADDRESS = "address";
-
-    public static final String WE_CHAT = "we_chat";
-
-    public static final String FLAG = "flag";
+    public static final String IP = "ip";
 
     public static final String CREAT_TIME = "creat_time";
 
     public static final String UPDATE_TIME = "update_time";
 
     public static final String DEL_FLAG = "del_flag";
+
+    public static final String DETAIL = "detail";
 }

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wsl.shoppingkill.mapper.LoginMapper">
   <select id="login" resultType="com.wsl.shoppingkill.obj.bo.UserBO">
-    select tt.id,tt.nick_name as name,tt.img as url
+    select tt.id,tt.nick_name as name,tt.img as url,tt.flag
     <if test="type != null and type == 0">
       from t_user tt
      </if>
