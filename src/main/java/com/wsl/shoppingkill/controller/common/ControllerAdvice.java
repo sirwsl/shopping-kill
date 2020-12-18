@@ -2,6 +2,7 @@ package com.wsl.shoppingkill.controller.common;
 
 import com.wsl.shoppingkill.common.Result;
 import com.wsl.shoppingkill.common.exception.Exceptions;
+import com.wsl.shoppingkill.obj.exception.ExperienceException;
 import com.wsl.shoppingkill.obj.exception.TokenRuntimeException;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.lettuce.core.RedisException;
@@ -28,7 +29,6 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.rmi.RemoteException;
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
@@ -59,7 +59,7 @@ public class ControllerAdvice {
     }
 
     public static void main(String[] args) {
-        System.out.println(getOutMsg(new SQLException("aaa")));
+        System.out.println(getOutMsg(new TokenRuntimeException("aaa")));
     }
 
     @ExceptionHandler(BindException.class)
@@ -172,6 +172,11 @@ public class ControllerAdvice {
         return Result.paramError(getOutMsg(e), "账号异常，存在非正常编码字符");
     }
 
+    @ExceptionHandler(ExperienceException.class)
+    public Result<Object> experienceException(UnsupportedEncodingException e) {
+        log.error("账号权限不足",e);
+        return Result.paramError(getOutMsg(e), "账号权限不足，如需体验全部，请联系管理员");
+    }
 
 
     /**
