@@ -129,7 +129,7 @@ public class CommonUtil {
         String start;
         if (isEmojiCharacter(userName.codePointAt(0))) {
             start = userName.substring(0, 2);
-            if (start.contains("�️")) {
+            if (start.contains("️")) {
                 start = "*";
             }
         } else {
@@ -143,7 +143,7 @@ public class CommonUtil {
                 end = userName.substring(length - 2, length);
             }
 
-            if (end.contains("�️")) {
+            if (end.contains("️")) {
                 end = "*";
             }
         } else {

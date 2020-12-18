@@ -1,6 +1,7 @@
 package com.wsl.shoppingkill.serviceImpl;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wsl.shoppingkill.common.log.MyLog;
@@ -25,7 +26,11 @@ public class AppraisalServiceImpl extends ServiceImpl<AppraisalMapper, Appraisal
 
     @Override
     public IPage<AppraisalVO> getAppraisalAll(Long current,Long size,AppraisalVO appraisalVO) {
-        return appraisalMapper.getAppraisalAll(new Page<>(current,size),appraisalVO);
+        final IPage<AppraisalVO> appraisalAll = appraisalMapper.getAppraisalAll(new Page<>(current, size), appraisalVO);
+        if (CollectionUtils.isNotEmpty(appraisalAll.getRecords())){
+            appraisalAll.getRecords().forEach(li -> li.setUserName(li.getUserName()));
+        }
+        return appraisalAll;
     }
 
     @Override

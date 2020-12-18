@@ -1,17 +1,19 @@
 package com.wsl.shoppingkill.serviceImpl;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wsl.shoppingkill.common.log.MyLog;
-import com.wsl.shoppingkill.obj.constant.LoggerEnum;
-import com.wsl.shoppingkill.obj.constant.RabbitMqEnum;
-import com.wsl.shoppingkill.obj.constant.RedisEnum;
-import com.wsl.shoppingkill.obj.constant.SmsEnum;
+import com.wsl.shoppingkill.common.util.CommonUtil;
 import com.wsl.shoppingkill.domain.Order;
 import com.wsl.shoppingkill.mapper.OrderMapper;
 import com.wsl.shoppingkill.obj.bo.OrderMqBO;
 import com.wsl.shoppingkill.obj.bo.SmsObject;
+import com.wsl.shoppingkill.obj.constant.LoggerEnum;
+import com.wsl.shoppingkill.obj.constant.RabbitMqEnum;
+import com.wsl.shoppingkill.obj.constant.RedisEnum;
+import com.wsl.shoppingkill.obj.constant.SmsEnum;
 import com.wsl.shoppingkill.obj.param.OrderParam;
 import com.wsl.shoppingkill.obj.vo.OrderVO;
 import com.wsl.shoppingkill.service.OrderService;
@@ -41,7 +43,13 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 
     @Override
     public IPage<OrderVO> getAllOrder(OrderParam orderParam, Long current, Long size){
-        return orderMapper.getAllOrder(new Page<>(current,size),orderParam);
+        final IPage<OrderVO> allOrder = orderMapper.getAllOrder(new Page<>(current, size), orderParam);
+        if (CollectionUtils.isNotEmpty(allOrder.getRecords())){
+            allOrder.getRecords().forEach(li -> li.setSendPhone(CommonUtil.replaceUserName(li.getSendPhone()))
+                    .setSendName(CommonUtil.replaceUserName(li.getSendName())));
+        }
+
+        return allOrder;
     }
 
     @Override

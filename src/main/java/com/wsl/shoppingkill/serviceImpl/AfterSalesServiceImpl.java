@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wsl.shoppingkill.common.log.MyLog;
+import com.wsl.shoppingkill.common.util.CommonUtil;
 import com.wsl.shoppingkill.component.request.AbstractCurrentRequestComponent;
 import com.wsl.shoppingkill.obj.constant.BaseEnum;
 import com.wsl.shoppingkill.obj.constant.LoggerEnum;
@@ -60,6 +61,7 @@ public class AfterSalesServiceImpl extends ServiceImpl<AfterSalesMapper, AfterSa
                 .select(User.ID, User.NAME, User.PHONE, User.NICK_NAME))
                 .stream()
                 .collect(Collectors.groupingBy(User::getId));
+
         Sku sku = new Sku();
         Map<Long, List<Sku>> skuCollect = sku.selectList(new QueryWrapper<Sku>()
                 .in(Sku.ID, afterSalesAll.getRecords()
@@ -90,8 +92,8 @@ public class AfterSalesServiceImpl extends ServiceImpl<AfterSalesMapper, AfterSa
             List<User> users = userCollect.get(afterSalesVO.getUserId());
             if (CollectionUtils.isNotEmpty(users)){
                 User userTemp = users.get(0);
-                afterSalesVO.setUserName(userTemp.getName())
-                        .setUserPhone(userTemp.getPhone())
+                afterSalesVO.setUserName(CommonUtil.replaceUserName(userTemp.getName()))
+                        .setUserPhone(CommonUtil.replaceUserName(userTemp.getPhone()))
                         .setUserNickName(userTemp.getNickName());
             }
         }

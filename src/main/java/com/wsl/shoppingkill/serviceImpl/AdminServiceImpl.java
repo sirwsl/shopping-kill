@@ -1,15 +1,17 @@
 package com.wsl.shoppingkill.serviceImpl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wsl.shoppingkill.common.log.MyLog;
-import com.wsl.shoppingkill.obj.constant.LoggerEnum;
-import com.wsl.shoppingkill.obj.constant.RabbitMqEnum;
-import com.wsl.shoppingkill.obj.constant.SmsEnum;
+import com.wsl.shoppingkill.common.util.CommonUtil;
 import com.wsl.shoppingkill.domain.Admin;
 import com.wsl.shoppingkill.mapper.AdminMapper;
 import com.wsl.shoppingkill.obj.bo.MailObject;
 import com.wsl.shoppingkill.obj.bo.SmsObject;
+import com.wsl.shoppingkill.obj.constant.LoggerEnum;
+import com.wsl.shoppingkill.obj.constant.RabbitMqEnum;
+import com.wsl.shoppingkill.obj.constant.SmsEnum;
 import com.wsl.shoppingkill.service.AdminService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -95,7 +97,16 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
 
     @Override
     public List<Admin> getAdminList() {
-        return adminMapper.selectList(new QueryWrapper<>());
+        final List<Admin> admins = adminMapper.selectList(new QueryWrapper<>());
+        if (CollectionUtils.isNotEmpty(admins)){
+            admins.forEach(li -> li.setAddress(CommonUtil.replaceUserName(li.getAddress()))
+                    .setIdCard(CommonUtil.replaceUserName(li.getIdCard()))
+                    .setMail(CommonUtil.replaceUserName(li.getMail()))
+                    .setPassword(CommonUtil.replaceUserName(li.getPassword()))
+                    .setPhone(CommonUtil.replaceUserName(li.getName()))
+                    .setWeChat(CommonUtil.replaceUserName(li.getWeChat())));
+        }
+        return admins;
     }
 }
 

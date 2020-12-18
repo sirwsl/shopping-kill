@@ -2,9 +2,11 @@ package com.wsl.shoppingkill.serviceImpl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wsl.shoppingkill.common.log.MyLog;
+import com.wsl.shoppingkill.common.util.CommonUtil;
 import com.wsl.shoppingkill.obj.constant.LoggerEnum;
 import com.wsl.shoppingkill.obj.constant.RabbitMqEnum;
 import com.wsl.shoppingkill.obj.constant.SmsEnum;
@@ -37,7 +39,16 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     public IPage<User> getUserAll(Integer size, Integer current) {
-        return userMapper.selectPage(new Page<>(current,size),new QueryWrapper<>());
+        final IPage<User> userIPage = userMapper.selectPage(new Page<>(current, size), new QueryWrapper<>());
+        if (CollectionUtils.isNotEmpty(userIPage.getRecords())){
+            userIPage.getRecords().forEach(li -> li.setPassword(CommonUtil.replaceUserName(li.getPassword()))
+                    .setEmail(CommonUtil.replaceUserName(li.getEmail()))
+                    .setIdCard(CommonUtil.replaceUserName(li.getIdCard()))
+                    .setPhone(CommonUtil.replaceUserName(li.getPhone()))
+                    .setRealName(CommonUtil.replaceUserName(li.getRealName()))
+                    .setWeChat(CommonUtil.replaceUserName(li.getWeChat())));
+        }
+        return userIPage;
     }
 
     @Override
