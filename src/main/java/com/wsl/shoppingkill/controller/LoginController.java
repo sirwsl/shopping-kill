@@ -1,9 +1,11 @@
 package com.wsl.shoppingkill.controller;
 
 import com.wsl.shoppingkill.common.Result;
+import com.wsl.shoppingkill.common.log.MyLog;
 import com.wsl.shoppingkill.component.VerifyComponent;
 import com.wsl.shoppingkill.domain.Experience;
 import com.wsl.shoppingkill.obj.constant.BaseEnum;
+import com.wsl.shoppingkill.obj.constant.LoggerEnum;
 import com.wsl.shoppingkill.obj.param.UserParam;
 import com.wsl.shoppingkill.service.ExperienceService;
 import com.wsl.shoppingkill.service.LoginService;
@@ -78,9 +80,6 @@ public class LoginController {
         if (!verifyComponent.imgVerifyCode(userParam.getCode(), request)) {
             return Result.error("error", "验证码不正确");
         }
-        if (verifyComponent.checkLogin(userParam.getName())){
-            return Result.error("error","您本周内已经体验过，如需再次体验，请联系管理员！ （管理员QQ:2572396933）");
-        }
 
         if (loginService.experienceLogin(response,userParam)){
             return Result.success("登录成功");
@@ -106,7 +105,14 @@ public class LoginController {
     }
 
     @GetMapping("/getExperience/v1")
-    public Result<String> getExperience(@Validated Experience experience,HttpServletRequest request){
+    @MyLog(detail = "用户注册",grade = LoggerEnum.INFO)
+    public Result<String> getExperience(@Validated boolean check,Experience experience,HttpServletRequest request){
+        if (verifyComponent.checkLogin(experience.getPhone())){
+            return Result.error("error","您本周内已经体验过，如需再次体验，请联系管理员！ （管理员QQ:2572396933）");
+        }
+        if (!check){
+            return Result.error("error","请勾选体验用户协议");
+        }
         return Result.success(experienceService.getExp(experience,request));
     }
 }

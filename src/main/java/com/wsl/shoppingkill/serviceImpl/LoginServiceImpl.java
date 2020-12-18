@@ -1,10 +1,12 @@
 package com.wsl.shoppingkill.serviceImpl;
 
+import com.wsl.shoppingkill.common.log.MyLog;
 import com.wsl.shoppingkill.common.util.RegexUtils;
 import com.wsl.shoppingkill.component.jwt.JwtComponent;
 import com.wsl.shoppingkill.mapper.LoginMapper;
 import com.wsl.shoppingkill.obj.bo.UserBO;
 import com.wsl.shoppingkill.obj.constant.JwtEnum;
+import com.wsl.shoppingkill.obj.constant.LoggerEnum;
 import com.wsl.shoppingkill.obj.constant.RedisEnum;
 import com.wsl.shoppingkill.obj.param.UserParam;
 import com.wsl.shoppingkill.service.LoginService;
@@ -63,6 +65,7 @@ public class LoginServiceImpl implements LoginService {
     }
 
     @Override
+    @MyLog(detail = "管理员登录",grade = LoggerEnum.INFO)
     public boolean exit(HttpServletResponse response, HttpServletRequest request) {
 
         String header = request.getHeader(JwtEnum.AUTH_HEADER_KEY);
@@ -97,6 +100,7 @@ public class LoginServiceImpl implements LoginService {
     }
 
     @Override
+    @MyLog(detail = "管理员登录",grade = LoggerEnum.INFO)
     public boolean experienceLogin(HttpServletResponse response, UserParam userParam) throws UnsupportedEncodingException {
         UserBO userBO = redisTemplate.opsForValue().get(RedisEnum.EXPERIENCE_LOGIN + userParam.getName());
         if (!Objects.isNull(userBO)){

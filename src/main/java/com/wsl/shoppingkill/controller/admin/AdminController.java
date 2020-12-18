@@ -5,6 +5,7 @@ import com.wsl.shoppingkill.common.util.CommonUtil;
 import com.wsl.shoppingkill.component.request.AbstractCurrentRequestComponent;
 import com.wsl.shoppingkill.domain.Admin;
 import com.wsl.shoppingkill.obj.constant.BaseEnum;
+import com.wsl.shoppingkill.obj.exception.ExperienceException;
 import com.wsl.shoppingkill.service.AdminService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -40,6 +41,10 @@ public class AdminController {
         if (!component.getCurrentUser().getFlag().equals(BaseEnum.ADMIN)){
             return Result.error("error","只有超级管理员有权限");
         }
+        if(Objects.nonNull(component.getCurrentUser()) && component.getCurrentUser().getFlag() != null
+                && component.getCurrentUser().getFlag()==1000){
+            throw new ExperienceException("体验账号权限不足");
+        }
         return Result.success(adminService.addAdmin(admin));
     }
 
@@ -71,6 +76,11 @@ public class AdminController {
         if (id == null || id == 0){
             return Result.error("error","id不能为空");
         }
+        if(Objects.nonNull(component.getCurrentUser()) && component.getCurrentUser().getFlag() != null
+                && component.getCurrentUser().getFlag()!=1){
+            throw new ExperienceException("账号权限不足");
+        }
+
         if (!component.getCurrentUser().getFlag().equals(BaseEnum.ADMIN)){
             return Result.error("error","只有超级管理员有权限");
         }

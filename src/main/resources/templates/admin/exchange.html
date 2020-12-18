@@ -151,7 +151,22 @@
 	<script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
     
     <script>
+        $.ajaxSetup({
+        	headers: {
+        		'Authorization': $.cookie("token")
+        	},
+        	xhrFields: {
+        		withCredentials: false
+        	},
+        	crossDomain: true
+        });
         
+        $(function() {
+        	if ($.cookie("token") == null || $.cookie("token") == "") {
+        		window.location.href = "/admin/login.html"
+        	}
+        });
+		
         	$("#search").on("click",function(){
         		logger($("#SId").val(),$("#orderId").val(),$("#types").val(),$("#resout").val());
         			

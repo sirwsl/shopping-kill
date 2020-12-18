@@ -56,14 +56,44 @@
 					</div>
 					</br>
 					<button type="button" id="sub" class="btn btn-primary block full-width m-b">登 录</button>
-					<p class="text-muted text-center"> <a id = "subs"><small>忘记密码了？</small></a> 
-					| <a href="register.html"><b>申请体验账号<b></a>
-					</p>
+					<a href="register.html" type="button" class="btn btn-primary block full-width m-b">申请体验账号</a>
+					<p class="text-muted text-center"> <a id = "subs"><small>忘记密码了？</small></a></p>
 
 				</form>
 			</div>
 		</div>
-		<footer class="footer navbar-fixed-bottom ">
+		
+		
+		<div id="Modal" class="modal fade" aria-hidden="true" style=" top: 100px;">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-body">
+							<div class="row">
+								<div class="col-sm-12">
+									<div style="text-align:center">
+										<h2>编码不易，请勿攻击，若是大款，随意打赏</h2>
+									</div>
+									
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-6">
+									<img src = "http://static.wslhome.top/pay/666666.png" />
+								</div>	
+								<div class="col-sm-6">
+									<img src = "http://static.wslhome.top/pay/8888888.jpg" />
+								</div>
+								<div style="text-align:center">
+									<input class="btn btn-primary" data-dismiss="modal" id = "btn" value = "关闭" />
+								</dir>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<footer class="footer navbar-fixed-bottom " style="height: 50px;">
 		    <div class="container">
 				<div class="row">
 					<div class="col-lg-2 ">
@@ -83,6 +113,7 @@
 					</div>
 				</div>
 			</div>
+			
 		</footer>			
 		<!-- 全局js -->
 		<script src="../static/admin/js/jquery.min.js?v=2.1.4"></script>
@@ -90,6 +121,28 @@
 		<script src="../static/admin/js/jquery.form.js"></script>
 		<script src="../static/admin/js/jquery.cookie.js"></script>
 		<script type="application/javascript">
+			$(function() {
+				$("#sub").addClass("disable");
+				$("#Modal").modal({
+					keyboard: true
+				});
+				time(document.getElementById("btn"));	
+			});
+			var wait=10;
+			function time(o) {
+				if (wait == 0) {
+					o.removeAttribute("disabled");  
+					o.value="关闭";
+					wait = 60;
+				} else { 
+					o.setAttribute("disabled", true);
+					o.value="关闭(" + wait + ")";
+					wait--;
+					setTimeout(function() {
+						time(o);
+					},1000)
+				}
+			 }
 			$("#subs").click(function(){
 				alert("请联系管理员sirwsl");
 			})

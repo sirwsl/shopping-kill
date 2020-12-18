@@ -22,7 +22,7 @@
 
 <body class="gray-bg">
 
-    <div class="middle-box text-center loginscreen   animated fadeInDown">
+    <div class="middle-box text-center animated fadeInDown">
         <div>
             <div>
 
@@ -32,21 +32,20 @@
             <h3>shoppingKill</h3>
             <p>欢迎体验商品限时抢购系统后台管理</p>
 			<div style="height: 50px;" ></div>
-            <div class="row">
-				<div class="col-sm-6">
-					<a class="btn btn-primary block full-width m-b" target="_blank" href = "https://www.wslhome.top">个人博客</a>
-					<a class="btn btn-primary block full-width m-b" target="_blank" href = "https://my.wslhome.top">个人主页</a>
-					<a class="btn btn-primary block full-width m-b" target="_blank" href = "https://blog.csdn.net/qq_40432886">CSDN</a>
-				</div>	                                            
-				<div class="col-sm-6">                              
-					<a class="btn btn-primary block full-width m-b" target="_blank" href = "https://ld246.com/member/sirwsl">社区主页</a>
-					<a class="btn btn-primary block full-width m-b" target="_blank" href = "https://oss.wslhome.top">个人存储</a>
-					<a class="btn btn-primary block full-width m-b" target="_blank" href = "https://github.com/sirwsl">GitHub</a>
-				</div>
-				<div class="col-sm-12">
-					<a data-toggle="modal" href="#Modals"  class="btn btn-danger block full-width m-b">打赏作者</a>
-				</div>
-			</div>
+           
+		   <div class="row">
+		   	<div class="col-sm-6">
+		   		<a class="btn btn-primary block full-width m-b" target="_blank" href = "https://www.wslhome.top">个人博客</a>
+		   		<a class="btn btn-primary block full-width m-b" target="_blank" href = "https://blog.csdn.net/qq_40432886">CSDN</a>
+		   	</div>	                                            
+		   	<div class="col-sm-6">                              
+				<a class="btn btn-primary block full-width m-b" target="_blank" href = "https://my.wslhome.top">个人主页</a>
+		   		<a class="btn btn-primary block full-width m-b" target="_blank" href = "https://github.com/sirwsl">GitHub</a>
+		   	</div>
+		   	<div class="col-sm-12">
+		   		<a data-toggle="modal" href="#Modals"  class="btn btn-danger block full-width m-b">打赏作者</a>
+		   	</div>
+		   </div>
                 
 			<div style="width: 50px;"></div>	
 			<div class="row" style="text-align: left;">
@@ -55,26 +54,27 @@
 					<input id = "imgUrl" name = "imgUrl" style="display:none" readonly="true" value = "" />
 					<div class="form-group">
 						<div class="form-group">
-							<label class="col-xl-3 control-label">手机号</label>
-							<div class="col-xl-9">
+							<label class="col-sm-3 control-label">手机号</label>
+							<div class="col-sm-9">
 								<input type="text" id = "phone" placeholder="请输入手机号" name = "phone" class="form-control layer-date" />
 							</div>
+							
 						</div>
 						<div class="form-group">
-							<label class="col-xl-3 control-label">用户名</label>
-							<div class="col-xl-9">
+							<label class="col-sm-3 control-label">用户名</label>
+							<div class="col-sm-9">
 								<input type="text" id = "userName" placeholder="请输入用户名" name = "userName" class="form-control layer-date" />
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-xl-3 control-label">密码</label>
-							<div class="col-xl-9">
-								<input type="text" id = "password" placeholder="请输入用户名" name = "password" class="form-control layer-date" />
+							<label class="col-sm-3 control-label">密码</label>
+							<div class="col-sm-9">
+								<input type="password" id = "password" placeholder="请输入密码" name = "password" class="form-control layer-date" />
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-xl-3 control-label">申请理由</label>
-							<div class="col-xl-9">
+							<label class="col-sm-3 control-label">申请理由</label>
+							<div class="col-sm-9">
 								<textarea type="text" placeholder="申请理由不能少于10个字" id = "detail" name = "detail" class="form-control layer-date" ></textarea>
 							</div>
 						</div>
@@ -83,14 +83,15 @@
 						</label>
 					</div>
 				</div>
+				
+				
 			</div>		
 				
             <button type="submit" id = "submit" class="btn btn-info block full-width m-b">获取体验权</button>
-            <p class="text-muted text-center"><small>已经有账户了？</small><a href="login.html">点此登录</a>
-            </p>
+            <p class="text-muted text-center"><small>已经有账户了？</small><a href="login.html">点此登录</a></p>
         </div>
     </div>
-
+	<div style="height: 100px;"></div>
 		<div id="view" class="modal fade" aria-hidden="true" style=" top: 300px;">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -110,43 +111,43 @@
 		</div>
 		</div>
 		
-		<div id="Modals" class="modal fade" aria-hidden="true" style=" top: 300px;">
+		<div id="Modals" class="modal fade" aria-hidden="true" style=" top: 100px;">
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-body">
 							<div class="row">
 								<div class="col-sm-12">
 									<div style="text-align:center">
-										<h2>您的打赏，将为我的大学生活添加一份美味早餐</h2>
+										<h2>您的打赏，将为我的生活添加一份美味早餐</h2>
 									</div>
 									
 								</div>
 							</div>
 							<div class="row">
 								<div class="col-sm-6">
-											<img src = "http://static.wslhome.top/pay/666666.png" />
-										</div>	
-										<div class="col-sm-6">
-											<img src = "http://static.wslhome.top/pay/8888888.jpg" />
-										</div>
-										<div style="text-align:center">
-											<input class="btn btn-primary" data-dismiss="modal" value = "关闭" />
-								</dir>
+									<img src = "http://static.wslhome.top/pay/666666.png" />
+									</div>	
+									<div class="col-sm-6">
+										<img src = "http://static.wslhome.top/pay/8888888.jpg" />
+									</div>
+									<div style="text-align:center">
+										<input class="btn btn-primary" data-dismiss="modal" value = "关闭" />
+									</dir>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-			
-		<div id="Modal" class="modal fade" aria-hidden="true" style=" top: 300px;">
+		</div>	
+		<div id="Modal" class="modal fade" aria-hidden="true" style=" top: 100px;">
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-body">
 							<div class="row">
 								<div class="col-sm-12">
 									<div style="text-align:center">
-										<h2>您的打赏，将为我的大学生活添加一份美味早餐</h2>
+										<h2>您的打赏，将为我的生活添加一份美味早餐</h2>
 									</div>
 									
 								</div>
@@ -167,7 +168,7 @@
 				</div>
 			</div>
 		</div>
-	<footer class="footer navbar-fixed-bottom ">
+	<footer class="footer navbar-fixed-bottom " style="height: 50px;">
 	    <div class="container">
 			<div class="row">
 				<div class="col-lg-2 ">
@@ -194,6 +195,12 @@
     <script src="../static/admin/js/bootstrap.min.js?v=3.3.6"></script>
     
     <script type="text/javascript">
+		$.ajaxSetup({
+			xhrFields: {
+				withCredentials: false
+			},
+			crossDomain: true
+		});
 		
 	$(function() {
 		$("#sub").addClass("disable");
@@ -201,7 +208,7 @@
 			keyboard: true
 		});
 		setTimeout("$('#Modal').modal('hide')",60000);
-		// time(document.getElementById("btn"));	
+		time(document.getElementById("btn"));	
 	});
  
     var wait=30;
@@ -249,6 +256,26 @@
 		 if(password == null || password.length < 6){
 			 alert("密码最低为6位，请输入您的密码");
 		 }
+		 
+		 $.ajax({
+		 	type: "GET",
+		 	url: "http://test.wslhome.top/login/getExperience/v1",
+		 	data: {check:check,
+					detail:detail,
+					phone:phone,
+					userName:userName,
+					password:password
+					
+			},
+		     dataType: "json",
+		     success: function (msg) {
+		 		alert(msg.data);
+		 		if (re.code == 0) {
+		 			window.location.href = "/admin/login.html"
+		 		}
+		 	}
+		 })
+		 
 	 })
 	 
     </script>

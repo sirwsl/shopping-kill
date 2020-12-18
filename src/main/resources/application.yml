@@ -17,7 +17,7 @@ spring:
     static-locations: classpath:/ftl/,classpath:/templates/
   #环境修改
   profiles:
-    active: test,all
+    active: pro,all
 
   devtools:
     restart:

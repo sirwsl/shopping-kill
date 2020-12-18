@@ -1,6 +1,5 @@
 package com.wsl.shoppingkill.common.log;
 
-import com.alibaba.fastjson.JSON;
 import com.wsl.shoppingkill.common.util.IpUtils;
 import com.wsl.shoppingkill.component.request.AbstractCurrentRequestComponent;
 import com.wsl.shoppingkill.domain.Loggers;
@@ -59,10 +58,7 @@ public class LoggersAspect {
             //获取请求的类名
             String[] className = joinPoint.getTarget().getClass().getName().split("\\.");
 
-            //请求的参数
-            Object[] args = joinPoint.getArgs();
             //将参数所在的数组转换成json
-            String params = JSON.toJSONString(args);
             String num =  "0";
             try {
                 if (StringUtils.isNotBlank(myLog.value())){

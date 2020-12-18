@@ -145,7 +145,10 @@
 				<nav class="navbar navbar-static-top" role="navigation" >
 					<div class="navbar-header"><a class="navbar-minimalize minimalize-styl-2 btn btn-info " href="#"><i class="fa fa-bars"></i> </a></div>
 				<ul class="nav navbar-top-links navbar-right">
-				    <li class="dropdown" style="margin-top: 10px;">
+					<li class="dropdown" style="margin-top: 10px;">
+						<button id = "money" class="btn btn-info btn-sm">佛系打赏</button>
+				    </li>		
+					<li class="dropdown" style="margin-top: 10px;">
 				    	<button id = "exits" class="btn btn-danger btn-sm">退出系统</button>
 				    </li>		
 				</ul>	
@@ -159,7 +162,38 @@
         </div>
         <!--右侧部分结束-->
     </div>
-<footer class="footer navbar-fixed-bottom ">
+	
+	<div id="Modal" class="modal fade" aria-hidden="true" style=" top: 100px;">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-sm-12">
+								<div style="text-align:center">
+									<h2>老板，给我加个鸡腿呗</h2>
+								</div>
+								
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-6">
+								<img src = "http://static.wslhome.top/pay/666666.png" />
+							</div>	
+							<div class="col-sm-6">
+								<img src = "http://static.wslhome.top/pay/8888888.jpg" />
+							</div>
+							<div style="text-align:center">
+								<input class="btn btn-primary" data-dismiss="modal" id = "btn" value = "关闭" />
+							</dir>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+<footer class="footer navbar-fixed-bottom " style="height: 50px;">
 		    <div class="container">
 				<div class="row">
 					<div class="col-lg-2 ">
@@ -211,6 +245,12 @@
 			},
 			crossDomain: true
 		});
+		
+		$("#money").click(function(){
+			$("#Modal").modal({
+				keyboard: true
+			});
+		})
 		
 		$(function(){
 		　　if($.cookie("token") == null || $.cookie("token") == ""){
