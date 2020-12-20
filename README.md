@@ -1,10 +1,9 @@
 ## 商品秒杀系统
+### 项目地址：
+#### 后台管理：https://admin.wslhome.top
+#### 商城页：开发中
 
-**项目还在继续完善中，改项目是今年毕设项目，目前只完成部分功能。** 
-
-**前端界面-后台-展示已经完成  后端-后台管理基本完成** 
-
-**项目源码地址在码云，但未公开，由于开发中设计到配置文件，将在完成后进行全部开源** 
+**项目还在继续完善中，该项目是今年毕设项目，后台管理基本完成，商城页面还在开发中。** 
 
 **喜欢就给个♥** 
 
@@ -13,8 +12,6 @@
 博客：https://www.wslhome.top
 
 CSDN: https://blog.csdn.net/qq_40432886
-
-个人主页：https://my.wslhome.top
 
 欢迎交流：sirwsl@163.com
 
@@ -27,67 +24,80 @@ CSDN: https://blog.csdn.net/qq_40432886
 还包括自定义注解、切面编程等相关东西
 
 ### 一、项目概况
-**总括：** 
-
 采用SpringBoot+中间件实现在高并发业务场景下商品的的限时抢购秒杀系统，本题目基于线上电商平台，以高可靠、高负载、高并发来实现商品的限时抢购系统。
 
-**研究内容：**
-
-（1）主要研究在O2O模式下，电商平台如何实现并优化业务场景，从而达到亿万级并发量的秒杀系统，采用Java、SpringBoot、Redis、RabbitMQ、zookeeper、mysql等技术，实现一个高负载、高并发、高可靠性的秒杀系统
-
-（2）为提高并发量与可靠性，采用Docker+Nginx实现反向代理与负载均衡，使用熵值法来计算该算法中四个核心要素的权重系数,从而进一步提高平台负载均衡的能力和并发性能
-
-（3）采用OSS存储、CDN加速，进一步改善浏览体验与并发量
-
-（4）采用以上技术与框架实现商品管理、商品上架、业务管理、前端门户等相关模块
-
-（5）对秒杀系统的性能进行测试,前后动态调节权重实现负载均衡策略对平台的并发性能和吞吐率所带来的提升效果。
 
 ### 二、目录说明
 ```
-
-├─doc          项目文档
-│  ├─api       文档接口
-│  │  └─admin  admin目录下文档接口
-│  ├─ER        ER建模请忽略
-│  └─refer     毕设文献参考
-├─sql          sql文件
-└─src		   文件目录
-    ├─main
-    │  ├─java
-    │  │  └─com
-    │  │      └─wsl
-    │  │          └─shoppingKill
-    │  │              ├─common      公共的一些配置与工具类
-    │  │              ├─component   一些组件、短信、邮件发送、jwt等
-    │  │              ├─constant    常用枚举类
-    │  │              ├─controller   控制层
-    │  │              ├─domain    实体类
-    │  │              ├─mapper 
-    │  │              ├─obj    一些对象
-    │  │              ├─request   请求等拦截器之类的东西
-    │  │              ├─service    服务层
-    │  │              └─serviceImpl    实现层
-    │  │                  ├─aspect     切面
-    │  │                  ├─subscription  队列监听
-    │  │                  └─timedTask     定时任务
-    │  └─resources
-    │      ├─config       yml文件
-    │      ├─ftl          邮件发送模板
-    │      ├─mapper       xml-mapper
-    │      └─templates   前端文件
-    └─test 自己写的些测试
-     
+.
+├── Dockerfile    docker部署
+├── README.md     说明文件
+├── doc    一些文档
+│   ├── ER 
+│   ├── api  接口文档
+│   │   └── admin
+│   ├── refer   乱七八糟的东西
+├── sql    sql文件
+└── src
+    ├── main
+    │   ├── java
+    │   │   └── com
+    │   │       └── wsl
+    │   │           └── shoppingkill
+    │   │               ├── common           一些工具和公共的东西
+    │   │               │   ├── exception        
+    │   │               │   ├── fastjson
+    │   │               │   ├── log
+    │   │               │   ├── test
+    │   │               │   └── util
+    │   │               ├── component         一些定义的组件
+    │   │               │   ├── email
+    │   │               │   ├── jwt
+    │   │               │   ├── oss
+    │   │               │   ├── request
+    │   │               │   ├── sms
+    │   │               │   └── snowflake
+    │   │               ├── config           配置文件
+    │   │               │   └── request
+    │   │               ├── controller       api
+    │   │               │   ├── admin       后端接口
+    │   │               │   └── common      公共接口
+    │   │               ├── domain          实体
+    │   │               ├── mapper          mapper接口
+    │   │               ├── obj             中间对象
+    │   │               │   ├── bo
+    │   │               │   ├── constant
+    │   │               │   ├── convert
+    │   │               │   ├── exception
+    │   │               │   ├── param
+    │   │               │   └── vo
+    │   │               ├── service         服务层接口
+    │   │               └── serviceImpl     实现
+    │   │                   ├── aspect
+    │   │                   ├── subscription
+    │   │                   └── timedTask
+    │   └── resources                       一些资源文件
+    │       ├── config     
+    │       ├── ftl                         邮件模版
+    │       ├── mapper
+    │       └── templates                   前端文件
+    │           ├── admin
+    │           ├── static
+    │           │   ├── admin
+    │           │   └── user
+    │           └── user
+    └── test                                  测试文件
+        └── java
+            └── com
+                └── wsl
+                    └── shoppingkill
+                     
 
 ```
 
 ### 三、完成进度
 
-参见doc下的完成进度表
-
-
-
-  
+参见doc下的完成进度表  
 
 ### 四、主要技术
 
@@ -121,23 +131,6 @@ CSDN: https://blog.csdn.net/qq_40432886
 
 (二)、实现框架：SpringBoot+MySQL+MybatisPlus+BootStrap
 
-1、Springboot：
-
-采用springboot技术简化Spring应用的初始搭建以及开发过程。该框架使用了特定的方式来进行配置，在构建系统整体结构时可更好的关注限时抢购逻辑，简化其中配置，更方便了前后端分离。
-
-2、MySql：
-
-通过mysql存储，采用InnoDB更好的支持了事物的存在，在系统中通过mysql存储基本信息对行锁的使用，更好的增加系统的并发用户数量，从而避免在商品限时抢购过程中造成数据库服务器瘫痪情况。
-
-3、MyBatisPlus：
-
-通过mybatis-plus的使用，更加便于代码的管理与维护，降低程序之间的耦合度，在编码的过程中可更好的实现debug，其比床头JDBC相比较，减少大量sql语句，彻底将sql从程序代码中分离，更便于提高工作效率。
-
-4、BootStrap：
-
-在限时抢购系统中通过bootstap前端框架使用，更加便于快速搭建前端界面，其内置布局与JS，使得整体系统配色、布局、数据传输、解析上更加方便。
-
-(三)、中间件技术：
 
 1、RabbitMQ：通过rabbitmq的使用，在系统中进行短信推送、邮件推送、订单管理等模块中更好的实现了系统的解耦，以异步方式进行操作，使得系统更加平稳运行。通过消息队列的应用，在高并发场景下进行限流，从而保证系统的可运行，起到削峰作用。
 
