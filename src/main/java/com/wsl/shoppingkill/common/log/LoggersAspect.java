@@ -76,7 +76,11 @@ public class LoggersAspect {
 
         }
         UserBO userBO = abstractCurrentRequestComponent.getCurrentUser();
-        loggers.setManId(userBO.getId()).setType(userBO.getFlag());
+        try {
+            loggers.setManId(userBO.getId()).setType(userBO.getFlag());
+        }catch (Exception e){
+            loggers.setManId(0L).setType(0);
+        }
         //获取用户ip地址
         HttpServletRequest request = HttpContextUtil.getHttpServletRequest();
         loggers.setIp(IpUtils.getIP(request));

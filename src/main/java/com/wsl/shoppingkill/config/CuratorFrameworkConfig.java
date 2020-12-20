@@ -29,7 +29,7 @@ public class CuratorFrameworkConfig {
     @Bean
     public CuratorFramework curatorFramework(){
         // ExponentialBackoffRetry是种重连策略，每次重连的间隔会越来越长,1000毫秒是初始化的间隔时间,3代表尝试重连次数。
-        ExponentialBackoffRetry retry = new ExponentialBackoffRetry(1000, 3);
+        ExponentialBackoffRetry retry = new ExponentialBackoffRetry(3000, 3);
         // 创建client
         CuratorFramework curatorFramework = CuratorFrameworkFactory.newClient(env.getProperty("zookeeper-hosts"), retry);
         // 添加watched 监听器
