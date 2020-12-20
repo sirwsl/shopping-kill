@@ -1,288 +1,124 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
-
-<head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-    <title>商品类别</title>
-    <meta name="keywords" content="">
-    <meta name="description" content="">
-
-    <link rel="shortcut icon" href="favicon.ico"> <link href="../static/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
-    <link href="../static/admin/css/font-awesome.css?v=4.4.0" rel="stylesheet">
-    <link href="../static/admin/css/plugins/iCheck/custom.css" rel="stylesheet">
-    <link href="../static/admin/css/animate.css" rel="stylesheet">
-    <link href="../static/admin/css/style.css?v=4.1.0" rel="stylesheet">
-	<link href="../static/admin/css/bootstrap-editable.css" rel = "stylesheet" />
-	<link href="../static/admin/css/bootstrapValidator.min.css" rel="stylesheet"/>
-</head>
-
-<body class="gray-bg">
-    <div class="wrapper wrapper-content animated fadeInRight">
-		<div class="row">
-		    <div class="col-sm-12">
-		        <div class="ibox float-e-margins">
-		            <div class="ibox-title">
-		                <h5>商品类别</h5>
-		                
-		            </div>
-					<div>
-						<div class="ibox-content" style="padding-bottom:0px;">
-						    <div>
-								<!-- <label class="form-inline" />状态：
-								<select name="trains"  class="form-control" id="selectStuas" >
-								    <option value="2">进行中</option>
-								    <option value="3">已结束</option>
-								    <option value="1">未开始</option>
-								    <option value="0">未添加</option>
-								</select>-->
-						        <label class="form-inline" />类别id：
-						        <input type="text" class="form-control" id = "searchId"/></label>
-								<label class="form-inline" />类别名称：
-								<input type="text" class="form-control" id = "searchName"/></label>
-								<button type="button" class="btn btn-sm btn-primary" onclick="serches()" > 搜索</button> </span>
-								<a data-toggle="modal" class="btn btn-info" style="float: right;" href="#modal-form" data-toggle="modal" data-target="#myModal">添加</a>
-						    </div>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>
+			商品类别
+		</title>
+		<meta name="keywords" content="">
+		<meta name="description" content="">
+		<link rel="shortcut icon" href="favicon.ico">
+		<link href="../static/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+		<link href="../static/admin/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+		<link href="../static/admin/css/plugins/iCheck/custom.css" rel="stylesheet">
+		<link href="../static/admin/css/animate.css" rel="stylesheet">
+		<link href="../static/admin/css/style.css?v=4.1.0" rel="stylesheet">
+		<link href="../static/admin/css/bootstrap-editable.css" rel="stylesheet"
+		/>
+		<link href="../static/admin/css/bootstrapValidator.min.css" rel="stylesheet"
+		/>
+	</head>
+	<body class="gray-bg">
+		<div class="wrapper wrapper-content animated fadeInRight">
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="ibox float-e-margins">
+						<div class="ibox-title">
+							<h5>
+								商品类别
+							</h5>
 						</div>
-						
-		            <div class="ibox-content">
-						<table class="table table-bordered" id = "goodstype">
-		                </table>
-		            </div>
-		        </div>
-		    </div>
-	    </div>
-    </div>
-
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModal" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-						&times;
-					</button>
-					<h4 class="modal-title" id="title">添加商品类别</h4>
-				</div>
-				<div class="modal-body">
-					<form class="form-horizontal" id = "addTypes"  method="post" action="http://test.wslhome.top/admin/addTypes/v1">
-					    <div class="form-group">
-							<label class="col-sm-3 control-label">类别名称：</label>
-							<div class="col-sm-8">
-					            <input type="text" id = "name" name="name" placeholder="类别名称" class="form-control"> 
-					        </div>
-					    </div>   
-					</form>
-					
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-					<button type="button" id = "sub" class="btn btn-primary" data-dismiss="modal">确定</button>
+						<div>
+							<div class="ibox-content" style="padding-bottom:0px;">
+								<div>
+									<label class="form-inline" />
+									类别id：
+									<input type="text" class="form-control" id="searchId" />
+									</label>
+									<label class="form-inline" />
+									类别名称：
+									<input type="text" class="form-control" id="searchName" />
+									</label>
+									<button type="button" class="btn btn-sm btn-primary" onclick="serches()">
+										搜索
+									</button>
+									</span>
+									<a data-toggle="modal" class="btn btn-info" style="float: right;" href="#modal-form"
+									data-toggle="modal" data-target="#myModal">
+										添加
+									</a>
+								</div>
+							</div>
+							<div class="ibox-content">
+								<table class="table table-bordered" id="goodstype">
+								</table>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
-		</div>
-	</div>
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModal"
+			aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+								&times;
+							</button>
+							<h4 class="modal-title" id="title">
+								添加商品类别
+							</h4>
+						</div>
+						<div class="modal-body">
+							<form class="form-horizontal" id="addTypes" method="post" action="https://test.wslhome.top/admin/addTypes/v1">
+								<div class="form-group">
+									<label class="col-sm-3 control-label">
+										类别名称：
+									</label>
+									<div class="col-sm-8">
+										<input type="text" id="name" name="name" placeholder="类别名称" class="form-control">
+									</div>
+								</div>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">
+								取消
+							</button>
+							<button type="button" id="sub" class="btn btn-primary" data-dismiss="modal">
+								确定
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<script src="../static/admin/js/jquery.min.js?v=2.1.4">
+			</script>
+			<script src="../static/admin/js/bootstrap.min.js?v=3.3.6">
+			</script>
+			<script src="../static/admin/js/jquery.form.js">
+			</script>
+			<script src="../static/admin/js/jquery.cookie.js">
+			</script>
+			<script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table.min.js">
+			</script>
+			<script src="../static/admin/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js">
+			</script>
+			<script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js">
+			</script>
+			<script src="../static/admin/js/bootstrap-editable.min.js">
+			</script>
+			<script src="../static/admin/js/bootstrap-table-editable.js">
+			</script>
+			<script src="../static/admin/js/bootstrapValidator.min.js">
+			</script>
+			<script src="../static/admin/myjs/goodstype.js">
+			</script>
+	</body>
 
-
-<!-- 全局js -->
-	<script src="../static/admin/js/jquery.min.js?v=2.1.4"></script>
-	<script src="../static/admin/js/bootstrap.min.js?v=3.3.6"></script>
-	<script src="../static/admin/js/jquery.form.js"></script>
-	<script src="../static/admin/js/jquery.cookie.js"></script>
-	<script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
-	<script src="../static/admin/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
-	<script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
-	<script src="../static/admin/js/bootstrap-editable.min.js"></script>
-	<script src="../static/admin/js/bootstrap-table-editable.js"></script>
-	<script src="../static/admin/js/bootstrapValidator.min.js"></script>	
-
-<script>
-	$.ajaxSetup({
-		headers: {
-			'Authorization': $.cookie("token")
-		},
-		xhrFields: {
-			withCredentials: false
-		},
-		crossDomain: true
-	});
-	
-	$(function() {
-		if ($.cookie("token") == null || $.cookie("token") == "") {
-			window.location.href = "/admin/login.html"
-		}
-	});
-	
-	$(function(){
-		goodsType("http://test.wslhome.top/admin/getTypesAll/v1",null,null);
-	})
-	
-	function serches(){
-		var url = "http://test.wslhome.top/admin/getTypesByNameAndId/v1";
-		var id = $("#searchId").val();
-		var name = $("#searchName").val();
-		goodsType(url,id,name);
-	}
-	
-	function goodsType(url,id,name) {
-		$('#goodstype').bootstrapTable('destroy'); 
-		$('#goodstype').bootstrapTable({
-			method: 'get',
-			url: url,
-			dataType: "json",
-			headers: {
-				'Authorization': $.cookie("token")
-			},
-			ajaxOptions: {
-			    xhrFields: {
-			        withCredentials: false
-			    },
-			    crossDomain: true
-			},
-			striped: true,
-			pageNumber: 1,
-			pagination: true,
-			sidePagination: 'server',
-			pageSize: 15,
-			pageList: [5, 10, 15,20, 30,50],
-			showRefresh: false,
-			silent: true, 
-			cache: false,
-			queryParams: queryParams,
-			clickToSelect: true,
-			responseHandler: returnFormat,
-			columns: [{
-				title: 'Id',
-				field: 'id',
-				edit:true,
-				sortable: true
-			}, {
-				title: '名称',
-				field: 'name',
-				editable: {
-				    type: 'text',
-				    title: '名称',
-				    validate: function (v) {
-				        if (!v) return '类别名称不能为空';
-				
-				    }
-				}
-			}, {
-				title: '更新时间',
-				field: 'updateTime',
-				sortable: true
-			}, {
-				title: '创建时间',
-				field: 'creatTime',
-				sortable: true
-			}, {
-				title: '操作',
-				field: 'grade',
-				formatter: function(value, row, index) {
-					return '<button type="button" class="btn  btn-danger" style="margin:5px" onclick=" deltype('+row.id+')">删除</button>';
-				}
-			}],
-			onEditableSave: function (field, row, oldValue, $el) {
-				$.ajax({
-                    type: "put",
-                    url: "http://test.wslhome.top/admin/updateTypes/v1",
-                    data: row,
-                    dataType: 'JSON',
-                    success: function (msg) {
-						console.log(msg);
-                        if (msg.code==0 &&msg.data == true) {
-                            alert('修改成功');
-                        }else{
-							alert('修改失败');
-						}
-                    },
-                    error: function () {
-                        alert('编辑失败');
-                    },
-                    complete: function () {
-						$('#goodstype').bootstrapTable('refresh'); 
-                    }
-
-                })
-			}
-		})
-		function queryParams(params) {
-			var temp = {
-				current : (params.offset / params.limit) + 1,
-				size: params.limit,
-				id: id,
-				name: name
-			};
-			return temp;
-		}
-		function returnFormat(res) {
-			console.log(res);
-			return {
-				"rows":res.data.records,
-				"total":res.data.total
-			};
-		}
-	}
-	
-	
-	
-	function deltype(id) {
-		var mymessage = confirm("确认删除吗？");
-		if (mymessage == true) {
-			$.ajax({
-				type: "DELETE",
-				url: "http://test.wslhome.top/admin/delTypes/v1",
-				data: {id : id},
-				dataType: 'JSON',
-				success: function (msg) {
-					console.log(msg);
-					if (msg.code==0 &&msg.data == true) {
-						alert('删除成功');
-					}else{
-						alert('删除失败');
-					}
-				},
-				error: function () {
-					alert('编辑失败');
-				},
-				complete: function () {
-					$('#goodstype').bootstrapTable('refresh'); 
-				}
-		
-			})
-		}
-	}
-	
-	
-	$("#sub").click(function() {
-		$("#addTypes").ajaxSubmit(function(re) {
-			alert(re.userMsg);
-			$('#goodstype').bootstrapTable('refresh'); 
-		});
-	});
-</script>
-
-
-
-
+</html>
 </body>
 
 </html>
-
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-	</body>
-</html>
-
-

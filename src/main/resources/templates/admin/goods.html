@@ -1,435 +1,195 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
-
-<head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-    <title>上架管理</title>
-    <meta name="keywords" content="">
-    <meta name="description" content="">
-
-    <link rel="shortcut icon" href="favicon.ico"> <link href="../static/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
-    <link href="../static/admin/css/font-awesome.css?v=4.4.0" rel="stylesheet">
-    <link href="../static/admin/css/plugins/iCheck/custom.css" rel="stylesheet">
-    <link href="../static/admin/css/animate.css" rel="stylesheet">
-    <link href="../static/admin/css/style.css?v=4.1.0" rel="stylesheet">
-	<link href="../static/admin/css/ionic.css" rel="stylesheet">
-	
-</head>
-
-<body class="gray-bg">
-    <div class="wrapper wrapper-content animated fadeInRight">
-		<div class="row">
-		    <div class="col-sm-12">
-				<div>
-					<div class="ibox-content" style="padding-bottom:0px;">
-					    <div>
-							
-							<label class="form-inline" />是否上架：
-								<select name="shelf"  class="form-control" id="shelf" >
-									<option value="">全部</option>
-									<option value="true">已上架</option>
-									<option value="false">未上架</option>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>
+			上架管理
+		</title>
+		<meta name="keywords" content="">
+		<meta name="description" content="">
+		<link rel="shortcut icon" href="favicon.ico">
+		<link href="../static/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+		<link href="../static/admin/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+		<link href="../static/admin/css/plugins/iCheck/custom.css" rel="stylesheet">
+		<link href="../static/admin/css/animate.css" rel="stylesheet">
+		<link href="../static/admin/css/style.css?v=4.1.0" rel="stylesheet">
+		<link href="../static/admin/css/ionic.css" rel="stylesheet">
+	</head>
+	<body class="gray-bg">
+		<div class="wrapper wrapper-content animated fadeInRight">
+			<div class="row">
+				<div class="col-sm-12">
+					<div>
+						<div class="ibox-content" style="padding-bottom:0px;">
+							<div>
+								<label class="form-inline" />
+								是否上架：
+								<select name="shelf" class="form-control" id="shelf">
+									<option value="">
+										全部
+									</option>
+									<option value="true">
+										已上架
+									</option>
+									<option value="false">
+										未上架
+									</option>
 								</select>
-							</label>
-					        <label class="form-inline" />商品id：
-					        <input type="text" class="form-control" id = "searchId"/></label>
-							<label class="form-inline" />商品名称：
-							<input type="text" class="form-control" id = "searchName"/></label>
-							<button type="button" class="btn btn-sm btn-primary" id = "search" > 搜索</button> </span>
-							<a data-toggle="modal" class="btn btn-info" id = "addGoods" style="float: right;" href="#EditModal">添加</a>
-					    </div>
-					</div>
-				</div>
-		        <div class="ibox float-e-margins">
-		            <div class="ibox-title">
-		                <h5>商品管理</h5>
-		            </div>
-		            <div class="ibox-content">
-		                <table class="table table-stripped toggle-arrow-tiny" id = "goods" name = "goods">
-		                </table>
-		            </div>
-		        </div>
-		    </div>
-	    </div>
-    </div>
-
-
-	<div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="myModal" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-						&times;
-					</button>
-					<h4 class="modal-title" id="myModalLabel">
-						编辑商品
-					</h4>
-				</div>
-				<div class="modal-body">
-					<div class="form-group">
-						<form role="form" id = "addOrUpdateGoods" enctype="multipart/form-data">
-							<div class="row">
-								<div class="col-sm-6">
-									<input id = "id" name = "id" style="display:none" readonly="true" value = "" />
-									<input id = "imgUrl" name = "imgUrl" style="display:none" readonly="true" value = "" />
-									<div class="form-group">
-										<div class="form-group">
-											<label class="col-xl-3 control-label">物品名称</label>
-											<div class="col-xl-9">
-												<input type="text" id = "name" name = "name" class="form-control layer-date" />
-											</div>
-										</div>
-										<div class="form-group">
-											<label class="col-xl-3 control-label">物品描述</label>
-											<div class="col-xl-9">
-												<textarea type="text" id = "detail" name = "detail" class="form-control layer-date" ></textarea>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-6">
-									<div class="form-group">
-										<label class="form-inline" />是否上架：
-											<select name="shelf"  class="form-control" id="shelf" >
-												<option value="true">下架</option>
-												<option value="false">上架</option>
-											</select>
-										</label>
-									</div>
-									<div class="form-group">
-										<label class="form-inline" />商品类别：
-											<select name="typeId"  class="form-control" id="typeId" ></select>
-											<!-- <button class="btn btn-info" style="width: 30px; font-size: 5px;">下</button> -->
-										</label>
-									</div>
-									<div class="form-group">
-										<label class="col-xl-3 control-label">图片</label>
-										<div class="col-xl-9">
-											<div class="file-container" style="display:inline-block;position:relative;overflow: hidden;vertical-align:middle">
-												<button class="btn btn-success fileinput-button" type="button">上传</button>
-												<input type="file" id="file" name = "file" multiple="multiple" onchange="loadFile(this.files[0])" style="position:absolute;top:0;left:0;font-size:34px; opacity:0">
-											</div>
-											<label id="imgUrls" name = "imgUrls" style="vertical-align: middle">未上传文件</span>
-											
-										</div>
-									</div>
-									
-								</div>
+								</label>
+								<label class="form-inline" />
+								商品id：
+								<input type="text" class="form-control" id="searchId" />
+								</label>
+								<label class="form-inline" />
+								商品名称：
+								<input type="text" class="form-control" id="searchName" />
+								</label>
+								<button type="button" class="btn btn-sm btn-primary" id="search">
+									搜索
+								</button>
+								</span>
+								<a data-toggle="modal" class="btn btn-info" id="addGoods" style="float: right;"
+								href="#EditModal">
+									添加
+								</a>
 							</div>
-						</form>
+						</div>
 					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">取消
-					</button>
-					<button type="button" class="btn btn-primary" data-dismiss="modal" id = "sub">
-						确定
-					</button>
+					<div class="ibox float-e-margins">
+						<div class="ibox-title">
+							<h5>
+								商品管理
+							</h5>
+						</div>
+						<div class="ibox-content">
+							<table class="table table-stripped toggle-arrow-tiny" id="goods" name="goods">
+							</table>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-</body>
-
-	<!-- 全局js -->
-	<script src="../static/admin/js/jquery.min.js?v=2.1.4"></script>
-		<script src="../static/admin/js/jquery-ui-1.10.4.min.js"></script>
-	<script src="../static/admin/js/bootstrap.min.js?v=3.3.6"></script>
-	<script src="../static/admin/js/jquery.form.js"></script>
-	<script src="../static/admin/js/jquery.cookie.js"></script>
-
-
-	
-	
-	<!-- 自定义js -->
-	<script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
-	<script src="../static/admin/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
-	<script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
-	
-	<!--开关JS-->
-	<script src="../static/admin/js/ionic.bundle.min.js"></script>
-
-
-<script>
-	
-	$.ajaxSetup({
-		headers: {
-			'Authorization': $.cookie("token")
-		},
-		xhrFields: {
-			withCredentials: false
-		},
-		crossDomain: true
-	});
-	
-	$(function() {
-		if ($.cookie("token") == null || $.cookie("token") == "") {
-			window.location.href = "/admin/login.html"
-		}
-	});
-	
-	$("#EditModal").on("hidden.bs.modal", function () {
-			$("#id").val("");
-			$("#name").val("");
-			$("#shelf").val("");
-			$("#detail").val("");
-			$("#imgUrls").html("");
-	});
-
-	function loadFile(file){
-		 $("#imgUrls").html(file.name);
-	}
-	
-	$(function() {
-	    var cusname = $('#typeName').val();
-	        $.ajax({
-	            url: "http://test.wslhome.top/admin/getTypesAll/v1",
-	            dataType: "json",
-	            type: "GET",
-				async:true,
-	            data: {
-					size:100
-	            },
-	            success: function (res) {
-	                var data = res.data.records;
-				    var html;
-				   	$("#typeId").empty();
-				   	for(var i=0;i<data.length;i++){
-				   		html +=	'<option value="'+data[i].id+'">'+data[i].name+'</option>';
-					}
-					$("#typeId").append(html);
-	            },
-	            error: function () {
-	                alert('查询失败！请检查你的网络或稍后重试');
-	            },
-	        });
-	    
-	  });
-
-	
-	$("#search").click(function(){
-		goods($("#searchId").val(),$("#searchName").val(),$("#shelf").val());
-		
-	})
-	$(function(){
-		goods(null,null,null);
-	})
-		function goods(goodId,goodName,shelf) {
-			$('#goods').bootstrapTable('destroy'); 
-			$('#goods').bootstrapTable({
-				method: 'get',
-				url: "http://test.wslhome.top/admin/getGoods/v1",
-				dataType: "json",
-				headers: {
-					'Authorization': $.cookie("token")
-				},
-				ajaxOptions: {
-				        xhrFields: {        //跨域
-				            withCredentials: false
-				        },
-				        crossDomain: true
-				},
-				striped: true,
-				pageNumber: 1,
-				pagination: true,
-				sidePagination: 'server',
-				pageSize: 5,
-				pageList: [5, 10, 20, 30],
-				showRefresh: true,
-				silent: true, 
-				cache: false,
-				queryParams: queryParams,
-				responseHandler: returnFormat,
-				columns: [{
-					title: 'Id',
-					field: 'id',
-					sortable: true
-				}, {
-					title: '商品名',
-					field: 'name',
-					sortable: true
-				}, {
-					title: '展示图',
-					field: 'imgUrl',
-					formatter: function(value, row, index) {
-						return '<img src = "'+row.imgUrl+'"></img>';
-					}
-				}, {
-					title: '类别',
-					field: 'typeName',
-					sortable: true
-				}, {
-					title: '商品描述',
-					field: 'detail',
-					sortable: true
-				},{
-					title: '上架',
-					formatter: function(value, row, index) {
-						var html  = '<label class="toggle toggle-positive">';
-						if(row.shelf==true){
-							html = html+' <input type="checkbox"  checked onclick="shelf('+row.id+')" />';
-						}else{
-							html = html+' <input type="checkbox" onclick="shelf('+row.id+')" />';
-						}
-						return html+'<div class="track"><div class="handle"></div></div></label>';
-					}
-				}, {
-					title: '<table><thead><tr><th style="width:110px">skuId</th><th style="width:400px">商品属性</th><th>总数</th></tr></thead></table>',
-					field: 'skuList',
-					formatter: function(value, row, index) {
-						
-						var html = "<table class='table'>";
-						if (row.skuList !=null){
-							$.each(row.skuList, function(i, sku) {
-								html += "<tr><td style='width:100px'>" + sku.id + "</td><td style='width:400px'>" + sku.attribute +
-									"</td><td >" + sku.num + "</td></tr>";
-							})	
-						}
-							
-						html += "</table>"
-						return html;
-					}
-				}, {
-					title: '操作',
-					field: 'Button',
-					align: 'center',
-					formatter: option
-
-				}]
-			})
-			function queryParams(params) {
-				var temp = {
-					current : (params.offset / params.limit) + 1,
-					size: params.limit,
-					id: goodId,
-					name: goodName,
-					shelf:shelf
-				};
-				return temp;
-			}
-
-			function returnFormat(res) {
-				if (res.code != 0){
-					alert('商品列表获取异常，请稍后再试');
-					return null;
-				}
-				
-				return {
-					"rows": res.data.records,
-					"total": res.data.total
-				}
-			}
-
-			function option(value, row, index) {
-				return '<a data-toggle="modal" class="btn btn-primary" href="#EditModal" onclick="setValue('+JSON.stringify(row).replace(/"/g, '&quot;')+') ">编辑</a></br>' +
-						'<a data-toggle="modal" class="btn btn-danger" onclick = "delGoods(' + row.id + ')">删除</a>';	
-			}
-			goodId = null;
-			goodName = null;
-			shelf = null;
-		}
-		
-		function delGoods(index) {
-			var mymessage = confirm("确认删除嘛？");
-			if (mymessage == true) {
-				$.ajax({
-					url: "http://test.wslhome.top/admin/delGoodsById/v1",
-					data: {
-						id: index
-					},
-					type: 'delete',
-					async:true,
-					success: function(data) {
-						if (data.code == 0) {
-							alert(data.userMsg);
-							$('#goods').bootstrapTable('refresh');
-						} else {
-							alert(data.userMsg);
-						}
-					},
-					error: function(msg) {
-						alert(msg.userMsg);
-					}
-				});
-		
-			}
-		
-		}
-		
-		
-		var url;
-		var method;
-		
-		$("#addGoods").click(function(){
-			url = "http://test.wslhome.top/admin/addGoods/v1";
-			method = "POST";
-		})
-		
-		
-		//更新
-		function setValue(vals,index){
-			$("#id").val(vals.id);
-			$("#name").val(vals.name);
-			$("#shelf").val(vals.shelf);
-			$("#detail").val(vals.detail);
-			$("#imgUrls").html(vals.imgUrl.slice(0,-44));
-			var temp = $("#typeId  option");
-			for (var i = 0;i < temp.length;i++){
-				if (temp[i].value==vals.typeId){
-					temp[i].selected = true;
-				}
-			}
-			url = "http://test.wslhome.top/admin/updateGoods/v1";
-			method = "PUT";
-		}
-		
-		$("#sub").click(function() {
-			$("#imgUrl").val($("#imgUrls").text());
-			var data = new FormData(document.getElementById("addOrUpdateGoods"));
-			$.ajax({
-				type: method,
-				url: url,
-				data: data,
-				contentType:false,
-				processData:false,
-				async:true,
-			    dataType: "json",
-			    success: function (msg) {
-					alert(msg.userMsg);
-					$('#goods').bootstrapTable("refresh");
-				},
-				error: function(data) {
-					alert(data.userMsg);
-				}
-			})
-			
-		});
-		
-	function shelf(obj){
-		$.ajax({
-			type: "PUT",
-			url: "http://test.wslhome.top/admin/merchandise/v1",
-			data: {id:obj},
-		    dataType: "json",
-			async:true, 
-		    success: function (msg) {
-				alert(msg.userMsg);
-				$('#goods').bootstrapTable("refresh");
-			},
-			error: function(msg) {
-				alert(msg.userMsg);
-			}
-		})
-	}
-			
+		<div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="myModal"
+		aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+							&times;
+						</button>
+						<h4 class="modal-title" id="myModalLabel">
+							编辑商品
+						</h4>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<form role="form" id="addOrUpdateGoods" enctype="multipart/form-data">
+								<div class="row">
+									<div class="col-sm-6">
+										<input id="id" name="id" style="display:none" readonly="true" value=""
+										/>
+										<input id="imgUrl" name="imgUrl" style="display:none" readonly="true"
+										value="" />
+										<div class="form-group">
+											<div class="form-group">
+												<label class="col-xl-3 control-label">
+													物品名称
+												</label>
+												<div class="col-xl-9">
+													<input type="text" id="name" name="name" class="form-control layer-date"
+													/>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-xl-3 control-label">
+													物品描述
+												</label>
+												<div class="col-xl-9">
+													<textarea type="text" id="detail" name="detail" class="form-control layer-date">
+													</textarea>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<div class="form-group">
+											<label class="form-inline" />
+											是否上架：
+											<select name="shelf" class="form-control" id="shelf">
+												<option value="true">
+													下架
+												</option>
+												<option value="false">
+													上架
+												</option>
+											</select>
+											</label>
+										</div>
+										<div class="form-group">
+											<label class="form-inline" />
+											商品类别：
+											<select name="typeId" class="form-control" id="typeId">
+											</select>
+											</label>
+										</div>
+										<div class="form-group">
+											<label class="col-xl-3 control-label">
+												图片
+											</label>
+											<div class="col-xl-9">
+												<div class="file-container" style="display:inline-block;position:relative;overflow: hidden;vertical-align:middle">
+													<button class="btn btn-success fileinput-button" type="button">
+														上传
+													</button>
+													<input type="file" id="file" name="file" multiple="multiple" onchange="loadFile(this.files[0])"
+													style="position:absolute;top:0;left:0;font-size:34px; opacity:0">
+												</div>
+												<label id="imgUrls" name="imgUrls" style="vertical-align: middle">
+													未上传文件
+													</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">
+							取消
+						</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal" id="sub">
+							确定
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="../static/admin/js/jquery.min.js?v=2.1.4">
 	</script>
-</html>
+	<script src="../static/admin/js/jquery-ui-1.10.4.min.js">
+	</script>
+	<script src="../static/admin/js/bootstrap.min.js?v=3.3.6">
+	</script>
+	<script src="../static/admin/js/jquery.form.js">
+	</script>
+	<script src="../static/admin/js/jquery.cookie.js">
+	</script>
+	<script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table.min.js">
+	</script>
+	<script src="../static/admin/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js">
+	</script>
+	<script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js">
+	</script>
+	<script src="../static/admin/js/ionic.bundle.min.js">
+	</script>
+	<script src="../static/admin/myjs/goods.js">
+	</script>
 
+</html>
 </body>
+
 </html>
-
-

@@ -1,152 +1,62 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-    <title>订阅历史记录</title>
-    <meta name="keywords" content="">
-    <meta name="description" content="">
-
-    <link rel="shortcut icon" href="favicon.ico"> <link href="../static/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
-    <link href="../static/admin/css/font-awesome.css?v=4.4.0" rel="stylesheet">
-    <link href="../static/admin/css/animate.css" rel="stylesheet">
-    <link href="../static/admin/css/style.css?v=4.1.0" rel="stylesheet">
-
-</head>
-
-<body class="gray-bg">
-    <div class="wrapper wrapper-content  animated fadeInRight">
-		<div class="row" style="margin-left: 10px;">
-		    <div>
-				<label class="form-inline" />开始时间：
-					<input id = "startTime" name = "startTime" type="text" class="form-control layer-date" placeholder="YYYY-MM-DD hh:mm:ss"autocomplete="off" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" />
-				</label>
-				<label class="form-inline" />结束时间：
-					<input id = "endTime" name = "endTime" type="text" class="form-control layer-date" placeholder="YYYY-MM-DD hh:mm:ss"autocomplete="off" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" />
-				</label>
-				<button class="btn btn-primary" id = "search">搜 索</button>
-		    </div>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>
+			订阅历史记录
+		</title>
+		<meta name="keywords" content="">
+		<meta name="description" content="">
+		<link rel="shortcut icon" href="favicon.ico">
+		<link href="../static/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+		<link href="../static/admin/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+		<link href="../static/admin/css/animate.css" rel="stylesheet">
+		<link href="../static/admin/css/style.css?v=4.1.0" rel="stylesheet">
+	</head>
+	<body class="gray-bg">
+		<div class="wrapper wrapper-content  animated fadeInRight">
+			<div class="row" style="margin-left: 10px;">
+				<div>
+					<label class="form-inline" />
+					开始时间：
+					<input id="startTime" name="startTime" type="text" class="form-control layer-date"
+					placeholder="YYYY-MM-DD hh:mm:ss" autocomplete="off" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})"
+					/>
+					</label>
+					<label class="form-inline" />
+					结束时间：
+					<input id="endTime" name="endTime" type="text" class="form-control layer-date"
+					placeholder="YYYY-MM-DD hh:mm:ss" autocomplete="off" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})"
+					/>
+					</label>
+					<button class="btn btn-primary" id="search">
+						搜 索
+					</button>
+				</div>
+			</div>
+			<table class="table" id="history">
+			</table>
 		</div>
-		
-       <table class="table" id = "history"> 
-	   </table> 
-        
-    </div>
-
-
-    <!-- 全局js -->
-    <script src="../static/admin/js/jquery.min.js?v=2.1.4"></script>
-    <script src="../static/admin/js/bootstrap.min.js?v=3.3.6"></script>
-	<script src="../static/admin/js/jquery.form.js"></script>
-	<script src="../static/admin/js/jquery.cookie.js"></script>
-	<!-- layerDate plugin javascript -->
-	<script src="../static/admin/js/plugins/layer/laydate/laydate.js"></script>
-	<script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
-	<script src="../static/admin/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
-	<script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
-
-<script type="application/javascript">
-	$.ajaxSetup({
-		headers: {
-			'Authorization': $.cookie("token")
-		},
-		xhrFields: {
-			withCredentials: false
-		},
-		crossDomain: true
-	});
-	
-	$(function() {
-		if ($.cookie("token") == null || $.cookie("token") == "") {
-			window.location.href = "/admin/login.html"
-		}
-	});
-	
-	
-	var url =  "http://test.wslhome.top/admin/getAllSubscription/v1";
-	var stime;
-	var etime;
-	$(function(){
-		logger();
-	})
-	$("#search").click(function(){
-		url = "http://test.wslhome.top/admin/getSubscriptionByTime/v1";
-		stime = $("#startTime").val();
-		etime = $("#endTime").val();
-		logger();
-	})
-	
-
-
-	function logger() {
-		
-		$('#history').bootstrapTable('destroy'); 
-		$('#history').bootstrapTable({
-			method: 'get',
-			url:url,
-			dataType: "json",
-			headers: {
-				'Authorization': $.cookie("token")
-			},
-			ajaxOptions: {
-				xhrFields: {
-					withCredentials: false
-				},
-				crossDomain: true
-			},
-			striped: true,
-			pageNumber: 1,
-			pagination: true,
-			sidePagination: 'server',
-			pageSize: 10,
-			pageList: [5, 10, 15,20, 30,50],
-			showRefresh: false,
-			silent: true, 
-			cache: false,
-			queryParams: queryParams,
-			responseHandler: returnFormat,
-			columns: [{
-				formatter: function(value, row, index) {
-					var type = '短信订阅';
-					if(row.type==0){
-						type = "邮件订阅";
-					}
-					var html = '<div class="row"><div class="col-sm-12"><div class="ibox float-e-margins">'
-					+'<div class="ibox-title"><h5>'+type+'&nbsp'+'id:'+row.id+'</h5>'
-					+'</div><div class="ibox-content"><h2>'+row.title+'</h2>'
-					+'<p>'+row.detail+'</p>'
-					+'<hr/><h4>创建时间：'+row.creatTime+'</h4>'
-					+'<h4>发布者Id：'+row.adminId+'</h4></div></div></div></div>';
-					
-					return html;
-				}
-			}]
-		})
-		function queryParams(params) {
-			var temp = {
-				page : (params.offset / params.limit) + 1,
-				num: params.limit,
-				beginTime: stime,
-				endTime: etime					
-			};
-			return temp;
-		}
-
-		function returnFormat(res) {
-			return {
-				"rows":res.data.records,
-				"total": res.data.total
-			};
-		}
-	}
-</script>
-    
-    
-
-</body>
+		<script src="../static/admin/js/jquery.min.js?v=2.1.4">
+		</script>
+		<script src="../static/admin/js/bootstrap.min.js?v=3.3.6">
+		</script>
+		<script src="../static/admin/js/jquery.form.js">
+		</script>
+		<script src="../static/admin/js/jquery.cookie.js">
+		</script>
+		<script src="../static/admin/js/plugins/layer/laydate/laydate.js">
+		</script>
+		<script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table.min.js">
+		</script>
+		<script src="../static/admin/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js">
+		</script>
+		<script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js">
+		</script>
+		<script src="../static/admin/myjs/subhis.js">
+		</script>
+	</body>
 
 </html>

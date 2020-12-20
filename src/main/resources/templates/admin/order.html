@@ -1,313 +1,181 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-    <title>订单管理</title>
-    <meta name="keywords" content="">
-    <meta name="description" content="">
-
-    <link rel="shortcut icon" href="favicon.ico"> <link href="../static/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
-    <link href="../static/admin/css/font-awesome.css?v=4.4.0" rel="stylesheet">
-    <link href="../static/admin/css/animate.css" rel="stylesheet">
-    <link href="../static/admin/css/style.css?v=4.1.0" rel="stylesheet">
-	<link href="../static/admin/css/plugins/footable/footable.core.css" rel="stylesheet">
-</head>
-
-<body class="gray-bg">
-    <div class="wrapper wrapper-content animated fadeIn">
-        <div class="row">
-			<div class="ibox-content" style="padding-bottom:0px;">
-			    <div>
-					<label class="form-inline" />类别：
-						<select name="type"  class="form-control" id="type" >
-							<option value="" selected="selected"></option>
-							<option value="2" >已支付</option>
-							<option value="1" >待支付</option>
-							<option value="3">已出库</option>
-							<option value="4">已收货</option>
-							<option value="0">已取消</option>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>
+			订单管理
+		</title>
+		<meta name="keywords" content="">
+		<meta name="description" content="">
+		<link rel="shortcut icon" href="favicon.ico">
+		<link href="../static/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+		<link href="../static/admin/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+		<link href="../static/admin/css/animate.css" rel="stylesheet">
+		<link href="../static/admin/css/style.css?v=4.1.0" rel="stylesheet">
+		<link href="../static/admin/css/plugins/footable/footable.core.css" rel="stylesheet">
+	</head>
+	<body class="gray-bg">
+		<div class="wrapper wrapper-content animated fadeIn">
+			<div class="row">
+				<div class="ibox-content" style="padding-bottom:0px;">
+					<div>
+						<label class="form-inline" />
+						类别：
+						<select name="type" class="form-control" id="type">
+							<option value="" selected="selected">
+							</option>
+							<option value="2">
+								已支付
+							</option>
+							<option value="1">
+								待支付
+							</option>
+							<option value="3">
+								已出库
+							</option>
+							<option value="4">
+								已收货
+							</option>
+							<option value="0">
+								已取消
+							</option>
 						</select>
-					</label>
-					<label class="form-inline" />订单id：
-			        <input type="text" class="form-control" id = "id"/></label>
-					<label class="form-inline" />用户编号：
-					<input type="text" class="form-control" id = "userId"/></label>
-					<label class="form-inline" />用户昵称：
-					<input type="text" class="form-control" id = "nickName"/></label>
-					<label class="form-inline" />商品id：
-					<input type="text" class="form-control" id = "goodsId"/></label>
-					<label class="form-inline" />商品名：	
-					<input type="text" class="form-control" id = "name"/></label>
-					<button type="button" class="btn btn-sm btn-primary " id = "search" >搜索</button></span>
+						</label>
+						<label class="form-inline" />
+						订单id：
+						<input type="text" class="form-control" id="id" />
+						</label>
+						<label class="form-inline" />
+						用户编号：
+						<input type="text" class="form-control" id="userId" />
+						</label>
+						<label class="form-inline" />
+						用户昵称：
+						<input type="text" class="form-control" id="nickName" />
+						</label>
+						<label class="form-inline" />
+						商品id：
+						<input type="text" class="form-control" id="goodsId" />
+						</label>
+						<label class="form-inline" />
+						商品名：
+						<input type="text" class="form-control" id="name" />
+						</label>
+						<button type="button" class="btn btn-sm btn-primary " id="search">
+							搜索
+						</button>
+						</span>
+					</div>
 				</div>
-			</div>
-            <div class="col-sm-12">
-                <div class="tabs-container">
-                    <ul class="nav nav-tabs">
-                        <li class="active"><a data-toggle="tab" href="#tab-1" aria-expanded="true" onclick="onclicks(2)">已支付</a>
-                        </li>
-                        <li class=""><a data-toggle="tab" href="#tab-1" aria-expanded="false" onclick="onclicks(1)">待支付</a>
-                        </li>
-						<li class=""><a data-toggle="tab" href="#tab-1" aria-expanded="false" onclick="onclicks(3)">已出库</a>
-						</li>
-						<li class=""><a data-toggle="tab" href="#tab-1" aria-expanded="false" onclick="onclicks(4)">已收货</a>
-						</li>
-						<li class=""><a data-toggle="tab" href="#tab-1" aria-expanded="false" onclick="onclicks(0)">已取消</a>
-						</li>
-                    </ul>
-                    <div class="tab-content">
-                        <div id="tab-1" class="tab-pane active">
-                            <div class="panel-body">
-                                <div class="ibox float-e-margins">
-                                	<div class="ibox-content">
-                                	   <table class="footable table table-stripped toggle-arrow-tiny" id = "order">
-                                	   </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-		</div>	
-	</div>		
-	
-	
-	<div id="Modal" class="modal fade" aria-hidden="true">
-	    <div class="modal-dialog">
-	        <div class="modal-content">
-	            <div class="modal-body">
-	                <div class="row">
-	                        <h3 class="m-t-none m-b">订单改价</h3>
-	                        <form role="form" name = "exchanges" id = "exchanges" enctype="application/x-www-form-urlencoded" action="http://test.wslhome.top/admin/modifyPrice/v1"
-								method="get" accept-charset="utf-8">
-								<input id = "orderId" name = "orderId" style="display:none" readonly="true" value = "" />
-	                            <div class="col-sm-6">
-									<div class="form-group">
-									    <label>商品原价</label>
-									    <div class="col-xl-8">
-											<input type="number"  class="form-control" id = "oldMoney" name = "oldMoney"/>
-										</div>
-									</div>
-								</div>	
-								<div class="col-sm-6">
-									<div class="form-group">
-									    <label>现在价格</label>
-									    <div class="col-xl-8">
-											<input type="number" class="form-control" id= "bigDecimal" name = "bigDecimal"/>
+				<div class="col-sm-12">
+					<div class="tabs-container">
+						<ul class="nav nav-tabs">
+							<li class="active">
+								<a data-toggle="tab" href="#tab-1" aria-expanded="true" onclick="onclicks(2)">
+									已支付
+								</a>
+							</li>
+							<li class="">
+								<a data-toggle="tab" href="#tab-1" aria-expanded="false" onclick="onclicks(1)">
+									待支付
+								</a>
+							</li>
+							<li class="">
+								<a data-toggle="tab" href="#tab-1" aria-expanded="false" onclick="onclicks(3)">
+									已出库
+								</a>
+							</li>
+							<li class="">
+								<a data-toggle="tab" href="#tab-1" aria-expanded="false" onclick="onclicks(4)">
+									已收货
+								</a>
+							</li>
+							<li class="">
+								<a data-toggle="tab" href="#tab-1" aria-expanded="false" onclick="onclicks(0)">
+									已取消
+								</a>
+							</li>
+						</ul>
+						<div class="tab-content">
+							<div id="tab-1" class="tab-pane active">
+								<div class="panel-body">
+									<div class="ibox float-e-margins">
+										<div class="ibox-content">
+											<table class="footable table table-stripped toggle-arrow-tiny" id="order">
+											</table>
 										</div>
 									</div>
 								</div>
-								
-								<button class="btn btn-default" data-dismiss="modal"> 取消</button>
-								<button class="btn btn-primary" data-dismiss="modal" id = "sub">确定</button>
-	                        </form>
-	                </div>
-	            </div>
-	        </div>
-	    </div>
-	</div>
-	
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="Modal" class="modal fade" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-body">
+						<div class="row">
+							<h3 class="m-t-none m-b">
+								订单改价
+							</h3>
+							<form role="form" name="exchanges" id="exchanges" enctype="application/x-www-form-urlencoded"
+							action="https://test.wslhome.top/admin/modifyPrice/v1" method="get" accept-charset="utf-8">
+								<input id="orderId" name="orderId" style="display:none" readonly="true"
+								value="" />
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label>
+											商品原价
+										</label>
+										<div class="col-xl-8">
+											<input type="number" class="form-control" id="oldMoney" name="oldMoney"
+											/>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label>
+											现在价格
+										</label>
+										<div class="col-xl-8">
+											<input type="number" class="form-control" id="bigDecimal" name="bigDecimal"
+											/>
+										</div>
+									</div>
+								</div>
+								<button class="btn btn-default" data-dismiss="modal">
+									取消
+								</button>
+								<button class="btn btn-primary" data-dismiss="modal" id="sub">
+									确定
+								</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</body>
-	
-	<!-- 全局js -->
-	<script src="../static/admin/js/jquery.min.js?v=2.1.4"></script>
-	<script src="../static/admin/js/bootstrap.min.js?v=3.3.6"></script>
-
-	<script src="../static/admin/js/jquery.form.js"></script>
-	<script src="../static/admin/js/jquery.cookie.js"></script>
-	<script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
-	<script src="../static/admin/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
-	<script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
-	
-	<script>
-	    $.ajaxSetup({
-	    	headers: {
-	    		'Authorization': $.cookie("token")
-	    	},
-	    	xhrFields: {
-	    		withCredentials: false
-	    	},
-	    	crossDomain: true
-	    });
-	    
-	    $(function() {
-	    	if ($.cookie("token") == null || $.cookie("token") == "") {
-	    		window.location.href = "/admin/login.html"
-	    	}
-	    });
-	    function onclicks(num){
-	    		order(num,null,null,null,null,null);
-	    			
-	    	}   
-		$("#search").on("click",function(){
-			order($("#type").val(),$("#id").val(),$("#nickName").val(),$("#name").val(),$("#goodsId").val(),$("#userId").val())
-		})	
-	    $(function(){order(2,null,null,null,null,null)})
-	    
-	    function order(type,id,nickName,name,goodsId,userId) {
-	    	$('#order').bootstrapTable('destroy'); 
-	    	$('#order').bootstrapTable({
-	    		method: 'get',
-	    		url: "http://test.wslhome.top/admin/getOrderAllById/v1",
-	    		dataType: "json",
-	    		headers: {
-	    			'Authorization': $.cookie("token")
-	    		},
-	    		ajaxOptions: {
-	    		    xhrFields: {
-	    		        withCredentials: false
-	    		    },
-	    		    crossDomain: true
-	    		},
-	    		striped: true,
-	    		pageNumber: 1,
-	    		pagination: true,
-	    		sidePagination: 'server',
-	    		pageSize: 10,
-	    		pageList: [5, 10, 20, 30,50],
-	    		showRefresh: true,
-	    		silent: true, 
-	    		cache: false,
-	    		singleSelect: true,
-	    		showColumns: true,
-	    		queryParams: queryParams,
-	    		responseHandler: returnFormat,
-	    		columns: [{
-	    			title:"订单编号",
-	    			field: 'id',
-	    			sortable: true
-	    		}, {
-	    			title:"用户昵称",
-	    			field: 'nickName',
-	    		}, {
-	    			title:"商品名",
-	    			field: 'goodsName',
-	    		}, {
-	    			title:"商品属性",
-	    			field: 'attribute',
-	    		},{
-	    			title:"购买数量",
-	    			field: 'num',
-	    		}, {
-	    			title:"支付金额",
-	    			field: 'payPrice',
-	    		} , {
-	    			title:"创建时间",
-	    			field: 'orderTime',
-	    		}, {
-	    			title:"支付时间",
-	    			field: 'payTime',
-	    			sortable: true,
-					visible: type == 2 || type == 3 ? true:false 
-	    		} , {
-	    			title:"出库时间",
-	    			field: 'sendTime',
-	    			sortable: true,
-					visible: type == 3 ? true:false 
-	    		} , {
-	    			title:"收件人",
-	    			field: 'sendName',
-	    			sortable: true,
-	    		}, {
-	    			title:"收件人电话",
-	    			field: 'sendPhone',
-	    			sortable: true
-	    		}, {
-	    			title:"收件地址",
-	    			field: 'remark',
-	    			visible: false 
-	    		},{
-	    			title:"处理结果",
-	    			field: 'result',
-					formatter: function(value, row, index) {
-						if (type == 1){
-							return '<a data-toggle="modal" href="#Modal"  style="margin-left: 5px;"  class="btn btn-danger" onclick = "onmoney('+JSON.stringify(row).replace(/"/g, '&quot;')+')">修改价格</a>'
-							+'<a data-toggle="modal"  style="margin-left: 5px;"  class="btn btn-info" onclick = "onpay('+row.id+')">提醒支付</a>';
-						}else if (type == 2){
-							return '<a data-toggle="modal" class="btn btn-primary" onclick = "onout('+row.id+')">出库</a>';
-						}else if (type == 3){
-							return '<a data-toggle="modal" class="btn btn-info" onclick = "onlook('+row.id+')">查看物流</a>';
-						}else if (type == 4){
-							return '<a data-toggle="modal" class="btn btn-success" onclick = "oncomm('+row.id+')">提醒评价</a>';
-						}else if (type == 5){
-							return '<i class="fa fa-check text-navy">已评价</i>';
-						}else if (type == 0){
-							return '<i class="fa fa-warning text-navy">已取消</i>';;
-						}
-					}
-	    		}]
-	    	})
-	    	function queryParams(params) {
-	    		var temp = {
-	    			current : (params.offset / params.limit) + 1,
-	    			size: params.limit,
-	    			id : id,
-					type : type,
-					nickName :nickName,
-					name : name,
-					goodsId : goodsId,
-					userId:userId
-				};
-	    		return temp;
-	    	}
-	    
-	    	function returnFormat(res) {
-	    		return {
-	    			"rows":res.data.records,
-	    			"total": res.data.total
-	    		};
-	    	}
-	    }
-		function onmoney(row,index){
-			$("#orderId").val(row.id);
-			$("#bigDecimal").val(row.payPrice);
-			$("#oldMoney").val(row.payPrice);
-			
-		}
-		$("#sub").click(function(){
-			$("#exchanges").ajaxSubmit(function(re) {
-				alert(re.userMsg);
-				
-			})
-		})
-		
-		function onpay(num){
-			var url = "http://test.wslhome.top/admin/remind2Pay/v1";
-			total(url,num);
-		}
-		function onout(num){
-			var url = "http://test.wslhome.top/admin/outGoods/v1";
-			total(url,num);
-		}
-
-		function oncomm(num){
-			var url = "http://test.wslhome.top/admin/reminderEvaluation/v1";
-			total(url,num);
-		}
-		
-		function total(url,data){
-			$.ajax({
-				url: url,
-				data: {orderId: data},
-				type: 'get',
-				success: function(data) {
-					alert(data.userMsg);
-				},
-				error: function(msg) {
-					alert(msg.userMsg);
-				}
-			});
-			
-		}
-		
-		function onlook(num){
-			alert("物流功能还在开发中，请稍后再试");
-		}
+	<script src="../static/admin/js/jquery.min.js?v=2.1.4">
 	</script>
+	<script src="../static/admin/js/bootstrap.min.js?v=3.3.6">
+	</script>
+	<script src="../static/admin/js/jquery.form.js">
+	</script>
+	<script src="../static/admin/js/jquery.cookie.js">
+	</script>
+	<script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table.min.js">
+	</script>
+	<script src="../static/admin/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js">
+	</script>
+	<script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js">
+	</script>
+	<script src="../static/admin/myjs/order.js">
+	</script>
+
 </html>

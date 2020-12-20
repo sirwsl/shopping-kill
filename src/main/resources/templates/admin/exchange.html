@@ -1,354 +1,192 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-    <title>退换货</title>
-    <meta name="keywords" content="">
-    <meta name="description" content="">
-
-    <link rel="shortcut icon" href="favicon.ico"> <link href="../static/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
-    <link href="../static/admin/css/font-awesome.css?v=4.4.0" rel="stylesheet">
-    <link href="../static/admin/css/plugins/iCheck/custom.css" rel="stylesheet">
-    <link href="../static/admin/css/animate.css" rel="stylesheet">
-    <link href="../static/admin/css/style.css?v=4.1.0" rel="stylesheet">
-
-</head>
-
-<body class="gray-bg">
-	
-	<div class="row">
-	    <div class="col-sm-12">
-	        <div class="tabs-container">
-				<div class="ibox-content">
-				    <div class="row">
-						<div class="ibox-content" style="padding-bottom:0px;">
-						    <div>
-								<label class="form-inline" />售后类别：
-									<select name="types"  class="form-control" id="types" >
-										<option value="" selected="selected">全部</option>
-										<option value="2" >换货</option>
-										<option value="1">仅退款</option>
-										<option value="3">退货退款</option>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>
+			退换货
+		</title>
+		<meta name="keywords" content="">
+		<meta name="description" content="">
+		<link rel="shortcut icon" href="favicon.ico">
+		<link href="../static/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+		<link href="../static/admin/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+		<link href="../static/admin/css/plugins/iCheck/custom.css" rel="stylesheet">
+		<link href="../static/admin/css/animate.css" rel="stylesheet">
+		<link href="../static/admin/css/style.css?v=4.1.0" rel="stylesheet">
+	</head>
+	<body class="gray-bg">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="tabs-container">
+					<div class="ibox-content">
+						<div class="row">
+							<div class="ibox-content" style="padding-bottom:0px;">
+								<div>
+									<label class="form-inline" />
+									售后类别：
+									<select name="types" class="form-control" id="types">
+										<option value="" selected="selected">
+											全部
+										</option>
+										<option value="2">
+											换货
+										</option>
+										<option value="1">
+											仅退款
+										</option>
+										<option value="3">
+											退货退款
+										</option>
 									</select>
-								</label>
-								<label class="form-inline" />是否处理：
-									<select name="resout" class="form-control" id="resout" >
-										<option value="" selected="selected">全部</option>
-										<option value="1" >已处理</option>
-										<option value="0">未处理</option>
+									</label>
+									<label class="form-inline" />
+									是否处理：
+									<select name="resout" class="form-control" id="resout">
+										<option value="" selected="selected">
+											全部
+										</option>
+										<option value="1">
+											已处理
+										</option>
+										<option value="0">
+											未处理
+										</option>
 									</select>
-								</label>
-								<label class="form-inline" />售后编号：
-						        <input type="text" class="form-control" id = "SId"/></label>
-								<label class="form-inline" />订单编号：
-								<input type="text" class="form-control" id = "orderId"/></label>
-								<button type="button" class="btn btn-sm btn-primary " id = "search" >搜索</button> </span>
-							</div>
-						</div>
-				       
-				    </div>
-					</br>
-	            <ul class="nav nav-tabs">
-	                <li class="active"><a data-toggle="tab" href="#tab-1" aria-expanded="true">售后处理</a>
-	                </li>
-	                
-	            </ul>
-	            <div class="tab-content">
-	                <div id="tab-1" class="tab-pane active">
-	                    <div class="panel-body">
-	                        
-							<div class="wrapper wrapper-content animated fadeInRight">
-							    <div class="row">
-							        <div class="col-sm-12">
-							            <div class="ibox float-e-margins">
-							                <div class="ibox-content">
-							            		<table class="table table-bordered"  id= "afterSale">
-							                    </table>
-							                </div>
-							        
-							            </div>
-							        </div>
-							    </div>
-							</div>
-	                    </div>
-	                </div>
-	            </div>
-	        </div>
-	    </div>
-	</div>	
-	
-    
-        
-		
-		
-	<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-						&times;
-					</button>
-					<h4 class="modal-title" id="myLabel">
-						售后处理
-					</h4>
-				</div>
-				<form class="m-t" role="form" id="updates" name="updates"accept-charset="utf-8">
-					<div class="modal-body">
-						<input id = "id" name = "id" style="display:none" readonly="true" value = "" />
-						<input id = "type" name = "type" style="display:none" readonly="true" value = "" />
-						<div class="form-group">
-							<label class="form-inline" id = "myTypes"/></label>
-						</div>
-						<div class="form-group">
-							<label class="form-inline" />是否处理：
-								<select name="result" class="form-control" id="result" >
-									<option value="true" >已处理</option>
-									<option value="<false></false>">未处理</option>
-								</select>
-							</label>
-						</div>	
-							<div class="form-group">
-							<label class="form-inline" id = "oldSku"> </label>
-						</div>
-						<div class="form-group">	
-							<input id = "oldSkuId" name = "oldSkuId" style="display:none" readonly="true" value = "" />
-							<label class="form-inline" />换货SKU：
-								<select name="skuId" class="form-control" id="skuId" >
-								</select>
-							</label>
-							<label class="form-inline" id = "number"/></label>
-						</div>	
-							<div class="form-group">
-								<label class="col-xl-3 control-label">处理结果：</label>
-								<div class="col-xl-9">
-									<textarea type="text" id = "resultDetail" name = "resultDetail" class="form-control layer-date" ></textarea>
+									</label>
+									<label class="form-inline" />
+									售后编号：
+									<input type="text" class="form-control" id="SId" />
+									</label>
+									<label class="form-inline" />
+									订单编号：
+									<input type="text" class="form-control" id="orderId" />
+									</label>
+									<button type="button" class="btn btn-sm btn-primary " id="search">
+										搜索
+									</button>
+									</span>
 								</div>
 							</div>
 						</div>
-					
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-						<button type="button" class="btn btn-primary" id = "sub" data-dismiss="modal">提交</button>
+						</br>
+						<ul class="nav nav-tabs">
+							<li class="active">
+								<a data-toggle="tab" href="#tab-1" aria-expanded="true">
+									售后处理
+								</a>
+							</li>
+						</ul>
+						<div class="tab-content">
+							<div id="tab-1" class="tab-pane active">
+								<div class="panel-body">
+									<div class="wrapper wrapper-content animated fadeInRight">
+										<div class="row">
+											<div class="col-sm-12">
+												<div class="ibox float-e-margins">
+													<div class="ibox-content">
+														<table class="table table-bordered" id="afterSale">
+														</table>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
-				</form>	
+				</div>
 			</div>
-		</div>
-	</div>
+			<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+			aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+								&times;
+							</button>
+							<h4 class="modal-title" id="myLabel">
+								售后处理
+							</h4>
+						</div>
+						<form class="m-t" role="form" id="updates" name="updates" accept-charset="utf-8">
+							<div class="modal-body">
+								<input id="id" name="id" style="display:none" readonly="true" value=""
+								/>
+								<input id="type" name="type" style="display:none" readonly="true" value=""
+								/>
+								<div class="form-group">
+									<label class="form-inline" id="myTypes" />
+									</label>
+								</div>
+								<div class="form-group">
+									<label class="form-inline" />
+									是否处理：
+									<select name="result" class="form-control" id="result">
+										<option value="true">
+											已处理
+										</option>
+										<option value="<false></false>">
+											未处理
+										</option>
+									</select>
+									</label>
+								</div>
+								<div class="form-group">
+									<label class="form-inline" id="oldSku">
+									</label>
+								</div>
+								<div class="form-group">
+									<input id="oldSkuId" name="oldSkuId" style="display:none" readonly="true"
+									value="" />
+									<label class="form-inline" />
+									换货SKU：
+									<select name="skuId" class="form-control" id="skuId">
+									</select>
+									</label>
+									<label class="form-inline" id="number" />
+									</label>
+								</div>
+								<div class="form-group">
+									<label class="col-xl-3 control-label">
+										处理结果：
+									</label>
+									<div class="col-xl-9">
+										<textarea type="text" id="resultDetail" name="resultDetail" class="form-control layer-date">
+										</textarea>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">
+									取消
+								</button>
+								<button type="button" class="btn btn-primary" id="sub" data-dismiss="modal">
+									提交
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<script src="../static/admin/js/jquery.min.js?v=2.1.4">
+			</script>
+			<script src="../static/admin/js/bootstrap.min.js?v=3.3.6">
+			</script>
+			<script src="../static/admin/js/jquery.form.js">
+			</script>
+			<script src="../static/admin/js/jquery.cookie.js">
+			</script>
+			<script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table.min.js">
+			</script>
+			<script src="../static/admin/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js">
+			</script>
+			<script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js">
+			</script>
+			<script src="../static/admin/myjs/exchange.js">
+			</script>
+	</body>
 
-			
-    <!-- 全局js -->
-    <script src="../static/admin/js/jquery.min.js?v=2.1.4"></script>
-    <script src="../static/admin/js/bootstrap.min.js?v=3.3.6"></script>
-	<script src="../static/admin/js/jquery.form.js"></script>
-	<script src="../static/admin/js/jquery.cookie.js"></script>
-	<script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
-	<script src="../static/admin/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
-	<script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
-    
-    <script>
-        $.ajaxSetup({
-        	headers: {
-        		'Authorization': $.cookie("token")
-        	},
-        	xhrFields: {
-        		withCredentials: false
-        	},
-        	crossDomain: true
-        });
-        
-        $(function() {
-        	if ($.cookie("token") == null || $.cookie("token") == "") {
-        		window.location.href = "/admin/login.html"
-        	}
-        });
-		
-        	$("#search").on("click",function(){
-        		logger($("#SId").val(),$("#orderId").val(),$("#types").val(),$("#resout").val());
-        			
-        	})
-        $(function(){logger(null,null,null,null)})
-        
-        function logger(id,orderId,type,result) {
-        	$('#afterSale').bootstrapTable('destroy'); 
-        	$('#afterSale').bootstrapTable({
-        		method: 'get',
-        		url: "http://test.wslhome.top/admin/getAfterSalesAll/v1",
-        		dataType: "json",
-        		headers: {
-        			'Authorization': $.cookie("token")
-        		},
-        		ajaxOptions: {
-        		    xhrFields: {
-        		        withCredentials: false
-        		    },
-        		    crossDomain: true
-        		},
-        		striped: true,
-        		pageNumber: 1,
-        		pagination: true,
-        		sidePagination: 'server',
-        		pageSize: 10,
-        		pageList: [5, 10, 20, 30,50],
-        		showRefresh: true,
-        		silent: true, 
-        		cache: false,
-        		singleSelect: true,
-        		showColumns: true,
-        		queryParams: queryParams,
-        		responseHandler: returnFormat,
-        		columns: [{
-        			title:"售后编号",
-        			field: 'id',
-        			sortable: true
-        		}, {
-        			title:"交易单号",
-        			field: 'orderId',
-					sortable: true
-        		}, {
-        			title:"用户Id",
-        			field: 'userId',
-        			sortable: true,
-					visible: false 
-        		}, {
-        			title:"用户姓名",
-        			field: 'userName',
-        			sortable: true
-        		},{
-        			title:"用户手机号",
-        			field: 'userPhone',
-        			visible: false 
-        		}, {
-        			title:"用户昵称",
-        			field: 'userNickName',
-        			visible: false 
-        		} , {
-        			title:"物品id",
-        			field: 'goodsId',
-        			sortable: true,
-					visible: false 
-        		} , {
-        			title:"物品名称",
-        			field: 'goodsName',
-        			sortable: true
-        		} , {
-        			title:"SkuId",
-        			field: 'skuId',
-        			sortable: true,
-					visible: false 
-        		}, {
-        			title:"(SKU)商品属性",
-        			field: 'skuDetail',
-        			sortable: true
-        		}, {
-        			title:"购买数量",
-        			field: 'num',
-        			sortable: true
-        		},{
-        			title:"购买价格",
-        			field: 'payPrice',
-        			sortable: true
-        		},{
-        			title:"售后类型",
-        			field: 'type',
-					formatter: function(value, row, index) {
-						if(row.type == 1){
-							return "仅退款";
-						}else if (row.type == 2){
-							return "换货";
-						}else if (row.type == 3){
-							return "退货退款";
-						}
-					}
-        		},{
-        			title:"售后内容",
-        			field: 'detail',
-        		},{
-        			title:"处理结果",
-        			field: 'result',
-					formatter: function(value, row, index) {
-						if(row.result){
-							return '<i class="fa fa-check text-navy">已处理</i>';
-						}else{
-							return '<a data-toggle="modal" href="#Modal" class="btn btn-info" onclick = "setValue('+JSON.stringify(row).replace(/"/g, '&quot;')+')">处理</a>';
-						}
-					}
-        		}]
-        	})
-        	function queryParams(params) {
-        		var temp = {
-        			current : (params.offset / params.limit) + 1,
-        			size: params.limit,
-        			id : id,
-        			orderId : orderId,
-					type : type,
-					result :result
-        		};
-        		return temp;
-        	}
-        
-        	function returnFormat(res) {
-        		return {
-        			"rows":res.data.records,
-        			"total": res.data.total
-        		};
-        	}
-        }
-		function setValue(row,index){
-			var types = "订单类型:&nbsp&nbsp&nbsp";
-			if(row.type == 1){
-				types += " 仅退款";
-			}else if (row.type == 2){
-				types += " 换货";
-			}else if (row.type == 3){
-				types += " 退货退款";
-			}
-			$("#myTypes").html(types);
-			$("#oldSku").html("原Sku("+row.skuId+"):&nbsp&nbsp&nbsp"+row.skuDetail);
-			
-			$("#skuId").empty();
-			
-			var html = "";
-			$.each(row.skuList, function(i, sku) {
-				html += '<option value="'+sku.id+'">('+sku.num+')'+sku.attribute+'</option>';
-			})
-			$("#skuId").append(html);
-			
-			$("#id").val(row.id);
-			$("#type").val(row.type);
-			$("#oldSkuId").val(row.skuId);
-		}
-		
-		$("#sub").click(function() {
-			var data = new FormData(document.getElementById("updates"));
-			$.ajax({
-				type: "put",
-				url: "http://test.wslhome.top/admin/refundGoodsAndMoney/v1",
-				data: data,
-				contentType:false,
-				processData:false,
-			    dataType: "json",
-			    success: function (msg) {
-					console.log(msg);
-					if (msg != 0){
-						alert(msg.userMsg);
-					}
-					
-					$('#afterSale').bootstrapTable("refresh");
-				},
-				error: function(msg) {
-					alert(msg.userMsg);
-				}
-			})
-		})	
-    </script>
-
-        
- </body>
-        
 </html>
-        
