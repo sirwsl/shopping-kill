@@ -18,7 +18,7 @@ $(function() {
 	$("#userTable").bootstrapTable("destroy");
 	$("#userTable").bootstrapTable({
 		method: "get",
-		url: "https://test.wslhome.top/admin/getUserAll/v1",
+		url: "https://localhost/admin/getUserAll/v1",
 		dataType: "json",
 		headers: {
 			"Authorization": $.cookie("token")
@@ -145,7 +145,7 @@ $("#sub").click(function() {
 $("#del").click(function() {
 	$.ajax({
 		type: "DELETE",
-		url: "https://test.wslhome.top/admin/delUser/v1",
+		url: "https://localhost/admin/delUser/v1",
 		data: {
 			id: value
 		},

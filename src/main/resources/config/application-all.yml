@@ -2,8 +2,8 @@
 spring:
   mail:
     host: smtp.163.com
-    username: shoppingkill@163.com
-    password: TSVSWNMMIHUDHUYY
+    username: shoppisdfsdngkill@163.com
+    password: TSVSsdfsdfsdsWNMMIHUDHUYY
     port: 25
     default-encoding: utf-8
     protocol: smtp
@@ -12,35 +12,35 @@ spring:
 ali:
   oss:
     endpoint: oss-cn-shenzhen.aliyuncs.com
-    accessKeyId: LTAIoOIpViJOimve
-    accessKeySecret: XzU1crrklFHlEHRgENojhew5b09hMC
+    accessKeyId: LTAIoOIpViJsdfsOimve
+    accessKeySecret: XzU1crrklFHsdfsdfslEHRgENojhew5b09hMC
     bucketName: shoppingkill
-    url: //shopingkill.oss-cn-shenzhen.aliyuncs.com/
-    aliUrl: http://shopingkill.oss-cn-shenzhen.aliyuncs.com/
+    url: //shsdfopisdfngksl.oss-cn-shenzhen.aliyuncs.com/
+    aliUrl: http://shosdfpisdfsdngksdfill.oss-cn-shenzhen.aliyuncs.com/
     getFileUrl: ${aliyun.oss.url}${aliyun.oss.fileDir}
-    myHostUrl: http://static.wslhome.top/
+    myHostUrl:
 
 #SMS榛子云参数配置
 zzy:
   apiUrl: https://sms_developer.zhenzikj.com
-  appSecret: MDAxNDZiNGMtNTYwNy00ZTcwLWEyNTItMGY1OThmYmNjZGM2
+  appSecret: MDAxNDZiNGdfsfsdfsdMtNTYwNy00ZTcwLWEyNTItMGY1OThmYmNjZGM2
   appId: 105924
 
 jwt:
   redisToken: 4800
   expire: 3600
   newToken: 600
-  keys: wslhome-shoppingkill-sirwsl
+  keys: shoppingkill-sirwsl
 
 verify:
   imgCodeTimeOut: 300
   phoneCodeTimeOut: 300
 
 req:
-  doMainUrl: wslhome.top
+  doMainUrl: url
 
 url:
-  image: http://static.wslhome.top/
-  webPage: http://test.wslhome.top/
-  server: http://kill.wslhome.top/
+  image: http://
+  webPage: http://
+  server: http://
 

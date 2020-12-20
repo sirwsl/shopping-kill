@@ -14,17 +14,17 @@ $(function() {
 });
 var flag = true;
 $(function() {
-	var a = "https://test.wslhome.top/admin/getSubscriberBySms/v1";
+	var a = "https://localhost/admin/getSubscriberBySms/v1";
 	$("#title").html("短信订阅列表");
 	logger(a);
 	view()
 });
 function change(a) {
 	if (a == 100) {
-		url = "https://test.wslhome.top/admin/getSubscriberBySms/v1";
+		url = "https://localhost/admin/getSubscriberBySms/v1";
 		flag = true
 	} else {
-		url = "https://test.wslhome.top/admin/getSubscriberByEmail/v1";
+		url = "https://localhost/admin/getSubscriberByEmail/v1";
 		flag = false
 	}
 	logger(url);
@@ -125,7 +125,7 @@ function delonly(a) {
 		return
 	}
 	$.ajax({
-		url: "https://test.wslhome.top/admin/delSubscriber/v1",
+		url: "https://localhost/admin/delSubscriber/v1",
 		data: "id=" + a,
 		type: "delete",
 		dataType: "json",

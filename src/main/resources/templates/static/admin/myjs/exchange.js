@@ -23,7 +23,7 @@ function logger(f, b, d, a) {
 	$("#afterSale").bootstrapTable("destroy");
 	$("#afterSale").bootstrapTable({
 		method: "get",
-		url: "https://test.wslhome.top/admin/getAfterSalesAll/v1",
+		url: "https://localhost/admin/getAfterSalesAll/v1",
 		dataType: "json",
 		headers: {
 			"Authorization": $.cookie("token")
@@ -191,7 +191,7 @@ $("#sub").click(function() {
 	var a = new FormData(document.getElementById("updates"));
 	$.ajax({
 		type: "put",
-		url: "https://test.wslhome.top/admin/refundGoodsAndMoney/v1",
+		url: "https://localhost/admin/refundGoodsAndMoney/v1",
 		data: a,
 		contentType: false,
 		processData: false,

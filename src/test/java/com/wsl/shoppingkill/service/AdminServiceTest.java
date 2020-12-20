@@ -26,7 +26,7 @@ public class AdminServiceTest {
 
     @Test
     public void testAdmin(){
-        //123,"123",1,"532923199701161916","18314263373","地址","sirWsl"
+        //123,"123",1,"532923199701161916","18888888888","地址","sirWsl"
         Admin admin = new Admin();
         admin.setAddress("地址").setIdCard("53292681136").setSex(SexEnum.MAN)
                 .setPassword("123").setPhone("18888677861").setWeChat("sirWsl").setDelFlag(true);

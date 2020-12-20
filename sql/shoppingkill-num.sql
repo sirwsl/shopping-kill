@@ -131,14 +131,14 @@ CREATE TABLE `t_address`  (
 -- ----------------------------
 -- Records of t_address
 -- ----------------------------
-INSERT INTO `t_address` VALUES (1, 1, '王世磊', '1562253547', '云南大力', 672100, 0, '2020-11-25 14:41:12', '2020-11-25 14:41:15', 0);
+INSERT INTO `t_address` VALUES (1, 1, 'sirwsl', '1562253547', '云南大力', 672100, 0, '2020-11-25 14:41:12', '2020-11-25 14:41:15', 0);
 INSERT INTO `t_address` VALUES (2, 1, '张三', '1562253547', '云南大力', 672100, 0, '2020-11-25 14:41:12', '2020-11-25 14:41:15', 0);
 INSERT INTO `t_address` VALUES (3, 1, '李四', '1562253547', '云南大力', 672100, 0, '2020-11-25 14:41:12', '2020-11-25 14:41:15', 0);
 INSERT INTO `t_address` VALUES (4, 1, '张八九', '1562253547', '云南大力', 672100, 0, '2020-11-25 14:41:12', '2020-11-25 14:41:15', 0);
 INSERT INTO `t_address` VALUES (5, 1, '刘教授', '1562253547', '丽江', 672100, 0, '2020-11-25 14:41:12', '2020-11-25 14:41:15', 0);
 INSERT INTO `t_address` VALUES (6, 1, '小姐姐', '1562253547', '山东', 672100, 0, '2020-11-25 14:41:12', '2020-11-25 14:41:15', 0);
 INSERT INTO `t_address` VALUES (7, 1, '阿里啥子', '1562253547', '昆明', 672100, 0, '2020-11-25 14:41:12', '2020-11-25 14:41:15', 0);
-INSERT INTO `t_address` VALUES (8, 1, '王世磊', '1562253547', '云南昆明', 672100, 0, '2020-11-25 14:41:12', '2020-11-25 14:41:15', 0);
+INSERT INTO `t_address` VALUES (8, 1, 'sirwsl', '1562253547', '云南昆明', 672100, 0, '2020-11-25 14:41:12', '2020-11-25 14:41:15', 0);
 
 -- ----------------------------
 -- Table structure for t_admin
@@ -166,9 +166,9 @@ CREATE TABLE `t_admin`  (
 -- ----------------------------
 -- Records of t_admin
 -- ----------------------------
-INSERT INTO `t_admin` VALUES (1, '小小磊', 'test', 'test', 0, '532923199701266', '1831426337', 'test.jpg', 'sirwsl@163.com', '云南省祥云县刘厂镇王家庄村7组91号', NULL, 0, '2020-11-16 13:17:27', '2020-12-16 23:05:50', 0);
-INSERT INTO `t_admin` VALUES (57, '123', 'sirwsl', '123', 0, '532923111101111911', '18314263373', NULL, '123', '123', NULL, 1, '2020-12-10 12:24:05', '2020-12-10 12:24:05', 0);
-INSERT INTO `t_admin` VALUES (58, 'test', '0', '0', 1, '532923111101111911', '18314263373', NULL, '123', '123', NULL, 0, '2020-12-10 12:24:35', '2020-12-10 12:24:35', 0);
+INSERT INTO `t_admin` VALUES (1, '小小磊', 'test', 'test', 0, '532923199701266', '1831426337', 'test.jpg', 'sir@163.com', '云南省祥云县刘厂镇王家庄村7组91号', NULL, 0, '2020-11-16 13:17:27', '2020-12-16 23:05:50', 0);
+INSERT INTO `t_admin` VALUES (57, '123', 'sirwsl', '123', 0, '532923111101111911', '18888888888', NULL, '123', '123', NULL, 1, '2020-12-10 12:24:05', '2020-12-10 12:24:05', 0);
+INSERT INTO `t_admin` VALUES (58, 'test', '0', '0', 1, '532923111101111911', '18888888888', NULL, '123', '123', NULL, 0, '2020-12-10 12:24:35', '2020-12-10 12:24:35', 0);
 
 -- ----------------------------
 -- Table structure for t_advertise
@@ -189,39 +189,39 @@ CREATE TABLE `t_advertise`  (
 -- ----------------------------
 -- Records of t_advertise
 -- ----------------------------
-INSERT INTO `t_advertise` VALUES (1, 'http://static.wslhome.top/advertise/0757a41e-a745-461a-89f8-06c0df03eefa.jpg', 'http://www.wslhome.top', '2020-12-08 17:18:12', '2020-12-09 17:18:06', '2020-12-09 00:00:00', '2020-12-09 00:00:00', 1);
-INSERT INTO `t_advertise` VALUES (2, 'http://static.wslhome.top/advertise/timg.jpg', 'http://www.wslhome.top', '2020-12-02 17:18:12', '2020-12-22 17:18:06', '2020-12-09 00:00:00', '2020-12-15 23:42:06', 0);
-INSERT INTO `t_advertise` VALUES (3, 'http://static.wslhome.top/advertise/commend1.jpg', 'http://www.wslhome.top', '2020-12-04 17:18:12', '2020-12-30 17:18:06', '2020-12-09 00:00:00', '2020-12-10 22:48:14', 0);
-INSERT INTO `t_advertise` VALUES (4, 'http://static.wslhome.top/advertise/commend2.jpg', 'http://www.wslhome.top', '2020-12-08 17:18:12', '2020-12-09 17:18:06', '2020-12-09 00:00:00', '2020-12-09 00:00:00', 0);
-INSERT INTO `t_advertise` VALUES (5, 'http://static.wslhome.top/advertise/elec1.jpg', 'http://www.wslhome.top', '2020-12-10 17:18:12', '2021-01-29 17:18:06', '2020-12-09 00:00:00', '2020-12-09 00:00:00', 0);
-INSERT INTO `t_advertise` VALUES (6, 'http://static.wslhome.top/advertise/good_shop3.png', 'http://www.wslhome.top', '2020-12-10 17:18:12', '2021-01-29 17:18:06', '2020-12-09 00:00:00', '2020-12-09 00:00:00', 0);
-INSERT INTO `t_advertise` VALUES (7, 'http://static.wslhome.top/advertise/goods_list2.jpg', 'http://www.wslhome.top', '2020-12-10 17:18:12', '2021-01-29 17:18:06', '2020-12-09 00:00:00', '2020-12-09 00:00:00', 0);
-INSERT INTO `t_advertise` VALUES (8, 'http://static.wslhome.top/advertise/goods_list3.jpg', 'http://www.wslhome.top', '2020-12-10 17:18:12', '2021-01-29 17:18:06', '2020-12-10 17:18:12', '2020-12-10 17:18:12', 0);
-INSERT INTO `t_advertise` VALUES (9, 'http://static.wslhome.top/advertise/login-background.jpg', 'http://www.wslhome.top', '2020-12-10 17:18:12', '2020-12-31 17:18:06', '2020-12-09 00:00:00', '2020-12-09 00:00:00', 0);
-INSERT INTO `t_advertise` VALUES (10, 'http://static.wslhome.top/advertise/p1.jpg', 'http://www.wslhome.top', '2020-12-10 17:18:12', '2020-12-31 17:18:06', '2020-12-09 00:00:00', '2020-12-09 00:00:00', 0);
-INSERT INTO `t_advertise` VALUES (11, 'http://static.wslhome.top/advertise/p2.jpg', 'http://www.wslhome.top', '2020-12-10 17:18:12', '2020-12-17 17:18:00', '2020-12-09 00:00:00', '2020-12-09 00:00:00', 0);
-INSERT INTO `t_advertise` VALUES (12, 'http://static.wslhome.top/advertise/vip_shop4.png', 'http://www.wslhome.top', '2020-12-10 17:18:12', '2020-12-17 17:18:06', '2020-12-09 00:00:00', '2020-12-09 00:00:00', 0);
-INSERT INTO `t_advertise` VALUES (13, 'http://static.wslhome.top/advertise/vip_shop3.png', 'http://www.wslhome.top', '2020-12-10 17:18:12', '2020-12-29 17:18:06', '2020-12-09 00:00:00', '2020-12-09 00:00:00', 0);
-INSERT INTO `t_advertise` VALUES (14, 'http://static.wslhome.top/advertise/vip_shop2.png', 'http://www.wslhome.top', '2020-12-10 17:18:12', '2020-12-27 17:18:06', '2020-12-09 00:00:00', '2020-12-09 00:00:00', 0);
-INSERT INTO `t_advertise` VALUES (15, 'http://static.wslhome.top/advertise/vip_shop1.png', 'http://www.wslhome.top', '2020-12-10 17:18:12', '2020-12-31 17:18:06', '2020-12-09 00:00:00', '2020-12-09 00:00:00', 0);
-INSERT INTO `t_advertise` VALUES (16, 'http://static.wslhome.top/advertise/shop1.jpg', 'http://www.wslhome.top', '2020-12-10 17:18:12', '2020-12-31 17:18:06', '2020-12-09 00:00:00', '2020-12-09 00:00:00', 0);
-INSERT INTO `t_advertise` VALUES (17, 'http://static.wslhome.top/advertise/se_kill_img4.jpg', 'http://www.wslhome.top', '2020-12-10 17:18:12', '2021-01-21 17:18:06', '2020-12-09 00:00:00', '2020-12-09 00:00:00', 0);
-INSERT INTO `t_advertise` VALUES (18, 'http://static.wslhome.top/', 'http://www.wslhome.top', '2020-12-10 17:18:12', '2020-12-16 17:18:06', '2020-12-09 00:00:00', '2020-12-09 00:00:00', 0);
-INSERT INTO `t_advertise` VALUES (19, 'http://static.wslhome.top/advertise/se_kill_img1.jpg', 'http://www.wslhome.top', '2020-12-01 17:18:12', '2020-12-08 17:18:06', '2020-12-09 00:00:00', '2020-12-09 00:00:00', 0);
-INSERT INTO `t_advertise` VALUES (20, 'http://static.wslhome.top/advertise/commend2.jpg', 'http://www.wslhome.top', '2020-12-10 17:18:12', '2020-12-17 17:18:06', '2020-12-09 00:00:00', '2020-12-09 00:00:00', 0);
-INSERT INTO `t_advertise` VALUES (21, 'http://static.wslhome.top/advertise/elec1.jpg', 'http://www.wslhome.top', '2020-12-02 17:18:12', '2020-12-10 17:18:06', '2020-12-09 00:00:00', '2020-12-09 00:00:00', 0);
-INSERT INTO `t_advertise` VALUES (22, 'http://static.wslhome.top/advertise/good_shop3.png', 'http://www.wslhome.top', '2020-12-10 17:18:12', '2021-01-01 17:18:06', '2020-12-09 00:00:00', '2020-12-09 00:00:00', 0);
-INSERT INTO `t_advertise` VALUES (23, 'http://static.wslhome.top/advertise/goods_list2.jpg', 'http://www.wslhome.top', '2020-12-02 17:18:12', '2020-12-10 17:18:06', '2020-12-09 00:00:00', '2020-12-09 00:00:00', 0);
-INSERT INTO `t_advertise` VALUES (24, 'http://static.wslhome.top/advertise/goods_list3.jpg', 'http://www.wslhome.top', '2021-01-01 17:18:12', '2021-01-29 00:00:00', '2020-12-09 00:00:00', '2020-12-09 00:00:00', 0);
-INSERT INTO `t_advertise` VALUES (25, 'http://static.wslhome.top/advertise/login-background.jpg', 'http://www.wslhome.top', '2021-01-01 17:18:12', '2021-01-29 00:00:00', '2020-12-09 00:00:00', '2020-12-09 00:00:00', 0);
-INSERT INTO `t_advertise` VALUES (26, 'http://static.wslhome.top/advertise/p1.jpg', 'http://www.wslhome.top', '2021-01-01 17:18:12', '2021-01-29 00:00:00', '2020-12-10 17:18:12', '2020-12-10 17:18:12', 0);
-INSERT INTO `t_advertise` VALUES (27, 'http://static.wslhome.top/advertise/p2.jpg', 'http://www.wslhome.top', '2021-01-01 17:18:12', '2021-01-29 00:00:00', '2020-12-09 00:00:00', '2020-12-09 00:00:00', 0);
-INSERT INTO `t_advertise` VALUES (28, 'http://static.wslhome.top/advertise/vip_shop4.png', 'http://www.wslhome.top', '2021-01-01 17:18:12', '2021-01-29 00:00:00', '2020-12-09 00:00:00', '2020-12-09 00:00:00', 0);
-INSERT INTO `t_advertise` VALUES (29, 'http://static.wslhome.top/advertise/vip_shop3.png', 'http://www.wslhome.top', '2021-01-01 17:18:12', '2021-01-29 00:00:00', '2020-12-09 00:00:00', '2020-12-09 00:00:00', 0);
-INSERT INTO `t_advertise` VALUES (30, 'http://static.wslhome.top/advertise/vip_shop2.png', 'http://www.wslhome.top', '2021-01-01 17:18:12', '2021-01-29 00:00:00', '2020-12-10 17:18:12', '2020-12-10 17:18:12', 0);
-INSERT INTO `t_advertise` VALUES (31, 'http://static.wslhome.top/advertise/vip_shop1.png', 'http://www.wslhome.top', '2021-01-01 17:18:12', '2021-01-29 00:00:00', '2020-12-09 00:00:00', '2020-12-09 00:00:00', 0);
-INSERT INTO `t_advertise` VALUES (32, 'http://static.wslhome.top/advertise/shop2.jpg', 'http://www.wslhome.top', '2021-01-01 17:18:12', '2021-01-29 00:00:00', '2020-12-09 00:00:00', '2020-12-09 00:00:00', 0);
-INSERT INTO `t_advertise` VALUES (33, 'http://static.wslhome.top/advertise/0f2e2fe2-8bbc-4325-acda-c641f593108d.jpg', 'http://my.wslhome.top', '2020-12-16 00:00:00', '2020-12-31 00:00:00', '2020-12-10 22:49:43', '2020-12-10 22:49:43', 0);
+INSERT INTO `t_advertise` VALUES (1, 'http://localhost/advertise/0757a41e-a745-461a-89f8-06c0df03eefa.jpg', 'http://www.wslhome.top', '2020-12-08 17:18:12', '2020-12-09 17:18:06', '2020-12-09 00:00:00', '2020-12-09 00:00:00', 1);
+INSERT INTO `t_advertise` VALUES (2, 'http://localhost/advertise/timg.jpg', 'http://www.wslhome.top', '2020-12-02 17:18:12', '2020-12-22 17:18:06', '2020-12-09 00:00:00', '2020-12-15 23:42:06', 0);
+INSERT INTO `t_advertise` VALUES (3, 'http://localhost/advertise/commend1.jpg', 'http://www.wslhome.top', '2020-12-04 17:18:12', '2020-12-30 17:18:06', '2020-12-09 00:00:00', '2020-12-10 22:48:14', 0);
+INSERT INTO `t_advertise` VALUES (4, 'http://localhost/advertise/commend2.jpg', 'http://www.wslhome.top', '2020-12-08 17:18:12', '2020-12-09 17:18:06', '2020-12-09 00:00:00', '2020-12-09 00:00:00', 0);
+INSERT INTO `t_advertise` VALUES (5, 'http://localhost/advertise/elec1.jpg', 'http://www.wslhome.top', '2020-12-10 17:18:12', '2021-01-29 17:18:06', '2020-12-09 00:00:00', '2020-12-09 00:00:00', 0);
+INSERT INTO `t_advertise` VALUES (6, 'http://localhost/advertise/good_shop3.png', 'http://www.wslhome.top', '2020-12-10 17:18:12', '2021-01-29 17:18:06', '2020-12-09 00:00:00', '2020-12-09 00:00:00', 0);
+INSERT INTO `t_advertise` VALUES (7, 'http://localhost/advertise/goods_list2.jpg', 'http://www.wslhome.top', '2020-12-10 17:18:12', '2021-01-29 17:18:06', '2020-12-09 00:00:00', '2020-12-09 00:00:00', 0);
+INSERT INTO `t_advertise` VALUES (8, 'http://localhost/advertise/goods_list3.jpg', 'http://www.wslhome.top', '2020-12-10 17:18:12', '2021-01-29 17:18:06', '2020-12-10 17:18:12', '2020-12-10 17:18:12', 0);
+INSERT INTO `t_advertise` VALUES (9, 'http://localhost/advertise/login-background.jpg', 'http://www.wslhome.top', '2020-12-10 17:18:12', '2020-12-31 17:18:06', '2020-12-09 00:00:00', '2020-12-09 00:00:00', 0);
+INSERT INTO `t_advertise` VALUES (10, 'http://localhost/advertise/p1.jpg', 'http://www.wslhome.top', '2020-12-10 17:18:12', '2020-12-31 17:18:06', '2020-12-09 00:00:00', '2020-12-09 00:00:00', 0);
+INSERT INTO `t_advertise` VALUES (11, 'http://localhost/advertise/p2.jpg', 'http://www.wslhome.top', '2020-12-10 17:18:12', '2020-12-17 17:18:00', '2020-12-09 00:00:00', '2020-12-09 00:00:00', 0);
+INSERT INTO `t_advertise` VALUES (12, 'http://localhost/advertise/vip_shop4.png', 'http://www.wslhome.top', '2020-12-10 17:18:12', '2020-12-17 17:18:06', '2020-12-09 00:00:00', '2020-12-09 00:00:00', 0);
+INSERT INTO `t_advertise` VALUES (13, 'http://localhost/advertise/vip_shop3.png', 'http://www.wslhome.top', '2020-12-10 17:18:12', '2020-12-29 17:18:06', '2020-12-09 00:00:00', '2020-12-09 00:00:00', 0);
+INSERT INTO `t_advertise` VALUES (14, 'http://localhost/advertise/vip_shop2.png', 'http://www.wslhome.top', '2020-12-10 17:18:12', '2020-12-27 17:18:06', '2020-12-09 00:00:00', '2020-12-09 00:00:00', 0);
+INSERT INTO `t_advertise` VALUES (15, 'http://localhost/advertise/vip_shop1.png', 'http://www.wslhome.top', '2020-12-10 17:18:12', '2020-12-31 17:18:06', '2020-12-09 00:00:00', '2020-12-09 00:00:00', 0);
+INSERT INTO `t_advertise` VALUES (16, 'http://localhost/advertise/shop1.jpg', 'http://www.wslhome.top', '2020-12-10 17:18:12', '2020-12-31 17:18:06', '2020-12-09 00:00:00', '2020-12-09 00:00:00', 0);
+INSERT INTO `t_advertise` VALUES (17, 'http://localhost/advertise/se_kill_img4.jpg', 'http://www.wslhome.top', '2020-12-10 17:18:12', '2021-01-21 17:18:06', '2020-12-09 00:00:00', '2020-12-09 00:00:00', 0);
+INSERT INTO `t_advertise` VALUES (18, 'http://localhost/', 'http://www.wslhome.top', '2020-12-10 17:18:12', '2020-12-16 17:18:06', '2020-12-09 00:00:00', '2020-12-09 00:00:00', 0);
+INSERT INTO `t_advertise` VALUES (19, 'http://localhost/advertise/se_kill_img1.jpg', 'http://www.wslhome.top', '2020-12-01 17:18:12', '2020-12-08 17:18:06', '2020-12-09 00:00:00', '2020-12-09 00:00:00', 0);
+INSERT INTO `t_advertise` VALUES (20, 'http://localhost/advertise/commend2.jpg', 'http://www.wslhome.top', '2020-12-10 17:18:12', '2020-12-17 17:18:06', '2020-12-09 00:00:00', '2020-12-09 00:00:00', 0);
+INSERT INTO `t_advertise` VALUES (21, 'http://localhost/advertise/elec1.jpg', 'http://www.wslhome.top', '2020-12-02 17:18:12', '2020-12-10 17:18:06', '2020-12-09 00:00:00', '2020-12-09 00:00:00', 0);
+INSERT INTO `t_advertise` VALUES (22, 'http://localhost/advertise/good_shop3.png', 'http://www.wslhome.top', '2020-12-10 17:18:12', '2021-01-01 17:18:06', '2020-12-09 00:00:00', '2020-12-09 00:00:00', 0);
+INSERT INTO `t_advertise` VALUES (23, 'http://localhost/advertise/goods_list2.jpg', 'http://www.wslhome.top', '2020-12-02 17:18:12', '2020-12-10 17:18:06', '2020-12-09 00:00:00', '2020-12-09 00:00:00', 0);
+INSERT INTO `t_advertise` VALUES (24, 'http://localhost/advertise/goods_list3.jpg', 'http://www.wslhome.top', '2021-01-01 17:18:12', '2021-01-29 00:00:00', '2020-12-09 00:00:00', '2020-12-09 00:00:00', 0);
+INSERT INTO `t_advertise` VALUES (25, 'http://localhost/advertise/login-background.jpg', 'http://www.wslhome.top', '2021-01-01 17:18:12', '2021-01-29 00:00:00', '2020-12-09 00:00:00', '2020-12-09 00:00:00', 0);
+INSERT INTO `t_advertise` VALUES (26, 'http://localhost/advertise/p1.jpg', 'http://www.wslhome.top', '2021-01-01 17:18:12', '2021-01-29 00:00:00', '2020-12-10 17:18:12', '2020-12-10 17:18:12', 0);
+INSERT INTO `t_advertise` VALUES (27, 'http://localhost/advertise/p2.jpg', 'http://www.wslhome.top', '2021-01-01 17:18:12', '2021-01-29 00:00:00', '2020-12-09 00:00:00', '2020-12-09 00:00:00', 0);
+INSERT INTO `t_advertise` VALUES (28, 'http://localhost/advertise/vip_shop4.png', 'http://www.wslhome.top', '2021-01-01 17:18:12', '2021-01-29 00:00:00', '2020-12-09 00:00:00', '2020-12-09 00:00:00', 0);
+INSERT INTO `t_advertise` VALUES (29, 'http://localhost/advertise/vip_shop3.png', 'http://www.wslhome.top', '2021-01-01 17:18:12', '2021-01-29 00:00:00', '2020-12-09 00:00:00', '2020-12-09 00:00:00', 0);
+INSERT INTO `t_advertise` VALUES (30, 'http://localhost/advertise/vip_shop2.png', 'http://www.wslhome.top', '2021-01-01 17:18:12', '2021-01-29 00:00:00', '2020-12-10 17:18:12', '2020-12-10 17:18:12', 0);
+INSERT INTO `t_advertise` VALUES (31, 'http://localhost/advertise/vip_shop1.png', 'http://www.wslhome.top', '2021-01-01 17:18:12', '2021-01-29 00:00:00', '2020-12-09 00:00:00', '2020-12-09 00:00:00', 0);
+INSERT INTO `t_advertise` VALUES (32, 'http://localhost/advertise/shop2.jpg', 'http://www.wslhome.top', '2021-01-01 17:18:12', '2021-01-29 00:00:00', '2020-12-09 00:00:00', '2020-12-09 00:00:00', 0);
+INSERT INTO `t_advertise` VALUES (33, 'http://localhost/advertise/0f2e2fe2-8bbc-4325-acda-c641f593108d.jpg', 'http://my.wslhome.top', '2020-12-16 00:00:00', '2020-12-31 00:00:00', '2020-12-10 22:49:43', '2020-12-10 22:49:43', 0);
 
 -- ----------------------------
 -- Table structure for t_after_sales
@@ -338,13 +338,13 @@ CREATE TABLE `t_goods`  (
 -- ----------------------------
 -- Records of t_goods
 -- ----------------------------
-INSERT INTO `t_goods` VALUES (1, '手机', 1, 'http://static.wslhome.top/advertise/0757a41e-a745-461a-89f8-06c0df03eefa.jpg', 0, '这就是一个手机，一个很牛逼的手机', NULL, '2020-11-17 14:27:07', '2020-12-17 00:05:01', 0);
-INSERT INTO `t_goods` VALUES (2, '手机', 1, 'http://static.wslhome.top/advertise/timg.jpg', 1, '电脑电脑电脑电脑电脑', NULL, '2020-11-17 14:28:26', '2020-12-16 22:27:20', 0);
-INSERT INTO `t_goods` VALUES (3, '充电宝', 2, 'http://static.wslhome.top/advertise/commend1.jpg', 1, '充电宝', NULL, '2020-11-19 14:30:05', '2020-12-16 22:35:04', 0);
-INSERT INTO `t_goods` VALUES (4, '手机壳', 2, 'http://static.wslhome.top/advertise/commend2.jpg', 1, '这就是个测试手机壳', NULL, '2020-11-17 14:30:52', '2020-12-16 22:23:54', 0);
-INSERT INTO `t_goods` VALUES (5, 'test1', 1, 'http://static.wslhome.top/advertise/elec1.jpg', 1, '测试描述', NULL, '2020-11-20 11:12:34', '2020-11-20 13:42:56', 0);
-INSERT INTO `t_goods` VALUES (6, '电灯泡', 1, 'http://static.wslhome.top/goods/067c984c-163a-4f52-86aa-38603f6a0641.jpg', 1, 'eceas测试一下', NULL, '2020-12-15 23:51:50', '2020-12-15 23:52:55', 0);
-INSERT INTO `t_goods` VALUES (7, '123', 1, 'http://static.wslhome.top/goods/eaa76633-baeb-4382-9c7f-4ca6d54d6018.jpg', 1, '恶气啊违法', NULL, '2020-12-16 18:24:45', '2020-12-16 18:24:45', 0);
+INSERT INTO `t_goods` VALUES (1, '手机', 1, 'http://localhost/advertise/0757a41e-a745-461a-89f8-06c0df03eefa.jpg', 0, '这就是一个手机，一个很牛逼的手机', NULL, '2020-11-17 14:27:07', '2020-12-17 00:05:01', 0);
+INSERT INTO `t_goods` VALUES (2, '手机', 1, 'http://localhost/advertise/timg.jpg', 1, '电脑电脑电脑电脑电脑', NULL, '2020-11-17 14:28:26', '2020-12-16 22:27:20', 0);
+INSERT INTO `t_goods` VALUES (3, '充电宝', 2, 'http://localhost/advertise/commend1.jpg', 1, '充电宝', NULL, '2020-11-19 14:30:05', '2020-12-16 22:35:04', 0);
+INSERT INTO `t_goods` VALUES (4, '手机壳', 2, 'http://localhost/advertise/commend2.jpg', 1, '这就是个测试手机壳', NULL, '2020-11-17 14:30:52', '2020-12-16 22:23:54', 0);
+INSERT INTO `t_goods` VALUES (5, 'test1', 1, 'http://localhost/advertise/elec1.jpg', 1, '测试描述', NULL, '2020-11-20 11:12:34', '2020-11-20 13:42:56', 0);
+INSERT INTO `t_goods` VALUES (6, '电灯泡', 1, 'http://localhost/goods/067c984c-163a-4f52-86aa-38603f6a0641.jpg', 1, 'eceas测试一下', NULL, '2020-12-15 23:51:50', '2020-12-15 23:52:55', 0);
+INSERT INTO `t_goods` VALUES (7, '123', 1, 'http://localhost/goods/eaa76633-baeb-4382-9c7f-4ca6d54d6018.jpg', 1, '恶气啊违法', NULL, '2020-12-16 18:24:45', '2020-12-16 18:24:45', 0);
 
 -- ----------------------------
 -- Table structure for t_limit_list
@@ -397,7 +397,7 @@ INSERT INTO `t_limit_list` VALUES (29, 1, '18314266666', 0, '2020-12-10 14:45:00
 INSERT INTO `t_limit_list` VALUES (30, 1, '18900000000', 0, '2020-12-10 14:52:29', '2020-12-29 00:00:00', '2020-12-10 14:52:29', '2020-12-10 14:52:29', 0);
 INSERT INTO `t_limit_list` VALUES (31, 1, '18314263333', 0, '2020-12-10 15:11:20', '2020-12-18 22:25:26', '2020-12-10 15:11:20', '2020-12-10 15:11:20', 0);
 INSERT INTO `t_limit_list` VALUES (32, 1, '18314263366', 0, '2020-12-10 15:19:56', '2020-12-18 22:25:26', '2020-12-10 15:19:56', '2020-12-10 15:19:56', 0);
-INSERT INTO `t_limit_list` VALUES (33, 1, '18314263373', 0, '2020-12-14 19:21:07', '2020-12-30 00:00:00', '2020-12-14 19:21:07', '2020-12-14 19:21:07', 0);
+INSERT INTO `t_limit_list` VALUES (33, 1, '18888888888', 0, '2020-12-14 19:21:07', '2020-12-30 00:00:00', '2020-12-14 19:21:07', '2020-12-14 19:21:07', 0);
 
 -- ----------------------------
 -- Table structure for t_loggers
@@ -419,8 +419,8 @@ CREATE TABLE `t_loggers`  (
 -- ----------------------------
 -- Records of t_loggers
 -- ----------------------------
-INSERT INTO `t_loggers` VALUES (12, '添加管理员->[操作参数：王世磊]->[Class：AdminServiceImpl]', 1, 1, 3, '127.0.0.1', '2020-11-16 10:58:28', '2020-11-16 10:58:28', 0);
-INSERT INTO `t_loggers` VALUES (13, '添加管理员->[操作参数：王世磊]->[Class：AdminServiceImpl]', 1, 1, 3, '127.0.0.1', '2020-11-16 11:42:28', '2020-11-16 11:42:28', 0);
+INSERT INTO `t_loggers` VALUES (12, '添加管理员->[操作参数：sirwsl]->[Class：AdminServiceImpl]', 1, 1, 3, '127.0.0.1', '2020-11-16 10:58:28', '2020-11-16 10:58:28', 0);
+INSERT INTO `t_loggers` VALUES (13, '添加管理员->[操作参数：sirwsl]->[Class：AdminServiceImpl]', 1, 1, 3, '127.0.0.1', '2020-11-16 11:42:28', '2020-11-16 11:42:28', 0);
 INSERT INTO `t_loggers` VALUES (14, '删除管理员->[操作参数：48]->[Class：AdminServiceImpl]', 1, 1, 3, '0:0:0:0:0:0:0:1', '2020-11-16 11:44:29', '2020-11-16 11:44:29', 0);
 INSERT INTO `t_loggers` VALUES (15, '删除管理员->[操作参数：48]->[Class：AdminServiceImpl]', 1, 1, 3, '0:0:0:0:0:0:0:1', '2020-11-16 11:47:15', '2020-11-16 11:47:15', 0);
 INSERT INTO `t_loggers` VALUES (16, '删除管理员->[操作参数：48]->[Class：AdminServiceImpl]', 1, 1, 3, '0:0:0:0:0:0:0:1', '2020-11-16 11:50:18', '2020-11-16 11:50:18', 0);
@@ -429,13 +429,13 @@ INSERT INTO `t_loggers` VALUES (18, '删除管理员->[操作参数：48]->[Clas
 INSERT INTO `t_loggers` VALUES (19, '删除管理员->[操作参数：48]->[Class：AdminServiceImpl]', 1, 1, 3, '0:0:0:0:0:0:0:1', '2020-11-16 12:38:12', '2020-11-16 12:38:12', 0);
 INSERT INTO `t_loggers` VALUES (20, '添加发布订阅内容->[操作参数：45]->[Class：SubscriptionHistoryServiceImpl]', 1, 1, 1, '0:0:0:0:0:0:0:1', '2020-11-16 12:42:16', '2020-11-16 12:42:16', 0);
 INSERT INTO `t_loggers` VALUES (21, '添加发布订阅内容->[操作参数：48]->[Class：SubscriptionHistoryServiceImpl]', 1, 1, 1, '0:0:0:0:0:0:0:1', '2020-11-16 12:50:12', '2020-11-16 12:50:12', 0);
-INSERT INTO `t_loggers` VALUES (22, '添加管理员->[操作参数：王世磊]->[Class：AdminServiceImpl]', 1, 1, 3, '127.0.0.1', '2020-11-16 12:51:34', '2020-11-16 12:51:34', 0);
+INSERT INTO `t_loggers` VALUES (22, '添加管理员->[操作参数：sirwsl]->[Class：AdminServiceImpl]', 1, 1, 3, '127.0.0.1', '2020-11-16 12:51:34', '2020-11-16 12:51:34', 0);
 INSERT INTO `t_loggers` VALUES (23, '添加发布订阅内容->[操作参数：49]->[Class：SubscriptionHistoryServiceImpl]', 1, 1, 1, '0:0:0:0:0:0:0:1', '2020-11-16 12:54:09', '2020-11-16 12:54:09', 0);
 INSERT INTO `t_loggers` VALUES (24, '添加发布订阅内容->[操作参数：52]->[Class：SubscriptionHistoryServiceImpl]', 1, 1, 1, '0:0:0:0:0:0:0:1', '2020-11-16 12:56:31', '2020-11-16 12:56:31', 0);
 INSERT INTO `t_loggers` VALUES (25, '添加发布订阅内容->[操作参数：56]->[Class：SubscriptionHistoryServiceImpl]', 1, 1, 1, '0:0:0:0:0:0:0:1', '2020-11-16 13:00:38', '2020-11-16 13:00:38', 0);
 INSERT INTO `t_loggers` VALUES (26, '添加发布订阅内容->[操作参数：63]->[Class：SubscriptionHistoryServiceImpl]', 1, 1, 1, '0:0:0:0:0:0:0:1', '2020-11-16 13:15:19', '2020-11-16 13:15:19', 0);
-INSERT INTO `t_loggers` VALUES (27, '添加管理员->[操作参数：王世磊]->[Class：AdminServiceImpl]', 1, 1, 3, '127.0.0.1', '2020-11-16 13:17:15', '2020-11-16 13:17:15', 0);
-INSERT INTO `t_loggers` VALUES (28, '添加管理员->[操作参数：王世磊]->[Class：AdminServiceImpl]', 1, 1, 3, '127.0.0.1', '2020-11-16 13:17:27', '2020-11-16 13:17:27', 0);
+INSERT INTO `t_loggers` VALUES (27, '添加管理员->[操作参数：sirwsl]->[Class：AdminServiceImpl]', 1, 1, 3, '127.0.0.1', '2020-11-16 13:17:15', '2020-11-16 13:17:15', 0);
+INSERT INTO `t_loggers` VALUES (28, '添加管理员->[操作参数：sirwsl]->[Class：AdminServiceImpl]', 1, 1, 3, '127.0.0.1', '2020-11-16 13:17:27', '2020-11-16 13:17:27', 0);
 INSERT INTO `t_loggers` VALUES (29, '添加发布订阅内容->[操作参数：69]->[Class：SubscriptionHistoryServiceImpl]', 1, 1, 1, '0:0:0:0:0:0:0:1', '2020-11-16 13:32:05', '2020-11-16 13:32:05', 0);
 INSERT INTO `t_loggers` VALUES (30, '添加发布订阅内容->[操作参数：71]->[Class：SubscriptionHistoryServiceImpl]', 1, 1, 1, '0:0:0:0:0:0:0:1', '2020-11-16 13:42:22', '2020-11-16 13:42:22', 0);
 INSERT INTO `t_loggers` VALUES (31, '添加发布订阅内容->[操作参数：72]->[Class：SubscriptionHistoryServiceImpl]', 1, 1, 1, '0:0:0:0:0:0:0:1', '2020-11-16 13:48:59', '2020-11-16 13:48:59', 0);
@@ -573,7 +573,7 @@ INSERT INTO `t_loggers` VALUES (164, '删除会员->[操作参数：1]->[Class�
 INSERT INTO `t_loggers` VALUES (165, '删除会员->[操作参数：1]->[Class：UserServiceImpl]', 1, 1, 3, '127.0.0.1', '2020-12-14 18:28:11', '2020-12-14 18:28:11', 0);
 INSERT INTO `t_loggers` VALUES (166, '删除会员->[操作参数：2]->[Class：UserServiceImpl]', 1, 1, 3, '127.0.0.1', '2020-12-14 18:31:53', '2020-12-14 18:31:53', 0);
 INSERT INTO `t_loggers` VALUES (167, '删除会员->[操作参数：10]->[Class：UserServiceImpl]', 1, 1, 3, '127.0.0.1', '2020-12-14 18:33:53', '2020-12-14 18:33:53', 0);
-INSERT INTO `t_loggers` VALUES (168, '添加黑名单->[操作参数：18314263373]->[Class：LimitListServiceImpl]', 1, 1, 3, '127.0.0.1', '2020-12-14 19:21:07', '2020-12-14 19:21:07', 0);
+INSERT INTO `t_loggers` VALUES (168, '添加黑名单->[操作参数：18888888888]->[Class：LimitListServiceImpl]', 1, 1, 3, '127.0.0.1', '2020-12-14 19:21:07', '2020-12-14 19:21:07', 0);
 INSERT INTO `t_loggers` VALUES (169, '添加发布订阅内容->[操作参数：91]->[Class：SubscriptionHistoryServiceImpl]', 1, 1, 1, '127.0.0.1', '2020-12-14 20:49:59', '2020-12-14 20:49:59', 0);
 INSERT INTO `t_loggers` VALUES (170, '商品删除->[操作参数：1]->[Class：GoodsServiceImpl]', 1, 1, 2, '127.0.0.1', '2020-12-15 11:56:32', '2020-12-15 11:56:32', 0);
 INSERT INTO `t_loggers` VALUES (171, '商品删除->[操作参数：1]->[Class：GoodsServiceImpl]', 1, 1, 2, '127.0.0.1', '2020-12-15 11:57:01', '2020-12-15 11:57:01', 0);
@@ -691,19 +691,19 @@ CREATE TABLE `t_sku`  (
 -- ----------------------------
 -- Records of t_sku
 -- ----------------------------
-INSERT INTO `t_sku` VALUES (1, 1, '128G 6G内存 红色', 'http://static.wslhome.top/advertise/good_shop3.png', 1256.00, 1200.00, 1695.00, 996, 20, 10.00, '2020-11-17 14:33:26', '2020-12-17 17:41:10', 0);
-INSERT INTO `t_sku` VALUES (2, 1, '128G 4G内存 白色', 'http://static.wslhome.top/sku/e9eb0192-e8e2-453e-810e-3feddc456df8.jpg', 1256.00, 1200.00, 1695.00, 1001, 20, 100.00, '2020-11-17 14:33:26', '2020-12-17 17:41:10', 0);
-INSERT INTO `t_sku` VALUES (3, 1, '128G 6G内存 黑色色', 'http://static.wslhome.top/advertise/goods_list3.jpg', 1256.00, 1200.00, 1695.00, 661, 20, 10.00, '2020-11-17 14:33:26', '2020-11-22 23:28:35', 0);
-INSERT INTO `t_sku` VALUES (4, 2, '1T硬盘 32G内存 2G独立显卡', 'http://static.wslhome.top/advertise/login-background.jpg', 4999.00, 5899.00, 8766.00, 1200, 124, 200.00, '2020-11-17 14:33:26', '2020-11-17 14:33:33', 0);
-INSERT INTO `t_sku` VALUES (5, 2, '1T硬盘 32G内存 黑色', 'http://static.wslhome.top/advertise/p1.jpg', 4999.00, 5899.00, 8766.00, 1200, 124, 200.00, '2020-11-17 14:33:26', '2020-11-17 14:33:33', 0);
-INSERT INTO `t_sku` VALUES (6, 2, '1T硬盘  内存', 'http://static.wslhome.top/advertise/vip_shop4.png', 4999.00, 5899.00, 8766.00, 1200, 124, 200.00, '2020-11-17 14:33:26', '2020-11-17 14:33:33', 0);
-INSERT INTO `t_sku` VALUES (7, 3, '白色', 'http://static.wslhome.top/advertise/vip_shop3.png', 59.00, 62.00, 99.00, 200, 5, 5.00, '2020-11-17 14:33:26', '2020-11-17 14:33:33', 0);
-INSERT INTO `t_sku` VALUES (8, 3, '黑色', 'http://static.wslhome.top/advertise/vip_shop2.png', 59.00, 62.00, 99.00, 200, 5, 5.00, '2020-11-17 14:33:26', '2020-11-17 14:33:33', 0);
-INSERT INTO `t_sku` VALUES (9, 4, '粉色', 'http://static.wslhome.top/advertise/vip_shop1.png', 59.00, 62.00, 99.00, 200, 5, 5.00, '2020-11-17 14:33:26', '2020-12-16 16:37:02', 0);
-INSERT INTO `t_sku` VALUES (10, 4, '紫色', 'http://static.wslhome.top/advertise/se_kill_img4.jpg', 59.00, 62.00, 99.00, 200, 5, 5.00, '2020-11-17 14:33:26', '2020-12-16 16:21:13', 0);
-INSERT INTO `t_sku` VALUES (11, 4, '蓝色', 'http://static.wslhome.top/advertise/se_kill_img1.jpg', 59.00, 62.00, 99.00, 200, 5, 5.00, '2020-11-17 14:33:26', '2020-11-17 14:33:33', 0);
-INSERT INTO `t_sku` VALUES (12, 4, '白色', 'http://static.wslhome.top/advertise/commend2.jpg', 59.00, 62.00, 99.00, 200, 5, 5.00, '2020-11-17 14:33:26', '2020-11-17 14:33:33', 0);
-INSERT INTO `t_sku` VALUES (13, 4, 'dsagsdfg sdfgwergsdfg sdfgsd', 'http://static.wslhome.top/sku/cc1275d6-f3db-464c-bb40-854fa1d22a56.jpg', 345633.00, 345637.00, 45634.00, 689, 67, NULL, '2020-12-16 17:32:03', '2020-12-16 17:32:03', 0);
+INSERT INTO `t_sku` VALUES (1, 1, '128G 6G内存 红色', 'http://localhost/advertise/good_shop3.png', 1256.00, 1200.00, 1695.00, 996, 20, 10.00, '2020-11-17 14:33:26', '2020-12-17 17:41:10', 0);
+INSERT INTO `t_sku` VALUES (2, 1, '128G 4G内存 白色', 'http://localhost/sku/e9eb0192-e8e2-453e-810e-3feddc456df8.jpg', 1256.00, 1200.00, 1695.00, 1001, 20, 100.00, '2020-11-17 14:33:26', '2020-12-17 17:41:10', 0);
+INSERT INTO `t_sku` VALUES (3, 1, '128G 6G内存 黑色色', 'http://localhost/advertise/goods_list3.jpg', 1256.00, 1200.00, 1695.00, 661, 20, 10.00, '2020-11-17 14:33:26', '2020-11-22 23:28:35', 0);
+INSERT INTO `t_sku` VALUES (4, 2, '1T硬盘 32G内存 2G独立显卡', 'http://localhost/advertise/login-background.jpg', 4999.00, 5899.00, 8766.00, 1200, 124, 200.00, '2020-11-17 14:33:26', '2020-11-17 14:33:33', 0);
+INSERT INTO `t_sku` VALUES (5, 2, '1T硬盘 32G内存 黑色', 'http://localhost/advertise/p1.jpg', 4999.00, 5899.00, 8766.00, 1200, 124, 200.00, '2020-11-17 14:33:26', '2020-11-17 14:33:33', 0);
+INSERT INTO `t_sku` VALUES (6, 2, '1T硬盘  内存', 'http://localhost/advertise/vip_shop4.png', 4999.00, 5899.00, 8766.00, 1200, 124, 200.00, '2020-11-17 14:33:26', '2020-11-17 14:33:33', 0);
+INSERT INTO `t_sku` VALUES (7, 3, '白色', 'http://localhost/advertise/vip_shop3.png', 59.00, 62.00, 99.00, 200, 5, 5.00, '2020-11-17 14:33:26', '2020-11-17 14:33:33', 0);
+INSERT INTO `t_sku` VALUES (8, 3, '黑色', 'http://localhost/advertise/vip_shop2.png', 59.00, 62.00, 99.00, 200, 5, 5.00, '2020-11-17 14:33:26', '2020-11-17 14:33:33', 0);
+INSERT INTO `t_sku` VALUES (9, 4, '粉色', 'http://localhost/advertise/vip_shop1.png', 59.00, 62.00, 99.00, 200, 5, 5.00, '2020-11-17 14:33:26', '2020-12-16 16:37:02', 0);
+INSERT INTO `t_sku` VALUES (10, 4, '紫色', 'http://localhost/advertise/se_kill_img4.jpg', 59.00, 62.00, 99.00, 200, 5, 5.00, '2020-11-17 14:33:26', '2020-12-16 16:21:13', 0);
+INSERT INTO `t_sku` VALUES (11, 4, '蓝色', 'http://localhost/advertise/se_kill_img1.jpg', 59.00, 62.00, 99.00, 200, 5, 5.00, '2020-11-17 14:33:26', '2020-11-17 14:33:33', 0);
+INSERT INTO `t_sku` VALUES (12, 4, '白色', 'http://localhost/advertise/commend2.jpg', 59.00, 62.00, 99.00, 200, 5, 5.00, '2020-11-17 14:33:26', '2020-11-17 14:33:33', 0);
+INSERT INTO `t_sku` VALUES (13, 4, 'dsagsdfg sdfgwergsdfg sdfgsd', 'http://localhost/sku/cc1275d6-f3db-464c-bb40-854fa1d22a56.jpg', 345633.00, 345637.00, 45634.00, 689, 67, NULL, '2020-12-16 17:32:03', '2020-12-16 17:32:03', 0);
 
 -- ----------------------------
 -- Table structure for t_subscriber
@@ -727,11 +727,11 @@ INSERT INTO `t_subscriber` VALUES (1, '1830000000', 1, 0, '2020-12-13 10:01:10',
 INSERT INTO `t_subscriber` VALUES (2, '18314212343', 1, 0, '2020-12-13 10:01:10', '2020-12-13 10:01:12', 1);
 INSERT INTO `t_subscriber` VALUES (3, '18314263312', 1, 0, '2020-12-13 10:01:10', '2020-12-13 10:01:12', 1);
 INSERT INTO `t_subscriber` VALUES (4, '18314263342', 1, 0, '2020-12-13 10:01:10', '2020-12-13 10:01:12', 0);
-INSERT INTO `t_subscriber` VALUES (5, '18314263373', 1, 0, '2020-12-13 10:01:10', '2020-12-13 10:01:12', 0);
+INSERT INTO `t_subscriber` VALUES (5, '18888888888', 1, 0, '2020-12-13 10:01:10', '2020-12-13 10:01:12', 0);
 INSERT INTO `t_subscriber` VALUES (6, '21343@163.com', 0, 0, '2020-12-13 10:05:03', '2020-12-13 10:05:06', 0);
 INSERT INTO `t_subscriber` VALUES (7, '329894357@qq.com', 0, 0, '2020-12-13 10:04:06', '2020-12-13 10:04:08', 0);
 INSERT INTO `t_subscriber` VALUES (8, '593894@qq.com', 0, 0, '2020-12-13 10:04:23', '2020-12-13 10:04:26', 0);
-INSERT INTO `t_subscriber` VALUES (9, 'sirwsl@163.com', 0, 0, '2020-12-13 10:01:41', '2020-12-13 10:01:43', 0);
+INSERT INTO `t_subscriber` VALUES (9, 'sir@163.com', 0, 0, '2020-12-13 10:01:41', '2020-12-13 10:01:43', 0);
 INSERT INTO `t_subscriber` VALUES (10, '18618618618', 1, 0, '2020-12-13 11:14:52', '2020-12-13 11:14:52', 0);
 INSERT INTO `t_subscriber` VALUES (11, '2572396933@qq.com', 0, 0, '2020-12-13 11:15:50', '2020-12-13 11:15:50', 0);
 
@@ -815,15 +815,15 @@ CREATE TABLE `t_user`  (
 -- ----------------------------
 -- Records of t_user
 -- ----------------------------
-INSERT INTO `t_user` VALUES (1, 'sirwsl', '123', '测试昵称', 'img/ser/img', '0', NULL, '18314263373', 'sirwsl@163.com', '53292319970161916', '王世磊', '59awasdf', '48asd', '2020-11-17 09:31:14', '2020-11-17 10:37:23', 0);
-INSERT INTO `t_user` VALUES (2, '测试姓名', '123456', '18453', 'img/ser/img', '0', NULL, '18314263373', 'sirwsl@163.com', '53292319970161916', '王世磊', '59awasdf', '48asd', '2020-11-17 09:31:14', '2020-11-17 09:31:17', 0);
-INSERT INTO `t_user` VALUES (3, '测试姓名', '123456', '18453', 'img/ser/img', '0', NULL, '18314263373', 'sirwsl@163.com', '53292319970161916', '王世磊', '59awasdf', '48asd', '2020-11-17 09:31:14', '2020-11-17 09:31:17', 0);
-INSERT INTO `t_user` VALUES (4, '测试姓名', '123456', '18453', 'img/ser/img', '0', NULL, '18314263373', 'sirwsl@163.com', '53292319970161916', '王世磊', '59awasdf', '48asd', '2020-11-17 09:31:14', '2020-11-17 09:31:17', 0);
-INSERT INTO `t_user` VALUES (5, '测试姓名', '123456', '18453', 'img/ser/img', '0', NULL, '18314263373', 'sirwsl@163.com', '53292319970161916', '王世磊', '59awasdf', '48asd', '2020-11-17 09:31:14', '2020-11-17 09:31:17', 0);
-INSERT INTO `t_user` VALUES (6, '测试姓名', '123456', '18453', 'img/ser/img', '0', NULL, '18314263373', 'sirwsl@163.com', '53292319970161916', '王世磊', '59awasdf', '48asd', '2020-11-17 09:31:14', '2020-11-17 09:31:17', 0);
-INSERT INTO `t_user` VALUES (7, '测试姓名', '123456', '18453', 'img/ser/img', '0', NULL, '18314263373', 'sirwsl@163.com', '53292319970161916', '王世磊', '59awasdf', '48asd', '2020-11-17 09:31:14', '2020-11-17 09:31:17', 0);
-INSERT INTO `t_user` VALUES (8, '测试姓名', '123456', '18453', 'img/ser/img', '0', NULL, '18314263373', 'sirwsl@163.com', '53292319970161916', '王世磊', '59awasdf', '48asd', '2020-11-17 09:31:14', '2020-11-17 09:31:17', 0);
-INSERT INTO `t_user` VALUES (9, '测试姓名', '123456', '18453', 'img/ser/img', '0', NULL, '18314263373', 'sirwsl@163.com', '53292319970161916', '王世磊', '59awasdf', '48asd', '2020-11-17 09:31:14', '2020-11-17 09:31:17', 0);
-INSERT INTO `t_user` VALUES (10, '测试姓名', '123456', '18453', 'img/ser/img', '0', NULL, '18314263373', 'sirwsl@163.com', '53292319970161916', '王世磊', '59awasdf', '48asd', '2020-11-17 09:31:14', '2020-11-17 09:31:17', 0);
+INSERT INTO `t_user` VALUES (1, 'sirwsl', '123', '测试昵称', 'img/ser/img', '0', NULL, '18888888888', 'sir@163.com', '53292312303023421916', 'sirwsl', '59awasdf', '48asd', '2020-11-17 09:31:14', '2020-11-17 10:37:23', 0);
+INSERT INTO `t_user` VALUES (2, '测试姓名', '123456', '18453', 'img/ser/img', '0', NULL, '18888888888', 'sir@163.com', '53292312303023421916', 'sirwsl', '59awasdf', '48asd', '2020-11-17 09:31:14', '2020-11-17 09:31:17', 0);
+INSERT INTO `t_user` VALUES (3, '测试姓名', '123456', '18453', 'img/ser/img', '0', NULL, '18888888888', 'sir@163.com', '53292312303023421916', 'sirwsl', '59awasdf', '48asd', '2020-11-17 09:31:14', '2020-11-17 09:31:17', 0);
+INSERT INTO `t_user` VALUES (4, '测试姓名', '123456', '18453', 'img/ser/img', '0', NULL, '18888888888', 'sir@163.com', '53292312303023421916', 'sirwsl', '59awasdf', '48asd', '2020-11-17 09:31:14', '2020-11-17 09:31:17', 0);
+INSERT INTO `t_user` VALUES (5, '测试姓名', '123456', '18453', 'img/ser/img', '0', NULL, '18888888888', 'sir@163.com', '53292312303023421916', 'sirwsl', '59awasdf', '48asd', '2020-11-17 09:31:14', '2020-11-17 09:31:17', 0);
+INSERT INTO `t_user` VALUES (6, '测试姓名', '123456', '18453', 'img/ser/img', '0', NULL, '18888888888', 'sir@163.com', '53292312303023421916', 'sirwsl', '59awasdf', '48asd', '2020-11-17 09:31:14', '2020-11-17 09:31:17', 0);
+INSERT INTO `t_user` VALUES (7, '测试姓名', '123456', '18453', 'img/ser/img', '0', NULL, '18888888888', 'sir@163.com', '53292312303023421916', 'sirwsl', '59awasdf', '48asd', '2020-11-17 09:31:14', '2020-11-17 09:31:17', 0);
+INSERT INTO `t_user` VALUES (8, '测试姓名', '123456', '18453', 'img/ser/img', '0', NULL, '18888888888', 'sir@163.com', '53292312303023421916', 'sirwsl', '59awasdf', '48asd', '2020-11-17 09:31:14', '2020-11-17 09:31:17', 0);
+INSERT INTO `t_user` VALUES (9, '测试姓名', '123456', '18453', 'img/ser/img', '0', NULL, '18888888888', 'sir@163.com', '53292312303023421916', 'sirwsl', '59awasdf', '48asd', '2020-11-17 09:31:14', '2020-11-17 09:31:17', 0);
+INSERT INTO `t_user` VALUES (10, '测试姓名', '123456', '18453', 'img/ser/img', '0', NULL, '18888888888', 'sir@163.com', '53292312303023421916', 'sirwsl', '59awasdf', '48asd', '2020-11-17 09:31:14', '2020-11-17 09:31:17', 0);
 
 SET FOREIGN_KEY_CHECKS = 1;

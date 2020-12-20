@@ -62,7 +62,7 @@ $("#submit").click(function() {
 	}
 	$.ajax({
 		type: "GET",
-		url: "https://test.wslhome.top/login/getExperience/v1",
+		url: "https://localhost/login/getExperience/v1",
 		data: {
 			check: b,
 			detail: d,

@@ -27,7 +27,7 @@ public class mailComponentTest {
 
     @Test
     public void sendSimpleMail() {
-        mailComponent.sendSimpleMail("sirwsl@163.com","测试spring boot-主题","测试spring boot - 内容");
+        mailComponent.sendSimpleMail("localhost","测试spring boot-主题","测试spring boot - 内容");
     }
 
     @Test

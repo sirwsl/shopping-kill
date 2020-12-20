@@ -1,4 +1,4 @@
-mysql—url: jdbc:mysql://121.196.187.160:3306/shoppingkill?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false&rewriteBatchedStatements=true #rewriteBatchedStatements=true开启批处理流程
+mysql—url: jdbc:mysql://localhost:3306/shoppingkill?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false&rewriteBatchedStatements=true #rewriteBatchedStatements=true开启批处理流程
 
 spring:
   datasource:
@@ -9,7 +9,7 @@ spring:
       platform: mysql
       url: ${mysql-url}
       username: root
-      password: 18314263373
+      password: phonenumber
       initial-size: 20 # 配置初始化大小、最小、最大
       min-idle: 0
       max-active: 50
@@ -63,18 +63,18 @@ spring:
     timeout: 10000
     cluster:
       nodes:
-        - 121.196.187.160:6379
-        - 121.196.187.160:6380
-        - 121.196.187.160:6381
-        - 121.196.187.160:6382
-        - 121.196.187.160:6383
-        - 121.196.187.160:6384
-    password: 18314263373
+        - localhost:6379
+        - localhost:6380
+        - localhost:6381
+        - localhost:6382
+        - localhost:6383
+        - localhost:6384
+    password: phonenumber
 
   rabbitmq:
-    addresses: 121.196.187.160:5672,121.196.187.160:5673,121.196.187.160:5674
+    addresses: localhost:5672,localhost:5673,localhost:5674
     username: admin
-    password: 18314263373
+    password: phonenumber
     publisher-confirms: true
     publisher-returns: true
     #默认虚拟主机
@@ -110,9 +110,9 @@ redis:
   timeBetweenEvictionRunsMillis: 30000 #逐出扫描的时间间隔(毫秒) 如果为负数,则不运行逐出线程, 默认-1
   testOnBorrow: true #是否在从池中取出连接前进行检验,如果检验失败,则从池中去除连接并尝试取出另一个
   testWhileIdle: true #在空闲时检查有效性, 默认false
-  password: 18314263373 #密码
+  password: phonenumber #密码
 
-zookeeper-hosts: 121.196.187.160:2181,121.196.187.160:2182,121.196.187.160:2183
+zookeeper-hosts: localhost:2181,localhost:2182,localhost:2183
 
 jetcache:
   statIntervalMinutes: 1 #统计间隔
@@ -135,10 +135,10 @@ jetcache:
         maxTotal: 1000
         maxWait: 1000
       uri:
-        - redis://18314263373@121.196.187.160:6379/0  #redis://密码@IP:端口/库
-        - redis://18314263373@121.196.187.160:6380/0
-        - redis://18314263373@121.196.187.160:6381/0
-        - redis://18314263373@121.196.187.160:6382/0
-        - redis://18314263373@121.196.187.160:6383/0
-        - redis://18314263373@121.196.187.160:6384/0
+        - redis://phonenumber@localhost:6379/0  #redis://密码@IP:端口/库
+        - redis://phonenumber@localhost:6380/0
+        - redis://phonenumber@localhost:6381/0
+        - redis://phonenumber@localhost:6382/0
+        - redis://phonenumber@localhost:6383/0
+        - redis://phonenumber@localhost:6384/0
       readFrom: masterPreferred #master优先

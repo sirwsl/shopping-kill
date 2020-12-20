@@ -26,7 +26,7 @@ function loadFile(a) {
 $(function() {
 	var a = $("#typeName").val();
 	$.ajax({
-		url: "https://test.wslhome.top/admin/getTypesAll/v1",
+		url: "https://localhost/admin/getTypesAll/v1",
 		dataType: "json",
 		type: "GET",
 		async: true,
@@ -57,7 +57,7 @@ function goods(e, d, f) {
 	$("#goods").bootstrapTable("destroy");
 	$("#goods").bootstrapTable({
 		method: "get",
-		url: "https://test.wslhome.top/admin/getGoods/v1",
+		url: "https://localhost/admin/getGoods/v1",
 		dataType: "json",
 		headers: {
 			"Authorization": $.cookie("token")
@@ -171,7 +171,7 @@ function delGoods(a) {
 	var b = confirm("确认删除嘛？");
 	if (b == true) {
 		$.ajax({
-			url: "https://test.wslhome.top/admin/delGoodsById/v1",
+			url: "https://localhost/admin/delGoodsById/v1",
 			data: {
 				id: a
 			},
@@ -194,7 +194,7 @@ function delGoods(a) {
 var url;
 var method;
 $("#addGoods").click(function() {
-	url = "https://test.wslhome.top/admin/addGoods/v1";
+	url = "https://localhost/admin/addGoods/v1";
 	method = "POST"
 });
 function setValue(d, b) {
@@ -209,7 +209,7 @@ function setValue(d, b) {
 			a[c].selected = true
 		}
 	}
-	url = "https://test.wslhome.top/admin/updateGoods/v1";
+	url = "https://localhost/admin/updateGoods/v1";
 	method = "PUT"
 }
 $("#sub").click(function() {
@@ -235,7 +235,7 @@ $("#sub").click(function() {
 function shelf(a) {
 	$.ajax({
 		type: "PUT",
-		url: "https://test.wslhome.top/admin/merchandise/v1",
+		url: "https://localhost/admin/merchandise/v1",
 		data: {
 			id: a
 		},

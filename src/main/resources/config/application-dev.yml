@@ -62,14 +62,14 @@ spring:
         max-wait: -1
         min-idle: 0
     timeout: 10000
-    host: 121.196.187.160
+    host: localhost
     port: 6390
-    password: 18314263373
+    password: 18888888888
 
   rabbitmq:
-    addresses: 121.196.187.160:5672,121.196.187.160:5673,121.196.187.160:5674
+    addresses: localhost:5672,localhost:5673,localhost:5674
     username: admin
-    password: 18314263373
+    password: 18888888888
     publisher-confirms: true
     publisher-returns: true
     #默认虚拟主机
@@ -102,9 +102,9 @@ redis:
   timeBetweenEvictionRunsMillis: 30000 #逐出扫描的时间间隔(毫秒) 如果为负数,则不运行逐出线程, 默认-1
   testOnBorrow: true #是否在从池中取出连接前进行检验,如果检验失败,则从池中去除连接并尝试取出另一个
   testWhileIdle: true #在空闲时检查有效性, 默认false
-  password: 18314263373 #密码
+  password: 18888888888 #密码
 
-zookeeper-hosts: 121.196.187.160:2181,121.196.187.160:2182,121.196.187.160:2183
+zookeeper-hosts: localhost:2181,localhost:2182,localhost:2183
 
 jetcache:
   statIntervalMinutes: 1 #统计间隔
@@ -126,4 +126,4 @@ jetcache:
         maxIdle: 50
         maxTotal: 1000
         maxWait: 1000
-      uri: redis://18314263373@121.196.187.160:6390/0  #redis://密码@IP:端口/库
+      uri: redis://18888888888@localhost:6390/0  #redis://密码@IP:端口/库

@@ -26,7 +26,7 @@ function logger(e, d, a) {
 	$("#cheet").bootstrapTable("destroy");
 	$("#cheet").bootstrapTable({
 		method: "get",
-		url: "https://test.wslhome.top/admin/getAppraisalAll/v1",
+		url: "https://localhost/admin/getAppraisalAll/v1",
 		dataType: "json",
 		headers: {
 			"Authorization": $.cookie("token")
@@ -111,7 +111,7 @@ function delActivity(b) {
 	var a = confirm("确认删除嘛？");
 	if (a == true) {
 		$.ajax({
-			url: "https://test.wslhome.top/admin/delAppraisalById/v1",
+			url: "https://localhost/admin/delAppraisalById/v1",
 			data: {
 				id: b
 			},

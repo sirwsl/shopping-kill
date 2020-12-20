@@ -18,7 +18,7 @@ $(function() {
 	}
 });
 $("#exits").click(function() {
-	$.get("https://test.wslhome.top/login/exit/v1", null,
+	$.get("https://localhost/login/exit/v1", null,
 	function(a) {
 		if (a.code == 0 && a.data) {
 			window.location.href = "/admin/login.html"

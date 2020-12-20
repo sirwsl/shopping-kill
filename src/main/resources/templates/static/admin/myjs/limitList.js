@@ -15,7 +15,7 @@ $(function() {
 var id999;
 var update = true;
 var flag = true;
-var url = "https://test.wslhome.top/admin/getBlackListForPhone/v1";
+var url = "https://localhost/admin/getBlackListForPhone/v1";
 var number = "";
 $(function() {
 	limit();
@@ -25,7 +25,7 @@ $(function() {
 function change(a) {
 	$("#titles").html("手机号黑名单");
 	if (a == 10) {
-		url = "https://test.wslhome.top/admin/getBlackListForIp/v1";
+		url = "https://localhost/admin/getBlackListForIp/v1";
 		flag = false;
 		$("#titles").html("IP地址黑名单");
 		$("#seNum").attr("placeholder", "请输入IP地址查询")
@@ -34,9 +34,9 @@ function change(a) {
 	$("#limitList").bootstrapTable("refresh")
 }
 $("#search").click(function() {
-	url = "https://test.wslhome.top/admin/selectBlackListByPhone/v1";
+	url = "https://localhost/admin/selectBlackListByPhone/v1";
 	if (!flag) {
-		url = "https://test.wslhome.top/admin/selectBlackListByIp/v1"
+		url = "https://localhost/admin/selectBlackListByIp/v1"
 	}
 	number = $("#seNum").val();
 	limit();
@@ -144,7 +144,7 @@ function delonly(a) {
 		return
 	}
 	$.ajax({
-		url: "https://test.wslhome.top/admin/delBlackListById/v1",
+		url: "https://localhost/admin/delBlackListById/v1",
 		data: "id=" + a,
 		type: "delete",
 		dataType: "json",
@@ -175,7 +175,7 @@ function() {
 });
 function deleteMs(a) {
 	$.ajax({
-		url: "https://test.wslhome.top/admin/delBlackListByIds/v1",
+		url: "https://localhost/admin/delBlackListByIds/v1",
 		data: "ids=" + a,
 		type: "delete",
 		dataType: "json",
@@ -194,12 +194,12 @@ $("#addLimit").click(function() {
 	}
 });
 function submits(c) {
-	var b = "https://test.wslhome.top/admin/addBlackListByPhone/v1";
+	var b = "https://localhost/admin/addBlackListByPhone/v1";
 	if (!flag) {
-		b = "https://test.wslhome.top/admin/addBlackListByIp/v1"
+		b = "https://localhost/admin/addBlackListByIp/v1"
 	}
 	if (!update) {
-		b = "https://test.wslhome.top/admin/updateBlackListById/v1"
+		b = "https://localhost/admin/updateBlackListById/v1"
 	}
 	var c = $("#adress").val();
 	var a = $("#startTime").val();

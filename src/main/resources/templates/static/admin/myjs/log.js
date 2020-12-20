@@ -23,7 +23,7 @@ function logger(b) {
 	$("#adminLog").bootstrapTable("destroy");
 	$("#adminLog").bootstrapTable({
 		method: "get",
-		url: "https://test.wslhome.top/admin/getAllLoggerByType/v1",
+		url: "https://localhost/admin/getAllLoggerByType/v1",
 		dataType: "json",
 		headers: {
 			"Authorization": $.cookie("token")

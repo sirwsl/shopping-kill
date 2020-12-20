@@ -19,7 +19,7 @@ $("#addGoods").click(function() {
 	if (index) {
 		$.ajax({
 			type: "get",
-			url: "https://test.wslhome.top/admin/getAllGoodsName/v1",
+			url: "https://localhost/admin/getAllGoodsName/v1",
 			data: {
 				"status": 1
 			},
@@ -51,7 +51,7 @@ function logger(d, a) {
 	$("#sku").bootstrapTable("destroy");
 	$("#sku").bootstrapTable({
 		method: "get",
-		url: "https://test.wslhome.top/admin/getSkuAll/v1",
+		url: "https://localhost/admin/getSkuAll/v1",
 		dataType: "json",
 		headers: {
 			"Authorization": $.cookie("token")
@@ -157,7 +157,7 @@ function delActivity(b) {
 	var a = confirm("确认删除嘛？");
 	if (a == true) {
 		$.ajax({
-			url: "https://test.wslhome.top/admin/delSkuById/v1",
+			url: "https://localhost/admin/delSkuById/v1",
 			data: {
 				id: b
 			},
@@ -197,7 +197,7 @@ $("#sub").click(function() {
 	var a = new FormData(document.getElementById("UpdateSku"));
 	$.ajax({
 		type: "post",
-		url: "https://test.wslhome.top/admin/updateSkuInfo/v1",
+		url: "https://localhost/admin/updateSkuInfo/v1",
 		data: a,
 		contentType: false,
 		processData: false,
@@ -215,7 +215,7 @@ $("#subs").click(function() {
 	var a = new FormData(document.getElementById("addSku"));
 	$.ajax({
 		type: "post",
-		url: "https://test.wslhome.top/admin/addSkuInfo/v1",
+		url: "https://localhost/admin/addSkuInfo/v1",
 		data: a,
 		contentType: false,
 		processData: false,

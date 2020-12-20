@@ -16,7 +16,7 @@ $(function() {
 	$("#admin").bootstrapTable("destroy");
 	$("#admin").bootstrapTable({
 		method: "get",
-		url: "https://test.wslhome.top/admin/getAdminList/v1",
+		url: "https://localhost/admin/getAdminList/v1",
 		dataType: "json",
 		headers: {
 			"Authorization": $.cookie("token")
@@ -139,7 +139,7 @@ $(function() {
 			}
 			$.ajax({
 				type: "put",
-				url: "https://test.wslhome.top/admin/updateAdmin/v1",
+				url: "https://localhost/admin/updateAdmin/v1",
 				data: e,
 				dataType: "JSON",
 				success: function(f) {
@@ -183,7 +183,7 @@ function delActivity(b) {
 	var a = confirm("确认删除吗？");
 	if (a == true) {
 		$.ajax({
-			url: "https://test.wslhome.top/admin/delAdmin/v1",
+			url: "https://localhost/admin/delAdmin/v1",
 			data: {
 				id: b
 			},

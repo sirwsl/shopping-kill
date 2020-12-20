@@ -17,6 +17,6 @@ public class SimAbstractCurrentRequestComponent extends AbstractCurrentRequestCo
     @Override
     public UserBO getCurrentUser() {
         UserBO userBO = new UserBO();
-        return userBO.setId(1L).setFlag(UserBO.ADMIN).setName("王世磊");
+        return userBO.setId(1L).setFlag(UserBO.ADMIN).setName("sirwsl");
     }
 }

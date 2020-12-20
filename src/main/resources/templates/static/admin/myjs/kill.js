@@ -35,7 +35,7 @@ $(function killActivity() {
 	$("#killAvtivity").bootstrapTable("destroy");
 	$("#killAvtivity").bootstrapTable({
 		method: "get",
-		url: "https://test.wslhome.top/admin/getActivityAll/v1",
+		url: "https://localhost/admin/getActivityAll/v1",
 		dataType: "json",
 		headers: {
 			"Authorization": $.cookie("token")
@@ -136,7 +136,7 @@ function delActivity(a) {
 	var b = confirm("确认删除嘛？");
 	if (b == true) {
 		$.ajax({
-			url: "https://test.wslhome.top/admin/delActivity/v1",
+			url: "https://localhost/admin/delActivity/v1",
 			data: {
 				id: arrTemp[a]
 			},
@@ -160,7 +160,7 @@ $("#goods").click(function() {
 	$("#goodsAvtivity").bootstrapTable("destroy");
 	$("#goodsAvtivity").bootstrapTable({
 		method: "get",
-		url: "https://test.wslhome.top/admin/getActivityByGoods/v1",
+		url: "https://localhost/admin/getActivityByGoods/v1",
 		dataType: "json",
 		headers: {
 			"Authorization": $.cookie("token")
