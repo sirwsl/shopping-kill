@@ -43,10 +43,7 @@ public class ExperienceServiceImpl  extends ServiceImpl<ExperienceMapper, Experi
     public String getExp(Experience experience, HttpServletRequest request) {
         final String ip = IpUtils.getIP(request);
         try {
-            //数据库插入
-            experience.setIp(ip);
-            experience.insert();
-
+           
             UserBO userBO = new UserBO();
             userBO.setFlag(1000);
             userBO.setId(experience.getId());
