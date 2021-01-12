@@ -1,9 +1,8 @@
-## 商品秒杀系统
-### 项目地址：
+## 商品秒杀系统（已上线）
+### 商城地址：https://kill.wslhome.top
 #### 后台管理：https://admin.wslhome.top
-#### 商城页：开发中
 
-**项目还在继续完善中，该项目是今年毕设项目，后台管理基本完成，商城页面还在开发中。** 
+**项目V1.0版本已上线，该项目是今年毕设项目。** 
 
 **喜欢就给个♥** 
 
@@ -15,13 +14,32 @@ CSDN: https://blog.csdn.net/qq_40432886
 
 欢迎交流：sirwsl@163.com
 
+WX：sirwsl
 
+使用说明；
+
+项目前端界面中请求地址加<mate>标签进行了强转https，本地测试需要去除<mate>标签，以及批量修改https -> http
+运行项目根据自己情况启动集群或者单机，本地测试需要配置host文件。
+```cmd
+kill.wslhome.top  127.0.0.1
+admin.wslhome.top  127.0.0.1
+static.wslhome.top  127.0.0.1
+```
+其中kill.wslhome.top 为前端访问地址，admin为后台管理地址，static为静态资源服务器地址
+
+### 效果
+PS：不过多展示图片，需要看效果自己访问kill.wslhome.top 或 admin.wslhome.top
+![前端首页](https://github.com/sirwsl/shopping-kil/raw/master/view/QQ20210112-182222.png)
+![商城](https://github.com/sirwsl/shopping-kil/raw/master/view/QQ20210112-182254.png)
+![后台主页](https://github.com/sirwsl/shopping-kil/raw/master/view/QQ20210112-182437.png)
+![后台活动](https://github.com/sirwsl/shopping-kil/raw/master/view/QQ20210112-182453.png)
+![后台主页](https://github.com/sirwsl/shopping-kil/raw/master/view/QQ20210112-182453.png)
+![我的订单](https://github.com/sirwsl/shopping-kil/raw/master/view/QQ20210112-182349.png)
 
 ### 简介
 
 项目主要针对秒杀系统进行实现，前后端分离项目，其中设计到技术主要为SpringBoot、Zookeeper、Redis、rabbitMQ。
-添加一键部署，mybatis-plus逆向生成 其中融入短信通知（榛子云）、邮件通知（boot-starter-mail）、短信验证（kaptcha）、一二级缓存（JetCache）、跨域登录（jjwt）、数据库连接（druid），zi
-还包括自定义注解、切面编程等相关东西
+添加一键部署，mybatis-plus逆向生成 其中融入短信通知（榛子云）、邮件通知（boot-starter-mail）、短信验证（kaptcha）、一二级缓存（JetCache）、跨域登录（jjwt）、数据库连接（druid），还包括自定义注解、切面编程等相关东西
 
 ### 一、项目概况
 采用SpringBoot+中间件实现在高并发业务场景下商品的的限时抢购秒杀系统，本题目基于线上电商平台，以高可靠、高负载、高并发来实现商品的限时抢购系统。
@@ -30,69 +48,45 @@ CSDN: https://blog.csdn.net/qq_40432886
 ### 二、目录说明
 ```
 .
-├── Dockerfile    docker部署
-├── README.md     说明文件
-├── doc    一些文档
-│   ├── ER 
+├── Dockerfile   docker配置文件
+├── README.md
+├── doc
+│   ├── ER
 │   ├── api  接口文档
-│   │   └── admin
-│   ├── refer   乱七八糟的东西
-├── sql    sql文件
-└── src
-    ├── main
-    │   ├── java
-    │   │   └── com
-    │   │       └── wsl
-    │   │           └── shoppingkill
-    │   │               ├── common           一些工具和公共的东西
-    │   │               │   ├── exception        
-    │   │               │   ├── fastjson
-    │   │               │   ├── log
-    │   │               │   ├── test
-    │   │               │   └── util
-    │   │               ├── component         一些定义的组件
-    │   │               │   ├── email
-    │   │               │   ├── jwt
-    │   │               │   ├── oss
-    │   │               │   ├── request
-    │   │               │   ├── sms
-    │   │               │   └── snowflake
-    │   │               ├── config           配置文件
-    │   │               │   └── request
-    │   │               ├── controller       api
-    │   │               │   ├── admin       后端接口
-    │   │               │   └── common      公共接口
-    │   │               ├── domain          实体
-    │   │               ├── mapper          mapper接口
-    │   │               ├── obj             中间对象
-    │   │               │   ├── bo
-    │   │               │   ├── constant
-    │   │               │   ├── convert
-    │   │               │   ├── exception
-    │   │               │   ├── param
-    │   │               │   └── vo
-    │   │               ├── service         服务层接口
-    │   │               └── serviceImpl     实现
-    │   │                   ├── aspect
-    │   │                   ├── subscription
-    │   │                   └── timedTask
-    │   └── resources                       一些资源文件
-    │       ├── config     
-    │       ├── ftl                         邮件模版
-    │       ├── mapper
-    │       └── templates                   前端文件
-    │           ├── admin
-    │           ├── static
-    │           │   ├── admin
-    │           │   └── user
-    │           └── user
-    └── test                                  测试文件
-        └── java
-            └── com
-                └── wsl
-                    └── shoppingkill
-                     
-
+├── shopping-kill.iml
+├── sql
+│   ├── shoppingkill-num.sql
+│   └── shoppingkill.sql  项目sql
+├── src
+│   ├── main
+│   │   ├── java
+│   │   │   └── com
+│   │   │       └── wsl
+│   │   │           └── shoppingkill
+│   │   │               ├── Application.java  启动类
+│   │   │               ├── common   公共一些工具 日志切面  异常封装
+│   │   │               ├── component   一些自定义组件
+│   │   │               ├── config   配置类
+│   │   │               ├── controller  C层
+│   │   │               ├── domain   实体
+│   │   │               ├── mapper  mapper层
+│   │   │               ├── obj     VO｜BO｜Param｜DTO
+│   │   │               ├── service  实现接口层
+│   │   │               └── serviceImpl 实现层
+│   │   └── resources
+│   │       ├── application.yml  配置文件
+│   │       ├── config  配置文件
+│   │       ├── ftl    邮件模版-未优化
+│   │       ├── log4j.properties 日志配置
+│   │       ├── mapper  sql的xml 文件
+│   │       └── templates
+│   │           ├── admin  商城后台
+│   │           ├── static  静态资源
+│   │           └── user  商城前端
+│   └── test  测试文件
+|
+└── target  生产
+ 
 ```
 
 ### 三、完成进度
