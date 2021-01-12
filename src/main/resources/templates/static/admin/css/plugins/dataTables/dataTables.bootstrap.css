@@ -59,11 +59,11 @@ table.dataTable thead .sorting {
 }
 
 table.dataTable thead .sorting_asc {
-    background: url('../images/sort_asc.png') no-repeat center right;
+    background: url('../imgs/rt_asc.png') no-repeat center right;
 }
 
 table.dataTable thead .sorting_desc {
-    background: url('../images/sort_desc.png') no-repeat center right;
+    background: url('../imgs/rt_desc.png') no-repeat center right;
 }
 
 table.dataTable thead .sorting_asc_disabled {

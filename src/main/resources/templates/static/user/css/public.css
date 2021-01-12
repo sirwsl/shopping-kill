@@ -4,10 +4,9 @@
 
 
 /*css预设*/
-
 * {
-	margin: 0;
-	padding: 0;
+    margin: 0px;
+    padding: 0px;
 }
 
 
@@ -122,10 +121,11 @@ summary {
 
 .fr {
 	float: right;
+	width: 220px;
 }
 
 .mt {
-	margin-top: 80px;
+	margin-top: 20px;
 }
 
 .wrapper {

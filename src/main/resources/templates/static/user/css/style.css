@@ -899,7 +899,7 @@
 	float: left;
 	margin-top: 7px;
 	margin-left: 10px;
-	background: url(../images/right_arrow.png) no-repeat;
+	background: url(../imgs/right_arrow.png) no-repeat;
 }
 
 .box_hd_arrow {
@@ -935,7 +935,7 @@
 	display: block;
 	width: 63px;
 	height: 31px;
-	background: url(../images/seckill.png) no-repeat;
+	background: url(../imgs/seckill.png) no-repeat;
 	float: left;
 	margin: 9px 15px 0 0;
 }
@@ -1134,7 +1134,7 @@
 	position: absolute;
 	top: -18px;
 	right: -10px;
-	background: url(../images/close1.png) no-repeat center;
+	background: url(../imgs/close1.png) no-repeat center;
 	background-size: 100%;
 }
 
@@ -1158,7 +1158,7 @@
 	overflow: hidden;
 	padding: 0 0 20px;
 	height: 35px;
-	background: url(../images/enjoy.jpg) repeat-x 0 18px;
+	background: url(../imgs/enjoy.jpg) repeat-x 0 18px;
 	text-align: center;
 	font-size: 24px;
 	line-height: 35px;
@@ -1498,7 +1498,7 @@
 	left: 35%;
 	top: 30%;
 	z-index: 10;
-	background: url(../images/red_package3.png);
+	background: url(../imgs/red_package3.png);
 	width: 0;
 	height: 0;
 }
@@ -1537,7 +1537,7 @@
 	left: 35%;
 	top: 30%;
 	z-index: 10;
-	background: url(../images/red_package3.png);
+	background: url(../imgs/red_package3.png);
 	width: 0;
 	height: 0;
 }
@@ -1683,7 +1683,7 @@
 }
 
 .summary_price_warp .s_p_w_wrap {
-	background: url(../images/summary_bg.jpg) #f3f3f3 repeat-x 20px -60px;
+	background: url(../imgs/summary_bg.jpg) #f3f3f3 repeat-x 20px -60px;
 	padding: 10px 0 0px 5px;
 }
 
@@ -1898,7 +1898,7 @@
 	display: inline-block;
 	width: 20px;
 	height: 20px;
-	background: url(../images/search.png) no-repeat;
+	background: url(../imgs/search.png) no-repeat;
 	margin-top: 7px;
 }
 
@@ -1911,7 +1911,7 @@
 .cart_message {
 	padding-left: 490px;
 	height: 174px;
-	background: url(../images/no_goods.png) 177px 0 no-repeat;
+	background: url(../imgs/no_goods.png) 177px 0 no-repeat;
 }
 
 .cart_message .txt {

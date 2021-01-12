@@ -54,7 +54,6 @@ public class VerifyComponent {
             //存入session
             HttpSession session = request.getSession();
             session.setAttribute("code",rightCode);
-            session.setMaxInactiveInterval(imgCodeTimeOut);
 
             // 使用生产的验证码字符串返回一个BufferedImage对象并转为byte写入到byte数组中
             BufferedImage challenge = katha.createImage(rightCode);

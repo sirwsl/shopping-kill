@@ -3,7 +3,7 @@ $.ajaxSetup({
 		"Authorization": $.cookie("token")
 	},
 	xhrFields: {
-		withCredentials: false
+		withCredentials: true
 	},
 	crossDomain: true
 });
@@ -12,14 +12,14 @@ $(function() {
 		window.location.href = "/admin/login.html"
 	}
 });
-var url = "https://localhost/admin/getAllSubscription/v1";
+var url = "https://test.wslhome.top/admin/getAllSubscription/v1";
 var stime;
 var etime;
 $(function() {
 	logger()
 });
 $("#search").click(function() {
-	url = "https://localhost/admin/getSubscriptionByTime/v1";
+	url = "https://test.wslhome.top/admin/getSubscriptionByTime/v1";
 	stime = $("#startTime").val();
 	etime = $("#endTime").val();
 	logger()
@@ -35,7 +35,7 @@ function logger() {
 		},
 		ajaxOptions: {
 			xhrFields: {
-				withCredentials: false
+				withCredentials: true
 			},
 			crossDomain: true
 		},

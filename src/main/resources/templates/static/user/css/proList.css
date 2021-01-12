@@ -748,7 +748,7 @@ section h3{
 	margin-top: 30px;
 }
 .order .orderCon .orderL{
-	width:700px;
+	width:600px;
 }
 .order .orderCon h3{
 	height:48px;
@@ -764,8 +764,8 @@ section h3{
 	text-decoration: underline;
 }
 .order .orderCon .orderL .addre{
-	width:325px;
-	margin:20px 20px 20px 0;
+	width:280px;
+	margin:10px 10px 10px 0;
 	border:2px solid #dbdbdb;
 	cursor: pointer;
 }
@@ -794,7 +794,7 @@ section h3{
 .order .orderCon .orderL .way img,.order .orderCon .orderL .dis span{
 	float: left;
 	border:2px solid #dbdbdb;
-	margin: 30px 20px 30px 0;
+	margin: 10px 10px 10px 0;
 	cursor: pointer;
 }
 .order .orderCon .orderL .way img.on,.order .orderCon .orderL .dis span.on{

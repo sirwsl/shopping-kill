@@ -19,6 +19,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -43,7 +44,12 @@ public class ExperienceServiceImpl  extends ServiceImpl<ExperienceMapper, Experi
     public String getExp(Experience experience, HttpServletRequest request) {
         final String ip = IpUtils.getIP(request);
         try {
-           
+            experience.setPassword(String.valueOf(ThreadLocalRandom.current().nextInt(99999999)));
+
+            //数据库插入
+            experience.setIp(ip);
+            experience.insert();
+
             UserBO userBO = new UserBO();
             userBO.setFlag(1000);
             userBO.setId(experience.getId());

@@ -12,6 +12,7 @@ import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -45,16 +46,19 @@ public class Address extends Model<Address> implements Serializable {
     /**
      * 收件人姓名
      */
+    @NotBlank(message = "收件人不能为空")
     private String name;
 
     /**
      * 收件人电话
      */
+    @NotBlank(message = "收件人电话不能为空")
     private String phone;
 
     /**
      * 地址
      */
+    @NotBlank(message = "收件人地址不能为空")
     private String address;
 
     /**

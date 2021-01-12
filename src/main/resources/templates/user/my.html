@@ -2,6 +2,8 @@
 <html>
 	<head lang="en">
 		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=0.1,user-scalable=yes">
+		<meta http-equiv ="Content-Security-Policy" content="upgrade-insecure-requests">
 		<title>我的订单</title>
 		<link rel="stylesheet" type="text/css" href="../static/user/css/public.css"/>
 		<link rel="stylesheet" type="text/css" href="../static/user/css/myorder.css" />
@@ -9,11 +11,10 @@
 	<body>
 		<div class="address mt" style="margin-top: 0px;">
 			<div class="wrapper clearfix">
-				<a href="#" class="fl">首页</a>
+				<a href="index.html" class="fl">首页</a>
 				<span>/</span>
-				<a href="mygxin.html">个人中心</a>
-				<span>/</span>
-				<a href="myOrder" class="on">我的订单</a>
+				<a href="myCenter.html" target="myinfo" class="on" >个人中心</a>
+				
 			</div>
 		</div>	
 		
@@ -22,13 +23,13 @@
 			<div class="wrapper clearfix" style="margin-right: 0px; margin-left: 5%;">
 				<div class="zuo fl">
 					<h3>
-						<a href="#" ><img src="../static/user/img/tx.png"/></a>
-						<p class="clearfix"><span class="fl">[羊羊羊]</span><span class="fr">[退出登录]</span></p>
+						<a href="#" ><img id = "imgId" src="../static/user/imgs/tx.png"/></a>
+						<p class="clearfix"><span class="fl" style="width: 60px;" id = "userName"></span></p>
 					</h3>
 					<div>
 						<h4>我的交易</h4>
 						<ul>
-							<li><a href="cart.html" target="myinfo">我的购物车</a></li>
+							<li><a href="cart.html" target="myinfo">我的收藏夹</a></li>
 							<li><a href="myOrder.html"  target="myinfo">我的订单</a></li>
 							<li><a href="myProd.html" target="myinfo">评价晒单</a></li>
 						</ul>
@@ -36,15 +37,12 @@
 						<ul>
 							<li><a href="myCenter.html" target="myinfo">我的中心</a></li>
 							<li><a href="address.html"  target="myinfo" >地址管理</a></li>
-						</ul>
-						<h4>账户管理</h4>
-						<ul>
-							<li  class="on"><a href="myInfo.html"  target="myinfo">个人信息</a></li>
+							<li><a href="myInfo.html"  target="myinfo">个人信息</a></li>
 						</ul>
 					</div>
 					
 				</div>	
-				<iframe src="myCenter.html" onload="setIframeHeight(this)"  name="myinfo" width="80%" height="100%" scrolling="no" id="myinfo" frameborder="0"></iframe>
+				<iframe src="myCenter.html"  name="myinfo" width="80%" height="100%" scrolling="no" id="myinfo" frameborder="0"></iframe>
 			</div>
 			
 		</div>
@@ -52,19 +50,7 @@
 		<script src="../static/user/js/jquery-1.12.4.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../static/user/js/public.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../static/user/js/user.js" type="text/javascript" charset="utf-8"></script>
-		<script type="text/javascript">
-			function setIframeHeight(iframe) {
-				if(iframe) {
-					var iframeWin = iframe.contentWindow || iframe.contentDocument.parentWindow;
-					if(iframeWin.document.body) {
-						iframe.height = iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight;
-					}
-				}
-			};
-			
-			window.onload = function() {
-			setIframeHeight(document.getElementById('myinfo'));
-			};
-		</script>
+		<script src="../static/user/js/jquery.cookie.js" type="application/javascript"></script>
+		<script type="text/javascript" src = "../static/user/myjs/my.js" charset="UTF-8"></script>
 	</body>
 </html>

@@ -45,7 +45,7 @@ public class ProdAbstractCurrentRequestComponent extends AbstractCurrentRequestC
         try {
             return jwtComponent.getTokenInfo(token.substring(JwtEnum.TOKEN_PREFIX.length()));
         }catch (Exception e){
-            UserBO userBO = redisTemplate.opsForValue().get(RedisEnum.VERIFY_TOKEN+token);
+            UserBO userBO = redisTemplate.opsForValue().get(RedisEnum.VERIFY_TOKEN+token.substring(JwtEnum.TOKEN_PREFIX.length()));
             if (Objects.nonNull(userBO)){
                 return userBO;
             }

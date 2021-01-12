@@ -2,6 +2,8 @@
 <html>
 	<head lang="en">
 		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=0.1,user-scalable=yes">
+		<meta http-equiv ="Content-Security-Policy" content="upgrade-insecure-requests">
 		<title>个人信息</title>
 		<link rel="stylesheet" type="text/css" href="../static/user/css/public.css"/>
 		<link rel="stylesheet" type="text/css" href="../static/user/css/myorder.css" />
@@ -10,48 +12,25 @@
 		<!------------------------------Bott------------------------------>
 		<div class="Bott">
 			<div class="wrapper clearfix">
-				<div class="zuo fl">
-					<h3>
-						<a href="#"><img src="../static/user/img/tx.png"/></a>
-						<p class="clearfix"><span class="fl">[羊羊羊]</span><span class="fr">[退出登录]</span></p>
-					</h3>
-					<div>
-						<h4>我的交易</h4>
-						<ul>
-							<li><a href="cart.html">我的购物车</a></li>
-							<li class="on"><a href="myOrder">我的订单</a></li>
-							<li><a href="myprod.html">评价晒单</a></li>
-						</ul>
-						<h4>个人中心</h4>
-						<ul>
-							<li><a href="mygxin.html">我的中心</a></li>
-							<li><a href="address.html">地址管理</a></li>
-						</ul>
-						<h4>账户管理</h4>
-						<ul>
-							<li><a href="mygrxx.html">个人信息</a></li>
-							<li><a href="remima.html">修改密码</a></li>
-						</ul>
-					</div>
-				</div>
+				
 				<div class="you fl">
 					<div class="my clearfix">
 						<h2>订单详情<a href="#">请谨防钓鱼链接或诈骗电话，了解更多&gt;</a></h2>
-						<h3>订单号：<span>54163846846848468</span></h3>
+						<h3>订单号：<span id = "orderId"></span></h3>
 					</div>
 					<div class="orderList">
 						<div class="orderList1">
-							<h3>已收货</h3>
+							<h3 id = "status"></h3>
 							<div class="clearfix">
-								<a href="#" class="fl"><img src="../static/user/img/g1.jpg"/></a>
-								<p class="fl"><a href="#">家用创意菜盘子圆盘 釉下彩复古</a><a href="#">¥99.00×1</a></p>
+								<a href="#" class="fl"><img id = "imgUrl" src="../static/user/imgs/g1.jpg"/></a>
+								<p class="fl"><a href="#" id = "goodsName"></a><a href="#" id = "priceAndNum"></a></p>
 							</div>
 						</div>
 						<div class="orderList1">
 							<h3>收货信息</h3>
-							<p>姓 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：<span>杨小黄</span></p>
-							<p>联系电话：<span>157*****121</span></p>
-							<p>收货地址：<span>河北 唐山市 路北区 高新软件园</span></p>
+							<p>姓 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：<span id = "userName"></span></p>
+							<p>联系电话：<span id = "userPhone"></span></p>
+							<p>收货地址：<span id = "userAddress"></span></p>
 						</div>
 						<div class="orderList1">
 							<h3>支付方式及送货时间</h3>
@@ -59,15 +38,13 @@
 							<p>送货时间：<span>不限送货时间</span></p>
 						</div>
 						<div class="orderList1 hei">
-							<h3><strong>商品总价：</strong><span>¥99</span></h3>
-							<p><strong>运费：</strong><span>¥0</span></p>
-							<p><strong>订单金额：</strong><span>¥99</span></p>
-							<p><strong>实付金额：</strong><span>¥99</span></p>
+							<h3><strong>商品总价：</strong><span id = "price"></span></h3>
+							<p><strong>运费：</strong><span id = "logisticsPrice">¥0</span></p>
+							<p><strong>订单金额：</strong><span id = "totalPrice">¥0</span></p>
+							<p><strong>实付金额：</strong><span id = "totalPrice">¥0</span></p>
 						</div>
 						
 					</div>
-					
-					
 				</div>
 			</div>
 		</div>
@@ -75,5 +52,7 @@
 		<script src="../static/user/js/jquery-1.12.4.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../static/user/js/public.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../static/user/js/user.js" type="text/javascript" charset="utf-8"></script>
+		<script type="application/javascript" src="../static/user/js/jquery.cookie.js"></script>
+		<script type="application/javascript" charset="UTF-8" src="../static/user/myjs/orderxq.js"></script>
 	</body>
 </html>

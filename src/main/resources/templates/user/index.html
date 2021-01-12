@@ -1,8 +1,10 @@
 <!doctype html>
-<html>
+<html >
 
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=0.1,user-scalable=yes">
+		<meta http-equiv ="Content-Security-Policy" content="upgrade-insecure-requests">
 		<title>首页</title>
 		<link rel="stylesheet" type="text/css" href="../static/user/css/base.css" />
 		<link rel="stylesheet" type="text/css" href="../static/user/css/style.css" />
@@ -14,8 +16,8 @@
 		<div class="top_banner">
 			<div class="module w1200">
 				<a href="javascript:">
-					<img src="../static/user/images/active.jpg" />
-					<i class="icon-close"><img src="../static/user/images/close.png"/></i>
+					<img src="../static/user/imgs/active.jpg" />
+					<i class="icon-close"><img src="../static/user/imgs/close.png"/></i>
 				</a>
 			</div>
 		</div>
@@ -24,36 +26,16 @@
 				<div class="fl">
 					<div class="city-choice" id="city-choice" data-ectype="dorpdown">
 						<div class="dsc-choie dsc-cm" ectype="dsc-choie">
-							<img src="../static/user/images/place.png" class="place" />
+							<img src="../static/user/imgs/place.png" class="place" />
 							<input type="text" value="云南" class="search" />
 						</div>
 
 					</div>
 					<div class="txt-info" id="ECS_MEMBERZONE">
-						<a href="login.html" class="link-login red" target="displayArea">请登录</a>
-						<a href="register.html" class="link-regist" target="displayArea">免费注册</a>
+						
 					</div>
 				</div>
-				<ul class="quick-menu fr">
-					<li>
-						<div class="dt">
-							<a href="myOrder.html" target="displayArea">我的订单</a>
-						</div>
-					</li>
-					<li class="spacer"></li>
-					<li class="spacer"></li>
-					<li>
-						<div class="dt">
-							<a href="my.html" target="displayArea">个人中心</a>
-						</div>
-					</li>
-					<li class="spacer"></li>
-					<li>
-						<div class="dt">
-							<a href="doing.html" target="displayArea">客户服务</a>
-						</div>
-					</li>
-					<li class="spacer"></li>
+				<ul class="quick-menu fr" id = "myleft">
 					
 				</ul>
 			</div>
@@ -62,14 +44,14 @@
 		<div class="header">
 			<div class="header_container">
 				<div class="logo fl">
-					<img src="../static/user/images/logo.png" />
-					<a href="#"><img src="../static/user/images/ecsc-join.gif" /></a>
+					<img src="../static/user/imgs/logo.png" />
+					<a href="#"><img src="../static/user/imgs/ecsc-join.gif" /></a>
 				</div>
 				<div class="dsc-search">
 					<div class="form">
 						<form class="search-form">
 							<input name="keywords" type="text" id="keyword" value="" class="search-text" style="color: rgb(153, 153, 153);">
-							<button type="submit" class="button button-goods">搜商品</button>
+							<a type="submit" style="padding-left: 18px;" href="no_goods.html" target="displayArea" class="button button-goods" id = "search" >搜商品</a>
 						</form>
 					</div>
 				</div>
@@ -79,9 +61,9 @@
 		<div class="nav" ectype="dscNav">
 			<div class="w w1200">
 				<div class="nav-main" id="nav">
-					<ul class="navitems">
+					<ul class="navitems" id = "ty">
 						<li>
-							<a href="home.html" class="curr" target="displayArea">首页</a>
+							<a href="home.html" class="curr" ID= "home1" target="displayArea">首页</a>
 						</li>
 						<li>
 							<a href="allList.html" target="displayArea">所有商品</a>
@@ -101,52 +83,33 @@
 				</div>
 			</div>
 		</div>
-		<div class="slide" id="lun2" style="">
-			<div class="carouse" style="min-width: 1200px;position:relative;margin-top: 0px;">
-				<div class="slideItem">
-					<a href="#" target="_blank"><img class="banner-img" src="../static/user/images/banner4.jpg" style="height: 500px;"></a>
-				</div>
-				<div class="slideItem">
-					<a href="#" target="_blank"><img class="banner-img" src="../static/user/images/banner5.jpg" style="height: 500px;"></a>
-				</div>
-				<div class="slideItem">
-					<a href="#" target="_blank"><img class="banner-img" src="../static/user/images/banner6.jpg" style="height: 500px;"></a>
-				</div>
-				<!--<a class="carousel-control left Next"></a>
-				<a class="carousel-control right Previous"></a>-->
-			</div>
-		</div>
 		
-		<iframe src="home.html"	 name="displayArea" width="100%" height="100%" scrolling="no" id="displayArea" frameborder="0"></iframe>
+		
+		<iframe src="home.html" name="displayArea" width="100%" height="100%" scrolling="no" id="displayArea" frameborder="0"></iframe>
 		
 		
 		<!--返回顶部-->
 		<div class="gotop">
-			<a href="cart.html" target="displayArea">
-			<dl class="goCart">
-				<dt><img src="../static/user/images/gt1.png"/></dt>
-				<dd>去购<br/>物车</dd>
-			</dl>
-			</a>
+			
 			<a href="#" class="dh">
 			<dl>
-				<dt><img src="../static/user/images/gt2.png"/></dt>
+				<dt><img src="../static/user/imgs/gt2.png"/></dt>
 				<dd>联系<br />客服</dd>
 			</dl>
 			</a>
-			<a href="my.html" target="displayArea">
+			<a onclick="check2()" target="displayArea">
 			<dl>
-				<dt><img src="../static/user/images/gt3.png"/></dt>
+				<dt><img src="../static/user/imgs/gt3.png"/></dt>
 				<dd>个人<br />中心</dd>
 			</dl>
 			</a>
 			<a href="#" class="toptop" style="display: none;">
 			<dl>
-				<dt><img src="../static/user/images/gt4.png"/></dt>
+				<dt><img src="../static/user/imgs/gt4.png"/></dt>
 				<dd>返回<br />顶部</dd>
 			</dl>
 			</a>
-			<p>400-800-8200</p>
+			<p>183-1426-3373</p>
 		</div>
 		<div class="msk"></div>
 		<!-- 底部-->
@@ -154,19 +117,19 @@
 			<div class="top">
 				<div class="wrapper">
 					<div class="clearfix">
-						<a href="#2" class="fl"><img src="../static/user/img/foot1.png"/></a>
+						<a href="#2" class="fl"><img src="../static/user/imgs/foot1.png"/></a>
 						<span class="fl">7天无理由退货</span>
 					</div>
 					<div class="clearfix">
-						<a href="#2" class="fl"><img src="../static/user/img/foot2.png"/></a>
+						<a href="#2" class="fl"><img src="../static/user/imgs/foot2.png"/></a>
 						<span class="fl">15天免费换货</span>
 					</div>
 					<div class="clearfix">
-						<a href="#2" class="fl"><img src="../static/user/img/foot3.png"/></a>
+						<a href="#2" class="fl"><img src="../static/user/imgs/foot3.png"/></a>
 						<span class="fl">满599包邮</span>
 					</div>
 					<div class="clearfix">
-						<a href="#2" class="fl"><img src="../static/user/img/foot4.png"/></a>
+						<a href="#2" class="fl"><img src="../static/user/imgs/foot4.png"/></a>
 						<span class="fl">手机特色服务</span>
 					</div>
 				</div>
@@ -179,40 +142,8 @@
 		<script type="text/javascript" src="../static/user/js/kuCity.js"></script>
 		<script type="text/javascript" src="../static/user/js/jquery.SuperSlide.js"></script>
 		<script type="text/javascript" src="../static/user/js/slide.js"></script>
-			<script src="../static/user/js/public.js" type="text/javascript" charset="utf-8"></script>
-		<script>
-			function reinitIframe() {
-			var iframe = document.getElementById("displayArea");
-			try {
-				var bHeight = iframe.contentWindow.document.body.scrollHeight;
-				var dHeight = iframe.contentWindow.document.documentElement.scrollHeight;
-				var height = Math.min(bHeight, dHeight);
-				iframe.height = height;
-				
-				} catch (ex) { }
-			}
-			window.setInterval("reinitIframe()", 20);
-			
-			$('.li_dorpdown').hover(function() {
-				$('.dorpdown-layer').show();
-			});
-			$('.li_dorpdown').mouseleave(function() {
-				$('.dorpdown-layer').hide();
-			});
-			$('.icon-close').click(function() {
-				$('.top_banner').hide();
-			});
-			$('.my_center_box_left a').hover(function() {
-			
-			});
-			$('.cate-layer-right-slide img').mouseenter(function() {
-			
-				$(this).delay('300').animate(300);
-			});
-			$('.cate-layer-right-slide img').mouseleave(function() {
-				$(this).css('border', 'none')
-			});
-			$()
-		</script>
+		<script src="../static/user/js/public.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../static/user/js/jquery.cookie.js" type="application/javascript"></script>
+		<script src="../static/user/myjs/index.js" type="application/javascript" charset="utf-8"></script>
 		
 </html>		

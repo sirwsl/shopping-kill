@@ -39,5 +39,23 @@ public class test {
         System.out.println(types);
         System.err.println(types);
     }
+
+    @Test
+    public void test1(){
+        String str = "89岁11月3天";
+        int year = Integer.parseInt(str.split("岁")[0]);
+        int month = Integer.parseInt(str.split("岁")[1].split("月")[0]);
+        int day = Integer.parseInt(str.split("月")[1].split("天")[0]);
+        System.out.println(year*365+month*30+day);
+
+    }
+
+    @Test
+    public void date(){
+        //获取下一个时间点,如现在为15:30,上一个整点时间点为，16:00
+        LocalDateTime.now().withMinute(0).withSecond(0).withNano(0).plusHours(4);
+
+    }
+
 }
 

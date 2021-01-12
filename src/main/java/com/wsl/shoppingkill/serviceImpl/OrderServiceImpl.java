@@ -1,23 +1,26 @@
 package com.wsl.shoppingkill.serviceImpl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wsl.shoppingkill.common.log.MyLog;
 import com.wsl.shoppingkill.common.util.CommonUtil;
 import com.wsl.shoppingkill.component.request.AbstractCurrentRequestComponent;
+import com.wsl.shoppingkill.domain.Cart;
 import com.wsl.shoppingkill.domain.Order;
+import com.wsl.shoppingkill.mapper.CartMapper;
 import com.wsl.shoppingkill.mapper.OrderMapper;
 import com.wsl.shoppingkill.obj.bo.OrderMqBO;
 import com.wsl.shoppingkill.obj.bo.SmsObject;
-import com.wsl.shoppingkill.obj.constant.LoggerEnum;
-import com.wsl.shoppingkill.obj.constant.RabbitMqEnum;
-import com.wsl.shoppingkill.obj.constant.RedisEnum;
-import com.wsl.shoppingkill.obj.constant.SmsEnum;
+import com.wsl.shoppingkill.obj.constant.*;
 import com.wsl.shoppingkill.obj.exception.ExperienceException;
 import com.wsl.shoppingkill.obj.param.OrderParam;
+import com.wsl.shoppingkill.obj.vo.OrderDetailVO;
 import com.wsl.shoppingkill.obj.vo.OrderVO;
+import com.wsl.shoppingkill.obj.vo.UserOrderVO;
 import com.wsl.shoppingkill.service.OrderService;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -26,6 +29,8 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -36,6 +41,9 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 
     @Resource
     private OrderMapper orderMapper;
+
+    @Resource
+    private CartMapper cartMapper;
 
     @Resource
     private RabbitTemplate rabbitTemplate;
@@ -123,6 +131,57 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
                 RabbitMqEnum.Key.KEY_NOTICE_SMS,
                 smsObject);
         return false;
+    }
+
+    @Override
+    public Map<String, Integer> getOrderCount() {
+        Map<String,Integer> result = new HashMap<>(8);
+        Long id = abstractCurrentRequestComponent.getCurrentUser().getId();
+        Integer noPay = 0;
+        Integer noGet = 0;
+        Integer noComm = 0;
+        Integer cart = 0;
+        noPay = orderMapper.selectCount(new QueryWrapper<Order>().eq(Order.USER_ID, id).eq(Order.STATUS, BaseEnum.ORDER_TYPE_NOT_PAY));
+        noGet = orderMapper.selectCount(new QueryWrapper<Order>().eq(Order.USER_ID, id).eq(Order.STATUS, BaseEnum.ORDER_TYPE_OUT));
+        noComm = orderMapper.selectCount(new QueryWrapper<Order>().eq(Order.USER_ID, id).eq(Order.STATUS, BaseEnum.ORDER_TYPE_GET));
+        cart = cartMapper.selectCount(new QueryWrapper<Cart>().eq(Cart.USER_ID, id));
+
+        result.put("noPay",noPay);
+        result.put("noGet",noGet);
+        result.put("noComm",noComm);
+        result.put("cart",cart);
+        return result;
+    }
+
+    @Override
+    public IPage<UserOrderVO> getOrderInfo(Integer status, String name,Long current,Long size) {
+        if(StringUtils.isNotEmpty(name)){
+            status = null;
+        }
+        IPage<UserOrderVO> voiPage = orderMapper.selectUserOrderInfo(new Page<>(current,size),status, name);
+        voiPage.getRecords().forEach(li -> {
+            li.setTotalPrice(li.getPrice().multiply(new BigDecimal(li.getNum())).add(li.getLogisticsPrice()));
+            li.setImgUrl(li.getImgUrl()+"?x-oss-process=image/resize,m_fill,h_50,w_50");
+        });
+
+        return voiPage;
+
+    }
+
+    @Override
+    public OrderDetailVO getOrderDetailVO(Long id) {
+        OrderDetailVO detailVO = orderMapper.selectOrderDetail(id);
+        if (Objects.isNull(detailVO)){
+            return null;
+        }
+        detailVO.setTotalPrice(detailVO.getPrice().multiply(new BigDecimal(detailVO.getNum())).add(detailVO.getLogisticsPrice()));
+        detailVO.setImgUrl(detailVO.getImgUrl()+"?x-oss-process=image/resize,m_fill,h_100,w_100");
+        return detailVO;
+    }
+
+    @Override
+    public boolean ackGoods(Long orderId) {
+        return orderMapper.updateById(new Order().setId(orderId).setStatus(BaseEnum.ORDER_TYPE_GET))>0;
     }
 
     /***内部使用紧张外调****/

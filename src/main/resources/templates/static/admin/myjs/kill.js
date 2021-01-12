@@ -3,7 +3,7 @@ $.ajaxSetup({
 		"Authorization": $.cookie("token")
 	},
 	xhrFields: {
-		withCredentials: false
+		withCredentials: true
 	},
 	crossDomain: true
 });
@@ -35,14 +35,14 @@ $(function killActivity() {
 	$("#killAvtivity").bootstrapTable("destroy");
 	$("#killAvtivity").bootstrapTable({
 		method: "get",
-		url: "https://localhost/admin/getActivityAll/v1",
+		url: "https://test.wslhome.top/admin/getActivityAll/v1",
 		dataType: "json",
 		headers: {
 			"Authorization": $.cookie("token")
 		},
 		ajaxOptions: {
 			xhrFields: {
-				withCredentials: false
+				withCredentials: true
 			},
 			crossDomain: true
 		},
@@ -136,7 +136,7 @@ function delActivity(a) {
 	var b = confirm("确认删除嘛？");
 	if (b == true) {
 		$.ajax({
-			url: "https://localhost/admin/delActivity/v1",
+			url: "https://test.wslhome.top/admin/delActivity/v1",
 			data: {
 				id: arrTemp[a]
 			},
@@ -160,14 +160,14 @@ $("#goods").click(function() {
 	$("#goodsAvtivity").bootstrapTable("destroy");
 	$("#goodsAvtivity").bootstrapTable({
 		method: "get",
-		url: "https://localhost/admin/getActivityByGoods/v1",
+		url: "https://test.wslhome.top/admin/getActivityByGoods/v1",
 		dataType: "json",
 		headers: {
 			"Authorization": $.cookie("token")
 		},
 		ajaxOptions: {
 			xhrFields: {
-				withCredentials: false
+				withCredentials: true
 			},
 			crossDomain: true
 		},
@@ -228,7 +228,7 @@ $("#goods").click(function() {
 		}
 	}
 	function a(e, f, d) {
-		return '<a data-toggle="modal" class="btn btn-success" href="#modal-form" onclick="setValue(' + JSON.stringify(f).replace(/"/g, "&quot;") + ')">开启</a>'
+		return '<a data-toggle="modal" class="btn btn-success" href="#modal-form" onclick="setValues(' + JSON.stringify(f).replace(/"/g, "&quot;") + ')">开启</a>'
 	}
 });
 function setValue(b, a) {
@@ -253,12 +253,21 @@ function setValue(b, a) {
 		$("#details").append(c)
 	})
 }
+function setValues(b, a) {
+	b.id = null;
+	setValue(b, a);
+}
 $("#sub").click(function() {
 	$("#activity").ajaxSubmit(function(a) {
 		if (a.code == 0) {
-			alert("编辑成功");
-			$("#killAvtivity").bootstrapTable("refresh");
-			window.location.reload()
+			if (a.data==true){
+				alert("编辑成功");
+				$("#killAvtivity").bootstrapTable("refresh");
+				window.location.reload()
+			}else{
+				alert("存在相同时段，数据库更新失败");
+			}
+
 		} else {
 			alert(a.userMsg)
 		}

@@ -1,7 +1,6 @@
 ## 商品秒杀系统
 ### 项目地址：
 #### 后台管理：https://admin.wslhome.top
-PS：可自己访问申请临时账号
 #### 商城页：开发中
 
 **项目还在继续完善中，该项目是今年毕设项目，后台管理基本完成，商城页面还在开发中。** 
@@ -24,9 +23,6 @@ CSDN: https://blog.csdn.net/qq_40432886
 添加一键部署，mybatis-plus逆向生成 其中融入短信通知（榛子云）、邮件通知（boot-starter-mail）、短信验证（kaptcha）、一二级缓存（JetCache）、跨域登录（jjwt）、数据库连接（druid），zi
 还包括自定义注解、切面编程等相关东西
 
-项目截图：
-
-
 ### 一、项目概况
 采用SpringBoot+中间件实现在高并发业务场景下商品的的限时抢购秒杀系统，本题目基于线上电商平台，以高可靠、高负载、高并发来实现商品的限时抢购系统。
 
@@ -37,59 +33,59 @@ CSDN: https://blog.csdn.net/qq_40432886
 ├── Dockerfile    docker部署
 ├── README.md     说明文件
 ├── doc    一些文档
-│   ├── ER 
-│   ├── api  接口文档
-│   │   └── admin
-│   ├── refer   乱七八糟的东西
+│   ├── ER 
+│   ├── api  接口文档
+│   │   └── admin
+│   ├── refer   乱七八糟的东西
 ├── sql    sql文件
 └── src
     ├── main
-    │   ├── java
-    │   │   └── com
-    │   │       └── wsl
-    │   │           └── shoppingkill
-    │   │               ├── common           一些工具和公共的东西
-    │   │               │   ├── exception        
-    │   │               │   ├── fastjson
-    │   │               │   ├── log
-    │   │               │   ├── test
-    │   │               │   └── util
-    │   │               ├── component         一些定义的组件
-    │   │               │   ├── email
-    │   │               │   ├── jwt
-    │   │               │   ├── oss
-    │   │               │   ├── request
-    │   │               │   ├── sms
-    │   │               │   └── snowflake
-    │   │               ├── config           配置文件
-    │   │               │   └── request
-    │   │               ├── controller       api
-    │   │               │   ├── admin       后端接口
-    │   │               │   └── common      公共接口
-    │   │               ├── domain          实体
-    │   │               ├── mapper          mapper接口
-    │   │               ├── obj             中间对象
-    │   │               │   ├── bo
-    │   │               │   ├── constant
-    │   │               │   ├── convert
-    │   │               │   ├── exception
-    │   │               │   ├── param
-    │   │               │   └── vo
-    │   │               ├── service         服务层接口
-    │   │               └── serviceImpl     实现
-    │   │                   ├── aspect
-    │   │                   ├── subscription
-    │   │                   └── timedTask
-    │   └── resources                       一些资源文件
-    │       ├── config     
-    │       ├── ftl                         邮件模版
-    │       ├── mapper
-    │       └── templates                   前端文件
-    │           ├── admin
-    │           ├── static
-    │           │   ├── admin
-    │           │   └── user
-    │           └── user
+    │   ├── java
+    │   │   └── com
+    │   │       └── wsl
+    │   │           └── shoppingkill
+    │   │               ├── common           一些工具和公共的东西
+    │   │               │   ├── exception        
+    │   │               │   ├── fastjson
+    │   │               │   ├── log
+    │   │               │   ├── test
+    │   │               │   └── util
+    │   │               ├── component         一些定义的组件
+    │   │               │   ├── email
+    │   │               │   ├── jwt
+    │   │               │   ├── oss
+    │   │               │   ├── request
+    │   │               │   ├── sms
+    │   │               │   └── snowflake
+    │   │               ├── config           配置文件
+    │   │               │   └── request
+    │   │               ├── controller       api
+    │   │               │   ├── admin       后端接口
+    │   │               │   └── common      公共接口
+    │   │               ├── domain          实体
+    │   │               ├── mapper          mapper接口
+    │   │               ├── obj             中间对象
+    │   │               │   ├── bo
+    │   │               │   ├── constant
+    │   │               │   ├── convert
+    │   │               │   ├── exception
+    │   │               │   ├── param
+    │   │               │   └── vo
+    │   │               ├── service         服务层接口
+    │   │               └── serviceImpl     实现
+    │   │                   ├── aspect
+    │   │                   ├── subscription
+    │   │                   └── timedTask
+    │   └── resources                       一些资源文件
+    │       ├── config     
+    │       ├── ftl                         邮件模版
+    │       ├── mapper
+    │       └── templates                   前端文件
+    │           ├── admin
+    │           ├── static
+    │           │   ├── admin
+    │           │   └── user
+    │           └── user
     └── test                                  测试文件
         └── java
             └── com

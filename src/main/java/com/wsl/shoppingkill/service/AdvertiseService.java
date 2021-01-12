@@ -25,8 +25,9 @@ public interface AdvertiseService extends IService<Advertise> {
      * @return List<AdvertiseVO>
      * @author wangshilei
      * @date 2020/11/9 18:29
+     * @param temp :
      **/
-    List<AdvertiseVO> getAdvertiseUrl();
+    List<AdvertiseVO> getAdvertiseUrl(Integer temp);
 
     /**
      * 获取正在展示的广告

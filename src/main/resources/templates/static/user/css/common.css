@@ -2,7 +2,7 @@
 /* CSS Document */
 /*相关样式*/
 #showbox { background:#eee;}
-#showbox span { background:url(../images/whitebg.png) repeat;}
+
 #showsum { left:25px; margin-top:10px;}
 #showsum span { border:1px solid #ddd;}
 #showsum span.sel { border:1px solid #f60;}

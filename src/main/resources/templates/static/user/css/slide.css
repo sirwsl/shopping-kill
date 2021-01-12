@@ -20,7 +20,8 @@
 	display: inline-block;
     width: 10px;
     height: 10px;
-    background-image: url(../images/slide.png);
+    background-color: plum;
+	border-radius: 50px;
     background-position:-12px 0px;
     margin-left: 10px;
     cursor:pointer;
@@ -37,13 +38,15 @@
 }
 .slide .carousel-control.left{
 	left:0;
-	background-image:url("../images/slide.png");
+	background-color: plum;
+	border-radius: 50px;
 	background-position:-38px 0px;
 	cursor:pointer;
 }
 .slide .carousel-control.right{
 	right:0;
-	background-image:url("../images/slide.png");
+	background-color: plum;
+	border-radius: 50px;
 	background-position:-85px 0px;
 	cursor:pointer;
 }

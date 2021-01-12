@@ -46,4 +46,12 @@
                 select sku_id from t_activity where t_activity.id = #{id}
         )
     </select>
+
+    <update id="count">
+        update t_sku set num=num+1 where id=#{id}
+    </update>
+
+    <update id="reduce">
+        update t_sku set num=num-1 where id=#{id}
+    </update>
 </mapper>

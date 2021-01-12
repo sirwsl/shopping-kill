@@ -58,6 +58,7 @@ public class LoginServiceImpl implements LoginService {
         if (Objects.isNull(userBO)){
             return false;
         }
+        userBO.setFlag(10);
         String token = jwtComponent.getToken(userBO);
         setRes(response,token,userBO);
         redisTemplate.opsForValue().set(RedisEnum.VERIFY_TOKEN+token,userBO,redisToken, TimeUnit.SECONDS);
@@ -65,38 +66,40 @@ public class LoginServiceImpl implements LoginService {
     }
 
     @Override
-    @MyLog(detail = "管理员登录",grade = LoggerEnum.INFO)
+    @MyLog(detail = "退出登录",grade = LoggerEnum.INFO)
     public boolean exit(HttpServletResponse response, HttpServletRequest request) {
-
+        Cookie name = new Cookie("name", null);
+        name.setPath("/");
+        name.setDomain(doMainUrl);
+        name.setMaxAge(0);
+        response.addCookie(name);
+        Cookie img = new Cookie("img", null);
+        img.setPath("/");
+        img.setDomain(doMainUrl);
+        img.setMaxAge(0);
+        response.addCookie(img);
+        Cookie token1 = new Cookie("token",null);
+        token1.setPath("/");
+        token1.setMaxAge(0);
+        token1.setDomain(doMainUrl);
+        response.addCookie(token1);
         String header = request.getHeader(JwtEnum.AUTH_HEADER_KEY);
+        response.setHeader(JwtEnum.AUTH_HEADER_KEY,"");
+
         if (StringUtils.isEmpty(header)) {
-            for (Cookie cookie : request.getCookies()) {
-                if (JwtEnum.TOKEN.equals(cookie.getName())){
-                    header = cookie.getValue();
+            if (request.getCookies()!=null&&request.getCookies().length > 0){
+                for (Cookie cookie : request.getCookies()) {
+                    if (JwtEnum.TOKEN.equals(cookie.getName())){
+                        header = cookie.getValue();
+                        String token = header.substring(JwtEnum.TOKEN_PREFIX.length());
+                        redisTemplate.delete(RedisEnum.VERIFY_TOKEN+token);
+
+                    }
                 }
             }
         }
-        //解析请求头（防止伪造token，token内容以"shoppingkill "作为开头
-        if (StringUtils.isNotEmpty(header) && header.startsWith(JwtEnum.TOKEN_PREFIX)) {
-            String token = header.substring(JwtEnum.TOKEN_PREFIX.length());
-            response.setHeader(JwtEnum.AUTH_HEADER_KEY,null);
-            Cookie name = new Cookie("name", null);
-            name.setPath("/");
-            name.setDomain(doMainUrl);
-            response.addCookie(name);
-            Cookie img = new Cookie("img", null);
-            img.setPath("/");
-            img.setDomain(doMainUrl);
-            response.addCookie(img);
-            Cookie token1 = new Cookie("token",null);
-            token1.setMaxAge(redisToken.intValue());
-            token1.setPath("/");
-            token1.setDomain(doMainUrl);
-            response.addCookie(token1);
-            redisTemplate.delete(RedisEnum.VERIFY_TOKEN+token);
-            return true;
-        }
-        return false;
+        return true;
+
     }
 
     @Override
@@ -117,14 +120,18 @@ public class LoginServiceImpl implements LoginService {
         Cookie name = new Cookie("name", URLEncoder.encode(userBO.getName(), "UTF-8"));
         name.setPath("/");
         name.setDomain(doMainUrl);
+        name.setMaxAge(3600);
         response.addCookie(name);
-        Cookie img = new Cookie("img", userBO.getUrl());
+        String headImg = URLEncoder.encode( userBO.getUrl()+"?x-oss-process=image/resize,m_fill,h_100,w_100/rounded-corners,r_50","utf-8");
+        Cookie img = new Cookie("img", headImg);
         img.setPath("/");
         img.setDomain(doMainUrl);
+        img.setMaxAge(3600);
         response.addCookie(img);
         Cookie token1 = new Cookie("token", JwtEnum.TOKEN_PREFIX + token);
         token1.setMaxAge(redisToken.intValue());
         token1.setPath("/");
+        token1.setMaxAge(3600);
         token1.setDomain(doMainUrl);
         response.addCookie(token1);
     }

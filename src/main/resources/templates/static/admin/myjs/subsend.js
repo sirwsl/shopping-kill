@@ -3,7 +3,7 @@ $.ajaxSetup({
 		"Authorization": $.cookie("token")
 	},
 	xhrFields: {
-		withCredentials: false
+		withCredentials: true
 	},
 	crossDomain: true
 });

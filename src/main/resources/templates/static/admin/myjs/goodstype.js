@@ -3,7 +3,7 @@ $.ajaxSetup({
 		"Authorization": $.cookie("token")
 	},
 	xhrFields: {
-		withCredentials: false
+		withCredentials: true
 	},
 	crossDomain: true
 });
@@ -13,10 +13,10 @@ $(function() {
 	}
 });
 $(function() {
-	goodsType("https://localhost/admin/getTypesAll/v1", null, null)
+	goodsType("https://test.wslhome.top/admin/getTypesAll/v1", null, null)
 });
 function serches() {
-	var b = "https://localhost/admin/getTypesByNameAndId/v1";
+	var b = "https://test.wslhome.top/admin/getTypesByNameAndId/v1";
 	var c = $("#searchId").val();
 	var a = $("#searchName").val();
 	goodsType(b, c, a)
@@ -32,7 +32,7 @@ function goodsType(b, e, a) {
 		},
 		ajaxOptions: {
 			xhrFields: {
-				withCredentials: false
+				withCredentials: true
 			},
 			crossDomain: true
 		},
@@ -87,7 +87,7 @@ function goodsType(b, e, a) {
 		onEditableSave: function(h, i, f, g) {
 			$.ajax({
 				type: "put",
-				url: "https://localhost/admin/updateTypes/v1",
+				url: "https://test.wslhome.top/admin/updateTypes/v1",
 				data: i,
 				dataType: "JSON",
 				success: function(j) {
@@ -127,7 +127,7 @@ function deltype(b) {
 	if (a == true) {
 		$.ajax({
 			type: "DELETE",
-			url: "https://localhost/admin/delTypes/v1",
+			url: "https://test.wslhome.top/admin/delTypes/v1",
 			data: {
 				id: b
 			},

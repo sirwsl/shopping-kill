@@ -23,4 +23,20 @@ public class RedisEnum {
 
     public static final String EXPERIENCE_FLAG = "experience:flag:";
 
+    public static final String SEARCH_GOODS = "search:goods:";
+
+    public static final String GOODS_VIEW = "goods:view:";
+
+    public static final String GOODS_DOING = "goods:doing:";
+
+    public static final String GOODS_FUTURE = "goods:future:";
+
+    public static final String GOODS_KILL = "goods:kill:";
+
+    public static final String GOODS_KILL_TIME = "goods:killtime:";
+
+    public static final String GOODS_SKU_NUM = "goods:sku:num:";
+
+    public static final String LIMIT_LIST = "user:limit:";
+    public static final String USER_KILL_NUM = "user:kill:num:";
 }

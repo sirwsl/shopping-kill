@@ -12,6 +12,8 @@ import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -40,7 +42,8 @@ public class Appraisal extends Model<Appraisal> implements Serializable {
     /**
     * 物品id
     */
-    private String goodsId;
+    @NotBlank(message = "物品id不能为空")
+    private String orderId;
 
     /**
      * 用户id
@@ -50,6 +53,7 @@ public class Appraisal extends Model<Appraisal> implements Serializable {
     /**
     * 评价内容
     */
+    @NotBlank(message = "评价内容不能为空")
     private String detail;
 
     /**
@@ -60,6 +64,7 @@ public class Appraisal extends Model<Appraisal> implements Serializable {
     /**
     * 评价星级（1-5）
     */
+    @NotNull(message = "您还没有进行星级评价")
     private Integer grade;
 
     /**
@@ -91,7 +96,7 @@ public class Appraisal extends Model<Appraisal> implements Serializable {
 
     public static final String ID = "id";
 
-    public static final String GOODS_ID = "goods_id";
+    public static final String GOODS_ID = "order_id";
 
     public static final String USER_ID = "user_id";
 

@@ -92,8 +92,8 @@ public class Generator {
         DataSourceConfig dsc = new DataSourceConfig();
         dsc.setDriverName("com.mysql.jdbc.Driver");
         dsc.setUsername("root");
-        dsc.setPassword("18888888888");
-        dsc.setUrl("jdbc:mysql://localhost:3306/shoppingkill?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false&rewriteBatchedStatements=true");
+        dsc.setPassword("18314263373");
+        dsc.setUrl("jdbc:mysql://121.196.187.160:3306/shoppingkill?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false&rewriteBatchedStatements=true");
         return dsc;
     }
 

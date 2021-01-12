@@ -19,7 +19,7 @@ class JwtTokenComponentTest {
     @Test
     void generatorToken() {
         UserBO user = new UserBO();
-        user.setName("sirwsl").setId(12025L).setUrl("https:localhost/user/test.jpg").setFlag(0);
+        user.setName("王世磊").setId(12025L).setUrl("https:static.wslhome.top/user/test.jpg").setFlag(0);
         String s = jwtComponent.getToken(user);
         System.err.println(s);
     }

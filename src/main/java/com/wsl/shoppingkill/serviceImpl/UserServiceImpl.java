@@ -7,21 +7,29 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wsl.shoppingkill.common.log.MyLog;
 import com.wsl.shoppingkill.common.util.CommonUtil;
+import com.wsl.shoppingkill.component.oss.OssComponent;
 import com.wsl.shoppingkill.component.request.AbstractCurrentRequestComponent;
 import com.wsl.shoppingkill.domain.User;
 import com.wsl.shoppingkill.mapper.UserMapper;
 import com.wsl.shoppingkill.obj.bo.MailObject;
 import com.wsl.shoppingkill.obj.bo.SmsObject;
-import com.wsl.shoppingkill.obj.constant.LoggerEnum;
-import com.wsl.shoppingkill.obj.constant.RabbitMqEnum;
-import com.wsl.shoppingkill.obj.constant.SmsEnum;
+import com.wsl.shoppingkill.obj.constant.*;
 import com.wsl.shoppingkill.obj.exception.ExperienceException;
+import com.wsl.shoppingkill.service.LoginService;
 import com.wsl.shoppingkill.service.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -37,23 +45,32 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     private UserMapper userMapper;
 
     @Resource
+    private LoginService loginService;
+
+    @Resource
     private RabbitTemplate rabbitTemplate;
 
     @Resource
     private AbstractCurrentRequestComponent abstractCurrentRequestComponent;
 
+    @Resource
+    private OssComponent ossComponent;
+
+    @Value("${req.doMainUrl}")
+    private String doMainUrl;
+
     @Override
     public IPage<User> getUserAll(Integer size, Integer current) {
-        final IPage<User> userIPage = userMapper.selectPage(new Page<>(current, size), new QueryWrapper<>());
-        if (CollectionUtils.isNotEmpty(userIPage.getRecords())){
-            userIPage.getRecords().forEach(li -> li.setPassword(CommonUtil.replaceUserName(li.getPassword()))
+        final IPage<User> iPage = userMapper.selectPage(new Page<>(current, size), new QueryWrapper<>());
+        if (CollectionUtils.isNotEmpty(iPage.getRecords())){
+            iPage.getRecords().forEach(li -> li.setPassword(CommonUtil.replaceUserName(li.getPassword()))
                     .setEmail(CommonUtil.replaceUserName(li.getEmail()))
                     .setIdCard(CommonUtil.replaceUserName(li.getIdCard()))
                     .setPhone(CommonUtil.replaceUserName(li.getPhone()))
                     .setRealName(CommonUtil.replaceUserName(li.getRealName()))
                     .setWeChat(CommonUtil.replaceUserName(li.getWeChat())));
         }
-        return userIPage;
+        return iPage;
     }
 
     @Override
@@ -103,6 +120,73 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         }
 
         return true;
+    }
+
+    @Override
+    public User getUserInfo() {
+        Long id = abstractCurrentRequestComponent.getCurrentUser().getId();
+        if (id ==null){
+            return null;
+        }
+        User user = userMapper.selectById(id);
+        user.setImg(user.getImg()+"?x-oss-process=image/resize,m_fill,h_100,w_100/rounded-corners,r_50");
+        return user;
+    }
+
+    @Override
+    public boolean updateUserInfoBySelf(User user) {
+        return userMapper.updateById(user)>0;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public boolean updateUserImg(MultipartFile file, HttpServletResponse response) {
+        Long id = abstractCurrentRequestComponent.getCurrentUser().getId();
+        try {
+            String s = ossComponent.uploadFile(BaseEnum.OSS_USER, file);
+            if (userMapper.updateById(new User().setId(id).setImg(s).setUpdateTime(LocalDateTime.now()))>0){
+                Cookie img = new Cookie("img", s+"?x-oss-process=image/resize,m_fill,h_100,w_100/rounded-corners,r_50");
+                img.setPath("/");
+                img.setDomain(doMainUrl);
+                img.setMaxAge(3600);
+                response.addCookie(img);
+                return true;
+            }
+        }catch (Exception e){
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+        }
+        return false;
+    }
+
+    @Override
+    @MyLog(detail = "会员注册",grade = LoggerEnum.NONE)
+    public boolean addUser(User user) {
+        return user.insert();
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public boolean updatePassword(String old, String newPassword, HttpServletResponse response, HttpServletRequest request) {
+        Long id = abstractCurrentRequestComponent.getCurrentUser().getId();
+        User user = userMapper.selectById(id);
+        if (Objects.nonNull(user)){
+            if (old.equals(user.getPassword())) {
+               try {
+                   boolean updateById = user.setPassword(newPassword).updateById();
+                   if (updateById){
+                       if (loginService.exit(response,request)){
+                           return true;
+                       }else{
+                           throw new Exception();
+                       }
+
+                   }
+               }catch (Exception e){
+                   TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+               }
+            }
+        }
+        return false;
     }
 
 

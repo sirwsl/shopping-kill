@@ -3,7 +3,7 @@ $.ajaxSetup({
 		"Authorization": $.cookie("token")
 	},
 	xhrFields: {
-		withCredentials: false
+		withCredentials: true
 	},
 	crossDomain: true
 });
@@ -26,9 +26,9 @@ function loadFile(a) {
 	$("#imgUrls").html(a.name)
 }
 $("#sub").click(function() {
-	var a = "https://localhost/admin/addAdvertise/v1";
+	var a = "https://test.wslhome.top/admin/addAdvertise/v1";
 	if (flag) {
-		a = "https://localhost/admin/updateAdvertise/v1";
+		a = "https://test.wslhome.top/admin/updateAdvertise/v1";
 		flag = false
 	}
 	if ($("#targetUrl").val() == null) {
@@ -56,16 +56,16 @@ $("#sub").click(function() {
 function col(b) {
 	var a;
 	if (b == 0) {
-		a = "https://localhost/admin/getAdvertiseAll/v1"
+		a = "https://test.wslhome.top/admin/getAdvertiseAll/v1"
 	} else {
 		if (b == 1) {
-			a = "https://localhost/admin/getAdvertiseBegin/v1"
+			a = "https://test.wslhome.top/admin/getAdvertiseBegin/v1"
 		} else {
 			if (b == 2) {
-				a = "https://localhost/admin/getAdvertiseDoing/v1"
+				a = "https://test.wslhome.top/admin/getAdvertiseDoing/v1"
 			} else {
 				if (b == 3) {
-					a = "https://localhost/admin/getAdvertiseOver/v1"
+					a = "https://test.wslhome.top/admin/getAdvertiseOver/v1"
 				}
 			}
 		}
@@ -73,7 +73,7 @@ function col(b) {
 	dev(a)
 }
 $(function() {
-	var a = "https://localhost/admin/getAdvertiseAll/v1";
+	var a = "https://test.wslhome.top/admin/getAdvertiseAll/v1";
 	dev(a)
 });
 function dev(a) {
@@ -87,7 +87,7 @@ function dev(a) {
 		},
 		ajaxOptions: {
 			xhrFields: {
-				withCredentials: false
+				withCredentials: true
 			},
 			crossDomain: true
 		},
@@ -176,7 +176,7 @@ function del(a) {
 	if (b == true) {
 		$.ajax({
 			type: "delete",
-			url: "https://localhost/admin/delAdvertise/v1",
+			url: "https://test.wslhome.top/admin/delAdvertise/v1",
 			data: {
 				"id": a
 			},

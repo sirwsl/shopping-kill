@@ -7,7 +7,7 @@ $("#subs").click(function() {
 	alert("请联系管理员sirwsl")
 });
 function refresh(a) {
-	a.src = "https://localhost/verify/getJpg/v1?id=" + Math.random()
+	a.src = "https://test.wslhome.top/verify/getJpg/v1?id=" + Math.random()
 }
 $("#sub").click(function() {
 	$("#login").ajaxSubmit(function(a) {
@@ -15,7 +15,7 @@ $("#sub").click(function() {
 			window.location.href = "/admin/index.html"
 		} else {
 			alert(a.userMsg);
-			$("img").attr("src", "https://localhost/verify/getJpg/v1?id=" + Math.random())
+			$("img").attr("src", "https://test.wslhome.top/verify/getJpg/v1?id=" + Math.random())
 		}
 	})
 });

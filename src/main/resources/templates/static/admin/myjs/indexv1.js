@@ -3,7 +3,7 @@ $.ajaxSetup({
 		"Authorization": $.cookie("token")
 	},
 	xhrFields: {
-		withCredentials: false
+		withCredentials: true
 	},
 	crossDomain: true
 });
@@ -14,7 +14,7 @@ $(function() {
 });
 $.ajax({
 	type: "GET",
-	url: "https://localhost/admin/getLoggersAll/v1",
+	url: "https://test.wslhome.top/admin/getLoggersAll/v1",
 	dataType: "json",
 	success: function(a) {
 		if (a.code == 0 && a.data != null) {
@@ -30,7 +30,7 @@ $.ajax({
 });
 $.ajax({
 	type: "GET",
-	url: "https://localhost/admin/getTotalToday/v1",
+	url: "https://test.wslhome.top/admin/getTotalToday/v1",
 	dataType: "json",
 	success: function(a) {
 		if (a.code == 0 && a.data != null) {

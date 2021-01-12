@@ -3,7 +3,7 @@ $.ajaxSetup({
 		"Authorization": $.cookie("token")
 	},
 	xhrFields: {
-		withCredentials: false
+		withCredentials: true
 	},
 	crossDomain: true
 });
@@ -26,14 +26,14 @@ function order(e, h, g, b, a, c) {
 	$("#order").bootstrapTable("destroy");
 	$("#order").bootstrapTable({
 		method: "get",
-		url: "https://localhost/admin/getOrderAllById/v1",
+		url: "https://test.wslhome.top/admin/getOrderAllById/v1",
 		dataType: "json",
 		headers: {
 			"Authorization": $.cookie("token")
 		},
 		ajaxOptions: {
 			xhrFields: {
-				withCredentials: false
+				withCredentials: true
 			},
 			crossDomain: true
 		},
@@ -167,15 +167,15 @@ $("#sub").click(function() {
 	})
 });
 function onpay(b) {
-	var a = "https://localhost/admin/remind2Pay/v1";
+	var a = "https://test.wslhome.top/admin/remind2Pay/v1";
 	total(a, b)
 }
 function onout(b) {
-	var a = "https://localhost/admin/outGoods/v1";
+	var a = "https://test.wslhome.top/admin/outGoods/v1";
 	total(a, b)
 }
 function oncomm(b) {
-	var a = "https://localhost/admin/reminderEvaluation/v1";
+	var a = "https://test.wslhome.top/admin/reminderEvaluation/v1";
 	total(a, b)
 }
 function total(a, b) {

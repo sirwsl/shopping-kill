@@ -1,8 +1,10 @@
 <!doctype html>
-<html>
+<html style="height: 500px;">
 
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=0.1,user-scalable=yes">
+		<meta http-equiv ="Content-Security-Policy" content="upgrade-insecure-requests">
 		<title>秒杀</title>
 		<link rel="stylesheet" type="text/css" href="../static/user/css/base.css" />
 		<link rel="stylesheet" type="text/css" href="../static/user/css/style.css" />
@@ -10,183 +12,26 @@
 		<link rel="stylesheet" href="../static/user/css/slide.css" />
 	</head>
 
-	<body>
+	<body style="height: 500px;">
 		<div class="seckill"></div>
 		<div class="w1200_container">
 			<div class="sec_kill_goods">
-				<div class="skill_tab">
-					<ul class="skill_tab_time">
-						<li class="curr">
-							<strong>8:00</strong>
-							<!--<div class="time" ectype="time" data-time="2018-01-04 10:00:00">
-								<span>距结束</span>
-								<span class="hours">00</span>
-								<em>:</em>
-								<span class="minutes">00</span>
-								<em>:</em>
-								<span class="seconds">00</span>
-							</div>-->
-							<i>即将开始</i>
-						</li>
-						<li>
-							<strong>10:00</strong>
-							<!--<div class="time hide" ectype="time" data-time="2018-01-04 10:00:00">
-								<span>距结束</span>
-								<span class="hours">00</span>
-								<em>:</em>
-								<span class="minutes">00</span>
-								<em>:</em>
-								<span class="seconds">00</span>
-							</div>-->
-							<i>即将开始</i>
-						</li>
-						<li>
-							<strong>12:00</strong>
-							<!--<div class="time hide" ectype="time" data-time="2018-01-04 10:00:00">
-								<span>距结束</span>
-								<span class="hours">00</span>
-								<em>:</em>
-								<span class="minutes">00</span>
-								<em>:</em>
-								<span class="seconds">00</span>
-							</div>-->
-							<i>即将开始</i>
-						</li>
-						<li>
-							<strong>14:00</strong>
-							<!--<div class="time hide" ectype="time" data-time="2018-01-04 10:00:00">
-								<span>距结束</span>
-								<span class="hours">00</span>
-								<em>:</em>
-								<span class="minutes">00</span>
-								<em>:</em>
-								<span class="seconds">00</span>
-							</div>-->
-							<i>即将开始</i>
-						</li>
-						<li>
-							<strong>16:00</strong>
-							<!--<div class="time hide" ectype="time" data-time="2018-01-04 10:00:00">
-								<span>距结束</span>
-								<span class="hours">00</span>
-								<em>:</em>
-								<span class="minutes">00</span>
-								<em>:</em>
-								<span class="seconds">00</span>
-							</div>-->
-							<i>即将开始</i>
-						</li>
-					</ul>
-				</div>
-				<div class="clear"></div>
 				<div class="tab_content">
 					<div class="skill_warp sel hide">
-						<ul class="skill_goods_list">
-							<li class="mod_shodow">
-								<div class="p_img">
-									<a href="goodsInfo.html" target="_blank">
-										<img src="../static/user/images/se_kill_img.jpg" />
-									</a>
-								</div>
-								<div class="p_name">
-									<a href="goodsInfo.html" title="HLA/海澜之家撞色长袖T恤春季热卖圆领修身拼接T恤男 简约圆领 微弹修身 撞色拼接 触感柔软" target="_blank">
-										HLA/海澜之家撞色长袖T恤春季热卖圆领修身拼接T恤男 简约圆领 微弹修身 撞色拼接 触感柔软
-									</a>
-								</div>
-								<div class="p_lie clear">
-									<div class="p_price">
-										<em>￥</em>888
-									</div>
-									<div class="p_del">
-										<del>
-										<em>￥</em>1111
-									</del>
-									</div>
-								</div>
-								<a class="sc_kill_btn btn" href="#" target="_blank">立即购买</a>
-							</li>
-							
+						<ul class="skill_goods_list" id = "getBefore">
 						</ul>
 					</div>
-					<div class="skill_warp hide">
-						<ul class="skill_goods_list">
-							<li class="mod_shodow">
-								<div class="p_img">
-									<a href="goodsInfo.html" target="_blank">
-										<img src="../static/user/images/se_kill_img1.jpg" />
-									</a>
-								</div>
-								<div class="p_name">
-									<a href="goodsInfo.html" title="HLA/海澜之家撞色长袖T恤春季热卖圆领修身拼接T恤男 简约圆领 微弹修身 撞色拼接 触感柔软" target="_blank">
-										HLA/海澜之家撞色长袖T恤春季热卖圆领修身拼接T恤男 简约圆领 微弹修身 撞色拼接 触感柔软
-									</a>
-								</div>
-								<div class="p_lie clear">
-									<div class="p_price">
-										<em>￥</em>888
-									</div>
-									<div class="p_del">
-										<del>
-										<em>￥</em>1111
-									</del>
-									</div>
-								</div>
-								<a class="sc_kill_btn btn" href="#" target="_blank">立即购买</a>
-							</li>
-							
-							
-						</ul>
-					</div>
-					
-					
 				</div>
 
 			</div>
-			<div class="more_goods">
-				<img src="../static/user/images/more_goods.png" />
-			</div>
-			<div class="sec_kill_goods">
-				<!--<div class="skill_tab">
-					<ul class="skill_tab_time">
-						<li class="curr"></li>
-					</ul>
-				</div>-->
-				<div class="skill_warp">
-					<ul class="skill_goods_list">
-						<li class="mod_shodow">
-							<div class="p_img">
-								<a href="#" target="_blank">
-									<img src="../static/user/images/se_kill_img.jpg" />
-								</a>
-							</div>
-							<div class="p_name">
-								<a href="#" title="HLA/海澜之家撞色长袖T恤春季热卖圆领修身拼接T恤男 简约圆领 微弹修身 撞色拼接 触感柔软" target="_blank">
-									HLA/海澜之家撞色长袖T恤春季热卖圆领修身拼接T恤男 简约圆领 微弹修身 撞色拼接 触感柔软
-								</a>
-							</div>
-							<div class="p_lie clear">
-								<div class="p_price">
-									<em>￥</em>888
-								</div>
-								<div class="p_del">
-									<del>
-										<em>￥</em>1111
-									</del>
-								</div>
-							</div>
-							<a class="sc_kill_btn btn" href="#" target="_blank">立即购买</a>
-						</li>
-						
-					</ul>
-				</div>
-			</div>
+			
 		</div>
 		<div class="clear"></div>
 		
 		<!--右侧红包栏-->
 			<div class="bk_foot_redbag">
 				<a href="javascript:void(0)" id="red_bag">
-					<img src="../static/user/images/red_package.png" width="100%" alt="">
+					<img src="../static/user/imgs/red_package.png" width="100%" alt="">
 				</a>
 				<span class="closehd"></span>
 			</div>
@@ -200,63 +45,7 @@
 		<script type="text/javascript" src="../static/user/js/kuCity.js"></script>
 		<script type="text/javascript" src="../static/user/js/jquery.SuperSlide.js"></script>
 		<script type="text/javascript" src="../static/user/js/slide.js"></script>
-		<script>
-			$('.li_dorpdown').hover(function() {
-				$('.dorpdown-layer').show();
-			});
-			$('.li_dorpdown').mouseleave(function() {
-				$('.dorpdown-layer').hide();
-			});
-			$('.icon-close').click(function() {
-				$('.top_banner').hide();
-			});
-			$('.my_center_box_left a').hover(function() {
-					
-			});
-			$('.cate-layer-right-slide img').mouseenter(function() {
-					
-				$(this).delay('300').animate(300);
-			});
-			$('.cate-layer-right-slide img').mouseleave(function() {
-				$(this).css('border', 'none')
-			});
-			$()
-			
-			$(function() {
-			
-				$("div.ranklist").myScroll({
-					speed: 50,
-					rowHeight: 50
-				});
-			
-			});
-			$(".closehd").click(function() { //右下角红包图标点击变小
-				$(this).hide();
-				$('.bk_foot_redbag a').animate({
-					width: '80px',
-					height: '100px'
-				});
-			});
-			$('#red_bag').click(function(){
-				$(this).hide();
-				$('.closehd').hide();
-				$('.font').show();
-				$('.font').css('display','inline-block')
-				$('.red_bag').animate({
-					width:'400px',
-					height:'300px'
-				});
-			});
-			$('#ensure').click(function(){
-				$('.red_bag').fadeOut();
-			});
-		</script>
-		<script>
-			$('.search').kuCity();
-			$("#lun2").slide({
-				autoplay: true,
-				autoTime: 5000,
-			});
-		</script>
+		<script type="application/javascript" src="../static/user/js/jquery.cookie.js"></script>
+		<script type="application/javascript" charset="UTF-8" src = "../static/user/myjs/kill_befor.js"></script>
 
 </html>

@@ -32,6 +32,7 @@ public class BaseEnum {
     public static final String OSS_SKU = "sku/";
     public static final String OSS_GOODS = "goods/";
     public static final String OSS_OTHER = "other/";
+    public static final String OSS_USER = "user/";
 
     /**
      * 3-退款退货
@@ -51,7 +52,7 @@ public class BaseEnum {
 
 
     /**
-     * 订单状态(1-已下单未支付 2-已支付 3-已出库 4-已收货 5-已评价)
+     * 订单状态(0-已取消 1-已下单未支付 2-已支付 3-已出库 4-已收货 5-已评价)
      */
     public static final Integer ORDER_TYPE_CANCEL = 0;
     public static final Integer ORDER_TYPE_NOT_PAY =1;

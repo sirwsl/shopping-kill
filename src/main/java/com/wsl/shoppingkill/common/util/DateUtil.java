@@ -155,6 +155,17 @@ public class DateUtil {
     }
 
     /**
+     * 时间相差秒数.
+     *
+     * @param start ： 开始时间
+     * @param end ：结束时间
+     * @return long
+     */
+    public static long distanceSecond(LocalDateTime start, LocalDateTime end) {
+        return Duration.between(start, end).toMillis()/1000;
+    }
+
+    /**
      * 获取String类型时间
      * @return String ：yyyy-MM-dd HH:mm:ss
      */

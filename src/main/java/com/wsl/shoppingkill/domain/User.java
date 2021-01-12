@@ -95,11 +95,15 @@ public class User extends Model<User> implements Serializable {
     /**
     * 身份证号
     */
+    @NotNull(message = "身份证号不能为空")
+    @NotBlank(message = "身份证号不能为空")
     private String idCard;
 
     /**
     * 真实姓名
     */
+    @NotNull(message = "真实姓名不能为空")
+    @NotBlank(message = "真实姓名不能为空")
     private String realName;
 
     /**

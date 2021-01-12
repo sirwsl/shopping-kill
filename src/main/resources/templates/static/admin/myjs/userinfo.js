@@ -3,7 +3,7 @@ $.ajaxSetup({
 		"Authorization": $.cookie("token")
 	},
 	xhrFields: {
-		withCredentials: false
+		withCredentials: true
 	},
 	crossDomain: true
 });
@@ -13,7 +13,7 @@ $(function() {
 	}
 });
 $(function() {
-	$.get("https://localhost/admin/getAdmin/v1",
+	$.get("https://test.wslhome.top/admin/getAdmin/v1",
 	function(a) {
 		$("#id").val(a.data.id);
 		$("#name").val(a.data.name);
@@ -61,7 +61,7 @@ $("#sub").click(function() {
 	}
 	$.ajax({
 		type: "put",
-		url: "https://localhost/admin/updateAdmin/v1",
+		url: "https://test.wslhome.top/admin/updateAdmin/v1",
 		data: $("#login").serialize(),
 		dataType: "json",
 		success: function(b) {

@@ -172,7 +172,7 @@ body{
 }
 .bj h3,.xg h3,.avatar h3{
 	padding-bottom: 10px;
-	border-bottom: 1px solid #e6e6e6;
+	border-bottom: 1px solid #e30005;
 }
 .bj form,.xg form{
 	padding: 40px 50px;
@@ -183,19 +183,13 @@ body{
 }
 .bj form p input,.xg form p input{
 	border:1px solid #e8e8e8; 
-	width: 250px;
+	width: 240px;
 	height: 40px;
 	line-height: 40px;
 	text-indent: 5px;
 }
-.bj form p:nth-child(3) input{
-	width: 20px;
-	height: 20px;
-	margin-right: 5px;
-	vertical-align: middle;
-}
-.bj form p:nth-child(3) span{
-	margin-right: 20px;
+.bj form p label{
+	width: 80px;
 }
 .bj form div,.xg form div{
 	margin-top: 30px;
@@ -243,7 +237,7 @@ body{
 	width: 65%;
 	margin: 5px auto 30px;
 }
-.avatar form  input:nth-child(2){
+.avatar form  input{
 	display:block;
 	width: 200px;
 	height: 40px;
@@ -252,16 +246,7 @@ body{
 	background: #A10000;
 	color: #FFFFFF;
 }
-.avatar form  input:nth-child(4){
-	display:block;
-	width: 150px;
-	height: 30px;
-	line-height: 30px;
-	margin: 0 auto;
-	background: #fff;
-	color: #000;
-	border: 1px solid #E0E0E0; 
-}
+
 
 
 
@@ -312,4 +297,32 @@ form.remima input[type=submit]{
 	margin:20px 0 0  30%;
 	background: #A10000;
 	color: #fff;
+}
+.file {
+    position: relative;
+    display: block;
+    background: #D0EEFF;
+    border: 1px solid #99D3F5;
+    border-radius: 20px;
+    padding: 10px 60px;
+    overflow: hidden;
+    color: #1E88C7;
+    text-decoration: none;
+    text-indent: 10px;
+    line-height: 20px;
+	
+}
+.file input {
+	
+    position: absolute;
+    font-size: 0.75em;
+    left: 0px;
+    top: 0;
+    opacity: 0;
+}
+.file:hover {
+    background: #AADFFD;
+    border-color: #78C3F3;
+    color: #004974;
+    text-decoration: none;
 }

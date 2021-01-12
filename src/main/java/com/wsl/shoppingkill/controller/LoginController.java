@@ -2,13 +2,17 @@ package com.wsl.shoppingkill.controller;
 
 import com.wsl.shoppingkill.common.Result;
 import com.wsl.shoppingkill.common.log.MyLog;
+import com.wsl.shoppingkill.common.util.RegexUtils;
 import com.wsl.shoppingkill.component.VerifyComponent;
 import com.wsl.shoppingkill.domain.Experience;
+import com.wsl.shoppingkill.domain.User;
 import com.wsl.shoppingkill.obj.constant.BaseEnum;
 import com.wsl.shoppingkill.obj.constant.LoggerEnum;
 import com.wsl.shoppingkill.obj.param.UserParam;
 import com.wsl.shoppingkill.service.ExperienceService;
 import com.wsl.shoppingkill.service.LoginService;
+import com.wsl.shoppingkill.service.UserService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,6 +43,9 @@ public class LoginController {
 
     @Resource
     private ExperienceService experienceService;
+
+    @Resource
+    private UserService userService;
     /**
      * 用户登录接口
      *
@@ -114,5 +121,30 @@ public class LoginController {
             return Result.error("error","请勾选体验用户协议");
         }
         return Result.success(experienceService.getExp(experience,request));
+    }
+
+    @PostMapping("/addUser/v1")
+    public Result<String> addUser(String codes,@Valid User user,HttpServletRequest request){
+        if (StringUtils.isBlank(codes)){
+            return Result.error("error", "验证码不能为空");
+        }
+        if (!verifyComponent.imgVerifyCode(codes, request)) {
+            return Result.error("error", "验证码不正确");
+        }
+        if(!RegexUtils.checkEmail(user.getEmail())){
+            return Result.error("error","邮箱校验失败，请更换邮箱重试");
+        }
+        if (!RegexUtils.checkMobile(user.getPhone())){
+            return Result.error("error","手机号校验失败，请更换手机号重试");
+        }
+
+        if(!RegexUtils.checkIdCard(user.getIdCard())){
+            return Result.error("error","身份证号校验失败，请认真填写身份证号");
+        }
+
+        if (userService.addUser(user)){
+            return Result.success("恭喜您注册成功！请尽情使用该系统进行购物");
+        }
+        return Result.error("error","注册失败，请您稍后再试");
     }
 }

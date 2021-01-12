@@ -9,7 +9,6 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import lombok.*;
 import lombok.experimental.Accessors;
-import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Id;
@@ -47,12 +46,6 @@ public class Experience extends Model<Experience> implements Serializable {
     private String userName;
 
 
-    /**
-    * 密码
-    */
-    @NotNull(message = "密码不能为空")
-    @NotBlank(message = "密码不能为空")
-    @Length(min =  6)
     private String password;
 
 

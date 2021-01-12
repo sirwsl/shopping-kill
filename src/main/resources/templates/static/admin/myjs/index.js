@@ -3,7 +3,7 @@ $.ajaxSetup({
 		"Authorization": $.cookie("token")
 	},
 	xhrFields: {
-		withCredentials: false
+		withCredentials: true
 	},
 	crossDomain: true
 });
@@ -18,7 +18,7 @@ $(function() {
 	}
 });
 $("#exits").click(function() {
-	$.get("https://localhost/login/exit/v1", null,
+	$.get("https://test.wslhome.top/login/exit/v1", null,
 	function(a) {
 		if (a.code == 0 && a.data) {
 			window.location.href = "/admin/login.html"

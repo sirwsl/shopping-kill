@@ -1,38 +1,24 @@
-<html>
+<html style="height: 900px;">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=0.1,user-scalable=yes">
+		<meta http-equiv ="Content-Security-Policy" content="upgrade-insecure-requests">
 		<meta http-equiv="Content-Language" content="zh-CN">
-		<link rel="stylesheet" href="../static/user/layui/css/layui.css" />
 		<link rel="stylesheet" type="text/css" href="../static/user/css/base.css" />
 		<link rel="stylesheet" type="text/css" href="../static/user/css/style.css" />
 		<link rel="stylesheet" href="../static/user/css/slide.css" />
 		<link rel="stylesheet" type="text/css" href="../static/user/css/goods_list.css" />
 		<title>购物</title>
-		<meta name="keywords" content="">
-		<meta name="description" content="">
-		<meta name="copyright" content="" />
+
 		<script src="../static/user/js/jquery.min.js"></script>
 		<script src="../static/user/js/common.js"></script>
-		<script type="text/javascript" src="../static/user/layui/layui.js"></script>
+		<script type="application/javascript" src="../static/user/js/jquery.cookie.js"></script>
+		<link rel="stylesheet" type="text/css" href="../static/user/css/mygxin.css" />
 		<link href="../static/user/css/common.css" rel="stylesheet" type="text/css" />
 		<script type="text/javascript">
-			$(document).ready(function() {
-				var showproduct = {
-					"boxid": "showbox",
-					"sumid": "showsum",
-					"boxw": 400, //宽度,该版本中请把宽高填写成一样
-					"boxh": 400, //高度,该版本中请把宽高填写成一样
-					"sumw": 60, //列表每个宽度,该版本中请把宽高填写成一样
-					"sumh": 60, //列表每个高度,该版本中请把宽高填写成一样
-					"sumi": 7, //列表间隔
-					"sums": 5, //列表显示个数
-					"sumsel": "sel",
-					"sumborder": 1, //列表边框，没有边框填写0，边框在css中修改
-					"lastid": "showlast",
-					"nextid": "shownext"
-				};
-				$.ljsGlasses.pcGlasses(showproduct); //方法调用，务必在加载完后执行
-			});
+			
+			
+			
 		</script>
 		<style>
 			.search {
@@ -61,18 +47,8 @@
 		<div class="w1200_container">
 			<div style="margin-top: 20px;float: left;">
 				<!--页面必要代码,img标签上请务必带上图片真实尺寸px-->
-				<div id="showbox">
-					<li class="goods_photo">
-						<img src="../static/user/images/pay_list1.jpg" width="280" height="280" />
-						<img src="../static/user/images/pay_list2.jpg" width="280" height="280" />
-						<img src="../static/user/images/pay_list3.jpg" width="280" height="280" />
-						<img src="../static/user/images/pay_list4.jpg" width="280" height="280" />
-					</li>
-					<li class="goods_photo1">
-						<img src="../static/user/images/pay_list1.jpg" width="280" height="280" />
-						<img src="../static/user/images/pay_list2.jpg" width="280" height="280" />
-						<img src="../static/user/images/pay_list3.jpg" width="280" height="280" />
-					</li>	
+				<div id="showbox" >
+					
 				</div>
 				<!--展示图片盒子-->
 				<div id="showsum"></div>
@@ -84,79 +60,61 @@
 				</p>
 			</div>
 			<div class="pay_content fl">
-				<div class="pay_title">超诺淋浴套装 太空铝增压花洒水龙头 三档冷热可升降喷头带下出水 拒绝生锈 十年质保 历久弥新</div>
+				<div class="pay_title" id = "goodsName" ></div>
 				<div class="summary">
 					<div class="summary_price_warp">
 						<div class="s_p_w_wrap">
 							<div class="summary_item si_shop_price">
 								<div class="si_tit">商 城 价</div>
 								<div class="si_warp">
-									<strong class="shop_price"><em>¥</em>2999.00</strong>
+									<strong class="shop_price"><em>¥</em><em id = "price"><em></strong>
 									<span class="price_notify" data-userid="63" data-goodsid="650" ectype="priceNotify">降价通知</span>
 								</div>
 							</div>
 							<div class="summary_item si_market_price">
 								<div class="si_tit">市 场 价</div>
 								<div class="si_warp">
-									<div class="m_price"><em>¥</em>3598.79</div>
+									<div class="m_price"><em>¥</em><em id = "maxPrice"></em></div>
 								</div>
 							</div>
 							<div class="si_info">
-								<div class="si_cumulative">累计评价<em>0</em></div>
-								<div class="si_cumulative">累计销量<em>0</em></div>
+								<div class="si_cumulative">累计评价<em id = 'eval'></em>
+								</div>
+								
 							</div>
 							<div class="clear"></div>
 							<div class="summary_basic_info">
-								<div class="summary_item is_stock">
-									<div class="si_tit">配送</div>
-									<div class="si_warp">
-										<span class="initial_area">
-                                                                                                              上海市                                              
-                                        </span>
-										<span>至</span>
-										<div class="city-choice" id="city-choice" data-ectype="dorpdown">
-											<div class="dsc-choie dsc-cm" ectype="dsc-choie">
-												<input type="text" value="石家庄" class="search" style="margin: 3px 0 0 0;border: none;background: #f7f8f8;width: 40px;" />
-											</div>
-										</div>
-										<div class="store_warehouse">
-											<div class="store_prompt"><strong>有货</strong>，下单后立即发货</div>
-										</div>
-									</div>
-								</div>
+								
 								<div class="clear"></div>
 								<div class="summary_item is_service">
 									<div class="si_tit">服务</div>
 									<div class="si_warp">
-										由
-										<a href="" class="link_red" target="_blank">本网站</a> 发货并提供售后服务
-										<span class="gary">[ 快递：<em>¥</em>4.30 ]</span>
+										由<a href="" class="link_red" target="_blank">本网站</a> 发货并提供售后服务
 									</div>
 								</div>
 								<div class="clear"></div>
-								<div class="summary_item is_integral">
-									<div class="si_tit">红包</div>
-									<div class="si_warp">可用 <span class="integral">0</span></div>
+								<div class="summary_item is_service">
+									<div class="si_tit">快递费</div>
+										<span class="gary"><em>¥</em><em id = "expPrice"></em></span>
 								</div>
+								
 								<div class="summary_item is_number clear">
 									<div class="si_tit">数量</div>
 									<div class="si_warp">
 										<div class="amount_warp">
-											<input class="text buy_num" value="1" name="number">
+											<input class="text buy_num" value="1" name="number" ID= "number">
 											<div class="a_btn">
-												<a href="javascript:void(0);" class="btn_add" ><i class="iconfont icon-up">+</i></a>
-												<a href="javascript:void(0);" class="btn_reduce btn_disabled" ><i class="iconfont icon-down">-</i></a>
+												<a onclick = "setNum(true)" class="btn_add" ><i class="iconfont icon-up">+</i></a>
+												<a onclick = "setNum(false)" class="btn_reduce btn_disabled" ><i class="iconfont icon-down">-</i></a>
 											</div>
 										</div>
-										<span>库存&nbsp;<em id="goods_attr_num" ectype="goods_attr_num">1000</em>&nbsp;个</span>
+										<span>库存&nbsp;<em id="goodsNum" ectype="goods_attr_num"></em>&nbsp;个</span>
 									</div>
 								</div>
 								<div class="summary_item regular">
 									<div class="si_tit">规格</div>
 									<div class="si_warp">
-										<ul class="regular_list">
-											<li class="regular_sort">红色</li>
-											<li>蓝色</li>
+										<ul class="regular_list" id = 'listName'>
 										</ul>
 									</div>
 								</div>
@@ -164,12 +122,16 @@
 							</div>
 							<!--class="layui-btn layui-btn-normal"-->
 							<div class="choose_btns clear">
-								<a href="#" class="btn_buynow">立即购买</a>
-								<a href="#" class="btn_append layui-btn layui-btn-danger business" data-type="auto" data-method="setTop"><i class="iconfont icon_carts"><img src="../static/user/images/icon/cart1.png" style="margin-top: -5px;"></i>加入购物车</a>
+								<input id = "skuIdn" value = '' style="display: none;" />
+								<div id = "temp" > 
+								</div>
+								<a onclick="addcart()"  class="btn_append layui-btn layui-btn-danger business" data-type="auto" data-method="setTop">
+									<i class="iconfont icon_carts"><img src="../static/user/imgs/cart1.png" style="margin-top: -5px;">
+									</i>加入收藏夹</a>
 							</div>
 							<div class="summary_item is_service">
 								<div class="si_tit">温馨提示</div>
-								<div class="si_warp gray">
+								<div class="si_warp gray" >
 									不支持退换货服务
 								</div>
 							</div>
@@ -182,166 +144,21 @@
 				<h3>还没逛够</h3>
 			</div>
 			<div class="no_enough">
-				<ul>
-					<li class="opacity_img1">
-						<a href="#" target="_blank">
-							<div class="p_img">
-								<img src="../static/user/images/no_enough1.jpg" />
-							</div>
-							<div class="no_ename" title="【情侣款】Camel骆驼男靴 时尚潮流英伦风马丁靴高帮皮靴 爆卖1万双！ 情侣马丁靴 好评如潮">
-								【情侣款】Camel骆驼男靴 时尚潮流英伦风马丁靴高帮皮靴 爆卖1万双！ 情侣马丁靴 好评如潮
-							</div>
-							<div class="no_eprice">
-								<em>¥</em>555.00
-							</div>
-						</a>
-					</li>
-					<li class="opacity_img1">
-						<a href="#" target="_blank">
-							<div class="p_img">
-								<img src="../static/user/images/no_enough2.jpg" />
-							</div>
-							<div class="no_ename" title="春季马丁靴男真皮男靴黄靴工装军靴韩版短靴沙漠靴高帮男鞋大黄靴 头层牛皮">
-								春季马丁靴男真皮男靴黄靴工装军靴韩版短靴沙漠靴高帮男鞋大黄靴 头层牛皮
-							</div>
-							<div class="no_eprice">
-								<em>¥</em>555.00
-							</div>
-						</a>
-					</li>
-					<li class="opacity_img1">
-						<a href="#" target="_blank">
-							<div class="p_img">
-								<img src="../static/user/images/no_enough3.jpg" />
-							</div>
-							<div class="no_ename" title="特步女鞋2017春季新款运动鞋休闲鞋女慢跑步鞋旅游鞋轻便舒适时尚 早春特惠 爆款休闲女鞋 赠运费险">
-								特步女鞋2017春季新款运动鞋休闲鞋女慢跑步鞋旅游鞋轻便舒适时尚 早春特惠 爆款休闲女鞋 赠运费险
-							</div>
-							<div class="no_eprice">
-								<em>¥</em>555.00
-							</div>
-						</a>
-					</li>
-					<li class="opacity_img1">
-						<a href="#" target="_blank">
-							<div class="p_img">
-								<img src="../static/user/images/no_enough4.jpg" />
-							</div>
-							<div class="no_ename" title="新款韩版chic学生宽松短款外套上衣字母长袖连帽套头卫衣女潮">
-								新款韩版chic学生宽松短款外套上衣字母长袖连帽套头卫衣女潮
-							</div>
-							<div class="no_eprice">
-								<em>¥</em>555.00
-							</div>
-						</a>
-					</li>
-					<li class="opacity_img1">
-						<a href="#" target="_blank">
-							<div class="p_img">
-								<img src="../static/user/images/no_enough5.jpg" />
-							</div>
-							<div class="no_ename" title="igtt铝框行李箱拉杆箱旅行箱万向轮男女20/24/26寸密码箱登机箱子 铝合金框 加强密码锁 万向轮 终身保修">
-								igtt铝框行李箱拉杆箱旅行箱万向轮男女20/24/26寸密码箱登机箱子 铝合金框 加强密码锁 万向轮 终身保修
-							</div>
-							<div class="no_eprice">
-								<em>¥</em>555.00
-							</div>
-						</a>
-					</li>
-					
+				<ul id = "htmls">
 				</ul>
 			</div>
 		</div>
 
+		<div class="mask" style="display: none;" id = "mask1"></div>
+		<div  class="adddz editAddre" id = "mask2" style="display: none;">
+			由于下单人数过多，正在进行下单,请稍等片刻
+		</div>
+		<div style="height: 40px;"></div>
 		
 	</body>
 	<script type="text/javascript" src="../static/user/js/kuCity.js"></script>
 	<script type="text/javascript" src="../static/user/js/jquery.SuperSlide.js"></script>
-	
-	<script>
-		function reinitIframe() {
-		var iframe = document.getElementById("displayArea");
-		try {
-		var bHeight = iframe.contentWindow.document.body.scrollHeight;
-		var dHeight = iframe.contentWindow.document.documentElement.scrollHeight;
-		var height = Math.min(bHeight, dHeight);
-		iframe.height = height;
-		
-		} catch (ex) { }
-		
-		}
-		window.setInterval("reinitIframe()", 20);
-		
-		layui.use('layer', function() { //独立版的layer无需执行这一句
-			var $ = layui.jquery,
-				layer = layui.layer; //独立版的layer无需执行这一句
-
-			//触发事件
-			var active = {
-				setTop: function() {
-					var that = this;
-					//多窗口模式，层叠置顶
-					layer.open({
-						type: 2 //此处以iframe举例
-							,
-						title: '温馨提示',
-						area: ['390px', '260px'],
-						shade: 0,
-						maxmin: true,
-						offset: [ //为了演示，随机坐标
-							Math.random() * ($(window).height() - 300), Math.random() * ($(window).width() - 390)
-						],
-						content: 'tip.html',
-						btn: ['继续购物'],
-						btn2: function() {
-							layer.closeAll();
-						},
-						zIndex: layer.zIndex,
-						success: function(layero) {
-							layer.setTop(layero); //重点2
-						}
-					});
-				},
-				confirmTrans: function() {
-					//配置一个透明的询问框
-					layer.msg('大部分参数都是可以公用的<br>合理搭配，展示不一样的风格', {
-						time: 20000, //20s后自动关闭
-						btn: ['明白了', '知道了', '哦']
-					});
-				},
-				notice: function() {
-					//示范一个公告层
-					layer.open({
-						type: 1,
-						title: false //不显示标题栏
-							,
-						closeBtn: false,
-						area: '300px;',
-						shade: 0.8,
-						id: 'LAY_layuipro' //设定一个id，防止重复弹出
-							,
-						btn: ['火速围观', '残忍拒绝'],
-						btnAlign: 'c',
-						moveType: 1 //拖拽模式，0或者1
-							,
-						content: '<div style="padding: 50px; line-height: 22px; background-color: #393D49; color: #fff; font-weight: 300;">你知道吗？亲！<br>layer ≠ layui<br><br>layer只是作为Layui的一个弹层模块，由于其用户基数较大，所以常常会有人以为layui是layerui<br><br>layer虽然已被 Layui 收编为内置的弹层模块，但仍然会作为一个独立组件全力维护、升级。<br><br>我们此后的征途是星辰大海 ^_^</div>',
-						success: function(layero) {
-							var btn = layero.find('.layui-layer-btn');
-							btn.find('.layui-layer-btn0').attr({
-								href: 'http://www.layui.com/',
-								target: '_blank'
-							});
-						}
-					});
-				}
-			};
-
-			$('.business').on('click', function() {
-				var othis = $(this),
-					method = othis.data('method');
-				active[method] ? active[method].call(this, othis) : '';
-			});
-		});
-	</script>
+	<script type="application/javascript" src="../static/user/js/jquery.cookie.js"></script>
+	<script type="application/javascript" src = "../static/user/myjs/goodsInfo.js" charset="UTF-8"></script>
 
 </html>

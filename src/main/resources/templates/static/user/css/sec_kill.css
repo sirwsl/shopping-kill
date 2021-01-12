@@ -2,7 +2,7 @@
 	width: 100%;
 	height: 190px;
 	min-width: 1200px;
-	background: url(../images/se_kill.png) center;
+	background: url(../imgs/se_kill.png) center;
 	background-size: 100% 100%;
 }
 
@@ -171,7 +171,7 @@ li .time {
 	width: 100%;
 	height: 130px;
 	min-width: 1200px;
-	background: url(../images/seckill_banner.jpg) center;
+	background: url(../imgs/seckill_banner.jpg) center;
 	background-size: 100% 100%;
 	text-align: center;
 }

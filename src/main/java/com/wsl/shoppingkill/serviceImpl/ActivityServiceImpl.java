@@ -5,18 +5,29 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wsl.shoppingkill.common.log.MyLog;
+import com.wsl.shoppingkill.common.util.ObjectUtil;
 import com.wsl.shoppingkill.domain.Activity;
+import com.wsl.shoppingkill.domain.Advertise;
+import com.wsl.shoppingkill.domain.Goods;
 import com.wsl.shoppingkill.domain.Sku;
 import com.wsl.shoppingkill.mapper.ActivityMapper;
 import com.wsl.shoppingkill.mapper.GoodsMapper;
+import com.wsl.shoppingkill.mapper.SkuMapper;
 import com.wsl.shoppingkill.obj.constant.LoggerEnum;
+import com.wsl.shoppingkill.obj.constant.RedisEnum;
 import com.wsl.shoppingkill.obj.param.ActivityParam;
 import com.wsl.shoppingkill.obj.param.ActivityUpdateParam;
 import com.wsl.shoppingkill.obj.vo.ActivityByGoodsVO;
 import com.wsl.shoppingkill.obj.vo.ActivityVO;
+import com.wsl.shoppingkill.obj.vo.KillGoodsVO;
 import com.wsl.shoppingkill.service.ActivityService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
+import org.springframework.dao.DataAccessException;
+import org.springframework.data.redis.core.RedisCallback;
+import org.springframework.data.redis.core.RedisOperations;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.SessionCallback;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
@@ -24,10 +35,9 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
@@ -43,11 +53,75 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
     @Resource
     private GoodsMapper goodsMapper;
 
+    @Resource
+    private SkuMapper skuMapper;
+
+    @Resource
+    private RedisTemplate<String,Object> redisTemplate;
+
     @Override
     public List<ActivityVO> getActivityAll(ActivityParam activityParam) {
         activityParam.setTime(LocalDateTime.now());
-        return activityMapper.getActivityAll( activityParam);
+        return activityMapper.getActivityAll(activityParam);
     }
+
+    @Override
+    public List<KillGoodsVO> getActivityFuture(){
+        LocalDateTime now = LocalDateTime.now().plusHours(1).withMinute(0).withSecond(0).withNano(0);
+        LocalDateTime end = now.plusHours(5);
+
+        Set<String> keys = redisTemplate.keys(RedisEnum.GOODS_FUTURE+"*");
+        if (CollectionUtils.isNotEmpty(keys)){
+            List<Object>  redisList=  redisTemplate.executePipelined((RedisCallback<Object>) redisConnection -> {
+                redisConnection.openPipeline();
+                keys.forEach( li -> redisConnection.get(li.getBytes()));
+                return null;
+            });
+            List<KillGoodsVO> activitiesList = ObjectUtil.castList(redisList, KillGoodsVO.class);
+            activitiesList = activitiesList.stream().filter(Objects::nonNull).collect(Collectors.toList());
+            if (CollectionUtils.isNotEmpty(activitiesList)){
+                return activitiesList;
+            }
+        }
+        List<Activity> activities = activityMapper.selectList(new QueryWrapper<Activity>()
+                .ge(Advertise.START_TIME, now)
+                .le(Advertise.START_TIME, end));
+        if (CollectionUtils.isEmpty(activities)) {
+            return new ArrayList<>();
+        }
+        List<KillGoodsVO> goodsByActivity = getGoodsByActivity(activities);
+        redisTemplate.executePipelined(new SessionCallback() {
+            //管道操作
+            @Override
+            public Object execute(RedisOperations operations) throws DataAccessException {
+                for (KillGoodsVO activity : goodsByActivity) {
+                    if (activity.getId() != null) {
+                        String s = RedisEnum.GOODS_FUTURE + activity.getId();
+                        operations.opsForValue().set(s, activity, 1L, TimeUnit.HOURS);
+                    }
+                }
+                return null;
+            }
+        });
+
+        return goodsByActivity;
+    }
+
+
+    @Override
+    public List<KillGoodsVO> getActivityDoing(LocalDateTime now){
+        if (now == null){
+            now = LocalDateTime.now();
+        }
+        List<Activity> activities = activityMapper.selectList(new QueryWrapper<Activity>()
+                .le(Advertise.START_TIME, now)
+                .ge(Advertise.END_TIME, now));
+        if (CollectionUtils.isNotEmpty(activities)){
+            return getGoodsByActivity(activities);
+        }
+        return new ArrayList<>();
+    }
+
 
     @Override
     public IPage<ActivityByGoodsVO> getActivityByGoods(Long current, Long size, Long id, String name) {
@@ -60,7 +134,7 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
     @Transactional(rollbackFor = Exception.class)
     public boolean addOrUpdateActivity(ActivityUpdateParam activity) {
 
-        List<Activity> activityList = new ArrayList<>(4);
+        List<Activity> activityList = new ArrayList<>(8);
         //获取对应商品的SKU数量
         Sku sku = new Sku();
         Map<Long, List<Sku>> collect = sku.selectList(new QueryWrapper<Sku>().select(Sku.ID, Sku.NUM)
@@ -72,6 +146,22 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
         )).stream().collect(Collectors.groupingBy(Sku::getId));
 
         log.info(activity.getSkuList().toString());
+        //如果有交叉时段，则不更新
+        List<Long> ids = new ArrayList<>();
+       collect.values().forEach(li -> li.forEach(v -> ids.add(v.getId())));
+        long count = activityMapper.selectList(new QueryWrapper<Activity>()
+                .in(Activity.SKU_ID, ids)
+                .le(Activity.START_TIME, activity.getStartTime())
+                .ge(Activity.END_TIME, activity.getStartTime())
+                .or()
+                .in(Activity.SKU_ID, ids)
+                .le(Activity.START_TIME, activity.getEndTime())
+                .ge(Activity.END_TIME, activity.getEndTime())
+
+        ).size();
+        if (count>0){
+            return false;
+        }
         //遍历判断
         activity.getSkuList().forEach(li -> {
             Activity activityTemp = new Activity();
@@ -95,9 +185,9 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
             //数量不能超库存数量
             //TODO: bug
             if (li.getTotalNum() <= collect.get(li.getId()).get(0).getNum()) {
-                activityTemp.setTotalNum(li.getTotalNum());
+                activityTemp.setTotalNum(li.getTotalNum()).setSellNum(li.getTotalNum());
             } else {
-                activityTemp.setTotalNum(collect.get(li.getId()).get(0).getNum());
+                activityTemp.setTotalNum(collect.get(li.getId()).get(0).getNum()).setSellNum(collect.get(li.getId()).get(0).getNum());
             }
             activityList.add(activityTemp);
         });
@@ -155,7 +245,7 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
 
         List<Activity> activities = activityMapper.selectBatchIds(id);
 
-        if (CollectionUtils.isEmpty(id)){
+        if (CollectionUtils.isEmpty(activities)){
             return false;
         }
         for (Activity activity : activities) {
@@ -166,5 +256,71 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
         }
         return true;
 
+    }
+
+    @Override
+    public List<KillGoodsVO> getGoodsByActivity(List<Activity> activities){
+        Set<Long> skuIds = activities.stream().map(Activity::getSkuId).collect(Collectors.toSet());
+        List<Sku> skus = skuMapper.selectBatchIds(skuIds);
+        if (skus.isEmpty()) {
+            return new ArrayList<>();
+        }
+        Map<Long, Long> sku2goodsId = skus.stream().collect(Collectors.toMap(Sku::getId, Sku::getGoodsId));
+        Map<Long, Goods> goodsMap = goodsMapper.selectList(new QueryWrapper<Goods>().in(Goods.ID, sku2goodsId.values()))
+                .stream()
+                .collect(Collectors.toMap(Goods::getId, Function.identity()));
+
+        if (goodsMap.isEmpty()) {
+            return new ArrayList<>();
+        }
+        List<KillGoodsVO> allVO = new ArrayList<>(64);
+        activities.forEach(li ->{
+            Long goodsId = sku2goodsId.get(li.getSkuId());
+            if (goodsId!=null && goodsId > 0){
+                Goods goods = goodsMap.get(goodsId);
+                if (Objects.isNull(goods)){
+                    return;
+                }
+                KillGoodsVO killAvtivityVO = new KillGoodsVO();
+
+                killAvtivityVO.setStartTime(li.getStartTime())
+                        .setEndTime(li.getEndTime())
+                        .setSum(li.getSellNum())
+                        .setId(goodsId)
+                        .setName(goods.getName())
+                        .setImgUrl(goods.getImgUrl())
+                        .setMinPrice(li.getPrice());
+                allVO.add(killAvtivityVO);
+            }
+        });
+
+        //处理最低价
+        Map<String, List<KillGoodsVO>> money = allVO.stream().collect(Collectors.groupingBy(li -> li.getId() + li.getStartTime().toString()));
+
+        //去重返回
+        final ArrayList<KillGoodsVO> returnVO = allVO.stream()
+                .collect(
+                        Collectors.collectingAndThen(
+                                Collectors.toCollection(
+                                        () -> new TreeSet<>(Comparator.comparing(o -> o.getId() + ";" + o.getStartTime()))), ArrayList::new));
+
+        returnVO.forEach(li ->{
+            BigDecimal min = money.get(li.getId() + li.getStartTime().toString()).stream().map(KillGoodsVO::getMinPrice).min(Comparator.naturalOrder()).get();
+            li.setMaxPrice(min).setMinPrice(min);
+        });
+        return returnVO;
+    }
+
+    @Override
+    public boolean checkActivityByTime(ActivityUpdateParam activity) {
+        List<Long> collect = activity.getSkuList().stream().map(ActivityUpdateParam.Sku::getAId).collect(Collectors.toList());
+        List<Activity> activities = activityMapper.selectList(new QueryWrapper<Activity>().in(Activity.SKU_ID, collect).le(Activity.END_TIME, LocalDateTime.now().minusHours(12)));
+
+        for (Activity li : activities) {
+            if (activity.getStartTime().isBefore(li.getEndTime().plusHours(12)) || activity.getEndTime().plusHours(12).isAfter(li.getStartTime())) {
+                return true;
+            }
+        }
+        return false;
     }
 }

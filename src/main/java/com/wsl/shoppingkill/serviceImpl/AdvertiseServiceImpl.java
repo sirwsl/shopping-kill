@@ -1,5 +1,7 @@
 package com.wsl.shoppingkill.serviceImpl;
 
+import com.alicp.jetcache.anno.CacheType;
+import com.alicp.jetcache.anno.Cached;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
@@ -22,6 +24,7 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author WangShilei
@@ -50,7 +53,8 @@ public class AdvertiseServiceImpl extends ServiceImpl<AdvertiseMapper, Advertise
     }
 
     @Override
-    public List<AdvertiseVO> getAdvertiseUrl() {
+    @Cached(name = "getAdvertiseUrl",expire = 6,cacheType = CacheType.REMOTE,timeUnit = TimeUnit.HOURS)
+    public List<AdvertiseVO> getAdvertiseUrl(Integer temp) {
         LocalDateTime localDateTime = LocalDateTime.now();
         List<Advertise> advertises = advertiseMapper.selectList(new QueryWrapper<Advertise>()
                 .le(Advertise.START_TIME, localDateTime)

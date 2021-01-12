@@ -1,7 +1,7 @@
 html,body{
     position: relative;
     width: 100%;
-    min-height: 950px;
+    min-height: 1200px;
 }
 input[type="checkbox"]{
     display: none;
@@ -18,7 +18,7 @@ label{
     cursor: pointer;
 }
 label.mark{
-    background: url("../images/mark1.png") no-repeat -1px -1px;
+    background: url("../imgs/mark1.png") no-repeat -1px -1px;
 }
 
 a:hover{

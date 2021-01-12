@@ -2,6 +2,8 @@
 <html>
 	<head lang="en">
 		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=0.1,user-scalable=yes">
+		<meta http-equiv ="Content-Security-Policy" content="upgrade-insecure-requests">
 		<title>个人信息</title>
 		<link rel="stylesheet" type="text/css" href="../static/user/css/public.css"/>
 		<link rel="stylesheet" type="text/css" href="../static/user/css/mygrxx.css" />
@@ -15,16 +17,26 @@
 				<div class="you fl">
 					<h2>个人信息</h2>
 					<div class="gxin">
-						<div class="tx"><a href="#"><img src="../static/user/img/tx.png"/><p id="avatar">修改头像</p></a></div>
+						<div class="tx"><a href="#"><img id = "imgId" src="../static/user/imgs/tx.png"/><p id="avatar">修改头像</p></a></div>
 						<div class="xx">
-							<h3 class="clearfix"><strong class="fl">基础资料</strong><a href="#" class="fr" id="edit1">编辑</a></h3>
-							<div>姓名：六六六</div>
-							<div>生日：1995-06-06</div>
-							<div>性别：女</div>
-							<h3>高级设置</h3>
-							<!--<div><span class="fl">银行卡</span><a href="#" class="fr">管理</a></div>-->
-							<div><span class="fl">账号地区：中国</span><a href="#" class="fr" id="edit2">修改</a></div>
+							<h3 class="clearfix"><strong class="fl">基础资料</strong>
+								<a href="#" class="fr" id="edit2" style="width: 60px;">修改密码</a>
+								<a href="#" class="fr" id="edit1" style="width: 60px;">编辑</a>
+							</h3>
+							<div> ID ：<span id = "myId"></span></div>
+							<div> 账号 ：<span id = "myName"></span></div>
+							<div> 真实姓名 ：<span id = "myRealName"></span></div>
+							<div> 身份证号 ：<span id = "idCard"></span></div>
+							<div> 手机号 ：<span id = "myPhone"></span></div>
+							<div> 昵称 ：<span id = "myNickName"></span></div>
+							<div> 性别 ：<span id = "mySex"></span></div>
+							<div> 签名 ：<span id = "mySignature"></span></div>
+							<div> 邮箱 ：<span id = "myEmail"></span></div>
+							<div> 微信号 ：<span id = "myWeChat"></span></div>
+							<div> 支付宝账号 ：<span id = "myApply"></span></div>
+							<div> 注册时间 ：<span id = "creatTime"></span></div>
 						</div>
+						
 					</div>			
 				</div>
 			</div>
@@ -33,47 +45,59 @@
 		<div class="mask"></div>
 		<!--编辑弹框-->
 		<div class="bj">
-			<div class="clearfix"><a href="#" class="fr gb"><img src="../static/user/img/icon4.png"/></a></div>
-			<h3>编辑基础资料</h3>
-			<form action="#" method="get">
-				<p><label>姓名：</label><input type="text"  value="六六六" /></p>
-				<p><label>生日：</label><input type="text"   /></p>
-				<p>
-					<label>性别：</label>
-					<span><input type="radio"  />男</span>
-					<span><input type="radio"   />女</span>
-				</p>
+			<div class="clearfix"><a href="#" class="fr gb"><img src="../static/user/imgs/icon4.png"/></a></div>
+			<h3>修改个人信息</h3>
+			<form  role="form" id="regoster" name="regoster" 
+							action="https://test.wslhome.top/user/updateUserInfo/v1" method="post" accept-charset="utf-8">
+				<input type="hidden" id = "id" name = "id" />
+				<p><label>账  号：</label><input type="text" name = "name"  id = "name" readonly /></p>
+				<p><label>昵  称：</label><input type="text" name = "nickName" id = "nickName"/></p>
+				<p><label>签  名：</label><input type="text" name = "signatu" id = "signature"/></p>
+				<p><label>手  机：</label><input type="text" name = "phone" id = "phone"/></p>
+				<p><label>邮  箱：</label><input type="text" name = "email" id = "email"/></p>
+				<p><label>微  信：</label><input type="text" name = "weChat" id = "weChat"/></p>
+				<p><label>支付宝号：</label><input style="width: 220px;" type="text" id = "apply"/></p>
 				<div class="bc">
-					<input type="button" value="保存"  />
+					<input type="button" id = "subjichu" value="保存" />
 					<input type="button" value="取消" />
 				</div>
 			</form>
 		</div>
 		<!--高级设置修改-->
 		<div class="xg">
-			<div class="clearfix"><a href="#" class="fr gb"><img src="../static/user/img/icon4.png"/></a></div>
-			<h3>切换账号地区</h3>
-			<form action="#" method="get">
-				<p><label>姓名：</label><input type="text"  value="六六六" /></p>
+			<div class="clearfix"><a href="#" class="fr gb"><img src="../static/user/imgs/icon4.png"/></a></div>
+			<h3>更改密码</h3>
+			<form  role="form" id="regosterpass" name="regosterpass" enctype="application/x-www-form-urlencoded"
+							action="https://test.wslhome.top/user/updatePassword/v1" method="post" accept-charset="utf-8">
+				<p><label>旧密码：</label><input type="password" id = "old" name = "old"/></p>
+				<p><label>新密码：</label><input type="password" id = "newPassword" name = "newPassword"/></p>
+				<p><label>确认密码：</label><input style="width: 230px;" type="newPassword1" id = "password1"/></p>
 				<div class="bc">
-					<input type="button" value="保存" />
+					<input type="button" id = "subPass" value="保存" />
 					<input type="button" value="取消" />
 				</div>
 			</form>
 		</div>
 		<!--修改头像-->
 		<div class="avatar">
-			<div class="clearfix"><a href="#" class="fr gb"><img src="../static/user/img/icon4.png"/></a></div>
+			<div class="clearfix"><a href="#" class="fr gb"><img src="../static/user/imgs/icon4.png"/></a></div>
 			<h3>修改头像</h3>
-			<form action="#" method="get">
-				<h4>请上传图片</h4>
-				<input type="button" value="上传头像" />
-				<p>jpg或png，大小不超过2M</p>
-				<input type="submit" value="提交" />
+			<form id="regosterimg" name="regosterimg" enctype="multipart/form-data"
+							action="https://test.wslhome.top/user/updateImg/v1" method="post" accept-charset="utf-8">
+				<a class="file" ><em id = "imgshow">请选择您即将要上传头像</em>
+				<input type="file" id = "file" onchange="shows()" name = "file" />
+				</a>
+				<p id = "shows">注：格式为：jpg或png，大小不超过2M</p>
+				
+				<input type="button" id="subimg" value="提交" />
+				
 			</form>
 		</div>
 		
 		<script src="../static/user/js/jquery-1.12.4.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../static/user/js/user.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../static/user/js/jquery.cookie.js" type="application/javascript"></script>
+		<script src="../static/user/js/jquery.form.js" type="application/javascript"></script>
+		<script type="application/javascript" charset="UTF-8" src="../static/user/myjs/myInfo.js"></script>
 	</body>
 </html>

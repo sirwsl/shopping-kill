@@ -50,4 +50,5 @@ public interface GoodsMapper extends BaseMapper<Goods> {
      * @return java.util.List<java.lang.Object>
      */
     List<BaseVO> getGoodsNameAll();
+
 }

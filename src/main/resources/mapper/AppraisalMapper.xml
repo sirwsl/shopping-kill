@@ -5,9 +5,9 @@
     <!--@mbg.generated-->
     <!--@Table t_appraisal-->
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="goods_id" jdbcType="BIGINT" property="goodsId" />
+    <result column="order_id" jdbcType="BIGINT" property="orderId" />
     <result column="user_id" jdbcType="BIGINT" property="userId" />
-    <result column="goods_id" jdbcType="VARCHAR" property="goodsId" />
+    <result column="order_id" jdbcType="VARCHAR" property="orderId" />
     <result column="detail" jdbcType="VARCHAR" property="detail" />
     <result column="img_url" jdbcType="VARCHAR" property="imgUrl" />
     <result column="grade" jdbcType="INTEGER" property="grade" />
@@ -20,7 +20,9 @@
     select ta.*, tu.name as userName,tu.nick_name as userNickName,tg.name as goodsName
     from t_appraisal ta
     left join t_user tu on ta.user_id = tu.id
-    left join t_goods tg on ta.goods_id = tg.id
+    left join t_order to2 on to2.id = ta.order_id
+    left join t_sku ts on ts.id = to2.sku_id
+    left join t_goods tg on ts.goods_id = tg.id
     <where>
       <if test="appraisal.id != null">
         <bind name="ta_id" value="'%' +appraisal.id+'%'" />

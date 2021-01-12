@@ -3,7 +3,7 @@ $.ajaxSetup({
 		"Authorization": $.cookie("token")
 	},
 	xhrFields: {
-		withCredentials: false
+		withCredentials: true
 	},
 	crossDomain: true
 });
@@ -18,14 +18,14 @@ $(function() {
 	$("#userTable").bootstrapTable("destroy");
 	$("#userTable").bootstrapTable({
 		method: "get",
-		url: "https://localhost/admin/getUserAll/v1",
+		url: "https://test.wslhome.top/admin/getUserAll/v1",
 		dataType: "json",
 		headers: {
 			"Authorization": $.cookie("token")
 		},
 		ajaxOptions: {
 			xhrFields: {
-				withCredentials: false
+				withCredentials: true
 			},
 			crossDomain: true
 		},
@@ -145,7 +145,7 @@ $("#sub").click(function() {
 $("#del").click(function() {
 	$.ajax({
 		type: "DELETE",
-		url: "https://localhost/admin/delUser/v1",
+		url: "https://test.wslhome.top/admin/delUser/v1",
 		data: {
 			id: value
 		},

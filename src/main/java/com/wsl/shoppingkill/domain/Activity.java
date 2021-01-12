@@ -51,9 +51,8 @@ public class Activity extends Model<Activity> implements Serializable {
     private Integer totalNum;
 
     /**
-     * 销售数量
+     * 剩余数量
      */
-
     private Integer sellNum;
 
     /**
@@ -104,9 +103,9 @@ public class Activity extends Model<Activity> implements Serializable {
 
     private static final String LOVE = "love";
 
-    private static final String TOTAL_NUM = "totalNum";
+    private static final String TOTAL_NUM = "total_num";
 
-    private static final String SELL_NUM = "sellNum";
+    private static final String SELL_NUM = "sell_num";
 
     private static final String PRICE = "price";
     

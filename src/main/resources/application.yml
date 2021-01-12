@@ -1,6 +1,6 @@
 # 应用服务 WEB 访问端口
 server:
-  port: 80
+  port: 8080
   servlet:
     context-path: /
     encoding:
@@ -31,7 +31,6 @@ spring:
     default-property-inclusion: non_null
   mvc:
     view:
-      suffix: .html
       prefix: classpath:/templates/
 
 mybatis-plus:

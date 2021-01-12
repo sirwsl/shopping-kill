@@ -3,6 +3,7 @@ package com.wsl.shoppingkill.obj.vo;
 import lombok.*;
 import lombok.experimental.Accessors;
 
+import java.io.Serializable;
 
 
 /** 活动连接展示
@@ -14,7 +15,7 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor
 @ToString
 @Accessors(chain = true)
-public class AdvertiseVO {
+public class AdvertiseVO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

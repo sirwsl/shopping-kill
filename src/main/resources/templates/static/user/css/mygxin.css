@@ -131,21 +131,21 @@
 /*地址管理*/
 .Bott .you .add{
 	display: flex;
-	justify-content: space-around;
+	padding-top: 5px;
 }
 .Bott .you .add div:nth-child(1){
-	width: 268px;
+	width: 230px;
 	height: 178px;
 	border: 1px solid #E0E0E0;
 	text-align: center;
 }
-.Bott .you .add div:nth-child(1) a{
-	width: 30px;
+.Bott .you .add div a{
+	width: 50px;
 	display: block;
-	margin: 60px auto 0;
+	margin: 20px auto 0;
 }
-.Bott .you .add div:nth-child(2){
-	width: 244px;
+.Bott .you .add div{
+	width: 230px;
 	height: 158px;
 	border: 1px solid #E0E0E0;
 	padding: 20px 0 0 24px;
@@ -157,13 +157,13 @@
 	margin-bottom: 25px;
 	color: #262626;
 }
-.Bott .you .add div:nth-child(2) a{
+.Bott .you .add div a{
 	color: #A10000;
 	display: inline-block;
 	margin-right: 10px;
 }
-.Bott .you .add div:nth-child(3){
-	width: 268px;
+.Bott .you .add div{
+	width: 230px;
 	height: 178px;
 }
 

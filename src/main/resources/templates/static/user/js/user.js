@@ -60,42 +60,9 @@ $(function(){
 		$(".sx > div").eq(index).show().siblings().hide();
 	});
 	
+	//评价打心
 
-//		评价打心
-
-		$(".sx dl dd").find("a").click(function(){
-			if($(this).text()=="评价"){
-				$(".mask").show();
-				$(".pj").show();
-			}else if($(this).text()=="查看评价"){
-				$(".mask").show();
-				$(".chak").show();
-			}else{
-				$(".mask").hide();
-				$(".pj").hide();
-				$(".chak").hide();
-			}
-			
-		});
-//	评价打心
-	$("#xin").each(function(i){
-		$("#xin").eq(i).children("a").click(function(){
-			var index = $(this).index();
-			for(var j = 0; j<5;j++){
-				if(j<=index){
-					$("#xin").eq(i).find("a").eq(j).find("img").attr("src","img/hxin.png");
-				}
-				else{
-					$("#xin").eq(i).find("a").eq(j).find("img").attr("src","img/xin.png");
-				}
-				
-			}
-		})
-	})
-
-
-
-		
+	
 //	个人信息 编辑
 	$("#edit1").click(function(){
 		$(".mask").show();
@@ -132,33 +99,6 @@ $(function(){
 	
 	
 //	address
-	$("#addxad").click(function(){
-		$(".mask").show();
-		$(".adddz").show();
-	});
-	$("#dizhi").hover(function(){
-		var txt="";
-		txt='<p class="addp"><a href="#"  id="readd">修改</a><a href="#" id="deladd">删除</a></p>'
-		$(this).append(txt);
-		$("#readd").click(function(){
-			$(".mask").show();
-			$(".readd").show();
-		});
-		$("#deladd").click(function(){
-			$(this).parents("#dizhi").remove();
-		});
-	},function(){
-		$(".bc>input").click(function(){
-			if($(this).val()=="保存"){
-				$(".mask").hide();
-				$(".readd").hide();
-			}else{
-				$(".mask").hide();
-				$(".readd").hide();
-			}
-		});
-		$(".addp").remove();
-	});
 	
 //	查看物流
 	$(".vewwl").hover(function(){

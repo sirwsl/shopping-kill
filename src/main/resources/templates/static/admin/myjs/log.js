@@ -3,7 +3,7 @@ $.ajaxSetup({
 		"Authorization": $.cookie("token")
 	},
 	xhrFields: {
-		withCredentials: false
+		withCredentials: true
 	},
 	crossDomain: true
 });
@@ -23,14 +23,14 @@ function logger(b) {
 	$("#adminLog").bootstrapTable("destroy");
 	$("#adminLog").bootstrapTable({
 		method: "get",
-		url: "https://localhost/admin/getAllLoggerByType/v1",
+		url: "https://test.wslhome.top/admin/getAllLoggerByType/v1",
 		dataType: "json",
 		headers: {
 			"Authorization": $.cookie("token")
 		},
 		ajaxOptions: {
 			xhrFields: {
-				withCredentials: false
+				withCredentials: true
 			},
 			crossDomain: true
 		},

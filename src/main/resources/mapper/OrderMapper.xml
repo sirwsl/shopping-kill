@@ -77,4 +77,51 @@
         where t_order.id = #{id}
           and t_order.del_flag = 0
     </select>
+
+    <select id="selectGoodsInfo" resultType="com.wsl.shoppingkill.obj.vo.AppraisalUserVO">
+        select tg.id as goodsId,to2.id as orderId , tg.name as goodsName,to2.pay_price as price, ts.img_url as imgUrl
+        from t_order to2
+        left join t_sku ts on to2.sku_id = ts.id
+        left join t_goods tg on tg.id = ts.goods_id
+        where to2.status = #{status}
+        and to2.user_id = #{id}
+        and to2.del_flag = 0
+
+    </select>
+
+    <select id="selectUserOrderInfo" resultType="com.wsl.shoppingkill.obj.vo.UserOrderVO">
+        select to2.id as orderId, to2.creat_time as creatTime, ta.name as userName,tg.name as goodsName,ts.img_url as imgUrl,
+                tg.id as goodsId,
+            to2.pay_price as price, to2.num ,ts.exp_price as logisticsPrice,to2.status
+        from t_order to2
+        left join t_sku ts on to2.sku_id = ts.id
+        left join t_goods tg on tg.id = ts.id
+        left join t_address ta on ta.id = to2.address_id
+        <where>
+            <if test="name != null and name != ''">
+                <bind name="names" value="'%' + name + '%'" />
+                tg.name like #{names}
+                or
+                to2.id like #{names}
+            </if>
+            <if test="status != null">
+                <if test="status != 100" >
+                    and to2.status = #{status}
+                </if>
+            </if>
+            and to2.del_flag = 0
+        </where>
+
+    </select>
+
+    <select id="selectOrderDetail" resultType="com.wsl.shoppingkill.obj.vo.OrderDetailVO">
+        select to2.id as orderId, to2.creat_time as creatTime,ts.attribute as skuName, ta.name as userName,
+        ta.phone as userPhone, ta.address as userAddress,to2.status as type,tg.name as goodsName,ts.img_url as imgUrl,
+        to2.pay_price as price, to2.num ,ts.exp_price as logisticsPrice,to2.status
+        from t_order to2
+        left join t_sku ts on to2.sku_id = ts.id
+        left join t_goods tg on tg.id = ts.goods_id
+        left join t_address ta on ta.id = to2.address_id
+        where to2.del_flag = 0 and to2.id = #{id}
+    </select>
 </mapper>

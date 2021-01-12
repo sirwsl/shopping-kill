@@ -100,4 +100,30 @@
         </where>
         )tg on tg.id = ts.goods_id
     </select>
+
+    <select id="getKillGoods" resultType="com.wsl.shoppingkill.obj.bo.KillGoodsBO">
+        select sku_id as `id`,sell_num as `num`,end_time as `end`,start_time as `start` from t_activity WHERE del_flag  = 0
+            and start_time  <![CDATA[ <= ]]> #{time}
+            and end_time <![CDATA[ >= ]]> #{time}
+            and sku_id in (
+             SELECT id FROM t_sku WHERE goods_id in
+        <foreach collection="ids" item="id" index="index" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+        )
+    </select>
+
+    <update id="count">
+        update t_activity set sell_num = sell_num +1 WHERE del_flag  = 0
+        and start_time  <![CDATA[ <= ]]> #{format}
+        and end_time <![CDATA[ >= ]]> #{format}
+        and sku_id = #{skuId}
+    </update>
+
+    <update id="desert">
+        update t_activity set sell_num = sell_num -1 WHERE del_flag  = 0
+        and start_time  <![CDATA[ <= ]]> #{format}
+        and end_time <![CDATA[ >= ]]> #{format}
+        and sku_id = #{skuId}
+    </update>
 </mapper>

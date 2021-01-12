@@ -2,14 +2,12 @@ package com.wsl.shoppingkill.controller.admin;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.wsl.shoppingkill.common.Result;
 import com.wsl.shoppingkill.domain.Advertise;
-import com.wsl.shoppingkill.obj.vo.AdvertiseVO;
 import com.wsl.shoppingkill.service.AdvertiseService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
-import java.util.List;
 
 /**
  * @author : WangShiLei
@@ -68,16 +66,6 @@ public class AdvertiseController {
         return Result.success(advertiseService.delAdvertise(id));
     }
 
-    /**
-     *  获取展示广告
-     * @author : WangShiLei
-     * @date : 2020/11/9 11:25 下午
-     * @return Result<List<AdvertiseVO>>
-     **/
-    @GetMapping("/getAdvertiseForView/v1")
-    public Result<List<AdvertiseVO>> getAdvertiseVO(){
-        return Result.success(advertiseService.getAdvertiseUrl());
-    }
 
     /**
      * 获取全部广告

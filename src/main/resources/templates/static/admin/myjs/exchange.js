@@ -3,7 +3,7 @@ $.ajaxSetup({
 		"Authorization": $.cookie("token")
 	},
 	xhrFields: {
-		withCredentials: false
+		withCredentials: true
 	},
 	crossDomain: true
 });
@@ -23,14 +23,14 @@ function logger(f, b, d, a) {
 	$("#afterSale").bootstrapTable("destroy");
 	$("#afterSale").bootstrapTable({
 		method: "get",
-		url: "https://localhost/admin/getAfterSalesAll/v1",
+		url: "https://test.wslhome.top/admin/getAfterSalesAll/v1",
 		dataType: "json",
 		headers: {
 			"Authorization": $.cookie("token")
 		},
 		ajaxOptions: {
 			xhrFields: {
-				withCredentials: false
+				withCredentials: true
 			},
 			crossDomain: true
 		},
@@ -191,7 +191,7 @@ $("#sub").click(function() {
 	var a = new FormData(document.getElementById("updates"));
 	$.ajax({
 		type: "put",
-		url: "https://localhost/admin/refundGoodsAndMoney/v1",
+		url: "https://test.wslhome.top/admin/refundGoodsAndMoney/v1",
 		data: a,
 		contentType: false,
 		processData: false,

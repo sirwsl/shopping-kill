@@ -3,10 +3,11 @@ package com.wsl.shoppingkill.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.wsl.shoppingkill.domain.Goods;
-import com.wsl.shoppingkill.obj.vo.BaseVO;
-import com.wsl.shoppingkill.obj.vo.GoodsVO;
+import com.wsl.shoppingkill.obj.vo.*;
 
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author wangShilei
@@ -33,6 +34,19 @@ public interface GoodsService extends IService<Goods> {
      * @date : 2020/11/19 9:55 上午
      **/
     IPage<GoodsVO> getGoodsAll(Long current, Long size,Goods goods);
+
+
+    /**
+     * 模糊查询商品展示页获取所有商品
+     * @author wangShilei
+     * @date 2020/12/23 10:56]
+     * @param size :
+     * @param current :
+     * @param name :
+     * @return List<ViewGoodsVO>
+     */
+    IPage<ViewGoodsVO> getViewGoodsAll(String name,Long current,Long size);
+
 
     /**
      * 商品上架处理
@@ -70,4 +84,32 @@ public interface GoodsService extends IService<Goods> {
      */
     List<BaseVO> getGoodsNameAll();
 
+
+    /**
+     * 获取推荐列表
+     * @author wangShilei
+     * @date 2020/12/22 17:47
+     * @param size : 获取条数
+     * @return void
+     */
+    List<BaseGoodsVO> getRecommendedGoods(Integer size);
+
+    /**
+     * 根据goodsId获取商品的最高价格与最低价格
+     * @author wangShilei
+     * @date 2020/12/22 18:53
+     * @param goodsIds :
+     * @return java.util.List<java.util.Map<java.lang.Long,java.util.List<java.math.BigDecimal>>>
+     */
+    Map<Long, BigDecimal[]> getPriceBigAndLittle(List<Long> goodsIds);
+
+    /**
+     * 根据物品ID获取物品详情
+     * @author wangShilei
+     * @date 2020/12/28 2:58 下午
+     * @param id :
+     * @param flag :
+     * @return com.wsl.shoppingkill.obj.vo.GoodsDetailVO
+     */
+    GoodsDetailVO getGoodsDetail(Long id,Integer flag);
 }

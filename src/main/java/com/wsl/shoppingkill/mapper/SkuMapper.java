@@ -44,4 +44,23 @@ public interface SkuMapper extends BaseMapper<Sku> {
      */
     Integer getMaxNumByActivity(Long id);
 
+    /**
+     * 数量+1
+     * @author wangShilei
+     * @date 2021/1/2 2:38 上午
+     * @param id :
+     * @return boolean
+     */
+    boolean count(Long id);
+
+
+    /**
+     * 数量-1
+     * @author wangShilei
+     * @date 2021/1/2 2:38 上午
+     * @param id :
+     * @return boolean
+     */
+    boolean reduce(Long id);
+
 }

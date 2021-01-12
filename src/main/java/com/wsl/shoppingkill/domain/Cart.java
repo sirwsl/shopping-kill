@@ -68,9 +68,9 @@ public class Cart extends Model<Cart> implements Serializable {
     private LocalDateTime updateTime;
 
     /**
-    * 状态(0-正常 1-已失效)
+    * 数量
     */
-    private Integer status;
+    private Integer num;
 
     /**
     * 是否删除
@@ -88,7 +88,7 @@ public class Cart extends Model<Cart> implements Serializable {
 
     public static final String UPDATE_TIME = "update_time";
 
-    public static final String STATUS = "status";
+    public static final String NUM = "num";
 
     public static final String DEL_FLAG = "del_flag";
 }

@@ -8,9 +8,11 @@ import com.wsl.shoppingkill.domain.Goods;
 import com.wsl.shoppingkill.domain.Sku;
 import com.wsl.shoppingkill.mapper.SkuMapper;
 import com.wsl.shoppingkill.obj.constant.BaseEnum;
+import com.wsl.shoppingkill.obj.constant.RedisEnum;
 import com.wsl.shoppingkill.obj.vo.SkuVO;
 import com.wsl.shoppingkill.obj.vo.SkuVOs;
 import com.wsl.shoppingkill.service.SkuService;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -29,6 +31,9 @@ public class SkuServiceImpl extends ServiceImpl<SkuMapper, Sku> implements SkuSe
 
     @Resource
     private OssComponent ossComponent;
+
+    @Resource
+    private RedisTemplate<String,Integer> redisTemplate;
 
     @Override
     public SkuVO getSku(Long id) {
@@ -64,6 +69,7 @@ public class SkuServiceImpl extends ServiceImpl<SkuMapper, Sku> implements SkuSe
                 .setGoodsId(skuVO.getGoodsId())
                 .setUpdateTime(LocalDateTime.now())
                 .insertOrUpdate();
+        redisTemplate.opsForValue().set(RedisEnum.GOODS_SKU_NUM+sku.getId(),sku.getNum());
         return true;
     }
 
@@ -87,11 +93,13 @@ public class SkuServiceImpl extends ServiceImpl<SkuMapper, Sku> implements SkuSe
                 .setUpdateTime(LocalDateTime.now())
                 .setCreatTime(LocalDateTime.now())
                 .insert();
+        redisTemplate.opsForValue().set(RedisEnum.GOODS_SKU_NUM+sku.getId(),sku.getNum());
         return true;
     }
 
     @Override
     public boolean delSku(Long id) {
+        redisTemplate.delete(RedisEnum.GOODS_SKU_NUM+id);
         return skuMapper.deleteById(id)>0;
     }
 

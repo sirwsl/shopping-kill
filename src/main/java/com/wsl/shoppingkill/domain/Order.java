@@ -88,7 +88,7 @@ public class Order extends Model<Order> implements Serializable {
     /**
     * 地址id
     */
-    private Integer addressId;
+    private Long addressId;
 
     /**
     * 支付金额
