@@ -29,12 +29,12 @@ static.wslhome.top  127.0.0.1
 
 ### 效果
 PS：不过多展示图片，需要看效果自己访问kill.wslhome.top 或 admin.wslhome.top
-![前端首页](https://github.com/sirwsl/shopping-kil/raw/master/view/QQ20210112-182222.png)
-![商城](https://github.com/sirwsl/shopping-kil/raw/master/view/QQ20210112-182254.png)
-![后台主页](https://github.com/sirwsl/shopping-kil/raw/master/view/QQ20210112-182437.png)
-![后台活动](https://github.com/sirwsl/shopping-kil/raw/master/view/QQ20210112-182453.png)
-![后台主页](https://github.com/sirwsl/shopping-kil/raw/master/view/QQ20210112-182453.png)
-![我的订单](https://github.com/sirwsl/shopping-kil/raw/master/view/QQ20210112-182349.png)
+![前端首页](https://github.com/sirwsl/shopping-kill/raw/master/view/QQ20210112-182222.png)
+![商城](https://github.com/sirwsl/shopping-kill/raw/master/view/QQ20210112-182254.png)
+![后台主页](https://github.com/sirwsl/shopping-kill/raw/master/view/QQ20210112-182437.png)
+![后台活动](https://github.com/sirwsl/shopping-kill/raw/master/view/QQ20210112-182453.png)
+![后台主页](https://github.com/sirwsl/shopping-kill/raw/master/view/QQ20210112-182453.png)
+![我的订单](https://github.com/sirwsl/shopping-kill/raw/master/view/QQ20210112-182349.png)
 
 ### 简介
 
