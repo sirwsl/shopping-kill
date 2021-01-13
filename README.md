@@ -28,6 +28,32 @@ static.wslhome.top  127.0.0.1
 ```
 其中kill.wslhome.top 为前端访问地址，admin为后台管理地址，static为静态资源服务器地址
 
+### 知识点
+* springboot+Mybatis-plus搭建
+* redis、zookeeper、mq集群
+* redis缓存、jetCache缓存
+* RabbitMq消息通知、死信、延迟队列使用
+* zookeeper分布式锁
+* 自定义注解
+* 统一封装返回
+* 切面使用
+* 设计模式使用
+* 事物、回滚使用
+* docker、nginx使用
+* 图片服务器OSS使用
+* stram、lambda使用
+* 多线程、线程池使用
+* 定时任务使用
+* 短信验证、邮件服务使用
+* JWT验证TOKEN令牌使用
+* 雪花算法分布式算法使用
+* 拦截器、Log4j日志使用
+* 还有很多的工具类、组件使用
+* 数据库连接池Druid使用
+* MapStruct实体转化工具使用
+* 然后部署时候CDN之类的使用
+* ... ...
+
 ### 效果
 PS：不过多展示图片，需要看效果自己访问kill.wslhome.top 或 admin.wslhome.top
 ![前端首页](https://github.com/sirwsl/shopping-kill/raw/master/view/QQ20210112-182222.png)
