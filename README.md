@@ -3,7 +3,8 @@
 ### 后台管理：https://admin.wslhome.top
 
 **项目V1.0版本已上线，该项目是今年毕设项目。** 
-PS：码云同步仓库地址：https：// gitee.com/sirwsl/ShoppingKill
+PS：码云同步仓库地址：https://gitee.com/sirwsl/ShoppingKill
+
 两处代码完全一致，gitee上的gitlog记录更加详细
 **喜欢就给个♥** 
 
