@@ -27,36 +27,36 @@ public class TypesServiceImpl extends ServiceImpl<TypesMapper, Types> implements
     @Override
     @MyLog(value = "#type.name", detail = "添加商品类别", grade = LoggerEnum.INFO)
     public boolean addTypes(Types type) {
-        return typesMapper.insert(type)>0;
+        return typesMapper.insert(type) > 0;
     }
 
     @Override
     @MyLog(value = "#id", detail = "删除商品类别", grade = LoggerEnum.INFO)
     public boolean delTypes(Integer id) {
-        return typesMapper.deleteById(id)>0;
+        return typesMapper.deleteById(id) > 0;
     }
 
     @Override
     @MyLog(value = "#types.id", detail = "更新商品类别", grade = LoggerEnum.NONE)
     public boolean updateTypes(Types types) {
-        return typesMapper.updateById(types)>0;
+        return typesMapper.updateById(types) > 0;
     }
 
     @Override
-    public IPage<Types> getTypesAll(Long current,Long size) {
-        return typesMapper.selectPage(new Page<>(current,size),new QueryWrapper<>());
+    public IPage<Types> getTypesAll(Long current, Long size) {
+        return typesMapper.selectPage(new Page<>(current, size), new QueryWrapper<>());
     }
 
     @Override
-    public IPage<Types> getTypesByNameAndId(Long current,Long size,String name,Integer id) {
+    public IPage<Types> getTypesByNameAndId(Long current, Long size, String name, Integer id) {
         QueryWrapper<Types> select = new QueryWrapper<>();
-        if (id != null){
+        if (id != null) {
             select.like(Types.ID, id);
         }
-        if (StringUtils.isNotBlank(name)){
+        if (StringUtils.isNotBlank(name)) {
             select.like(Types.NAME, name);
         }
 
-        return typesMapper.selectPage(new Page<>(current,size),select);
+        return typesMapper.selectPage(new Page<>(current, size), select);
     }
 }

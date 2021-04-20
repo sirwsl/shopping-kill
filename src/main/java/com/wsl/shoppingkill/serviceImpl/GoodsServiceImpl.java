@@ -37,7 +37,7 @@ import java.util.stream.Collectors;
  * @author WangShilei
  */
 @Service
-public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements GoodsService{
+public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements GoodsService {
 
     @Resource
     private GoodsMapper goodsMapper;
@@ -55,7 +55,7 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
     private ActivityMapper activityMapper;
 
     @Resource
-    private RedisTemplate<String,ViewGoodsVO> redisTemplate;
+    private RedisTemplate<String, ViewGoodsVO> redisTemplate;
 
 
     private final String min = "?x-oss-process=image/resize,m_fill,h_50,w_50";
@@ -67,14 +67,14 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean addGoods(Goods goods) throws Exception {
-        goods.setImgUrl(ossComponent.uploadFile(BaseEnum.OSS_GOODS,goods.getFile())) ;
-        return goodsMapper.insert(goods)>0;
+        goods.setImgUrl(ossComponent.uploadFile(BaseEnum.OSS_GOODS, goods.getFile()));
+        return goodsMapper.insert(goods) > 0;
     }
 
     @Override
     public IPage<GoodsVO> getGoodsAll(Long current, Long size, Goods goods) {
         IPage<GoodsVO> allGoods = goodsMapper.getAllGoods(new Page<>(current, size), goods);
-        allGoods.getRecords().forEach(li->li.setImgUrl(li.getImgUrl()+min));
+        allGoods.getRecords().forEach(li -> li.setImgUrl(li.getImgUrl() + min));
         Sku sku = new Sku();
         Map<Long, List<Sku>> collect = sku.selectList(new QueryWrapper<Sku>().in(Sku.GOODS_ID,
                 allGoods.getRecords()
@@ -94,10 +94,10 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
         IPage<ViewGoodsVO> viewGoodsVOIPage = new Page<>();
         //获取商品
         QueryWrapper<Goods> queryWrapper = new QueryWrapper<Goods>().eq(Goods.SHELF, true);
-        if (StringUtils.isNotBlank(name)){
+        if (StringUtils.isNotBlank(name)) {
             queryWrapper.like(Goods.NAME, name);
         }
-        IPage<Goods> goods = goodsMapper.selectPage(new Page<>(current, size),queryWrapper);
+        IPage<Goods> goods = goodsMapper.selectPage(new Page<>(current, size), queryWrapper);
 
         //取出records
         List<ViewGoodsVO> viewGoodsVOs = GoodsConverter.INSTANCE.Goods2ViewGoodsVO(goods.getRecords());
@@ -106,7 +106,7 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
             List<Long> ids = viewGoodsVOs.stream().map(ViewGoodsVO::getId).collect(Collectors.toList());
             Map<Long, List<Sku>> collect = skuMapper.selectList(new QueryWrapper<Sku>()
                     .in(Sku.GOODS_ID, ids)
-                    .select(Sku.ID,Sku.IMG_URL, Sku.NUM, Sku.SELL_PRICE,Sku.GOODS_ID))
+                    .select(Sku.ID, Sku.IMG_URL, Sku.NUM, Sku.SELL_PRICE, Sku.GOODS_ID))
                     .stream()
                     .collect(Collectors.groupingBy(Sku::getGoodsId));
             //遍历goods取对应sku赋值
@@ -120,7 +120,7 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
                     li.setNumber(count);
                     li.setSkuImgUrl(skus.stream()
                             .filter(t -> StringUtils.isNotBlank(t.getImgUrl()))
-                            .map(t -> t.getImgUrl()+viewMin)
+                            .map(t -> t.getImgUrl() + viewMin)
                             .collect(Collectors.toList()));
                     li.setSkuId(skus.stream()
                             .filter(t -> t.getId() > 0)
@@ -129,7 +129,7 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 
                     li.setMaxPrice(Collections.max(skus, Comparator.comparing(Sku::getSellPrice)).getSellPrice());
                     li.setMinPrice(Collections.min(skus, Comparator.comparing(Sku::getSellPrice)).getSellPrice());
-                    if (li.getMaxPrice().compareTo(li.getMinPrice())==0){
+                    if (li.getMaxPrice().compareTo(li.getMinPrice()) == 0) {
                         li.setMaxPrice(null);
                     }
                 }
@@ -144,28 +144,26 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
     }
 
 
-
-
     @Override
     @MyLog(value = "#id", detail = "商品上架处理", grade = LoggerEnum.INFO)
     public String merchandise(Long id) {
 
         Goods goods = goodsMapper.selectOne(new QueryWrapper<Goods>()
                 .eq(Goods.ID, id)
-                .select(Goods.ID,Goods.SHELF));
+                .select(Goods.ID, Goods.SHELF));
 
         Boolean shelf = goods.getShelf();
         System.err.println(shelf);
-        if (shelf){
-            if (goods.setShelf(false).updateById()){
+        if (shelf) {
+            if (goods.setShelf(false).updateById()) {
                 return "下架成功";
-            }else{
+            } else {
                 return "下架失败";
             }
-        }else{
-            if (goods.setShelf(true).updateById()){
+        } else {
+            if (goods.setShelf(true).updateById()) {
                 return "上架成功";
-            }else{
+            } else {
                 return "下架失败";
             }
         }
@@ -173,13 +171,13 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
     }
 
     @Override
-    @MyLog(value = "#goods.id", detail = "商品更新" ,grade = LoggerEnum.INFO)
+    @MyLog(value = "#goods.id", detail = "商品更新", grade = LoggerEnum.INFO)
     @Transactional(rollbackFor = Exception.class)
     public boolean updateGoods(Goods goods) throws Exception {
-        if (goods.getFile()!=null && StringUtils.isNotBlank(goods.getFile().getOriginalFilename())){
-            goods.setImgUrl(ossComponent.uploadFile(BaseEnum.OSS_GOODS,goods.getFile()));
+        if (goods.getFile() != null && StringUtils.isNotBlank(goods.getFile().getOriginalFilename())) {
+            goods.setImgUrl(ossComponent.uploadFile(BaseEnum.OSS_GOODS, goods.getFile()));
         }
-        return goodsMapper.updateById(goods)>0;
+        return goodsMapper.updateById(goods) > 0;
     }
 
     @Override
@@ -189,7 +187,7 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
         if (count > 0) {
             return false;
         }
-        return goodsMapper.deleteById(id)>0;
+        return goodsMapper.deleteById(id) > 0;
     }
 
     @Override
@@ -199,33 +197,33 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 
 
     @Override
-    @Cached(name = "getRecommendedGoods",expire = 60,cacheType = CacheType.REMOTE,timeUnit = TimeUnit.MINUTES,localLimit = 40)
+    @Cached(name = "getRecommendedGoods", expire = 60, cacheType = CacheType.REMOTE, timeUnit = TimeUnit.MINUTES, localLimit = 40)
     public List<BaseGoodsVO> getRecommendedGoods(Integer size) {
         //随机获取10条记录
-        String sql = "order by rand() limit "+size;
-        List<Goods> goods = goodsMapper.selectList(new QueryWrapper<Goods>().eq(Goods.SHELF,true).last(sql));
-        if (CollectionUtils.isEmpty(goods)){
+        String sql = "order by rand() limit " + size;
+        List<Goods> goods = goodsMapper.selectList(new QueryWrapper<Goods>().eq(Goods.SHELF, true).last(sql));
+        if (CollectionUtils.isEmpty(goods)) {
             return new ArrayList<>();
         }
         List<BaseGoodsVO> baseGoodsVOs = GoodsConverter.INSTANCE.Goods2BaseGoodsVO(goods);
-        baseGoodsVOs.forEach(li ->li.setImgUrl(li.getImgUrl()+recomMin));
+        baseGoodsVOs.forEach(li -> li.setImgUrl(li.getImgUrl() + recomMin));
         Map<Long, BigDecimal[]> priceBigAndLittle = getPriceBigAndLittle(
                 baseGoodsVOs.stream().map(BaseGoodsVO::getId).collect(Collectors.toList()));
-        if (CollectionUtils.isEmpty(priceBigAndLittle)){
+        if (CollectionUtils.isEmpty(priceBigAndLittle)) {
             return new ArrayList<>();
         }
 
-        baseGoodsVOs.forEach(li ->{
+        baseGoodsVOs.forEach(li -> {
             //0-大 1-小
             BigDecimal[] bigDecimals = priceBigAndLittle.get(li.getId());
-            if (bigDecimals != null){
-                if (bigDecimals[0] != null && bigDecimals[0].compareTo(BigDecimal.ZERO)>0){
+            if (bigDecimals != null) {
+                if (bigDecimals[0] != null && bigDecimals[0].compareTo(BigDecimal.ZERO) > 0) {
                     li.setMaxPrice(bigDecimals[0]);
                 }
-                if (bigDecimals[1] != null && bigDecimals[1].compareTo(BigDecimal.ZERO)>0){
+                if (bigDecimals[1] != null && bigDecimals[1].compareTo(BigDecimal.ZERO) > 0) {
                     li.setMinPrice(bigDecimals[1]);
                 }
-                if (li.getMaxPrice() != null && li.getMinPrice() != null && li.getMinPrice().compareTo(li.getMaxPrice())==0){
+                if (li.getMaxPrice() != null && li.getMinPrice() != null && li.getMinPrice().compareTo(li.getMaxPrice()) == 0) {
                     li.setMinPrice(null);
                 }
             }
@@ -237,30 +235,30 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 
     @Override
     public Map<Long, BigDecimal[]> getPriceBigAndLittle(List<Long> goodsIds) {
-        if (CollectionUtils.isEmpty(goodsIds)){
+        if (CollectionUtils.isEmpty(goodsIds)) {
             return null;
         }
         //获取最高最低价格
         Map<Long, BigDecimal[]> price = new LinkedHashMap<>(64);
         skuMapper.selectList(new QueryWrapper<Sku>()
-                .in(Sku.GOODS_ID,goodsIds)
-                .select(Sku.GOODS_ID,Sku.SELL_PRICE))
+                .in(Sku.GOODS_ID, goodsIds)
+                .select(Sku.GOODS_ID, Sku.SELL_PRICE))
                 .stream()
                 .filter(Objects::nonNull)
                 .collect(Collectors.groupingBy(Sku::getGoodsId))
-                .forEach((k,v) ->{
+                .forEach((k, v) -> {
                     //0-max 1-min
                     BigDecimal[] bigDecimals = new BigDecimal[2];
-                    if (v.size()>=2){
+                    if (v.size() >= 2) {
                         BigDecimal sellPrice = Collections.max(v, Comparator.comparing(Sku::getSellPrice)).getSellPrice();
                         bigDecimals[0] = sellPrice;
                         sellPrice = Collections.min(v, Comparator.comparing(Sku::getSellPrice)).getSellPrice();
                         bigDecimals[1] = sellPrice;
-                    }else if (v.size() == 1){
+                    } else if (v.size() == 1) {
                         BigDecimal sellPrice = Collections.max(v, Comparator.comparing(Sku::getSellPrice)).getSellPrice();
                         bigDecimals[0] = sellPrice;
                     }
-                    price.put(k,bigDecimals);
+                    price.put(k, bigDecimals);
                 });
 
         return price;
@@ -268,25 +266,25 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
     }
 
     @Override
-    @Cached(name = "goodsDetail" ,expire = 30,cacheType = CacheType.BOTH,localLimit = 50)
-    public GoodsDetailVO getGoodsDetail(Long id,Integer flag) {
+    @Cached(name = "goodsDetail", expire = 30, cacheType = CacheType.BOTH, localLimit = 50)
+    public GoodsDetailVO getGoodsDetail(Long id, Integer flag) {
         GoodsDetailVO goodsDetailVO = new GoodsDetailVO();
 
         Goods goods = goodsMapper.selectById(id);
-        if (Objects.isNull(goods)){
+        if (Objects.isNull(goods)) {
             return goodsDetailVO;
         }
         List<Sku> collect1 = skuMapper.selectList(new QueryWrapper<Sku>().eq(Sku.GOODS_ID, goods.getId()));
-        List<Sku> skuList ;
-        if (flag == 100){
-            List<Long> collect  = activityMapper.selectList(new QueryWrapper<Activity>()
+        List<Sku> skuList;
+        if (flag == 100) {
+            List<Long> collect = activityMapper.selectList(new QueryWrapper<Activity>()
                     .le(Advertise.START_TIME, LocalDateTime.now())
                     .ge(Advertise.END_TIME, LocalDateTime.now()))
                     .stream()
                     .map(Activity::getSkuId)
                     .collect(Collectors.toList());
             skuList = collect1.stream().filter(li -> collect.contains(li.getId())).collect(Collectors.toList());
-        }else{
+        } else {
             skuList = collect1;
         }
 

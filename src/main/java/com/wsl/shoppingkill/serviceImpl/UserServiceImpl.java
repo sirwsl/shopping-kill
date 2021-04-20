@@ -39,7 +39,7 @@ import java.util.Objects;
  * @author WangShilei
  */
 @Service
-public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService{
+public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
 
     @Resource
     private UserMapper userMapper;
@@ -62,7 +62,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Override
     public IPage<User> getUserAll(Integer size, Integer current) {
         final IPage<User> iPage = userMapper.selectPage(new Page<>(current, size), new QueryWrapper<>());
-        if (CollectionUtils.isNotEmpty(iPage.getRecords())){
+        if (CollectionUtils.isNotEmpty(iPage.getRecords())) {
             iPage.getRecords().forEach(li -> li.setPassword(CommonUtil.replaceUserName(li.getPassword()))
                     .setEmail(CommonUtil.replaceUserName(li.getEmail()))
                     .setIdCard(CommonUtil.replaceUserName(li.getIdCard()))
@@ -74,22 +74,22 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
-    @MyLog(detail = "修改会员信息",grade = LoggerEnum.INFO,value = "#user.id")
-    public boolean updateUserInfo(User user) throws ExperienceException{
+    @MyLog(detail = "修改会员信息", grade = LoggerEnum.INFO, value = "#user.id")
+    public boolean updateUserInfo(User user) throws ExperienceException {
         try {
-            if(Objects.nonNull(abstractCurrentRequestComponent.getCurrentUser()) && abstractCurrentRequestComponent.getCurrentUser().getFlag() != null
-                    && abstractCurrentRequestComponent.getCurrentUser().getFlag()==1000){
+            if (Objects.nonNull(abstractCurrentRequestComponent.getCurrentUser()) && abstractCurrentRequestComponent.getCurrentUser().getFlag() != null
+                    && abstractCurrentRequestComponent.getCurrentUser().getFlag() == 1000) {
                 throw new ExperienceException("体验账号权限不足");
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new ExperienceException("体验账号权限不足");
         }
-        if (userMapper.updateById(user)>0){
-            rabbitTemplate.convertAndSend(RabbitMqEnum.Exchange.EXCHANGE_NOTICE,RabbitMqEnum.Key.KEY_NOTICE_SMS,
-                    getSmsObject(user,SmsEnum.UPDATE_INFO.getCode()));
-            if (StringUtils.isNotBlank(user.getEmail())){
-                rabbitTemplate.convertAndSend(RabbitMqEnum.Exchange.EXCHANGE_NOTICE,RabbitMqEnum.Key.KEY_NOTICE_MAIL,
-                        getMailObject(user,"UpdateUser.ftl","用户信息修改通知"));
+        if (userMapper.updateById(user) > 0) {
+            rabbitTemplate.convertAndSend(RabbitMqEnum.Exchange.EXCHANGE_NOTICE, RabbitMqEnum.Key.KEY_NOTICE_SMS,
+                    getSmsObject(user, SmsEnum.UPDATE_INFO.getCode()));
+            if (StringUtils.isNotBlank(user.getEmail())) {
+                rabbitTemplate.convertAndSend(RabbitMqEnum.Exchange.EXCHANGE_NOTICE, RabbitMqEnum.Key.KEY_NOTICE_MAIL,
+                        getMailObject(user, "UpdateUser.ftl", "用户信息修改通知"));
             }
             return true;
         }
@@ -97,25 +97,25 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
-    @MyLog(detail = "删除会员",grade = LoggerEnum.SERIOUS,value = "#id")
-    public boolean delUserInfo(Long id) throws ExperienceException{
+    @MyLog(detail = "删除会员", grade = LoggerEnum.SERIOUS, value = "#id")
+    public boolean delUserInfo(Long id) throws ExperienceException {
         try {
-            if(Objects.nonNull(abstractCurrentRequestComponent.getCurrentUser()) && abstractCurrentRequestComponent.getCurrentUser().getFlag() != null
-                    && abstractCurrentRequestComponent.getCurrentUser().getFlag()==1000){
+            if (Objects.nonNull(abstractCurrentRequestComponent.getCurrentUser()) && abstractCurrentRequestComponent.getCurrentUser().getFlag() != null
+                    && abstractCurrentRequestComponent.getCurrentUser().getFlag() == 1000) {
                 throw new ExperienceException("体验账号权限不足");
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new ExperienceException("体验账号权限不足");
         }
         User user = userMapper.selectById(id);
-        if(userMapper.deleteById(id)>0){
-            if (StringUtils.isNotBlank(user.getPhone())){
-                rabbitTemplate.convertAndSend(RabbitMqEnum.Exchange.EXCHANGE_NOTICE,RabbitMqEnum.Key.KEY_NOTICE_SMS,
-                        getSmsObject(user,SmsEnum.REMOVE_AUTHORIZATION.getCode()));
+        if (userMapper.deleteById(id) > 0) {
+            if (StringUtils.isNotBlank(user.getPhone())) {
+                rabbitTemplate.convertAndSend(RabbitMqEnum.Exchange.EXCHANGE_NOTICE, RabbitMqEnum.Key.KEY_NOTICE_SMS,
+                        getSmsObject(user, SmsEnum.REMOVE_AUTHORIZATION.getCode()));
             }
-            if (StringUtils.isNotBlank(user.getEmail())){
-                rabbitTemplate.convertAndSend(RabbitMqEnum.Exchange.EXCHANGE_NOTICE,RabbitMqEnum.Key.KEY_NOTICE_MAIL,
-                        getMailObject(user,"DelUser.flt","删除账号通知"));
+            if (StringUtils.isNotBlank(user.getEmail())) {
+                rabbitTemplate.convertAndSend(RabbitMqEnum.Exchange.EXCHANGE_NOTICE, RabbitMqEnum.Key.KEY_NOTICE_MAIL,
+                        getMailObject(user, "DelUser.flt", "删除账号通知"));
             }
         }
 
@@ -125,17 +125,17 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Override
     public User getUserInfo() {
         Long id = abstractCurrentRequestComponent.getCurrentUser().getId();
-        if (id ==null){
+        if (id == null) {
             return null;
         }
         User user = userMapper.selectById(id);
-        user.setImg(user.getImg()+"?x-oss-process=image/resize,m_fill,h_100,w_100/rounded-corners,r_50");
+        user.setImg(user.getImg() + "?x-oss-process=image/resize,m_fill,h_100,w_100/rounded-corners,r_50");
         return user;
     }
 
     @Override
     public boolean updateUserInfoBySelf(User user) {
-        return userMapper.updateById(user)>0;
+        return userMapper.updateById(user) > 0;
     }
 
     @Override
@@ -144,22 +144,22 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         Long id = abstractCurrentRequestComponent.getCurrentUser().getId();
         try {
             String s = ossComponent.uploadFile(BaseEnum.OSS_USER, file);
-            if (userMapper.updateById(new User().setId(id).setImg(s).setUpdateTime(LocalDateTime.now()))>0){
-                Cookie img = new Cookie("img", s+"?x-oss-process=image/resize,m_fill,h_100,w_100/rounded-corners,r_50");
+            if (userMapper.updateById(new User().setId(id).setImg(s).setUpdateTime(LocalDateTime.now())) > 0) {
+                Cookie img = new Cookie("img", s + "?x-oss-process=image/resize,m_fill,h_100,w_100/rounded-corners,r_50");
                 img.setPath("/");
                 img.setDomain(doMainUrl);
                 img.setMaxAge(3600);
                 response.addCookie(img);
                 return true;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return false;
     }
 
     @Override
-    @MyLog(detail = "会员注册",grade = LoggerEnum.NONE)
+    @MyLog(detail = "会员注册", grade = LoggerEnum.NONE)
     public boolean addUser(User user) {
         return user.insert();
     }
@@ -169,21 +169,21 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     public boolean updatePassword(String old, String newPassword, HttpServletResponse response, HttpServletRequest request) {
         Long id = abstractCurrentRequestComponent.getCurrentUser().getId();
         User user = userMapper.selectById(id);
-        if (Objects.nonNull(user)){
+        if (Objects.nonNull(user)) {
             if (old.equals(user.getPassword())) {
-               try {
-                   boolean updateById = user.setPassword(newPassword).updateById();
-                   if (updateById){
-                       if (loginService.exit(response,request)){
-                           return true;
-                       }else{
-                           throw new Exception();
-                       }
+                try {
+                    boolean updateById = user.setPassword(newPassword).updateById();
+                    if (updateById) {
+                        if (loginService.exit(response, request)) {
+                            return true;
+                        } else {
+                            throw new Exception();
+                        }
 
-                   }
-               }catch (Exception e){
-                   TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-               }
+                    }
+                } catch (Exception e) {
+                    TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+                }
             }
         }
         return false;
@@ -193,7 +193,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     /**
      * 内部方法引用
      */
-    private SmsObject getSmsObject(User user,Integer type){
+    private SmsObject getSmsObject(User user, Integer type) {
         List<String> userDescription = new ArrayList<>(4);
         userDescription.add(user.getNickName());
         userDescription.add(user.getName());
@@ -204,12 +204,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         return smsObject;
     }
 
-    private MailObject getMailObject(User user,String template,String subject){
+    private MailObject getMailObject(User user, String template, String subject) {
         HashMap<String, String> content = new HashMap<>(8);
-        content.put("name",user.getNickName());
-        content.put("code",user.getName());
-        content.put("phone",user.getPhone());
-        content.put("mail",user.getEmail());
+        content.put("name", user.getNickName());
+        content.put("code", user.getName());
+        content.put("phone", user.getPhone());
+        content.put("mail", user.getEmail());
         MailObject mailObject = new MailObject();
         mailObject.setTemplate(template)
                 .setNumber(user.getEmail())

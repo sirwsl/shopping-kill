@@ -10,12 +10,13 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * 启动类
+ *
  * @author wangshilei
  * @date 2020/10/19 13:55
  **/
 
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
-@EnableMethodCache(basePackages = { "com.wsl.shoppingkill" })
+@EnableMethodCache(basePackages = {"com.wsl.shoppingkill"})
 @EnableCreateCacheAnnotation
 @EntityScan(basePackages = {"com.wsl.shoppingkill.domain"})
 @EnableTransactionManagement

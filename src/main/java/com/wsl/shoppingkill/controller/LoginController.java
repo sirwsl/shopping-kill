@@ -39,6 +39,7 @@ public class LoginController {
 
     @Resource
     private UserService userService;
+
     /**
      * 用户登录接口
      *
@@ -81,7 +82,7 @@ public class LoginController {
             return Result.error("error", "验证码不正确");
         }
 
-        if (loginService.experienceLogin(response,userParam)){
+        if (loginService.experienceLogin(response, userParam)) {
             return Result.success("登录成功");
         }
         userParam.setType(BaseEnum.ADMIN);
@@ -93,40 +94,41 @@ public class LoginController {
 
     /**
      * 退出系统
+     *
+     * @param response :
+     * @param request  :
+     * @return Result<java.lang.Boolean>
      * @author wangShilei
      * @date 2020/12/3 14:08
-     * @param response :
-     * @param request :
-     * @return Result<java.lang.Boolean>
      */
     @GetMapping("/exit/v1")
-    public Result<Boolean> exitLogin(HttpServletResponse response, HttpServletRequest request){
-        return Result.success(loginService.exit(response,request));
+    public Result<Boolean> exitLogin(HttpServletResponse response, HttpServletRequest request) {
+        return Result.success(loginService.exit(response, request));
     }
 
 
     @PostMapping("/addUser/v1")
-    public Result<String> addUser(String codes,@Valid User user,HttpServletRequest request){
-        if (StringUtils.isBlank(codes)){
+    public Result<String> addUser(String codes, @Valid User user, HttpServletRequest request) {
+        if (StringUtils.isBlank(codes)) {
             return Result.error("error", "验证码不能为空");
         }
         if (!verifyComponent.imgVerifyCode(codes, request)) {
             return Result.error("error", "验证码不正确");
         }
-        if(!RegexUtils.checkEmail(user.getEmail())){
-            return Result.error("error","邮箱校验失败，请更换邮箱重试");
+        if (!RegexUtils.checkEmail(user.getEmail())) {
+            return Result.error("error", "邮箱校验失败，请更换邮箱重试");
         }
-        if (!RegexUtils.checkMobile(user.getPhone())){
-            return Result.error("error","手机号校验失败，请更换手机号重试");
-        }
-
-        if(!RegexUtils.checkIdCard(user.getIdCard())){
-            return Result.error("error","身份证号校验失败，请认真填写身份证号");
+        if (!RegexUtils.checkMobile(user.getPhone())) {
+            return Result.error("error", "手机号校验失败，请更换手机号重试");
         }
 
-        if (userService.addUser(user)){
+        if (!RegexUtils.checkIdCard(user.getIdCard())) {
+            return Result.error("error", "身份证号校验失败，请认真填写身份证号");
+        }
+
+        if (userService.addUser(user)) {
             return Result.success("恭喜您注册成功！请尽情使用该系统进行购物");
         }
-        return Result.error("error","注册失败，请您稍后再试");
+        return Result.error("error", "注册失败，请您稍后再试");
     }
 }

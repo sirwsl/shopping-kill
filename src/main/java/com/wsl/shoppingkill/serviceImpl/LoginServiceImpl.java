@@ -44,29 +44,29 @@ public class LoginServiceImpl implements LoginService {
     private JwtComponent jwtComponent;
 
     @Resource
-    private RedisTemplate<String,UserBO> redisTemplate;
+    private RedisTemplate<String, UserBO> redisTemplate;
 
     @Override
     public boolean login(HttpServletResponse response, UserParam userParam) throws UnsupportedEncodingException {
         //查看账号是不是手机号
-        if(RegexUtils.checkMobile(userParam.getName())){
+        if (RegexUtils.checkMobile(userParam.getName())) {
             userParam.setPhone(userParam.getName());
             userParam.setName(null);
         }
         //登录
         UserBO userBO = loginMapper.login(userParam);
-        if (Objects.isNull(userBO)){
+        if (Objects.isNull(userBO)) {
             return false;
         }
         userBO.setFlag(10);
         String token = jwtComponent.getToken(userBO);
-        setRes(response,token,userBO);
-        redisTemplate.opsForValue().set(RedisEnum.VERIFY_TOKEN+token,userBO,redisToken, TimeUnit.SECONDS);
+        setRes(response, token, userBO);
+        redisTemplate.opsForValue().set(RedisEnum.VERIFY_TOKEN + token, userBO, redisToken, TimeUnit.SECONDS);
         return true;
     }
 
     @Override
-    @MyLog(detail = "退出登录",grade = LoggerEnum.INFO)
+    @MyLog(detail = "退出登录", grade = LoggerEnum.INFO)
     public boolean exit(HttpServletResponse response, HttpServletRequest request) {
         Cookie name = new Cookie("name", null);
         name.setPath("/");
@@ -78,21 +78,21 @@ public class LoginServiceImpl implements LoginService {
         img.setDomain(doMainUrl);
         img.setMaxAge(0);
         response.addCookie(img);
-        Cookie token1 = new Cookie("token",null);
+        Cookie token1 = new Cookie("token", null);
         token1.setPath("/");
         token1.setMaxAge(0);
         token1.setDomain(doMainUrl);
         response.addCookie(token1);
         String header = request.getHeader(JwtEnum.AUTH_HEADER_KEY);
-        response.setHeader(JwtEnum.AUTH_HEADER_KEY,"");
+        response.setHeader(JwtEnum.AUTH_HEADER_KEY, "");
 
         if (StringUtils.isEmpty(header)) {
-            if (request.getCookies()!=null&&request.getCookies().length > 0){
+            if (request.getCookies() != null && request.getCookies().length > 0) {
                 for (Cookie cookie : request.getCookies()) {
-                    if (JwtEnum.TOKEN.equals(cookie.getName())){
+                    if (JwtEnum.TOKEN.equals(cookie.getName())) {
                         header = cookie.getValue();
                         String token = header.substring(JwtEnum.TOKEN_PREFIX.length());
-                        redisTemplate.delete(RedisEnum.VERIFY_TOKEN+token);
+                        redisTemplate.delete(RedisEnum.VERIFY_TOKEN + token);
 
                     }
                 }
@@ -105,24 +105,23 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public boolean experienceLogin(HttpServletResponse response, UserParam userParam) throws UnsupportedEncodingException {
         UserBO userBO = redisTemplate.opsForValue().get(RedisEnum.EXPERIENCE_LOGIN + userParam.getName());
-        if (!Objects.isNull(userBO)){
+        if (!Objects.isNull(userBO)) {
             String token = jwtComponent.getToken(userBO);
-            setRes(response,token,userBO);
+            setRes(response, token, userBO);
             return true;
         }
         return false;
     }
 
 
-
-    private void setRes(HttpServletResponse response,String token,UserBO userBO) throws UnsupportedEncodingException {
-        response.setHeader(JwtEnum.AUTH_HEADER_KEY, JwtEnum.TOKEN_PREFIX+token);
+    private void setRes(HttpServletResponse response, String token, UserBO userBO) throws UnsupportedEncodingException {
+        response.setHeader(JwtEnum.AUTH_HEADER_KEY, JwtEnum.TOKEN_PREFIX + token);
         Cookie name = new Cookie("name", URLEncoder.encode(userBO.getName(), "UTF-8"));
         name.setPath("/");
         name.setDomain(doMainUrl);
         name.setMaxAge(3600);
         response.addCookie(name);
-        String headImg = URLEncoder.encode( userBO.getUrl()+"?x-oss-process=image/resize,m_fill,h_100,w_100/rounded-corners,r_50","utf-8");
+        String headImg = URLEncoder.encode(userBO.getUrl() + "?x-oss-process=image/resize,m_fill,h_100,w_100/rounded-corners,r_50", "utf-8");
         Cookie img = new Cookie("img", headImg);
         img.setPath("/");
         img.setDomain(doMainUrl);

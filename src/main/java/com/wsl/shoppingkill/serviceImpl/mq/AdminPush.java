@@ -17,7 +17,9 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.io.IOException;
 
-/** 管理员消息推送
+/**
+ * 管理员消息推送
+ *
  * @author : WangShiLei
  * @date : 2020/11/15 10:38 下午
  **/
@@ -33,29 +35,30 @@ public class AdminPush {
 
     /**
      * 短信通知创建管理员
-     * @author : WangShiLei
-     * @date : 2020/11/15 10:55 下午
+     *
      * @param smsObject:
      * @param channel:
      * @param message:
+     * @author : WangShiLei
+     * @date : 2020/11/15 10:55 下午
      **/
     @RabbitListener(bindings = @QueueBinding(
-            value = @Queue(value = RabbitMqEnum.Queue.QUEUE_NOTICE_SMS,exclusive = "false",autoDelete = "false",durable = "true"),
+            value = @Queue(value = RabbitMqEnum.Queue.QUEUE_NOTICE_SMS, exclusive = "false", autoDelete = "false", durable = "true"),
             exchange = @Exchange(RabbitMqEnum.Exchange.EXCHANGE_NOTICE),
             key = RabbitMqEnum.Key.KEY_NOTICE_SMS,
             ignoreDeclarationExceptions = "true"
     ))
     public void addAdminSms(SmsObject smsObject, Channel channel, Message message) throws IOException {
         try {
-            channel.basicAck(message.getMessageProperties().getDeliveryTag(),false);
-            smsComponent.send(smsObject.getCode(),smsObject.getDescription(),smsObject.getPhone());
+            channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
+            smsComponent.send(smsObject.getCode(), smsObject.getDescription(), smsObject.getPhone());
         } catch (IOException e) {
             if (message.getMessageProperties().getRedelivered()) {
-                log.warn("管理员消息发送已重复处理失败,拒绝再次接收:{}",smsObject.getPhone());
+                log.warn("管理员消息发送已重复处理失败,拒绝再次接收:{}", smsObject.getPhone());
                 /* 拒绝消息，requeue=false 表示不再重新入队，如果配置了死信队列则进入死信队列 */
                 channel.basicReject(message.getMessageProperties().getDeliveryTag(), true);
-            }else {
-                channel.basicNack(message.getMessageProperties().getDeliveryTag(), false,true);
+            } else {
+                channel.basicNack(message.getMessageProperties().getDeliveryTag(), false, true);
             }
             e.printStackTrace();
         }
@@ -63,14 +66,15 @@ public class AdminPush {
 
     /**
      * 邮件通知
-     * @author : WangShiLei
-     * @date : 2020/11/15 10:55 下午
+     *
      * @param mailObject:
      * @param channel:
      * @param message:
+     * @author : WangShiLei
+     * @date : 2020/11/15 10:55 下午
      **/
     @RabbitListener(bindings = @QueueBinding(
-            value = @Queue(value = RabbitMqEnum.Queue.QUEUE_NOTICE_MAIL,exclusive = "false",autoDelete = "false",durable = "true"),
+            value = @Queue(value = RabbitMqEnum.Queue.QUEUE_NOTICE_MAIL, exclusive = "false", autoDelete = "false", durable = "true"),
             exchange = @Exchange(RabbitMqEnum.Exchange.EXCHANGE_NOTICE),
             key = RabbitMqEnum.Key.KEY_NOTICE_MAIL,
             ignoreDeclarationExceptions = "true"

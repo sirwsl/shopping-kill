@@ -10,7 +10,7 @@ import java.util.Properties;
 /**
  * @author wsl
  * 2020-10-22 22:43
- * */
+ */
 @Configuration
 public class KaptchaConfig {
 

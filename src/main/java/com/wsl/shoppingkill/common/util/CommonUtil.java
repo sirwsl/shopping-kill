@@ -17,7 +17,8 @@ import java.util.stream.Collectors;
  */
 public class CommonUtil {
 
-    /**手机号码正则(弱规则，只保证格式)
+    /**
+     * 手机号码正则(弱规则，只保证格式)
      */
     static final String PHONE = "^(1[3-9])\\d{9}$";
 
@@ -58,7 +59,6 @@ public class CommonUtil {
         }
         return StringUtils.join(idList, ",");
     }
-
 
 
     public static List<String> covertStr2List(String str) {

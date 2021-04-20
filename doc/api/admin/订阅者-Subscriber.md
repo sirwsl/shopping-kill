@@ -21,7 +21,7 @@
     "data": {
         "records": [
             {
-                "number": "18314263373",
+                "number": "",
                 "type": 1,
                 "status": 0,
                 "delFlag": false

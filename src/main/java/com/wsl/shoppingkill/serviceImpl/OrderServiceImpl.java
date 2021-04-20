@@ -37,7 +37,7 @@ import java.util.Objects;
  * @author WangShilei
  */
 @Service
-public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements OrderService{
+public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements OrderService {
 
     @Resource
     private OrderMapper orderMapper;
@@ -55,9 +55,9 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     private AbstractCurrentRequestComponent abstractCurrentRequestComponent;
 
     @Override
-    public IPage<OrderVO> getAllOrder(OrderParam orderParam, Long current, Long size){
+    public IPage<OrderVO> getAllOrder(OrderParam orderParam, Long current, Long size) {
         final IPage<OrderVO> allOrder = orderMapper.getAllOrder(new Page<>(current, size), orderParam);
-        if (CollectionUtils.isNotEmpty(allOrder.getRecords())){
+        if (CollectionUtils.isNotEmpty(allOrder.getRecords())) {
             allOrder.getRecords().forEach(li -> li.setSendPhone(CommonUtil.replaceUserName(li.getSendPhone()))
                     .setSendName(CommonUtil.replaceUserName(li.getSendName())));
         }
@@ -69,16 +69,16 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     public boolean remind2Pay(Long orderId) throws ExperienceException {
 
         try {
-            if(Objects.nonNull(abstractCurrentRequestComponent.getCurrentUser()) && abstractCurrentRequestComponent.getCurrentUser().getFlag() != null
-                    && abstractCurrentRequestComponent.getCurrentUser().getFlag()==1000){
+            if (Objects.nonNull(abstractCurrentRequestComponent.getCurrentUser()) && abstractCurrentRequestComponent.getCurrentUser().getFlag() != null
+                    && abstractCurrentRequestComponent.getCurrentUser().getFlag() == 1000) {
                 throw new ExperienceException("体验账号权限不足");
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new ExperienceException("体验账号权限不足");
         }
 
         SmsObject smsObject = reminderInfoObjet(orderId).setCode(SmsEnum.REMIND_PAY.getCode());
-        if(Objects.isNull(smsObject)){
+        if (Objects.isNull(smsObject)) {
             return false;
         }
         rabbitTemplate.convertAndSend(
@@ -89,7 +89,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     }
 
     @Override
-    @MyLog(value = "#orderId",detail = "修改物品价格",grade = LoggerEnum.SERIOUS)
+    @MyLog(value = "#orderId", detail = "修改物品价格", grade = LoggerEnum.SERIOUS)
     public boolean modifyPrice(Long orderId, BigDecimal bigDecimal) {
         Order order = new Order();
         order.setId(orderId).setPayPrice(bigDecimal);
@@ -97,10 +97,10 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     }
 
     @Override
-    @MyLog(value = "#orderId",detail = "物品出库",grade = LoggerEnum.WORN)
+    @MyLog(value = "#orderId", detail = "物品出库", grade = LoggerEnum.WORN)
     public boolean outGoods(Long orderId) {
         SmsObject smsObject = reminderInfoObjet(orderId).setCode(SmsEnum.OUT_STOCK.getCode());
-        if(Objects.isNull(smsObject)){
+        if (Objects.isNull(smsObject)) {
             return false;
         }
 //        rabbitTemplate.convertAndSend(
@@ -113,17 +113,17 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     }
 
     @Override
-    public boolean reminderEvaluation(Long orderId) throws ExperienceException{
+    public boolean reminderEvaluation(Long orderId) throws ExperienceException {
         try {
-            if(Objects.nonNull(abstractCurrentRequestComponent.getCurrentUser()) && abstractCurrentRequestComponent.getCurrentUser().getFlag() != null
-                    && abstractCurrentRequestComponent.getCurrentUser().getFlag()==1000){
+            if (Objects.nonNull(abstractCurrentRequestComponent.getCurrentUser()) && abstractCurrentRequestComponent.getCurrentUser().getFlag() != null
+                    && abstractCurrentRequestComponent.getCurrentUser().getFlag() == 1000) {
                 throw new ExperienceException("体验账号权限不足");
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new ExperienceException("体验账号权限不足");
         }
         SmsObject smsObject = reminderInfoObjet(orderId).setCode(SmsEnum.REMIND_EVALUATION.getCode());
-        if(Objects.isNull(smsObject)){
+        if (Objects.isNull(smsObject)) {
             return false;
         }
         rabbitTemplate.convertAndSend(
@@ -135,7 +135,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 
     @Override
     public Map<String, Integer> getOrderCount() {
-        Map<String,Integer> result = new HashMap<>(8);
+        Map<String, Integer> result = new HashMap<>(8);
         Long id = abstractCurrentRequestComponent.getCurrentUser().getId();
         Integer noPay = 0;
         Integer noGet = 0;
@@ -146,22 +146,22 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         noComm = orderMapper.selectCount(new QueryWrapper<Order>().eq(Order.USER_ID, id).eq(Order.STATUS, BaseEnum.ORDER_TYPE_GET));
         cart = cartMapper.selectCount(new QueryWrapper<Cart>().eq(Cart.USER_ID, id));
 
-        result.put("noPay",noPay);
-        result.put("noGet",noGet);
-        result.put("noComm",noComm);
-        result.put("cart",cart);
+        result.put("noPay", noPay);
+        result.put("noGet", noGet);
+        result.put("noComm", noComm);
+        result.put("cart", cart);
         return result;
     }
 
     @Override
-    public IPage<UserOrderVO> getOrderInfo(Integer status, String name,Long current,Long size) {
-        if(StringUtils.isNotEmpty(name)){
+    public IPage<UserOrderVO> getOrderInfo(Integer status, String name, Long current, Long size) {
+        if (StringUtils.isNotEmpty(name)) {
             status = null;
         }
-        IPage<UserOrderVO> voiPage = orderMapper.selectUserOrderInfo(new Page<>(current,size),status, name);
+        IPage<UserOrderVO> voiPage = orderMapper.selectUserOrderInfo(new Page<>(current, size), status, name);
         voiPage.getRecords().forEach(li -> {
             li.setTotalPrice(li.getPrice().multiply(new BigDecimal(li.getNum())).add(li.getLogisticsPrice()));
-            li.setImgUrl(li.getImgUrl()+"?x-oss-process=image/resize,m_fill,h_50,w_50");
+            li.setImgUrl(li.getImgUrl() + "?x-oss-process=image/resize,m_fill,h_50,w_50");
         });
 
         return voiPage;
@@ -171,21 +171,21 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     @Override
     public OrderDetailVO getOrderDetailVO(Long id) {
         OrderDetailVO detailVO = orderMapper.selectOrderDetail(id);
-        if (Objects.isNull(detailVO)){
+        if (Objects.isNull(detailVO)) {
             return new OrderDetailVO();
         }
         detailVO.setTotalPrice(detailVO.getPrice().multiply(new BigDecimal(detailVO.getNum())).add(detailVO.getLogisticsPrice()));
-        detailVO.setImgUrl(detailVO.getImgUrl()+"?x-oss-process=image/resize,m_fill,h_100,w_100");
+        detailVO.setImgUrl(detailVO.getImgUrl() + "?x-oss-process=image/resize,m_fill,h_100,w_100");
         return detailVO;
     }
 
     @Override
     public boolean ackGoods(Long orderId) {
-        return orderMapper.updateById(new Order().setId(orderId).setStatus(BaseEnum.ORDER_TYPE_GET))>0;
+        return orderMapper.updateById(new Order().setId(orderId).setStatus(BaseEnum.ORDER_TYPE_GET)) > 0;
     }
 
     /***内部使用紧张外调****/
-    private SmsObject reminderInfoObjet(Long orderId){
+    private SmsObject reminderInfoObjet(Long orderId) {
 
         OrderMqBO orderSendInfo = orderMapper.getOrderSendInfo(orderId);
         SmsObject smsObject = new SmsObject();

@@ -16,6 +16,7 @@ import java.util.ArrayList;
  * <p>
  * 代码生成器
  * </p>
+ *
  * @author macbookpro
  */
 public class Generator {
@@ -24,10 +25,10 @@ public class Generator {
      * 需要生成的表名
      */
     private static final String[] TABLE_NAME = {
-            "t_user","t_types","t_subscription_history","t_subscription"
-            ,"t_sku","t_order","t_loggers","t_limit_list","t_goods",
-            "t_cart","t_appraisal","t_after_sales","t_advertise","t_admin",
-            "t_address","t_activity_limit","t_activity"
+            "t_user", "t_types", "t_subscription_history", "t_subscription"
+            , "t_sku", "t_order", "t_loggers", "t_limit_list", "t_goods",
+            "t_cart", "t_appraisal", "t_after_sales", "t_advertise", "t_admin",
+            "t_address", "t_activity_limit", "t_activity"
     };
 
 
@@ -92,8 +93,8 @@ public class Generator {
         DataSourceConfig dsc = new DataSourceConfig();
         dsc.setDriverName("com.mysql.jdbc.Driver");
         dsc.setUsername("root");
-        dsc.setPassword("18314263373");
-        dsc.setUrl("jdbc:mysql://121.196.187.160:3306/shoppingkill?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false&rewriteBatchedStatements=true");
+        dsc.setPassword("root");
+        dsc.setUrl("jdbc:mysql://localhost:3306/shoppingkill?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false&rewriteBatchedStatements=true");
         return dsc;
     }
 

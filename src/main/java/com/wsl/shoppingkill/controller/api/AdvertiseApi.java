@@ -1,4 +1,5 @@
 package com.wsl.shoppingkill.controller.api;
+
 import com.wsl.shoppingkill.common.Result;
 import com.wsl.shoppingkill.obj.vo.AdvertiseVO;
 import com.wsl.shoppingkill.service.AdvertiseService;
@@ -21,13 +22,14 @@ public class AdvertiseApi {
     private AdvertiseService advertiseService;
 
     /**
-     *  获取展示广告
+     * 获取展示广告
+     *
+     * @return Result<List < AdvertiseVO>>
      * @author : WangShiLei
      * @date : 2020/11/9 11:25 下午
-     * @return Result<List<AdvertiseVO>>
      **/
     @GetMapping("/getAdvertiseForView/v1")
-    public Result<List<AdvertiseVO>> getAdvertiseVO(){
+    public Result<List<AdvertiseVO>> getAdvertiseVO() {
         return Result.success(advertiseService.getAdvertiseUrl(0));
     }
 

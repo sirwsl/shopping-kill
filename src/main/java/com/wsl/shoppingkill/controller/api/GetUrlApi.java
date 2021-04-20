@@ -13,6 +13,7 @@ import java.util.Objects;
 
 /**
  * 秒杀地址获取Controller
+ *
  * @author : WangShiLei
  * @date : 2020/12/31 11:08 上午
  **/
@@ -25,12 +26,12 @@ public class GetUrlApi {
     private GetUrlService getUrlService;
 
     @GetMapping("/{id}/getUrl")
-    public Result<ExposerBO> getUrl(@PathVariable("id") Long id){
-        if (id ==null || id < 1){
+    public Result<ExposerBO> getUrl(@PathVariable("id") Long id) {
+        if (id == null || id < 1) {
             return Result.error();
         }
         ExposerBO url = getUrlService.getUrl(id);
-        if (Objects.nonNull(url)){
+        if (Objects.nonNull(url)) {
             return Result.success(url);
         }
         return Result.error();

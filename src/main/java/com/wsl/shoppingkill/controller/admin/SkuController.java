@@ -15,6 +15,7 @@ import javax.validation.Valid;
 /**
  * TODO:
  * SKU界面管理
+ *
  * @author WangShilei
  * @date 2020/11/17-17:49
  **/
@@ -28,8 +29,8 @@ public class SkuController {
 
     @GetMapping("/getSkuVoById/v1")
     public Result<SkuVO> getSkuVoById(Long id) {
-        if(id ==null || id == 0){
-            return Result.error("error","id不能为空");
+        if (id == null || id == 0) {
+            return Result.error("error", "id不能为空");
         }
         return Result.success(skuService.getSku(id));
     }
@@ -47,29 +48,29 @@ public class SkuController {
         }
         try {
             return Result.success(skuService.updateSku(skuVO));
-        }catch (Exception e){
+        } catch (Exception e) {
             log.error("SKU图片上传出错或数据库服务器异常");
-            return Result.error("error","文件上传出错或服务器异常");
+            return Result.error("error", "文件上传出错或服务器异常");
         }
     }
 
     @PostMapping("/addSkuInfo/v1")
     public Result<Boolean> addSkuInfo(@Valid SkuVOs skuVO) {
-        if (skuVO.getImgs()==null || skuVO.getImgs().getName().isEmpty()) {
+        if (skuVO.getImgs() == null || skuVO.getImgs().getName().isEmpty()) {
             return Result.error("error", "图片不能为空");
         }
         try {
             return Result.success(skuService.addSku(skuVO));
-        }catch (Exception e){
+        } catch (Exception e) {
             log.error("SKU图片上传出错或数据库服务器异常");
-            return Result.error("error","文件上传出错或服务器异常");
+            return Result.error("error", "文件上传出错或服务器异常");
         }
     }
 
     @DeleteMapping("/delSkuById/v1")
-    public Result<Boolean> delSkuInfo(Long id){
-        if (id == null || id == 0){
-            return Result.error("error","删除SKU的id不能为空");
+    public Result<Boolean> delSkuInfo(Long id) {
+        if (id == null || id == 0) {
+            return Result.error("error", "删除SKU的id不能为空");
         }
         return Result.success(skuService.delSku(id));
     }

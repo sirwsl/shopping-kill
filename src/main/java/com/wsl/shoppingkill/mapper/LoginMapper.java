@@ -11,10 +11,11 @@ import org.apache.ibatis.annotations.Mapper;
 public interface LoginMapper {
     /**
      * 获取登录信息
-     * @author wangShilei
-     * @date 2020/11/23 11:04 下午
+     *
      * @param userParam :
      * @return com.wsl.shoppingkill.obj.bo.UserBO
+     * @author wangShilei
+     * @date 2020/11/23 11:04 下午
      */
     UserBO login(UserParam userParam);
 }

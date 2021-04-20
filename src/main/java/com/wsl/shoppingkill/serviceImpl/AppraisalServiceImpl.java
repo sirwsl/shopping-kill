@@ -33,7 +33,7 @@ import java.util.stream.Collectors;
  * @author WangShilei
  */
 @Service
-public class AppraisalServiceImpl extends ServiceImpl<AppraisalMapper, Appraisal> implements AppraisalService{
+public class AppraisalServiceImpl extends ServiceImpl<AppraisalMapper, Appraisal> implements AppraisalService {
 
     @Resource
     private AppraisalMapper appraisalMapper;
@@ -49,9 +49,9 @@ public class AppraisalServiceImpl extends ServiceImpl<AppraisalMapper, Appraisal
 
 
     @Override
-    public IPage<AppraisalVO> getAppraisalAll(Long current,Long size,AppraisalVO appraisalVO) {
+    public IPage<AppraisalVO> getAppraisalAll(Long current, Long size, AppraisalVO appraisalVO) {
         final IPage<AppraisalVO> appraisalAll = appraisalMapper.getAppraisalAll(new Page<>(current, size), appraisalVO);
-        if (CollectionUtils.isNotEmpty(appraisalAll.getRecords())){
+        if (CollectionUtils.isNotEmpty(appraisalAll.getRecords())) {
             appraisalAll.getRecords().forEach(li -> li.setUserName(li.getUserName()));
         }
         return appraisalAll;
@@ -62,13 +62,13 @@ public class AppraisalServiceImpl extends ServiceImpl<AppraisalMapper, Appraisal
         Long id = abstractCurrentRequestComponent.getCurrentUser().getId();
         int status = 0;
 
-        if (flag){
+        if (flag) {
             status = BaseEnum.ORDER_TYPE_GET;
-        }else {
+        } else {
             status = BaseEnum.ORDER_TYPE_TELL;
         }
-        List<AppraisalUserVO> appraisal = orderMapper.selectGoodsInfo(id,status);
-        if (flag){
+        List<AppraisalUserVO> appraisal = orderMapper.selectGoodsInfo(id, status);
+        if (flag) {
             return appraisal;
         }
         Map<String, Appraisal> collect = appraisalMapper.selectList(new QueryWrapper<Appraisal>().in(Appraisal.GOODS_ID,
@@ -78,16 +78,16 @@ public class AppraisalServiceImpl extends ServiceImpl<AppraisalMapper, Appraisal
         ).stream().collect(Collectors.toMap(Appraisal::getOrderId, Function.identity()));
         appraisal.forEach(li -> {
             String orderId = li.getOrderId();
-            li.setImgUrl(li.getImgUrl()+"?x-oss-process=image/resize,m_fill,h_150,w_150");
+            li.setImgUrl(li.getImgUrl() + "?x-oss-process=image/resize,m_fill,h_150,w_150");
             Appraisal appraisal1 = collect.get(orderId);
-            if (Objects.nonNull(appraisal1)){
+            if (Objects.nonNull(appraisal1)) {
                 li.setCreatTime(appraisal1.getCreatTime())
                         .setDetail(appraisal1.getDetail())
                         .setGrade(appraisal1.getGrade())
                         .setId(appraisal1.getId());
             }
         });
-        return appraisal.stream().filter(li -> li.getId()!=null).collect(Collectors.toList());
+        return appraisal.stream().filter(li -> li.getId() != null).collect(Collectors.toList());
     }
 
     @Override
@@ -97,14 +97,14 @@ public class AppraisalServiceImpl extends ServiceImpl<AppraisalMapper, Appraisal
         try {
             boolean flag = appraisal.setUserId(id).insert();
             Order order = orderMapper.selectById(appraisal.getOrderId());
-            if (BaseEnum.ORDER_TYPE_GET.equals(order.getStatus())){
+            if (BaseEnum.ORDER_TYPE_GET.equals(order.getStatus())) {
                 boolean flag2 = orderMapper.updateById(order.setStatus(BaseEnum.ORDER_TYPE_END)) > 0;
-                if (flag&&flag2){
+                if (flag && flag2) {
                     return true;
                 }
             }
             throw new Exception();
-        }catch (Exception e){
+        } catch (Exception e) {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return false;
@@ -112,9 +112,9 @@ public class AppraisalServiceImpl extends ServiceImpl<AppraisalMapper, Appraisal
 
 
     @Override
-    @MyLog(detail = "删除评价信息",grade = LoggerEnum.SERIOUS,value = "#id")
+    @MyLog(detail = "删除评价信息", grade = LoggerEnum.SERIOUS, value = "#id")
     public boolean delAppraisalById(Long id) {
-        return appraisalMapper.deleteById(id)>0;
+        return appraisalMapper.deleteById(id) > 0;
     }
 
 }

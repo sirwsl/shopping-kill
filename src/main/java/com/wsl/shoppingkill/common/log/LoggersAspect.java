@@ -18,7 +18,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
 
 
-/** Log切面类
+/**
+ * Log切面类
+ *
  * @author WangShilei
  * @date 2020/11/9-10:15
  **/
@@ -32,14 +34,14 @@ public class LoggersAspect {
     private AbstractCurrentRequestComponent abstractCurrentRequestComponent;
 
     /**
-     *定义切点 @Pointcut 在注解的位置切入代码
+     * 定义切点 @Pointcut 在注解的位置切入代码
      **/
     @Pointcut("@annotation( com.wsl.shoppingkill.common.log.MyLog)")
     public void logPointCut() {
     }
 
     /**
-     *切面 配置通知
+     * 切面 配置通知
      */
 
     @AfterReturning("logPointCut()")
@@ -59,26 +61,26 @@ public class LoggersAspect {
             String[] className = joinPoint.getTarget().getClass().getName().split("\\.");
 
             //将参数所在的数组转换成json
-            String num =  "0";
+            String num = "0";
             try {
-                if (StringUtils.isNotBlank(myLog.value())){
+                if (StringUtils.isNotBlank(myLog.value())) {
                     num = AspectSupport.getKeyValue(joinPoint, myLog.value()).toString();
                 }
-            }catch (Exception e){
-                log.error("日志切面获取数据异常{}",e.getLocalizedMessage());
+            } catch (Exception e) {
+                log.error("日志切面获取数据异常{}", e.getLocalizedMessage());
             }
 
 
             //保存获取的操作
-            loggers.setDetail(myLog.detail()+"->[操作参数："+num+"]"
-                    +"->[Class："+className[className.length-1]+"]")
+            loggers.setDetail(myLog.detail() + "->[操作参数：" + num + "]"
+                    + "->[Class：" + className[className.length - 1] + "]")
                     .setGrade(myLog.grade());
 
         }
         UserBO userBO = abstractCurrentRequestComponent.getCurrentUser();
         try {
             loggers.setManId(userBO.getId()).setType(userBO.getFlag());
-        }catch (Exception e){
+        } catch (Exception e) {
             loggers.setManId(0L).setType(0);
         }
         //获取用户ip地址

@@ -126,4 +126,4 @@ jetcache:
         maxIdle: 50
         maxTotal: 1000
         maxWait: 1000
-      uri: redis://admin@121.196.187.160:6390/0  #redis://密码@IP:端口/库
+      uri: redis://admin@localhost:6390/0  #redis://密码@IP:端口/库

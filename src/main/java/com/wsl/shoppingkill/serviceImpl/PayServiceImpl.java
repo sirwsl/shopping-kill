@@ -21,6 +21,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * 支付业务层
+ *
  * @author : WangShiLei
  * @date : 2021/1/1 2:10 下午
  **/
@@ -44,7 +45,7 @@ public class PayServiceImpl implements PayService {
     public boolean pay(PayParam payParam) {
         Order order = orderMapper.selectOne(new QueryWrapper<Order>().eq(Order.STATUS, BaseEnum.ORDER_TYPE_NOT_PAY)
                 .eq(Order.ID, payParam.getOrderId()));
-        if (Objects.isNull(order)){
+        if (Objects.isNull(order)) {
             return false;
         }
         CorrelationData correlationData = new CorrelationData(String.valueOf(snowFlake.nextId()));
@@ -57,15 +58,15 @@ public class PayServiceImpl implements PayService {
          *     支付接口返回，由于个人无法调用，所以当支付成功处理
          * </P>
          */
-        PayBO payBO = new PayBO(id,payParam.getOrderId());
+        PayBO payBO = new PayBO(id, payParam.getOrderId());
 
-        rabbitTemplate.convertAndSend(RabbitMqEnum.Exchange.EXCHANGE_PAY,RabbitMqEnum.Key.KEY_PAY,payBO,correlationData);
+        rabbitTemplate.convertAndSend(RabbitMqEnum.Exchange.EXCHANGE_PAY, RabbitMqEnum.Key.KEY_PAY, payBO, correlationData);
         try {
             boolean isAck = correlationData.getFuture().get(1, TimeUnit.MINUTES).isAck();
             System.out.println(isAck);
-            if(isAck){
+            if (isAck) {
                 return true;
-            }else{
+            } else {
                 order.setPayType(payParam.getPayType())
                         .setStatus(BaseEnum.ORDER_TYPE_NOT_PAY)
                         .setAddressId(payParam.getAddressId())
@@ -73,7 +74,7 @@ public class PayServiceImpl implements PayService {
                         .setPayTime(LocalDateTime.now())
                         .updateById();
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             order.setPayType(payParam.getPayType())
                     .setStatus(BaseEnum.ORDER_TYPE_NOT_PAY)
                     .setAddressId(payParam.getAddressId())

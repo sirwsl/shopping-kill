@@ -12,36 +12,39 @@ import java.util.TimeZone;
 
 /**
  * 时间工具类
- * @author Wangshilei
  *
+ * @author Wangshilei
  */
 @Slf4j
 public class DateUtil {
     public static final String DEFAULT_TZ = "Asia/Shanghai";
 
     /**
-     *  是否比当前时间早
-     * @author  WangShilei
+     * 是否比当前时间早
+     *
+     * @author WangShilei
      * @date 2020/11/7 6:05 下
      **/
-    public static boolean isAfter(LocalDateTime localDateTime){
+    public static boolean isAfter(LocalDateTime localDateTime) {
         //获取当前时间
-        LocalDateTime nowTime= LocalDateTime.now();
+        LocalDateTime nowTime = LocalDateTime.now();
         //比较  现在的时间 比 设定的时间 之前  返回的类型是Boolean类型
         return nowTime.isAfter(localDateTime);
     }
 
     /**
      * 是否比当前时间晚
+     *
      * @author : WangShiLei
      * @date : 2020/11/7 6:06 下午
      **/
-    public static boolean isBefore(LocalDateTime localDateTime){
+    public static boolean isBefore(LocalDateTime localDateTime) {
         //获取当前时间
-        LocalDateTime nowTime= LocalDateTime.now();
+        LocalDateTime nowTime = LocalDateTime.now();
         //比较  现在的时间 比 设定的时间 之后  返回的类型是Boolean类型
         return nowTime.isBefore(localDateTime);
     }
+
     /**
      * 获取过去第几天的日期
      *
@@ -58,6 +61,7 @@ public class DateUtil {
     /**
      * 获取明天的几点钟点钟
      * 抢购的时候需要
+     *
      * @param hours:明天几点 int
      * @return LocalDateTime：明天几点钟钟
      */
@@ -86,6 +90,7 @@ public class DateUtil {
     /**
      * 获取今天的几点钟点钟
      * 抢购的时候需要
+     *
      * @param hours:今天几点 int
      * @return LocalDateTime
      */
@@ -97,6 +102,7 @@ public class DateUtil {
 
     /**
      * 判断选择的日期是否是本周
+     *
      * @param time:long类型
      * @return boolean类型
      */
@@ -108,7 +114,9 @@ public class DateUtil {
         return paramWeek == currentWeek;
     }
 
-    /**判断选择的日期是否是今天
+    /**
+     * 判断选择的日期是否是今天
+     *
      * @param time :long类型时间
      * @return bool：是否是今天
      **/
@@ -117,7 +125,8 @@ public class DateUtil {
     }
 
     /**
-     *判断选择的日期是否是本月
+     * 判断选择的日期是否是本月
+     *
      * @param time :long类型时间
      * @return 是否是本月
      */
@@ -128,6 +137,7 @@ public class DateUtil {
 
     /**
      * 判断是否是当前时间
+     *
      * @param time : long 时间
      * @return pattern ： 时间格式String
      * @author wangshilei
@@ -147,7 +157,7 @@ public class DateUtil {
      * 时间相差秒数.
      *
      * @param start ： 开始时间
-     * @param end ：结束时间
+     * @param end   ：结束时间
      * @return long
      */
     public static long distanceSecond(Date start, Date end) {
@@ -158,15 +168,16 @@ public class DateUtil {
      * 时间相差秒数.
      *
      * @param start ： 开始时间
-     * @param end ：结束时间
+     * @param end   ：结束时间
      * @return long
      */
     public static long distanceSecond(LocalDateTime start, LocalDateTime end) {
-        return Duration.between(start, end).toMillis()/1000;
+        return Duration.between(start, end).toMillis() / 1000;
     }
 
     /**
      * 获取String类型时间
+     *
      * @return String ：yyyy-MM-dd HH:mm:ss
      */
     public static String getDateString() {
@@ -177,7 +188,8 @@ public class DateUtil {
 
     /**
      * 时间格式化
-     * @param date : 时间
+     *
+     * @param date   : 时间
      * @param format :格式类型
      * @return String：返回时间
      * @author wangshilei
@@ -191,6 +203,7 @@ public class DateUtil {
 
     /**
      * date转String
+     *
      * @param date : 时间
      * @return String ： 时间
      * @author wangshilei

@@ -27,23 +27,25 @@ public class ActivityApi {
 
     /**
      * 获取未来5小时内的秒杀商品
+     *
+     * @return Result<List < KillGoodsVO>>
      * @author wangShilei
      * @date 2020/12/25 18:08
-     * @return Result<List<KillGoodsVO>>
      */
     @GetMapping("/getKillGoods/v1")
-    public Result<List<KillGoodsVO>> getKillGoodsVO(){
+    public Result<List<KillGoodsVO>> getKillGoodsVO() {
         return Result.success(activityService.getActivityFuture());
     }
 
     /**
      * 获取真正进行的活动
+     *
+     * @return Result<List < KillGoodsVO>>
      * @author wangShilei
      * @date 2020/12/27 7:06 下午
-     * @return Result<List <KillGoodsVO>>
      */
     @GetMapping("/getActivityDoing/v1")
-    public Result<List<KillGoodsVO>> getActivityDoing(){
+    public Result<List<KillGoodsVO>> getActivityDoing() {
         return Result.success(activityAdapter.getActivityDoing());
     }
 

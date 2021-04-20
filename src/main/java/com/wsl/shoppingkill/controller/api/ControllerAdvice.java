@@ -52,7 +52,6 @@ public class ControllerAdvice {
     }
 
 
-
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"), true));
@@ -162,19 +161,19 @@ public class ControllerAdvice {
 
     @ExceptionHandler(TokenRuntimeException.class)
     public Result<Object> tokenRuntimeException(TokenRuntimeException e) {
-        log.error("token校验不通过",e);
-        return new Result<>(Result.UNLOGIN,getOutMsg(e), e.getMsg(),null);
+        log.error("token校验不通过", e);
+        return new Result<>(Result.UNLOGIN, getOutMsg(e), e.getMsg(), null);
     }
 
     @ExceptionHandler(UnsupportedEncodingException.class)
     public Result<Object> unsupportedEncodingException(UnsupportedEncodingException e) {
-        log.error("账号名称编码异常",e);
+        log.error("账号名称编码异常", e);
         return Result.paramError(getOutMsg(e), "账号异常，存在非正常编码字符");
     }
 
     @ExceptionHandler(ExperienceException.class)
     public Result<Object> experienceException(ExperienceException e) {
-        log.error("账号权限不足",e);
+        log.error("账号权限不足", e);
         return Result.paramError(getOutMsg(e), "账号权限不足，如需体验全部，请联系管理员");
     }
 

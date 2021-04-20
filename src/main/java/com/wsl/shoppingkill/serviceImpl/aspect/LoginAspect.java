@@ -23,27 +23,28 @@ public class LoginAspect {
 
     /**
      * 登录后redis计数器+1
+     *
      * @author wangShilei
      * @date 2020/11/24 14:42
      */
     @Pointcut("execution(public * com.wsl.shoppingkill.controller.LoginController.userLogin(..))")
-    public void userLogin(){
+    public void userLogin() {
 
     }
 
     @After("userLogin()")
-    public void afterUserLogin(){
+    public void afterUserLogin() {
         stringRedisTemplate.boundValueOps(RedisEnum.COUNT_USER_SUM).increment(1);
     }
 
 
     @Pointcut("execution(public * com.wsl.shoppingkill.controller.LoginController.adminLogin(..))")
-    public void adminLogin(){
+    public void adminLogin() {
 
     }
 
     @After("adminLogin()")
-    public void afterAdminLogin(){
+    public void afterAdminLogin() {
         stringRedisTemplate.boundValueOps(RedisEnum.COUNT_USER_SUM).increment(1);
     }
 

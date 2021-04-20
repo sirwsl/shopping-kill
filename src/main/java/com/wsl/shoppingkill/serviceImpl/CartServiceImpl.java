@@ -18,7 +18,7 @@ import java.util.List;
  * @author WangShilei
  */
 @Service
-public class CartServiceImpl extends ServiceImpl<CartMapper, Cart> implements CartService{
+public class CartServiceImpl extends ServiceImpl<CartMapper, Cart> implements CartService {
 
     @Resource
     private CartMapper cartMapper;
@@ -27,7 +27,7 @@ public class CartServiceImpl extends ServiceImpl<CartMapper, Cart> implements Ca
     private AbstractCurrentRequestComponent abstractCurrentRequestComponent;
 
     @Override
-    public boolean addCart(Long skuId,Integer num) {
+    public boolean addCart(Long skuId, Integer num) {
         Long userId = abstractCurrentRequestComponent.getCurrentUser().getId();
         Cart cart = new Cart();
         return cart.setCreatTime(LocalDateTime.now()).setUpdateTime(LocalDateTime.now())
@@ -47,9 +47,9 @@ public class CartServiceImpl extends ServiceImpl<CartMapper, Cart> implements Ca
     public Integer delCartByIds(Long ids) {
         Long userId = abstractCurrentRequestComponent.getCurrentUser().getId();
 
-            return cartMapper.delete(new QueryWrapper<Cart>()
-                    .eq(Cart.USER_ID,userId)
-                    .eq(Cart.ID,ids));
+        return cartMapper.delete(new QueryWrapper<Cart>()
+                .eq(Cart.USER_ID, userId)
+                .eq(Cart.ID, ids));
 
     }
 }

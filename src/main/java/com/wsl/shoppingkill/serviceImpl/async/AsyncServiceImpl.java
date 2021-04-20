@@ -64,7 +64,7 @@ public class AsyncServiceImpl implements AsyncService {
     @Override
     @Async("taskExecutor")
     public void goodsAll(IPage<ViewGoodsVO> goods) {
-        redisTemplate.opsForValue().set(RedisEnum.GOODS_VIEW+goods.getCurrent(),goods,5,TimeUnit.SECONDS);
+        redisTemplate.opsForValue().set(RedisEnum.GOODS_VIEW + goods.getCurrent(), goods, 5, TimeUnit.SECONDS);
     }
 
     @Override
@@ -77,11 +77,11 @@ public class AsyncServiceImpl implements AsyncService {
     @Override
     @Async("taskExecutor")
     @Transactional(rollbackFor = Exception.class)
-    public void killGoodsSync(List<KillGoodsVO> activityDoing,LocalDateTime localDateTime) {
-        if (localDateTime==null){
+    public void killGoodsSync(List<KillGoodsVO> activityDoing, LocalDateTime localDateTime) {
+        if (localDateTime == null) {
             localDateTime = LocalDateTime.now();
         }
-        if (CollectionUtils.isNotEmpty(activityDoing)){
+        if (CollectionUtils.isNotEmpty(activityDoing)) {
 
             List<KillGoodsBO> killGoods = activityMapper.getKillGoods(
                     activityDoing.stream().map(KillGoodsVO::getId).collect(Collectors.toList()),
@@ -94,26 +94,26 @@ public class AsyncServiceImpl implements AsyncService {
                         //商品id缓存
                         for (KillGoodsVO k : activityDoing) {
                             Object o = redisTemplate.opsForValue().get(RedisEnum.GOODS_DOING + k.getId());
-                            if (Objects.isNull(o)){
-                                redisTemplate.opsForValue().set(RedisEnum.GOODS_DOING+k.getId(),k, DateUtil.distanceSecond(LocalDateTime.now(),k.getEndTime()), TimeUnit.SECONDS);
+                            if (Objects.isNull(o)) {
+                                redisTemplate.opsForValue().set(RedisEnum.GOODS_DOING + k.getId(), k, DateUtil.distanceSecond(LocalDateTime.now(), k.getEndTime()), TimeUnit.SECONDS);
                             }
                         }
                         //SKUid缓存
                         for (KillGoodsBO k : killGoods) {
                             LocalDateTime now = LocalDateTime.now();
                             Object o = redisTemplate.opsForValue().get(RedisEnum.GOODS_KILL + k.getId());
-                            if (Objects.isNull(o)){
-                                redisTemplate.opsForValue().set(RedisEnum.GOODS_KILL+k.getId()
-                                        ,k.getNum(), DateUtil.distanceSecond(now,k.getEnd()), TimeUnit.SECONDS);
-                                redisTemplate.opsForValue().set(RedisEnum.GOODS_KILL_TIME+k.getId()
-                                        ,DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(k.getStart()), DateUtil.distanceSecond(now,k.getEnd()), TimeUnit.SECONDS);
+                            if (Objects.isNull(o)) {
+                                redisTemplate.opsForValue().set(RedisEnum.GOODS_KILL + k.getId()
+                                        , k.getNum(), DateUtil.distanceSecond(now, k.getEnd()), TimeUnit.SECONDS);
+                                redisTemplate.opsForValue().set(RedisEnum.GOODS_KILL_TIME + k.getId()
+                                        , DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(k.getStart()), DateUtil.distanceSecond(now, k.getEnd()), TimeUnit.SECONDS);
                             }
                         }
                         return null;
                     }
                 });
                 log.info("秒杀商品信息同步结束");
-            }catch (Exception e){
+            } catch (Exception e) {
                 TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
                 log.info("秒杀商品信息同步失败");
             }
@@ -126,8 +126,8 @@ public class AsyncServiceImpl implements AsyncService {
     @Async("taskExecutor")
     public void killGoodsCheck() {
         List<KillGoodsVO> activityDoing = activityService.getActivityDoing(LocalDateTime.now());
-        if (CollectionUtils.isNotEmpty(activityDoing)){
-            killGoodsSync(activityDoing,LocalDateTime.now());
+        if (CollectionUtils.isNotEmpty(activityDoing)) {
+            killGoodsSync(activityDoing, LocalDateTime.now());
         }
     }
 }

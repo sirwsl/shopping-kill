@@ -19,19 +19,19 @@ public class MapUtil {
      * Map集合对象转化成 JavaBean集合对象
      *
      * @param javaBean JavaBean实例对象
-     * @param mapList Map数据集对象
+     * @param mapList  Map数据集对象
      * @return List<T>
      */
-    @SuppressWarnings({ "rawtypes" })
+    @SuppressWarnings({"rawtypes"})
     public static <T> List<T> map2Java(T javaBean, List<Map> mapList) {
-        if(mapList == null || mapList.isEmpty()){
+        if (mapList == null || mapList.isEmpty()) {
             return null;
         }
         List<T> objectList = new ArrayList<>();
 
         T object;
-        for(Map map : mapList){
-            if(map != null){
+        for (Map map : mapList) {
+            if (map != null) {
                 object = map2Java(javaBean, map);
                 objectList.add(object);
             }
@@ -45,10 +45,10 @@ public class MapUtil {
      * Map对象转化成 JavaBean对象
      *
      * @param javaBean JavaBean实例对象
-     * @param map Map对象
+     * @param map      Map对象
      * @return <T>
      */
-    @SuppressWarnings({ "rawtypes","unchecked", "hiding" })
+    @SuppressWarnings({"rawtypes", "unchecked", "hiding"})
     public static <T> T map2Java(T javaBean, Map map) {
         try {
             // 获取javaBean属性
@@ -85,7 +85,7 @@ public class MapUtil {
      * @return Map
      * @author jqlin
      */
-    @SuppressWarnings({ "rawtypes", "unchecked" })
+    @SuppressWarnings({"rawtypes", "unchecked"})
     public static Map java2Map(Object javaBean) {
         Map map = new HashMap<>(8);
 
@@ -96,9 +96,9 @@ public class MapUtil {
             PropertyDescriptor[] propertyDescriptors = beanInfo.getPropertyDescriptors();
             if (propertyDescriptors != null && propertyDescriptors.length > 0) {
                 // javaBean属性名
-                String propertyName ;
+                String propertyName;
                 // javaBean属性值
-                Object propertyValue ;
+                Object propertyValue;
                 for (PropertyDescriptor pd : propertyDescriptors) {
                     propertyName = pd.getName();
                     if (!"class".equals(propertyName)) {
@@ -115,8 +115,6 @@ public class MapUtil {
 
         return map;
     }
-
-
 
 
 }

@@ -16,7 +16,7 @@ public class IpUtils {
     /**
      * 获取真实ip
      *
-     * @param request       HttpServletRequest
+     * @param request HttpServletRequest
      * @return 真实ip
      */
     public static String getIP(HttpServletRequest request) {
@@ -56,6 +56,7 @@ public class IpUtils {
 
     /**
      * 仅仅判断ip是否有效
+     *
      * @param ip：IP地址
      * @return bool
      */
@@ -83,6 +84,7 @@ public class IpUtils {
 
     /**
      * 判断ip是否有效，并且不是内网ip
+     *
      * @param ip:
      * @return bool
      */

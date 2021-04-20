@@ -28,7 +28,6 @@ import java.io.StringWriter;
 public class MailComponent {
 
 
-
     @Value("${spring.mail.username}")
     private String from;
 
@@ -36,21 +35,21 @@ public class MailComponent {
     private JavaMailSender mailSender;
 
 
-
     /**
-     *  添加管理员账号
+     * 添加管理员账号
+     *
+     * @param mailObject :信息
      * @author : WangShiLei
      * @date : 2020/11/15 11:05 下午
-     * @param mailObject :信息
      **/
     public void sendMail2Html(MailObject mailObject) throws MessagingException, IOException, TemplateException {
-        Configuration configuration =new Configuration(Configuration.VERSION_2_3_0);
+        Configuration configuration = new Configuration(Configuration.VERSION_2_3_0);
         ClassLoader loader = Application.class.getClassLoader();
-        configuration.setClassLoaderForTemplateLoading(loader,"ftl");
+        configuration.setClassLoaderForTemplateLoading(loader, "ftl");
         Template template = configuration.getTemplate(mailObject.getTemplate());
         StringWriter mail = new StringWriter();
         template.process(mailObject.getContent(), mail);
-        sendMail(mailObject.getNumber(),mailObject.getSubject(),mail.toString(),mailObject.getFile(),mailObject.getFileName());
+        sendMail(mailObject.getNumber(), mailObject.getSubject(), mail.toString(), mailObject.getFile(), mailObject.getFileName());
     }
 
 
@@ -58,11 +57,12 @@ public class MailComponent {
 
     /**
      * 简单文本邮件
-     * @param to 接收者邮件
+     *
+     * @param to      接收者邮件
      * @param subject 邮件主题
      * @param content 邮件内容
      */
-    public void sendSimpleMail(String to, String subject, String content){
+    public void sendSimpleMail(String to, String subject, String content) {
 
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(to);
@@ -75,12 +75,13 @@ public class MailComponent {
 
     /**
      * HTML 文本邮件
-     * @param to 接收者邮件
+     *
+     * @param to      接收者邮件
      * @param subject 邮件主题
      * @param content HTML内容
      * @throws MessagingException:发送异常
      */
-    public void sendMail(String to, String subject, String content,File file,String name) throws MessagingException {
+    public void sendMail(String to, String subject, String content, File file, String name) throws MessagingException {
         MimeMessage message = mailSender.createMimeMessage();
 
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
@@ -88,8 +89,8 @@ public class MailComponent {
         helper.setSubject(subject);
         helper.setText(content, true);
         helper.setFrom(from);
-        if (file!=null&&file.length()>0&& StringUtils.isNotBlank(name)){
-            helper.addAttachment(name,file);
+        if (file != null && file.length() > 0 && StringUtils.isNotBlank(name)) {
+            helper.addAttachment(name, file);
         }
         mailSender.send(message);
     }

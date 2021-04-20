@@ -10,7 +10,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/** 短信模板组件
+/**
+ * 短信模板组件
+ *
  * @author WangShilei
  * @date 2020/11/13-17:36
  **/
@@ -28,14 +30,14 @@ public class SmsComponent {
     String appId;
 
     /**
-     * @param phone ：手机号
-     * @param list :内容
+     * @param phone        ：手机号
+     * @param list         :内容
      * @param templateCode :
      * @return boolean
      * @author wangshilei
      * @date 2020/11/13 17:59
      **/
-    public boolean send(Integer templateCode, List<String> list, String phone){
+    public boolean send(Integer templateCode, List<String> list, String phone) {
         ZhenziSmsClient client = new ZhenziSmsClient(apiUrl, appId, appSecret);
         Map<String, Object> params = new HashMap<>(8);
         String[] text = list.toArray(new String[0]);
@@ -45,12 +47,12 @@ public class SmsComponent {
         try {
             String result = client.send(params);
             String key = "code";
-            if (JSONObject.parseObject(result).getIntValue(key)==0){
+            if (JSONObject.parseObject(result).getIntValue(key) == 0) {
                 return true;
             }
 
-        }catch (Exception e){
-            log.error("短信消息发送异常：{}",e.getMessage());
+        } catch (Exception e) {
+            log.error("短信消息发送异常：{}", e.getMessage());
         }
         return false;
     }

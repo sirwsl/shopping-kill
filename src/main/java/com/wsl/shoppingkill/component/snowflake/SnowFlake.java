@@ -17,18 +17,18 @@ public class SnowFlake {
     private final static long START_STMP = 1480166465631L;
 
 
-     //每一部分占用的位数
+    //每一部分占用的位数
     /**
-     *序列号占用的位数
+     * 序列号占用的位数
      */
 
     private final static long SEQUENCE_BIT = 12;
     /**
-     *机器标识占用的位数
+     * 机器标识占用的位数
      */
     private final static long MACHINE_BIT = 5;
     /**
-     *数据中心占用的位数
+     * 数据中心占用的位数
      */
     private final static long DATACENTER_BIT = 5;
 
@@ -47,7 +47,7 @@ public class SnowFlake {
     private final static long TIMESTMP_LEFT = DATACENTER_LEFT + DATACENTER_BIT;
 
     /**
-     *数据中心
+     * 数据中心
      */
 
     private long datacenterId;
@@ -64,7 +64,7 @@ public class SnowFlake {
      */
     private long lastStamp = -1L;
 
-    public SnowFlake(){
+    public SnowFlake() {
         this.datacenterId = 2;
         this.machineId = 3;
     }

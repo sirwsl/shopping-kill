@@ -10,6 +10,7 @@ import com.wsl.shoppingkill.service.LoggersService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+
 @Service
 public class LoggersServiceImpl extends ServiceImpl<LoggersMapper, Loggers> implements LoggersService {
 
@@ -18,10 +19,10 @@ public class LoggersServiceImpl extends ServiceImpl<LoggersMapper, Loggers> impl
 
 
     @Override
-    public IPage<LoggersVO> getLogListLimit(Long page ,Long num, Integer type) {
-        Page<LoggersVO> pages = new Page<>(page,num);
+    public IPage<LoggersVO> getLogListLimit(Long page, Long num, Integer type) {
+        Page<LoggersVO> pages = new Page<>(page, num);
         IPage<LoggersVO> allLogByType = loggersMapper.getAllLogByType(pages, type);
-        if (allLogByType.getSize()>0) {
+        if (allLogByType.getSize() > 0) {
             return allLogByType;
         }
 

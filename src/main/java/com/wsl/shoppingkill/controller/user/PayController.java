@@ -12,6 +12,7 @@ import javax.validation.Valid;
 
 /**
  * 支付接口
+ *
  * @author : WangShiLei
  * @date : 2021/1/1 2:03 下午
  **/
@@ -24,11 +25,11 @@ public class PayController {
     private PayService payService;
 
     @PostMapping("/pay/v1")
-    public Result<String> userPay(@Valid PayParam payParam){
-        if (payService.pay(payParam)){
+    public Result<String> userPay(@Valid PayParam payParam) {
+        if (payService.pay(payParam)) {
             return Result.success("支付成功");
-        }else {
-            return Result.error("error","支付失败");
+        } else {
+            return Result.error("error", "支付失败");
         }
     }
 }

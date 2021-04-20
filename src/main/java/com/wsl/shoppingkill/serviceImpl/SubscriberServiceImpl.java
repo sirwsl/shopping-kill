@@ -23,11 +23,11 @@ public class SubscriberServiceImpl extends ServiceImpl<SubscriberMapper, Subscri
     private SubscriberMapper subscriberMapper;
 
     @Override
-    public IPage<Subscriber> getSubscriber(Integer size, Integer current,Integer type) {
+    public IPage<Subscriber> getSubscriber(Integer size, Integer current, Integer type) {
         final IPage<Subscriber> subscriberIPage = subscriberMapper.selectPage(new Page<>(current, size),
                 new QueryWrapper<Subscriber>().eq(Subscriber.TYPE, type));
-        if (CollectionUtils.isNotEmpty(subscriberIPage.getRecords())){
-            subscriberIPage.getRecords().forEach(li ->li.setNumber(CommonUtil.replaceUserName(li.getNumber())));
+        if (CollectionUtils.isNotEmpty(subscriberIPage.getRecords())) {
+            subscriberIPage.getRecords().forEach(li -> li.setNumber(CommonUtil.replaceUserName(li.getNumber())));
         }
 
         return subscriberIPage;
@@ -41,6 +41,6 @@ public class SubscriberServiceImpl extends ServiceImpl<SubscriberMapper, Subscri
 
     @Override
     public boolean delSubscriber(Long number) {
-        return subscriberMapper.deleteById(number)>0;
+        return subscriberMapper.deleteById(number) > 0;
     }
 }

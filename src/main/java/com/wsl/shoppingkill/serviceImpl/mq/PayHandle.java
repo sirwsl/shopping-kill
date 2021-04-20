@@ -17,6 +17,7 @@ import java.io.IOException;
 
 /**
  * 支付mq限流处理
+ *
  * @author : WangShiLei
  * @date : 2021/1/1 2:18 下午
  **/
@@ -29,14 +30,15 @@ public class PayHandle {
 
     /**
      * 短信通知创建管理员
-     * @author : WangShiLei
-     * @date : 2020/11/15 10:55 下午
+     *
      * @param payBO:
      * @param channel:
      * @param message:
+     * @author : WangShiLei
+     * @date : 2020/11/15 10:55 下午
      **/
     @RabbitListener(bindings = @QueueBinding(
-            value = @Queue(value = RabbitMqEnum.Queue.QUEUE_PAY,exclusive = "false",autoDelete = "false",durable = "true"),
+            value = @Queue(value = RabbitMqEnum.Queue.QUEUE_PAY, exclusive = "false", autoDelete = "false", durable = "true"),
             exchange = @Exchange(RabbitMqEnum.Exchange.EXCHANGE_PAY),
             key = RabbitMqEnum.Key.KEY_PAY,
             ignoreDeclarationExceptions = "true"
@@ -47,15 +49,15 @@ public class PayHandle {
 
             Order order = orderMapper.selectById(payBO.getOrderId());
             order.setStatus(BaseEnum.ORDER_TYPE_PAY).updateById();
-            channel.basicAck(message.getMessageProperties().getDeliveryTag(),false);
+            channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
 
         } catch (IOException e) {
             if (message.getMessageProperties().getRedelivered()) {
                 log.warn("支付失败，尝试重新入队操作");
                 /* 拒绝消息，requeue=false 表示不再重新入队，如果配置了死信队列则进入死信队列 */
                 channel.basicReject(message.getMessageProperties().getDeliveryTag(), true);
-            }else {
-                channel.basicNack(message.getMessageProperties().getDeliveryTag(), false,true);
+            } else {
+                channel.basicNack(message.getMessageProperties().getDeliveryTag(), false, true);
             }
             e.printStackTrace();
         }

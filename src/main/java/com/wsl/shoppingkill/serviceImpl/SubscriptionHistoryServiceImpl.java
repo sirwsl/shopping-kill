@@ -42,13 +42,13 @@ public class SubscriptionHistoryServiceImpl extends ServiceImpl<SubscriptionHist
     @Override
     @Transactional(rollbackFor = Exception.class)
     @MyLog(detail = "添加发布订阅内容", value = "#subscriptionHistory.id", grade = LoggerEnum.INFO)
-    public boolean sendNewsSubscription(SubscriptionHistory subscriptionHistory) throws ExperienceException{
+    public boolean sendNewsSubscription(SubscriptionHistory subscriptionHistory) throws ExperienceException {
         try {
-            if(Objects.nonNull(abstractCurrentRequestComponent.getCurrentUser()) && abstractCurrentRequestComponent.getCurrentUser().getFlag() != null
-                    && abstractCurrentRequestComponent.getCurrentUser().getFlag()==1000){
+            if (Objects.nonNull(abstractCurrentRequestComponent.getCurrentUser()) && abstractCurrentRequestComponent.getCurrentUser().getFlag() != null
+                    && abstractCurrentRequestComponent.getCurrentUser().getFlag() == 1000) {
                 throw new ExperienceException("体验账号权限不足");
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new ExperienceException("体验账号权限不足");
         }
         subscriptionHistory.setAdminId(abstractCurrentRequestComponent.getCurrentUser().getId());
@@ -62,8 +62,8 @@ public class SubscriptionHistoryServiceImpl extends ServiceImpl<SubscriptionHist
     }
 
     @Override
-    public IPage<SubscriptionHistory> getAllSubscriptionHistory(Integer current,Integer size) {
-        Page<SubscriptionHistory> page = new Page<>(current,size);
+    public IPage<SubscriptionHistory> getAllSubscriptionHistory(Integer current, Integer size) {
+        Page<SubscriptionHistory> page = new Page<>(current, size);
         return subscriptionHistoryMapper.selectPage(page,
                 new QueryWrapper<SubscriptionHistory>().orderByDesc(SubscriptionHistory.ID));
     }
@@ -71,9 +71,9 @@ public class SubscriptionHistoryServiceImpl extends ServiceImpl<SubscriptionHist
     @Override
     public IPage<SubscriptionHistory> getSubscriptionHistoryByTime(PageTimeParam pageTimeParam) {
         Page<SubscriptionHistory> page = new Page<>(pageTimeParam.getCurrent(), pageTimeParam.getSize());
-        return subscriptionHistoryMapper.selectPage(page,new QueryWrapper<SubscriptionHistory>()
-                .ge(SubscriptionHistory.CREAT_TIME,pageTimeParam.getBeginTime())
-                .le(SubscriptionHistory.CREAT_TIME,pageTimeParam.getEndTime()));
+        return subscriptionHistoryMapper.selectPage(page, new QueryWrapper<SubscriptionHistory>()
+                .ge(SubscriptionHistory.CREAT_TIME, pageTimeParam.getBeginTime())
+                .le(SubscriptionHistory.CREAT_TIME, pageTimeParam.getEndTime()));
     }
 
 }

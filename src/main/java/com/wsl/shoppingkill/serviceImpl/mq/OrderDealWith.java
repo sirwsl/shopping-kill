@@ -87,8 +87,8 @@ public class OrderDealWith {
             Sku sku = skuMapper.selectById(addOrderParam.getSkuId());
             long oId = Long.parseLong(message.getMessageProperties().getHeaders().get("spring_returned_message_correlation").toString());
             BigDecimal expPrice = sku.getExpPrice();
-            if (Objects.isNull(expPrice)){
-                expPrice=new BigDecimal(0);
+            if (Objects.isNull(expPrice)) {
+                expPrice = new BigDecimal(0);
             }
             order.setStatus(BaseEnum.ORDER_TYPE_NOT_PAY)
                     .setPayPrice(sku.getSellPrice().multiply(new BigDecimal(addOrderParam.getNum())).add(expPrice))
@@ -148,7 +148,7 @@ public class OrderDealWith {
             Order order = new Order();
             long oId = Long.parseLong(message.getMessageProperties().getHeaders().get("spring_returned_message_correlation").toString());
             BigDecimal expPrice = sku.getExpPrice();
-            if (Objects.isNull(expPrice)){
+            if (Objects.isNull(expPrice)) {
                 expPrice = new BigDecimal(0);
             }
             order.setStatus(BaseEnum.ORDER_TYPE_NOT_PAY)
@@ -174,7 +174,7 @@ public class OrderDealWith {
             });
             //redisTemplate.opsForValue().set(RedisEnum.USER_KILL_NUM+id+sku.getId(),"1");
 
-            Object o = redisTemplate.opsForValue().get(RedisEnum.GOODS_DOING+ sku.getGoodsId());
+            Object o = redisTemplate.opsForValue().get(RedisEnum.GOODS_DOING + sku.getGoodsId());
             if (Objects.nonNull(o)) {
                 ObjectMapper objectMapper = new ObjectMapper();
                 KillGoodsVO killGoodsVO = objectMapper.convertValue(o, KillGoodsVO.class);

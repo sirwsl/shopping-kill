@@ -23,6 +23,7 @@ import java.util.stream.Collectors;
 
 /**
  * 商品适配器
+ *
  * @author WangShilei
  * @date 2020/12/24-9:38
  **/
@@ -36,7 +37,7 @@ public class GoodsAdapterImpl implements GoodsAdapter {
     private AsyncService asyncService;
 
     @Resource
-    private RedisTemplate<String,?> redisTemplate;
+    private RedisTemplate<String, ?> redisTemplate;
 
     @Override
     public IPage<ViewGoodsVO> getViewGoodsAll(String name, Long current, Long size) {
@@ -54,7 +55,7 @@ public class GoodsAdapterImpl implements GoodsAdapter {
                 }
                 return null;
             });
-            if (!CollectionUtils.isEmpty(objects)){
+            if (!CollectionUtils.isEmpty(objects)) {
                 List<ViewGoodsVO> collect = objects.stream()
                         .map(obj -> objectMapper.convertValue(obj, ViewGoodsVO.class))
                         .collect(Collectors.toList());
@@ -63,7 +64,7 @@ public class GoodsAdapterImpl implements GoodsAdapter {
         }
 
         final IPage<ViewGoodsVO> viewGoodsAll = goodsService.getViewGoodsAll(name, current, 50L);
-        if (!CollectionUtils.isEmpty(viewGoodsAll.getRecords())){
+        if (!CollectionUtils.isEmpty(viewGoodsAll.getRecords())) {
             asyncService.searchGoods(viewGoodsAll.getRecords());
             asyncService.goodsAll(viewGoodsAll);
         }
@@ -73,7 +74,7 @@ public class GoodsAdapterImpl implements GoodsAdapter {
     @Override
     public IPage<ViewGoodsVO> getViewGoods(Long current, Long size) {
         Object goodsVO = redisTemplate.opsForValue().get(RedisEnum.GOODS_VIEW + current);
-        if (Objects.nonNull(goodsVO)){
+        if (Objects.nonNull(goodsVO)) {
             IPage<ViewGoodsVO> goods = ObjectUtil.castIPage(goodsVO, ViewGoodsVO.class);
             return goods;
         }

@@ -7,11 +7,12 @@ import org.springframework.stereotype.Component;
 
 /**
  * 本地获取当前登录用户信息
+ *
  * @author wsl
  */
 @Slf4j
 @Component
-@Profile({"dev","test"})
+@Profile({"dev", "test"})
 public class SimAbstractCurrentRequestComponent extends AbstractCurrentRequestComponent {
 
     @Override

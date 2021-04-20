@@ -42,6 +42,7 @@ public class DruidConfiguration {
         servletRegistrationBean.addInitParameter("resetEnable", "false");
         return servletRegistrationBean;
     }
+
     @Bean
     public FilterRegistrationBean<WebStatFilter> filterRegistrationBean() {
         FilterRegistrationBean<WebStatFilter> filterRegistrationBean = new FilterRegistrationBean<>(new WebStatFilter());
@@ -52,13 +53,14 @@ public class DruidConfiguration {
 
     /**
      * 事务开启
-     * @author wangShilei
-     * @date 2020/11/26 15:54
+     *
      * @param dataSource :
      * @return org.springframework.transaction.PlatformTransactionManager
+     * @author wangShilei
+     * @date 2020/11/26 15:54
      */
     @Bean
-    public PlatformTransactionManager transactionManager(DataSource dataSource){
+    public PlatformTransactionManager transactionManager(DataSource dataSource) {
         DataSourceTransactionManager txManager = new DataSourceTransactionManager();
         txManager.setDataSource(dataSource);
         return txManager;

@@ -24,7 +24,7 @@ import java.util.List;
  * @author WangShilei
  */
 @Service
-public class SkuServiceImpl extends ServiceImpl<SkuMapper, Sku> implements SkuService{
+public class SkuServiceImpl extends ServiceImpl<SkuMapper, Sku> implements SkuService {
 
     @Resource
     private SkuMapper skuMapper;
@@ -33,7 +33,7 @@ public class SkuServiceImpl extends ServiceImpl<SkuMapper, Sku> implements SkuSe
     private OssComponent ossComponent;
 
     @Resource
-    private RedisTemplate<String,Integer> redisTemplate;
+    private RedisTemplate<String, Integer> redisTemplate;
 
     @Override
     public SkuVO getSku(Long id) {
@@ -43,7 +43,7 @@ public class SkuServiceImpl extends ServiceImpl<SkuMapper, Sku> implements SkuSe
     @Override
     public IPage<SkuVO> getSkuAll(Long current, Long size, Long id, String name) {
         IPage<SkuVO> skuAll = skuMapper.getSkuAll(new Page<>(current, size), id, name);
-            skuAll.setRecords(changeUrl(skuAll.getRecords()));
+        skuAll.setRecords(changeUrl(skuAll.getRecords()));
         return skuAll;
     }
 
@@ -54,8 +54,8 @@ public class SkuServiceImpl extends ServiceImpl<SkuMapper, Sku> implements SkuSe
         Sku sku = new Sku();
         Goods goods = new Goods();
         goods.setId(skuVO.getId()).setName(skuVO.getGoodsName()).updateById();
-        if (!skuVO.getImg().isEmpty()){
-            skuVO.setImgUrl(ossComponent.uploadFile(BaseEnum.OSS_SKU,skuVO.getImg()));
+        if (!skuVO.getImg().isEmpty()) {
+            skuVO.setImgUrl(ossComponent.uploadFile(BaseEnum.OSS_SKU, skuVO.getImg()));
         }
         sku.setWarnNum(skuVO.getWarnNum())
                 .setSellPrice(skuVO.getSellPrice())
@@ -69,7 +69,7 @@ public class SkuServiceImpl extends ServiceImpl<SkuMapper, Sku> implements SkuSe
                 .setGoodsId(skuVO.getGoodsId())
                 .setUpdateTime(LocalDateTime.now())
                 .insertOrUpdate();
-        redisTemplate.opsForValue().set(RedisEnum.GOODS_SKU_NUM+sku.getId(),sku.getNum());
+        redisTemplate.opsForValue().set(RedisEnum.GOODS_SKU_NUM + sku.getId(), sku.getNum());
         return true;
     }
 
@@ -78,8 +78,8 @@ public class SkuServiceImpl extends ServiceImpl<SkuMapper, Sku> implements SkuSe
     @Transactional(rollbackOn = Exception.class)
     public boolean addSku(SkuVOs skuVO) throws Exception {
         Sku sku = new Sku();
-       if (!skuVO.getImgs().isEmpty()){
-            skuVO.setImgUrls(ossComponent.uploadFile(BaseEnum.OSS_SKU,skuVO.getImgs()));
+        if (!skuVO.getImgs().isEmpty()) {
+            skuVO.setImgUrls(ossComponent.uploadFile(BaseEnum.OSS_SKU, skuVO.getImgs()));
         }
         sku.setWarnNum(skuVO.getWarnNums())
                 .setSellPrice(skuVO.getSellPrices())
@@ -93,14 +93,14 @@ public class SkuServiceImpl extends ServiceImpl<SkuMapper, Sku> implements SkuSe
                 .setUpdateTime(LocalDateTime.now())
                 .setCreatTime(LocalDateTime.now())
                 .insert();
-        redisTemplate.opsForValue().set(RedisEnum.GOODS_SKU_NUM+sku.getId(),sku.getNum());
+        redisTemplate.opsForValue().set(RedisEnum.GOODS_SKU_NUM + sku.getId(), sku.getNum());
         return true;
     }
 
     @Override
     public boolean delSku(Long id) {
-        redisTemplate.delete(RedisEnum.GOODS_SKU_NUM+id);
-        return skuMapper.deleteById(id)>0;
+        redisTemplate.delete(RedisEnum.GOODS_SKU_NUM + id);
+        return skuMapper.deleteById(id) > 0;
     }
 
     @Override
@@ -111,14 +111,15 @@ public class SkuServiceImpl extends ServiceImpl<SkuMapper, Sku> implements SkuSe
 
     /**
      * 获取路径拼接
-     * @author wangShilei
-     * @date 2020/12/10 17:43
+     *
      * @param skuVO :
      * @return java.util.List<Advertise>
+     * @author wangShilei
+     * @date 2020/12/10 17:43
      */
-    private List<SkuVO> changeUrl(List<SkuVO> skuVO){
+    private List<SkuVO> changeUrl(List<SkuVO> skuVO) {
         String min = "?x-oss-process=image/resize,m_fill,h_50,w_50";
-        skuVO.forEach(li->li.setImgUrl(li.getImgUrl()+min));
+        skuVO.forEach(li -> li.setImgUrl(li.getImgUrl() + min));
         return skuVO;
     }
 }

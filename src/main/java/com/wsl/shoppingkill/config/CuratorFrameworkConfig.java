@@ -27,13 +27,14 @@ public class CuratorFrameworkConfig {
     private Environment env;
 
     @Bean
-    public CuratorFramework curatorFramework(){
+    public CuratorFramework curatorFramework() {
         // ExponentialBackoffRetry是种重连策略，每次重连的间隔会越来越长,1000毫秒是初始化的间隔时间,3代表尝试重连次数。
         ExponentialBackoffRetry retry = new ExponentialBackoffRetry(3000, 3);
         // 创建client
         CuratorFramework curatorFramework = CuratorFrameworkFactory.newClient(env.getProperty("zookeeper-hosts"), retry);
         // 添加watched 监听器
-        curatorFramework.getCuratorListenable().addListener(new MyCuratorListener() {});
+        curatorFramework.getCuratorListenable().addListener(new MyCuratorListener() {
+        });
 
         try {
 
@@ -47,12 +48,12 @@ public class CuratorFrameworkConfig {
                     //指定设置节点权限信息
                     .withACL(ZooDefs.Ids.OPEN_ACL_UNSAFE)
                     //指定节点名称
-                    .forPath("/monitor/"+ip);
-        }catch (Exception e){
+                    .forPath("/monitor/" + ip);
+        } catch (Exception e) {
             curatorFramework.close();
 
-           // curatorFramework.start();
-           // Log.info("zk正常启动");
+            // curatorFramework.start();
+            // Log.info("zk正常启动");
         }
 
         return curatorFramework;
@@ -63,11 +64,11 @@ public class CuratorFrameworkConfig {
         @Override
         public void eventReceived(CuratorFramework client, CuratorEvent event) throws Exception {
             CuratorEventType type = event.getType();
-            if(type == CuratorEventType.WATCHED){
+            if (type == CuratorEventType.WATCHED) {
                 WatchedEvent watchedEvent = event.getWatchedEvent();
                 String path = watchedEvent.getPath();
                 // 重新设置改节点监听
-                if(null != path){
+                if (null != path) {
                     client.checkExists().watched().forPath(path);
                 }
             }

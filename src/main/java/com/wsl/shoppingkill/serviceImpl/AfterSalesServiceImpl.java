@@ -37,7 +37,7 @@ import java.util.stream.Collectors;
  */
 @Service
 @Slf4j
-public class AfterSalesServiceImpl extends ServiceImpl<AfterSalesMapper, AfterSales> implements AfterSalesService{
+public class AfterSalesServiceImpl extends ServiceImpl<AfterSalesMapper, AfterSales> implements AfterSalesService {
 
     @Resource
     private AfterSalesMapper afterSalesMapper;
@@ -49,7 +49,7 @@ public class AfterSalesServiceImpl extends ServiceImpl<AfterSalesMapper, AfterSa
     @Override
     public IPage<AfterSalesVO> getAfterSalesAll(Long current, Long size, AfterSalesParam afterSalesParam) {
         IPage<AfterSalesVO> afterSalesAll = afterSalesMapper.getAfterSalesAll(new Page<>(current, size), afterSalesParam);
-        if (CollectionUtils.isEmpty(afterSalesAll.getRecords())){
+        if (CollectionUtils.isEmpty(afterSalesAll.getRecords())) {
             return afterSalesAll;
         }
         User user = new User();
@@ -68,7 +68,7 @@ public class AfterSalesServiceImpl extends ServiceImpl<AfterSalesMapper, AfterSa
                         .stream()
                         .map(AfterSalesVO::getSkuId)
                         .collect(Collectors.toList()))
-                .select(Sku.ID,Sku.GOODS_ID, Sku.ATTRIBUTE))
+                .select(Sku.ID, Sku.GOODS_ID, Sku.ATTRIBUTE))
                 .stream()
                 .collect(Collectors.groupingBy(Sku::getId));
 
@@ -76,7 +76,7 @@ public class AfterSalesServiceImpl extends ServiceImpl<AfterSalesMapper, AfterSa
         skuCollect.values().forEach(li -> goodsId.add(li.get(0).getGoodsId()));
         Goods goods = new Goods();
         Map<Long, List<Goods>> goodsCollect = goods.selectList(new QueryWrapper<Goods>()
-                .in(Goods.ID,goodsId)
+                .in(Goods.ID, goodsId)
                 .select(Goods.ID, Goods.NAME))
                 .stream()
                 .collect(Collectors.groupingBy(Goods::getId));
@@ -90,7 +90,7 @@ public class AfterSalesServiceImpl extends ServiceImpl<AfterSalesMapper, AfterSa
                         .setGoodsName(goodsCollect.get(afterSalesVO.getGoodsId()).get(0).getName());
             }
             List<User> users = userCollect.get(afterSalesVO.getUserId());
-            if (CollectionUtils.isNotEmpty(users)){
+            if (CollectionUtils.isNotEmpty(users)) {
                 User userTemp = users.get(0);
                 afterSalesVO.setUserName(CommonUtil.replaceUserName(userTemp.getName()))
                         .setUserPhone(CommonUtil.replaceUserName(userTemp.getPhone()))
@@ -98,7 +98,7 @@ public class AfterSalesServiceImpl extends ServiceImpl<AfterSalesMapper, AfterSa
             }
         }
 
-        Map<Long, List<Sku>> collect = sku.selectList(new QueryWrapper<Sku>().in(Sku.GOODS_ID,goodsId)
+        Map<Long, List<Sku>> collect = sku.selectList(new QueryWrapper<Sku>().in(Sku.GOODS_ID, goodsId)
                 .select(Sku.ID, Sku.GOODS_ID, Sku.ATTRIBUTE, Sku.NUM))
                 .stream()
                 .collect(Collectors.groupingBy(Sku::getGoodsId));
@@ -108,9 +108,9 @@ public class AfterSalesServiceImpl extends ServiceImpl<AfterSalesMapper, AfterSa
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    @MyLog(value = "#afterSalesResultParam.id",detail = "售后处理",grade = LoggerEnum.INFO)
+    @MyLog(value = "#afterSalesResultParam.id", detail = "售后处理", grade = LoggerEnum.INFO)
     public boolean refundGoodsAndMoney(AfterSalesResultParam afterSalesResultParam) throws Exception {
-        if (afterSalesMapper.selectById(afterSalesResultParam.getId()).getResult()){
+        if (afterSalesMapper.selectById(afterSalesResultParam.getId()).getResult()) {
             return false;
         }
         boolean updateById = AfterSalesConverter.INSTANCE.afterSalesParam2DoMain(
@@ -120,19 +120,19 @@ public class AfterSalesServiceImpl extends ServiceImpl<AfterSalesMapper, AfterSa
 
         Sku sku = new Sku();
         Sku skuTemp = sku.setId(afterSalesResultParam.getOldSkuId()).selectById();
-        if(BaseEnum.REFUND_GOODS_MONEY.equals(afterSalesResultParam.getType())){
+        if (BaseEnum.REFUND_GOODS_MONEY.equals(afterSalesResultParam.getType())) {
             //退货退钱
-           if (skuTemp.setNum(skuTemp.getNum()+1).updateById()&&updateById){
+            if (skuTemp.setNum(skuTemp.getNum() + 1).updateById() && updateById) {
                 return true;
             }
-        }else if(BaseEnum.REFUND_MONEY.equals(afterSalesResultParam.getType())){
+        } else if (BaseEnum.REFUND_MONEY.equals(afterSalesResultParam.getType())) {
             //退钱
             return true;
-        }else if(BaseEnum.REFUND_GOODS.equals(afterSalesResultParam.getType())){
+        } else if (BaseEnum.REFUND_GOODS.equals(afterSalesResultParam.getType())) {
             //换货
             Sku newSkuTemp = sku.setId(afterSalesResultParam.getSkuId()).selectById();
-            if (newSkuTemp.setNum(newSkuTemp.getNum()-1).updateById()&&
-            skuTemp.setNum(skuTemp.getNum()+1).updateById()&&updateById){
+            if (newSkuTemp.setNum(newSkuTemp.getNum() - 1).updateById() &&
+                    skuTemp.setNum(skuTemp.getNum() + 1).updateById() && updateById) {
                 return true;
             }
         }

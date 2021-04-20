@@ -15,10 +15,11 @@ public interface CartMapper extends BaseMapper<Cart> {
 
     /**
      * 根据用户id获取购物车列表
-     * @author wangShilei
-     * @date 2020/12/28 4:38 下午
+     *
      * @param userId :
      * @return java.util.List<com.wsl.shoppingkill.domain.Cart>
+     * @author wangShilei
+     * @date 2020/12/28 4:38 下午
      */
     List<CartVO> selectCartByUserId(Long userId);
 }

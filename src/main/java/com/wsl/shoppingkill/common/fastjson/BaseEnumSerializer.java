@@ -13,6 +13,6 @@ public class BaseEnumSerializer implements ObjectSerializer {
 
     @Override
     public void write(JSONSerializer jsonSerializer, Object o, Object o1, Type type, int i) {
-        jsonSerializer.write(((BaseEnum)o).getDesc());
+        jsonSerializer.write(((BaseEnum) o).getDesc());
     }
 }

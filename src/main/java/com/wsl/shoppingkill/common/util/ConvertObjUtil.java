@@ -43,7 +43,7 @@ public class ConvertObjUtil {
             resultList.add(map);
         } catch (SecurityException e) {
             // TODO Auto-generated catch block
-            log.error("异常",e);
+            log.error("异常", e);
         }
         return resultList;
     }
@@ -75,19 +75,18 @@ public class ConvertObjUtil {
             }
         } catch (SecurityException e) {
             // TODO Auto-generated catch block
-            log.error("异常",e);
+            log.error("异常", e);
         }
         return resultMap;
     }
 
 
-    
     public static void main(String[] args) {
         Admin admin = new Admin();
         admin.setSex(SexEnum.MAN).setAddress("地址test").setId(123L).setName("张三");
         System.out.println("list:" + convertObjToList(admin));
 
-        System.out.println("map:"+ConvertObjToMap(admin));
+        System.out.println("map:" + ConvertObjToMap(admin));
 
     }
 }

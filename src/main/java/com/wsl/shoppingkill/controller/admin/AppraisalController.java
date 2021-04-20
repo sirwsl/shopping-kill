@@ -21,29 +21,29 @@ public class AppraisalController {
 
     /**
      * 获取所有的评价内容
-     * @param current :
-     * @param size :
+     *
+     * @param current     :
+     * @param size        :
      * @param appraisalVO :
-     * @return Result<IPage<AppraisalVO>>
+     * @return Result<IPage < AppraisalVO>>
      * @author wangshilei
      * @date 2020/11/18 11:04
      **/
     @GetMapping("/getAppraisalAll/v1")
-    public Result<IPage<AppraisalVO>> getAppraisalAll(@RequestParam(defaultValue = "1") Long current, @RequestParam(defaultValue = "10")Long size, AppraisalVO appraisalVO){
-        return Result.success(appraisalService.getAppraisalAll(current,size,appraisalVO));
+    public Result<IPage<AppraisalVO>> getAppraisalAll(@RequestParam(defaultValue = "1") Long current, @RequestParam(defaultValue = "10") Long size, AppraisalVO appraisalVO) {
+        return Result.success(appraisalService.getAppraisalAll(current, size, appraisalVO));
     }
 
     /**
-     *
      * @param id :
      * @return boolean
      * @author wangshilei
      * @date 2020/11/18 15:04
      **/
     @DeleteMapping("delAppraisalById/v1")
-    public Result<Boolean> delAppraisalById(Long id){
-        if(id == null || id == 0){
-            return Result.error("error","id不能为空");
+    public Result<Boolean> delAppraisalById(Long id) {
+        if (id == null || id == 0) {
+            return Result.error("error", "id不能为空");
         }
         return Result.success(appraisalService.delAppraisalById(id));
     }

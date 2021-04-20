@@ -22,6 +22,7 @@ import java.util.Objects;
 
 /**
  * 下单接口
+ *
  * @author : WangShiLei
  * @date : 2021/1/1 5:15 下午
  **/
@@ -46,54 +47,54 @@ public class AddOrderController {
     private GetUrlService getUrlService;
 
     @PostMapping("/commonGoods/v1")
-    public Result<String> commonGoods(AddOrderParam addOrderParam, HttpServletRequest request){
+    public Result<String> commonGoods(AddOrderParam addOrderParam, HttpServletRequest request) {
         if (checkBlackList(request)) {
-            return Result.error("error","由于您在黑名单中下单,下单失败");
+            return Result.error("error", "由于您在黑名单中下单,下单失败");
         }
         addOrderParam.setUserId(abstractCurrentRequestComponent.getCurrentUser().getId());
         String s = addOrderService.commonOrder(addOrderParam);
         if (StringUtils.isNotBlank(s)) {
             return Result.success(s);
         }
-        return Result.error("error","下单失败");
+        return Result.error("error", "下单失败");
     }
 
     @PostMapping("/killGoods/{goodsId}/{num}/{md5}")
-    public Result<String> killGoods(@PathVariable("goodsId")Long goodsId,
-                                    @PathVariable("num")Integer num,
-                                    @PathVariable("md5")String md5,
-                                    HttpServletRequest request){
+    public Result<String> killGoods(@PathVariable("goodsId") Long goodsId,
+                                    @PathVariable("num") Integer num,
+                                    @PathVariable("md5") String md5,
+                                    HttpServletRequest request) {
         Long id = abstractCurrentRequestComponent.getCurrentUser().getId();
-        if (StringUtils.isBlank(md5)){
-            return Result.error("error","找不到接口位置");
+        if (StringUtils.isBlank(md5)) {
+            return Result.error("error", "找不到接口位置");
         }
         if (!md5.equals(getUrlService.getMd5(goodsId))) {
-            return Result.error("error","秒杀地址不正确");
+            return Result.error("error", "秒杀地址不正确");
         }
         Object o = redisTemplate.opsForValue().get(RedisEnum.USER_KILL_NUM + id + goodsId);
-        if (Objects.nonNull(o)){
-            return Result.error("error","您已经抢购过该商品了");
+        if (Objects.nonNull(o)) {
+            return Result.error("error", "您已经抢购过该商品了");
         }
-        if(num < 1){
-            return Result.error("error","数量不正确");
+        if (num < 1) {
+            return Result.error("error", "数量不正确");
         }
         if (checkBlackList(request)) {
-            return Result.error("error","由于您在黑名单中下单,下单失败");
+            return Result.error("error", "由于您在黑名单中下单,下单失败");
         }
 
-        AddOrderParam addOrderParam = new AddOrderParam(goodsId,num,id);
+        AddOrderParam addOrderParam = new AddOrderParam(goodsId, num, id);
         String s = addOrderService.killOrder(addOrderParam);
         if (StringUtils.isNotBlank(s)) {
             return Result.success(s);
         }
-        return Result.error("error","下单失败");
+        return Result.error("error", "下单失败");
     }
 
-    private boolean checkBlackList(HttpServletRequest request){
+    private boolean checkBlackList(HttpServletRequest request) {
         Long userId = abstractCurrentRequestComponent.getCurrentUser().getId();
         User user = userService.getById(userId);
         Object phone = redisTemplate.opsForValue().get(RedisEnum.LIMIT_LIST + user.getPhone());
-        if (Objects.nonNull(phone)){
+        if (Objects.nonNull(phone)) {
             return true;
         }
         String ip = IpUtils.getIP(request);

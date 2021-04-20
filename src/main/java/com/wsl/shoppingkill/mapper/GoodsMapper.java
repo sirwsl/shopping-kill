@@ -20,34 +20,37 @@ public interface GoodsMapper extends BaseMapper<Goods> {
 
     /**
      * 根据查询全部或者条件查询
-     * @author wangShilei
-     * @date 2020/11/19 11:19 上午
-     * @param page :
+     *
+     * @param page  :
      * @param goods :
      * @return IPage<com.wsl.shoppingkill.obj.vo.GoodsVO>
+     * @author wangShilei
+     * @date 2020/11/19 11:19 上午
      */
     IPage<GoodsVO> getAllGoods(Page<GoodsVO> page, @Param("goods") Goods goods);
 
 
     /**
      * 获取未开始活动的商品名称与SKU属性
-     * @author wangShilei
-     * @date 2020/11/30 9:29
+     *
      * @param page :
-     * @param id :
+     * @param id   :
      * @param name :
      * @return IPage<ActivityByGoodsVO>
+     * @author wangShilei
+     * @date 2020/11/30 9:29
      */
-    IPage<ActivityByGoodsVO> getActivityBuyGoods(Page<ActivityByGoodsVO> page,@Param("id") Long id,@Param("name") String name);
+    IPage<ActivityByGoodsVO> getActivityBuyGoods(Page<ActivityByGoodsVO> page, @Param("id") Long id, @Param("name") String name);
 
     /**
      * 获取所有物品名称
      * <p>
-     *     Object ->(id,name)
+     * Object ->(id,name)
      * </p>
+     *
+     * @return java.util.List<java.lang.Object>
      * @author wangShilei
      * @date 2020/12/16 10:04
-     * @return java.util.List<java.lang.Object>
      */
     List<BaseVO> getGoodsNameAll();
 

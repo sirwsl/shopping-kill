@@ -55,22 +55,22 @@ public class OrderTimeOut {
         if (Objects.nonNull(order)) {
             //如果订单存在 删除订单 库存+1
             try {
-                boolean flag1 = orderMapper.deleteById(orderId)>0;
+                boolean flag1 = orderMapper.deleteById(orderId) > 0;
                 boolean flag2 = skuMapper.count(order.getSkuId());
-                if (!(flag1 && flag2)){
+                if (!(flag1 && flag2)) {
                     throw new Exception();
                 }
                 Object o1 = redisTemplate.opsForValue().get(RedisEnum.GOODS_SKU_NUM + orderId);
-                if (Objects.nonNull(o1)){
+                if (Objects.nonNull(o1)) {
                     redisTemplate.boundValueOps(RedisEnum.GOODS_SKU_NUM + orderId).increment(1);
                 }
                 //如果redis中有需要更新redis库存
                 String key = RedisEnum.GOODS_KILL + order.getSkuId();
                 Object o = redisTemplate.opsForValue().get(key);
-                if (Objects.nonNull(o)){
+                if (Objects.nonNull(o)) {
                     redisTemplate.boundValueOps(key).increment(1);
                     //只是做统计，允许小误差出错
-                    activityMapper.count(order.getSkuId(),  DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(order.getCreatTime()));
+                    activityMapper.count(order.getSkuId(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(order.getCreatTime()));
                 }
             } catch (Exception e) {
                 TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();

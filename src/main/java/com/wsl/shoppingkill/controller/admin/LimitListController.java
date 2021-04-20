@@ -65,11 +65,11 @@ public class LimitListController {
      * @date : 2020/11/8 5:28 下午
      **/
     @GetMapping("/selectBlackListByPhone/v1")
-    public Result<IPage<LimitList>> getLimitListByPhone(String number,@RequestParam(defaultValue = "1") Long page, @RequestParam(defaultValue = "10")Long num) {
+    public Result<IPage<LimitList>> getLimitListByPhone(String number, @RequestParam(defaultValue = "1") Long page, @RequestParam(defaultValue = "10") Long num) {
         if (StringUtils.isEmpty(number) || number.isEmpty()) {
             return Result.error("error", "手机号不能为空");
         }
-        return Result.success(limitListService.getBlackListByNumber(page,num,number, BaseEnum.PHONE));
+        return Result.success(limitListService.getBlackListByNumber(page, num, number, BaseEnum.PHONE));
     }
 
     /**
@@ -81,11 +81,11 @@ public class LimitListController {
      * @date : 2020/11/8 5:28 下午
      **/
     @GetMapping("/selectBlackListByIp/v1")
-    public Result<IPage<LimitList>> getLimitListByIp(String number,@RequestParam(defaultValue = "1") Long page, @RequestParam(defaultValue = "10")Long num) {
+    public Result<IPage<LimitList>> getLimitListByIp(String number, @RequestParam(defaultValue = "1") Long page, @RequestParam(defaultValue = "10") Long num) {
         if (StringUtils.isEmpty(number) || number.isEmpty()) {
             return Result.error("error", "IP不能为空");
         }
-        return Result.success(limitListService.getBlackListByNumber(page,num,number, BaseEnum.IP));
+        return Result.success(limitListService.getBlackListByNumber(page, num, number, BaseEnum.IP));
     }
 
     /**
@@ -97,15 +97,15 @@ public class LimitListController {
      * @date : 2020/11/7 5:02 下午
      **/
     @PostMapping("/addBlackListByPhone/v1")
-    public Result<Boolean> addLimitListByPhone(@Valid  LimitListParam limitListParam) {
+    public Result<Boolean> addLimitListByPhone(@Valid LimitListParam limitListParam) {
         return Result.success(limitListService.addBlackList(
                 limitListParam.setType(BaseEnum.PHONE)
         ));
     }
 
     @PostMapping("/addBlackListByIp/v1")
-    public Result<Boolean> addLimitListByIp(@Valid  LimitListParam limitListParam) {
-         return Result.success(limitListService.addBlackList(
+    public Result<Boolean> addLimitListByIp(@Valid LimitListParam limitListParam) {
+        return Result.success(limitListService.addBlackList(
                 limitListParam.setType(BaseEnum.IP)
         ));
     }
@@ -124,7 +124,7 @@ public class LimitListController {
                                             @JsonFormat(locale = "zh", pattern = "yyyy-MM-dd HH:mm:ss")
                                                     LocalDateTime beginTime,
                                             @NotNull(message = "开始时间不能为空") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-                                            @JsonFormat(locale = "zh",  pattern = "yyyy-MM-dd HH:mm:ss")
+                                            @JsonFormat(locale = "zh", pattern = "yyyy-MM-dd HH:mm:ss")
                                                     LocalDateTime endTime) {
         User user = new User();
         user = user.selectById(id);

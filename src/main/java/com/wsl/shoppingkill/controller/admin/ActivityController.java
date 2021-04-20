@@ -43,7 +43,7 @@ public class ActivityController {
         if (activityParam.getStatus() == null || activityParam.getStatus() < 0) {
             return Result.error("error", "参数错误，status");
         }
-        log.info("{}",activityService.getActivityAll(activityParam));
+        log.info("{}", activityService.getActivityAll(activityParam));
         return Result.success(activityService.getActivityAll(activityParam));
     }
 
@@ -88,12 +88,12 @@ public class ActivityController {
         }
 
         //校验能否被修改
-        if( activity.getId() == null || activity.getId() < 1 ){
+        if (activity.getId() == null || activity.getId() < 1) {
             //新增校验
-            if (activityService.checkActivityByTime(activity)){
+            if (activityService.checkActivityByTime(activity)) {
                 return Result.error("error", "同一商品两场活动时间至少间隔12小时");
             }
-        }else{
+        } else {
             //修改校验
             if (CollectionUtils.isNotEmpty(activity.getSkuList()) && !activityService.checkActivity(activity.getId())) {
                 return Result.error("error", "当前活动不允许被修改");
@@ -113,7 +113,7 @@ public class ActivityController {
      * @date 2020/11/30 15:24
      */
     @DeleteMapping("/delActivity/v1")
-    public Result<Boolean> delActivity(@RequestParam(value="id[]") Long[] id) {
+    public Result<Boolean> delActivity(@RequestParam(value = "id[]") Long[] id) {
         log.info(Arrays.toString(id));
         //0-未开始  1-进行中  2-已结束
         if (!activityService.checkActivity(id)) {

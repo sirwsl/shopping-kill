@@ -20,11 +20,12 @@ public interface AfterSalesMapper extends BaseMapper<AfterSales> {
      * 根据状态1-已处理 2未处理获取
      * 根据类型3-退货退款 2-换货 1-退款
      * 根据单号 根据id
-     * @author wangShilei
-     * @date 2020/11/20 15:30
-     * @param page :
+     *
+     * @param page            :
      * @param afterSalesParam :
      * @return IPage<com.wsl.shoppingkill.obj.vo.AfterSalesBO>
+     * @author wangShilei
+     * @date 2020/11/20 15:30
      */
     IPage<AfterSalesVO> getAfterSalesAll(Page<AfterSalesVO> page, @Param("afterSalesParam") AfterSalesParam afterSalesParam);
 }

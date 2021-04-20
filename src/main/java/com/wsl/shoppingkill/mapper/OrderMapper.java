@@ -64,7 +64,7 @@ public interface OrderMapper extends BaseMapper<Order> {
      * @author wangShilei
      * @date 2020/12/30 10:27 上午
      */
-    IPage<UserOrderVO> selectUserOrderInfo(Page<UserOrderVO> page,@Param("status") Integer status, @Param("name") String name);
+    IPage<UserOrderVO> selectUserOrderInfo(Page<UserOrderVO> page, @Param("status") Integer status, @Param("name") String name);
 
     /**
      * 根据ID获取订单详情

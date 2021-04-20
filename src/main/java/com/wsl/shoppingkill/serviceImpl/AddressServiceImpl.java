@@ -18,7 +18,7 @@ import java.util.List;
  * @author WangShilei
  */
 @Service
-public class AddressServiceImpl extends ServiceImpl<AddressMapper, Address> implements AddressService{
+public class AddressServiceImpl extends ServiceImpl<AddressMapper, Address> implements AddressService {
 
     @Resource
     private AddressMapper addressMapper;
@@ -29,15 +29,15 @@ public class AddressServiceImpl extends ServiceImpl<AddressMapper, Address> impl
     @Override
     public List<Address> getAddressByUser() {
         Long id = abstractCurrentRequestComponent.getCurrentUser().getId();
-        return addressMapper.selectList(new QueryWrapper<Address>().eq(Address.USER_ID,id));
+        return addressMapper.selectList(new QueryWrapper<Address>().eq(Address.USER_ID, id));
     }
 
     @Override
     public boolean addOrUpdateAddress(Address address) {
         address.setUserId(abstractCurrentRequestComponent.getCurrentUser().getId());
-        if (address.getId() == null){
+        if (address.getId() == null) {
             address.setCreatTime(LocalDateTime.now()).setUpdateTime(LocalDateTime.now()).setStatus(false);
-        }else {
+        } else {
             address.setUpdateTime(LocalDateTime.now());
         }
         return address.insertOrUpdate();
@@ -50,18 +50,18 @@ public class AddressServiceImpl extends ServiceImpl<AddressMapper, Address> impl
         Boolean status = addressMapper.selectById(id).getStatus();
 
         try {
-            if (Boolean.TRUE.equals(status)){
-                boolean flag = addressMapper.deleteById(id)>0;
+            if (Boolean.TRUE.equals(status)) {
+                boolean flag = addressMapper.deleteById(id) > 0;
                 boolean upFlag = addressMapper.selectOne(new QueryWrapper<Address>().eq(Address.USER_ID, userId).last("limit 1")).setStatus(true).updateById();
-                if (flag && upFlag){
+                if (flag && upFlag) {
                     return true;
-                }else {
+                } else {
                     throw new Exception();
                 }
-            }else {
-                return addressMapper.deleteById(id)>0;
+            } else {
+                return addressMapper.deleteById(id) > 0;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return false;
@@ -74,12 +74,12 @@ public class AddressServiceImpl extends ServiceImpl<AddressMapper, Address> impl
         try {
             int update = addressMapper.update(new Address().setStatus(false), new QueryWrapper<Address>().eq(Address.USER_ID, userId).eq(Address.STATUS, true));
             int i = addressMapper.updateById(new Address().setStatus(true).setId(id));
-            if (i>0 && update >= 0){
+            if (i > 0 && update >= 0) {
                 return true;
-            }else {
+            } else {
                 throw new Exception();
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return false;

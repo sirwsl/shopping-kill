@@ -30,7 +30,7 @@ public class ActivityAdapterImpl implements ActivityAdapter {
     private ActivityService activityService;
 
     @Resource
-    private RedisTemplate<String,Object> redisTemplate;
+    private RedisTemplate<String, Object> redisTemplate;
 
     @Resource
     private AsyncService asyncService;
@@ -43,9 +43,9 @@ public class ActivityAdapterImpl implements ActivityAdapter {
         Set<String> keys = redisTemplate.keys(key + "*");
 
         if (CollectionUtils.isNotEmpty(keys)) {
-            List<Object>  redisList=  redisTemplate.executePipelined((RedisCallback<Object>) redisConnection -> {
+            List<Object> redisList = redisTemplate.executePipelined((RedisCallback<Object>) redisConnection -> {
                 redisConnection.openPipeline();
-                keys.forEach( li -> redisConnection.get(li.getBytes()));
+                keys.forEach(li -> redisConnection.get(li.getBytes()));
                 return null;
             });
             List<KillGoodsVO> activitiesList = ObjectUtil.castList(redisList, KillGoodsVO.class);
@@ -57,8 +57,8 @@ public class ActivityAdapterImpl implements ActivityAdapter {
         }
 
         List<KillGoodsVO> activityDoing = activityService.getActivityDoing(localDateTime);
-        if (CollectionUtils.isNotEmpty(activityDoing)){
-            asyncService.killGoodsSync(activityDoing,localDateTime);
+        if (CollectionUtils.isNotEmpty(activityDoing)) {
+            asyncService.killGoodsSync(activityDoing, localDateTime);
         }
         return activityDoing;
     }

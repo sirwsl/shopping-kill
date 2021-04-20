@@ -30,7 +30,7 @@ import java.util.concurrent.TimeUnit;
  * @author WangShilei
  */
 @Service
-public class AdvertiseServiceImpl extends ServiceImpl<AdvertiseMapper, Advertise> implements AdvertiseService{
+public class AdvertiseServiceImpl extends ServiceImpl<AdvertiseMapper, Advertise> implements AdvertiseService {
 
     @Resource
     private AdvertiseMapper advertiseMapper;
@@ -42,10 +42,10 @@ public class AdvertiseServiceImpl extends ServiceImpl<AdvertiseMapper, Advertise
     private String target;
 
     @Override
-    public IPage<Advertise> getAdvertisePage(Long page,Long size) {
-        Page<Advertise> pages = new Page<>(page,size);
+    public IPage<Advertise> getAdvertisePage(Long page, Long size) {
+        Page<Advertise> pages = new Page<>(page, size);
         IPage<Advertise> iPage = advertiseMapper.selectPage(pages, new QueryWrapper<>());
-        if (iPage.getSize()>0) {
+        if (iPage.getSize() > 0) {
             iPage.setRecords(changeUrl(iPage.getRecords()));
             return iPage;
         }
@@ -53,30 +53,30 @@ public class AdvertiseServiceImpl extends ServiceImpl<AdvertiseMapper, Advertise
     }
 
     @Override
-    @Cached(name = "getAdvertiseUrl",expire = 6,cacheType = CacheType.REMOTE,timeUnit = TimeUnit.HOURS)
+    @Cached(name = "getAdvertiseUrl", expire = 6, cacheType = CacheType.REMOTE, timeUnit = TimeUnit.HOURS)
     public List<AdvertiseVO> getAdvertiseUrl(Integer temp) {
         LocalDateTime localDateTime = LocalDateTime.now();
         List<Advertise> advertises = advertiseMapper.selectList(new QueryWrapper<Advertise>()
                 .le(Advertise.START_TIME, localDateTime)
                 .ge(Advertise.END_TIME, localDateTime)
         );
-        if (CollectionUtils.isEmpty(advertises)){
+        if (CollectionUtils.isEmpty(advertises)) {
             return null;
         }
-        List<Advertise> changeAdvertise = changeUrl(advertises,false);
+        List<Advertise> changeAdvertise = changeUrl(advertises, false);
         return AdvertiseConverter.CONVERTER.advertise2VO(changeAdvertise);
     }
 
     @Override
     public IPage<Advertise> getAdvertiseDoing(Long page, Long size) {
         LocalDateTime localDateTime = LocalDateTime.now();
-        Page<Advertise> pages = new Page<>(page,size);
+        Page<Advertise> pages = new Page<>(page, size);
         IPage<Advertise> advertisePage = advertiseMapper.selectPage(pages, new QueryWrapper<Advertise>()
                 .le(Advertise.START_TIME, localDateTime)
                 .ge(Advertise.END_TIME, localDateTime)
         );
 
-        if (advertisePage.getSize()>0) {
+        if (advertisePage.getSize() > 0) {
             advertisePage.setRecords(changeUrl(advertisePage.getRecords()));
             return advertisePage;
         }
@@ -88,12 +88,12 @@ public class AdvertiseServiceImpl extends ServiceImpl<AdvertiseMapper, Advertise
     @Override
     public IPage<Advertise> getAdvertiseOver(Long page, Long size) {
         LocalDateTime localDateTime = LocalDateTime.now();
-        Page<Advertise> pages = new Page<>(page,size);
+        Page<Advertise> pages = new Page<>(page, size);
         IPage<Advertise> advertisePage = advertiseMapper.selectPage(pages, new QueryWrapper<Advertise>()
                 .le(Advertise.END_TIME, localDateTime)
         );
 
-        if (advertisePage.getSize()>0) {
+        if (advertisePage.getSize() > 0) {
             advertisePage.setRecords(changeUrl(advertisePage.getRecords()));
             return advertisePage;
         }
@@ -104,12 +104,12 @@ public class AdvertiseServiceImpl extends ServiceImpl<AdvertiseMapper, Advertise
     @Override
     public IPage<Advertise> getAdvertiseBegin(Long page, Long size) {
         LocalDateTime localDateTime = LocalDateTime.now();
-        Page<Advertise> pages = new Page<>(page,size);
+        Page<Advertise> pages = new Page<>(page, size);
         IPage<Advertise> advertisePage = advertiseMapper.selectPage(pages, new QueryWrapper<Advertise>()
                 .ge(Advertise.START_TIME, localDateTime)
         );
 
-        if (advertisePage.getSize()>0) {
+        if (advertisePage.getSize() > 0) {
             advertisePage.setRecords(changeUrl(advertisePage.getRecords()));
             return advertisePage;
         }
@@ -118,29 +118,29 @@ public class AdvertiseServiceImpl extends ServiceImpl<AdvertiseMapper, Advertise
     }
 
     @Override
-    @MyLog(detail = "更新广告",grade = LoggerEnum.WORN,value = "#advertise.id")
-    public String updateAdvertise(Advertise advertise){
-        try{
+    @MyLog(detail = "更新广告", grade = LoggerEnum.WORN, value = "#advertise.id")
+    public String updateAdvertise(Advertise advertise) {
+        try {
             //如果更新图片需要上传
-            if (!advertise.getFile().isEmpty()){
+            if (!advertise.getFile().isEmpty()) {
                 String url = ossComponent.uploadFile(BaseEnum.OSS_ADVERTISE, advertise.getFile());
-                if(url.split("/").length>2){
+                if (url.split("/").length > 2) {
                     advertise.setImgUrl(url);
                     advertiseMapper.updateById(advertise);
-                }else {
+                } else {
                     throw new Exception();
                 }
-            }else {
+            } else {
                 //更新其他信息不更新图片，直接更新数据库
-                if (advertise.getStartTime()==null){
+                if (advertise.getStartTime() == null) {
                     advertise.setStartTime(LocalDateTime.now());
                 }
-                if (advertise.getEndTime()==null){
+                if (advertise.getEndTime() == null) {
                     advertise.setEndTime(LocalDateTime.now().plusDays(7));
                 }
                 advertiseMapper.updateById(advertise);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return e.getMessage();
         }
@@ -148,33 +148,33 @@ public class AdvertiseServiceImpl extends ServiceImpl<AdvertiseMapper, Advertise
     }
 
     @Override
-    @MyLog(detail = "删除广告",grade = LoggerEnum.SERIOUS,value = "#id")
+    @MyLog(detail = "删除广告", grade = LoggerEnum.SERIOUS, value = "#id")
     public boolean delAdvertise(Long id) {
-        return advertiseMapper.deleteById(id)>0;
+        return advertiseMapper.deleteById(id) > 0;
     }
 
     @Override
-    @MyLog(detail = "添加广告",grade = LoggerEnum.WORN,value = "#advertise.targetUrl")
+    @MyLog(detail = "添加广告", grade = LoggerEnum.WORN, value = "#advertise.targetUrl")
     @Transactional(rollbackFor = Exception.class)
-    public String addAdvertise(Advertise advertise){
-        if (advertise.getStartTime()==null){
+    public String addAdvertise(Advertise advertise) {
+        if (advertise.getStartTime() == null) {
             advertise.setStartTime(LocalDateTime.now());
         }
-        if (advertise.getEndTime()==null){
+        if (advertise.getEndTime() == null) {
             advertise.setEndTime(LocalDateTime.now().plusDays(7));
         }
 
-        try{
+        try {
 
-            String imgUrl = ossComponent.uploadFile(BaseEnum.OSS_ADVERTISE,advertise.getFile());
-            if(imgUrl.split("/").length>2){
+            String imgUrl = ossComponent.uploadFile(BaseEnum.OSS_ADVERTISE, advertise.getFile());
+            if (imgUrl.split("/").length > 2) {
                 advertiseMapper.insert(advertise.setImgUrl(imgUrl));
                 imgUrl = "添加成功";
-            }else {
+            } else {
                 throw new Exception();
             }
             return imgUrl;
-        }catch (Exception e){
+        } catch (Exception e) {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return e.getMessage();
         }
@@ -182,22 +182,23 @@ public class AdvertiseServiceImpl extends ServiceImpl<AdvertiseMapper, Advertise
 
     /**
      * 获取路径拼接
-     * @author wangShilei
-     * @date 2020/12/10 17:43
+     *
      * @param advertiseList :
      * @return java.util.List<Advertise>
+     * @author wangShilei
+     * @date 2020/12/10 17:43
      */
-    private List<Advertise> changeUrl(List<Advertise> advertiseList,boolean flag){
+    private List<Advertise> changeUrl(List<Advertise> advertiseList, boolean flag) {
         String min = "?x-oss-process=image/resize,m_fill,h_50,w_50";
-        if (flag){
-            advertiseList.forEach(li->li.setImgUrl(li.getImgUrl()+min));
-        }else{
-            advertiseList.forEach(li->li.setImgUrl(li.getImgUrl()));
+        if (flag) {
+            advertiseList.forEach(li -> li.setImgUrl(li.getImgUrl() + min));
+        } else {
+            advertiseList.forEach(li -> li.setImgUrl(li.getImgUrl()));
         }
         return advertiseList;
     }
 
-    private List<Advertise> changeUrl(List<Advertise> advertiseList){
-        return changeUrl(advertiseList,true);
+    private List<Advertise> changeUrl(List<Advertise> advertiseList) {
+        return changeUrl(advertiseList, true);
     }
 }

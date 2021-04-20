@@ -24,6 +24,7 @@ public class LoggersController {
 
     /**
      * 根据角色获取log日志列表
+     *
      * @param page : num :type
      * @return Page
      * @author wangshilei
@@ -31,8 +32,8 @@ public class LoggersController {
      **/
     @GetMapping("/getAllLoggerByType/v1")
     public Result<IPage<LoggersVO>> getAllLoggerByType(@RequestParam(defaultValue = "0") Long page,
-                                                      @RequestParam(defaultValue = "10") Long num,
-                                                      @RequestParam(defaultValue = "0") Integer type){
-        return Result.success(loggersService.getLogListLimit(page,num,type));
+                                                       @RequestParam(defaultValue = "10") Long num,
+                                                       @RequestParam(defaultValue = "0") Integer type) {
+        return Result.success(loggersService.getLogListLimit(page, num, type));
     }
 }

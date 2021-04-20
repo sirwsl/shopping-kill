@@ -30,17 +30,17 @@ public class CORSFilter implements Filter {
         String[] allowDomains = {"https://localhost:8081"};
         Set<String> allowOrigins = new HashSet<>(Arrays.asList(allowDomains));
         String originHeads = request.getHeader("Origin");
-        if(allowOrigins.contains(originHeads)){
+        if (allowOrigins.contains(originHeads)) {
             response.setHeader("Access-Control-Allow-Origin", originHeads);
             response.setHeader("Access-Control-Allow-Methods", "POST,GET,OPTIONS,DELETE,HEAD,PUT,PATCH");
             response.setHeader("Access-Control-Max-Age", "36000");
             response.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept,Authorization,authorization");
-            response.setHeader("Access-Control-Allow-Credentials","true");
+            response.setHeader("Access-Control-Allow-Credentials", "true");
         }
         chain.doFilter(req, response);
     }
 
-        @Override
-        public void init(FilterConfig fConfig) throws ServletException {
-        }
+    @Override
+    public void init(FilterConfig fConfig) throws ServletException {
     }
+}

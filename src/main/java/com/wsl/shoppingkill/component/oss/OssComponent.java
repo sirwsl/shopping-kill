@@ -23,9 +23,9 @@ import java.util.*;
  */
 @Component
 public class OssComponent {
-    
+
     protected static final Logger log = LoggerFactory.getLogger(OssComponent.class);
-    
+
     /**
      * OSS配置信息
      */
@@ -48,21 +48,21 @@ public class OssComponent {
     private String myUrl;
     @Value("${ali.oss.aliUrl}")
     private String aliUrl;
-    
+
     /* -----------------对外功能---------------- */
-    
+
     /**
      * 单个文件上传
      *
      * @param file 文件
      * @return 返回完整URL地址
      */
-    public String uploadFile(String fileDir,MultipartFile file) throws Exception{
-        String fileUrl = uploadImg2Oss(fileDir,file);
-        String str = getFileUrl(fileDir,fileUrl);
+    public String uploadFile(String fileDir, MultipartFile file) throws Exception {
+        String fileUrl = uploadImg2Oss(fileDir, file);
+        String str = getFileUrl(fileDir, fileUrl);
         return str.trim();
     }
-    
+
     /**
      * 单个文件上传(指定文件名（带后缀）)
      *
@@ -70,11 +70,11 @@ public class OssComponent {
      * @param fileName 文件名(带后缀)
      * @return 返回完整URL地址
      */
-    public String uploadFile(String fileDir,MultipartFile file, String fileName) throws Exception{
+    public String uploadFile(String fileDir, MultipartFile file, String fileName) throws Exception {
         try {
             InputStream inputStream = file.getInputStream();
-            this.uploadFile2Oss(fileDir,inputStream, fileName);
-            String url = getFileUrl(fileDir,fileName);
+            this.uploadFile2Oss(fileDir, inputStream, fileName);
+            String url = getFileUrl(fileDir, fileName);
             if (url != null && url.length() > 0) {
                 return url;
             }
@@ -83,20 +83,20 @@ public class OssComponent {
             throw new Exception("上传失败");
         }
     }
-    
+
     /**
      * 多文件上传
      *
      * @param fileList 文件列表
      * @return 返回完整URL，逗号分隔
      */
-    public String uploadFile(String fileDir,List<MultipartFile> fileList) throws Exception{
+    public String uploadFile(String fileDir, List<MultipartFile> fileList) throws Exception {
         String fileUrl;
         String str;
         StringBuilder photoUrl = new StringBuilder();
         for (int i = 0; i < fileList.size(); i++) {
-            fileUrl = uploadImg2Oss(fileDir,fileList.get(i));
-            str = getFileUrl(fileDir,fileUrl);
+            fileUrl = uploadImg2Oss(fileDir, fileList.get(i));
+            str = getFileUrl(fileDir, fileUrl);
             if (i == 0) {
                 photoUrl = new StringBuilder(str);
             } else {
@@ -105,8 +105,8 @@ public class OssComponent {
         }
         return photoUrl.toString().trim();
     }
-    
-    public boolean deleteFile(String fileDir,String fileName) {
+
+    public boolean deleteFile(String fileDir, String fileName) {
         // 创建OSSClient实例
         OSS ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
         // 删除文件
@@ -116,21 +116,22 @@ public class OssComponent {
         // 如果文件存在则删除失败
         return !found;
     }
-    
+
     /**
      * 通过文件名获取文完整件路径
      *
      * @param fileUrl 文件名
      * @return 完整URL路径
      */
-    public String getFileUrl(String fileDir,String fileUrl) {
+    public String getFileUrl(String fileDir, String fileUrl) {
         if (fileUrl != null && fileUrl.length() > 0) {
             String[] split = fileUrl.split("/");
-            String url = myHostUrl+ fileDir + split[split.length - 1];
+            String url = myHostUrl + fileDir + split[split.length - 1];
             return Objects.requireNonNull(url);
         }
         return null;
     }
+
     public File getFile(String url) {
         //对本地文件命名
         String fileName = url.substring(url.lastIndexOf("."));
@@ -146,7 +147,7 @@ public class OssComponent {
             inStream = urlfile.openStream();
             os = new FileOutputStream(file);
 
-            int bytesRead ;
+            int bytesRead;
             byte[] buffer = new byte[8192];
             while ((bytesRead = inStream.read(buffer, 0, 8192)) != -1) {
                 os.write(buffer, 0, bytesRead);
@@ -171,7 +172,7 @@ public class OssComponent {
     }
 
     /* -----------内部辅助功能------------------------ */
-    
+
     /**
      * 获取去掉参数的完整路径
      *
@@ -182,10 +183,11 @@ public class OssComponent {
         String[] imgUrls = url.split("\\?");
         return imgUrls[0].trim();
     }
-    
+
     /**
      * 获得url真实外网链接
      * 不提供使用，因为会产生公网OOS流量下行费用
+     *
      * @param key 文件名
      * @return URL
      */
@@ -203,14 +205,14 @@ public class OssComponent {
         }
         return null;
     }
-    
+
     /**
      * 上传文件
      *
      * @param file 文件
      * @return 文件名
      */
-    private String uploadImg2Oss(String fileDir,MultipartFile file) throws Exception{
+    private String uploadImg2Oss(String fileDir, MultipartFile file) throws Exception {
         // 1、限制最大文件为20M
         int maxFileSize = 1024 * 1024 * 5;
         if (file.getSize() > maxFileSize) {
@@ -224,20 +226,20 @@ public class OssComponent {
         String name = uuid + suffix;
         try {
             InputStream inputStream = file.getInputStream();
-            this.uploadFile2Oss(fileDir,inputStream, name);
+            this.uploadFile2Oss(fileDir, inputStream, name);
             return name;
         } catch (Exception e) {
             throw new Exception("上传失败");
         }
     }
-    
+
     /**
      * 上传文件（指定文件名）
      *
      * @param inputStream 输入流
      * @param fileName    文件名
      */
-    private void uploadFile2Oss(String fileDir,InputStream inputStream, String fileName) {
+    private void uploadFile2Oss(String fileDir, InputStream inputStream, String fileName) {
         String ret;
         try {
             //创建上传Object的Metadata
@@ -266,7 +268,7 @@ public class OssComponent {
             }
         }
     }
-    
+
     private static String getContentType(String filenameExtension) {
         if (FileNameSuffixEnum.BMP.getSuffix().equalsIgnoreCase(filenameExtension)) {
             return "image/bmp";

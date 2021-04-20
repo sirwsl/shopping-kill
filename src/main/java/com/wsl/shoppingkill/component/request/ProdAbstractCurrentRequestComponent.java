@@ -18,6 +18,7 @@ import java.util.Objects;
 
 /**
  * 线上获取当前登录用户信息
+ *
  * @author wsl
  */
 @Slf4j
@@ -27,30 +28,32 @@ public class ProdAbstractCurrentRequestComponent extends AbstractCurrentRequestC
 
 
     @Resource
-    private RedisTemplate<String,UserBO> redisTemplate;
+    private RedisTemplate<String, UserBO> redisTemplate;
 
     @Resource
     private JwtComponent jwtComponent;
+
     /**
      * 获取当前登陆用户信息
+     *
      * @return 当前登录用户信息
      */
     @Override
     public UserBO getCurrentUser() {
         HttpServletRequest request = ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
         String token = request.getHeader(JwtEnum.AUTH_HEADER_KEY);
-        if (StringUtils.isBlank(token) ) {
+        if (StringUtils.isBlank(token)) {
             return null;
         }
         try {
             return jwtComponent.getTokenInfo(token.substring(JwtEnum.TOKEN_PREFIX.length()));
-        }catch (Exception e){
-            UserBO userBO = redisTemplate.opsForValue().get(RedisEnum.VERIFY_TOKEN+token.substring(JwtEnum.TOKEN_PREFIX.length()));
-            if (Objects.nonNull(userBO)){
+        } catch (Exception e) {
+            UserBO userBO = redisTemplate.opsForValue().get(RedisEnum.VERIFY_TOKEN + token.substring(JwtEnum.TOKEN_PREFIX.length()));
+            if (Objects.nonNull(userBO)) {
                 return userBO;
             }
 
-            log.info("获取用户信息失败"+e.getMessage());
+            log.info("获取用户信息失败" + e.getMessage());
         }
 
         return null;

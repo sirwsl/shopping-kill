@@ -15,7 +15,7 @@ import javax.annotation.Resource;
 
 @Configuration
 @Slf4j
-public class WebMvcConfig implements WebMvcConfigurer  {
+public class WebMvcConfig implements WebMvcConfigurer {
     /*
      * 注入 token 拦截器
      */

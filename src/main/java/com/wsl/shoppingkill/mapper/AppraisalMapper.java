@@ -16,12 +16,13 @@ public interface AppraisalMapper extends BaseMapper<Appraisal> {
 
     /**
      * 获取全部的评价内容
-     * @param page :
+     *
+     * @param page        :
      * @param appraisalVO :
      * @return IPage<AppraisalVO>
      * @author wangshilei
      * @date 2020/11/18 10:59
      **/
-    IPage<AppraisalVO> getAppraisalAll(Page<AppraisalVO> page,@Param("appraisal") AppraisalVO appraisalVO);
+    IPage<AppraisalVO> getAppraisalAll(Page<AppraisalVO> page, @Param("appraisal") AppraisalVO appraisalVO);
 
 }

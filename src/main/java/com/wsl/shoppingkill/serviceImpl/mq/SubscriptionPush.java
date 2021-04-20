@@ -48,18 +48,19 @@ public class SubscriptionPush {
 
     /**
      * 监听短信发送
-     *@param subscriptionHistory:
+     *
+     * @param subscriptionHistory:
      * @author wangshilei
      * @date 2020/11/13 18:25
      **/
     @RabbitListener(bindings = @QueueBinding(
-            value = @Queue(value = RabbitMqEnum.Queue.QUEUE_SUBSCRIPTION_SMS,exclusive = "false",autoDelete = "false",durable = "true"),
+            value = @Queue(value = RabbitMqEnum.Queue.QUEUE_SUBSCRIPTION_SMS, exclusive = "false", autoDelete = "false", durable = "true"),
             exchange = @Exchange(RabbitMqEnum.Exchange.EXCHANGE_NOTICE),
             key = RabbitMqEnum.Key.KEY_SUBSCRIPTION_SMS,
             ignoreDeclarationExceptions = "true"
     ))
     public void smsConsumerSubscription(SubscriptionHistory subscriptionHistory, Channel channel, Message message) throws IOException {
-        channel.basicAck(message.getMessageProperties().getDeliveryTag(),false);
+        channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
         List<String> phoneList = subscriberService.list(new QueryWrapper<Subscriber>()
                 .eq(Subscriber.TYPE, BaseEnum.PHONE))
                 .stream()
@@ -68,44 +69,45 @@ public class SubscriptionPush {
         String[] text = new String[3];
         text[1] = subscriptionHistory.getTitle();
         text[2] = subscriptionHistory.getDetail();
-        phoneList.forEach(li-> {
+        phoneList.forEach(li -> {
             text[0] = li;
-            smsComponent.send(SmsEnum.SUBSCRIPTION.getCode(), Arrays.asList(text),li);
+            smsComponent.send(SmsEnum.SUBSCRIPTION.getCode(), Arrays.asList(text), li);
         });
         subscriptionHistory.setRealFlag(true).updateById();
     }
 
     /**
      * 监听邮件发送
-     *@param subscriptionHistory:
+     *
+     * @param subscriptionHistory:
      * @author wangshilei
      * @date 2020/11/13 18:25
      **/
     @RabbitListener(bindings = @QueueBinding(
-            value = @Queue(value = RabbitMqEnum.Queue.QUEUE_SUBSCRIPTION_MAIL,exclusive = "false",autoDelete = "false",durable = "true"),
+            value = @Queue(value = RabbitMqEnum.Queue.QUEUE_SUBSCRIPTION_MAIL, exclusive = "false", autoDelete = "false", durable = "true"),
             exchange = @Exchange(RabbitMqEnum.Exchange.EXCHANGE_NOTICE),
             key = RabbitMqEnum.Key.KEY_SUBSCRIPTION_MAIL,
             ignoreDeclarationExceptions = "true"
     ))
     public void emailConsumerSubscription(SubscriptionHistory subscriptionHistory, Channel channel, Message message) throws IOException {
-        try{
-            channel.basicAck(message.getMessageProperties().getDeliveryTag(),false);
+        try {
+            channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
             List<String> emailList = subscriberService.list(new QueryWrapper<Subscriber>()
                     .eq(Subscriber.TYPE, BaseEnum.EMAIL))
                     .stream()
                     .map(Subscriber::getNumber)
                     .collect(Collectors.toList());
             MailObject mailObject = new MailObject();
-            Map<String,String> map = new HashMap<>(8);
-            map.put("title",subscriptionHistory.getTitle());
-            map.put("detail",subscriptionHistory.getDetail());
+            Map<String, String> map = new HashMap<>(8);
+            map.put("title", subscriptionHistory.getTitle());
+            map.put("detail", subscriptionHistory.getDetail());
             mailObject.setContent(map).setTemplate("Subscription.ftl").setSubject(subscriptionHistory.getTitle());
-            emailList.forEach(li-> {
+            emailList.forEach(li -> {
                 mailObject.setNumber(li);
                 try {
                     mailComponent.sendMail2Html(mailObject);
                 } catch (Exception e) {
-                    log.error("邮件推送失败用户mail：{}，内容为：{}",li,subscriptionHistory.getTitle());
+                    log.error("邮件推送失败用户mail：{}，内容为：{}", li, subscriptionHistory.getTitle());
                     e.printStackTrace();
                 }
             });
@@ -115,8 +117,8 @@ public class SubscriptionPush {
                 log.warn("短信订阅消息已重复处理失败,拒绝再次接收:{}", subscriptionHistory.getTitle());
                 /* 拒绝消息，requeue=false 表示不再重新入队，如果配置了死信队列则进入死信队列 */
                 channel.basicReject(message.getMessageProperties().getDeliveryTag(), false);
-            }else {
-                channel.basicNack(message.getMessageProperties().getDeliveryTag(), false,false);
+            } else {
+                channel.basicNack(message.getMessageProperties().getDeliveryTag(), false, false);
             }
         }
 

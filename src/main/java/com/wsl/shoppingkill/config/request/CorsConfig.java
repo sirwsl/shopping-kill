@@ -5,8 +5,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
+
 /**
  * 跨域设置
+ *
  * @author WangShilei
  * @date 2020/12/1-19:03
  **/
@@ -22,6 +24,7 @@ public class CorsConfig {
         corsConfiguration.setMaxAge(3600L);
         return corsConfiguration;
     }
+
     @Bean
     public CorsFilter corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

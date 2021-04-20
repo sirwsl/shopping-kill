@@ -61,7 +61,7 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
     private SkuService skuService;
 
     @Resource
-    private RedisTemplate<String,Object> redisTemplate;
+    private RedisTemplate<String, Object> redisTemplate;
 
     @Override
     public List<ActivityVO> getActivityAll(ActivityParam activityParam) {
@@ -70,20 +70,20 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
     }
 
     @Override
-    public List<KillGoodsVO> getActivityFuture(){
+    public List<KillGoodsVO> getActivityFuture() {
         LocalDateTime now = LocalDateTime.now().plusHours(1).withMinute(0).withSecond(0).withNano(0);
         LocalDateTime end = now.plusHours(5);
 
-        Set<String> keys = redisTemplate.keys(RedisEnum.GOODS_FUTURE+"*");
-        if (CollectionUtils.isNotEmpty(keys)){
-            List<Object>  redisList=  redisTemplate.executePipelined((RedisCallback<Object>) redisConnection -> {
+        Set<String> keys = redisTemplate.keys(RedisEnum.GOODS_FUTURE + "*");
+        if (CollectionUtils.isNotEmpty(keys)) {
+            List<Object> redisList = redisTemplate.executePipelined((RedisCallback<Object>) redisConnection -> {
                 redisConnection.openPipeline();
-                keys.forEach( li -> redisConnection.get(li.getBytes()));
+                keys.forEach(li -> redisConnection.get(li.getBytes()));
                 return null;
             });
             List<KillGoodsVO> activitiesList = ObjectUtil.castList(redisList, KillGoodsVO.class);
             activitiesList = activitiesList.stream().filter(Objects::nonNull).collect(Collectors.toList());
-            if (CollectionUtils.isNotEmpty(activitiesList)){
+            if (CollectionUtils.isNotEmpty(activitiesList)) {
                 return activitiesList;
             }
         }
@@ -113,14 +113,14 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
 
 
     @Override
-    public List<KillGoodsVO> getActivityDoing(LocalDateTime now){
-        if (now == null){
+    public List<KillGoodsVO> getActivityDoing(LocalDateTime now) {
+        if (now == null) {
             now = LocalDateTime.now();
         }
         List<Activity> activities = activityMapper.selectList(new QueryWrapper<Activity>()
                 .le(Advertise.START_TIME, now)
                 .ge(Advertise.END_TIME, now));
-        if (CollectionUtils.isNotEmpty(activities)){
+        if (CollectionUtils.isNotEmpty(activities)) {
             return getGoodsByActivity(activities);
         }
         return new ArrayList<>();
@@ -142,17 +142,17 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
         //获取对应商品的SKU数量
         Sku sku = new Sku();
         Map<Long, List<Sku>> collect = sku.selectList(new QueryWrapper<Sku>().select(Sku.ID, Sku.NUM)
-                .in(Sku.ID,activity.getSkuList()
+                .in(Sku.ID, activity.getSkuList()
                         .stream()
                         .map(ActivityUpdateParam.Sku::getId)
                         .map(String::valueOf)
                         .collect(Collectors.toList())
-        )).stream().collect(Collectors.groupingBy(Sku::getId));
+                )).stream().collect(Collectors.groupingBy(Sku::getId));
 
         log.info(activity.getSkuList().toString());
         //如果有交叉时段，则不更新
         List<Long> ids = new ArrayList<>();
-       collect.values().forEach(li -> li.forEach(v -> ids.add(v.getId())));
+        collect.values().forEach(li -> li.forEach(v -> ids.add(v.getId())));
         long count = activityMapper.selectList(new QueryWrapper<Activity>()
                 .in(Activity.SKU_ID, ids)
                 .le(Activity.START_TIME, activity.getStartTime())
@@ -163,7 +163,7 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
                 .ge(Activity.END_TIME, activity.getEndTime())
 
         ).size();
-        if (count>0){
+        if (count > 0) {
             return false;
         }
         //遍历判断
@@ -196,10 +196,9 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
                 activityTemp.setTotalNum(collect.get(li.getId()).get(0).getNum()).setSellNum(collect.get(li.getId()).get(0).getNum());
             }
             Sku sku1 = collect.get(li.getId()).get(0);
-            skuListTemp.add(sku1.setNum(sku1.getNum()-activityTemp.getTotalNum()));
+            skuListTemp.add(sku1.setNum(sku1.getNum() - activityTemp.getTotalNum()));
             activityList.add(activityTemp);
         });
-
 
 
         log.info(activityList.toString());
@@ -225,7 +224,7 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
     public boolean delActivity(Long[] ids) {
         try {
             //TODO：删除redis
-            if (activityMapper.deleteBatchIds(Arrays.asList(ids)) ==ids.length) {
+            if (activityMapper.deleteBatchIds(Arrays.asList(ids)) == ids.length) {
                 return true;
             } else {
                 throw new Exception("删除出错");
@@ -252,13 +251,13 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
 
     @Override
     public boolean checkActivity(List<Long> id) {
-        if (CollectionUtils.isEmpty(id)){
+        if (CollectionUtils.isEmpty(id)) {
             return false;
         }
 
         List<Activity> activities = activityMapper.selectBatchIds(id);
 
-        if (CollectionUtils.isEmpty(activities)){
+        if (CollectionUtils.isEmpty(activities)) {
             return false;
         }
         for (Activity activity : activities) {
@@ -272,7 +271,7 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
     }
 
     @Override
-    public List<KillGoodsVO> getGoodsByActivity(List<Activity> activities){
+    public List<KillGoodsVO> getGoodsByActivity(List<Activity> activities) {
         Set<Long> skuIds = activities.stream().map(Activity::getSkuId).collect(Collectors.toSet());
         List<Sku> skus = skuMapper.selectBatchIds(skuIds);
         if (skus.isEmpty()) {
@@ -287,11 +286,11 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
             return new ArrayList<>();
         }
         List<KillGoodsVO> allVO = new ArrayList<>(64);
-        activities.forEach(li ->{
+        activities.forEach(li -> {
             Long goodsId = sku2goodsId.get(li.getSkuId());
-            if (goodsId!=null && goodsId > 0){
+            if (goodsId != null && goodsId > 0) {
                 Goods goods = goodsMap.get(goodsId);
-                if (Objects.isNull(goods)){
+                if (Objects.isNull(goods)) {
                     return;
                 }
                 KillGoodsVO killAvtivityVO = new KillGoodsVO();
@@ -317,7 +316,7 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
                                 Collectors.toCollection(
                                         () -> new TreeSet<>(Comparator.comparing(o -> o.getId() + ";" + o.getStartTime()))), ArrayList::new));
 
-        returnVO.forEach(li ->{
+        returnVO.forEach(li -> {
             BigDecimal min = money.get(li.getId() + li.getStartTime().toString()).stream().map(KillGoodsVO::getMinPrice).min(Comparator.naturalOrder()).get();
             li.setMaxPrice(min).setMinPrice(min);
         });

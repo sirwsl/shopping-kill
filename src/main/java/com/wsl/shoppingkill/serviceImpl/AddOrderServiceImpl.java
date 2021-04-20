@@ -54,29 +54,29 @@ public class AddOrderServiceImpl implements AddOrderService {
             if (flags) {
                 Object o = redisTemplate.opsForValue().get(RedisEnum.GOODS_SKU_NUM + addOrderParam.getSkuId());
                 int num = 0;
-                if (Objects.isNull(o)){
+                if (Objects.isNull(o)) {
                     num = skuMapper.selectById(addOrderParam.getSkuId()).getNum();
-                }else{
+                } else {
                     num = Integer.parseInt(o.toString());
-                    if (num < 1){
+                    if (num < 1) {
                         num = skuMapper.selectById(addOrderParam.getSkuId()).getNum();
                     }
                 }
-                if ( num > 1){
+                if (num > 1) {
                     rabbitTemplate.convertAndSend(RabbitMqEnum.Exchange.EXCHANGE_ORDER_COMMON, RabbitMqEnum.Key.KEY_ORDER_COMMON, addOrderParam, correlationData);
-                    redisTemplate.opsForValue().set(RedisEnum.GOODS_SKU_NUM + addOrderParam.getSkuId(),String.valueOf(num-1));
+                    redisTemplate.opsForValue().set(RedisEnum.GOODS_SKU_NUM + addOrderParam.getSkuId(), String.valueOf(num - 1));
                     boolean isAck = correlationData.getFuture().get(10, TimeUnit.SECONDS).isAck();
                     if (isAck) {
-                       return correlationData.getId();
+                        return correlationData.getId();
                     }
-                }else{
+                } else {
                     return null;
                 }
             }
-        }catch (Exception e){
-            log.info("下单失败{}",e.getMessage());
+        } catch (Exception e) {
+            log.info("下单失败{}", e.getMessage());
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-        }finally {
+        } finally {
             try {
                 lock.release();
             } catch (Exception es) {
@@ -87,7 +87,7 @@ public class AddOrderServiceImpl implements AddOrderService {
     }
 
     @Override
-    public String killOrder(AddOrderParam addOrderParam){
+    public String killOrder(AddOrderParam addOrderParam) {
         String lockPath = "/lock/kill/";
         InterProcessSemaphoreMutex lock = new InterProcessSemaphoreMutex(curatorFramework, lockPath + snowFlake.nextId());
         String key = RedisEnum.GOODS_KILL + addOrderParam.getSkuId();
@@ -95,7 +95,7 @@ public class AddOrderServiceImpl implements AddOrderService {
             boolean flags = lock.acquire(60, TimeUnit.SECONDS);
             if (flags) {
                 //库存减1
-                log.info("========================线程:{}，获取到了锁",Thread.currentThread().getName());
+                log.info("========================线程:{}，获取到了锁", Thread.currentThread().getName());
                 Object value = redisTemplate.opsForValue().get(key);
                 if (Objects.nonNull(value) && Integer.parseInt(Objects.toString(value)) > 0) {
                     redisTemplate.boundValueOps(key).decrement(1);
@@ -107,7 +107,7 @@ public class AddOrderServiceImpl implements AddOrderService {
                     } else {
                         throw new Exception();
                     }
-                }else {
+                } else {
                     return null;
                 }
             }

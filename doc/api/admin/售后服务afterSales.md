@@ -31,7 +31,7 @@
                 "result": false,
                 "userId": 1,
                 "userName": "sirwsl",
-                "userPhone": "18314263373",
+                "userPhone": "",
                 "userNickName": "测试昵称",
                 "skuId": 2,
                 "skuDetail": "128G 4G内存 白色",
