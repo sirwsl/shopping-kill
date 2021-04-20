@@ -1,0 +1,184 @@
+
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=0.1,user-scalable=yes">
+		<title>
+			秒杀界面
+		</title>
+		<meta name="keywords" content="">
+		<meta name="description" content="">
+		<link rel="shortcut icon" href="favicon.ico">
+		<link href="../static/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+		<link href="../static/admin/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+		<link href="../static/admin/css/animate.css" rel="stylesheet">
+		<link href="../static/admin/css/style.css?v=4.1.0" rel="stylesheet">
+		<link href="../static/admin/css/plugins/footable/footable.core.css" rel="stylesheet">
+	</head>
+	<body class="gray-bg">
+		<div class="wrapper wrapper-content animated fadeIn">
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="tabs-container">
+						<ul class="nav nav-tabs">
+							<li class="active">
+								<a onclick="col(2)" data-toggle="tab" href="#tab-1" aria-expanded="true">
+									进行中
+								</a>
+							</li>
+							<li>
+								<a onclick="col(3)" data-toggle="tab" href="#tab-1" aria-expanded="false">
+									已结束
+								</a>
+							</li>
+							<li>
+								<a onclick="col(1)" data-toggle="tab" href="#tab-1" aria-expanded="false">
+									未开始
+								</a>
+							</li>
+							<li>
+								<a data-toggle="tab" href="#tab-2" aria-expanded="false" id="goods" name="goods">
+									待添加
+								</a>
+							</li>
+						</ul>
+						<div>
+							<div class="ibox-content" style="padding-bottom:0px;">
+								<div>
+									<label class="form-inline" />
+									商品id：
+									<input type="text" class="form-control" id="searchId" />
+									</label>
+									<label class="form-inline" />
+									商品名称：
+									<input type="text" class="form-control" id="searchName" />
+									</label>
+									<button type="button" class="btn btn-sm btn-primary" onclick="serches()">
+										搜索
+									</button>
+									</span>
+								</div>
+							</div>
+						</div>
+						<div class="tab-content">
+							<div id="tab-1" class="tab-pane active">
+								<div class="panel-body">
+									<div class="ibox float-e-margins">
+										<div class="ibox-content">
+											<table id="killAvtivity" class="footable table table-stripped toggle-arrow-tiny"
+											data-page-size="8">
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div id="tab-2" class="tab-pane active">
+								<div class="panel-body">
+									<div class="ibox float-e-margins">
+										<div class="ibox-content">
+											<table id="goodsAvtivity" class="footable table table-stripped toggle-arrow-tiny"
+											data-page-size="8">
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="modal-form" class="modal fade" aria-hidden="true">
+				<div class="modal-dialog" id="kills">
+					<div class="modal-content">
+						<div class="modal-body">
+							<div class="row">
+								<h3 class="m-t-none m-b">
+									限时抢购活动编辑
+								</h3>
+								<form role="form" id="activity" enctype="application/x-www-form-urlencoded"
+								method="post" action="http://localhost/admin/addOrUpdateActivity/v1"
+								/>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<div class="form-group">
+											<label class="col-xl-3 control-label">
+												商品编号
+											</label>
+											<div class="col-xl-9">
+												<input class="form-control layer-date" name="id" id="id" readonly="readonly">
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-xl-3 control-label">
+												商品名称
+											</label>
+											<div class="col-xl-9">
+												<input class="form-control layer-date" name="goodsName" id="goodsName"
+												readonly="readonly">
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-xl-3 control-label">
+												开始时间
+											</label>
+											<div class="col-xl-3">
+												<input id="startTime" name="startTime" class="form-control layer-date"
+												placeholder="YYYY-MM-DD hh:mm:ss" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="form-group">
+											<label class="col-xl-3 control-label">
+												结束时间
+											</label>
+											<div class="col-xl-9">
+												<input id="endTime" name="endTime" class="form-control layer-date" placeholder="YYYY-MM-DD hh:mm:ss"
+												onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div id="details">
+									</div>
+								</div>
+								<button type="button" class="btn btn-default" data-dismiss="modal">
+									取消
+								</button>
+								<a type="button" class="btn btn-primary" data-dismiss="modal" id="sub">
+									确定修改
+								</a>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+	</body>
+	<script src="../static/admin/js/jquery.min.js?v=2.1.4">
+	</script>
+	<script src="../static/admin/js/jquery.form.js">
+	</script>
+	<script src="../static/admin/js/jquery.cookie.js">
+	</script>
+	<script src="../static/admin/js/bootstrap.min.js?v=3.3.6">
+	</script>
+	<script src="../static/admin/js/plugins/footable/footable.all.min.js">
+	</script>
+	<script src="../static/admin/js/plugins/layer/laydate/laydate.js">
+	</script>
+	<script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table.min.js">
+	</script>
+	<script src="../static/admin/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js">
+	</script>
+	<script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js">
+	</script>
+	<script src="../static/admin/js/content.js?v=1.0.0">
+	</script>
+	<script src="../static/admin/js/all.js">
+	</script>
+	<script src="../static/admin/myjs/kill.js">
+	</script>
+
+</html>

@@ -1,0 +1,144 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=0.1,user-scalable=yes">
+		<title>
+			Kill-后台登录
+		</title>
+		<meta name="keywords" content="">
+		<meta name="description" content="">
+		<link rel="shortcut icon" href="favicon.ico">
+		<link href="../static/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+		<link href="../static/admin/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+		<link href="../static/admin/css/animate.css" rel="stylesheet">
+		<link href="../static/admin/css/style.css?v=4.1.0" rel="stylesheet">
+		<script>
+			if (window.top !== window.self) {
+				window.top.location = window.location;
+			}
+		</script>
+	</head>
+	<body class="gray-bg">
+		<div class="middle-box text-center loginscreen  animated fadeInDown">
+			<div>
+				<div>
+					<h1 class="logo-name">
+						kill
+					</h1>
+				</div>
+				<h3>
+					欢迎使用 ShoppingKill
+				</h3>
+				<form class="m-t" role="form" id="login" name="login" enctype="application/x-www-form-urlencoded"
+				action="http://localhost/login/admin/v1" method="post" accept-charset="utf-8">
+					<div class="form-group">
+						<input type="text" id="name" name="name" style="height: 40px; font-size: 1.3em;"
+						class="form-control text-justify" placeholder="用户名" required="">
+					</div>
+					<div class="form-group">
+						<input type="password" id="password" name="password" style="height: 40px; font-size: 1.3em;"
+						class="form-control text-justify" placeholder="密码" required="">
+					</div>
+					<div class="row">
+						<div class="col-sm-7">
+							<input style="height: 40px; font-size: 1.3em;" id="code" name="code" class="form-control text-justify"
+							type="text" name="codeNum" maxlength="4" placeholder="验证码">
+						</div>
+						<div class="col-sm-5">
+							<img border="0" style="height: 40px;" id="img" name="img" style="cursor:pointer"
+							alt="刷新" onclick="refresh(this)" src="http://localhost/verify/getJpg/v1?id=1">
+						</div>
+					</div>
+					</br>
+					<button type="button" id="sub" class="btn btn-primary block full-width m-b">
+						登 录
+					</button>
+					
+					<p class="text-muted text-center">
+						<a id="subs">
+							<small>
+								忘记密码了？
+							</small>
+						</a>
+					</p>
+				</form>
+			</div>
+		</div>
+		<div id="Modal" class="modal fade" aria-hidden="true" style=" top: 100px;">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-sm-12">
+								<div style="text-align:center">
+									<h2>
+										编码不易，请勿攻击，若是大款，随意打赏
+									</h2>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-6">
+								<img src="http://static.wslhome.top/pay/666666.png" />
+							</div>
+							<div class="col-sm-6">
+								<img src="http://static.wslhome.top/pay/8888888.jpg" />
+							</div>
+							<div style="text-align:center">
+								<input class="btn btn-primary" data-dismiss="modal" id="btn" value="关闭"
+								/>
+								</dir>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<footer class="footer navbar-fixed-bottom " style="height: 50px;">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-2 ">
+						<center>
+							<a target="_blank" href="http://www.wslhome.top/">
+								我的博客
+							</a>
+						</center>
+					</div>
+					<div class="col-lg-2 ">
+						<center>
+							<a target="_blank" href="http://blog.csdn.net/qq_40432886">
+								CSDN
+							</a>
+						</center>
+					</div>
+					
+					<div class="col-lg-2 ">
+						<center>
+							<a target="_blank" href="http://github.com/sirwsl">
+								GitHub
+							</a>
+						</center>
+					</div>
+					<div class="col-lg-2 ">
+						<center>
+							<a target="_blank" href="https://kill.wslhome.top">
+								商城首页
+							</a>
+						</center>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<script src="../static/admin/js/jquery.min.js?v=2.1.4">
+		</script>
+		<script src="../static/admin/js/bootstrap.min.js?v=3.3.6">
+		</script>
+		<script src="../static/admin/js/jquery.form.js">
+		</script>
+		<script src="../static/admin/js/jquery.cookie.js">
+		</script>
+		<script src="../static/admin/myjs/login.js">
+		</script>
+	</body>
+
+</html>

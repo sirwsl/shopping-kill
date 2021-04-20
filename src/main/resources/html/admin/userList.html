@@ -1,0 +1,158 @@
+
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=0.1,user-scalable=yes">
+		<title>
+			用户表格
+		</title>
+		<meta name="keywords" content="">
+		<meta name="description" content="">
+		<link rel="shortcut icon" href="favicon.ico">
+		<link href="../static/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+		<link href="../static/admin/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+		<link href="../static/admin/css/plugins/dataTables/dataTables.bootstrap.css"
+		rel="stylesheet">
+		<link href="../static/admin/css/animate.css" rel="stylesheet">
+		<link href="../static/admin/css/style.css?v=4.1.0" rel="stylesheet">
+	</head>
+	<body class="gray-bg">
+		<div class="wrapper wrapper-content animated fadeInRight">
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="ibox float-e-margins">
+						<div class="ibox-title">
+							<h5>
+								用户列表
+							</h5>
+						</div>
+						<div class="ibox-content">
+							<table class="table table-striped table-bordered table-hover " id="userTable">
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+		aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+							&times;
+						</button>
+						<h4 class="modal-title" id="myModalLabel">
+							用户编辑
+						</h4>
+					</div>
+					<div class="modal-body">
+						<a class="J_menuItem btn btn-success" href="css_animation.html">
+							<i class="fa fa-gg">
+							</i>
+							<span class="nav-label">
+								查看消费
+							</span>
+						</a>
+						<a class="J_menuItem btn btn-success" href="css_animation.html">
+							<i class="fa fa-info">
+							</i>
+							<span class="nav-label">
+								基本信息
+							</span>
+						</a>
+						<button class="btn btn-danger" data-dismiss="modal" href="#modal-form"
+						data-toggle="modal" data-target="#addBlack">
+							<i class="fa fa-bell-slash">
+							</i>
+							加入黑名单
+						</button>
+						<button class="btn btn-danger" id="del" data-dismiss="modal">
+							<i class="fa fa-remove">
+							</i>
+							删除用户
+						</button>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">
+							关闭
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="addBlack" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+		aria-hidden="true">
+			<div class="modal-dialog" style="width: 400px;">
+				<div class="modal-content">
+					<div class="modal-body">
+						<div class="row">
+							<h3 class="m-t-none m-b">
+								加入黑名单编辑
+							</h3>
+							<form role="form" id="addBlackList" enctype="application/x-www-form-urlencoded"
+							method="post" action="http://localhost/admin/addBlackListById/v1"
+							/>
+							<div class="form-group">
+								<div class="form-group">
+									<label class="col-sm-3 control-label">
+										用户id
+									</label>
+									<div class="col-sm-9">
+										<input class="form-control layer-date" name="id" id="id" readonly="readonly">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-3 control-label">
+										开始时间
+									</label>
+									<div class="col-sm-9">
+										<input id="beginTime" name="beginTime" class="form-control layer-date"
+										autocomplete="off" placeholder="YYYY-MM-DD hh:mm:ss" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="form-group">
+									<label class="col-sm-3 control-label">
+										结束时间
+									</label>
+									<div class="col-sm-9">
+										<input id="endTime" name="endTime" class="form-control layer-date" autocomplete="off"
+										placeholder="YYYY-MM-DD hh:mm:ss" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+									</div>
+								</div>
+							</div>
+							<a type="button" class="btn btn-primary" data-dismiss="modal" id="sub">
+								确定修改
+							</a>
+							<button type="button" class="btn btn-default" data-dismiss="modal">
+								取消
+							</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="../static/admin/js/jquery.min.js?v=2.1.4">
+		</script>
+		<script src="../static/admin/js/bootstrap.min.js?v=3.3.6">
+		</script>
+		<script src="../static/admin/js/jquery.form.js">
+		</script>
+		<script src="../static/admin/js/jquery.cookie.js">
+		</script>
+		<script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table.min.js">
+		</script>
+		<script src="../static/admin/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js">
+		</script>
+		<script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js">
+		</script>
+		<script src="../static/admin/js/plugins/layer/laydate/laydate.js">
+		</script>
+		<script src="../static/admin/myjs/userList.js">
+		</script>
+	</body>
+
+</html>

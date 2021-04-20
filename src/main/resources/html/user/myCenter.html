@@ -1,0 +1,56 @@
+
+<html>
+	<head lang="en">
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=0.1,user-scalable=yes">
+		
+		<title>我的中心</title>
+		<link rel="stylesheet" type="text/css" href="../static/user/css/public.css"/>
+		<link rel="stylesheet" type="text/css" href="../static/user/css/mygxin.css" />
+	</head>
+	<body>
+		<div class="Bott">
+			<div class="wrapper clearfix">
+				
+				<div class="you fl">
+					<div class="tx clearfix">
+						<div class="fl clearfix">
+							<a href="#" class="fl" ><img id= "imgId" src="../static/user/imgs/tx.png"/></a>
+							<p class="fl"><span id = "userName"></span><a href="myInfo.html" target="myinfo">修改个人信息></a></p>
+						</div>
+						
+					</div>
+					<div class="bott">
+						<div class="clearfix">
+							<a href="myOrder.html" onclick="setId(1)" class="fl" target="myinfo"><img src="../static/user/imgs/gxin1.jpg"/></a>
+							<p class="fl"><span>待支付的订单：<strong id = "noPay">0</strong></span>
+								<a href="myOrder.html" target="myinfo">查看待支付订单></a>
+							</p>
+						</div>
+						<div class="clearfix">
+							<a href="myOrder.html" onclick="setId(3)"class="fl" target="myinfo"><img src="../static/user/imgs/gxin2.jpg"/></a>
+							<p class="fl"><span>已发货的订单：<strong id = "noGet">0</strong></span>
+								<a href="myOrder.html" target="myinfo">查看已发货订单></a>
+							</p>
+						</div>
+						<div class="clearfix">
+							<a href="myProd.html" class="fl" target="myinfo"><img src="../static/user/imgs/gxin3.jpg"/></a>
+							<p class="fl"><span>待评价的订单：<strong id = "noComm">0</strong></span>
+								<a href="myProd.html" target="myinfo">查看待评价订单></a>
+							</p>
+						</div>
+						<div class="clearfix">
+							<a href="cart.html" class="fl" target="myinfo"><img src="../static/user/imgs/gxin4.jpg"/></a>
+							<p class="fl"><span>收藏夹商品：<strong id = "cart">0</strong></span>
+								<a href="cart.html" target="myinfo">收藏夹商品></a>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="../static/user/js/jquery-1.12.4.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../static/user/js/jquery.cookie.js" type="application/javascript"></script>
+	<script type="application/javascript" src = "../static/user/myjs/myCenter.js"></script>
+</html>

@@ -1,0 +1,55 @@
+
+<html>
+	<head lang="en">
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=0.1,user-scalable=yes">
+		
+		<title>我的订单</title>
+		<link rel="stylesheet" type="text/css" href="../static/user/css/public.css"/>
+		<link rel="stylesheet" type="text/css" href="../static/user/css/myorder.css" />
+	</head>
+	<body>
+		
+		<!------------------------------Bott------------------------------>
+		<div class="Bott">
+			<div class="wrapper clearfix">
+				<div class="you fl">
+					<div class="my clearfix">
+						<h2 class="fl">我的订单</h2>
+						<a href="#" class="fl">请谨防钓鱼链接或诈骗电话，了解更多&gt;</a>
+					</div>
+					<div class="dlist clearfix">
+						<ul class="fl clearfix" id="wa">
+							<li class="on"><a onclick = "exchange(100)">全部订单</a></li>
+							<li><a onclick = "exchange(1)">待支付</a></li>
+							<li><a onclick = "exchange(2)">已支付</a></li>
+							<li><a onclick = "exchange(3)">已出库</a></li>
+							<li><a onclick = "exchange(4)">已收货</a></li>
+							<li><a onclick = "exchange(5)">已评价</a></li>
+							<li><a onclick = "exchange(0)">已取消</a></li>
+						</ul>
+						<form action="#" method="get" class="fr clearfix">
+							<input type="text" name="" id="ordernamees" value="" placeholder="请输入商品名称" />
+							<input type="button" onclick = "search()" />
+						</form>
+					</div>
+					<div  id ="htmls">
+					
+					</div>
+					
+					
+					<div class="fenye clearfix">
+						<a href="#"><img src="../static/user/img/zuo.jpg"/></a>
+						<a href="#">1</a>
+						<a href="#"><img src="../static/user/img/you.jpg"/></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<script src="../static/user/js/jquery-1.12.4.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../static/user/js/user.js" type="text/javascript" charset="utf-8"></script>
+		<script type="application/javascript" src="../static/user/js/jquery.cookie.js"></script>
+		<script type="application/javascript" charset="UTF-8" src="../static/user/myjs/myOrder.js"></script>
+	</body>
+</html>

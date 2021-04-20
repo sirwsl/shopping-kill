@@ -1,0 +1,191 @@
+
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=0.1,user-scalable=yes">
+		<title>
+			退换货
+		</title>
+		<meta name="keywords" content="">
+		<meta name="description" content="">
+		<link rel="shortcut icon" href="favicon.ico">
+		<link href="../static/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+		<link href="../static/admin/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+		<link href="../static/admin/css/plugins/iCheck/custom.css" rel="stylesheet">
+		<link href="../static/admin/css/animate.css" rel="stylesheet">
+		<link href="../static/admin/css/style.css?v=4.1.0" rel="stylesheet">
+	</head>
+	<body class="gray-bg">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="tabs-container">
+					<div class="ibox-content">
+						<div class="row">
+							<div class="ibox-content" style="padding-bottom:0px;">
+								<div>
+									<label class="form-inline" />
+									售后类别：
+									<select name="types" class="form-control" id="types">
+										<option value="" selected="selected">
+											全部
+										</option>
+										<option value="2">
+											换货
+										</option>
+										<option value="1">
+											仅退款
+										</option>
+										<option value="3">
+											退货退款
+										</option>
+									</select>
+									</label>
+									<label class="form-inline" />
+									是否处理：
+									<select name="resout" class="form-control" id="resout">
+										<option value="" selected="selected">
+											全部
+										</option>
+										<option value="1">
+											已处理
+										</option>
+										<option value="0">
+											未处理
+										</option>
+									</select>
+									</label>
+									<label class="form-inline" />
+									售后编号：
+									<input type="text" class="form-control" id="SId" />
+									</label>
+									<label class="form-inline" />
+									订单编号：
+									<input type="text" class="form-control" id="orderId" />
+									</label>
+									<button type="button" class="btn btn-sm btn-primary " id="search">
+										搜索
+									</button>
+									</span>
+								</div>
+							</div>
+						</div>
+						</br>
+						<ul class="nav nav-tabs">
+							<li class="active">
+								<a data-toggle="tab" href="#tab-1" aria-expanded="true">
+									售后处理
+								</a>
+							</li>
+						</ul>
+						<div class="tab-content">
+							<div id="tab-1" class="tab-pane active">
+								<div class="panel-body">
+									<div class="wrapper wrapper-content animated fadeInRight">
+										<div class="row">
+											<div class="col-sm-12">
+												<div class="ibox float-e-margins">
+													<div class="ibox-content">
+														<table class="table table-bordered" id="afterSale">
+														</table>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+			aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+								&times;
+							</button>
+							<h4 class="modal-title" id="myLabel">
+								售后处理
+							</h4>
+						</div>
+						<form class="m-t" role="form" id="updates" name="updates" accept-charset="utf-8">
+							<div class="modal-body">
+								<input id="id" name="id" style="display:none" readonly="true" value=""
+								/>
+								<input id="type" name="type" style="display:none" readonly="true" value=""
+								/>
+								<div class="form-group">
+									<label class="form-inline" id="myTypes" />
+									</label>
+								</div>
+								<div class="form-group">
+									<label class="form-inline" />
+									是否处理：
+									<select name="result" class="form-control" id="result">
+										<option value="true">
+											已处理
+										</option>
+										<option value="<false></false>">
+											未处理
+										</option>
+									</select>
+									</label>
+								</div>
+								<div class="form-group">
+									<label class="form-inline" id="oldSku">
+									</label>
+								</div>
+								<div class="form-group">
+									<input id="oldSkuId" name="oldSkuId" style="display:none" readonly="true"
+									value="" />
+									<label class="form-inline" />
+									换货SKU：
+									<select name="skuId" class="form-control" id="skuId">
+									</select>
+									</label>
+									<label class="form-inline" id="number" />
+									</label>
+								</div>
+								<div class="form-group">
+									<label class="col-xl-3 control-label">
+										处理结果：
+									</label>
+									<div class="col-xl-9">
+										<textarea type="text" id="resultDetail" name="resultDetail" class="form-control layer-date">
+										</textarea>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">
+									取消
+								</button>
+								<button type="button" class="btn btn-primary" id="sub" data-dismiss="modal">
+									提交
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<script src="../static/admin/js/jquery.min.js?v=2.1.4">
+			</script>
+			<script src="../static/admin/js/bootstrap.min.js?v=3.3.6">
+			</script>
+			<script src="../static/admin/js/jquery.form.js">
+			</script>
+			<script src="../static/admin/js/jquery.cookie.js">
+			</script>
+			<script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table.min.js">
+			</script>
+			<script src="../static/admin/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js">
+			</script>
+			<script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js">
+			</script>
+			<script src="../static/admin/myjs/exchange.js">
+			</script>
+	</body>
+
+</html>

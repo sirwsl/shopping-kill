@@ -1,0 +1,94 @@
+
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=0.1,user-scalable=yes">
+		<title>
+			发布订阅
+		</title>
+		<meta name="keywords" content="">
+		<meta name="description" content="">
+		<link rel="shortcut icon" href="favicon.ico">
+		<link href="../static/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+		<link href="../static/admin/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+		<link href="../static/admin/css/animate.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../static/admin/css/plugins/markdown/bootstrap-markdown.min.css"
+		/>
+		<link href="../static/admin/css/style.css?v=4.1.0" rel="stylesheet">
+	</head>
+	<body class="gray-bg">
+		<div class="wrapper wrapper-content">
+			<div class="row">
+				<div class="col-lg-12">
+					<form role="form" id="addSub" name="addSub" enctype="application/x-www-form-urlencoded"
+					action="http://localhost/admin/newsPush/v1" method="post" accept-charset="utf-8">
+						<div class="ibox float-e-margins">
+							<div class="ibox-title">
+								<h5>
+									订阅内容
+								</h5>
+							</div>
+							<div class="ibox-content">
+								<div class="form-group">
+									<label class="col-sm-2 control-label">
+										标题：
+									</label>
+									<div class="col-sm-10">
+										<input id="title" name="title" class="form-control" placeholder="请输入活动名称"
+										required="" aria-required="true">
+										</input>
+									</div>
+								</div>
+							</div>
+							<div class="ibox-content">
+								<div class="form-group">
+									<label class="col-sm-2 control-label">
+										内容：
+									</label>
+									<div class="col-sm-10">
+										<textarea id="detail" name="detail" class="form-control" placeholder="短信通知内容12字以内一般为日期,eg:2020年3月15日"
+										style="height: 114px;">
+										</textarea>
+									</div>
+								</div>
+							</div>
+							<div class="ibox-content">
+								<table class="footable table table-stripped toggle-arrow-tiny" data-page-size="8">
+									<div class="row">
+										<div class="col-sm-3" style="float: right;">
+											<select class="form-control" id="type" name="type">
+												<option value="1">
+													短信推送
+												</option>
+												<option value="0">
+													邮件推送
+												</option>
+											</select>
+										</div>
+									</div>
+								</table>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="col-sm-6">
+				</div>
+				<a data-toggle="modal" id="sub" class="btn btn-success">
+					确认推送
+				</a>
+				</td>
+			</div>
+		</div>
+		<script src="../static/admin/js/jquery.min.js?v=2.1.4">
+		</script>
+		<script src="../static/admin/js/bootstrap.min.js?v=3.3.6">
+		</script>
+		<script src="../static/admin/js/jquery.form.js">
+		</script>
+		<script src="../static/admin/js/jquery.cookie.js">
+		</script>
+		<script src="../static/admin/myjs/subsend.js">
+		</script>
+	</body>
+
+</html>

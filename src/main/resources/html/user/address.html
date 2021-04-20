@@ -1,0 +1,49 @@
+
+<html>
+	<head lang="en">
+		<meta charset="utf-8" />
+		<title>地址</title>
+		
+		<meta name="viewport" content="width=device-width,initial-scale=0.1,user-scalable=yes">
+		<link rel="stylesheet" type="text/css" href="../static/user/css/public.css"/>
+		<link rel="stylesheet" type="text/css" href="../static/user/css/mygxin.css" />
+	</head>
+	<body>
+		<!------------------------------idea------------------------------>
+		<!------------------------------Bott--------<div id = "htmls">
+						
+					</div>	---------------------->
+		<div class="Bott">
+			<div class="wrapper clearfix">
+				
+				<div class="you fl">
+					<h2>收货地址</h2>
+					<div id="htmlss">
+					</div>		
+				</div>
+			</div>
+		</div>
+		<!--编辑弹框-->
+		<!--遮罩-->
+		<div class="mask"></div>
+		<div class="adddz">
+			<form action="http://localhost/user/addOrUpdateAddress/v1" method="POST" id = "addressAdd">
+				<input type="text" id = "id" name = "id" value = "" style="display: none;" autocomplete="off"/>
+				<input type="text" placeholder="姓名" class="on" id = "name" name = "name" autocomplete="off"/>
+				<input type="text" placeholder="手机号" id = "phone" name = "phone" autocomplete="off" />
+				<textarea id="address" name = "address" rows="" cols="" placeholder="详细地址" autocomplete="off"></textarea>
+				<input type="text" id = "addressNum" name = "addressNum" placeholder="邮政编码" autocomplete="off"/>
+				<div class="bc">
+					<input type="button" value="保存" id = "adOk"/>
+					<input type="button" value="取消" />
+				</div>
+			</form>
+		</div>
+
+		<script src="../static/user/js/jquery-1.12.4.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../static/user/js/user.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../static/user/js/jquery.form.js" type="text/javascript" ></script>
+		<script type="application/javascript" src="../static/user/js/jquery.cookie.js"></script>
+		<script type="application/javascript" src = "../static/user/myjs/address.js" charset="UTF-8"></script>
+	</body>
+</html>

@@ -1,0 +1,194 @@
+
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=0.1,user-scalable=yes">
+		<title>
+			上架管理
+		</title>
+		<meta name="keywords" content="">
+		<meta name="description" content="">
+		<link rel="shortcut icon" href="favicon.ico">
+		<link href="../static/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+		<link href="../static/admin/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+		<link href="../static/admin/css/plugins/iCheck/custom.css" rel="stylesheet">
+		<link href="../static/admin/css/animate.css" rel="stylesheet">
+		<link href="../static/admin/css/style.css?v=4.1.0" rel="stylesheet">
+		<link href="../static/admin/css/ionic.css" rel="stylesheet">
+	</head>
+	<body class="gray-bg">
+		<div class="wrapper wrapper-content animated fadeInRight">
+			<div class="row">
+				<div class="col-sm-12">
+					<div>
+						<div class="ibox-content" style="padding-bottom:0px;">
+							<div>
+								<label class="form-inline" />
+								是否上架：
+								<select name="shelf" class="form-control" id="shelf">
+									<option value="">
+										全部
+									</option>
+									<option value="true">
+										已上架
+									</option>
+									<option value="false">
+										未上架
+									</option>
+								</select>
+								</label>
+								<label class="form-inline" />
+								商品id：
+								<input type="text" class="form-control" id="searchId" />
+								</label>
+								<label class="form-inline" />
+								商品名称：
+								<input type="text" class="form-control" id="searchName" />
+								</label>
+								<button type="button" class="btn btn-sm btn-primary" id="search">
+									搜索
+								</button>
+								</span>
+								<a data-toggle="modal" class="btn btn-info" id="addGoods" style="float: right;"
+								href="#EditModal">
+									添加
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="ibox float-e-margins">
+						<div class="ibox-title">
+							<h5>
+								商品管理
+							</h5>
+						</div>
+						<div class="ibox-content">
+							<table class="table table-stripped toggle-arrow-tiny" id="goods" name="goods">
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="myModal"
+		aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+							&times;
+						</button>
+						<h4 class="modal-title" id="myModalLabel">
+							编辑商品
+						</h4>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<form role="form" id="addOrUpdateGoods" enctype="multipart/form-data">
+								<div class="row">
+									<div class="col-sm-6">
+										<input id="id" name="id" style="display:none" readonly="true" value=""
+										/>
+										<input id="imgUrl" name="imgUrl" style="display:none" readonly="true"
+										value="" />
+										<div class="form-group">
+											<div class="form-group">
+												<label class="col-xl-3 control-label">
+													物品名称
+												</label>
+												<div class="col-xl-9">
+													<input type="text" id="name" name="name" class="form-control layer-date"
+													/>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-xl-3 control-label">
+													物品描述
+												</label>
+												<div class="col-xl-9">
+													<textarea type="text" id="detail" name="detail" class="form-control layer-date">
+													</textarea>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<div class="form-group">
+											<label class="form-inline" />
+											是否上架：
+											<select name="shelf" class="form-control" id="shelf">
+												<option value="true">
+													下架
+												</option>
+												<option value="false">
+													上架
+												</option>
+											</select>
+											</label>
+										</div>
+										<div class="form-group">
+											<label class="form-inline" />
+											商品类别：
+											<select name="typeId" class="form-control" id="typeId">
+											</select>
+											</label>
+										</div>
+										<div class="form-group">
+											<label class="col-xl-3 control-label">
+												图片
+											</label>
+											<div class="col-xl-9">
+												<div class="file-container" style="display:inline-block;position:relative;overflow: hidden;vertical-align:middle">
+													<button class="btn btn-success fileinput-button" type="button">
+														上传
+													</button>
+													<input type="file" id="file" name="file" multiple="multiple" onchange="loadFile(this.files[0])"
+													style="position:absolute;top:0;left:0;font-size:34px; opacity:0">
+												</div>
+												<label id="imgUrls" name="imgUrls" style="vertical-align: middle">
+													未上传文件
+													</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">
+							取消
+						</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal" id="sub">
+							确定
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="../static/admin/js/jquery.min.js?v=2.1.4">
+	</script>
+	<script src="../static/admin/js/jquery-ui-1.10.4.min.js">
+	</script>
+	<script src="../static/admin/js/bootstrap.min.js?v=3.3.6">
+	</script>
+	<script src="../static/admin/js/jquery.form.js">
+	</script>
+	<script src="../static/admin/js/jquery.cookie.js">
+	</script>
+	<script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table.min.js">
+	</script>
+	<script src="../static/admin/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js">
+	</script>
+	<script src="../static/admin/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js">
+	</script>
+	<script src="../static/admin/js/ionic.bundle.min.js">
+	</script>
+	<script src="../static/admin/myjs/goods.js">
+	</script>
+
+</html>
+</body>
+
+</html>
