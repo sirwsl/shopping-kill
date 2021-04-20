@@ -1,7 +1,7 @@
 #邮件通知设置
 spring:
   mail:
-    host: smtp.163.com
+    host: #
     username: #你的邮箱地址
     password: #邮箱授权码
     port: 25
