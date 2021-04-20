@@ -64,7 +64,8 @@ public class UserOrderInfoController {
         if(id==null){
             return Result.error("error","订单编号错误");
         }
-        return Result.success( orderService.getOrderDetailVO(id));
+        OrderDetailVO orderDetailVO = orderService.getOrderDetailVO(id);
+        return Result.success(orderDetailVO);
     }
 
     @PutMapping("/ackGoods/v1")

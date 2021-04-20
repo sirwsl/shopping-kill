@@ -15,16 +15,7 @@ import org.springframework.web.filter.CorsFilter;
 public class CorsConfig {
     private CorsConfiguration corsConfig() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
-        corsConfiguration.addAllowedOrigin("http://oss.wslhome.top");
-        corsConfiguration.addAllowedOrigin("http://admin.wslhome.top");
-        corsConfiguration.addAllowedOrigin("http://www.wslhome.top");
-        corsConfiguration.addAllowedOrigin("http://test.wslhome.top");
-        corsConfiguration.addAllowedOrigin("http://kill.wslhome.top");
-        corsConfiguration.addAllowedOrigin("https://oss.wslhome.top");
-        corsConfiguration.addAllowedOrigin("https://admin.wslhome.top");
-        corsConfiguration.addAllowedOrigin("https://www.wslhome.top");
-        corsConfiguration.addAllowedOrigin("https://test.wslhome.top");
-        corsConfiguration.addAllowedOrigin("https://kill.wslhome.top");
+        corsConfiguration.addAllowedOrigin("http://localhost:8081");
         corsConfiguration.addAllowedHeader("*");
         corsConfiguration.addAllowedMethod("*");
         corsConfiguration.setAllowCredentials(true);

@@ -2,8 +2,8 @@
 spring:
   mail:
     host: smtp.163.com
-    username: shoppisdfsdngkill@163.com
-    password: TSVSsdfsdfsdsWNMMIHUDHUYY
+    username: #你的邮箱地址
+    password: #邮箱授权码
     port: 25
     default-encoding: utf-8
     protocol: smtp
@@ -11,36 +11,36 @@ spring:
 # 阿里云存储参数配置
 ali:
   oss:
-    endpoint: oss-cn-shenzhen.aliyuncs.com
-    accessKeyId: LTAIoOIpViJsdfsOimve
-    accessKeySecret: XzU1crrklFHsdfsdfslEHRgENojhew5b09hMC
-    bucketName: shoppingkill
-    url: //shsdfopisdfngksl.oss-cn-shenzhen.aliyuncs.com/
-    aliUrl: http://shosdfpisdfsdngksdfill.oss-cn-shenzhen.aliyuncs.com/
-    getFileUrl: ${aliyun.oss.url}${aliyun.oss.fileDir}
-    myHostUrl:
+    endpoint: #阿里云OSS的节点 oss-cn-shenzhen.aliyuncs.com
+    accessKeyId: #关键key
+    accessKeySecret: #密钥
+    bucketName: #bucket名称
+    url: #访问URL
+    aliUrl: #bucket的地址
+    getFileUrl: #
+    myHostUrl: #访问静态资源域名
 
 #SMS榛子云参数配置
 zzy:
   apiUrl: https://sms_developer.zhenzikj.com
-  appSecret: MDAxNDZiNGdfsfsdfsdMtNTYwNy00ZTcwLWEyNTItMGY1OThmYmNjZGM2
-  appId: 105924
+  appSecret: #授权码
+  appId: #ID
 
 jwt:
   redisToken: 4800
   expire: 3600
   newToken: 600
-  keys: shoppingkill-sirwsl
+  keys: wslhome-shoppingkill-sirwsl
 
 verify:
   imgCodeTimeOut: 300
   phoneCodeTimeOut: 300
 
 req:
-  doMainUrl: url
+  doMainUrl: localhost
 
 url:
-  image: http://
-  webPage: http://
-  server: http://
+  image: http://static.wslhome.top/ #图片资源域名
+  webPage: http://test.wslhome.top/ #后端访问域名
+  server: http://kill.wslhome.top/ #前端域名
 

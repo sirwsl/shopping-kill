@@ -60,7 +60,7 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 
     private final String min = "?x-oss-process=image/resize,m_fill,h_50,w_50";
 
-    private final String recomMin = "?x-oss-process=image/resize,m_fill,h_100,w_100";
+    private final String recomMin = "?x-oss-process=image/resize,m_fill,h_210,w_210";
 
     private final String viewMin = "?x-oss-process=image/resize,m_fill,h_400,w_400";
 
@@ -199,7 +199,7 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 
 
     @Override
-    @Cached(name = "getRecommendedGoods",expire = 60,cacheType = CacheType.REMOTE,timeUnit = TimeUnit.MINUTES,localLimit = 20)
+    @Cached(name = "getRecommendedGoods",expire = 60,cacheType = CacheType.REMOTE,timeUnit = TimeUnit.MINUTES,localLimit = 40)
     public List<BaseGoodsVO> getRecommendedGoods(Integer size) {
         //随机获取10条记录
         String sql = "order by rand() limit "+size;

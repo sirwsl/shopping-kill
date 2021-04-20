@@ -73,8 +73,8 @@ public class GoodsAdapterImpl implements GoodsAdapter {
     @Override
     public IPage<ViewGoodsVO> getViewGoods(Long current, Long size) {
         Object goodsVO = redisTemplate.opsForValue().get(RedisEnum.GOODS_VIEW + current);
-        IPage<ViewGoodsVO> goods = ObjectUtil.castIPage(goodsVO, ViewGoodsVO.class);
-        if (Objects.nonNull(goodsVO) && !CollectionUtils.isEmpty(goods.getRecords())){
+        if (Objects.nonNull(goodsVO)){
+            IPage<ViewGoodsVO> goods = ObjectUtil.castIPage(goodsVO, ViewGoodsVO.class);
             return goods;
         }
         final IPage<ViewGoodsVO> viewGoodsAll = goodsService.getViewGoodsAll(null, current, 50L);

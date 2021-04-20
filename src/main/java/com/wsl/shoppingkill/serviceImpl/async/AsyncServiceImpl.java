@@ -53,7 +53,7 @@ public class AsyncServiceImpl implements AsyncService {
             @Override
             public Object execute(RedisOperations operations) throws DataAccessException {
                 for (ViewGoodsVO goods : list) {
-                    operations.opsForValue().set(RedisEnum.SEARCH_GOODS + goods.getName(), goods, 30L, TimeUnit.MINUTES);
+                    operations.opsForValue().set(RedisEnum.SEARCH_GOODS + goods.getName(), goods, 5L, TimeUnit.MINUTES);
                 }
                 return null;
             }
@@ -64,7 +64,7 @@ public class AsyncServiceImpl implements AsyncService {
     @Override
     @Async("taskExecutor")
     public void goodsAll(IPage<ViewGoodsVO> goods) {
-        redisTemplate.opsForValue().set(RedisEnum.GOODS_VIEW+goods.getCurrent(),goods);
+        redisTemplate.opsForValue().set(RedisEnum.GOODS_VIEW+goods.getCurrent(),goods,5,TimeUnit.SECONDS);
     }
 
     @Override

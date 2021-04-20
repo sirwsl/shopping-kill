@@ -21,6 +21,7 @@ import com.wsl.shoppingkill.obj.vo.ActivityByGoodsVO;
 import com.wsl.shoppingkill.obj.vo.ActivityVO;
 import com.wsl.shoppingkill.obj.vo.KillGoodsVO;
 import com.wsl.shoppingkill.service.ActivityService;
+import com.wsl.shoppingkill.service.SkuService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.dao.DataAccessException;
@@ -55,6 +56,9 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
 
     @Resource
     private SkuMapper skuMapper;
+
+    @Resource
+    private SkuService skuService;
 
     @Resource
     private RedisTemplate<String,Object> redisTemplate;
@@ -163,6 +167,7 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
             return false;
         }
         //遍历判断
+        List<Sku> skuListTemp = new ArrayList<>();
         activity.getSkuList().forEach(li -> {
             Activity activityTemp = new Activity();
 
@@ -186,15 +191,23 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
             //TODO: bug
             if (li.getTotalNum() <= collect.get(li.getId()).get(0).getNum()) {
                 activityTemp.setTotalNum(li.getTotalNum()).setSellNum(li.getTotalNum());
+
             } else {
                 activityTemp.setTotalNum(collect.get(li.getId()).get(0).getNum()).setSellNum(collect.get(li.getId()).get(0).getNum());
             }
+            Sku sku1 = collect.get(li.getId()).get(0);
+            skuListTemp.add(sku1.setNum(sku1.getNum()-activityTemp.getTotalNum()));
             activityList.add(activityTemp);
         });
+
+
+
         log.info(activityList.toString());
         //批量更新
         try {
             saveOrUpdateBatch(activityList);
+
+            skuService.updateBatchById(skuListTemp);
             //TODO：如果redis有则更新redis
 
             return true;

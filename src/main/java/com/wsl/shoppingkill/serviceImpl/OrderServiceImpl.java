@@ -172,7 +172,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     public OrderDetailVO getOrderDetailVO(Long id) {
         OrderDetailVO detailVO = orderMapper.selectOrderDetail(id);
         if (Objects.isNull(detailVO)){
-            return null;
+            return new OrderDetailVO();
         }
         detailVO.setTotalPrice(detailVO.getPrice().multiply(new BigDecimal(detailVO.getNum())).add(detailVO.getLogisticsPrice()));
         detailVO.setImgUrl(detailVO.getImgUrl()+"?x-oss-process=image/resize,m_fill,h_100,w_100");

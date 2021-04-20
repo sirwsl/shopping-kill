@@ -83,40 +83,42 @@ public class OrderDealWith {
     @Transactional(rollbackFor = Exception.class)
     public void commonOrder(AddOrderParam addOrderParam, Channel channel, Message message) throws IOException {
         try {
+            Order order = new Order();
+            Sku sku = skuMapper.selectById(addOrderParam.getSkuId());
+            long oId = Long.parseLong(message.getMessageProperties().getHeaders().get("spring_returned_message_correlation").toString());
+            BigDecimal expPrice = sku.getExpPrice();
+            if (Objects.isNull(expPrice)){
+                expPrice=new BigDecimal(0);
+            }
+            order.setStatus(BaseEnum.ORDER_TYPE_NOT_PAY)
+                    .setPayPrice(sku.getSellPrice().multiply(new BigDecimal(addOrderParam.getNum())).add(expPrice))
+                    .setCreatTime(LocalDateTime.now())
+                    .setUpdateTime(LocalDateTime.now())
+                    .setNum(addOrderParam.getNum())
+                    .setSkuId(addOrderParam.getSkuId())
+                    .setUserId(addOrderParam.getUserId())
+                    .setOrderTime(LocalDateTime.now())
+                    .setId(oId);
+            orderMapper.insert(order);
+            sku.setNum(sku.getNum() - 1).updateById();
+            rabbitTemplate.convertAndSend(RabbitMqEnum.Queue.QUEUE_ORDER_DELAY, oId, msg -> {
+                //过期时间60*5*1000
+                msg.getMessageProperties().setExpiration("300000");
+                return msg;
+            });
             channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
         } catch (Exception e) {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             if (message.getMessageProperties().getRedelivered()) {
                 log.warn("普通订单处理失败，回滚订单，进入死信队列");
                 /* 拒绝消息，requeue=false 表示不再重新入队，如果配置了死信队列则进入死信队列 */
-                channel.basicReject(message.getMessageProperties().getDeliveryTag(), true);
+                channel.basicReject(message.getMessageProperties().getDeliveryTag(), false);
             } else {
                 log.warn("普通订单处理失败，回滚订单，重新入队");
-                channel.basicNack(message.getMessageProperties().getDeliveryTag(), false, true);
+                channel.basicNack(message.getMessageProperties().getDeliveryTag(), false, false);
             }
             e.printStackTrace();
         }
-
-
-        Order order = new Order();
-        Sku sku = skuMapper.selectById(addOrderParam.getSkuId());
-        long oId = Long.parseLong(message.getMessageProperties().getHeaders().get("spring_returned_message_correlation").toString());
-        order.setStatus(BaseEnum.ORDER_TYPE_NOT_PAY)
-                .setPayPrice(sku.getSellPrice().multiply(new BigDecimal(addOrderParam.getNum())).add(sku.getExpPrice()))
-                .setCreatTime(LocalDateTime.now())
-                .setUpdateTime(LocalDateTime.now())
-                .setNum(addOrderParam.getNum())
-                .setSkuId(addOrderParam.getSkuId())
-                .setUserId(addOrderParam.getUserId())
-                .setOrderTime(LocalDateTime.now())
-                .setId(oId);
-        orderMapper.insert(order);
-        sku.setNum(sku.getNum() - 1).updateById();
-            rabbitTemplate.convertAndSend(RabbitMqEnum.Queue.QUEUE_ORDER_DELAY, oId, msg -> {
-                //过期时间60*5*1000
-                msg.getMessageProperties().setExpiration("300000");
-                return msg;
-            });
     }
 
 
@@ -141,52 +143,55 @@ public class OrderDealWith {
     ))
     public void killOrder(AddOrderParam addOrderParam, Channel channel, Message message) throws IOException {
         try {
+            LocalDateTime now = LocalDateTime.now();
+            Sku sku = skuMapper.selectById(addOrderParam.getSkuId());
+            Order order = new Order();
+            long oId = Long.parseLong(message.getMessageProperties().getHeaders().get("spring_returned_message_correlation").toString());
+            BigDecimal expPrice = sku.getExpPrice();
+            if (Objects.isNull(expPrice)){
+                expPrice = new BigDecimal(0);
+            }
+            order.setStatus(BaseEnum.ORDER_TYPE_NOT_PAY)
+                    .setPayPrice(sku.getSellPrice().multiply(new BigDecimal(addOrderParam.getNum())).add(expPrice))
+                    .setCreatTime(now)
+                    .setUpdateTime(now)
+                    .setNum(addOrderParam.getNum())
+                    .setSkuId(addOrderParam.getSkuId())
+                    .setUserId(addOrderParam.getUserId())
+                    .setOrderTime(now)
+                    .setId(oId);
+
+            String key = RedisEnum.GOODS_KILL + addOrderParam.getSkuId();
+
+            orderMapper.insert(order);
+            sku.setNum(sku.getNum() - 1).updateById();
+            activityMapper.desert(sku.getId(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(now));
+
+            rabbitTemplate.convertAndSend(RabbitMqEnum.Queue.QUEUE_ORDER_DELAY, oId, msg -> {
+                //过期时间60*5*1000
+                msg.getMessageProperties().setExpiration("300000");
+                return msg;
+            });
+            //redisTemplate.opsForValue().set(RedisEnum.USER_KILL_NUM+id+sku.getId(),"1");
+
+            Object o = redisTemplate.opsForValue().get(RedisEnum.GOODS_DOING+ sku.getGoodsId());
+            if (Objects.nonNull(o)) {
+                ObjectMapper objectMapper = new ObjectMapper();
+                KillGoodsVO killGoodsVO = objectMapper.convertValue(o, KillGoodsVO.class);
+                killGoodsVO.setSum(killGoodsVO.getSum() - 1);
+                redisTemplate.opsForValue().set(key + killGoodsVO.getId(), killGoodsVO,
+                        DateUtil.distanceSecond(LocalDateTime.now(), killGoodsVO.getEndTime()), TimeUnit.SECONDS);
+            }
             channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
         } catch (Exception e) {
             if (message.getMessageProperties().getRedelivered()) {
                 log.warn("秒杀订单处理失败");
                 /* 拒绝消息，requeue=false 表示不再重新入队，如果配置了死信队列则进入死信队列 */
-                channel.basicReject(message.getMessageProperties().getDeliveryTag(), true);
+                channel.basicReject(message.getMessageProperties().getDeliveryTag(), false);
             } else {
-                channel.basicNack(message.getMessageProperties().getDeliveryTag(), false, true);
+                channel.basicNack(message.getMessageProperties().getDeliveryTag(), false, false);
             }
             e.printStackTrace();
-        }
-
-        LocalDateTime now = LocalDateTime.now();
-        Sku sku = skuMapper.selectById(addOrderParam.getSkuId());
-        Order order = new Order();
-        long oId = Long.parseLong(message.getMessageProperties().getHeaders().get("spring_returned_message_correlation").toString());
-        order.setStatus(BaseEnum.ORDER_TYPE_NOT_PAY)
-                .setPayPrice(sku.getSellPrice().multiply(new BigDecimal(addOrderParam.getNum())).add(sku.getExpPrice()))
-                .setCreatTime(now)
-                .setUpdateTime(now)
-                .setNum(addOrderParam.getNum())
-                .setSkuId(addOrderParam.getSkuId())
-                .setUserId(addOrderParam.getUserId())
-                .setOrderTime(now)
-                .setId(oId);
-
-        String key = RedisEnum.GOODS_KILL + addOrderParam.getSkuId();
-
-        orderMapper.insert(order);
-        sku.setNum(sku.getNum() - 1).updateById();
-        activityMapper.desert(sku.getId(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(now));
-
-        rabbitTemplate.convertAndSend(RabbitMqEnum.Queue.QUEUE_ORDER_DELAY, oId, msg -> {
-            //过期时间60*5*1000
-            msg.getMessageProperties().setExpiration("300000");
-            return msg;
-        });
-        //redisTemplate.opsForValue().set(RedisEnum.USER_KILL_NUM+id+sku.getId(),"1");
-
-        Object o = redisTemplate.opsForValue().get(RedisEnum.GOODS_DOING+ sku.getGoodsId());
-        if (Objects.nonNull(o)) {
-            ObjectMapper objectMapper = new ObjectMapper();
-            KillGoodsVO killGoodsVO = objectMapper.convertValue(o, KillGoodsVO.class);
-            killGoodsVO.setSum(killGoodsVO.getSum() - 1);
-            redisTemplate.opsForValue().set(key + killGoodsVO.getId(), killGoodsVO,
-                    DateUtil.distanceSecond(LocalDateTime.now(), killGoodsVO.getEndTime()), TimeUnit.SECONDS);
         }
     }
 

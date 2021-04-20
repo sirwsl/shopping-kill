@@ -27,19 +27,8 @@ public class CORSFilter implements Filter {
         //设置跨域请求
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) res;
-        String[] allowDomains = {"http://oss.wslhome.top",
-                "http://static.wslhome.top",
-                "http://admin.wslhome.top",
-                "http://www.wslhome.top",
-                "http://test.wslhome.top",
-                "http://kill.wslhome.top",
-                "https://oss.wslhome.top",
-                "https://static.wslhome.top",
-                "https://admin.wslhome.top",
-                "https://www.wslhome.top",
-                "https://test.wslhome.top",
-                "https://kill.wslhome.top"};
-        Set allowOrigins = new HashSet(Arrays.asList(allowDomains));
+        String[] allowDomains = {"https://localhost:8081"};
+        Set<String> allowOrigins = new HashSet<>(Arrays.asList(allowDomains));
         String originHeads = request.getHeader("Origin");
         if(allowOrigins.contains(originHeads)){
             response.setHeader("Access-Control-Allow-Origin", originHeads);

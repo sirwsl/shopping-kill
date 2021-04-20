@@ -1,19 +1,14 @@
 package com.wsl.shoppingkill.controller;
 
 import com.wsl.shoppingkill.common.Result;
-import com.wsl.shoppingkill.common.log.MyLog;
 import com.wsl.shoppingkill.common.util.RegexUtils;
 import com.wsl.shoppingkill.component.VerifyComponent;
-import com.wsl.shoppingkill.domain.Experience;
 import com.wsl.shoppingkill.domain.User;
 import com.wsl.shoppingkill.obj.constant.BaseEnum;
-import com.wsl.shoppingkill.obj.constant.LoggerEnum;
 import com.wsl.shoppingkill.obj.param.UserParam;
-import com.wsl.shoppingkill.service.ExperienceService;
 import com.wsl.shoppingkill.service.LoginService;
 import com.wsl.shoppingkill.service.UserService;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,8 +36,6 @@ public class LoginController {
     @Resource
     private VerifyComponent verifyComponent;
 
-    @Resource
-    private ExperienceService experienceService;
 
     @Resource
     private UserService userService;
@@ -111,17 +104,6 @@ public class LoginController {
         return Result.success(loginService.exit(response,request));
     }
 
-    @GetMapping("/getExperience/v1")
-    @MyLog(detail = "用户注册",grade = LoggerEnum.INFO)
-    public Result<String> getExperience(@Validated boolean check,Experience experience,HttpServletRequest request){
-        if (verifyComponent.checkLogin(experience.getPhone())){
-            return Result.error("error","您本周内已经体验过，如需再次体验，请联系管理员！ （管理员QQ:2572396933）");
-        }
-        if (!check){
-            return Result.error("error","请勾选体验用户协议");
-        }
-        return Result.success(experienceService.getExp(experience,request));
-    }
 
     @PostMapping("/addUser/v1")
     public Result<String> addUser(String codes,@Valid User user,HttpServletRequest request){

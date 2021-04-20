@@ -28,12 +28,12 @@ public class PageTimeParam implements Serializable {
 
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(locale="zh", pattern="yyyy-MM-dd HH:mm:ss")
     @NotNull(message = "开始时间不能为空")
     private LocalDateTime beginTime;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(locale="zh", pattern="yyyy-MM-dd HH:mm:ss")
     @NotNull(message = "结束时间不能为空")
     private LocalDateTime endTime;
 

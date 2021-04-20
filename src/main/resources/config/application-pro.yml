@@ -2,14 +2,14 @@ mysql—url: jdbc:mysql://localhost:3306/shoppingkill?useUnicode=true&characterE
 
 spring:
   datasource:
-    type: com.alibaba.druid.pool.DruidDataSoHurce
+    type: com.alibaba.druid.pool.DruidDataSource
     druid:
       driverClassName: com.mysql.cj.jdbc.Driver
       driver-class-name: com.mysql.cj.jdbc.Driver
       platform: mysql
       url: ${mysql-url}
       username: root
-      password: 18888888888
+      password: root
       initial-size: 20 # 配置初始化大小、最小、最大
       min-idle: 0
       max-active: 50
@@ -74,7 +74,7 @@ spring:
   rabbitmq:
     addresses: localhost:5672,localhost:5673,localhost:5674
     username: admin
-    password: 18888888888
+    password: admin
     publisher-confirms: true
     publisher-returns: true
     #默认虚拟主机
@@ -107,7 +107,7 @@ redis:
   timeBetweenEvictionRunsMillis: 30000 #逐出扫描的时间间隔(毫秒) 如果为负数,则不运行逐出线程, 默认-1
   testOnBorrow: true #是否在从池中取出连接前进行检验,如果检验失败,则从池中去除连接并尝试取出另一个
   testWhileIdle: true #在空闲时检查有效性, 默认false
-  password: 18888888888 #密码
+  password: admin #密码
 
 zookeeper-hosts: localhost:2181,localhost:2182,localhost:2183
 
@@ -132,10 +132,10 @@ jetcache:
         maxTotal: 1000
         maxWait: 1000
       uri:
-        - redis://18888888888@localhost:6379/0  #redis://密码@IP:端口/库
-        - redis://18888888888@localhost:6380/0
-        - redis://18888888888@localhost:6381/0
-        - redis://18888888888@localhost:6382/0
-        - redis://18888888888@localhost:6383/0
-        - redis://18888888888@localhost:6384/0
+        - redis://admin@localhost:6379/0  #redis://密码@IP:端口/库
+        - redis://admin@localhost:6380/0
+        - redis://admin@localhost:6381/0
+        - redis://admin@localhost:6382/0
+        - redis://admin@localhost:6383/0
+        - redis://admin@localhost:6384/0
       readFrom: masterPreferred #master优先

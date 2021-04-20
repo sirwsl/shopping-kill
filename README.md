@@ -18,16 +18,33 @@ CSDN: https://blog.csdn.net/qq_40432886
 
 WX：sirwsl
 
-使用说明；
 
-项目前端界面中请求地址加<mate>标签进行了强转https，本地测试需要去除<mate>标签，以及批量修改https -> http
-运行项目根据自己情况启动集群或者单机，本地测试需要配置host文件。
-```cmd
-kill.wslhome.top  127.0.0.1
-admin.wslhome.top  127.0.0.1
-static.wslhome.top  127.0.0.1
+### 使用说明
+#### 1、前端部署说明
+前端文件在resources资源目录下的html文件中，运行时候把整个html文件夹直接copy或者cut出来
+
+注：项目在打包时候是去除html文件的，只包含后端文件
+
+前端部署Tomcat或者Nginx，直接把整个html文件夹复制到www或者对应目录下，然后配置tomcat或者nginx进行启动
+
+nginx配置参见项目中的nginx.conf
+
+注意：前端端口设置8081，如果更改前端端口，请更改对应的com.wsl.shoppingkill.config.request下的跨域设置
+
+访问：必须使用localhost，访问地址如下
 ```
-其中kill.wslhome.top 为前端访问地址，admin为后台管理地址，static为静态资源服务器地址
+http://localhost:8081/html/user/index.html   #商城主页
+http://localhost:8081/html/admin/login.html  #后台管理
+```
+
+#### 2、后端部署说明
+后端必须运行80端口，否则需要更改前端文件的请求路径比较麻烦
+
+可以用idea直接运行，也可以打成jar包 Java -jar运行
+
+你也可以使用docker运行，参见dockerfile
+
+
 
 ### 知识点
 * springboot+Mybatis-plus搭建

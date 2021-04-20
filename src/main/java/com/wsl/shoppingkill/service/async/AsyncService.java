@@ -20,7 +20,7 @@ public interface AsyncService {
      * @author wangShilei
      * @date 2020/12/24 11:22
      * @param list :
-     * @return void
+     * @return void:
      */
     void searchGoods(List<ViewGoodsVO> list);
 

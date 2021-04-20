@@ -145,24 +145,6 @@ CREATE TABLE `t_cart` (
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='购物车';
 
 -- ----------------------------
--- Table structure for t_experience
--- ----------------------------
-DROP TABLE IF EXISTS `t_experience`;
-CREATE TABLE `t_experience` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',
-  `name` varchar(255) DEFAULT NULL COMMENT '体验账户',
-  `password` varchar(255) DEFAULT NULL COMMENT '密码',
-  `phone` varchar(255) DEFAULT NULL COMMENT '账户',
-  `ip` varchar(255) DEFAULT NULL COMMENT 'ip地址',
-  `creat_time` datetime DEFAULT NULL COMMENT '创建时间',
-  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
-  `del_flag` tinyint(1) DEFAULT '0' COMMENT '逻辑删除',
-  `user_name` varchar(255) DEFAULT NULL COMMENT '用户姓名',
-  `detail` varchar(999) DEFAULT NULL COMMENT '申请内容',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='体验账号';
-
--- ----------------------------
 -- Table structure for t_goods
 -- ----------------------------
 DROP TABLE IF EXISTS `t_goods`;

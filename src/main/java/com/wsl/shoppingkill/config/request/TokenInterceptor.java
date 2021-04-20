@@ -51,7 +51,7 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
         // 允许跨域
-        String[] allowDomains = {"http://oss.wslhome.top","http://static.wslhome.top","http://admin.wslhome.top","http://www.wslhome.top","http://test.wslhome.top","http://kill.wslhome.top","https://oss.wslhome.top","https://static.wslhome.top","https://admin.wslhome.top","https://www.wslhome.top","https://test.wslhome.top","https://kill.wslhome.top"};
+        String[] allowDomains = {"http://localhost:8081"};
         Set<String> allowOrigins = new HashSet<>(Arrays.asList(allowDomains));
         String originHeads = request.getHeader("Origin");
         if(allowOrigins.contains(originHeads)) {

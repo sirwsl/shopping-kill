@@ -121,10 +121,10 @@ public class LimitListController {
     @PostMapping("/addBlackListById/v1")
     public Result<Boolean> addLimitListById(@NotNull(message = "用户id不能为空") Long id,
                                             @NotNull(message = "开始时间不能为空") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-                                            @JsonFormat(locale = "zh", timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+                                            @JsonFormat(locale = "zh", pattern = "yyyy-MM-dd HH:mm:ss")
                                                     LocalDateTime beginTime,
                                             @NotNull(message = "开始时间不能为空") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-                                            @JsonFormat(locale = "zh", timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+                                            @JsonFormat(locale = "zh",  pattern = "yyyy-MM-dd HH:mm:ss")
                                                     LocalDateTime endTime) {
         User user = new User();
         user = user.selectById(id);

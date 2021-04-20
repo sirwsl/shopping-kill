@@ -1,6 +1,6 @@
 # 应用服务 WEB 访问端口
 server:
-  port: 8080
+  port: 80
   servlet:
     context-path: /
     encoding:
@@ -14,10 +14,10 @@ spring:
     name: shopping-kill
   # spring 静态资源扫描路径
   resources:
-    static-locations: classpath:/ftl/,classpath:/templates/
+    static-locations: classpath:/ftl/,classpath:/html/
   #环境修改
   profiles:
-    active: pro,all
+    active: dev,all
 
   devtools:
     restart:
@@ -27,11 +27,11 @@ spring:
 
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
-    time-zone: GMT-8
+    time-zone: GMT+8
     default-property-inclusion: non_null
   mvc:
     view:
-      prefix: classpath:/templates/
+      prefix: classpath:/html/
 
 mybatis-plus:
   type-aliases-package: com.wsl.shoppingkill.constant
