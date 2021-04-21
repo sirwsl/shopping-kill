@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         :
+ Source Server         : 120.78.148.81
  Source Server Type    : MySQL
  Source Server Version : 50731
  Source Host           :
  Source Schema         :
 
  Target Server Type    : MySQL
- Target Server Version : 50731
+ Target Server Version : 50730
  File Encoding         : 65001
 
- Date: 02/01/2021 18:24:18
+ Date: 21/04/2021 12:24:45
 */
 
 SET NAMES utf8mb4;
@@ -32,9 +32,9 @@ CREATE TABLE `t_activity` (
   `end_time` datetime NOT NULL COMMENT '结束时间',
   `creat_time` datetime DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
-  `del_flag` tinyint(1) DEFAULT '0' COMMENT '逻辑删除',
+  `del_flag` tinyint(1) NOT NULL DEFAULT '0' COMMENT '逻辑删除',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=99 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=623 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Table structure for t_address
@@ -52,7 +52,7 @@ CREATE TABLE `t_address` (
   `update_time` datetime NOT NULL COMMENT '修改时间',
   `del_flag` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否删除',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='收货地址';
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='收货地址';
 
 -- ----------------------------
 -- Table structure for t_admin
@@ -91,7 +91,7 @@ CREATE TABLE `t_advertise` (
   `update_time` datetime NOT NULL COMMENT '更新时间',
   `del_flag` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否删除',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='广告内容';
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='广告内容';
 
 -- ----------------------------
 -- Table structure for t_after_sales
@@ -127,7 +127,7 @@ CREATE TABLE `t_appraisal` (
   `update_time` datetime NOT NULL COMMENT '更新时间',
   `del_flag` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否删除',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='评价表';
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='评价表';
 
 -- ----------------------------
 -- Table structure for t_cart
@@ -142,7 +142,7 @@ CREATE TABLE `t_cart` (
   `num` int(11) DEFAULT '1' COMMENT '数量',
   `del_flag` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否删除',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='购物车';
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='购物车';
 
 -- ----------------------------
 -- Table structure for t_goods
@@ -160,7 +160,7 @@ CREATE TABLE `t_goods` (
   `update_time` datetime NOT NULL COMMENT '更新时间',
   `del_flag` tinyint(1) NOT NULL DEFAULT '0' COMMENT '逻辑删除',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='商品表';
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='商品表';
 
 -- ----------------------------
 -- Table structure for t_limit_list
@@ -194,7 +194,7 @@ CREATE TABLE `t_loggers` (
   `update_time` datetime NOT NULL COMMENT '更新时间',
   `del_flag` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否删除',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=214 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=799 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Table structure for t_order
@@ -228,17 +228,17 @@ CREATE TABLE `t_sku` (
   `goods_id` bigint(20) NOT NULL COMMENT '商品id',
   `attribute` varchar(100) NOT NULL COMMENT '商品属性',
   `img_url` varchar(100) DEFAULT NULL COMMENT '商品图片',
-  `real_price` decimal(10,2) NOT NULL COMMENT '进价',
-  `cost_price` decimal(10,2) NOT NULL COMMENT '成本价',
+  `real_price` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '进价',
+  `cost_price` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '成本价',
   `sell_price` decimal(10,2) NOT NULL COMMENT '售价',
   `num` int(11) NOT NULL COMMENT '数量',
   `warn_num` int(11) NOT NULL DEFAULT '10' COMMENT '预警量（默认10）',
-  `exp_price` decimal(10,2) DEFAULT NULL COMMENT '快递费用',
+  `exp_price` decimal(10,2) DEFAULT '0.00' COMMENT '快递费用',
   `creat_time` datetime NOT NULL COMMENT '创建时间',
   `update_time` datetime NOT NULL COMMENT '更新时间',
   `del_flag` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否删除',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='SKU（商品的售卖产生的影响属性）';
+) ENGINE=InnoDB AUTO_INCREMENT=235 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='SKU（商品的售卖产生的影响属性）';
 
 -- ----------------------------
 -- Table structure for t_subscriber
@@ -283,7 +283,7 @@ CREATE TABLE `t_types` (
   `update_time` datetime NOT NULL COMMENT '更新时间',
   `del_flag` tinyint(1) NOT NULL DEFAULT '0' COMMENT '逻辑删除',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='商品类别表';
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='商品类别表';
 
 -- ----------------------------
 -- Table structure for t_user
@@ -291,22 +291,22 @@ CREATE TABLE `t_types` (
 DROP TABLE IF EXISTS `t_user`;
 CREATE TABLE `t_user` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',
-  `name` varchar(50) NOT NULL COMMENT '账号',
+  `name` varchar(100) NOT NULL COMMENT '账号',
   `password` varchar(255) NOT NULL COMMENT '密码',
-  `nick_name` varchar(20) NOT NULL COMMENT '昵称',
-  `img` varchar(40) DEFAULT NULL COMMENT '头像',
+  `nick_name` varchar(100) NOT NULL COMMENT '昵称',
+  `img` varchar(100) DEFAULT NULL COMMENT '头像',
   `sex` char(2) NOT NULL COMMENT '性别',
   `signature` varchar(666) DEFAULT NULL COMMENT '个性签名',
   `phone` char(11) NOT NULL COMMENT '手机号',
   `email` varchar(25) NOT NULL COMMENT '邮箱',
   `id_card` varchar(18) DEFAULT NULL COMMENT '身份证号',
-  `real_name` varchar(10) DEFAULT NULL COMMENT '真实姓名',
+  `real_name` varchar(50) DEFAULT NULL COMMENT '真实姓名',
   `we_chat` varchar(20) DEFAULT NULL COMMENT '微信',
   `apply` varchar(15) DEFAULT NULL COMMENT '支付宝（暂时不用）',
   `creat_time` datetime NOT NULL COMMENT '创建时间',
   `update_time` datetime NOT NULL COMMENT '跟新时间',
   `del_flag` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否删除',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='用户表';
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='用户表';
 
 SET FOREIGN_KEY_CHECKS = 1;

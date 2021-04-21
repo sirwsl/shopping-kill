@@ -62,7 +62,7 @@ public class AddOrderServiceImpl implements AddOrderService {
                         num = skuMapper.selectById(addOrderParam.getSkuId()).getNum();
                     }
                 }
-                if (num > 1) {
+                if (num > 0) {
                     rabbitTemplate.convertAndSend(RabbitMqEnum.Exchange.EXCHANGE_ORDER_COMMON, RabbitMqEnum.Key.KEY_ORDER_COMMON, addOrderParam, correlationData);
                     redisTemplate.opsForValue().set(RedisEnum.GOODS_SKU_NUM + addOrderParam.getSkuId(), String.valueOf(num - 1));
                     boolean isAck = correlationData.getFuture().get(10, TimeUnit.SECONDS).isAck();
